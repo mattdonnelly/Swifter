@@ -26,45 +26,22 @@
 import Foundation
 
 struct OAuthAccessToken {
+
     var key: String
     var secret: String
     var verifier: String?
-    var session: String?
 
-    var expiration: NSDate?
-    var renewable: Bool
-    var expired: Bool {
-        get {
-            return self.expiration?.compare(NSDate()) == NSComparisonResult.OrderedAscending
-        }
-    }
-
-    var userInfo: Dictionary<String, String>?
+    var screenName: String?
+    var userID: String?
 
     init(queryString: String) {
         var attributes = queryString.parametersFromQueryString()
 
         self.key = attributes["oauth_token"]!
         self.secret = attributes["oauth_token_secret"]!
-        self.session = attributes["oauth_session_handle"]
 
-        if let expiration = attributes["oauth_token_duration"] {
-            self.expiration = NSDate(timeIntervalSinceNow: expiration.bridgeToObjectiveC().doubleValue)
-        }
-
-        self.renewable = false
-        if let canBeRenewed = attributes["oauth_token_renewable"] {
-            self.renewable = canBeRenewed.lowercaseString.hasPrefix("t")
-        }
-
-        attributes.removeValueForKey("oauth_token")
-        attributes.removeValueForKey("oauth_token_secret")
-        attributes.removeValueForKey("oauth_session_handle")
-        attributes.removeValueForKey("oauth_token_duration")
-        attributes.removeValueForKey("oauth_token_renewable")
-
-        if attributes.count > 0 {
-            self.userInfo = attributes
-        }
+        self.screenName = attributes["screen_name"]
+        self.userID = attributes["user_id"]
     }
+
 }
