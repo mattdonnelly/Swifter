@@ -27,6 +27,15 @@ import Foundation
 
 extension String {
 
+    func percentEscapedWithEncoding(encoding: NSStringEncoding) -> String {
+        let charactersToBeEscaped = ":/?&=;+!@#$()',*" as CFStringRef
+        let charactersToLeaveUnescaped = "[]." as CFStringRef
+
+        let result = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, self.bridgeToObjectiveC(), charactersToLeaveUnescaped, charactersToBeEscaped, CFStringConvertNSStringEncodingToEncoding(encoding)) as String
+
+        return result
+    }
+
     func parametersFromQueryString() -> Dictionary<String, String> {
         var parameters = Dictionary<String, String>()
 

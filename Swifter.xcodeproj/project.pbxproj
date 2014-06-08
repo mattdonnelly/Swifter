@@ -7,42 +7,129 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0AF2751944B7C4004DD4A6 /* OAuthAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0AF2741944B7C4004DD4A6 /* OAuthAccessToken.swift */; };
+		8B0AF2761944B7C4004DD4A6 /* OAuthAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0AF2741944B7C4004DD4A6 /* OAuthAccessToken.swift */; };
+		8B300C241944AA1A00993175 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C231944AA1A00993175 /* AppDelegate.swift */; };
+		8B300C261944AA1A00993175 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C251944AA1A00993175 /* ViewController.swift */; };
+		8B300C291944AA1A00993175 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C271944AA1A00993175 /* Main.storyboard */; };
+		8B300C2B1944AA1A00993175 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C2A1944AA1A00993175 /* Images.xcassets */; };
+		8B300C3E1944AA6600993175 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; };
+		8B300C3F1944AA6600993175 /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8B300C4C1944AECB00993175 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4B1944AECB00993175 /* main.swift */; };
+		8B300C4E1944AECB00993175 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4D1944AECB00993175 /* ViewController.swift */; };
+		8B300C501944AECB00993175 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4F1944AECB00993175 /* AppDelegate.swift */; };
+		8B300C521944AECB00993175 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C511944AECB00993175 /* Images.xcassets */; };
+		8B300C551944AECB00993175 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C531944AECB00993175 /* Main.storyboard */; };
+		8B300C611944AECB00993175 /* SwifterDemoMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C601944AECB00993175 /* SwifterDemoMacTests.swift */; };
 		8B9F50F41944A5AB00894629 /* SwifteriOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F50F31944A5AB00894629 /* SwifteriOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B9F51181944A61D00894629 /* SwifterMac.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F51171944A61D00894629 /* SwifterMac.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8B9F511E1944A61D00894629 /* SwifterMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F51131944A61D00894629 /* SwifterMac.framework */; };
-		8B9F51251944A61D00894629 /* SwifterMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51241944A61D00894629 /* SwifterMacTests.swift */; };
+		8B9F514D1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */; };
+		8B9F514E1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */; };
+		8B9F514F1944A8DC00894629 /* HMACSHA1Signature.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F51481944A8DC00894629 /* HMACSHA1Signature.h */; };
+		8B9F51501944A8DC00894629 /* HMACSHA1Signature.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F51481944A8DC00894629 /* HMACSHA1Signature.h */; };
+		8B9F51511944A8DC00894629 /* HMACSHA1Signature.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51491944A8DC00894629 /* HMACSHA1Signature.m */; };
+		8B9F51521944A8DC00894629 /* HMACSHA1Signature.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51491944A8DC00894629 /* HMACSHA1Signature.m */; };
+		8B9F51531944A8DC00894629 /* String+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514A1944A8DC00894629 /* String+Swifter.swift */; };
+		8B9F51541944A8DC00894629 /* String+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514A1944A8DC00894629 /* String+Swifter.swift */; };
+		8B9F51551944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */; };
+		8B9F51561944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */; };
+		8B9F51571944A8DC00894629 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514C1944A8DC00894629 /* Swifter.swift */; };
+		8B9F51581944A8DC00894629 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514C1944A8DC00894629 /* Swifter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8B9F511F1944A61D00894629 /* PBXContainerItemProxy */ = {
+		8B300C401944AA6600993175 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8B9F50E51944A5AB00894629 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8B9F51121944A61D00894629;
-			remoteInfo = SwifterMac;
+			remoteGlobalIDString = 8B9F50ED1944A5AB00894629;
+			remoteInfo = SwifteriOS;
 		};
-		8B9F512C1944A61E00894629 /* PBXContainerItemProxy */ = {
+		8B300C5B1944AECB00993175 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8B9F50E51944A5AB00894629 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8B9F51121944A61D00894629;
-			remoteInfo = SwifterMac;
+			remoteGlobalIDString = 8B300C461944AECB00993175;
+			remoteInfo = SwifterDemoMac;
+		};
+		8B300C681944AECC00993175 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B9F50E51944A5AB00894629 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B300C461944AECB00993175;
+			remoteInfo = SwifterDemoMac;
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8B300C421944AA6600993175 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8B300C3F1944AA6600993175 /* SwifteriOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		8B0AF2741944B7C4004DD4A6 /* OAuthAccessToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAccessToken.swift; sourceTree = "<group>"; };
+		8B300C1F1944AA1A00993175 /* SwifterDemoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B300C221944AA1A00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B300C231944AA1A00993175 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8B300C251944AA1A00993175 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8B300C281944AA1A00993175 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8B300C2A1944AA1A00993175 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8B300C471944AECB00993175 /* SwifterDemoMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B300C4A1944AECB00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B300C4B1944AECB00993175 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		8B300C4D1944AECB00993175 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8B300C4F1944AECB00993175 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8B300C511944AECB00993175 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8B300C541944AECB00993175 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8B300C5A1944AECB00993175 /* SwifterDemoMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwifterDemoMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B300C5F1944AECB00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B300C601944AECB00993175 /* SwifterDemoMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwifterDemoMacTests.swift; sourceTree = "<group>"; };
 		8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwifteriOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9F50F21944A5AB00894629 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B9F50F31944A5AB00894629 /* SwifteriOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwifteriOS.h; sourceTree = "<group>"; };
 		8B9F51131944A61D00894629 /* SwifterMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwifterMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9F51161944A61D00894629 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B9F51171944A61D00894629 /* SwifterMac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwifterMac.h; sourceTree = "<group>"; };
-		8B9F511D1944A61D00894629 /* SwifterMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwifterMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B9F51231944A61D00894629 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B9F51241944A61D00894629 /* SwifterMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwifterMacTests.swift; sourceTree = "<group>"; };
+		8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Swifter.swift"; sourceTree = "<group>"; };
+		8B9F51481944A8DC00894629 /* HMACSHA1Signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMACSHA1Signature.h; sourceTree = "<group>"; };
+		8B9F51491944A8DC00894629 /* HMACSHA1Signature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMACSHA1Signature.m; sourceTree = "<group>"; };
+		8B9F514A1944A8DC00894629 /* String+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Swifter.swift"; sourceTree = "<group>"; };
+		8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swifter-Bridging-Header.h"; sourceTree = "<group>"; };
+		8B9F514C1944A8DC00894629 /* Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swifter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8B300C1C1944AA1A00993175 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B300C3E1944AA6600993175 /* SwifteriOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B300C441944AECB00993175 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B300C571944AECB00993175 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8B9F50EA1944A5AB00894629 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -57,23 +144,76 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8B9F511A1944A61D00894629 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8B9F511E1944A61D00894629 /* SwifterMac.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B300C201944AA1A00993175 /* SwifterDemoiOS */ = {
+			isa = PBXGroup;
+			children = (
+				8B300C231944AA1A00993175 /* AppDelegate.swift */,
+				8B300C251944AA1A00993175 /* ViewController.swift */,
+				8B300C271944AA1A00993175 /* Main.storyboard */,
+				8B300C2A1944AA1A00993175 /* Images.xcassets */,
+				8B300C211944AA1A00993175 /* Supporting Files */,
+			);
+			path = SwifterDemoiOS;
+			sourceTree = "<group>";
+		};
+		8B300C211944AA1A00993175 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8B300C221944AA1A00993175 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8B300C481944AECB00993175 /* SwifterDemoMac */ = {
+			isa = PBXGroup;
+			children = (
+				8B300C4D1944AECB00993175 /* ViewController.swift */,
+				8B300C4F1944AECB00993175 /* AppDelegate.swift */,
+				8B300C511944AECB00993175 /* Images.xcassets */,
+				8B300C531944AECB00993175 /* Main.storyboard */,
+				8B300C491944AECB00993175 /* Supporting Files */,
+			);
+			path = SwifterDemoMac;
+			sourceTree = "<group>";
+		};
+		8B300C491944AECB00993175 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8B300C4A1944AECB00993175 /* Info.plist */,
+				8B300C4B1944AECB00993175 /* main.swift */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8B300C5D1944AECB00993175 /* SwifterDemoMacTests */ = {
+			isa = PBXGroup;
+			children = (
+				8B300C601944AECB00993175 /* SwifterDemoMacTests.swift */,
+				8B300C5E1944AECB00993175 /* Supporting Files */,
+			);
+			path = SwifterDemoMacTests;
+			sourceTree = "<group>";
+		};
+		8B300C5E1944AECB00993175 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8B300C5F1944AECB00993175 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		8B9F50E41944A5AB00894629 = {
 			isa = PBXGroup;
 			children = (
+				8B300C201944AA1A00993175 /* SwifterDemoiOS */,
+				8B9F51461944A8DC00894629 /* SwifterCommon */,
 				8B9F50F01944A5AB00894629 /* SwifteriOS */,
 				8B9F51141944A61D00894629 /* SwifterMac */,
-				8B9F51211944A61D00894629 /* SwifterMacTests */,
+				8B300C481944AECB00993175 /* SwifterDemoMac */,
+				8B300C5D1944AECB00993175 /* SwifterDemoMacTests */,
 				8B9F50EF1944A5AB00894629 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,7 +223,9 @@
 			children = (
 				8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */,
 				8B9F51131944A61D00894629 /* SwifterMac.framework */,
-				8B9F511D1944A61D00894629 /* SwifterMacTests.xctest */,
+				8B300C1F1944AA1A00993175 /* SwifterDemoiOS.app */,
+				8B300C471944AECB00993175 /* SwifterDemoMac.app */,
+				8B300C5A1944AECB00993175 /* SwifterDemoMacTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,21 +264,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8B9F51211944A61D00894629 /* SwifterMacTests */ = {
+		8B9F51461944A8DC00894629 /* SwifterCommon */ = {
 			isa = PBXGroup;
 			children = (
-				8B9F51241944A61D00894629 /* SwifterMacTests.swift */,
-				8B9F51221944A61D00894629 /* Supporting Files */,
+				8B9F514C1944A8DC00894629 /* Swifter.swift */,
+				8B0AF2741944B7C4004DD4A6 /* OAuthAccessToken.swift */,
+				8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */,
+				8B9F51481944A8DC00894629 /* HMACSHA1Signature.h */,
+				8B9F51491944A8DC00894629 /* HMACSHA1Signature.m */,
+				8B9F51591944A8E100894629 /* Extensions */,
 			);
-			path = SwifterMacTests;
+			path = SwifterCommon;
 			sourceTree = "<group>";
 		};
-		8B9F51221944A61D00894629 /* Supporting Files */ = {
+		8B9F51591944A8E100894629 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				8B9F51231944A61D00894629 /* Info.plist */,
+				8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */,
+				8B9F514A1944A8DC00894629 /* String+Swifter.swift */,
 			);
-			name = "Supporting Files";
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,6 +294,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B9F50F41944A5AB00894629 /* SwifteriOS.h in Headers */,
+				8B9F51551944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */,
+				8B9F514F1944A8DC00894629 /* HMACSHA1Signature.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,12 +304,69 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B9F51181944A61D00894629 /* SwifterMac.h in Headers */,
+				8B9F51561944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */,
+				8B9F51501944A8DC00894629 /* HMACSHA1Signature.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		8B300C1E1944AA1A00993175 /* SwifterDemoiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B300C3C1944AA1A00993175 /* Build configuration list for PBXNativeTarget "SwifterDemoiOS" */;
+			buildPhases = (
+				8B300C1B1944AA1A00993175 /* Sources */,
+				8B300C1C1944AA1A00993175 /* Frameworks */,
+				8B300C1D1944AA1A00993175 /* Resources */,
+				8B300C421944AA6600993175 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8B300C411944AA6600993175 /* PBXTargetDependency */,
+			);
+			name = SwifterDemoiOS;
+			productName = SwifterDemoiOS;
+			productReference = 8B300C1F1944AA1A00993175 /* SwifterDemoiOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8B300C461944AECB00993175 /* SwifterDemoMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B300C621944AECB00993175 /* Build configuration list for PBXNativeTarget "SwifterDemoMac" */;
+			buildPhases = (
+				8B300C431944AECB00993175 /* Sources */,
+				8B300C441944AECB00993175 /* Frameworks */,
+				8B300C451944AECB00993175 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwifterDemoMac;
+			productName = SwifterDemoMac;
+			productReference = 8B300C471944AECB00993175 /* SwifterDemoMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8B300C591944AECB00993175 /* SwifterDemoMacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B300C651944AECB00993175 /* Build configuration list for PBXNativeTarget "SwifterDemoMacTests" */;
+			buildPhases = (
+				8B300C561944AECB00993175 /* Sources */,
+				8B300C571944AECB00993175 /* Frameworks */,
+				8B300C581944AECB00993175 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8B300C5C1944AECB00993175 /* PBXTargetDependency */,
+				8B300C691944AECC00993175 /* PBXTargetDependency */,
+			);
+			name = SwifterDemoMacTests;
+			productName = SwifterDemoMacTests;
+			productReference = 8B300C5A1944AECB00993175 /* SwifterDemoMacTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8B9F50ED1944A5AB00894629 /* SwifteriOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B9F51041944A5AB00894629 /* Build configuration list for PBXNativeTarget "SwifteriOS" */;
@@ -197,25 +403,6 @@
 			productReference = 8B9F51131944A61D00894629 /* SwifterMac.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		8B9F511C1944A61D00894629 /* SwifterMacTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8B9F512B1944A61D00894629 /* Build configuration list for PBXNativeTarget "SwifterMacTests" */;
-			buildPhases = (
-				8B9F51191944A61D00894629 /* Sources */,
-				8B9F511A1944A61D00894629 /* Frameworks */,
-				8B9F511B1944A61D00894629 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8B9F51201944A61D00894629 /* PBXTargetDependency */,
-				8B9F512D1944A61E00894629 /* PBXTargetDependency */,
-			);
-			name = SwifterMacTests;
-			productName = SwifterMacTests;
-			productReference = 8B9F511D1944A61D00894629 /* SwifterMacTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -225,15 +412,21 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Matt Donnelly";
 				TargetAttributes = {
+					8B300C1E1944AA1A00993175 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					8B300C461944AECB00993175 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					8B300C591944AECB00993175 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = 8B300C461944AECB00993175;
+					};
 					8B9F50ED1944A5AB00894629 = {
 						CreatedOnToolsVersion = 6.0;
 					};
 					8B9F51121944A61D00894629 = {
 						CreatedOnToolsVersion = 6.0;
-					};
-					8B9F511C1944A61D00894629 = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = 8B9F51121944A61D00894629;
 					};
 				};
 			};
@@ -243,20 +436,48 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 8B9F50E41944A5AB00894629;
 			productRefGroup = 8B9F50EF1944A5AB00894629 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				8B300C1E1944AA1A00993175 /* SwifterDemoiOS */,
 				8B9F50ED1944A5AB00894629 /* SwifteriOS */,
 				8B9F51121944A61D00894629 /* SwifterMac */,
-				8B9F511C1944A61D00894629 /* SwifterMacTests */,
+				8B300C461944AECB00993175 /* SwifterDemoMac */,
+				8B300C591944AECB00993175 /* SwifterDemoMacTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8B300C1D1944AA1A00993175 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B300C291944AA1A00993175 /* Main.storyboard in Resources */,
+				8B300C2B1944AA1A00993175 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B300C451944AECB00993175 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B300C521944AECB00993175 /* Images.xcassets in Resources */,
+				8B300C551944AECB00993175 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B300C581944AECB00993175 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8B9F50EC1944A5AB00894629 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -271,20 +492,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8B9F511B1944A61D00894629 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8B300C1B1944AA1A00993175 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B300C261944AA1A00993175 /* ViewController.swift in Sources */,
+				8B300C241944AA1A00993175 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B300C431944AECB00993175 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B300C501944AECB00993175 /* AppDelegate.swift in Sources */,
+				8B300C4E1944AECB00993175 /* ViewController.swift in Sources */,
+				8B300C4C1944AECB00993175 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B300C561944AECB00993175 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B300C611944AECB00993175 /* SwifterDemoMacTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8B9F50E91944A5AB00894629 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B9F51571944A8DC00894629 /* Swifter.swift in Sources */,
+				8B0AF2751944B7C4004DD4A6 /* OAuthAccessToken.swift in Sources */,
+				8B9F51531944A8DC00894629 /* String+Swifter.swift in Sources */,
+				8B9F51511944A8DC00894629 /* HMACSHA1Signature.m in Sources */,
+				8B9F514D1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,33 +538,160 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8B9F51191944A61D00894629 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8B9F51251944A61D00894629 /* SwifterMacTests.swift in Sources */,
+				8B9F51581944A8DC00894629 /* Swifter.swift in Sources */,
+				8B0AF2761944B7C4004DD4A6 /* OAuthAccessToken.swift in Sources */,
+				8B9F51541944A8DC00894629 /* String+Swifter.swift in Sources */,
+				8B9F51521944A8DC00894629 /* HMACSHA1Signature.m in Sources */,
+				8B9F514E1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8B9F51201944A61D00894629 /* PBXTargetDependency */ = {
+		8B300C411944AA6600993175 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B9F51121944A61D00894629 /* SwifterMac */;
-			targetProxy = 8B9F511F1944A61D00894629 /* PBXContainerItemProxy */;
+			target = 8B9F50ED1944A5AB00894629 /* SwifteriOS */;
+			targetProxy = 8B300C401944AA6600993175 /* PBXContainerItemProxy */;
 		};
-		8B9F512D1944A61E00894629 /* PBXTargetDependency */ = {
+		8B300C5C1944AECB00993175 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B9F51121944A61D00894629 /* SwifterMac */;
-			targetProxy = 8B9F512C1944A61E00894629 /* PBXContainerItemProxy */;
+			target = 8B300C461944AECB00993175 /* SwifterDemoMac */;
+			targetProxy = 8B300C5B1944AECB00993175 /* PBXContainerItemProxy */;
+		};
+		8B300C691944AECC00993175 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B300C461944AECB00993175 /* SwifterDemoMac */;
+			targetProxy = 8B300C681944AECC00993175 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		8B300C271944AA1A00993175 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8B300C281944AA1A00993175 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8B300C531944AECB00993175 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8B300C541944AECB00993175 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		8B300C381944AA1A00993175 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SwifterDemoiOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8B300C391944AA1A00993175 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = SwifterDemoiOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8B300C631944AECB00993175 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SwifterDemoMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8B300C641944AECB00993175 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				INFOPLIST_FILE = SwifterDemoMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		8B300C661944AECB00993175 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SwifterDemoMac.app/Contents/MacOS/SwifterDemoMac";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SwifterDemoMacTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		8B300C671944AECB00993175 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SwifterDemoMac.app/Contents/MacOS/SwifterDemoMac";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SwifterDemoMacTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
 		8B9F51021944A5AB00894629 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -416,6 +789,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwifterCommon/Swifter-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -431,6 +805,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwifterCommon/Swifter-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -455,6 +830,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwifterCommon/Swifter-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -476,51 +852,40 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		8B9F51281944A61D00894629 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SwifterMacTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Debug;
-		};
-		8B9F51291944A61D00894629 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SwifterMacTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwifterCommon/Swifter-Bridging-Header.h";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8B300C3C1944AA1A00993175 /* Build configuration list for PBXNativeTarget "SwifterDemoiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B300C381944AA1A00993175 /* Debug */,
+				8B300C391944AA1A00993175 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8B300C621944AECB00993175 /* Build configuration list for PBXNativeTarget "SwifterDemoMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B300C631944AECB00993175 /* Debug */,
+				8B300C641944AECB00993175 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8B300C651944AECB00993175 /* Build configuration list for PBXNativeTarget "SwifterDemoMacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B300C661944AECB00993175 /* Debug */,
+				8B300C671944AECB00993175 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8B9F50E81944A5AB00894629 /* Build configuration list for PBXProject "Swifter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -546,14 +911,7 @@
 				8B9F51271944A61D00894629 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		8B9F512B1944A61D00894629 /* Build configuration list for PBXNativeTarget "SwifterMacTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8B9F51281944A61D00894629 /* Debug */,
-				8B9F51291944A61D00894629 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

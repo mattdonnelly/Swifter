@@ -64,17 +64,17 @@ class Swifter {
 
     func authorizeWithCallbackURL(callbackURL: NSURL, success: SwifterTokenRequestSuccessHandler, failure: ((error: NSError) -> Void)?) {
         self.requestOAuthRequestTokenWithCallbackURL(callbackURL, success: {
-            accessToken, response in
+                accessToken, response in
 
-            let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.baseURL)
-            let queryURL = NSURL(string: authorizeURL.absoluteString + "?oauth_token=\(accessToken.key)")
+                let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.baseURL)
+                let queryURL = NSURL(string: authorizeURL.absoluteString + "?oauth_token=\(accessToken.key)")
 
-            #if os(iOS)
-                UIApplication.sharedApplication().openURL(queryURL)
-            #else
-                NSWorkspace.sharedWorkspace().openURL(queryURL)
-            #endif
-        }, failure: failure)
+                #if os(iOS)
+                    UIApplication.sharedApplication().openURL(queryURL)
+                #else
+                    NSWorkspace.sharedWorkspace().openURL(queryURL)
+                #endif
+            }, failure: failure)
     }
 
     func requestOAuthRequestTokenWithCallbackURL(callbackURL: NSURL, success: SwifterTokenRequestSuccessHandler, failure: SwifterRequestFailureHandler?) {
@@ -89,9 +89,9 @@ class Swifter {
             }
             else {
                 let httpResponse = response as NSHTTPURLResponse
+                let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
 
                 if httpResponse.statusCode == 200 {
-                    let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
                     let accessToken = OAuthAccessToken(queryString: responseString)
                     success(accessToken: accessToken, response: response)
                 }
@@ -104,7 +104,7 @@ class Swifter {
         dataTask.resume()
     }
 
-    func requestOAuthAccessTokenWithRequestToken(requestToken: OAuthAccessToken, success: SwifterRequestFailureHandler, failure: SwifterRequestFailureHandler?) {
+    func requestOAuthAccessTokenWithRequesToken(requestToken: OAuthAccessToken, success: SwifterTokenRequestSuccessHandler, failure: SwifterRequestFailureHandler?) {
 
     }
 
@@ -141,6 +141,9 @@ class Swifter {
         }
 
         let authorizationHeader = self.authorizationHeaderForMethod(method, url: url, parameters: parameters)
+
+        println(authorizationHeader)
+
         request.setValue(authorizationHeader, forHTTPHeaderField: "Authorization")
         request.HTTPShouldHandleCookies = false
 
@@ -166,6 +169,8 @@ class Swifter {
 
         let authorizationParameterComponents = authorizationParameters.urlEncodedString(self.stringEncoding).componentsSeparatedByString("&") as String[]
         authorizationParameterComponents.sort { $0 < $1 }
+
+        println(authorizationParameterComponents)
 
         var headerComponents = String[]()
         for component in authorizationParameterComponents {
@@ -200,10 +205,10 @@ class Swifter {
     func oauthSignatureForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>, accessToken token: OAuthAccessToken?) -> String {
         var tokenSecret: NSString = ""
         if token {
-            tokenSecret = token!.secret.stringByAddingPercentEscapesUsingEncoding(self.stringEncoding)
+            tokenSecret = token!.secret.percentEscapedWithEncoding(self.stringEncoding)
         }
 
-        let encodedConsumerSecret = self.consumerSecret.stringByAddingPercentEscapesUsingEncoding(self.stringEncoding)
+        let encodedConsumerSecret = self.consumerSecret.percentEscapedWithEncoding(self.stringEncoding)
 
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"
         let signingKeyData = signingKey.bridgeToObjectiveC().dataUsingEncoding(self.stringEncoding)
@@ -212,14 +217,14 @@ class Swifter {
         parameterComponents.sort { $0 < $1 }
 
         let parameterString = parameterComponents.bridgeToObjectiveC().componentsJoinedByString("&")
-        let encodedParameterString = parameterString.stringByAddingPercentEscapesUsingEncoding(self.stringEncoding)
+        let encodedParameterString = parameterString.percentEscapedWithEncoding(self.stringEncoding)
 
-        let encodedURL = url.absoluteString.stringByAddingPercentEscapesUsingEncoding(self.stringEncoding)
+        let encodedURL = url.absoluteString.percentEscapedWithEncoding(self.stringEncoding)
 
         let signatureBaseString = "\(method)&\(encodedURL)&\(encodedParameterString)"
         let signatureBaseStringData = signatureBaseString.dataUsingEncoding(self.stringEncoding)
-
+        
         return HMACSHA1Signature.signatureForKey(signingKeyData, data: signatureBaseStringData).base64EncodedStringWithOptions(nil)
     }
-
+    
 }
