@@ -44,8 +44,6 @@ struct OAuthAccessToken {
     init(queryString: String) {
         var attributes = queryString.parametersFromQueryString()
 
-        println(attributes)
-
         self.key = attributes["oauth_token"]!
         self.secret = attributes["oauth_token_secret"]!
         self.session = attributes["oauth_session_handle"]

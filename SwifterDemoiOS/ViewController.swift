@@ -36,6 +36,7 @@ class ViewController: UIViewController {
         swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success"), success: {
                 accessToken, response in
 
+                println("Successfully authorized")
             }, failure: {
                 error in
 

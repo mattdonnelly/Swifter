@@ -41,12 +41,12 @@ extension Dictionary {
         return map
     }
 
-    func urlEncodedString(encoding: NSStringEncoding) -> String {
+    func urlEncodedQueryStringWithEncoding(encoding: NSStringEncoding) -> String {
         var parts = String[]()
 
         for (key, value) in self {
-            let keyString = "\(key)".stringByAddingPercentEscapesUsingEncoding(encoding)
-            let valueString = "\(value)".stringByAddingPercentEscapesUsingEncoding(encoding)
+            let keyString = "\(key)".urlEncodedStringWithEncoding(encoding)
+            let valueString = "\(value)".urlEncodedStringWithEncoding(encoding)
             let query = "\(keyString)=\(valueString)" as String
             parts.append(query)
         }

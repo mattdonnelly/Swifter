@@ -20,7 +20,6 @@
 		8B300C501944AECB00993175 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4F1944AECB00993175 /* AppDelegate.swift */; };
 		8B300C521944AECB00993175 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C511944AECB00993175 /* Images.xcassets */; };
 		8B300C551944AECB00993175 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C531944AECB00993175 /* Main.storyboard */; };
-		8B300C611944AECB00993175 /* SwifterDemoMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C601944AECB00993175 /* SwifterDemoMacTests.swift */; };
 		8B9F50F41944A5AB00894629 /* SwifteriOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F50F31944A5AB00894629 /* SwifteriOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B9F51181944A61D00894629 /* SwifterMac.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F51171944A61D00894629 /* SwifterMac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B9F514D1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */; };
@@ -91,8 +90,6 @@
 		8B300C511944AECB00993175 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8B300C541944AECB00993175 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B300C5A1944AECB00993175 /* SwifterDemoMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwifterDemoMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B300C5F1944AECB00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B300C601944AECB00993175 /* SwifterDemoMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwifterDemoMacTests.swift; sourceTree = "<group>"; };
 		8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwifteriOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9F50F21944A5AB00894629 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B9F50F31944A5AB00894629 /* SwifteriOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwifteriOS.h; sourceTree = "<group>"; };
@@ -170,8 +167,8 @@
 		8B300C481944AECB00993175 /* SwifterDemoMac */ = {
 			isa = PBXGroup;
 			children = (
-				8B300C4D1944AECB00993175 /* ViewController.swift */,
 				8B300C4F1944AECB00993175 /* AppDelegate.swift */,
+				8B300C4D1944AECB00993175 /* ViewController.swift */,
 				8B300C511944AECB00993175 /* Images.xcassets */,
 				8B300C531944AECB00993175 /* Main.storyboard */,
 				8B300C491944AECB00993175 /* Supporting Files */,
@@ -188,32 +185,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8B300C5D1944AECB00993175 /* SwifterDemoMacTests */ = {
-			isa = PBXGroup;
-			children = (
-				8B300C601944AECB00993175 /* SwifterDemoMacTests.swift */,
-				8B300C5E1944AECB00993175 /* Supporting Files */,
-			);
-			path = SwifterDemoMacTests;
-			sourceTree = "<group>";
-		};
-		8B300C5E1944AECB00993175 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8B300C5F1944AECB00993175 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		8B9F50E41944A5AB00894629 = {
 			isa = PBXGroup;
 			children = (
 				8B300C201944AA1A00993175 /* SwifterDemoiOS */,
+				8B300C481944AECB00993175 /* SwifterDemoMac */,
 				8B9F51461944A8DC00894629 /* SwifterCommon */,
 				8B9F50F01944A5AB00894629 /* SwifteriOS */,
 				8B9F51141944A61D00894629 /* SwifterMac */,
-				8B300C481944AECB00993175 /* SwifterDemoMac */,
-				8B300C5D1944AECB00993175 /* SwifterDemoMacTests */,
 				8B9F50EF1944A5AB00894629 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -518,7 +497,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B300C611944AECB00993175 /* SwifterDemoMacTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

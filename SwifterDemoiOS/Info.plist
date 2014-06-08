@@ -28,5 +28,16 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.mattdonnelly.swifter-scheme</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>swifter</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

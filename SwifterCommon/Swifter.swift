@@ -36,9 +36,18 @@ class Swifter {
     typealias SwifterTokenRequestSuccessHandler = (accessToken: OAuthAccessToken, response: NSURLResponse) -> Void
     typealias SwifterRequestFailureHandler = (error: NSError) -> Void
 
-    struct OAuthConstants {
+    struct CallbackNotification {
+        static let notificationName = "SwifterCallbackNotificationName"
+        static let optionsURLKey = "SwifterCallbackNotificationOptionsURLKey"
+    }
+
+    struct OAuth {
         static let version = "1.0"
         static let signatureMethod = "HMAC-SHA1"
+    }
+
+    struct SwifterError {
+        static let domain = "SwifterErrorDomain"
     }
 
     var baseURL: NSURL
@@ -62,18 +71,43 @@ class Swifter {
         self.stringEncoding = NSUTF8StringEncoding
     }
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
     func authorizeWithCallbackURL(callbackURL: NSURL, success: SwifterTokenRequestSuccessHandler, failure: ((error: NSError) -> Void)?) {
         self.requestOAuthRequestTokenWithCallbackURL(callbackURL, success: {
-                accessToken, response in
+            token, response in
 
-                let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.baseURL)
-                let queryURL = NSURL(string: authorizeURL.absoluteString + "?oauth_token=\(accessToken.key)")
+            var requestToken = token
 
-                #if os(iOS)
-                    UIApplication.sharedApplication().openURL(queryURL)
-                #else
-                    NSWorkspace.sharedWorkspace().openURL(queryURL)
-                #endif
+            NSNotificationCenter.defaultCenter().addObserverForName(CallbackNotification.notificationName, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock:{
+                notification in
+
+                NSNotificationCenter.defaultCenter().removeObserver(self)
+
+                let url = notification.userInfo[CallbackNotification.optionsURLKey] as NSURL
+
+                let parameters = url.query.parametersFromQueryString()
+                requestToken.verifier = parameters["oauth_verifier"]
+
+                self.requestOAuthAccessTokenWithRequestToken(requestToken, success: {
+                    accessToken, response in
+
+                    self.accessToken = accessToken
+                    success(accessToken: accessToken, response: response)
+
+                    }, failure: failure)
+            })
+
+            let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.baseURL)
+            let queryURL = NSURL(string: authorizeURL.absoluteString + "?oauth_token=\(token.key)")
+
+            #if os(iOS)
+                UIApplication.sharedApplication().openURL(queryURL)
+            #else
+                NSWorkspace.sharedWorkspace().openURL(queryURL)
+            #endif
             }, failure: failure)
     }
 
@@ -104,8 +138,44 @@ class Swifter {
         dataTask.resume()
     }
 
-    func requestOAuthAccessTokenWithRequesToken(requestToken: OAuthAccessToken, success: SwifterTokenRequestSuccessHandler, failure: SwifterRequestFailureHandler?) {
+    func requestOAuthAccessTokenWithRequestToken(requestToken: OAuthAccessToken, success: SwifterTokenRequestSuccessHandler, failure: SwifterRequestFailureHandler?) {
+        if requestToken.verifier {
+            let parameters: Dictionary<String, AnyObject> = ["oauth_token": requestToken.key.bridgeToObjectiveC(), "oauth_verifier": requestToken.verifier!.bridgeToObjectiveC()]
+            let request = self.requestWithMethod("POST", path: "/oauth/access_token", parameters: parameters)
 
+            let dataTask = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+                data, response, error in
+
+                if error {
+                    failure?(error: error)
+                }
+                else {
+                    let httpResponse = response as NSHTTPURLResponse
+                    let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
+
+                    if httpResponse.statusCode == 200 {
+                        let accessToken = OAuthAccessToken(queryString: responseString)
+                        success(accessToken: accessToken, response: response)
+                    }
+                    else {
+                        failure?(error: NSError(domain: NSHTTPURLResponse.localizedStringForStatusCode(httpResponse.statusCode), code: httpResponse.statusCode, userInfo: httpResponse.allHeaderFields))
+                    }
+                }
+            }
+            
+            dataTask.resume()
+        }
+        else {
+            let userInfo = [NSLocalizedFailureReasonErrorKey: "Bad OAuth response received from server"]
+            let error = NSError(domain: SwifterError.domain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
+            failure?(error: error)
+        }
+    }
+
+    class func handleOpenURL(url: NSURL) {
+        let notification = NSNotification(name: CallbackNotification.notificationName, object: nil,
+            userInfo: [CallbackNotification.optionsURLKey: url])
+        NSNotificationCenter.defaultCenter().postNotification(notification)
     }
 
     func requestWithMethod(method: String, path: String, parameters: Dictionary<String, AnyObject>) -> NSMutableURLRequest {
@@ -126,7 +196,7 @@ class Swifter {
         if filteredParameters.count > 0 {
             if method == "GET" || method == "HEAD" || method == "DELETE" {
                 let queryStart = NSString(string: path).containsString("?") ? "?" : "&"
-                let queryURL = NSURL.URLWithString(url.absoluteString + queryStart + filteredParameters.urlEncodedString(self.stringEncoding))
+                let queryURL = NSURL.URLWithString(url.absoluteString + queryStart + filteredParameters.urlEncodedQueryStringWithEncoding(self.stringEncoding))
                 request.URL = queryURL
             }
             else {
@@ -141,9 +211,6 @@ class Swifter {
         }
 
         let authorizationHeader = self.authorizationHeaderForMethod(method, url: url, parameters: parameters)
-
-        println(authorizationHeader)
-
         request.setValue(authorizationHeader, forHTTPHeaderField: "Authorization")
         request.HTTPShouldHandleCookies = false
 
@@ -167,10 +234,8 @@ class Swifter {
 
         authorizationParameters["oauth_signature"] = self.oauthSignatureForMethod(method, url: url, parameters: combinedParameters, accessToken: self.accessToken)
 
-        let authorizationParameterComponents = authorizationParameters.urlEncodedString(self.stringEncoding).componentsSeparatedByString("&") as String[]
+        let authorizationParameterComponents = authorizationParameters.urlEncodedQueryStringWithEncoding(self.stringEncoding).componentsSeparatedByString("&") as String[]
         authorizationParameterComponents.sort { $0 < $1 }
-
-        println(authorizationParameterComponents)
 
         var headerComponents = String[]()
         for component in authorizationParameterComponents {
@@ -185,8 +250,8 @@ class Swifter {
 
     func oauthParameters() -> Dictionary<String, AnyObject> {
         var parameters = Dictionary<String, AnyObject>()
-        parameters["oauth_version"] = OAuthConstants.version
-        parameters["oauth_signature_method"] =  OAuthConstants.signatureMethod
+        parameters["oauth_version"] = OAuth.version
+        parameters["oauth_signature_method"] =  OAuth.signatureMethod
         parameters["oauth_consumer_key"] = self.consumerKey.bridgeToObjectiveC()
         parameters["oauth_timestamp"] = "\(Int(NSDate().timeIntervalSince1970))".bridgeToObjectiveC()
         parameters["oauth_nonce"] = NSUUID().UUIDString.bridgeToObjectiveC()
@@ -205,21 +270,21 @@ class Swifter {
     func oauthSignatureForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>, accessToken token: OAuthAccessToken?) -> String {
         var tokenSecret: NSString = ""
         if token {
-            tokenSecret = token!.secret.percentEscapedWithEncoding(self.stringEncoding)
+            tokenSecret = token!.secret.urlEncodedStringWithEncoding(self.stringEncoding)
         }
 
-        let encodedConsumerSecret = self.consumerSecret.percentEscapedWithEncoding(self.stringEncoding)
+        let encodedConsumerSecret = self.consumerSecret.urlEncodedStringWithEncoding(self.stringEncoding)
 
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"
         let signingKeyData = signingKey.bridgeToObjectiveC().dataUsingEncoding(self.stringEncoding)
 
-        let parameterComponents = parameters.urlEncodedString(self.stringEncoding).componentsSeparatedByString("&") as String[]
+        let parameterComponents = parameters.urlEncodedQueryStringWithEncoding(self.stringEncoding).componentsSeparatedByString("&") as String[]
         parameterComponents.sort { $0 < $1 }
 
         let parameterString = parameterComponents.bridgeToObjectiveC().componentsJoinedByString("&")
-        let encodedParameterString = parameterString.percentEscapedWithEncoding(self.stringEncoding)
+        let encodedParameterString = parameterString.urlEncodedStringWithEncoding(self.stringEncoding)
 
-        let encodedURL = url.absoluteString.percentEscapedWithEncoding(self.stringEncoding)
+        let encodedURL = url.absoluteString.urlEncodedStringWithEncoding(self.stringEncoding)
 
         let signatureBaseString = "\(method)&\(encodedURL)&\(encodedParameterString)"
         let signatureBaseStringData = signatureBaseString.dataUsingEncoding(self.stringEncoding)

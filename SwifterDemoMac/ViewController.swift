@@ -34,8 +34,9 @@ class ViewController: NSViewController {
         let swifter = Swifter(baseURL: NSURL(string: "https://api.twitter.com/1.1/"), consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
 
         swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success"), success: {
-            accessToken, response in
+                accessToken, response in
 
+                println("Successfully authorized")
             }, failure: {
                 error in
 

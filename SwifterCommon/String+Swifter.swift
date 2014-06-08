@@ -26,8 +26,8 @@
 import Foundation
 
 extension String {
-
-    func percentEscapedWithEncoding(encoding: NSStringEncoding) -> String {
+    
+    func urlEncodedStringWithEncoding(encoding: NSStringEncoding) -> String {
         let charactersToBeEscaped = ":/?&=;+!@#$()',*" as CFStringRef
         let charactersToLeaveUnescaped = "[]." as CFStringRef
 
