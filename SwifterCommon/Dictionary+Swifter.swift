@@ -41,6 +41,18 @@ extension Dictionary {
         return map
     }
 
+    func filter(predicate: (key: KeyType, value: ValueType) -> Bool) -> Dictionary {
+        var filteredDictionary = Dictionary()
+
+        for (key, value) in self {
+            if predicate(key: key, value: value) {
+                filteredDictionary.updateValue(value, forKey: key)
+            }
+        }
+
+        return filteredDictionary
+    }
+
     func urlEncodedQueryStringWithEncoding(encoding: NSStringEncoding) -> String {
         var parts = String[]()
 
