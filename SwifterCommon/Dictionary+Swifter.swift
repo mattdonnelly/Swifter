@@ -28,17 +28,17 @@ import Foundation
 extension Dictionary {
 
     func join(other: Dictionary) -> Dictionary {
-        var map = Dictionary()
+        var joinedDictionary = Dictionary()
 
         for (key, value) in self {
-            map.updateValue(value, forKey: key)
+            joinedDictionary.updateValue(value, forKey: key)
         }
 
         for (key, value) in other {
-            map.updateValue(value, forKey: key)
+            joinedDictionary.updateValue(value, forKey: key)
         }
 
-        return map
+        return joinedDictionary
     }
 
     func filter(predicate: (key: KeyType, value: ValueType) -> Bool) -> Dictionary {

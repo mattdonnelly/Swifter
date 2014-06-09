@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B0AF2751944B7C4004DD4A6 /* OAuthAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0AF2741944B7C4004DD4A6 /* OAuthAccessToken.swift */; };
-		8B0AF2761944B7C4004DD4A6 /* OAuthAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0AF2741944B7C4004DD4A6 /* OAuthAccessToken.swift */; };
 		8B300C241944AA1A00993175 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C231944AA1A00993175 /* AppDelegate.swift */; };
 		8B300C261944AA1A00993175 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C251944AA1A00993175 /* ViewController.swift */; };
 		8B300C291944AA1A00993175 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C271944AA1A00993175 /* Main.storyboard */; };
@@ -22,6 +20,10 @@
 		8B300C551944AECB00993175 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C531944AECB00993175 /* Main.storyboard */; };
 		8B548F5619450BDB00EE2927 /* SwifterOAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */; };
 		8B548F5719450BDB00EE2927 /* SwifterOAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */; };
+		8B548F591945325E00EE2927 /* SwifterAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B548F581945325E00EE2927 /* SwifterAuth.swift */; };
+		8B548F5A1945325E00EE2927 /* SwifterAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B548F581945325E00EE2927 /* SwifterAuth.swift */; };
+		8B548F5C1945331D00EE2927 /* SwifterTimelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B548F5B1945331D00EE2927 /* SwifterTimelines.swift */; };
+		8B548F5D1945331D00EE2927 /* SwifterTimelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B548F5B1945331D00EE2927 /* SwifterTimelines.swift */; };
 		8B9F50F41944A5AB00894629 /* SwifteriOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F50F31944A5AB00894629 /* SwifteriOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B9F51181944A61D00894629 /* SwifterMac.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F51171944A61D00894629 /* SwifterMac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B9F514D1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */; };
@@ -77,7 +79,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8B0AF2741944B7C4004DD4A6 /* OAuthAccessToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAccessToken.swift; sourceTree = "<group>"; };
 		8B300C1F1944AA1A00993175 /* SwifterDemoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B300C221944AA1A00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B300C231944AA1A00993175 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +94,8 @@
 		8B300C541944AECB00993175 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B300C5A1944AECB00993175 /* SwifterDemoMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwifterDemoMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterOAuthClient.swift; sourceTree = "<group>"; };
+		8B548F581945325E00EE2927 /* SwifterAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAuth.swift; sourceTree = "<group>"; };
+		8B548F5B1945331D00EE2927 /* SwifterTimelines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTimelines.swift; sourceTree = "<group>"; };
 		8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwifteriOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9F50F21944A5AB00894629 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B9F50F31944A5AB00894629 /* SwifteriOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwifteriOS.h; sourceTree = "<group>"; };
@@ -251,7 +254,8 @@
 			children = (
 				8B9F514C1944A8DC00894629 /* Swifter.swift */,
 				8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */,
-				8B0AF2741944B7C4004DD4A6 /* OAuthAccessToken.swift */,
+				8B548F581945325E00EE2927 /* SwifterAuth.swift */,
+				8B548F5B1945331D00EE2927 /* SwifterTimelines.swift */,
 				8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */,
 				8B9F51481944A8DC00894629 /* HMACSHA1Signature.h */,
 				8B9F51491944A8DC00894629 /* HMACSHA1Signature.m */,
@@ -510,10 +514,11 @@
 			files = (
 				8B548F5619450BDB00EE2927 /* SwifterOAuthClient.swift in Sources */,
 				8B9F51571944A8DC00894629 /* Swifter.swift in Sources */,
-				8B0AF2751944B7C4004DD4A6 /* OAuthAccessToken.swift in Sources */,
+				8B548F591945325E00EE2927 /* SwifterAuth.swift in Sources */,
 				8B9F51531944A8DC00894629 /* String+Swifter.swift in Sources */,
 				8B9F51511944A8DC00894629 /* HMACSHA1Signature.m in Sources */,
 				8B9F514D1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */,
+				8B548F5C1945331D00EE2927 /* SwifterTimelines.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,10 +528,11 @@
 			files = (
 				8B548F5719450BDB00EE2927 /* SwifterOAuthClient.swift in Sources */,
 				8B9F51581944A8DC00894629 /* Swifter.swift in Sources */,
-				8B0AF2761944B7C4004DD4A6 /* OAuthAccessToken.swift in Sources */,
+				8B548F5A1945325E00EE2927 /* SwifterAuth.swift in Sources */,
 				8B9F51541944A8DC00894629 /* String+Swifter.swift in Sources */,
 				8B9F51521944A8DC00894629 /* HMACSHA1Signature.m in Sources */,
 				8B9F514E1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */,
+				8B548F5D1945331D00EE2927 /* SwifterTimelines.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

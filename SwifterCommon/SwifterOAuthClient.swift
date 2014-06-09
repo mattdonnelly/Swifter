@@ -25,6 +25,27 @@
 
 import Foundation
 
+struct OAuthAccessToken {
+
+    var key: String
+    var secret: String
+    var verifier: String?
+
+    var screenName: String?
+    var userID: String?
+
+    init(queryString: String) {
+        var attributes = queryString.parametersFromQueryString()
+
+        self.key = attributes["oauth_token"]!
+        self.secret = attributes["oauth_token_secret"]!
+
+        self.screenName = attributes["screen_name"]
+        self.userID = attributes["user_id"]
+    }
+    
+}
+
 class SwifterOAuthClient {
 
     struct OAuth {
@@ -89,17 +110,23 @@ class SwifterOAuthClient {
 
         var nonOAuthParameters = parameters.filter { key, _ in !key.hasPrefix("oauth_") }
 
-        if nonOAuthParameters.count > 0 && (method == "POST" || method == "PUT") {
-            var error: NSError?
-            var jsonData = NSJSONSerialization.dataWithJSONObject(nonOAuthParameters, options: nil, error: &error)
-
-            if error {
-                println(error!.localizedDescription)
+        if nonOAuthParameters.count > 0 {
+            if method == "GET" || method == "HEAD" || method == "DELETE" {
+                let queryURL = NSURL(string: url.absoluteString + "?" + nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.stringEncoding))
+                request.URL = queryURL
             }
             else {
-                let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.stringEncoding))
-                request.setValue("application/json; charset=\(charset)", forHTTPHeaderField: "Content-Type")
-                request.HTTPBody = jsonData
+                var error: NSError?
+                var jsonData = NSJSONSerialization.dataWithJSONObject(nonOAuthParameters, options: nil, error: &error)
+
+                if error {
+                    println(error!.localizedDescription)
+                }
+                else {
+                    let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.stringEncoding))
+                    request.setValue("application/json; charset=\(charset)", forHTTPHeaderField: "Content-Type")
+                    request.HTTPBody = jsonData
+                }
             }
         }
 
@@ -119,7 +146,7 @@ class SwifterOAuthClient {
         authorizationParameters["oauth_nonce"] = NSUUID().UUIDString.bridgeToObjectiveC()
 
         if self.accessToken {
-            authorizationParameters["oauth_token"] = self.accessToken!.key
+            authorizationParameters["oauth_token"] = self.accessToken!.key.bridgeToObjectiveC()
         }
 
         for (key, value: AnyObject) in parameters {
@@ -167,8 +194,8 @@ class SwifterOAuthClient {
 
         let signatureBaseString = "\(method)&\(encodedURL)&\(encodedParameterString)"
         let signatureBaseStringData = signatureBaseString.dataUsingEncoding(self.stringEncoding)
-
+        
         return HMACSHA1Signature.signatureForKey(signingKeyData, data: signatureBaseStringData).base64EncodedStringWithOptions(nil)
     }
-
+    
 }
