@@ -101,7 +101,7 @@ class SwifterOAuthClient: NSObject, NSURLSessionDelegate {
         self.dataRequestWithPath(path, baseURL: baseURL, method: "POST", parameters: parameters, progress: progress, success: success, failure: failure)
     }
 
-    func jsonRequestWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: JSONRequestSuccessHandler?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func jsonRequestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: JSONRequestSuccessHandler?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
 
         let jsonDownloadProgressHandler: SwifterHTTPRequest.DownloadProgressHandler = {
             data, _, _, response in
@@ -148,7 +148,15 @@ class SwifterOAuthClient: NSObject, NSURLSessionDelegate {
             }
         }
 
-        self.dataRequestWithPath(path, baseURL: baseURL, method: "GET", parameters: parameters, progress: jsonDownloadProgressHandler, success: jsonSuccessHandler, failure: failure)
+        self.dataRequestWithPath(path, baseURL: baseURL, method: method, parameters: parameters, progress: jsonDownloadProgressHandler, success: jsonSuccessHandler, failure: failure)
+    }
+
+    func getJSONWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: JSONRequestSuccessHandler?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+        self.jsonRequestWithPath(path, baseURL: baseURL, method: "GET", parameters: parameters, progress: progress, success: success, failure: failure)
+    }
+
+    func postJSONWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: JSONRequestSuccessHandler?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+        self.jsonRequestWithPath(path, baseURL: baseURL, method: "POST", parameters: parameters, progress: progress, success: success, failure: failure)
     }
 
     func authorizationHeaderForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>) -> String {

@@ -27,42 +27,47 @@ import Foundation
 
 extension Swifter {
 
-    func getStatusesAtPath(path: String, parameters: Dictionary<String, AnyObject>, count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getTimelineAtPath(path: String, parameters: Dictionary<String, AnyObject>, count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         var params = parameters
 
-        if count > 0 {
-            params["count"] = count.bridgeToObjectiveC()
+        if count {
+            params["count"] = count!.bridgeToObjectiveC()
         }
-        if sinceID > 0 {
-            params["since_id"] = sinceID.bridgeToObjectiveC()
+        if sinceID {
+            params["since_id"] = sinceID!.bridgeToObjectiveC()
         }
-        if maxID > 0 {
-            params["max_id"] = maxID.bridgeToObjectiveC()
+        if maxID {
+            params["max_id"] = maxID!.bridgeToObjectiveC()
+        }
+        if trimUser {
+            params["trim_user"] = Int(trimUser!)
+        }
+        if contributorDetails {
+            params["contributor_details"] = Int(!contributorDetails!)
+        }
+        if includeEntities {
+            params["include_entities"] = Int(includeEntities!)
         }
 
-        params["trim_user"] = Int(trimUser)
-        params["contributor_details"] = Int(contributorDetails)
-        params["include_entities"] = Int(includeEntities)
-
-        self.oauthClient.jsonRequestWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getStatusesMentionTimelineWithCount(count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
-        self.getStatusesAtPath("statuses/mentions_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
+    func getStatusesMentionTimelineWithCount(count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
+        self.getTimelineAtPath("statuses/mentions_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 
-    func getStatusesUserTimelineWithUserID(userID: String, count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
+    func getStatusesUserTimelineWithUserID(userID: String, count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
         var parameters: Dictionary<String, AnyObject> = ["user_id": userID.bridgeToObjectiveC()]
 
-        self.getStatusesAtPath("statuses/mentions_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
+        self.getTimelineAtPath("statuses/mentions_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 
-    func getStatusesHomeTimelineWithCount(count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
-        self.getStatusesAtPath("statuses/home_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
+    func getStatusesHomeTimelineWithCount(count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
+        self.getTimelineAtPath("statuses/home_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 
-    func getStatusesRetweetsOfMeWithCount(count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
-        self.getStatusesAtPath("statuses/retweets_of_me.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
+    func getStatusesRetweetsOfMeWithCount(count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
+        self.getTimelineAtPath("statuses/retweets_of_me.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 
 }

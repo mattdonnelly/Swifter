@@ -27,9 +27,120 @@ import Foundation
 
 extension Swifter {
 
-    func getStatusesSampleDelimited(delimited: Bool, stallWarnings: Bool, progress: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        var parameters: Dictionary<String, AnyObject> = ["delimited": delimited.bridgeToObjectiveC(), "stall_warning": stallWarnings.bridgeToObjectiveC()]
-        self.oauthClient.jsonRequestWithPath("statuses/sample.json", baseURL: self.streamingURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+    func postStatusesFilter(follow: String[]?, track: String[]?, locations: String[]?, delimited: Bool?, stallWarnings: Bool?, progress: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler) {
+        assert(follow || track || locations, "At least one predicate parameter (follow, locations, or track) must be specified")
+
+        let path = "statuses/filter.json"
+
+        var parameters = Dictionary<String, AnyObject>()
+        if follow {
+            parameters["follow"] = follow!.bridgeToObjectiveC().componentsJoinedByString(",")
+        }
+        if track {
+            parameters["track"] = track!.bridgeToObjectiveC().componentsJoinedByString(",")
+        }
+        if locations {
+            parameters["locations"] = locations!.bridgeToObjectiveC().componentsJoinedByString(",")
+        }
+        if delimited {
+            parameters["delimited"] = delimited!.bridgeToObjectiveC()
+        }
+        if stallWarnings {
+            parameters["stall_warnings"] = stallWarnings!.bridgeToObjectiveC()
+        }
+
+        self.oauthClient.postJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+    }
+
+    func getStatusesSampleDelimited(delimited: Bool?, stallWarnings: Bool?, progress: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+        let path = "statuses/sample.json"
+
+        var parameters = Dictionary<String, AnyObject>()
+        if delimited {
+            parameters["delimited"] = delimited!.bridgeToObjectiveC()
+        }
+        if stallWarnings {
+            parameters["stall_warnings"] = stallWarnings!.bridgeToObjectiveC()
+        }
+
+        self.oauthClient.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+    }
+
+    func getStatusesFirehose(count: Int?, delimited: Bool?, stallWarnings: Bool?, progress: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+        let path = "statuses/firehose.json"
+
+        var parameters = Dictionary<String, AnyObject>()
+        if count {
+            parameters["count"] = count!.bridgeToObjectiveC()
+        }
+        if delimited {
+            parameters["delimited"] = delimited!.bridgeToObjectiveC()
+        }
+        if stallWarnings {
+            parameters["stall_warnings"] = stallWarnings!.bridgeToObjectiveC()
+        }
+
+        self.oauthClient.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+    }
+
+    func getUserStream(delimited: Bool?, stallWarnings: Bool?, includeMessagesFromFollowedAccounts: Bool?, includeReplies: Bool?, track: String[]?, locations: String[]?, stringifyFriendIDs: Bool?, progress: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+        let path = "user.json"
+
+        var parameters = Dictionary<String, AnyObject>()
+        if delimited {
+            parameters["delimited"] = delimited!.bridgeToObjectiveC()
+        }
+        if stallWarnings {
+            parameters["stall_warnings"] = stallWarnings!.bridgeToObjectiveC()
+        }
+        if includeMessagesFromFollowedAccounts {
+            if includeMessagesFromFollowedAccounts! {
+                parameters["with"] = "user".bridgeToObjectiveC()
+            }
+        }
+        if includeReplies {
+            if includeReplies! {
+                parameters["replies"] = "all".bridgeToObjectiveC()
+            }
+        }
+        if track {
+            parameters["track"] = track!.bridgeToObjectiveC().componentsJoinedByString(",")
+        }
+        if locations {
+            parameters["locations"] = locations!.bridgeToObjectiveC().componentsJoinedByString(",")
+        }
+        if stringifyFriendIDs {
+            parameters["stringify_friend_ids"] = stringifyFriendIDs!.bridgeToObjectiveC()
+        }
+
+        self.oauthClient.postJSONWithPath(path, baseURL: self.userStreamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+    }
+
+    func getFollowStream(delimited: Bool?, stallWarnings: Bool?, includeMessagesFromFollowedAccounts: Bool?, includeReplies: Bool?, stringifyFriendIDs: Bool?, progress: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+        let path = "site.json"
+
+        var parameters = Dictionary<String, AnyObject>()
+        if delimited {
+            parameters["delimited"] = delimited!.bridgeToObjectiveC()
+        }
+        if stallWarnings {
+            parameters["stall_warnings"] = stallWarnings!.bridgeToObjectiveC()
+        }
+        if includeMessagesFromFollowedAccounts {
+            if includeMessagesFromFollowedAccounts! {
+                parameters["with"] = "user".bridgeToObjectiveC()
+            }
+        }
+        if includeReplies {
+            if includeReplies! {
+                parameters["replies"] = "all".bridgeToObjectiveC()
+            }
+        }
+        if stringifyFriendIDs {
+            parameters["stringify_friend_ids"] = stringifyFriendIDs!.bridgeToObjectiveC()
+        }
+
+        self.oauthClient.postJSONWithPath(path, baseURL: self.siteStreamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
     }
 
 }
