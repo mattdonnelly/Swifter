@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let swifter = Swifter(baseURL: NSURL(string: "https://api.twitter.com/1.1/"), consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
+        let swifter = Swifter(apiURL: NSURL(string: "https://api.twitter.com/1.1/"), streamingURL: NSURL(string: "https://stream.twitter.com/1.1/"), consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
 
         let failureHandler: ((NSError) -> Void) = {
             error in

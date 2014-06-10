@@ -46,14 +46,14 @@ struct OAuthAccessToken {
     
 }
 
-class SwifterOAuthClient {
+class SwifterOAuthClient: NSObject, NSURLSessionDelegate {
+
+    typealias JSONRequestSuccessHandler = (json: AnyObject, response: NSHTTPURLResponse) -> Void
 
     struct OAuth {
         static let version = "1.0"
         static let signatureMethod = "HMAC-SHA1"
     }
-
-    var baseURL: NSURL
 
     var consumerKey: String
     var consumerSecret: String
@@ -62,91 +62,105 @@ class SwifterOAuthClient {
 
     var stringEncoding: NSStringEncoding
 
-    init(baseURL: NSURL, consumerKey: String, consumerSecret: String) {
-        self.baseURL = baseURL
+    init(consumerKey: String, consumerSecret: String) {
         self.consumerKey = consumerKey
         self.consumerSecret = consumerSecret
         self.stringEncoding = NSUTF8StringEncoding
+        super.init()
     }
 
-    func dataRequestWithMethod(method: String, path: String, parameters: Dictionary<String, AnyObject>, success: ((data: NSData, response: NSHTTPURLResponse) -> Void), failure: ((error: NSError) -> Void)?) {
-        let request = self.requestWithMethod(method, path: path, parameters: parameters)
+    func requestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.RequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+        let url = NSURL(string: path, relativeToURL: baseURL)
+        let request = SwifterHTTPRequest(URL: url, method: method, parameters: parameters)
+        request.headers = ["Authorization": self.authorizationHeaderForMethod(method, url: url, parameters: parameters)]
+        request.downloadRequestProgressHandler = progress
+        request.requestSuccessHandler = success
+        request.requestFailureHandler = failure
+        request.dataEncoding = self.stringEncoding
 
-        let dataTask = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            data, response, error in
+        request.start()
+    }
+
+    func dataRequestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.DataRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+        let url = NSURL(string: path, relativeToURL: baseURL)
+        let request = SwifterHTTPRequest(URL: url, method: method, parameters: parameters)
+        request.headers = ["Authorization": self.authorizationHeaderForMethod(method, url: url, parameters: parameters)]
+        request.downloadRequestProgressHandler = progress
+        request.dataRequestSuccessHandler = success
+        request.requestFailureHandler = failure
+        request.dataEncoding = self.stringEncoding
+
+        request.start()
+    }
+
+    func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.DataRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+        self.dataRequestWithPath(path, baseURL: baseURL, method: "GET", parameters: parameters, progress: progress, success: success, failure: failure)
+    }
+
+    func post(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.DataRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+        self.dataRequestWithPath(path, baseURL: baseURL, method: "POST", parameters: parameters, progress: progress, success: success, failure: failure)
+    }
+
+    func jsonRequestWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: JSONRequestSuccessHandler?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+
+        let jsonDownloadProgressHandler: SwifterHTTPRequest.DownloadProgressHandler = {
+            data, _, _, response in
+
+            if !progress {
+                return
+            }
+
+            var error: NSError?
+            var jsonResult: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
+
+            if !error {
+                progress?(json: jsonResult!, response: response)
+            }
+
+            let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding)
+            let jsonChunks = jsonString.componentsSeparatedByString("\r\n") as String[]
+
+            for chunk in jsonChunks {
+                if chunk.utf16count == 0 {
+                    continue
+                }
+
+                let chunkData = chunk.dataUsingEncoding(NSUTF8StringEncoding)
+                jsonResult = NSJSONSerialization.JSONObjectWithData(chunkData, options: nil, error: &error)
+
+                if !error {
+                    progress?(json: jsonResult!, response: response)
+                }
+            }
+        }
+
+        let jsonSuccessHandler: SwifterHTTPRequest.DataRequestSuccessHandler = {
+            data, response in
+
+            var error: NSError?
+            let jsonResult: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
 
             if error {
-                failure?(error: error)
+                failure?(error: error!)
             }
             else {
-                let httpResponse = response as NSHTTPURLResponse
-
-                if httpResponse.statusCode == 200 {
-                    success(data: data, response: httpResponse)
-                }
-                else {
-                    let httpError = NSError(domain: NSURLErrorDomain, code: httpResponse.statusCode, userInfo: httpResponse.allHeaderFields)
-                    failure?(error: httpError)
-                }
+                success?(json: jsonResult!, response: response)
             }
         }
 
-        dataTask.resume()
-    }
-
-    func getRequestWithPath(path: String, parameters: Dictionary<String, AnyObject>, success: ((data: NSData, response: NSHTTPURLResponse) -> Void), failure: ((error: NSError) -> Void)?) {
-        self.dataRequestWithMethod("GET", path: path, parameters: parameters, success: success, failure: failure)
-    }
-
-    func postRequestWithPath(path: String, parameters: Dictionary<String, AnyObject>, success: ((data: NSData, response: NSHTTPURLResponse) -> Void), failure: ((error: NSError) -> Void)?) {
-        self.dataRequestWithMethod("POST", path: path, parameters: parameters, success: success, failure: failure)
-    }
-
-    func requestWithMethod(method: String, path: String, parameters: Dictionary<String, AnyObject>) -> NSMutableURLRequest {
-        let url = NSURL(string: path, relativeToURL: self.baseURL)
-        let request = NSMutableURLRequest(URL: url)
-
-        request.HTTPMethod = method
-
-        var nonOAuthParameters = parameters.filter { key, _ in !key.hasPrefix("oauth_") }
-
-        if nonOAuthParameters.count > 0 {
-            if method == "GET" || method == "HEAD" || method == "DELETE" {
-                let queryURL = NSURL(string: url.absoluteString + "?" + nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.stringEncoding))
-                request.URL = queryURL
-            }
-            else {
-                var error: NSError?
-                var jsonData = NSJSONSerialization.dataWithJSONObject(nonOAuthParameters, options: nil, error: &error)
-
-                if error {
-                    println(error!.localizedDescription)
-                }
-                else {
-                    let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.stringEncoding))
-                    request.setValue("application/json; charset=\(charset)", forHTTPHeaderField: "Content-Type")
-                    request.HTTPBody = jsonData
-                }
-            }
-        }
-
-        let authorizationHeader = self.authorizationHeaderForMethod(method, url: url, parameters: parameters)
-        request.setValue(authorizationHeader, forHTTPHeaderField: "Authorization")
-        request.HTTPShouldHandleCookies = false
-
-        return request
+        self.dataRequestWithPath(path, baseURL: baseURL, method: "GET", parameters: parameters, progress: jsonDownloadProgressHandler, success: jsonSuccessHandler, failure: failure)
     }
 
     func authorizationHeaderForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>) -> String {
         var authorizationParameters = Dictionary<String, AnyObject>()
         authorizationParameters["oauth_version"] = OAuth.version
         authorizationParameters["oauth_signature_method"] =  OAuth.signatureMethod
-        authorizationParameters["oauth_consumer_key"] = self.consumerKey.bridgeToObjectiveC()
-        authorizationParameters["oauth_timestamp"] = "\(Int(NSDate().timeIntervalSince1970))".bridgeToObjectiveC()
+        authorizationParameters["oauth_consumer_key"] = self.consumerKey
+        authorizationParameters["oauth_timestamp"] = String(Int(NSDate().timeIntervalSince1970))
         authorizationParameters["oauth_nonce"] = NSUUID().UUIDString.bridgeToObjectiveC()
 
         if self.accessToken {
-            authorizationParameters["oauth_token"] = self.accessToken!.key.bridgeToObjectiveC()
+            authorizationParameters["oauth_token"] = self.accessToken!.key
         }
 
         for (key, value: AnyObject) in parameters {

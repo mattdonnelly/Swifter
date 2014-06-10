@@ -33,8 +33,7 @@ import Foundation
 
 class Swifter {
 
-    typealias SwifterTokenRequestSuccessHandler = (accessToken: OAuthAccessToken, response: NSURLResponse) -> Void
-    typealias SwifterRequestFailureHandler = (error: NSError) -> Void
+    typealias RequestFailureHandler = (error: NSError) -> Void
 
     struct CallbackNotification {
         static let notificationName = "SwifterCallbackNotificationName"
@@ -45,22 +44,24 @@ class Swifter {
         static let domain = "SwifterErrorDomain"
     }
 
-    var baseURL: NSURL
+    var apiURL: NSURL
+    var streamingURL: NSURL
 
-    var requestManager: SwifterOAuthClient
+    var oauthClient: SwifterOAuthClient
 
     var stringEncoding: NSStringEncoding {
         set {
-            requestManager.stringEncoding = stringEncoding
+            oauthClient.stringEncoding = stringEncoding
         }
         get {
-            return requestManager.stringEncoding
+            return oauthClient.stringEncoding
         }
     }
 
-    init(baseURL: NSURL, consumerKey: String, consumerSecret: String) {
-        self.baseURL = baseURL
-        self.requestManager = SwifterOAuthClient(baseURL: baseURL, consumerKey: consumerKey, consumerSecret: consumerSecret)
+    init(apiURL: NSURL, streamingURL: NSURL, consumerKey: String, consumerSecret: String) {
+        self.apiURL = apiURL
+        self.streamingURL = streamingURL
+        self.oauthClient = SwifterOAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
         self.stringEncoding = NSUTF8StringEncoding
     }
 

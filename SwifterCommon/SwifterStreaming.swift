@@ -1,6 +1,6 @@
 //
-//  ViewController.swift
-//  SwifterDemoMac
+//  SwifterStreaming.swift
+//  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
 //
@@ -23,38 +23,13 @@
 //  THE SOFTWARE.
 //
 
-import Cocoa
-import SwifterMac
+import Foundation
 
-class ViewController: NSViewController {
-                            
-    override func viewDidLoad() {
-        super.viewDidLoad()
+extension Swifter {
 
-        let swifter = Swifter(apiURL: NSURL(string: "https://api.twitter.com/1.1/"), streamingURL: NSURL(string: "https://stream.twitter.com/1.1/"), consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
-
-        let failureHandler: ((NSError) -> Void) = {
-            error in
-
-            println(error.localizedDescription)
-            println(error.userInfo)
-        }
-
-        swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success"), success: {
-            accessToken, response in
-
-            println("Successfully authorized")
-
-           swifter.getStatusesHomeTimelineWithCount(100, sinceID: 0, maxID: 0, trimUser: false, contributorDetails: true, includeEntities: true, success: {
-                statuses in
-
-                println(statuses)
-
-                },
-                failure: failureHandler)
-
-            }, failure: failureHandler)
+    func getStatusesSampleDelimited(delimited: Bool, stallWarnings: Bool, progress: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+        var parameters: Dictionary<String, AnyObject> = ["delimited": delimited.bridgeToObjectiveC(), "stall_warning": stallWarnings.bridgeToObjectiveC()]
+        self.oauthClient.jsonRequestWithPath("statuses/sample.json", baseURL: self.streamingURL, parameters: parameters, progress: progress, success: nil, failure: failure)
     }
 
 }
-

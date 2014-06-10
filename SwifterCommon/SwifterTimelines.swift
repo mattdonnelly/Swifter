@@ -27,14 +27,7 @@ import Foundation
 
 extension Swifter {
 
-    typealias SwifterStatusesSuccessHandler = (statuses: NSArray) -> Void
-
-    func getStatusesAtPath(path: String, count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterStatusesSuccessHandler, failure: SwifterRequestFailureHandler?) {
-        self.getStatusesAtPath(path, parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
-    }
-
-    func getStatusesAtPath(path: String, parameters: Dictionary<String, AnyObject>, count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterStatusesSuccessHandler, failure: SwifterRequestFailureHandler?) {
-
+    func getStatusesAtPath(path: String, parameters: Dictionary<String, AnyObject>, count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         var params = parameters
 
         if count > 0 {
@@ -47,42 +40,29 @@ extension Swifter {
             params["max_id"] = maxID.bridgeToObjectiveC()
         }
 
-        params["trim_user"] = trimUser.bridgeToObjectiveC()
-        params["contributor_details"] = contributorDetails.bridgeToObjectiveC()
-        params["include_entities"] = includeEntities.bridgeToObjectiveC()
+        params["trim_user"] = Int(trimUser)
+        params["contributor_details"] = Int(contributorDetails)
+        params["include_entities"] = Int(includeEntities)
 
-        self.requestManager.getRequestWithPath(path, parameters: params, success: {
-            data, response in
-
-            var error: NSError?
-            let jsonResult: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
-
-            if error {
-                failure?(error: error!)
-            }
-            else {
-                success(statuses: jsonResult as NSArray)
-            }
-
-            }, failure: failure)
+        self.oauthClient.jsonRequestWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getStatusesMentionTimelineWithCount(count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterStatusesSuccessHandler, failure: SwifterRequestFailureHandler?) {
-        self.getStatusesAtPath("statuses/mentions_timeline.json", count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
+    func getStatusesMentionTimelineWithCount(count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
+        self.getStatusesAtPath("statuses/mentions_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 
-    func getStatusesUserTimelineWithUserID(userID: String, count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterStatusesSuccessHandler, failure: SwifterRequestFailureHandler?) {
+    func getStatusesUserTimelineWithUserID(userID: String, count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
         var parameters: Dictionary<String, AnyObject> = ["user_id": userID.bridgeToObjectiveC()]
 
-        self.getStatusesAtPath("statuses/mentions_timeline.json", parameters: parameters, count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
+        self.getStatusesAtPath("statuses/mentions_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 
-    func getStatusesHomeTimelineWithCount(count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterStatusesSuccessHandler, failure: SwifterRequestFailureHandler?) {
-        self.getStatusesAtPath("statuses/home_timeline.json", count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
+    func getStatusesHomeTimelineWithCount(count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
+        self.getStatusesAtPath("statuses/home_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 
-    func getStatusesRetweetsOfMeWithCount(count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterStatusesSuccessHandler, failure: SwifterRequestFailureHandler?) {
-        self.getStatusesAtPath("statuses/retweets_of_me.json", count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
+    func getStatusesRetweetsOfMeWithCount(count: Int, sinceID: Int, maxID: Int, trimUser: Bool, contributorDetails: Bool, includeEntities: Bool, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
+        self.getStatusesAtPath("statuses/retweets_of_me.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 
 }

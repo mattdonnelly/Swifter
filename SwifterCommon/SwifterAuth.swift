@@ -27,7 +27,9 @@ import Foundation
 
 extension Swifter {
 
-    func authorizeWithCallbackURL(callbackURL: NSURL, success: SwifterTokenRequestSuccessHandler, failure: ((error: NSError) -> Void)?) {
+    typealias TokenRequestSuccessHandler = (accessToken: OAuthAccessToken, response: NSURLResponse) -> Void
+
+    func authorizeWithCallbackURL(callbackURL: NSURL, success: TokenRequestSuccessHandler, failure: ((error: NSError) -> Void)?) {
         self.requestOAuthRequestTokenWithCallbackURL(callbackURL, success: {
             token, response in
 
@@ -46,13 +48,13 @@ extension Swifter {
                 self.requestOAuthAccessTokenWithRequestToken(requestToken, success: {
                     accessToken, response in
 
-                    self.requestManager.accessToken = accessToken
+                    self.oauthClient.accessToken = accessToken
                     success(accessToken: accessToken, response: response)
 
                     }, failure: failure)
                 })
 
-            let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.baseURL)
+            let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.apiURL)
             let queryURL = NSURL(string: authorizeURL.absoluteString + "?oauth_token=\(token.key)")
 
             #if os(iOS)
@@ -63,27 +65,25 @@ extension Swifter {
             }, failure: failure)
     }
 
-    func requestOAuthRequestTokenWithCallbackURL(callbackURL: NSURL, success: SwifterTokenRequestSuccessHandler, failure: SwifterRequestFailureHandler?) {
+    func requestOAuthRequestTokenWithCallbackURL(callbackURL: NSURL, success: TokenRequestSuccessHandler, failure: RequestFailureHandler?) {
         let parameters: Dictionary<String, AnyObject> = ["oauth_callback": callbackURL.absoluteString.bridgeToObjectiveC()]
 
-        self.requestManager.postRequestWithPath("/oauth/request_token", parameters: parameters, success: {
-            data, response in
+        self.oauthClient.requestWithPath("/oauth/request_token", baseURL: self.apiURL, method: "POST", parameters: parameters, progress: nil, success: {
+            responseString, response in
 
-            let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
             let accessToken = OAuthAccessToken(queryString: responseString)
             success(accessToken: accessToken, response: response)
 
             }, failure: failure)
     }
 
-    func requestOAuthAccessTokenWithRequestToken(requestToken: OAuthAccessToken, success: SwifterTokenRequestSuccessHandler, failure: SwifterRequestFailureHandler?) {
+    func requestOAuthAccessTokenWithRequestToken(requestToken: OAuthAccessToken, success: TokenRequestSuccessHandler, failure: RequestFailureHandler?) {
         if requestToken.verifier {
             let parameters: Dictionary<String, AnyObject> = ["oauth_token": requestToken.key, "oauth_verifier": requestToken.verifier!]
 
-            self.requestManager.postRequestWithPath("/oauth/access_token", parameters: parameters, success: {
-                data, response in
+            self.oauthClient.requestWithPath("/oauth/access_token", baseURL: self.apiURL, method: "POST", parameters: parameters, progress: nil, success: {
+                responseString, response in
 
-                let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
                 let accessToken = OAuthAccessToken(queryString: responseString)
                 success(accessToken: accessToken, response: response)
 

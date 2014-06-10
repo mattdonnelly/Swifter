@@ -1,6 +1,6 @@
 //
-//  ViewController.swift
-//  SwifterDemoMac
+//  NSURL+Swifter.swift
+//  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
 //
@@ -23,38 +23,19 @@
 //  THE SOFTWARE.
 //
 
-import Cocoa
-import SwifterMac
+import Foundation
 
-class ViewController: NSViewController {
-                            
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        let swifter = Swifter(apiURL: NSURL(string: "https://api.twitter.com/1.1/"), streamingURL: NSURL(string: "https://stream.twitter.com/1.1/"), consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
+extension NSURL {
 
-        let failureHandler: ((NSError) -> Void) = {
-            error in
-
-            println(error.localizedDescription)
-            println(error.userInfo)
+    func URLByAppendingQueryString(queryString: String) -> NSURL {
+        if queryString.utf16count == 0 {
+            return self
         }
 
-        swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success"), success: {
-            accessToken, response in
+        let URLString = self.absoluteString + (self.query ? "&" : "?") + queryString
 
-            println("Successfully authorized")
-
-           swifter.getStatusesHomeTimelineWithCount(100, sinceID: 0, maxID: 0, trimUser: false, contributorDetails: true, includeEntities: true, success: {
-                statuses in
-
-                println(statuses)
-
-                },
-                failure: failureHandler)
-
-            }, failure: failureHandler)
+        return NSURL(string: URLString)
     }
 
 }
-
