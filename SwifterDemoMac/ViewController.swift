@@ -31,7 +31,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let swifter = Swifter(apiURL: NSURL(string: "https://api.twitter.com/1.1/"), streamingURL: NSURL(string: "https://stream.twitter.com/1.1/"), consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
+        let swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
 
         let failureHandler: ((NSError) -> Void) = {
             error in
@@ -45,7 +45,7 @@ class ViewController: NSViewController {
 
             println("Successfully authorized")
 
-           swifter.getStatusesHomeTimelineWithCount(100, sinceID: 0, maxID: 0, trimUser: false, contributorDetails: true, includeEntities: true, success: {
+           swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
                 statuses in
 
                 println(statuses)

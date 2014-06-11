@@ -1,6 +1,6 @@
 //
-//  ViewController.swift
-//  SwifterDemoiOS
+//  SwifterSpam.swift
+//  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
 //
@@ -23,38 +23,26 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
-import SwifteriOS
+import Foundation
 
-class ViewController: UIViewController {
-                            
-    override func viewDidLoad() {
-        super.viewDidLoad()
+extension Swifter {
 
-        let swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
+    func postUsersReportSpamWithScreenName(screenName: String, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+        let path = "users/report_spam.json"
 
-        let failureHandler: ((NSError) -> Void) = {
-            error in
+        var parameters = Dictionary<String, AnyObject>()
+        parameters["screen_name"] = screenName
 
-            println(error.localizedDescription)
-            println(error.userInfo)
-        }
+        self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+    }
 
-        swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success"), success: {
-            accessToken, response in
+    func postUsersReportSpamWithScreenName(userID: Int, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+        let path = "users/report_spam.json"
 
-            println("Successfully authorized")
+        var parameters = Dictionary<String, AnyObject>()
+        parameters["user_id"] = userID
 
-            swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
-                statuses in
-
-                println(statuses)
-
-                },
-                failure: failureHandler)
-            
-            }, failure: failureHandler)
+        self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
 }
-

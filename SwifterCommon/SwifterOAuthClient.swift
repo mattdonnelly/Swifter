@@ -103,6 +103,8 @@ class SwifterOAuthClient: NSObject, NSURLSessionDelegate {
 
     func jsonRequestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: JSONRequestSuccessHandler?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
 
+        println(parameters)
+
         let jsonDownloadProgressHandler: SwifterHTTPRequest.DownloadProgressHandler = {
             data, _, _, response in
 

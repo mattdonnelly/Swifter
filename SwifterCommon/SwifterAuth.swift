@@ -30,7 +30,7 @@ extension Swifter {
     typealias TokenRequestSuccessHandler = (accessToken: OAuthAccessToken, response: NSURLResponse) -> Void
 
     func authorizeWithCallbackURL(callbackURL: NSURL, success: TokenRequestSuccessHandler, failure: ((error: NSError) -> Void)?) {
-        self.requestOAuthRequestTokenWithCallbackURL(callbackURL, success: {
+        self.getOAuthRequestTokenWithCallbackURL(callbackURL, success: {
             token, response in
 
             var requestToken = token
@@ -45,7 +45,7 @@ extension Swifter {
                 let parameters = url.query.parametersFromQueryString()
                 requestToken.verifier = parameters["oauth_verifier"]
 
-                self.requestOAuthAccessTokenWithRequestToken(requestToken, success: {
+                self.getOAuthAccessTokenWithRequestToken(requestToken, success: {
                     accessToken, response in
 
                     self.oauthClient.accessToken = accessToken
@@ -65,8 +65,8 @@ extension Swifter {
             }, failure: failure)
     }
 
-    func requestOAuthRequestTokenWithCallbackURL(callbackURL: NSURL, success: TokenRequestSuccessHandler, failure: RequestFailureHandler?) {
-        let parameters: Dictionary<String, AnyObject> = ["oauth_callback": callbackURL.absoluteString.bridgeToObjectiveC()]
+    func getOAuthRequestTokenWithCallbackURL(callbackURL: NSURL, success: TokenRequestSuccessHandler, failure: RequestFailureHandler?) {
+        let parameters: Dictionary<String, AnyObject> = ["oauth_callback": callbackURL.absoluteString as String]
 
         self.oauthClient.requestWithPath("/oauth/request_token", baseURL: self.apiURL, method: "POST", parameters: parameters, progress: nil, success: {
             responseString, response in
@@ -77,7 +77,7 @@ extension Swifter {
             }, failure: failure)
     }
 
-    func requestOAuthAccessTokenWithRequestToken(requestToken: OAuthAccessToken, success: TokenRequestSuccessHandler, failure: RequestFailureHandler?) {
+    func getOAuthAccessTokenWithRequestToken(requestToken: OAuthAccessToken, success: TokenRequestSuccessHandler, failure: RequestFailureHandler?) {
         if requestToken.verifier {
             let parameters: Dictionary<String, AnyObject> = ["oauth_token": requestToken.key, "oauth_verifier": requestToken.verifier!]
 

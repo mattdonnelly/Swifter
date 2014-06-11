@@ -34,34 +34,34 @@ extension Swifter {
         parameters["q"] = q
 
         if geocode {
-            parameters["geocode"] = geocode!.bridgeToObjectiveC()
+            parameters["geocode"] = geocode!
         }
         if lang {
-            parameters["lang"] = lang!.bridgeToObjectiveC()
+            parameters["lang"] = lang!
         }
         if locale {
-            parameters["locale"] = locale!.bridgeToObjectiveC()
+            parameters["locale"] = locale!
         }
         if resultType {
-            parameters["result_type"] = resultType!.bridgeToObjectiveC()
+            parameters["result_type"] = resultType!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if until {
-            parameters["until"] = until!.bridgeToObjectiveC()
+            parameters["until"] = until!
         }
         if sinceID {
-            parameters["since_id"] = sinceID!.bridgeToObjectiveC()
+            parameters["since_id"] = sinceID!
         }
         if maxID {
-            parameters["max_id"] = maxID!.bridgeToObjectiveC()
+            parameters["max_id"] = maxID!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if callback {
-            parameters["callback"] = callback!.bridgeToObjectiveC()
+            parameters["callback"] = callback!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)

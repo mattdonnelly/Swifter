@@ -32,7 +32,7 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if lang {
-            parameters["lang"] = lang!.bridgeToObjectiveC()
+            parameters["lang"] = lang!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -43,7 +43,7 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if lang {
-            parameters["lang"] = lang!.bridgeToObjectiveC()
+            parameters["lang"] = lang!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)

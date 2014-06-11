@@ -32,10 +32,10 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if trimUser {
-            parameters["trim_user"] = trimUser!.bridgeToObjectiveC()
+            parameters["trim_user"] = trimUser!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -47,16 +47,16 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if trimUser {
-            parameters["trim_user"] = trimUser!.bridgeToObjectiveC()
+            parameters["trim_user"] = trimUser!
         }
         if includeMyRetweet {
-            parameters["include_my_retweet"] = includeMyRetweet!.bridgeToObjectiveC()
+            parameters["include_my_retweet"] = includeMyRetweet!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -67,7 +67,7 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if trimUser {
-            parameters["trim_user"] = trimUser!.bridgeToObjectiveC()
+            parameters["trim_user"] = trimUser!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -77,7 +77,7 @@ extension Swifter {
         var path: String = "statuses/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["status"] = status.bridgeToObjectiveC()
+        parameters["status"] = status
 
         if mediaIDs {
             let mediaIDsString = mediaIDs!.bridgeToObjectiveC().componentsJoinedByString(",")
@@ -85,19 +85,19 @@ extension Swifter {
         }
 
         if inReplyToStatusID {
-            parameters["in_reply_to_status_id"] = inReplyToStatusID!.bridgeToObjectiveC()
+            parameters["in_reply_to_status_id"] = inReplyToStatusID!
         }
         if placeID {
-            parameters["place_id"] = placeID!.bridgeToObjectiveC()
-            parameters["display_coordinates"] = true.bridgeToObjectiveC()
+            parameters["place_id"] = placeID!
+            parameters["display_coordinates"] = true
         }
         else if lat && long {
-            parameters["lat"] = lat!.bridgeToObjectiveC()
-            parameters["long"] = long!.bridgeToObjectiveC()
-            parameters["display_coordinates"] = true.bridgeToObjectiveC()
+            parameters["lat"] = lat!
+            parameters["long"] = long!
+            parameters["display_coordinates"] = true
         }
         if trimUser {
-            parameters["trim_user"] = trimUser!.bridgeToObjectiveC()
+            parameters["trim_user"] = trimUser!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -108,7 +108,7 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if trimUser {
-            parameters["trim_user"] = trimUser!.bridgeToObjectiveC()
+            parameters["trim_user"] = trimUser!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -122,25 +122,25 @@ extension Swifter {
         parameters["url"] = url
 
         if maxWidth {
-            parameters["max_width"] = maxWidth!.bridgeToObjectiveC()
+            parameters["max_width"] = maxWidth!
         }
         if hideMedia {
-            parameters["hide_media"] = hideMedia!.bridgeToObjectiveC()
+            parameters["hide_media"] = hideMedia!
         }
         if hideThread {
-            parameters["hide_thread"] = hideThread!.bridgeToObjectiveC()
+            parameters["hide_thread"] = hideThread!
         }
         if omitScript {
-            parameters["omit_scipt"] = omitScript!.bridgeToObjectiveC()
+            parameters["omit_scipt"] = omitScript!
         }
         if align {
-            parameters["align"] = align!.bridgeToObjectiveC()
+            parameters["align"] = align!
         }
         if related {
-            parameters["related"] = related!.bridgeToObjectiveC()
+            parameters["related"] = related!
         }
         if lang {
-            parameters["lang"] = lang!.bridgeToObjectiveC()
+            parameters["lang"] = lang!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -153,10 +153,10 @@ extension Swifter {
         parameters["id"] = id
 
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if stringifyIDs {
-            parameters["stringify_ids"] = cursor!.bridgeToObjectiveC()
+            parameters["stringify_ids"] = cursor!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)

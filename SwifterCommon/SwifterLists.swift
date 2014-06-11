@@ -2,6 +2,8 @@
 //  SwifterLists.swift
 //  Swifter
 //
+//  Copyright (c) 2014 Matt Donnelly.
+//
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
@@ -29,10 +31,10 @@ extension Swifter {
         let path = "lists/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["userID"] = userID.bridgeToObjectiveC()
+        parameters["userID"] = userID
 
         if reverse {
-            parameters["reverse"] = reverse!.bridgeToObjectiveC()
+            parameters["reverse"] = reverse!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -42,10 +44,10 @@ extension Swifter {
         let path = "lists/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["screen_name"] = screenName
 
         if reverse {
-            parameters["reverse"] = reverse!.bridgeToObjectiveC()
+            parameters["reverse"] = reverse!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -55,23 +57,23 @@ extension Swifter {
         let path = "lists/statuses.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
+        parameters["list_id"] = listID
+        parameters["owner_screen_name"] = ownerScreenName
 
         if sinceID {
-            parameters["since_id"] = sinceID!.bridgeToObjectiveC()
+            parameters["since_id"] = sinceID!
         }
         if maxID {
-            parameters["max_id"] = maxID!.bridgeToObjectiveC()
+            parameters["max_id"] = maxID!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if includeRTs {
-            parameters["include_rts"] = includeRTs!.bridgeToObjectiveC()
+            parameters["include_rts"] = includeRTs!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -81,23 +83,23 @@ extension Swifter {
         let path = "lists/statuses.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
+        parameters["list_id"] = listID
+        parameters["owner_id"] = ownerID
 
         if sinceID {
-            parameters["since_id"] = sinceID!.bridgeToObjectiveC()
+            parameters["since_id"] = sinceID!
         }
         if maxID {
-            parameters["max_id"] = maxID!.bridgeToObjectiveC()
+            parameters["max_id"] = maxID!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if includeRTs {
-            parameters["include_rts"] = includeRTs!.bridgeToObjectiveC()
+            parameters["include_rts"] = includeRTs!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -107,23 +109,23 @@ extension Swifter {
         let path = "lists/statuses.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_screen_name"] = ownerScreenName
 
         if sinceID {
-            parameters["since_id"] = sinceID!.bridgeToObjectiveC()
+            parameters["since_id"] = sinceID!
         }
         if maxID {
-            parameters["max_id"] = maxID!.bridgeToObjectiveC()
+            parameters["max_id"] = maxID!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if includeRTs {
-            parameters["include_rts"] = includeRTs!.bridgeToObjectiveC()
+            parameters["include_rts"] = includeRTs!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -133,23 +135,23 @@ extension Swifter {
         let path = "lists/statuses.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_id"] = ownerID
 
         if sinceID {
-            parameters["since_id"] = sinceID!.bridgeToObjectiveC()
+            parameters["since_id"] = sinceID!
         }
         if maxID {
-            parameters["max_id"] = maxID!.bridgeToObjectiveC()
+            parameters["max_id"] = maxID!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if includeRTs {
-            parameters["include_rts"] = includeRTs!.bridgeToObjectiveC()
+            parameters["include_rts"] = includeRTs!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -159,8 +161,8 @@ extension Swifter {
         let path = "lists/members/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["list_id"] = listID
+        parameters["user_id"] = userID
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -169,8 +171,8 @@ extension Swifter {
         let path = "lists/members/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["list_id"] = listID
+        parameters["screen_name"] = screenName
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -179,9 +181,9 @@ extension Swifter {
         let path = "lists/members/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["userID"] = userID.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["userID"] = userID
+        parameters["owner_screen_name"] = ownerScreenName
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -190,9 +192,9 @@ extension Swifter {
         let path = "lists/members/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["screen_name"] = screenName
+        parameters["owner_screen_name"] = ownerScreenName
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -201,9 +203,9 @@ extension Swifter {
         let path = "lists/members/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["userID"] = userID.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["userID"] = userID
+        parameters["owner_id"] = ownerID
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -212,9 +214,9 @@ extension Swifter {
         let path = "lists/members/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["screen_name"] = screenName
+        parameters["owner_id"] = ownerID
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -223,13 +225,13 @@ extension Swifter {
         let path = "lists/memberships.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["user_id"] = userID
 
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if filterToOwnedLists {
-            parameters["filter_to_owned_lists"] = filterToOwnedLists!.bridgeToObjectiveC()
+            parameters["filter_to_owned_lists"] = filterToOwnedLists!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -239,13 +241,13 @@ extension Swifter {
         let path = "lists/memberships.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["screen_name"] = screenName
 
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if filterToOwnedLists {
-            parameters["filter_to_owned_lists"] = filterToOwnedLists!.bridgeToObjectiveC()
+            parameters["filter_to_owned_lists"] = filterToOwnedLists!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -255,18 +257,18 @@ extension Swifter {
         let path = "lists/subscribers.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
+        parameters["list_id"] = listID
         if ownerScreenName {
-            parameters["owner_screen_name"] = ownerScreenName!.bridgeToObjectiveC()
+            parameters["owner_screen_name"] = ownerScreenName!
         }
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -276,18 +278,18 @@ extension Swifter {
         let path = "lists/subscribers.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
+        parameters["list_id"] = listID
         if ownerID {
-            parameters["owner_id"] = ownerID!.bridgeToObjectiveC()
+            parameters["owner_id"] = ownerID!
         }
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -297,18 +299,18 @@ extension Swifter {
         let path = "lists/subscribers.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
+        parameters["slug"] = slug
         if ownerScreenName {
-            parameters["owner_screen_name"] = ownerScreenName!.bridgeToObjectiveC()
+            parameters["owner_screen_name"] = ownerScreenName!
         }
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -318,18 +320,18 @@ extension Swifter {
         let path = "lists/subscribers.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
+        parameters["slug"] = slug
         if ownerID {
-            parameters["owner_id"] = ownerID!.bridgeToObjectiveC()
+            parameters["owner_id"] = ownerID!
         }
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -339,8 +341,8 @@ extension Swifter {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
+        parameters["owner_screen_name"] = ownerScreenName
+        parameters["list_id"] = listID
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -349,8 +351,8 @@ extension Swifter {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
+        parameters["owner_id"] = ownerID
+        parameters["list_id"] = listID
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -359,8 +361,8 @@ extension Swifter {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
-        parameters["slug"] = slug.bridgeToObjectiveC()
+        parameters["owner_screen_name"] = ownerScreenName
+        parameters["slug"] = slug
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -369,8 +371,8 @@ extension Swifter {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
-        parameters["slug"] = slug.bridgeToObjectiveC()
+        parameters["owner_id"] = ownerID
+        parameters["slug"] = slug
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -379,14 +381,14 @@ extension Swifter {
         let path = "lists/subscribers/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["list_id"] = listID
+        parameters["user_id"] = userID
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -396,14 +398,14 @@ extension Swifter {
         let path = "lists/subscribers/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["list_id"] = listID
+        parameters["screen_name"] = screenName
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -413,15 +415,15 @@ extension Swifter {
         let path = "lists/subscribers/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_id"] = ownerID
+        parameters["user_id"] = userID
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -431,15 +433,15 @@ extension Swifter {
         let path = "lists/subscribers/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_id"] = ownerID
+        parameters["screen_name"] = screenName
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -449,15 +451,15 @@ extension Swifter {
         let path = "lists/subscribers/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_screen_name"] = ownerScreenName
+        parameters["user_id"] = userID
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -467,15 +469,15 @@ extension Swifter {
         let path = "lists/subscribers/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_screen_name"] = ownerScreenName
+        parameters["screen_name"] = screenName
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -485,7 +487,7 @@ extension Swifter {
         let path = "lists/subscribers/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["listID"] = listID.bridgeToObjectiveC()
+        parameters["listID"] = listID
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -494,8 +496,8 @@ extension Swifter {
         let path = "lists/subscribers/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_screen_name"] = ownerScreenName
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -504,8 +506,8 @@ extension Swifter {
         let path = "lists/subscribers/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_id"] = ownerID
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -514,14 +516,14 @@ extension Swifter {
         let path = "lists/members/create_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["list_id"] = listID
+        parameters["user_id"] = userID
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -531,14 +533,14 @@ extension Swifter {
         let path = "lists/members/create_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["list_id"] = listID
+        parameters["screen_name"] = screenName
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -548,15 +550,15 @@ extension Swifter {
         let path = "lists/members/create_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_id"] = ownerID
+        parameters["user_id"] = userID
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -566,15 +568,15 @@ extension Swifter {
         let path = "lists/members/create_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_id"] = ownerID
+        parameters["screen_name"] = screenName
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -584,15 +586,15 @@ extension Swifter {
         let path = "lists/members/create_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_screen_name"] = ownerScreenName
+        parameters["user_id"] = userID
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -602,15 +604,15 @@ extension Swifter {
         let path = "lists/members/create_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_screen_name"] = ownerScreenName
+        parameters["screen_name"] = screenName
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
         
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -620,14 +622,14 @@ extension Swifter {
         let path = "lists/members/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["list_id"] = listID
+        parameters["user_id"] = userID
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -637,14 +639,14 @@ extension Swifter {
         let path = "lists/members/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["list_id"] = listID
+        parameters["screen_name"] = screenName
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -654,15 +656,15 @@ extension Swifter {
         let path = "lists/members/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_id"] = ownerID
+        parameters["user_id"] = userID
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -672,15 +674,15 @@ extension Swifter {
         let path = "lists/members/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_id"] = ownerID
+        parameters["screen_name"] = screenName
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -690,15 +692,15 @@ extension Swifter {
         let path = "lists/members/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_screen_name"] = ownerScreenName
+        parameters["user_id"] = userID
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -708,15 +710,15 @@ extension Swifter {
         let path = "lists/members/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_screen_name"] = ownerScreenName
+        parameters["screen_name"] = screenName
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
         
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -726,18 +728,18 @@ extension Swifter {
         let path = "lists/members.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
+        parameters["list_id"] = listID
         if ownerScreenName {
-            parameters["owner_screen_name"] = ownerScreenName!.bridgeToObjectiveC()
+            parameters["owner_screen_name"] = ownerScreenName!
         }
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -747,18 +749,18 @@ extension Swifter {
         let path = "lists/members.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
+        parameters["list_id"] = listID
         if ownerID {
-            parameters["owner_id"] = ownerID!.bridgeToObjectiveC()
+            parameters["owner_id"] = ownerID!
         }
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -768,18 +770,18 @@ extension Swifter {
         let path = "lists/members.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
+        parameters["slug"] = slug
         if ownerScreenName {
-            parameters["owner_screen_name"] = ownerScreenName!.bridgeToObjectiveC()
+            parameters["owner_screen_name"] = ownerScreenName!
         }
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -789,18 +791,18 @@ extension Swifter {
         let path = "lists/members.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
+        parameters["slug"] = slug
         if ownerID {
-            parameters["owner_id"] = ownerID!.bridgeToObjectiveC()
+            parameters["owner_id"] = ownerID!
         }
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -810,8 +812,8 @@ extension Swifter {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
+        parameters["owner_screen_name"] = ownerScreenName
+        parameters["list_id"] = listID
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -820,8 +822,8 @@ extension Swifter {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
+        parameters["owner_id"] = ownerID
+        parameters["list_id"] = listID
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -830,8 +832,8 @@ extension Swifter {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
-        parameters["slug"] = slug.bridgeToObjectiveC()
+        parameters["owner_screen_name"] = ownerScreenName
+        parameters["slug"] = slug
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -840,8 +842,8 @@ extension Swifter {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
-        parameters["slug"] = slug.bridgeToObjectiveC()
+        parameters["owner_id"] = ownerID
+        parameters["slug"] = slug
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -850,7 +852,7 @@ extension Swifter {
         let path = "lists/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
+        parameters["list_id"] = listID
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -859,8 +861,8 @@ extension Swifter {
         let path = "lists/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_id"] = ownerID
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -869,8 +871,8 @@ extension Swifter {
         let path = "lists/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_screen_name"] = ownerScreenName
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -879,21 +881,21 @@ extension Swifter {
         let path = "lists/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
+        parameters["list_id"] = listID
 
         if name {
-            parameters["name"] = name!.bridgeToObjectiveC()
+            parameters["name"] = name!
         }
         if public {
             if public! {
-                parameters["mode"] = "public".bridgeToObjectiveC()
+                parameters["mode"] = "public"
             }
             else {
-                parameters["mode"] = "private".bridgeToObjectiveC()
+                parameters["mode"] = "private"
             }
         }
         if description {
-            parameters["description"] = description!.bridgeToObjectiveC()
+            parameters["description"] = description!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -903,22 +905,22 @@ extension Swifter {
         let path = "lists/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_id"] = ownerID
 
         if name {
-            parameters["name"] = name!.bridgeToObjectiveC()
+            parameters["name"] = name!
         }
         if public {
             if public! {
-                parameters["mode"] = "public".bridgeToObjectiveC()
+                parameters["mode"] = "public"
             }
             else {
-                parameters["mode"] = "private".bridgeToObjectiveC()
+                parameters["mode"] = "private"
             }
         }
         if description {
-            parameters["description"] = description!.bridgeToObjectiveC()
+            parameters["description"] = description!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -928,22 +930,22 @@ extension Swifter {
         let path = "lists/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_screen_name"] = ownerScreenName
 
         if name {
-            parameters["name"] = name!.bridgeToObjectiveC()
+            parameters["name"] = name!
         }
         if public {
             if public! {
-                parameters["mode"] = "public".bridgeToObjectiveC()
+                parameters["mode"] = "public"
             }
             else {
-                parameters["mode"] = "private".bridgeToObjectiveC()
+                parameters["mode"] = "private"
             }
         }
         if description {
-            parameters["description"] = description!.bridgeToObjectiveC()
+            parameters["description"] = description!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -953,18 +955,18 @@ extension Swifter {
         let path = "lists/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["name"] = name.bridgeToObjectiveC()
+        parameters["name"] = name
 
         if public {
             if public! {
-                parameters["mode"] = "public".bridgeToObjectiveC()
+                parameters["mode"] = "public"
             }
             else {
-                parameters["mode"] = "private".bridgeToObjectiveC()
+                parameters["mode"] = "private"
             }
         }
         if description {
-            parameters["description"] = description!.bridgeToObjectiveC()
+            parameters["description"] = description!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -974,7 +976,7 @@ extension Swifter {
         let path = "lists/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
+        parameters["list_id"] = listID
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -983,8 +985,8 @@ extension Swifter {
         let path = "lists/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_id"] = ownerID
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -993,8 +995,8 @@ extension Swifter {
         let path = "lists/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["owner_screen_name"] = ownerScreenName
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -1003,13 +1005,13 @@ extension Swifter {
         let path = "lists/subscriptions.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["user_id"] = userID
 
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -1019,13 +1021,13 @@ extension Swifter {
         let path = "lists/subscriptions.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["screen_name"] = screenName
 
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -1035,8 +1037,8 @@ extension Swifter {
         let path = "lists/members/destroy_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["list_id"] = listID
+        parameters["user_id"] = userID
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -1045,8 +1047,8 @@ extension Swifter {
         let path = "lists/members/destroy_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["list_id"] = listID
+        parameters["screen_name"] = screenName
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -1055,9 +1057,9 @@ extension Swifter {
         let path = "lists/members/destroy_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["userID"] = userID.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["userID"] = userID
+        parameters["owner_screen_name"] = ownerScreenName
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -1066,9 +1068,9 @@ extension Swifter {
         let path = "lists/members/destroy_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
-        parameters["owner_screen_name"] = ownerScreenName.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["screen_name"] = screenName
+        parameters["owner_screen_name"] = ownerScreenName
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -1077,9 +1079,9 @@ extension Swifter {
         let path = "lists/members/destroy_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["userID"] = userID.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["userID"] = userID
+        parameters["owner_id"] = ownerID
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -1088,9 +1090,9 @@ extension Swifter {
         let path = "lists/members/destroy_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug.bridgeToObjectiveC()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
-        parameters["owner_id"] = ownerID.bridgeToObjectiveC()
+        parameters["slug"] = slug
+        parameters["screen_name"] = screenName
+        parameters["owner_id"] = ownerID
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -1099,13 +1101,13 @@ extension Swifter {
         let path = "lists/ownerships.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["user_id"] = userID
 
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)

@@ -32,19 +32,19 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if sinceID {
-            parameters["since_id"] = sinceID!.bridgeToObjectiveC()
+            parameters["since_id"] = sinceID!
         }
         if maxID {
-            parameters["max_id"] = maxID!.bridgeToObjectiveC()
+            parameters["max_id"] = maxID!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -55,19 +55,19 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if sinceID {
-            parameters["since_id"] = sinceID!.bridgeToObjectiveC()
+            parameters["since_id"] = sinceID!
         }
         if maxID {
-            parameters["max_id"] = maxID!.bridgeToObjectiveC()
+            parameters["max_id"] = maxID!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if page {
-            parameters["page"] = page!.bridgeToObjectiveC()
+            parameters["page"] = page!
         }
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -77,7 +77,7 @@ extension Swifter {
         let path = "direct_messages/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = id.bridgeToObjectiveC()
+        parameters["id"] = id
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -86,10 +86,10 @@ extension Swifter {
         let path = "direct_messages/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = id.bridgeToObjectiveC()
+        parameters["id"] = id
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -99,8 +99,8 @@ extension Swifter {
         let path = "direct_messages/new.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["status"] = status.bridgeToObjectiveC()
-        parameters["sceen_name"] = screenName.bridgeToObjectiveC()
+        parameters["status"] = status
+        parameters["sceen_name"] = screenName
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }

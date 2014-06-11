@@ -31,16 +31,16 @@ extension Swifter {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["user_id"] = userID.bridgeToObjectiveC()
+        parameters["user_id"] = userID
 
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if sinceID {
-            parameters["since_id"] = sinceID!.bridgeToObjectiveC()
+            parameters["since_id"] = sinceID!
         }
         if maxID {
-            parameters["max_id"] = maxID!.bridgeToObjectiveC()
+            parameters["max_id"] = maxID!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -50,16 +50,16 @@ extension Swifter {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["screen_name"] = screenName
 
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if sinceID {
-            parameters["since_id"] = sinceID!.bridgeToObjectiveC()
+            parameters["since_id"] = sinceID!
         }
         if maxID {
-            parameters["max_id"] = maxID!.bridgeToObjectiveC()
+            parameters["max_id"] = maxID!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -69,10 +69,10 @@ extension Swifter {
         let path = "favorites/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = id.bridgeToObjectiveC()
+        parameters["id"] = id
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -82,10 +82,10 @@ extension Swifter {
         let path = "favorites/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = id.bridgeToObjectiveC()
+        parameters["id"] = id
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)

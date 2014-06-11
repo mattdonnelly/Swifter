@@ -31,7 +31,7 @@ extension Swifter {
         let path = "friendships/no_retweets/ids.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["stringify_ids"] = stringifyIDs!.bridgeToObjectiveC()
+        parameters["stringify_ids"] = stringifyIDs!
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -40,16 +40,16 @@ extension Swifter {
         let path = "friends/ids.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = id.bridgeToObjectiveC()
+        parameters["id"] = id
 
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if stringifyIDs {
-            parameters["stringify_ids"] = stringifyIDs!.bridgeToObjectiveC()
+            parameters["stringify_ids"] = stringifyIDs!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -59,16 +59,16 @@ extension Swifter {
         let path = "friends/ids.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["screen_name"] = screenName
 
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if stringifyIDs {
-            parameters["stringify_ids"] = stringifyIDs!.bridgeToObjectiveC()
+            parameters["stringify_ids"] = stringifyIDs!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -78,16 +78,16 @@ extension Swifter {
         let path = "followers/ids.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = id.bridgeToObjectiveC()
+        parameters["id"] = id
 
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if stringifyIDs {
-            parameters["stringify_ids"] = stringifyIDs!.bridgeToObjectiveC()
+            parameters["stringify_ids"] = stringifyIDs!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -97,16 +97,16 @@ extension Swifter {
         let path = "followers/ids.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["screen_name"] = screenName
 
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if stringifyIDs {
-            parameters["stringify_ids"] = stringifyIDs!.bridgeToObjectiveC()
+            parameters["stringify_ids"] = stringifyIDs!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -117,10 +117,10 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if stringifyIDs {
-            parameters["stringify_urls"] = stringifyIDs!.bridgeToObjectiveC()
+            parameters["stringify_urls"] = stringifyIDs!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -131,10 +131,10 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if stringifyIDs {
-            parameters["stringify_urls"] = stringifyIDs!.bridgeToObjectiveC()
+            parameters["stringify_urls"] = stringifyIDs!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -144,10 +144,10 @@ extension Swifter {
         let path = "friendships/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = id.bridgeToObjectiveC()
+        parameters["id"] = id
 
         if follow {
-            parameters["follow"] = follow!.bridgeToObjectiveC()
+            parameters["follow"] = follow!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -157,10 +157,10 @@ extension Swifter {
         let path = "friendships/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["screen_name"] = screenName
 
         if follow {
-            parameters["follow"] = follow!.bridgeToObjectiveC()
+            parameters["follow"] = follow!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -170,7 +170,7 @@ extension Swifter {
         let path = "friendships/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = id.bridgeToObjectiveC()
+        parameters["id"] = id
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -179,7 +179,7 @@ extension Swifter {
         let path = "friendships/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["screen_name"] = screenName
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -188,13 +188,13 @@ extension Swifter {
         let path = "friendships/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = id.bridgeToObjectiveC()
+        parameters["id"] = id
 
         if device {
-            parameters["device"] = device!.bridgeToObjectiveC()
+            parameters["device"] = device!
         }
         if retweets {
-            parameters["retweets"] = retweets!.bridgeToObjectiveC()
+            parameters["retweets"] = retweets!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -204,13 +204,13 @@ extension Swifter {
         let path = "friendships/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["screen_name"] = screenName
 
         if device {
-            parameters["device"] = device!.bridgeToObjectiveC()
+            parameters["device"] = device!
         }
         if retweets {
-            parameters["retweets"] = retweets!.bridgeToObjectiveC()
+            parameters["retweets"] = retweets!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -224,16 +224,16 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if sourceID {
-            parameters["source_id"] = sourceID!.bridgeToObjectiveC()
+            parameters["source_id"] = sourceID!
         }
         else if sourceScreenName {
-            parameters["source_screen_name"] = sourceScreenName!.bridgeToObjectiveC()
+            parameters["source_screen_name"] = sourceScreenName!
         }
         if targetID {
-            parameters["target_id"] = targetID!.bridgeToObjectiveC()
+            parameters["target_id"] = targetID!
         }
         else if targetScreenName {
-            parameters["targetScreenName"] = targetScreenName!.bridgeToObjectiveC()
+            parameters["targetScreenName"] = targetScreenName!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -243,19 +243,19 @@ extension Swifter {
         let path = "friendships/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = id.bridgeToObjectiveC()
+        parameters["id"] = id
 
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
         if includeUserEntities {
-            parameters["include_user_entities"] = includeUserEntities!.bridgeToObjectiveC()
+            parameters["include_user_entities"] = includeUserEntities!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -265,19 +265,19 @@ extension Swifter {
         let path = "friendships/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["screen_name"] = screenName
 
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
         if includeUserEntities {
-            parameters["include_user_entities"] = includeUserEntities!.bridgeToObjectiveC()
+            parameters["include_user_entities"] = includeUserEntities!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -287,19 +287,19 @@ extension Swifter {
         let path = "followers/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = id.bridgeToObjectiveC()
+        parameters["id"] = id
 
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
         if includeUserEntities {
-            parameters["include_user_entities"] = includeUserEntities!.bridgeToObjectiveC()
+            parameters["include_user_entities"] = includeUserEntities!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -309,19 +309,19 @@ extension Swifter {
         let path = "followers/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["screen_name"] = screenName
 
         if cursor {
-            parameters["cursor"] = cursor!.bridgeToObjectiveC()
+            parameters["cursor"] = cursor!
         }
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
         if includeUserEntities {
-            parameters["include_user_entities"] = includeUserEntities!.bridgeToObjectiveC()
+            parameters["include_user_entities"] = includeUserEntities!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -331,7 +331,7 @@ extension Swifter {
         let path = "followers/lookup.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["screen_name"] = screenName
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -340,7 +340,7 @@ extension Swifter {
         let path = "followers/lookup.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = id.bridgeToObjectiveC()
+        parameters["id"] = id
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
@@ -349,13 +349,13 @@ extension Swifter {
         let path = "users/contributees.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = id.bridgeToObjectiveC()
+        parameters["id"] = id
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -365,13 +365,13 @@ extension Swifter {
         let path = "users/contributees.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["screen_name"] = screenName
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -381,13 +381,13 @@ extension Swifter {
         let path = "users/contributors.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = id.bridgeToObjectiveC()
+        parameters["id"] = id
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -397,13 +397,13 @@ extension Swifter {
         let path = "users/contributors.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName.bridgeToObjectiveC()
+        parameters["screen_name"] = screenName
 
         if includeEntities {
-            parameters["include_entities"] = includeEntities!.bridgeToObjectiveC()
+            parameters["include_entities"] = includeEntities!
         }
         if skipStatus {
-            parameters["skip_status"] = skipStatus!.bridgeToObjectiveC()
+            parameters["skip_status"] = skipStatus!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
@@ -420,19 +420,19 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if imageData {
-            parameters["banner"] = imageData!.base64EncodedStringWithOptions(nil).bridgeToObjectiveC()
+            parameters["banner"] = imageData!.base64EncodedStringWithOptions(nil)
         }
         if width {
-            parameters["width"] = width!.bridgeToObjectiveC()
+            parameters["width"] = width!
         }
         if height {
-            parameters["height"] = height!.bridgeToObjectiveC()
+            parameters["height"] = height!
         }
         if offsetLeft {
-            parameters["offset_left"] = offsetLeft!.bridgeToObjectiveC()
+            parameters["offset_left"] = offsetLeft!
         }
         if offsetTop {
-            parameters["offset_top"] = offsetTop!.bridgeToObjectiveC()
+            parameters["offset_top"] = offsetTop!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)

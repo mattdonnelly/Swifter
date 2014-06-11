@@ -77,7 +77,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
         let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.dataEncoding))
 
-        var nonOAuthParameters = parameters.filter { key, _ in !key.hasPrefix("oauth_") }
+        var nonOAuthParameters = self.parameters.filter { key, _ in !key.hasPrefix("oauth_") }
 
         if nonOAuthParameters.count > 0 {
             if self.HTTPMethod == "GET" || self.HTTPMethod == "HEAD" || self.HTTPMethod == "DELETE" {

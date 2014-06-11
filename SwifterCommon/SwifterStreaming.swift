@@ -43,10 +43,10 @@ extension Swifter {
             parameters["locations"] = locations!.bridgeToObjectiveC().componentsJoinedByString(",")
         }
         if delimited {
-            parameters["delimited"] = delimited!.bridgeToObjectiveC()
+            parameters["delimited"] = delimited!
         }
         if stallWarnings {
-            parameters["stall_warnings"] = stallWarnings!.bridgeToObjectiveC()
+            parameters["stall_warnings"] = stallWarnings!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
@@ -57,10 +57,10 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if delimited {
-            parameters["delimited"] = delimited!.bridgeToObjectiveC()
+            parameters["delimited"] = delimited!
         }
         if stallWarnings {
-            parameters["stall_warnings"] = stallWarnings!.bridgeToObjectiveC()
+            parameters["stall_warnings"] = stallWarnings!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
@@ -71,13 +71,13 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if count {
-            parameters["count"] = count!.bridgeToObjectiveC()
+            parameters["count"] = count!
         }
         if delimited {
-            parameters["delimited"] = delimited!.bridgeToObjectiveC()
+            parameters["delimited"] = delimited!
         }
         if stallWarnings {
-            parameters["stall_warnings"] = stallWarnings!.bridgeToObjectiveC()
+            parameters["stall_warnings"] = stallWarnings!
         }
 
         self.oauthClient.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
@@ -88,19 +88,19 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if delimited {
-            parameters["delimited"] = delimited!.bridgeToObjectiveC()
+            parameters["delimited"] = delimited!
         }
         if stallWarnings {
-            parameters["stall_warnings"] = stallWarnings!.bridgeToObjectiveC()
+            parameters["stall_warnings"] = stallWarnings!
         }
         if includeMessagesFromFollowedAccounts {
             if includeMessagesFromFollowedAccounts! {
-                parameters["with"] = "user".bridgeToObjectiveC()
+                parameters["with"] = "user"
             }
         }
         if includeReplies {
             if includeReplies! {
-                parameters["replies"] = "all".bridgeToObjectiveC()
+                parameters["replies"] = "all"
             }
         }
         if track {
@@ -110,7 +110,7 @@ extension Swifter {
             parameters["locations"] = locations!.bridgeToObjectiveC().componentsJoinedByString(",")
         }
         if stringifyFriendIDs {
-            parameters["stringify_friend_ids"] = stringifyFriendIDs!.bridgeToObjectiveC()
+            parameters["stringify_friend_ids"] = stringifyFriendIDs!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.userStreamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
@@ -121,23 +121,23 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         if delimited {
-            parameters["delimited"] = delimited!.bridgeToObjectiveC()
+            parameters["delimited"] = delimited!
         }
         if stallWarnings {
-            parameters["stall_warnings"] = stallWarnings!.bridgeToObjectiveC()
+            parameters["stall_warnings"] = stallWarnings!
         }
         if includeMessagesFromFollowedAccounts {
             if includeMessagesFromFollowedAccounts! {
-                parameters["with"] = "user".bridgeToObjectiveC()
+                parameters["with"] = "user"
             }
         }
         if includeReplies {
             if includeReplies! {
-                parameters["replies"] = "all".bridgeToObjectiveC()
+                parameters["replies"] = "all"
             }
         }
         if stringifyFriendIDs {
-            parameters["stringify_friend_ids"] = stringifyFriendIDs!.bridgeToObjectiveC()
+            parameters["stringify_friend_ids"] = stringifyFriendIDs!
         }
 
         self.oauthClient.postJSONWithPath(path, baseURL: self.siteStreamURL, parameters: parameters, progress: progress, success: nil, failure: failure)

@@ -31,13 +31,13 @@ extension Swifter {
         var params = parameters
 
         if count {
-            params["count"] = count!.bridgeToObjectiveC()
+            params["count"] = count!
         }
         if sinceID {
-            params["since_id"] = sinceID!.bridgeToObjectiveC()
+            params["since_id"] = sinceID!
         }
         if maxID {
-            params["max_id"] = maxID!.bridgeToObjectiveC()
+            params["max_id"] = maxID!
         }
         if trimUser {
             params["trim_user"] = Int(trimUser!)
@@ -49,7 +49,7 @@ extension Swifter {
             params["include_entities"] = Int(includeEntities!)
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: params, progress: nil, success: success, failure: failure)
     }
 
     func getStatusesMentionTimelineWithCount(count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
