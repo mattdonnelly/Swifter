@@ -24,31 +24,9 @@
 //
 
 import Foundation
+import Accounts
 
-struct OAuthAccessToken {
-
-    var key: String
-    var secret: String
-    var verifier: String?
-
-    var screenName: String?
-    var userID: String?
-
-    init(queryString: String) {
-        var attributes = queryString.parametersFromQueryString()
-
-        self.key = attributes["oauth_token"]!
-        self.secret = attributes["oauth_token_secret"]!
-
-        self.screenName = attributes["screen_name"]
-        self.userID = attributes["user_id"]
-    }
-    
-}
-
-class SwifterOAuthClient: NSObject, NSURLSessionDelegate {
-
-    typealias JSONRequestSuccessHandler = (json: AnyObject, response: NSHTTPURLResponse) -> Void
+class SwifterOAuthClient: SwifterClientProtocol  {
 
     struct OAuth {
         static let version = "1.0"
@@ -58,7 +36,7 @@ class SwifterOAuthClient: NSObject, NSURLSessionDelegate {
     var consumerKey: String
     var consumerSecret: String
 
-    var accessToken: OAuthAccessToken?
+    var account: SwifterAccount?
 
     var stringEncoding: NSStringEncoding
 
@@ -66,7 +44,6 @@ class SwifterOAuthClient: NSObject, NSURLSessionDelegate {
         self.consumerKey = consumerKey
         self.consumerSecret = consumerSecret
         self.stringEncoding = NSUTF8StringEncoding
-        super.init()
     }
 
     func requestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.RequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
@@ -101,66 +78,6 @@ class SwifterOAuthClient: NSObject, NSURLSessionDelegate {
         self.dataRequestWithPath(path, baseURL: baseURL, method: "POST", parameters: parameters, progress: progress, success: success, failure: failure)
     }
 
-    func jsonRequestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: JSONRequestSuccessHandler?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-
-        println(parameters)
-
-        let jsonDownloadProgressHandler: SwifterHTTPRequest.DownloadProgressHandler = {
-            data, _, _, response in
-
-            if !progress {
-                return
-            }
-
-            var error: NSError?
-            var jsonResult: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
-
-            if !error {
-                progress?(json: jsonResult!, response: response)
-            }
-
-            let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding)
-            let jsonChunks = jsonString.componentsSeparatedByString("\r\n") as String[]
-
-            for chunk in jsonChunks {
-                if chunk.utf16count == 0 {
-                    continue
-                }
-
-                let chunkData = chunk.dataUsingEncoding(NSUTF8StringEncoding)
-                jsonResult = NSJSONSerialization.JSONObjectWithData(chunkData, options: nil, error: &error)
-
-                if !error {
-                    progress?(json: jsonResult!, response: response)
-                }
-            }
-        }
-
-        let jsonSuccessHandler: SwifterHTTPRequest.DataRequestSuccessHandler = {
-            data, response in
-
-            var error: NSError?
-            let jsonResult: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
-
-            if error {
-                failure?(error: error!)
-            }
-            else {
-                success?(json: jsonResult!, response: response)
-            }
-        }
-
-        self.dataRequestWithPath(path, baseURL: baseURL, method: method, parameters: parameters, progress: jsonDownloadProgressHandler, success: jsonSuccessHandler, failure: failure)
-    }
-
-    func getJSONWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: JSONRequestSuccessHandler?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        self.jsonRequestWithPath(path, baseURL: baseURL, method: "GET", parameters: parameters, progress: progress, success: success, failure: failure)
-    }
-
-    func postJSONWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: JSONRequestSuccessHandler?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        self.jsonRequestWithPath(path, baseURL: baseURL, method: "POST", parameters: parameters, progress: progress, success: success, failure: failure)
-    }
-
     func authorizationHeaderForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>) -> String {
         var authorizationParameters = Dictionary<String, AnyObject>()
         authorizationParameters["oauth_version"] = OAuth.version
@@ -169,8 +86,8 @@ class SwifterOAuthClient: NSObject, NSURLSessionDelegate {
         authorizationParameters["oauth_timestamp"] = String(Int(NSDate().timeIntervalSince1970))
         authorizationParameters["oauth_nonce"] = NSUUID().UUIDString.bridgeToObjectiveC()
 
-        if self.accessToken {
-            authorizationParameters["oauth_token"] = self.accessToken!.key
+        if self.account?.accessToken {
+            authorizationParameters["oauth_token"] = self.account!.accessToken!.key
         }
 
         for (key, value: AnyObject) in parameters {
@@ -181,7 +98,7 @@ class SwifterOAuthClient: NSObject, NSURLSessionDelegate {
 
         let combinedParameters = authorizationParameters.join(parameters)
 
-        authorizationParameters["oauth_signature"] = self.oauthSignatureForMethod(method, url: url, parameters: combinedParameters, accessToken: self.accessToken)
+        authorizationParameters["oauth_signature"] = self.oauthSignatureForMethod(method, url: url, parameters: combinedParameters, accessToken: self.account?.accessToken)
 
         let authorizationParameterComponents = authorizationParameters.urlEncodedQueryStringWithEncoding(self.stringEncoding).componentsSeparatedByString("&") as String[]
         authorizationParameterComponents.sort { $0 < $1 }
@@ -197,7 +114,7 @@ class SwifterOAuthClient: NSObject, NSURLSessionDelegate {
         return "OAuth " + headerComponents.bridgeToObjectiveC().componentsJoinedByString(", ")
     }
 
-    func oauthSignatureForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>, accessToken token: OAuthAccessToken?) -> String {
+    func oauthSignatureForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>, accessToken token: SwifterAccount.OAuthAccessToken?) -> String {
         var tokenSecret: NSString = ""
         if token {
             tokenSecret = token!.secret.urlEncodedStringWithEncoding(self.stringEncoding)

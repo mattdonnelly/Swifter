@@ -1,5 +1,5 @@
 //
-//  SwifterSpam.swift
+//  SwifterAccount.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -24,25 +24,40 @@
 //
 
 import Foundation
+import Accounts
 
-extension Swifter {
+class SwifterAccount {
 
-    func postUsersReportSpamWithScreenName(screenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        let path = "users/report_spam.json"
+    struct OAuthAccessToken {
 
-        var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName
+        var key: String
+        var secret: String
+        var verifier: String?
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        var screenName: String?
+        var userID: String?
+
+        init(queryString: String) {
+            var attributes = queryString.parametersFromQueryString()
+
+            self.key = attributes["oauth_token"]!
+            self.secret = attributes["oauth_token_secret"]!
+
+            self.screenName = attributes["screen_name"]
+            self.userID = attributes["user_id"]
+        }
+        
     }
 
-    func postUsersReportSpamWithScreenName(userID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        let path = "users/report_spam.json"
+    var accessToken: OAuthAccessToken?
+    var account: ACAccount?
 
-        var parameters = Dictionary<String, AnyObject>()
-        parameters["user_id"] = userID
+    init(accessToken: OAuthAccessToken) {
+        self.accessToken = accessToken
+    }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+    init(account: ACAccount) {
+        self.account = account
     }
 
 }

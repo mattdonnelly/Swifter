@@ -27,7 +27,7 @@ import Foundation
 
 extension Swifter {
 
-    func getSearchTweetsWithQuery(q: String, geocode: String?, lang: String?, locale: String?, resultType: String?, count: Int?, until: String?, sinceID: Int?, maxID: Int?, includeEntities: Bool?, callback: String?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler) {
+    func getSearchTweetsWithQuery(q: String, geocode: String?, lang: String?, locale: String?, resultType: String?, count: Int?, until: String?, sinceID: Int?, maxID: Int?, includeEntities: Bool?, callback: String?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler) {
         let path = "search/tweets.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -64,7 +64,7 @@ extension Swifter {
             parameters["callback"] = callback!
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
 }

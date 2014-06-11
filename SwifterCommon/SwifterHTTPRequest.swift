@@ -35,7 +35,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     var URL: NSURL
     var HTTPMethod: String
 
-    var request: NSMutableURLRequest!
+    var request: NSMutableURLRequest?
     var connection: NSURLConnection!
 
     var headers: Dictionary<String, String>
@@ -48,7 +48,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
     var response: NSHTTPURLResponse!
     var responseString: String!
-    var responseData: NSMutableData!
+    var responseData: NSMutableData
 
     var downloadRequestProgressHandler: DownloadProgressHandler?
     var requestSuccessHandler: RequestSuccessHandler?
@@ -70,46 +70,60 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.responseData = NSMutableData()
     }
 
-    func start() {
-        self.request = NSMutableURLRequest(URL: self.URL)
-        self.request.HTTPMethod = self.HTTPMethod
-        self.request.timeoutInterval = self.timeoutInterval
-
-        let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.dataEncoding))
-
-        var nonOAuthParameters = self.parameters.filter { key, _ in !key.hasPrefix("oauth_") }
-
-        if nonOAuthParameters.count > 0 {
-            if self.HTTPMethod == "GET" || self.HTTPMethod == "HEAD" || self.HTTPMethod == "DELETE" {
-                let queryString = nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding)
-                self.request.URL = self.URL.URLByAppendingQueryString(queryString)
-                self.request.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
-            }
-            else {
-                var error: NSError?
-                var jsonData: NSData? = NSJSONSerialization.dataWithJSONObject(nonOAuthParameters, options: nil, error: &error)
-
-                if error {
-                    println(error!.localizedDescription)
-                }
-                else {
-                    self.request.setValue("application/json; charset=\(charset)", forHTTPHeaderField: "Content-Type")
-                    self.request.HTTPBody = jsonData!
-                }
-            }
-        }
-
-        for (key, value) in headers {
-            self.request.setValue(value, forHTTPHeaderField: key)
-        }
-
-        self.request.HTTPShouldHandleCookies = self.HTTPShouldHandleCookies
-
-        self.connection = NSURLConnection(request: self.request, delegate: self)
-        self.connection.scheduleInRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
-        self.connection.start()
+    init(request: NSURLRequest) {
+        self.request = request as? NSMutableURLRequest
+        self.URL = request.URL
+        self.HTTPMethod = request.HTTPMethod
+        self.headers = [:]
+        self.parameters = [:]
+        self.dataEncoding = NSUTF8StringEncoding
+        self.timeoutInterval = 60
+        self.HTTPShouldHandleCookies = false
+        self.responseData = NSMutableData()
     }
 
+    func start() {
+        if !request {
+            self.request = NSMutableURLRequest(URL: self.URL)
+            self.request!.HTTPMethod = self.HTTPMethod
+            self.request!.timeoutInterval = self.timeoutInterval
+
+            let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.dataEncoding))
+
+            var nonOAuthParameters = self.parameters.filter { key, _ in !key.hasPrefix("oauth_") }
+
+            if nonOAuthParameters.count > 0 {
+                if self.HTTPMethod == "GET" || self.HTTPMethod == "HEAD" || self.HTTPMethod == "DELETE" {
+                    let queryString = nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding)
+                    self.request!.URL = self.URL.URLByAppendingQueryString(queryString)
+                    self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
+                }
+                else {
+                    var error: NSError?
+                    var jsonData: NSData? = NSJSONSerialization.dataWithJSONObject(nonOAuthParameters, options: nil, error: &error)
+
+                    if error {
+                        println(error!.localizedDescription)
+                    }
+                    else {
+                        self.request!.setValue("application/json; charset=\(charset)", forHTTPHeaderField: "Content-Type")
+                        self.request!.HTTPBody = jsonData!
+                    }
+                }
+            }
+
+            for (key, value) in headers {
+                self.request!.setValue(value, forHTTPHeaderField: key)
+            }
+            
+            self.request!.HTTPShouldHandleCookies = self.HTTPShouldHandleCookies
+        }
+
+
+        self.connection = NSURLConnection(request: self.request!, delegate: self)
+        self.connection.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        self.connection.start()
+    }
 
     func connection(connection: NSURLConnection!, didReceiveResponse response: NSURLResponse!) {
         self.response = response as? NSHTTPURLResponse
@@ -121,7 +135,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.responseData.appendData(data)
 
         let expectedContentLength = Int(self.response!.expectedContentLength)
-        let totalBytesReceived = self.responseData!.length
+        let totalBytesReceived = self.responseData.length
 
         if data {
             self.downloadRequestProgressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)

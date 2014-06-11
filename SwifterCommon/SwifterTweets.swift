@@ -27,7 +27,7 @@ import Foundation
 
 extension Swifter {
 
-    func getStatusesRetweetsWithID(id: Int, count: Int?, trimUser: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getStatusesRetweetsWithID(id: Int, count: Int?, trimUser: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "statuses/retweets/\(id).json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -38,11 +38,11 @@ extension Swifter {
             parameters["trim_user"] = trimUser!
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
 
-    func getStatusesShowWithID(id: Int, count: Int?, trimUser: Bool?, includeMyRetweet: Bool?, includeEntities: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getStatusesShowWithID(id: Int, count: Int?, trimUser: Bool?, includeMyRetweet: Bool?, includeEntities: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "statuses/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -59,10 +59,10 @@ extension Swifter {
             parameters["include_entities"] = includeEntities!
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postStatusesDestroyWithID(id: Int, trimUser: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postStatusesDestroyWithID(id: Int, trimUser: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "statuses/destroy/\(id).json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -70,10 +70,10 @@ extension Swifter {
             parameters["trim_user"] = trimUser!
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postStatusesUpdate(status: String, mediaIDs: String[]?, inReplyToStatusID: Int?, lat: Double?, long: Double?, placeID: Double?, displayCoordinates: Bool?, trimUser: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postStatusesUpdate(status: String, mediaIDs: String[]?, inReplyToStatusID: Int?, lat: Double?, long: Double?, placeID: Double?, displayCoordinates: Bool?, trimUser: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         var path: String = "statuses/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -100,10 +100,10 @@ extension Swifter {
             parameters["trim_user"] = trimUser!
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postStatusesRetweetWithID(id: Int, trimUser: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postStatusesRetweetWithID(id: Int, trimUser: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "statuses/retweet/\(id).json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -111,10 +111,10 @@ extension Swifter {
             parameters["trim_user"] = trimUser!
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getStatusesOEmbedWithID(id: Int, url: NSURL, maxWidth: Int?, hideMedia: Bool?, hideThread: Bool?, omitScript: Bool?, align: String?, related: String?, lang: String?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getStatusesOEmbedWithID(id: Int, url: NSURL, maxWidth: Int?, hideMedia: Bool?, hideThread: Bool?, omitScript: Bool?, align: String?, related: String?, lang: String?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "statuses/oembed"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -143,10 +143,10 @@ extension Swifter {
             parameters["lang"] = lang!
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getStatusesRetweetersWithID(id: Int, cursor: Int?, stringifyIDs: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getStatusesRetweetersWithID(id: Int, cursor: Int?, stringifyIDs: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "statuses/oembed"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -159,7 +159,7 @@ extension Swifter {
             parameters["stringify_ids"] = cursor!
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
 }

@@ -27,7 +27,7 @@ import Foundation
 
 extension Swifter {
 
-    func getFavoritesListWithUserID(userID: Int, count: Int?, sinceID: Int?, maxID: Int?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getFavoritesListWithUserID(userID: Int, count: Int?, sinceID: Int?, maxID: Int?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -43,10 +43,10 @@ extension Swifter {
             parameters["max_id"] = maxID!
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getFavoritesListWithScreenName(screenName: String, count: Int?, sinceID: Int?, maxID: Int?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getFavoritesListWithScreenName(screenName: String, count: Int?, sinceID: Int?, maxID: Int?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -62,10 +62,10 @@ extension Swifter {
             parameters["max_id"] = maxID!
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyFavoriteWithID(id: Int, includeEntities: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postDestroyFavoriteWithID(id: Int, includeEntities: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "favorites/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -75,10 +75,10 @@ extension Swifter {
             parameters["include_entities"] = includeEntities!
         }
 
-        self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateFavoriteWithID(id: Int, includeEntities: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postCreateFavoriteWithID(id: Int, includeEntities: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "favorites/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -88,7 +88,7 @@ extension Swifter {
             parameters["include_entities"] = includeEntities!
         }
 
-        self.oauthClient.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
 }

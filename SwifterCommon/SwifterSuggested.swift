@@ -27,7 +27,7 @@ import Foundation
 
 extension Swifter {
 
-    func getUsersSuggestionsWithSlug(slug: String, lang: String?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getUsersSuggestionsWithSlug(slug: String, lang: String?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "users/suggestions/\(slug).json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -35,10 +35,10 @@ extension Swifter {
             parameters["lang"] = lang!
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getUsersSuggestionsWithLang(lang: String?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getUsersSuggestionsWithLang(lang: String?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "users/suggestions.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -46,13 +46,13 @@ extension Swifter {
             parameters["lang"] = lang!
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getUsersSuggestionsForSlugMembers(slug: String, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getUsersSuggestionsForSlugMembers(slug: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "users/suggestions/\(slug)/members.json"
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
     }
 
 }

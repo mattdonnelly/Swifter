@@ -27,7 +27,7 @@ import Foundation
 
 extension Swifter {
 
-    func getTimelineAtPath(path: String, parameters: Dictionary<String, AnyObject>, count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getTimelineAtPath(path: String, parameters: Dictionary<String, AnyObject>, count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         var params = parameters
 
         if count {
@@ -49,24 +49,24 @@ extension Swifter {
             params["include_entities"] = Int(includeEntities!)
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.apiURL, parameters: params, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: params, progress: nil, success: success, failure: failure)
     }
 
-    func getStatusesMentionTimelineWithCount(count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
+    func getStatusesMentionTimelineWithCount(count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
         self.getTimelineAtPath("statuses/mentions_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 
-    func getStatusesUserTimelineWithUserID(userID: String, count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
+    func getStatusesUserTimelineWithUserID(userID: String, count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
         var parameters: Dictionary<String, AnyObject> = ["user_id": userID.bridgeToObjectiveC()]
 
         self.getTimelineAtPath("statuses/mentions_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 
-    func getStatusesHomeTimelineWithCount(count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
+    func getStatusesHomeTimelineWithCount(count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
         self.getTimelineAtPath("statuses/home_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 
-    func getStatusesRetweetsOfMeWithCount(count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: SwifterOAuthClient.JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
+    func getStatusesRetweetsOfMeWithCount(count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: JSONRequestSuccessHandler, failure: RequestFailureHandler?) {
         self.getTimelineAtPath("statuses/retweets_of_me.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 

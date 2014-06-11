@@ -27,7 +27,7 @@ import Foundation
 
 extension Swifter {
 
-    func postStatusesFilter(follow: String[]?, track: String[]?, locations: String[]?, delimited: Bool?, stallWarnings: Bool?, progress: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler) {
+    func postStatusesFilter(follow: String[]?, track: String[]?, locations: String[]?, delimited: Bool?, stallWarnings: Bool?, progress: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler) {
         assert(follow || track || locations, "At least one predicate parameter (follow, locations, or track) must be specified")
 
         let path = "statuses/filter.json"
@@ -49,10 +49,10 @@ extension Swifter {
             parameters["stall_warnings"] = stallWarnings!
         }
 
-        self.oauthClient.postJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
     }
 
-    func getStatusesSampleDelimited(delimited: Bool?, stallWarnings: Bool?, progress: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getStatusesSampleDelimited(delimited: Bool?, stallWarnings: Bool?, progress: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "statuses/sample.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -63,10 +63,10 @@ extension Swifter {
             parameters["stall_warnings"] = stallWarnings!
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
     }
 
-    func getStatusesFirehose(count: Int?, delimited: Bool?, stallWarnings: Bool?, progress: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getStatusesFirehose(count: Int?, delimited: Bool?, stallWarnings: Bool?, progress: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "statuses/firehose.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -80,10 +80,10 @@ extension Swifter {
             parameters["stall_warnings"] = stallWarnings!
         }
 
-        self.oauthClient.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
     }
 
-    func getUserStream(delimited: Bool?, stallWarnings: Bool?, includeMessagesFromFollowedAccounts: Bool?, includeReplies: Bool?, track: String[]?, locations: String[]?, stringifyFriendIDs: Bool?, progress: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getUserStream(delimited: Bool?, stallWarnings: Bool?, includeMessagesFromFollowedAccounts: Bool?, includeReplies: Bool?, track: String[]?, locations: String[]?, stringifyFriendIDs: Bool?, progress: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "user.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -113,10 +113,10 @@ extension Swifter {
             parameters["stringify_friend_ids"] = stringifyFriendIDs!
         }
 
-        self.oauthClient.postJSONWithPath(path, baseURL: self.userStreamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.userStreamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
     }
 
-    func getFollowStream(delimited: Bool?, stallWarnings: Bool?, includeMessagesFromFollowedAccounts: Bool?, includeReplies: Bool?, stringifyFriendIDs: Bool?, progress: SwifterOAuthClient.JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getFollowStream(delimited: Bool?, stallWarnings: Bool?, includeMessagesFromFollowedAccounts: Bool?, includeReplies: Bool?, stringifyFriendIDs: Bool?, progress: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
         let path = "site.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -140,7 +140,7 @@ extension Swifter {
             parameters["stringify_friend_ids"] = stringifyFriendIDs!
         }
 
-        self.oauthClient.postJSONWithPath(path, baseURL: self.siteStreamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.siteStreamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
     }
 
 }

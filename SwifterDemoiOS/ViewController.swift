@@ -24,14 +24,15 @@
 //
 
 import UIKit
+import Accounts
 import SwifteriOS
 
 class ViewController: UIViewController {
                             
+    let useACAccount = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
 
         let failureHandler: ((NSError) -> Void) = {
             error in
@@ -40,20 +41,58 @@ class ViewController: UIViewController {
             println(error.userInfo)
         }
 
-        swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success"), success: {
-            accessToken, response in
+        if useACAccount {
+            let accountStore = ACAccountStore()
+            let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
 
-            println("Successfully authorized")
+            accountStore.requestAccessToAccountsWithType(accountType) {
+                granted, error in
 
-            swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
-                statuses in
+                if granted {
+                    let twitterAccounts = accountStore.accountsWithAccountType(accountType)
 
-                println(statuses)
+                    if twitterAccounts {
+                        if twitterAccounts.count == 0 {
+                            println("There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
+                        }
+                        else {
+                            let twitterAccount = twitterAccounts[0] as ACAccount
 
-                },
-                failure: failureHandler)
-            
-            }, failure: failureHandler)
+                            let swifter = Swifter(account: twitterAccount)
+
+                            swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
+                                statuses in
+
+                                println(statuses)
+
+                                },
+                                failure: failureHandler)
+                        }
+                    }
+                    else {
+                        println("There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
+                    }
+                }
+            }
+        }
+        else {
+            let swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
+
+            swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success"), success: {
+                accessToken, response in
+
+                println("Successfully authorized")
+
+                swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
+                    statuses in
+                    
+                    println(statuses)
+                    
+                    },
+                    failure: failureHandler)
+                
+                }, failure: failureHandler)
+        }
     }
 
 }
