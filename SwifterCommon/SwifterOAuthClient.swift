@@ -36,7 +36,7 @@ class SwifterOAuthClient: SwifterClientProtocol  {
     var consumerKey: String
     var consumerSecret: String
 
-    var account: SwifterAccount?
+    var credential: SwifterCredential?
 
     var stringEncoding: NSStringEncoding
 
@@ -86,8 +86,8 @@ class SwifterOAuthClient: SwifterClientProtocol  {
         authorizationParameters["oauth_timestamp"] = String(Int(NSDate().timeIntervalSince1970))
         authorizationParameters["oauth_nonce"] = NSUUID().UUIDString.bridgeToObjectiveC()
 
-        if self.account?.accessToken {
-            authorizationParameters["oauth_token"] = self.account!.accessToken!.key
+        if self.credential?.accessToken {
+            authorizationParameters["oauth_token"] = self.credential!.accessToken!.key
         }
 
         for (key, value: AnyObject) in parameters {
@@ -98,7 +98,7 @@ class SwifterOAuthClient: SwifterClientProtocol  {
 
         let combinedParameters = authorizationParameters.join(parameters)
 
-        authorizationParameters["oauth_signature"] = self.oauthSignatureForMethod(method, url: url, parameters: combinedParameters, accessToken: self.account?.accessToken)
+        authorizationParameters["oauth_signature"] = self.oauthSignatureForMethod(method, url: url, parameters: combinedParameters, accessToken: self.credential?.accessToken)
 
         let authorizationParameterComponents = authorizationParameters.urlEncodedQueryStringWithEncoding(self.stringEncoding).componentsSeparatedByString("&") as String[]
         authorizationParameterComponents.sort { $0 < $1 }
@@ -114,7 +114,7 @@ class SwifterOAuthClient: SwifterClientProtocol  {
         return "OAuth " + headerComponents.bridgeToObjectiveC().componentsJoinedByString(", ")
     }
 
-    func oauthSignatureForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>, accessToken token: SwifterAccount.OAuthAccessToken?) -> String {
+    func oauthSignatureForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>, accessToken token: SwifterCredential.OAuthAccessToken?) -> String {
         var tokenSecret: NSString = ""
         if token {
             tokenSecret = token!.secret.urlEncodedStringWithEncoding(self.stringEncoding)

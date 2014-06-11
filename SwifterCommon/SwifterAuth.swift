@@ -27,7 +27,7 @@ import Foundation
 
 extension Swifter {
 
-    typealias TokenRequestSuccessHandler = (accessToken: SwifterAccount.OAuthAccessToken, response: NSURLResponse) -> Void
+    typealias TokenRequestSuccessHandler = (accessToken: SwifterCredential.OAuthAccessToken, response: NSURLResponse) -> Void
 
     func authorizeWithCallbackURL(callbackURL: NSURL, success: TokenRequestSuccessHandler, failure: ((error: NSError) -> Void)?) {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: {
@@ -48,7 +48,7 @@ extension Swifter {
                 self.postOAuthAccessTokenWithRequestToken(requestToken, success: {
                     accessToken, response in
 
-                    self.client.account = SwifterAccount(accessToken: accessToken)
+                    self.client.credential = SwifterCredential(accessToken: accessToken)
                     success(accessToken: accessToken, response: response)
 
                     }, failure: failure)
@@ -71,20 +71,20 @@ extension Swifter {
         self.client.requestWithPath("/oauth/request_token", baseURL: self.apiURL, method: "POST", parameters: parameters, progress: nil, success: {
             responseString, response in
 
-            let accessToken = SwifterAccount.OAuthAccessToken(queryString: responseString)
+            let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString)
             success(accessToken: accessToken, response: response)
 
             }, failure: failure)
     }
 
-    func postOAuthAccessTokenWithRequestToken(requestToken: SwifterAccount.OAuthAccessToken, success: TokenRequestSuccessHandler, failure: RequestFailureHandler?) {
+    func postOAuthAccessTokenWithRequestToken(requestToken: SwifterCredential.OAuthAccessToken, success: TokenRequestSuccessHandler, failure: RequestFailureHandler?) {
         if requestToken.verifier {
             let parameters: Dictionary<String, AnyObject> = ["oauth_token": requestToken.key, "oauth_verifier": requestToken.verifier!]
 
             self.client.requestWithPath("/oauth/access_token", baseURL: self.apiURL, method: "POST", parameters: parameters, progress: nil, success: {
                 responseString, response in
 
-                let accessToken = SwifterAccount.OAuthAccessToken(queryString: responseString)
+                let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString)
                 success(accessToken: accessToken, response: response)
 
                 }, failure: failure)

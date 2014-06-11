@@ -1,5 +1,5 @@
 //
-//  SwifterAccount.swift
+//  SwifterCredential.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -26,7 +26,7 @@
 import Foundation
 import Accounts
 
-class SwifterAccount {
+class SwifterCredential {
 
     struct OAuthAccessToken {
 

@@ -70,8 +70,8 @@
 		8BF1D680194889B900E3AA64 /* SwifterClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */; };
 		8BF1D6851948BCC100E3AA64 /* SwifterOSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6841948BCC100E3AA64 /* SwifterOSClient.swift */; };
 		8BF1D6861948BCC100E3AA64 /* SwifterOSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6841948BCC100E3AA64 /* SwifterOSClient.swift */; };
-		8BF1D6881948C11E00E3AA64 /* SwifterAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterAccount.swift */; };
-		8BF1D6891948C11E00E3AA64 /* SwifterAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterAccount.swift */; };
+		8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
+		8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,7 +158,7 @@
 		8BF1D67B1948882700E3AA64 /* SwifterSpam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterSpam.swift; sourceTree = "<group>"; };
 		8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterClientProtocol.swift; sourceTree = "<group>"; };
 		8BF1D6841948BCC100E3AA64 /* SwifterOSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterOSClient.swift; sourceTree = "<group>"; };
-		8BF1D6871948C11E00E3AA64 /* SwifterAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAccount.swift; sourceTree = "<group>"; };
+		8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterCredential.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,7 +305,7 @@
 			children = (
 				8B9F514C1944A8DC00894629 /* Swifter.swift */,
 				8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */,
-				8BF1D6871948C11E00E3AA64 /* SwifterAccount.swift */,
+				8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */,
 				8B548F581945325E00EE2927 /* SwifterAuth.swift */,
 				8B548F5B1945331D00EE2927 /* SwifterTimelines.swift */,
 				8BCF43161947450A00E63301 /* SwifterTweets.swift */,
@@ -596,7 +596,7 @@
 				8BF1D67C1948882700E3AA64 /* SwifterSpam.swift in Sources */,
 				8BCF431A19475D3C00E63301 /* SwifterSearch.swift in Sources */,
 				8BCF432C1947CED700E63301 /* SwifterLists.swift in Sources */,
-				8BF1D6881948C11E00E3AA64 /* SwifterAccount.swift in Sources */,
+				8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
 				8BF1D6791948839800E3AA64 /* SwifterPlaces.swift in Sources */,
 				8BCF43231947A6C800E63301 /* SwifterUsers.swift in Sources */,
 				8B9F514D1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */,
@@ -627,7 +627,7 @@
 				8BF1D67D1948882700E3AA64 /* SwifterSpam.swift in Sources */,
 				8BCF431B19475D3C00E63301 /* SwifterSearch.swift in Sources */,
 				8BCF432D1947CED700E63301 /* SwifterLists.swift in Sources */,
-				8BF1D6891948C11E00E3AA64 /* SwifterAccount.swift in Sources */,
+				8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
 				8BF1D67A1948839800E3AA64 /* SwifterPlaces.swift in Sources */,
 				8BCF43241947A6C800E63301 /* SwifterUsers.swift in Sources */,
 				8B9F514E1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */,

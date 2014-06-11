@@ -38,7 +38,6 @@ class ViewController: UIViewController {
             error in
 
             println(error.localizedDescription)
-            println(error.userInfo)
         }
 
         if useACAccount {

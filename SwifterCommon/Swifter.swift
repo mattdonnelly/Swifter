@@ -60,7 +60,8 @@ class Swifter {
         self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")
         self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")
         self.userStreamURL = NSURL(string: "https://userstream.twitter.com/1.1/")
-        self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")    }
+        self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")
+    }
 
     init(account: ACAccount) {
         self.client = SwifterOSClient(account: account)
@@ -68,7 +69,8 @@ class Swifter {
         self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")
         self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")
         self.userStreamURL = NSURL(string: "https://userstream.twitter.com/1.1/")
-        self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")    }
+        self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")
+    }
 
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)

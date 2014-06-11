@@ -29,22 +29,19 @@ import Social
 
 class SwifterOSClient: SwifterClientProtocol {
 
-    var account: SwifterAccount?
+    var credential: SwifterCredential?
 
     init(account: ACAccount) {
-        self.account = SwifterAccount(account: account)
+        self.credential = SwifterCredential(account: account)
     }
 
     func requestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.RequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        var requestMethod = SLRequestMethod.GET
-        if method == "POST" {
-            requestMethod = SLRequestMethod.POST
-        }
+        var requestMethod = method == "POST" ? SLRequestMethod.POST : SLRequestMethod.GET
 
         let url = NSURL(string: path, relativeToURL: baseURL)
 
-        let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: requestMethod, URL: url, parameters: parameters)
-        socialRequest.account = self.account!.account
+        let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: requestMethod, URL: url, parameters: parameters.bridgeToObjectiveC())
+        socialRequest.account = self.credential!.account!
 
         let request = SwifterHTTPRequest(request: socialRequest.preparedURLRequest())
         request.downloadRequestProgressHandler = progress
@@ -55,15 +52,12 @@ class SwifterOSClient: SwifterClientProtocol {
     }
 
     func dataRequestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.DataRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        var requestMethod = SLRequestMethod.GET
-        if method == "POST" {
-            requestMethod = SLRequestMethod.POST
-        }
+        var requestMethod = method == "POST" ? SLRequestMethod.POST : SLRequestMethod.GET
 
         let url = NSURL(string: path, relativeToURL: baseURL)
 
         let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: requestMethod, URL: url, parameters: parameters)
-        socialRequest.account = self.account!.account
+        socialRequest.account = self.credential!.account!
 
         let request = SwifterHTTPRequest(request: socialRequest.preparedURLRequest())
         request.downloadRequestProgressHandler = progress

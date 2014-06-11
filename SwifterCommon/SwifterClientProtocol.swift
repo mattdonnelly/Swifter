@@ -29,7 +29,7 @@ import Social
 
 protocol SwifterClientProtocol {
 
-    var account: SwifterAccount? { get set }
+    var credential: SwifterCredential? { get set }
 
     typealias DownloadProgressHandler = (data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void
     typealias RequestSuccessHandler = (body: String, response: NSHTTPURLResponse) -> Void

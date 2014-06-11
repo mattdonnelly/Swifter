@@ -25,6 +25,12 @@
 
 import Foundation
 
+#if os(iOS)
+    import UIKit
+#else
+    import AppKit
+#endif
+
 class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
     typealias DownloadProgressHandler = (data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void
@@ -47,7 +53,6 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     var HTTPShouldHandleCookies: Bool
 
     var response: NSHTTPURLResponse!
-    var responseString: String!
     var responseData: NSMutableData
 
     var downloadRequestProgressHandler: DownloadProgressHandler?
@@ -87,6 +92,11 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
             self.request = NSMutableURLRequest(URL: self.URL)
             self.request!.HTTPMethod = self.HTTPMethod
             self.request!.timeoutInterval = self.timeoutInterval
+            self.request!.HTTPShouldHandleCookies = self.HTTPShouldHandleCookies
+
+            for (key, value) in headers {
+                self.request!.setValue(value, forHTTPHeaderField: key)
+            }
 
             let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.dataEncoding))
 
@@ -111,18 +121,16 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
                     }
                 }
             }
-
-            for (key, value) in headers {
-                self.request!.setValue(value, forHTTPHeaderField: key)
-            }
-            
-            self.request!.HTTPShouldHandleCookies = self.HTTPShouldHandleCookies
         }
 
+        dispatch_async(dispatch_get_main_queue()) {
+            self.connection = NSURLConnection(request: self.request!, delegate: self)
+            self.connection.start()
 
-        self.connection = NSURLConnection(request: self.request!, delegate: self)
-        self.connection.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
-        self.connection.start()
+            #if os(iOS)
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            #endif
+        }
     }
 
     func connection(connection: NSURLConnection!, didReceiveResponse response: NSURLResponse!) {
@@ -142,9 +150,22 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         }
     }
 
+    func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
+        #if os(iOS)
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        #endif
+
+        self.requestFailureHandler?(error: error)
+    }
+
     func connectionDidFinishLoading(connection: NSURLConnection!) {
+        #if os(iOS)
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        #endif
+
         if self.response.statusCode >= 400 {
-            let localizedDescription = SwifterHTTPRequest.descriptionForHTTPStatus(self.response.statusCode)
+            let responseString = NSString(data: self.responseData, encoding: self.dataEncoding)
+            let localizedDescription = SwifterHTTPRequest.descriptionForHTTPStatus(self.response.statusCode, responseString: responseString)
             let userInfo = [NSLocalizedDescriptionKey: localizedDescription, "Response-Headers": self.response.allHeaderFields]
             let error = NSError(domain: NSURLErrorDomain, code: self.response.statusCode, userInfo: userInfo)
             self.requestFailureHandler?(error: error)
@@ -172,7 +193,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         return NSString(data: data, encoding: encoding)
     }
 
-    class func descriptionForHTTPStatus(status: Int) -> String {
+    class func descriptionForHTTPStatus(status: Int, responseString: String) -> String {
         var s = "HTTP Status \(status)"
 
         var description: String?
@@ -220,7 +241,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         if status == 511 { description = "Network Authentication Required" }
         
         if description {
-            s = s + ": " + description!
+            s = s + ": " + description! + ", Response: " + responseString
         }
         
         return s
