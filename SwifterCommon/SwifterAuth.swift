@@ -27,9 +27,9 @@ import Foundation
 
 extension Swifter {
 
-    typealias TokenRequestSuccessHandler = (accessToken: SwifterCredential.OAuthAccessToken, response: NSURLResponse) -> Void
+    typealias TokenSuccessHandler = (accessToken: SwifterCredential.OAuthAccessToken, response: NSURLResponse) -> Void
 
-    func authorizeWithCallbackURL(callbackURL: NSURL, success: TokenRequestSuccessHandler, failure: ((error: NSError) -> Void)?) {
+    func authorizeWithCallbackURL(callbackURL: NSURL, success: TokenSuccessHandler, failure: ((error: NSError) -> Void)?) {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: {
             token, response in
 
@@ -65,25 +65,27 @@ extension Swifter {
             }, failure: failure)
     }
 
-    func postOAuthRequestTokenWithCallbackURL(callbackURL: NSURL, success: TokenRequestSuccessHandler, failure: RequestFailureHandler?) {
+    func postOAuthRequestTokenWithCallbackURL(callbackURL: NSURL, success: TokenSuccessHandler, failure: FailureHandler?) {
         let parameters: Dictionary<String, AnyObject> = ["oauth_callback": callbackURL.absoluteString as String]
 
-        self.client.requestWithPath("/oauth/request_token", baseURL: self.apiURL, method: "POST", parameters: parameters, progress: nil, success: {
-            responseString, response in
+        self.client.post("/oauth/request_token", baseURL: self.apiURL, parameters: parameters, progress: nil, success: {
+            data, response in
 
+            let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
             let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString)
             success(accessToken: accessToken, response: response)
 
             }, failure: failure)
     }
 
-    func postOAuthAccessTokenWithRequestToken(requestToken: SwifterCredential.OAuthAccessToken, success: TokenRequestSuccessHandler, failure: RequestFailureHandler?) {
+    func postOAuthAccessTokenWithRequestToken(requestToken: SwifterCredential.OAuthAccessToken, success: TokenSuccessHandler, failure: FailureHandler?) {
         if requestToken.verifier {
             let parameters: Dictionary<String, AnyObject> = ["oauth_token": requestToken.key, "oauth_verifier": requestToken.verifier!]
 
-            self.client.requestWithPath("/oauth/access_token", baseURL: self.apiURL, method: "POST", parameters: parameters, progress: nil, success: {
-                responseString, response in
+            self.client.post("/oauth/access_token", baseURL: self.apiURL, parameters: parameters, progress: nil, success: {
+                data, response in
 
+                let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
                 let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString)
                 success(accessToken: accessToken, response: response)
 

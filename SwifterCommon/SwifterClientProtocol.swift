@@ -31,14 +31,9 @@ protocol SwifterClientProtocol {
 
     var credential: SwifterCredential? { get set }
 
-    typealias DownloadProgressHandler = (data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void
-    typealias RequestSuccessHandler = (body: String, response: NSHTTPURLResponse) -> Void
-    typealias DataRequestSuccessHandler = (data: NSData, response: NSHTTPURLResponse) -> Void
-    typealias RequestFailureHandler = (error: NSError) -> Void
-
-    func requestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: ((data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void)?, success: ((body: String, response: NSHTTPURLResponse) -> Void)?, failure: ((error: NSError) -> Void)?)
-
-    func dataRequestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: ((data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void)?, success: ((data: NSData, response: NSHTTPURLResponse) -> Void)?, failure: ((error: NSError) -> Void)?)
+    typealias ProgressHandler = (data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void
+    typealias SuccessHandler = (body: NSData, response: NSHTTPURLResponse) -> Void
+    typealias FailureHandler = (error: NSError) -> Void
 
     func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: ((data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void)?, success: ((data: NSData, response: NSHTTPURLResponse) -> Void)?, failure: ((error: NSError) -> Void)?)
 

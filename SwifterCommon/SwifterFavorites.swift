@@ -27,7 +27,31 @@ import Foundation
 
 extension Swifter {
 
-    func getFavoritesListWithUserID(userID: Int, count: Int?, sinceID: Int?, maxID: Int?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    favorites/list
+
+        Returns the 20 most recent Tweets favorited by the authenticating or specified user.
+
+        If you do not provide either a user_id or screen_name to this method, it will assume you are requesting on behalf of the authenticating user. Specify one or the other for best results.
+    */
+    func getFavoritesListWithCount(count: Int?, sinceID: Int?, maxID: Int?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let path = "favorites/list.json"
+
+        var parameters = Dictionary<String, AnyObject>()
+        if count {
+            parameters["count"] = count!
+        }
+        if sinceID {
+            parameters["since_id"] = sinceID!
+        }
+        if maxID {
+            parameters["max_id"] = maxID!
+        }
+
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+    }
+
+    func getFavoritesListWithUserID(userID: Int, count: Int?, sinceID: Int?, maxID: Int?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -46,7 +70,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getFavoritesListWithScreenName(screenName: String, count: Int?, sinceID: Int?, maxID: Int?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getFavoritesListWithScreenName(screenName: String, count: Int?, sinceID: Int?, maxID: Int?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -65,7 +89,14 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyFavoriteWithID(id: Int, includeEntities: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        POST	favorites/destroy
+
+        Un-favorites the status specified in the ID parameter as the authenticating user. Returns the un-favorited status in the requested format when successful.
+
+        This process invoked by this method is asynchronous. The immediately returned status may not indicate the resultant favorited status of the tweet. A 200 OK response from this method will indicate whether the intended action was successful or not.
+    */
+    func postDestroyFavoriteWithID(id: Int, includeEntities: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "favorites/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -78,7 +109,14 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateFavoriteWithID(id: Int, includeEntities: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        POST	favorites/create
+
+        Favorites the status specified in the ID parameter as the authenticating user. Returns the favorite status when successful.
+
+        This process invoked by this method is asynchronous. The immediately returned status may not indicate the resultant favorited status of the tweet. A 200 OK response from this method will indicate whether the intended action was successful or not.
+    */
+    func postCreateFavoriteWithID(id: Int, includeEntities: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "favorites/create.json"
 
         var parameters = Dictionary<String, AnyObject>()

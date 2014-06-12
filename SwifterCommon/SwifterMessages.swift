@@ -27,7 +27,12 @@ import Foundation
 
 extension Swifter {
 
-    func getDirectMessagesSinceID(sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET	direct_messages
+
+        Returns the 20 most recent direct messages sent to the authenticating user. Includes detailed information about the sender and recipient user. You can request up to 200 direct messages per call, up to a maximum of 800 incoming DMs.
+    */
+    func getDirectMessagesSinceID(sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "direct_messages.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -50,7 +55,12 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getSentDirectMessagesSinceID(sinceID: Int?, maxID: Int?, count: Int?, page: Int?, includeEntities: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    direct_messages/sent
+
+        Returns the 20 most recent direct messages sent by the authenticating user. Includes detailed information about the sender and recipient user. You can request up to 200 direct messages per call, up to a maximum of 800 outgoing DMs.
+    */
+    func getSentDirectMessagesSinceID(sinceID: Int?, maxID: Int?, count: Int?, page: Int?, includeEntities: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "direct_messages/sent.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -73,7 +83,12 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getDirectMessagesShowWithID(id: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    direct_messages/show
+
+        Returns a single direct message, specified by an id parameter. Like the /1.1/direct_messages.format request, this method will include the user objects of the sender and recipient.
+    */
+    func getDirectMessagesShowWithID(id: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "direct_messages/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -82,7 +97,12 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyDirectMessagesWithID(id: Int, includeEntities: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        POST	direct_messages/destroy
+
+        Destroys the direct message specified in the required ID parameter. The authenticating user must be the recipient of the specified direct message.
+    */
+    func postDestroyDirectMessageWithID(id: Int, includeEntities: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "direct_messages/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -95,7 +115,12 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDirectMessagesWithStatus(status: String, to screenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        POST	direct_messages/new
+
+        Sends a new direct message to the specified user from the authenticating user. Requires both the user and text parameters and must be a POST. Returns the sent message in the requested format if successful.
+    */
+    func postDirectMessagesWithStatus(status: String, to screenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "direct_messages/new.json"
 
         var parameters = Dictionary<String, AnyObject>()

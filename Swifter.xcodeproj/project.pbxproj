@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8B116AF1194601970019A4DC /* SwifterHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */; };
 		8B116AF2194601970019A4DC /* SwifterHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */; };
+		8B1F259F194A663D004BD304 /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
+		8B1F25A0194A663D004BD304 /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
 		8B300C241944AA1A00993175 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C231944AA1A00993175 /* AppDelegate.swift */; };
 		8B300C261944AA1A00993175 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C251944AA1A00993175 /* ViewController.swift */; };
 		8B300C291944AA1A00993175 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C271944AA1A00993175 /* Main.storyboard */; };
@@ -114,6 +116,7 @@
 
 /* Begin PBXFileReference section */
 		8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterHTTPRequest.swift; sourceTree = "<group>"; };
+		8B1F259E194A663D004BD304 /* SwifterHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterHelp.swift; sourceTree = "<group>"; };
 		8B300C1F1944AA1A00993175 /* SwifterDemoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B300C221944AA1A00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B300C231944AA1A00993175 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -320,6 +323,7 @@
 				8BF1D6751948825D00E3AA64 /* SwifterSavedSearches.swift */,
 				8BF1D6781948839800E3AA64 /* SwifterPlaces.swift */,
 				8BF1D67B1948882700E3AA64 /* SwifterSpam.swift */,
+				8B1F259E194A663D004BD304 /* SwifterHelp.swift */,
 				8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */,
 				8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */,
 				8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */,
@@ -604,6 +608,7 @@
 				8BCF4320194798FB00E63301 /* SwifterFollowers.swift in Sources */,
 				8B548F5C1945331D00EE2927 /* SwifterTimelines.swift in Sources */,
 				8BF1D67F194889B900E3AA64 /* SwifterClientProtocol.swift in Sources */,
+				8B1F259F194A663D004BD304 /* SwifterHelp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,6 +640,7 @@
 				8BCF4321194798FB00E63301 /* SwifterFollowers.swift in Sources */,
 				8B548F5D1945331D00EE2927 /* SwifterTimelines.swift in Sources */,
 				8BF1D680194889B900E3AA64 /* SwifterClientProtocol.swift in Sources */,
+				8B1F25A0194A663D004BD304 /* SwifterHelp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

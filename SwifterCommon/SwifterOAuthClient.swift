@@ -46,36 +46,32 @@ class SwifterOAuthClient: SwifterClientProtocol  {
         self.stringEncoding = NSUTF8StringEncoding
     }
 
-    func requestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.RequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.ProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let url = NSURL(string: path, relativeToURL: baseURL)
+        let method = "GET"
+
         let request = SwifterHTTPRequest(URL: url, method: method, parameters: parameters)
         request.headers = ["Authorization": self.authorizationHeaderForMethod(method, url: url, parameters: parameters)]
-        request.downloadRequestProgressHandler = progress
-        request.requestSuccessHandler = success
-        request.requestFailureHandler = failure
+        request.progressHandler = progress
+        request.successHandler = success
+        request.failureHandler = failure
         request.dataEncoding = self.stringEncoding
 
         request.start()
     }
 
-    func dataRequestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.DataRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func post(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.ProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let url = NSURL(string: path, relativeToURL: baseURL)
+        let method = "POST"
+
         let request = SwifterHTTPRequest(URL: url, method: method, parameters: parameters)
         request.headers = ["Authorization": self.authorizationHeaderForMethod(method, url: url, parameters: parameters)]
-        request.downloadRequestProgressHandler = progress
-        request.dataRequestSuccessHandler = success
-        request.requestFailureHandler = failure
+        request.progressHandler = progress
+        request.successHandler = success
+        request.failureHandler = failure
         request.dataEncoding = self.stringEncoding
 
         request.start()
-    }
-
-    func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.DataRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        self.dataRequestWithPath(path, baseURL: baseURL, method: "GET", parameters: parameters, progress: progress, success: success, failure: failure)
-    }
-
-    func post(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.DataRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        self.dataRequestWithPath(path, baseURL: baseURL, method: "POST", parameters: parameters, progress: progress, success: success, failure: failure)
     }
 
     func authorizationHeaderForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>) -> String {

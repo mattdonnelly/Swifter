@@ -27,19 +27,34 @@ import Foundation
 
 extension Swifter {
 
-    func getSavedSearchesListWithSuccess(success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    saved_searches/list
+
+        Returns the authenticated user's saved search queries.
+    */
+    func getSavedSearchesListWithSuccess(success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "saved_searches/list.json"
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
     }
 
-    func getSavedSearchesShowWithID(id: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    saved_searches/show/:id
+
+        Retrieve the information for the saved search represented by the given id. The authenticating user must be the owner of saved search ID being requested.
+    */
+    func getSavedSearchesShowWithID(id: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "saved_searches/show/\(id).json"
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
     }
 
-    func postCreateSavedSearchesShowWithQuery(query: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        POST   saved_searches/create
+
+        Create a new saved search for the authenticated user. A user may only have 25 saved searches.
+    */
+    func postSavedSearchesCreateShowWithQuery(query: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "saved_searches/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -48,7 +63,12 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
     }
 
-    func postDestroySavedSearchesWithID(id: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        POST   saved_searches/destroy/:id
+
+        Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.
+    */
+    func postSavedSearchesDestroyWithID(id: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "saved_searches/destroy/\(id).json"
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)

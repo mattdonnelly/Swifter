@@ -35,7 +35,7 @@ class SwifterAccountsClient: SwifterClientProtocol {
         self.credential = SwifterCredential(account: account)
     }
 
-    func requestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.RequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func requestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.ProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         var requestMethod = method == "POST" ? SLRequestMethod.POST : SLRequestMethod.GET
 
         let url = NSURL(string: path, relativeToURL: baseURL)
@@ -50,16 +50,14 @@ class SwifterAccountsClient: SwifterClientProtocol {
 
         let request = SwifterHTTPRequest(request: socialRequest.preparedURLRequest())
         request.parameters = parameters
-        request.downloadRequestProgressHandler = progress
-        request.requestSuccessHandler = success
-        request.requestFailureHandler = failure
+        request.progressHandler = progress
+        request.successHandler = success
+        request.failureHandler = failure
 
         request.start()
     }
 
-    func dataRequestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.DataRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        var requestMethod = method == "POST" ? SLRequestMethod.POST : SLRequestMethod.GET
-
+    func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.ProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let url = NSURL(string: path, relativeToURL: baseURL)
 
         var params = Dictionary<String, String>()
@@ -67,24 +65,35 @@ class SwifterAccountsClient: SwifterClientProtocol {
             params[key] = "\(value)"
         }
 
-        let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: requestMethod, URL: url, parameters: params)
+        let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: url, parameters: params)
         socialRequest.account = self.credential!.account!
 
         let request = SwifterHTTPRequest(request: socialRequest.preparedURLRequest())
         request.parameters = parameters
-        request.downloadRequestProgressHandler = progress
-        request.dataRequestSuccessHandler = success
-        request.requestFailureHandler = failure
-
+        request.progressHandler = progress
+        request.successHandler = success
+        request.failureHandler = failure
+        
         request.start()
     }
 
-    func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.DataRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        self.dataRequestWithPath(path, baseURL: baseURL, method: "GET", parameters: parameters, progress: progress, success: success, failure: failure)
-    }
+    func post(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.ProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let url = NSURL(string: path, relativeToURL: baseURL)
 
-    func post(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.DataRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        self.dataRequestWithPath(path, baseURL: baseURL, method: "POST", parameters: parameters, progress: progress, success: success, failure: failure)
-    }
+        var params = Dictionary<String, String>()
+        for (key, value: AnyObject) in parameters {
+            params[key] = "\(value)"
+        }
+
+        let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.POST, URL: url, parameters: params)
+        socialRequest.account = self.credential!.account!
+
+        let request = SwifterHTTPRequest(request: socialRequest.preparedURLRequest())
+        request.parameters = parameters
+        request.progressHandler = progress
+        request.successHandler = success
+        request.failureHandler = failure
+        
+        request.start()    }
 
 }

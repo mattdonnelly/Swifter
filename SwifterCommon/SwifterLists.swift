@@ -27,7 +27,27 @@ import Foundation
 
 extension Swifter {
 
-    func getListsSubscribedByUserWithID(userID: Int, reverse: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    lists/list
+
+        Returns all lists the authenticating or specified user subscribes to, including their own. The user is specified using the user_id or screen_name parameters. If no user is given, the authenticating user is used.
+
+        This method used to be GET lists in version 1.0 of the API and has been renamed for consistency with other call.
+
+        A maximum of 100 results will be returned by this call. Subscribed lists are returned first, followed by owned lists. This means that if a user subscribes to 90 lists and owns 20 lists, this method returns 90 subscriptions and 10 owned lists. The reverse method returns owned lists first, so with reverse=true, 20 owned lists and 80 subscriptions would be returned. If your goal is to obtain every list a user owns or subscribes to, use GET lists/ownerships and/or GET lists/subscriptions instead.
+    */
+    func getListsSubscribedByUserWithReverse(reverse: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let path = "lists/list.json"
+
+        var parameters = Dictionary<String, AnyObject>()
+        if reverse {
+            parameters["reverse"] = reverse!
+        }
+
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+    }
+
+    func getListsSubscribedByUserWithID(userID: Int, reverse: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -40,7 +60,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListsSubscribedByUserWithScreenName(screenName: String, reverse: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsSubscribedByUserWithScreenName(screenName: String, reverse: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -53,7 +73,12 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListStatuesWithListID(listID: Int, ownerScreenName: String, sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET	lists/statuses
+
+        Returns a timeline of tweets authored by members of the specified list. Retweets are included by default. Use the include_rts=false parameter to omit retweets. Embedded Timelines is a great way to embed list timelines on your website.
+    */
+    func getListsStatusesWithListID(listID: Int, ownerScreenName: String, sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/statuses.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -79,7 +104,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListStatuesWithListID(listID: Int, ownerID: Int, sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsStatuesWithListID(listID: Int, ownerID: Int, sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/statuses.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -105,7 +130,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListStatuesWithSlug(slug: String, ownerScreenName: String, sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsStatuesWithSlug(slug: String, ownerScreenName: String, sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/statuses.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -131,7 +156,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListStatuesWithSlug(slug: String, ownerID: Int, sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsStatuesWithSlug(slug: String, ownerID: Int, sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/statuses.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -157,7 +182,12 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyListMembersWithListID(listID: Int, userID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        POST	lists/members/destroy
+
+        Removes the specified member from the list. The authenticated user must be the list's owner to remove members from the list.
+    */
+    func postListsMembersDestroyWithListID(listID: Int, userID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -167,7 +197,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyListMembersWithListID(listID: Int, screenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsMembersDestroyWithListID(listID: Int, screenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -177,7 +207,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyListMembersWithSlug(slug: String, userID: Int, ownerScreenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsMembersDestroyWithSlug(slug: String, userID: Int, ownerScreenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -188,7 +218,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyListMemberWithSlug(slug: String, screenName: String, ownerScreenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsMembersDestroyWithSlug(slug: String, screenName: String, ownerScreenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -199,7 +229,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyListMembersWithSlug(slug: String, userID: Int, ownerID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsMembersDestroyWithSlug(slug: String, userID: Int, ownerID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -210,7 +240,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyListMembersWithSlug(slug: String, screenName: String, ownerID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsMembersDestroyWithSlug(slug: String, screenName: String, ownerID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -221,7 +251,12 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListMembershipsWithUserID(userID: Int, cursor: Int?, filterToOwnedLists: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    lists/memberships
+
+        Returns the lists the specified user has been added to. If user_id or screen_name are not provided the memberships for the authenticating user are returned.
+    */
+    func getListsMembershipsWithUserID(userID: Int, cursor: Int?, filterToOwnedLists: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/memberships.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -237,7 +272,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListMembershipsWithScreenName(screenName: String, cursor: Int?, filterToOwnedLists: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsMembershipsWithScreenName(screenName: String, cursor: Int?, filterToOwnedLists: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/memberships.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -253,7 +288,12 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListSubscribersWithListID(listID: Int, ownerScreenName: String?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET	lists/subscribers
+
+        Returns the subscribers of the specified list. Private list subscribers will only be shown if the authenticated user owns the specified list.
+    */
+    func getListsSubscribersWithListID(listID: Int, ownerScreenName: String?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -274,7 +314,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListSubscribersWithListID(listID: Int, ownerID: Int?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsSubscribersWithListID(listID: Int, ownerID: Int?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -295,7 +335,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListSubscribersWithSlug(slug: String, ownerScreenName: String?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsSubscribersWithSlug(slug: String, ownerScreenName: String?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -316,7 +356,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListSubscribersWithSlug(slug: String, ownerID: Int?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsSubscribersWithSlug(slug: String, ownerID: Int?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -337,7 +377,12 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsSubscribersWithListID(listID: Int, ownerScreenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        POST	lists/subscribers/create
+
+        Subscribes the authenticated user to the specified list.
+    */
+    func postListsSubscribersCreateWithListID(listID: Int, ownerScreenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -347,7 +392,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsSubscribersWithListID(listID: Int, ownerID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsSubscribersCreateWithListID(listID: Int, ownerID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -357,7 +402,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsSubscribersWithSlug(slug: String, ownerScreenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsSubscribersCreateWithSlug(slug: String, ownerScreenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -367,7 +412,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsSubscribersWithSlug(slug: String, ownerID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsSubscribersCreateWithSlug(slug: String, ownerID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -377,7 +422,12 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListSubscribersShowWithListID(listID: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET	lists/subscribers/show
+
+        Check if the specified user is a subscriber of the specified list. Returns the user if they are subscriber.
+    */
+    func getListsSubscribersShowWithListID(listID: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -394,7 +444,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListSubscribersShowWithListID(listID: Int, screenName: String, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsSubscribersShowWithListID(listID: Int, screenName: String, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -411,7 +461,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListSubscribersShowWithSlug(slug: String, ownerID: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsSubscribersShowWithSlug(slug: String, ownerID: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -429,7 +479,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListSubscribersShowWithSlug(slug: String, ownerID: Int, screenName: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsSubscribersShowWithSlug(slug: String, ownerID: Int, screenName: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -447,7 +497,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListSubscribersShowWithSlug(slug: String, ownerScreenName: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsSubscribersShowWithSlug(slug: String, ownerScreenName: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -465,7 +515,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListSubscribersShowWithSlug(slug: String, ownerScreenName: Int, screenName: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsSubscribersShowWithSlug(slug: String, ownerScreenName: Int, screenName: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -483,7 +533,12 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyListsSubscribersWithListID(listID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        POST	lists/subscribers/destroy
+
+        Unsubscribes the authenticated user from the specified list.
+    */
+    func postListsSubscribersDestroyWithListID(listID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -492,7 +547,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyListsSubscribersWithSlug(slug: String, ownerScreenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsSubscribersDestroyWithSlug(slug: String, ownerScreenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -502,7 +557,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyListsSubscribersWithSlug(slug: String, ownerID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsSubscribersDestroyWithSlug(slug: String, ownerID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -512,8 +567,126 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsMembersWithListID(listID: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        POST	lists/members/create_all
+
+        Adds multiple members to a list, by specifying a comma-separated list of member ids or screen names. The authenticated user must own the list to be able to add members to it. Note that lists can't have more than 5,000 members, and you are limited to adding up to 100 members to a list at a time with this method.
+
+        Please note that there can be issues with lists that rapidly remove and add memberships. Take care when using these methods such that you are not too rapidly switching between removals and adds on the same list.
+    */
+    func postListsMembersCreateWithListID(listID: Int, userIDs: Int[], includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members/create_all.json"
+
+        var parameters = Dictionary<String, AnyObject>()
+        parameters["list_id"] = listID
+        parameters["user_id"] = userIDs.bridgeToObjectiveC().componentsJoinedByString(",")
+
+        if includeEntities {
+            parameters["include_entities"] = includeEntities!
+        }
+        if skipStatus {
+            parameters["skip_status"] = skipStatus!
+        }
+
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+    }
+
+    func postListsMembersCreateWithListID(listID: Int, screenNames: String[], includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let path = "lists/members/create_all.json"
+
+        var parameters = Dictionary<String, AnyObject>()
+        parameters["list_id"] = listID
+        parameters["screen_name"] = screenNames.bridgeToObjectiveC().componentsJoinedByString(",")
+
+        if includeEntities {
+            parameters["include_entities"] = includeEntities!
+        }
+        if skipStatus {
+            parameters["skip_status"] = skipStatus!
+        }
+
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+    }
+
+    func postListsMembersCreateWithSlug(slug: String, ownerID: Int, userIDs: Int[], includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let path = "lists/members/create_all.json"
+
+        var parameters = Dictionary<String, AnyObject>()
+        parameters["slug"] = slug
+        parameters["owner_id"] = ownerID
+        parameters["user_id"] = userIDs.bridgeToObjectiveC().componentsJoinedByString(",")
+
+        if includeEntities {
+            parameters["include_entities"] = includeEntities!
+        }
+        if skipStatus {
+            parameters["skip_status"] = skipStatus!
+        }
+
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+    }
+
+    func postListsMembersCreateWithSlug(slug: String, ownerID: Int, screenNames: String[], includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let path = "lists/members/create_all.json"
+
+        var parameters = Dictionary<String, AnyObject>()
+        parameters["slug"] = slug
+        parameters["owner_id"] = ownerID
+        parameters["screen_name"] = screenNames.bridgeToObjectiveC().componentsJoinedByString(",")
+
+        if includeEntities {
+            parameters["include_entities"] = includeEntities!
+        }
+        if skipStatus {
+            parameters["skip_status"] = skipStatus!
+        }
+
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+    }
+
+    func postListsMembersCreateWithSlug(slug: String, ownerScreenName: String, userIDs: Int[], includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let path = "lists/members/create_all.json"
+
+        var parameters = Dictionary<String, AnyObject>()
+        parameters["slug"] = slug
+        parameters["owner_screen_name"] = ownerScreenName
+        parameters["user_id"] = userIDs.bridgeToObjectiveC().componentsJoinedByString(",")
+
+        if includeEntities {
+            parameters["include_entities"] = includeEntities!
+        }
+        if skipStatus {
+            parameters["skip_status"] = skipStatus!
+        }
+
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+    }
+
+    func postListsMembersCreateWithSlug(slug: String, ownerScreenName: String, screenNames: String[], includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let path = "lists/members/create_all.json"
+
+        var parameters = Dictionary<String, AnyObject>()
+        parameters["slug"] = slug
+        parameters["owner_screen_name"] = ownerScreenName
+        parameters["screen_name"] = screenNames.bridgeToObjectiveC().componentsJoinedByString(",")
+
+        if includeEntities {
+            parameters["include_entities"] = includeEntities!
+        }
+        if skipStatus {
+            parameters["skip_status"] = skipStatus!
+        }
+        
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+    }
+
+    /*
+        GET	lists/members/show
+
+        Check if the specified user is a member of the specified list.
+    */
+    func getListsMembersShowWithListID(listID: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let path = "lists/members/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
@@ -526,11 +699,11 @@ extension Swifter {
             parameters["skip_status"] = skipStatus!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsMembersWithListID(listID: Int, screenName: String, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        let path = "lists/members/create_all.json"
+    func getListsMembersShowWithListID(listID: Int, screenName: String, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let path = "lists/members/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
@@ -543,11 +716,11 @@ extension Swifter {
             parameters["skip_status"] = skipStatus!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsMembersWithSlug(slug: String, ownerID: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        let path = "lists/members/create_all.json"
+    func getListsMembersShowWithSlug(slug: String, ownerID: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let path = "lists/members/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
@@ -561,11 +734,11 @@ extension Swifter {
             parameters["skip_status"] = skipStatus!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsMembersWithSlug(slug: String, ownerID: Int, screenName: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        let path = "lists/members/create_all.json"
+    func getListsMembersShowWithSlug(slug: String, ownerID: Int, screenName: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let path = "lists/members/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
@@ -579,11 +752,11 @@ extension Swifter {
             parameters["skip_status"] = skipStatus!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsMembersWithSlug(slug: String, ownerScreenName: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        let path = "lists/members/create_all.json"
+    func getListsMembersShowWithSlug(slug: String, ownerScreenName: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let path = "lists/members/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
@@ -597,11 +770,16 @@ extension Swifter {
             parameters["skip_status"] = skipStatus!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsMembersWithSlug(slug: String, ownerScreenName: Int, screenName: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        let path = "lists/members/create_all.json"
+    /*
+        GET    lists/members
+
+        Returns the members of the specified list. Private list members will only be shown if the authenticated user owns the specified list.
+    */
+    func getListsMembersShowWithSlug(slug: String, ownerScreenName: Int, screenName: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let path = "lists/members/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
@@ -615,116 +793,10 @@ extension Swifter {
             parameters["skip_status"] = skipStatus!
         }
         
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
-    }
-
-    func getListMembersShowWithListID(listID: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        let path = "lists/members/show.json"
-
-        var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID
-        parameters["user_id"] = userID
-
-        if includeEntities {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus {
-            parameters["skip_status"] = skipStatus!
-        }
-
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListMembersShowWithListID(listID: Int, screenName: String, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        let path = "lists/members/show.json"
-
-        var parameters = Dictionary<String, AnyObject>()
-        parameters["list_id"] = listID
-        parameters["screen_name"] = screenName
-
-        if includeEntities {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus {
-            parameters["skip_status"] = skipStatus!
-        }
-
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
-    }
-
-    func getListMembersShowWithSlug(slug: String, ownerID: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        let path = "lists/members/show.json"
-
-        var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug
-        parameters["owner_id"] = ownerID
-        parameters["user_id"] = userID
-
-        if includeEntities {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus {
-            parameters["skip_status"] = skipStatus!
-        }
-
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
-    }
-
-    func getListMembersShowWithSlug(slug: String, ownerID: Int, screenName: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        let path = "lists/members/show.json"
-
-        var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug
-        parameters["owner_id"] = ownerID
-        parameters["screen_name"] = screenName
-
-        if includeEntities {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus {
-            parameters["skip_status"] = skipStatus!
-        }
-
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
-    }
-
-    func getListMembersShowWithSlug(slug: String, ownerScreenName: Int, userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        let path = "lists/members/show.json"
-
-        var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug
-        parameters["owner_screen_name"] = ownerScreenName
-        parameters["user_id"] = userID
-
-        if includeEntities {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus {
-            parameters["skip_status"] = skipStatus!
-        }
-
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
-    }
-
-    func getListMembersShowWithSlug(slug: String, ownerScreenName: Int, screenName: Int, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        let path = "lists/members/show.json"
-
-        var parameters = Dictionary<String, AnyObject>()
-        parameters["slug"] = slug
-        parameters["owner_screen_name"] = ownerScreenName
-        parameters["screen_name"] = screenName
-
-        if includeEntities {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus {
-            parameters["skip_status"] = skipStatus!
-        }
-        
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
-    }
-
-    func getListMembersWithListID(listID: Int, ownerScreenName: String?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsMembersWithListID(listID: Int, ownerScreenName: String?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -745,7 +817,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListMembersWithListID(listID: Int, ownerID: Int?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsMembersWithListID(listID: Int, ownerID: Int?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -766,7 +838,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListMembersWithSlug(slug: String, ownerScreenName: String?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsMembersWithSlug(slug: String, ownerScreenName: String?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -787,7 +859,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListMembersWithSlug(slug: String, ownerID: Int?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsMembersWithSlug(slug: String, ownerID: Int?, cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -808,7 +880,13 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsMembersWithListID(listID: Int, ownerScreenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+
+    /*
+        POST	lists/members/create
+
+        Creates a new list for the authenticated user. Note that you can't create more than 20 lists per account.
+    */
+    func postListsMembersCreateWithListID(listID: Int, ownerScreenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -818,7 +896,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsMembersWithListID(listID: Int, ownerID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsMembersCreateWithListID(listID: Int, ownerID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -828,7 +906,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsMembersWithSlug(slug: String, ownerScreenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsMembersCreateWithSlug(slug: String, ownerScreenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -838,7 +916,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsMembersWithSlug(slug: String, ownerID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsMembersCreateWithSlug(slug: String, ownerID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -848,7 +926,12 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyListsWithListID(listID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        POST	lists/destroy
+
+        Deletes the specified list. The authenticated user must own the list to be able to destroy it.
+    */
+    func postListsDestroyWithListID(listID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -857,7 +940,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyListsWithSlug(slug: String, ownerID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsDestroyWithSlug(slug: String, ownerID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -867,7 +950,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyListsWithSlug(slug: String, ownerScreenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsDestroyWithSlug(slug: String, ownerScreenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -877,7 +960,12 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postUpdateListsWithListID(listID: Int, name: String?, public: Bool?, description: String?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        POST	lists/update
+
+        Updates the specified list. The authenticated user must own the list to be able to update it.
+    */
+    func postListsUpdateWithListID(listID: Int, name: String?, public: Bool?, description: String?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -901,7 +989,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postUpdateListsWithSlug(slug: String, ownerID: Int, name: String?, public: Bool?, description: String?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsUpdateWithSlug(slug: String, ownerID: Int, name: String?, public: Bool?, description: String?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -926,7 +1014,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postUpdateListsWithSlug(slug: String, ownerScreenName: String, name: String?, public: Bool?, description: String?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsUpdateWithSlug(slug: String, ownerScreenName: String, name: String?, public: Bool?, description: String?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -951,7 +1039,12 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postCreateListsWithName(name: String, public: Bool?, description: String?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        POST	lists/create
+
+        Creates a new list for the authenticated user. Note that you can't create more than 20 lists per account.
+    */
+    func postListsCreateWithName(name: String, public: Bool?, description: String?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -972,7 +1065,12 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListsShowWithID(listID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET	lists/show
+
+        Returns the specified list. Private lists will only be shown if the authenticated user owns the specified list.
+    */
+    func getListsShowWithID(listID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -981,7 +1079,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListsShowWithSlug(slug: String, ownerID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsShowWithSlug(slug: String, ownerID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -991,7 +1089,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListsShowWithSlug(slug: String, ownerScreenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsShowWithSlug(slug: String, ownerScreenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -1001,7 +1099,12 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListsSubscribersWithUserID(userID: Int, count: Int?, cursor: Int?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET	lists/subscriptions
+
+        Obtain a collection of the lists the specified user is subscribed to, 20 lists per page by default. Does not include the user's own lists.
+    */
+    func getListsSubscriptionsWithUserID(userID: Int, count: Int?, cursor: Int?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscriptions.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -1017,7 +1120,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListsSubscribersWithScreenName(screenName: String, count: Int?, cursor: Int?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getListsSubscriptionsWithScreenName(screenName: String, count: Int?, cursor: Int?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/subscriptions.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -1033,38 +1136,45 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyAllListMembersWithListID(listID: Int, userID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        POST	lists/members/destroy_all
+
+        Removes multiple members from a list, by specifying a comma-separated list of member ids or screen names. The authenticated user must own the list to be able to remove members from it. Note that lists can't have more than 500 members, and you are limited to removing up to 100 members to a list at a time with this method.
+
+        Please note that there can be issues with lists that rapidly remove and add memberships. Take care when using these methods such that you are not too rapidly switching between removals and adds on the same list.
+    */
+    func postListsMembersDestroyAllWithListID(listID: Int, userIDs: Int[], success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members/destroy_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
-        parameters["user_id"] = userID
+        parameters["user_id"] = userIDs.bridgeToObjectiveC().componentsJoinedByString(",")
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyAllListMembersWithListID(listID: Int, screenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsMembersDestroyAllWithListID(listID: Int, screenNames: String[], success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members/destroy_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
-        parameters["screen_name"] = screenName
+        parameters["screen_name"] = screenNames.bridgeToObjectiveC().componentsJoinedByString(",")
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyAllListMembersWithSlug(slug: String, userID: Int, ownerScreenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsMembersDestroyAllWithSlug(slug: String, userIDs: Int[], ownerScreenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members/destroy_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
-        parameters["userID"] = userID
+        parameters["userID"] = userIDs.bridgeToObjectiveC().componentsJoinedByString(",")
         parameters["owner_screen_name"] = ownerScreenName
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyAllListMemberWithSlug(slug: String, screenName: String, ownerScreenName: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsMembersDestroyAllWithSlug(slug: String, screenName: String, ownerScreenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members/destroy_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -1075,7 +1185,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyAllListMembersWithSlug(slug: String, userID: Int, ownerID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsMembersDestroyAllWithSlug(slug: String, userID: Int, ownerID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members/destroy_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -1086,7 +1196,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func postDestroyAllListMembersWithSlug(slug: String, screenName: String, ownerID: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postListsMembersDestroyAllWithSlug(slug: String, screenName: String, ownerID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/members/destroy_all.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -1097,7 +1207,12 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getListsOwnershipsWithUserID(userID: Int, count: Int?, cursor: Int?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    lists/ownerships
+
+        Returns the lists owned by the specified Twitter user. Private lists will only be shown if the authenticated user is also the owner of the lists.
+    */
+    func getListsOwnershipsWithUserID(userID: Int, count: Int?, cursor: Int?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "lists/ownerships.json"
 
         var parameters = Dictionary<String, AnyObject>()

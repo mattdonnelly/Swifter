@@ -27,13 +27,25 @@ import Foundation
 
 extension Swifter {
 
-    func getGeoIDWithPlaceID(placeID: String, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    geo/id/:place_id
+
+        Returns all the information about a known place.
+    */
+    func getGeoIDWithPlaceID(placeID: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "geo/id/\(placeID).json"
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
     }
 
-    func getGeoReverseGeocodeWithLat(lat: Double, long: Double, accuracy: String?, granularity: String?, maxResults: Int?, callback: String?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    geo/reverse_geocode
+
+        Given a latitude and a longitude, searches for up to 20 places that can be used as a place_id when updating a status.
+
+        This request is an informative call and will deliver generalized results about geography.
+    */
+    func getGeoReverseGeocodeWithLat(lat: Double, long: Double, accuracy: String?, granularity: String?, maxResults: Int?, callback: String?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "geo/reverse_geocode.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -56,7 +68,16 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getGeoSearchWithLat(lat: Double?, long: Double?, query: String?, ipAddress: String?, accuracy: String?, granularity: String?, maxResults: Int?, containedWithin: String?, attributeStreetAddress: String?, callback: String?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    geo/search
+
+        Search for places that can be attached to a statuses/update. Given a latitude and a longitude pair, an IP address, or a name, this request will return a list of all the valid places that can be used as the place_id when updating a status.
+
+        Conceptually, a query can be made from the user's location, retrieve a list of places, have the user validate the location he or she is at, and then send the ID of this location with a call to POST statuses/update.
+
+        This is the recommended method to use find places that can be attached to statuses/update. Unlike GET geo/reverse_geocode which provides raw data access, this endpoint can potentially re-order places with regards to the user who is authenticated. This approach is also preferred for interactive place matching with the user.
+    */
+    func getGeoSearchWithLat(lat: Double?, long: Double?, query: String?, ipAddress: String?, accuracy: String?, granularity: String?, maxResults: Int?, containedWithin: String?, attributeStreetAddress: String?, callback: String?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         assert(lat || long || query || ipAddress, "At least one of the following parameters must be provided to this resource: lat, long, ipAddress, or query")
 
         let path = "geo/search.json"
@@ -97,7 +118,16 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getGeoSimilarPlacesWithLat(lat: Double, long: Double, name: String, containedWithin: String?, attributeStreetAddress: String?, callback: String?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    geo/similar_places
+
+        Locates places near the given coordinates which are similar in name.
+
+        Conceptually you would use this method to get a list of known places to choose from first. Then, if the desired place doesn't exist, make a request to POST geo/place to create a new one.
+
+        The token contained in the response is the token needed to be able to create a new place.
+    */
+    func getGeoSimilarPlacesWithLat(lat: Double, long: Double, name: String, containedWithin: String?, attributeStreetAddress: String?, callback: String?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "geo/similar_places.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -118,7 +148,16 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getTrendsPlaceWithWOEID(id: Int, excludeHashtags: Bool?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    trends/place
+
+        Returns the top 10 trending topics for a specific WOEID, if trending information is available for it.
+
+        The response is an array of "trend" objects that encode the name of the trending topic, the query parameter that can be used to search for the topic on Twitter Search, and the Twitter Search URL.
+
+        This information is cached for 5 minutes. Requesting more frequently than that will not return any more data, and will count against your rate limit usage.
+    */
+    func getTrendsPlaceWithWOEID(id: Int, excludeHashtags: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "trends/place.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -133,13 +172,31 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
     }
 
-    func getTrendsAvailableWithSuccess(success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    trends/available
+
+        Returns the locations that Twitter has trending topic information for.
+
+        The response is an array of "locations" that encode the location's WOEID and some other human-readable information such as a canonical name and country the location belongs in.
+
+        A WOEID is a Yahoo! Where On Earth ID.
+    */
+    func getTrendsAvailableWithSuccess(success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "trends/available.json"
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
     }
 
-    func getTrendsClosestWithLat(lat: Int, long: Int, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    trends/closest
+
+        Returns the locations that Twitter has trending topic information for, closest to a specified location.
+
+        The response is an array of "locations" that encode the location's WOEID and some other human-readable information such as a canonical name and country the location belongs in.
+
+        A WOEID is a Yahoo! Where On Earth ID.
+    */
+    func getTrendsClosestWithLat(lat: Int, long: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "trends/closest.json"
 
         var parameters = Dictionary<String, AnyObject>()

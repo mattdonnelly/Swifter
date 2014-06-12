@@ -34,8 +34,8 @@ import Accounts
 
 class Swifter {
 
-    typealias JSONRequestSuccessHandler = (json: AnyObject, response: NSHTTPURLResponse) -> Void
-    typealias RequestFailureHandler = (error: NSError) -> Void
+    typealias JSONSuccessHandler = (json: AnyObject, response: NSHTTPURLResponse) -> Void
+    typealias FailureHandler = (error: NSError) -> Void
 
     struct CallbackNotification {
         static let notificationName = "SwifterCallbackNotificationName"
@@ -44,6 +44,10 @@ class Swifter {
 
     struct SwifterError {
         static let domain = "SwifterErrorDomain"
+    }
+
+    struct POSTData {
+        static let key = "SwifterPostDataKey"
     }
 
     var apiURL: NSURL
@@ -76,12 +80,8 @@ class Swifter {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
-    func commonInit() {
-
-    }
-
-    func jsonRequestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: JSONRequestSuccessHandler?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
-        let jsonDownloadProgressHandler: SwifterHTTPRequest.DownloadProgressHandler = {
+    func jsonRequestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, progress: JSONSuccessHandler?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let jsonProgressHandler: SwifterHTTPRequest.ProgressHandler = {
             data, _, _, response in
 
             if !progress {
@@ -112,7 +112,7 @@ class Swifter {
             }
         }
 
-        let jsonSuccessHandler: SwifterHTTPRequest.DataRequestSuccessHandler = {
+        let jsonSuccessHandler: SwifterHTTPRequest.SuccessHandler = {
             data, response in
 
             var error: NSError?
@@ -126,14 +126,19 @@ class Swifter {
             }
         }
 
-        self.client.dataRequestWithPath(path, baseURL: baseURL, method: method, parameters: parameters, progress: jsonDownloadProgressHandler, success: jsonSuccessHandler, failure: failure)
+        if method == "GET" {
+            self.client.get(path, baseURL: baseURL, parameters: parameters, progress: jsonProgressHandler, success: jsonSuccessHandler, failure: failure)
+        }
+        else {
+            self.client.post(path, baseURL: baseURL, parameters: parameters, progress: jsonProgressHandler, success: jsonSuccessHandler, failure: failure)
+        }
     }
 
-    func getJSONWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: JSONRequestSuccessHandler?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func getJSONWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: JSONSuccessHandler?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         self.jsonRequestWithPath(path, baseURL: baseURL, method: "GET", parameters: parameters, progress: progress, success: success, failure: failure)
     }
 
-    func postJSONWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: JSONRequestSuccessHandler?, success: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    func postJSONWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: JSONSuccessHandler?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         self.jsonRequestWithPath(path, baseURL: baseURL, method: "POST", parameters: parameters, progress: progress, success: success, failure: failure)
     }
     

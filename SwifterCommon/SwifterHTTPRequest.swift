@@ -33,10 +33,9 @@ import Foundation
 
 class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
-    typealias DownloadProgressHandler = (data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void
-    typealias RequestSuccessHandler = (body: String, response: NSHTTPURLResponse) -> Void
-    typealias DataRequestSuccessHandler = (data: NSData, response: NSHTTPURLResponse) -> Void
-    typealias RequestFailureHandler = (error: NSError) -> Void
+    typealias ProgressHandler = (data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void
+    typealias SuccessHandler = (data: NSData, response: NSHTTPURLResponse) -> Void
+    typealias FailureHandler = (error: NSError) -> Void
 
     var URL: NSURL
     var HTTPMethod: String
@@ -46,19 +45,20 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
     var headers: Dictionary<String, String>
     var parameters: Dictionary<String, AnyObject>
-    var postData: NSData?
 
+    var encodeParameters: Bool
     var dataEncoding: NSStringEncoding
+
     var timeoutInterval: NSTimeInterval
+
     var HTTPShouldHandleCookies: Bool
 
     var response: NSHTTPURLResponse!
     var responseData: NSMutableData
 
-    var downloadRequestProgressHandler: DownloadProgressHandler?
-    var requestSuccessHandler: RequestSuccessHandler?
-    var dataRequestSuccessHandler: DataRequestSuccessHandler?
-    var requestFailureHandler: RequestFailureHandler?
+    var progressHandler: ProgressHandler?
+    var successHandler: SuccessHandler?
+    var failureHandler: FailureHandler?
 
     convenience init(URL: NSURL) {
         self.init(URL: URL, method: "GET", parameters: [:])
@@ -69,6 +69,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.HTTPMethod = method
         self.headers = [:]
         self.parameters = parameters
+        self.encodeParameters = true
         self.dataEncoding = NSUTF8StringEncoding
         self.timeoutInterval = 60
         self.HTTPShouldHandleCookies = false
@@ -81,6 +82,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.HTTPMethod = request.HTTPMethod
         self.headers = [:]
         self.parameters = [:]
+        self.encodeParameters = true
         self.dataEncoding = NSUTF8StringEncoding
         self.timeoutInterval = 60
         self.HTTPShouldHandleCookies = false
@@ -146,7 +148,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         let totalBytesReceived = self.responseData.length
 
         if data {
-            self.downloadRequestProgressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)
+            self.progressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)
         }
     }
 
@@ -155,7 +157,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         #endif
 
-        self.requestFailureHandler?(error: error)
+        self.failureHandler?(error: error)
     }
 
     func connectionDidFinishLoading(connection: NSURLConnection!) {
@@ -168,14 +170,11 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
             let localizedDescription = SwifterHTTPRequest.descriptionForHTTPStatus(self.response.statusCode, responseString: responseString)
             let userInfo = [NSLocalizedDescriptionKey: localizedDescription, "Response-Headers": self.response.allHeaderFields]
             let error = NSError(domain: NSURLErrorDomain, code: self.response.statusCode, userInfo: userInfo)
-            self.requestFailureHandler?(error: error)
+            self.failureHandler?(error: error)
             return
         }
 
-        self.dataRequestSuccessHandler?(data: self.responseData, response: self.response)
-
-        let responseString = SwifterHTTPRequest.stringWithData(self.responseData, encodingName: self.response.textEncodingName)
-        self.requestSuccessHandler?(body: responseString, response: self.response)
+        self.successHandler?(data: self.responseData, response: self.response)
     }
 
     class func stringWithData(data: NSData, encodingName: String?) -> String {

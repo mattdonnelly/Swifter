@@ -27,7 +27,18 @@ import Foundation
 
 extension Swifter {
 
-    func postStatusesFilter(follow: String[]?, track: String[]?, locations: String[]?, delimited: Bool?, stallWarnings: Bool?, progress: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler) {
+    /*
+        POST	statuses/filter
+
+        Returns public statuses that match one or more filter predicates. Multiple parameters may be specified which allows most clients to use a single connection to the Streaming API. Both GET and POST requests are supported, but GET requests with too many parameters may cause the request to be rejected for excessive URL length. Use a POST request to avoid long URLs.
+
+        The track, follow, and locations fields should be considered to be combined with an OR operator. track=foo&follow=1234 returns Tweets matching "foo" OR created by user 1234.
+
+        The default access level allows up to 400 track keywords, 5,000 follow userids and 25 0.1-360 degree location boxes. If you need elevated access to the Streaming API, you should explore our partner providers of Twitter data here: https://dev.twitter.com/programs/twitter-certified-products/products#Certified-Data-Products
+
+        At least one predicate parameter (follow, locations, or track) must be specified.
+    */
+    func postStatusesFilter(follow: String[]?, track: String[]?, locations: String[]?, delimited: Bool?, stallWarnings: Bool?, progress: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler) {
         assert(follow || track || locations, "At least one predicate parameter (follow, locations, or track) must be specified")
 
         let path = "statuses/filter.json"
@@ -52,7 +63,12 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
     }
 
-    func getStatusesSampleDelimited(delimited: Bool?, stallWarnings: Bool?, progress: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    statuses/sample
+
+        Returns a small random sample of all public statuses. The Tweets returned by the default access level are the same, so if two different clients connect to this endpoint, they will see the same Tweets.
+    */
+    func getStatusesSampleDelimited(delimited: Bool?, stallWarnings: Bool?, progress: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "statuses/sample.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -66,7 +82,14 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
     }
 
-    func getStatusesFirehose(count: Int?, delimited: Bool?, stallWarnings: Bool?, progress: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    statuses/firehose
+
+        This endpoint requires special permission to access.
+
+        Returns all public statuses. Few applications require this level of access. Creative use of a combination of other resources and various access levels can satisfy nearly every application use case.
+    */
+    func getStatusesFirehose(count: Int?, delimited: Bool?, stallWarnings: Bool?, progress: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "statuses/firehose.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -83,7 +106,12 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
     }
 
-    func getUserStream(delimited: Bool?, stallWarnings: Bool?, includeMessagesFromFollowedAccounts: Bool?, includeReplies: Bool?, track: String[]?, locations: String[]?, stringifyFriendIDs: Bool?, progress: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    user
+
+        Streams messages for a single user, as described in User streams https://dev.twitter.com/docs/streaming-apis/streams/user
+    */
+    func getUserStreamDelimited(delimited: Bool?, stallWarnings: Bool?, includeMessagesFromFollowedAccounts: Bool?, includeReplies: Bool?, track: String[]?, locations: String[]?, stringifyFriendIDs: Bool?, progress: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "user.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -116,7 +144,12 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.userStreamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
     }
 
-    func getFollowStream(delimited: Bool?, stallWarnings: Bool?, includeMessagesFromFollowedAccounts: Bool?, includeReplies: Bool?, stringifyFriendIDs: Bool?, progress: JSONRequestSuccessHandler?, failure: SwifterHTTPRequest.RequestFailureHandler?) {
+    /*
+        GET    site
+
+        Streams messages for a set of users, as described in Site streams https://dev.twitter.com/docs/streaming-apis/streams/site
+    */
+    func getSiteStreamDelimited(delimited: Bool?, stallWarnings: Bool?, restrictToUserMessages: Bool?, includeReplies: Bool?, stringifyFriendIDs: Bool?, progress: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "site.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -126,8 +159,8 @@ extension Swifter {
         if stallWarnings {
             parameters["stall_warnings"] = stallWarnings!
         }
-        if includeMessagesFromFollowedAccounts {
-            if includeMessagesFromFollowedAccounts! {
+        if restrictToUserMessages {
+            if restrictToUserMessages! {
                 parameters["with"] = "user"
             }
         }
