@@ -25,6 +25,7 @@
 
 import UIKit
 import Accounts
+import Social
 import SwifteriOS
 
 class ViewController: UIViewController {

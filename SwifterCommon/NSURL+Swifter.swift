@@ -33,7 +33,13 @@ extension NSURL {
             return self
         }
 
-        let URLString = self.absoluteString + (self.query ? "&" : "?") + queryString
+        var absoluteURLString = self.absoluteString
+
+        if absoluteURLString.hasSuffix("?") {
+            absoluteURLString = absoluteURLString.substringToIndex(absoluteURLString.utf16count - 1)
+        }
+
+        let URLString = absoluteURLString + (absoluteURLString.rangeOfString("?") ? "&" : "?") + queryString
 
         return NSURL(string: URLString)
     }

@@ -64,7 +64,7 @@ class Swifter {
     }
 
     init(account: ACAccount) {
-        self.client = SwifterOSClient(account: account)
+        self.client = SwifterAccountsClient(account: account)
         self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")
         self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")
         self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")

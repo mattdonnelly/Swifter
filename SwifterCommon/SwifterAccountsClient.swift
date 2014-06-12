@@ -1,5 +1,5 @@
 //
-//  SwifterOSClient.swift
+//  SwifterAccountsClient.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -27,7 +27,7 @@ import Foundation
 import Accounts
 import Social
 
-class SwifterOSClient: SwifterClientProtocol {
+class SwifterAccountsClient: SwifterClientProtocol {
 
     var credential: SwifterCredential?
 
@@ -40,10 +40,16 @@ class SwifterOSClient: SwifterClientProtocol {
 
         let url = NSURL(string: path, relativeToURL: baseURL)
 
-        let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: requestMethod, URL: url, parameters: parameters.bridgeToObjectiveC())
+        var params = Dictionary<String, String>()
+        for (key, value: AnyObject) in parameters {
+            params[key] = "\(value)"
+        }
+
+        let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: requestMethod, URL: url, parameters: params)
         socialRequest.account = self.credential!.account!
 
         let request = SwifterHTTPRequest(request: socialRequest.preparedURLRequest())
+        request.parameters = parameters
         request.downloadRequestProgressHandler = progress
         request.requestSuccessHandler = success
         request.requestFailureHandler = failure
@@ -56,10 +62,16 @@ class SwifterOSClient: SwifterClientProtocol {
 
         let url = NSURL(string: path, relativeToURL: baseURL)
 
-        let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: requestMethod, URL: url, parameters: parameters)
+        var params = Dictionary<String, String>()
+        for (key, value: AnyObject) in parameters {
+            params[key] = "\(value)"
+        }
+
+        let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: requestMethod, URL: url, parameters: params)
         socialRequest.account = self.credential!.account!
 
         let request = SwifterHTTPRequest(request: socialRequest.preparedURLRequest())
+        request.parameters = parameters
         request.downloadRequestProgressHandler = progress
         request.dataRequestSuccessHandler = success
         request.requestFailureHandler = failure

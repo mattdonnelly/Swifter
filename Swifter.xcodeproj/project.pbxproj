@@ -68,8 +68,8 @@
 		8BF1D67D1948882700E3AA64 /* SwifterSpam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D67B1948882700E3AA64 /* SwifterSpam.swift */; };
 		8BF1D67F194889B900E3AA64 /* SwifterClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */; };
 		8BF1D680194889B900E3AA64 /* SwifterClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */; };
-		8BF1D6851948BCC100E3AA64 /* SwifterOSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6841948BCC100E3AA64 /* SwifterOSClient.swift */; };
-		8BF1D6861948BCC100E3AA64 /* SwifterOSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6841948BCC100E3AA64 /* SwifterOSClient.swift */; };
+		8BF1D6851948BCC100E3AA64 /* SwifterAccountsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */; };
+		8BF1D6861948BCC100E3AA64 /* SwifterAccountsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */; };
 		8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
 		8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
 /* End PBXBuildFile section */
@@ -157,7 +157,7 @@
 		8BF1D6781948839800E3AA64 /* SwifterPlaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterPlaces.swift; sourceTree = "<group>"; };
 		8BF1D67B1948882700E3AA64 /* SwifterSpam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterSpam.swift; sourceTree = "<group>"; };
 		8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterClientProtocol.swift; sourceTree = "<group>"; };
-		8BF1D6841948BCC100E3AA64 /* SwifterOSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterOSClient.swift; sourceTree = "<group>"; };
+		8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAccountsClient.swift; sourceTree = "<group>"; };
 		8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterCredential.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -321,7 +321,7 @@
 				8BF1D6781948839800E3AA64 /* SwifterPlaces.swift */,
 				8BF1D67B1948882700E3AA64 /* SwifterSpam.swift */,
 				8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */,
-				8BF1D6841948BCC100E3AA64 /* SwifterOSClient.swift */,
+				8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */,
 				8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */,
 				8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */,
 				8B9F51481944A8DC00894629 /* HMACSHA1Signature.h */,
@@ -588,7 +588,7 @@
 				8B9F51571944A8DC00894629 /* Swifter.swift in Sources */,
 				8BF1D6761948825D00E3AA64 /* SwifterSavedSearches.swift in Sources */,
 				8BCF43171947450A00E63301 /* SwifterTweets.swift in Sources */,
-				8BF1D6851948BCC100E3AA64 /* SwifterOSClient.swift in Sources */,
+				8BF1D6851948BCC100E3AA64 /* SwifterAccountsClient.swift in Sources */,
 				8B548F591945325E00EE2927 /* SwifterAuth.swift in Sources */,
 				8BCF431D1947907300E63301 /* SwifterMessages.swift in Sources */,
 				8B9F51531944A8DC00894629 /* String+Swifter.swift in Sources */,
@@ -619,7 +619,7 @@
 				8B9F51581944A8DC00894629 /* Swifter.swift in Sources */,
 				8BF1D6771948825D00E3AA64 /* SwifterSavedSearches.swift in Sources */,
 				8BCF43181947450A00E63301 /* SwifterTweets.swift in Sources */,
-				8BF1D6861948BCC100E3AA64 /* SwifterOSClient.swift in Sources */,
+				8BF1D6861948BCC100E3AA64 /* SwifterAccountsClient.swift in Sources */,
 				8B548F5A1945325E00EE2927 /* SwifterAuth.swift in Sources */,
 				8BCF431E1947907300E63301 /* SwifterMessages.swift in Sources */,
 				8B9F51541944A8DC00894629 /* String+Swifter.swift in Sources */,
