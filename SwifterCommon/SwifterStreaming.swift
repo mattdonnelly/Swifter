@@ -60,7 +60,7 @@ extension Swifter {
             parameters["stall_warnings"] = stallWarnings!
         }
 
-        self.postJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: progress, success: nil, failure: failure)
     }
 
     /*
@@ -79,7 +79,7 @@ extension Swifter {
             parameters["stall_warnings"] = stallWarnings!
         }
 
-        self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters,  uploadProgress: nil, downloadProgress: progress, success: nil, failure: failure)
     }
 
     /*
@@ -103,7 +103,7 @@ extension Swifter {
             parameters["stall_warnings"] = stallWarnings!
         }
 
-        self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters,  uploadProgress: nil, downloadProgress: progress, success: nil, failure: failure)
     }
 
     /*
@@ -141,7 +141,7 @@ extension Swifter {
             parameters["stringify_friend_ids"] = stringifyFriendIDs!
         }
 
-        self.postJSONWithPath(path, baseURL: self.userStreamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.userStreamURL, parameters: parameters,  uploadProgress: nil, downloadProgress: progress, success: nil, failure: failure)
     }
 
     /*
@@ -173,7 +173,7 @@ extension Swifter {
             parameters["stringify_friend_ids"] = stringifyFriendIDs!
         }
 
-        self.postJSONWithPath(path, baseURL: self.siteStreamURL, parameters: parameters, progress: progress, success: nil, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.siteStreamURL, parameters: parameters,  uploadProgress: nil, downloadProgress: progress, success: nil, failure: failure)
     }
 
 }

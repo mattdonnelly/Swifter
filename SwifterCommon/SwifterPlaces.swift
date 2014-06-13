@@ -35,7 +35,7 @@ extension Swifter {
     func getGeoIDWithPlaceID(placeID: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "geo/id/\(placeID).json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -65,7 +65,7 @@ extension Swifter {
             parameters["callback"] = callback!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -115,7 +115,7 @@ extension Swifter {
             parameters["callback"] = callback!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -145,7 +145,7 @@ extension Swifter {
             parameters["callback"] = callback!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -169,7 +169,7 @@ extension Swifter {
             }
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -184,7 +184,7 @@ extension Swifter {
     func getTrendsAvailableWithSuccess(success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "trends/available.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -203,7 +203,7 @@ extension Swifter {
         parameters["lat"] = lat
         parameters["long"] = long
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
 }

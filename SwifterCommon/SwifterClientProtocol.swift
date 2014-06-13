@@ -31,12 +31,8 @@ protocol SwifterClientProtocol {
 
     var credential: SwifterCredential? { get set }
 
-    typealias ProgressHandler = (data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void
-    typealias SuccessHandler = (body: NSData, response: NSHTTPURLResponse) -> Void
-    typealias FailureHandler = (error: NSError) -> Void
+    func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?)
 
-    func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: ((data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void)?, success: ((data: NSData, response: NSHTTPURLResponse) -> Void)?, failure: ((error: NSError) -> Void)?)
-
-    func post(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: ((data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void)?, success: ((data: NSData, response: NSHTTPURLResponse) -> Void)?, failure: ((error: NSError) -> Void)?)
+    func post(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?)
 
 }

@@ -43,7 +43,7 @@ extension Swifter {
             parameters["trim_user"] = trimUser!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -82,7 +82,7 @@ extension Swifter {
             parameters["include_entities"] = includeEntities!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -98,7 +98,7 @@ extension Swifter {
             parameters["trim_user"] = trimUser!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -145,7 +145,34 @@ extension Swifter {
             parameters["trim_user"] = trimUser!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
+    }
+
+    func postStatusUpdate(status: String, media: NSData, inReplyToStatusID: Int?, lat: Double?, long: Double?, placeID: Double?, displayCoordinates: Bool?, trimUser: Bool?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        var path: String = "statuses/update_with_media.json"
+
+        var parameters = Dictionary<String, AnyObject>()
+        parameters["status"] = status
+        parameters["media[]"] = media
+        parameters[Swifter.DataParameters.dataKey] = "media[]"
+
+        if inReplyToStatusID {
+            parameters["in_reply_to_status_id"] = inReplyToStatusID!
+        }
+        if placeID {
+            parameters["place_id"] = placeID!
+            parameters["display_coordinates"] = true
+        }
+        else if lat && long {
+            parameters["lat"] = lat!
+            parameters["long"] = long!
+            parameters["display_coordinates"] = true
+        }
+        if trimUser {
+            parameters["trim_user"] = trimUser!
+        }
+
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -167,7 +194,7 @@ extension Swifter {
             parameters["trim_user"] = trimUser!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -206,7 +233,7 @@ extension Swifter {
             parameters["lang"] = lang!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -229,7 +256,7 @@ extension Swifter {
             parameters["stringify_ids"] = cursor!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -250,7 +277,7 @@ extension Swifter {
             parameters["map"] = map!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
 }

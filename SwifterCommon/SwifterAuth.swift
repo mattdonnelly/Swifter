@@ -68,7 +68,7 @@ extension Swifter {
     func postOAuthRequestTokenWithCallbackURL(callbackURL: NSURL, success: TokenSuccessHandler, failure: FailureHandler?) {
         let parameters: Dictionary<String, AnyObject> = ["oauth_callback": callbackURL.absoluteString as String]
 
-        self.client.post("/oauth/request_token", baseURL: self.apiURL, parameters: parameters, progress: nil, success: {
+        self.client.post("/oauth/request_token", baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             data, response in
 
             let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
@@ -82,7 +82,7 @@ extension Swifter {
         if requestToken.verifier {
             let parameters: Dictionary<String, AnyObject> = ["oauth_token": requestToken.key, "oauth_verifier": requestToken.verifier!]
 
-            self.client.post("/oauth/access_token", baseURL: self.apiURL, parameters: parameters, progress: nil, success: {
+            self.client.post("/oauth/access_token", baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
                 data, response in
 
                 let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)

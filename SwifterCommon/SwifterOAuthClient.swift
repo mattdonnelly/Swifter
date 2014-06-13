@@ -46,13 +46,13 @@ class SwifterOAuthClient: SwifterClientProtocol  {
         self.stringEncoding = NSUTF8StringEncoding
     }
 
-    func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.ProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let url = NSURL(string: path, relativeToURL: baseURL)
         let method = "GET"
 
         let request = SwifterHTTPRequest(URL: url, method: method, parameters: parameters)
-        request.headers = ["Authorization": self.authorizationHeaderForMethod(method, url: url, parameters: parameters)]
-        request.progressHandler = progress
+        request.headers = ["Authorization": self.authorizationHeaderForMethod(method, url: url, parameters: parameters, isMediaUpload: false)]
+        request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
         request.dataEncoding = self.stringEncoding
@@ -60,21 +60,45 @@ class SwifterOAuthClient: SwifterClientProtocol  {
         request.start()
     }
 
-    func post(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, progress: SwifterHTTPRequest.ProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func post(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let url = NSURL(string: path, relativeToURL: baseURL)
         let method = "POST"
 
-        let request = SwifterHTTPRequest(URL: url, method: method, parameters: parameters)
-        request.headers = ["Authorization": self.authorizationHeaderForMethod(method, url: url, parameters: parameters)]
-        request.progressHandler = progress
+        var localParameters = parameters
+
+        var postData: NSData?
+        var postDataKey: String?
+
+        if let key : AnyObject = localParameters[Swifter.DataParameters.dataKey] {
+            postDataKey = key as? String
+            postData = localParameters[postDataKey!] as? NSData
+
+            localParameters.removeValueForKey(Swifter.DataParameters.dataKey)
+            localParameters.removeValueForKey(postDataKey!)
+        }
+
+        var postDataFileName: String?
+        if let fileName : AnyObject = localParameters[Swifter.DataParameters.fileNameKey] {
+            postDataFileName = fileName as? String
+            localParameters.removeValueForKey(postDataFileName!)
+        }
+
+        let request = SwifterHTTPRequest(URL: url, method: method, parameters: localParameters)
+        request.headers = ["Authorization": self.authorizationHeaderForMethod(method, url: url, parameters: localParameters, isMediaUpload: postData != nil)]
+        request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
         request.dataEncoding = self.stringEncoding
 
+        if postData {
+            let fileName = postDataFileName ? postDataFileName! as String : "media.jpg"
+            request.addMultipartData(postData!, parameterName: postDataKey!, mimeType: "application/octet-stream", fileName: fileName)
+        }
+
         request.start()
     }
 
-    func authorizationHeaderForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>) -> String {
+    func authorizationHeaderForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>, isMediaUpload: Bool) -> String {
         var authorizationParameters = Dictionary<String, AnyObject>()
         authorizationParameters["oauth_version"] = OAuth.version
         authorizationParameters["oauth_signature_method"] =  OAuth.signatureMethod
@@ -94,7 +118,9 @@ class SwifterOAuthClient: SwifterClientProtocol  {
 
         let combinedParameters = authorizationParameters.join(parameters)
 
-        authorizationParameters["oauth_signature"] = self.oauthSignatureForMethod(method, url: url, parameters: combinedParameters, accessToken: self.credential?.accessToken)
+        let finalParameters = isMediaUpload ? authorizationParameters : combinedParameters
+
+        authorizationParameters["oauth_signature"] = self.oauthSignatureForMethod(method, url: url, parameters: finalParameters, accessToken: self.credential?.accessToken)
 
         let authorizationParameterComponents = authorizationParameters.urlEncodedQueryStringWithEncoding(self.stringEncoding).componentsSeparatedByString("&") as String[]
         authorizationParameterComponents.sort { $0 < $1 }

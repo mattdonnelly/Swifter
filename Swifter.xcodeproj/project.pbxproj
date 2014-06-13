@@ -11,10 +11,11 @@
 		8B116AF2194601970019A4DC /* SwifterHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */; };
 		8B1F259F194A663D004BD304 /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
 		8B1F25A0194A663D004BD304 /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
+		8B1F25A2194A7869004BD304 /* SwifterMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F25A1194A7869004BD304 /* SwifterMedia.swift */; };
+		8B1F25A3194A7869004BD304 /* SwifterMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F25A1194A7869004BD304 /* SwifterMedia.swift */; };
 		8B300C241944AA1A00993175 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C231944AA1A00993175 /* AppDelegate.swift */; };
 		8B300C261944AA1A00993175 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C251944AA1A00993175 /* ViewController.swift */; };
 		8B300C291944AA1A00993175 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C271944AA1A00993175 /* Main.storyboard */; };
-		8B300C2B1944AA1A00993175 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C2A1944AA1A00993175 /* Images.xcassets */; };
 		8B300C3E1944AA6600993175 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; };
 		8B300C3F1944AA6600993175 /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8B300C4C1944AECB00993175 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4B1944AECB00993175 /* main.swift */; };
@@ -46,6 +47,7 @@
 		8B9F51561944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */; };
 		8B9F51571944A8DC00894629 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514C1944A8DC00894629 /* Swifter.swift */; };
 		8B9F51581944A8DC00894629 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514C1944A8DC00894629 /* Swifter.swift */; };
+		8BCB9329194B2E1200A998EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BCB9328194B2E1200A998EA /* Images.xcassets */; };
 		8BCF43171947450A00E63301 /* SwifterTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF43161947450A00E63301 /* SwifterTweets.swift */; };
 		8BCF43181947450A00E63301 /* SwifterTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF43161947450A00E63301 /* SwifterTweets.swift */; };
 		8BCF431A19475D3C00E63301 /* SwifterSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF431919475D3C00E63301 /* SwifterSearch.swift */; };
@@ -117,12 +119,12 @@
 /* Begin PBXFileReference section */
 		8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterHTTPRequest.swift; sourceTree = "<group>"; };
 		8B1F259E194A663D004BD304 /* SwifterHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterHelp.swift; sourceTree = "<group>"; };
+		8B1F25A1194A7869004BD304 /* SwifterMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterMedia.swift; sourceTree = "<group>"; };
 		8B300C1F1944AA1A00993175 /* SwifterDemoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B300C221944AA1A00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B300C231944AA1A00993175 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B300C251944AA1A00993175 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8B300C281944AA1A00993175 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8B300C2A1944AA1A00993175 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8B300C471944AECB00993175 /* SwifterDemoMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B300C4A1944AECB00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B300C4B1944AECB00993175 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 		8B9F514A1944A8DC00894629 /* String+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Swifter.swift"; sourceTree = "<group>"; };
 		8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swifter-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B9F514C1944A8DC00894629 /* Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swifter.swift; sourceTree = "<group>"; };
+		8BCB9328194B2E1200A998EA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8BCF43161947450A00E63301 /* SwifterTweets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTweets.swift; sourceTree = "<group>"; };
 		8BCF431919475D3C00E63301 /* SwifterSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterSearch.swift; sourceTree = "<group>"; };
 		8BCF431C1947907300E63301 /* SwifterMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterMessages.swift; sourceTree = "<group>"; };
@@ -209,8 +212,8 @@
 			children = (
 				8B300C231944AA1A00993175 /* AppDelegate.swift */,
 				8B300C251944AA1A00993175 /* ViewController.swift */,
+				8BCB9328194B2E1200A998EA /* Images.xcassets */,
 				8B300C271944AA1A00993175 /* Main.storyboard */,
-				8B300C2A1944AA1A00993175 /* Images.xcassets */,
 				8B300C211944AA1A00993175 /* Supporting Files */,
 			);
 			path = SwifterDemoiOS;
@@ -324,6 +327,7 @@
 				8BF1D6781948839800E3AA64 /* SwifterPlaces.swift */,
 				8BF1D67B1948882700E3AA64 /* SwifterSpam.swift */,
 				8B1F259E194A663D004BD304 /* SwifterHelp.swift */,
+				8B1F25A1194A7869004BD304 /* SwifterMedia.swift */,
 				8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */,
 				8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */,
 				8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */,
@@ -517,7 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B300C291944AA1A00993175 /* Main.storyboard in Resources */,
-				8B300C2B1944AA1A00993175 /* Images.xcassets in Resources */,
+				8BCB9329194B2E1200A998EA /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,6 +613,7 @@
 				8B548F5C1945331D00EE2927 /* SwifterTimelines.swift in Sources */,
 				8BF1D67F194889B900E3AA64 /* SwifterClientProtocol.swift in Sources */,
 				8B1F259F194A663D004BD304 /* SwifterHelp.swift in Sources */,
+				8B1F25A2194A7869004BD304 /* SwifterMedia.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +646,7 @@
 				8B548F5D1945331D00EE2927 /* SwifterTimelines.swift in Sources */,
 				8BF1D680194889B900E3AA64 /* SwifterClientProtocol.swift in Sources */,
 				8B1F25A0194A663D004BD304 /* SwifterHelp.swift in Sources */,
+				8B1F25A3194A7869004BD304 /* SwifterMedia.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

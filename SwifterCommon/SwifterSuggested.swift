@@ -42,7 +42,7 @@ extension Swifter {
             parameters["lang"] = lang!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -58,7 +58,7 @@ extension Swifter {
             parameters["lang"] = lang!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -69,7 +69,7 @@ extension Swifter {
     func getUsersSuggestionsForSlugMembers(slug: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "users/suggestions/\(slug)/members.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
 }

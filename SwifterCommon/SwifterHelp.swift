@@ -37,7 +37,7 @@ extension Swifter {
     func getHelpConfigurationWithSuccess(success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "help/configuration.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -48,7 +48,7 @@ extension Swifter {
     func getHelpLanguagesWithSuccess(success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "help/languages.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -59,7 +59,7 @@ extension Swifter {
     func getHelpPrivacyWithSuccess(success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "help/privacy.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -70,7 +70,7 @@ extension Swifter {
     func getHelpTermsOfServiceWithSuccess(success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "help/tos.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -94,7 +94,7 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["resources"] = resources.bridgeToObjectiveC().componentsJoinedByString(",")
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
 }

@@ -35,7 +35,7 @@ extension Swifter {
     func getSavedSearchesListWithSuccess(success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "saved_searches/list.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -46,7 +46,7 @@ extension Swifter {
     func getSavedSearchesShowWithID(id: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "saved_searches/show/\(id).json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -60,7 +60,7 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["query"] = query
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     /*
@@ -71,7 +71,7 @@ extension Swifter {
     func postSavedSearchesDestroyWithID(id: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "saved_searches/destroy/\(id).json"
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], progress: nil, success: success, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
 }

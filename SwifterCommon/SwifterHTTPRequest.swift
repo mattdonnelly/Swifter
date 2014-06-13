@@ -33,9 +33,17 @@ import Foundation
 
 class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
-    typealias ProgressHandler = (data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void
+    typealias UploadProgressHandler = (bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) -> Void
+    typealias DownloadProgressHandler = (data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void
     typealias SuccessHandler = (data: NSData, response: NSHTTPURLResponse) -> Void
     typealias FailureHandler = (error: NSError) -> Void
+
+    struct DataUpload {
+        var data: NSData
+        var parameterName: String
+        var mimeType: String?
+        var fileName: String?
+    }
 
     var URL: NSURL
     var HTTPMethod: String
@@ -46,7 +54,8 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     var headers: Dictionary<String, String>
     var parameters: Dictionary<String, AnyObject>
 
-    var encodeParameters: Bool
+    var uploadData: DataUpload[]
+
     var dataEncoding: NSStringEncoding
 
     var timeoutInterval: NSTimeInterval
@@ -56,7 +65,8 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     var response: NSHTTPURLResponse!
     var responseData: NSMutableData
 
-    var progressHandler: ProgressHandler?
+    var uploadProgressHandler: UploadProgressHandler?
+    var downloadProgressHandler: DownloadProgressHandler?
     var successHandler: SuccessHandler?
     var failureHandler: FailureHandler?
 
@@ -69,7 +79,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.HTTPMethod = method
         self.headers = [:]
         self.parameters = parameters
-        self.encodeParameters = true
+        self.uploadData = []
         self.dataEncoding = NSUTF8StringEncoding
         self.timeoutInterval = 60
         self.HTTPShouldHandleCookies = false
@@ -82,7 +92,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.HTTPMethod = request.HTTPMethod
         self.headers = [:]
         self.parameters = [:]
-        self.encodeParameters = true
+        self.uploadData = []
         self.dataEncoding = NSUTF8StringEncoding
         self.timeoutInterval = 60
         self.HTTPShouldHandleCookies = false
@@ -104,7 +114,32 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
             var nonOAuthParameters = self.parameters.filter { key, _ in !key.hasPrefix("oauth_") }
 
-            if nonOAuthParameters.count > 0 {
+            if self.uploadData.count > 0 {
+                let boundary = "----------SwIfTeRhTtPrEqUeStBoUnDaRy"
+
+                let contentType = "multipart/form-data; boundary=\(boundary)"
+                self.request!.setValue(contentType, forHTTPHeaderField:"Content-Type")
+
+                var body = NSMutableData();
+
+                for dataUpload: DataUpload in self.uploadData {
+                    let multipartData = SwifterHTTPRequest.mulipartContentWithBounday(boundary, data: dataUpload.data, fileName: dataUpload.fileName, parameterName: dataUpload.parameterName, mimeType: dataUpload.mimeType)
+
+                    body.appendData(multipartData)
+                }
+
+                for (key, value : AnyObject) in nonOAuthParameters {
+                    body.appendData("\r\n--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding))
+                    body.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding))
+                    body.appendData("\(value)".dataUsingEncoding(NSUTF8StringEncoding))
+                }
+
+                body.appendData("\r\n--\(boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding))
+
+                self.request!.setValue("\(body.length)", forHTTPHeaderField: "Content-Length")
+                self.request!.HTTPBody = body
+            }
+            else if nonOAuthParameters.count > 0 {
                 if self.HTTPMethod == "GET" || self.HTTPMethod == "HEAD" || self.HTTPMethod == "DELETE" {
                     let queryString = nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding)
                     self.request!.URL = self.URL.URLByAppendingQueryString(queryString)
@@ -135,10 +170,37 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         }
     }
 
+    func addMultipartData(data: NSData, parameterName: String, mimeType: String?, fileName: String?) -> Void {
+        let dataUpload = DataUpload(data: data, parameterName: parameterName, mimeType: mimeType, fileName: fileName)
+        self.uploadData.append(dataUpload)
+    }
+
+    class func mulipartContentWithBounday(boundary: String, data: NSData, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> NSData {
+        let mimeType = mimeTypeOrNil ? mimeTypeOrNil! : "application/octet-stream"
+
+        let tempData = NSMutableData()
+
+        tempData.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding))
+
+        let fileNameContentDisposition = fileName ? "filename=\"\(fileName)\"" : ""
+        let contentDisposition = "Content-Disposition: form-data; name=\"\(parameterName)\"; \(fileNameContentDisposition)\r\n"
+
+        tempData.appendData(contentDisposition.dataUsingEncoding(NSUTF8StringEncoding))
+        tempData.appendData("Content-Type: \(mimeType)\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding))
+        tempData.appendData(data)
+        tempData.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding))
+
+        return tempData
+    }
+
     func connection(connection: NSURLConnection!, didReceiveResponse response: NSURLResponse!) {
         self.response = response as? NSHTTPURLResponse
 
         self.responseData.length = 0
+    }
+
+    func connection(connection: NSURLConnection!, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
+        self.uploadProgressHandler?(bytesWritten: bytesWritten, totalBytesWritten: totalBytesWritten, totalBytesExpectedToWrite: totalBytesExpectedToWrite)
     }
 
     func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
@@ -148,7 +210,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         let totalBytesReceived = self.responseData.length
 
         if data {
-            self.progressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)
+            self.downloadProgressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)
         }
     }
 

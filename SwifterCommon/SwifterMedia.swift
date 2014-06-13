@@ -1,5 +1,5 @@
 //
-//  SwifterSpam.swift
+//  SwifterMedia.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -27,27 +27,17 @@ import Foundation
 
 extension Swifter {
 
-    /*
-        POST   users/report_spam
+    func postMediaUploadWithURL(mediaURL: NSURL, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler) {
+        let path = "media/upload.json"
 
-        Report the specified user as a spam account to Twitter. Additionally performs the equivalent of POST blocks/create on behalf of the authenticated user.
-    */
-    func postUsersReportSpamWithScreenName(screenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
-        let path = "users/report_spam.json"
+        let data = NSData(contentsOfURL: mediaURL)
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenName
+        parameters["media"] = data
+        parameters[Swifter.DataParameters.dataKey] = "media"
+        parameters[Swifter.DataParameters.fileNameKey] = mediaURL.isFileReferenceURL() ? mediaURL.path.lastPathComponent : "media.jpg"
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
-    }
-
-    func postUsersReportSpamWithScreenName(userID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
-        let path = "users/report_spam.json"
-
-        var parameters = Dictionary<String, AnyObject>()
-        parameters["user_id"] = userID
-
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
+        //self.postJSONWithPath(path, baseURL: self.uploadURL, parameters: parameters, progress: <#JSONSuccessHandler?#>, success: <#JSONSuccessHandler?#>, failure: <#FailureHandler?#>)
     }
 
 }
