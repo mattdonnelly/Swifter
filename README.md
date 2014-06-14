@@ -10,7 +10,7 @@ If you're using Xcode 6, Swifter can be installed by simply dragging the Swifter
 
 ###Usage
 
-Instatiation With ACAccount:
+Instantiation with ACAccount:
 
 `let swifter = Swifter(account: twitterAccount)`
 
