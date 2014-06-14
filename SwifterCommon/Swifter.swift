@@ -90,25 +90,24 @@ class Swifter {
             }
 
             var error: NSError?
-            var jsonResult: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
-
-            if !error {
-                downloadProgress?(json: jsonResult!, response: response)
+            if let jsonResult: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error) {
+                downloadProgress?(json: jsonResult, response: response)
             }
+            else {
+                let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding)
+                let jsonChunks = jsonString.componentsSeparatedByString("\r\n") as String[]
 
-            let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding)
-            let jsonChunks = jsonString.componentsSeparatedByString("\r\n") as String[]
+                for chunk in jsonChunks {
+                    if chunk.utf16count == 0 {
+                        continue
+                    }
 
-            for chunk in jsonChunks {
-                if chunk.utf16count == 0 {
-                    continue
-                }
+                    let chunkData = chunk.dataUsingEncoding(NSUTF8StringEncoding)
 
-                let chunkData = chunk.dataUsingEncoding(NSUTF8StringEncoding)
-                jsonResult = NSJSONSerialization.JSONObjectWithData(chunkData, options: nil, error: &error)
 
-                if !error {
-                    downloadProgress?(json: jsonResult!, response: response)
+                    if let jsonResult: AnyObject = NSJSONSerialization.JSONObjectWithData(chunkData, options: nil, error: &error) {
+                        downloadProgress?(json: jsonResult, response: response)
+                    }
                 }
             }
         }

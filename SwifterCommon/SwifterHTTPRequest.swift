@@ -147,14 +147,12 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
                 }
                 else {
                     var error: NSError?
-                    var jsonData: NSData? = NSJSONSerialization.dataWithJSONObject(nonOAuthParameters, options: nil, error: &error)
-
-                    if error {
-                        println(error!.localizedDescription)
+                    if let jsonData: NSData = NSJSONSerialization.dataWithJSONObject(nonOAuthParameters, options: nil, error: &error)  {
+                        self.request!.setValue("application/json; charset=\(charset)", forHTTPHeaderField: "Content-Type")
+                        self.request!.HTTPBody = jsonData
                     }
                     else {
-                        self.request!.setValue("application/json; charset=\(charset)", forHTTPHeaderField: "Content-Type")
-                        self.request!.HTTPBody = jsonData!
+                        println(error!.localizedDescription)
                     }
                 }
             }
