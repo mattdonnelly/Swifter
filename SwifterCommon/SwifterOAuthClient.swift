@@ -46,6 +46,16 @@ class SwifterOAuthClient: SwifterClientProtocol  {
         self.stringEncoding = NSUTF8StringEncoding
     }
 
+    init(consumerKey: String, consumerSecret: String, accessToken: String, accessTokenSecret: String) {
+        self.consumerKey = consumerKey
+        self.consumerSecret = consumerSecret
+
+        let credentialAccessToken = SwifterCredential.OAuthAccessToken(key: accessToken, secret: accessTokenSecret)
+        self.credential = SwifterCredential(accessToken: credentialAccessToken)
+
+        self.stringEncoding = NSUTF8StringEncoding
+    }
+
     func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let url = NSURL(string: path, relativeToURL: baseURL)
         let method = "GET"

@@ -61,6 +61,17 @@ class Swifter {
 
     init(consumerKey: String, consumerSecret: String) {
         self.client = SwifterOAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
+
+        self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")
+        self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")
+        self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")
+        self.userStreamURL = NSURL(string: "https://userstream.twitter.com/1.1/")
+        self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")
+    }
+
+    init(consumerKey: String, consumerSecret: String, oauthToken: String, oauthTokenSecret: String) {
+        self.client = SwifterOAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret , accessToken: oauthToken, accessTokenSecret: oauthTokenSecret)
+
         self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")
         self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")
         self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")
@@ -70,6 +81,7 @@ class Swifter {
 
     init(account: ACAccount) {
         self.client = SwifterAccountsClient(account: account)
+
         self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")
         self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")
         self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")

@@ -37,6 +37,11 @@ class SwifterCredential {
         var screenName: String?
         var userID: String?
 
+        init(key: String, secret: String) {
+            self.key = key
+            self.secret = secret
+        }
+
         init(queryString: String) {
             var attributes = queryString.parametersFromQueryString()
 
