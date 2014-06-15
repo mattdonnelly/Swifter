@@ -14,7 +14,7 @@ Instantiation with ACAccount:
 
 `let swifter = Swifter(account: twitterAccount)`
 
-Instansiation with OAuth:
+Instantiation with OAuth:
 
 `let swifter = Swifter(consumerKey: "", consumerSecret: "")`
 
