@@ -6,7 +6,7 @@
 
 ###Installation
 
-If you're using Xcode 6, Swifter can be installed by simply dragging the Swifter Xcode project into your own project and adding either the SwifteriOS or SwifterMac framework as an embeded framework.
+If you're using Xcode 6, Swifter can be installed by simply dragging the Swifter Xcode project into your own project and adding either the SwifteriOS or SwifterMac framework as an embedded framework.
 
 ###Usage
 
@@ -14,7 +14,7 @@ Instantiation with ACAccount:
 
 `let swifter = Swifter(account: twitterAccount)`
 
-Instansiation with OAuth:
+Instantiation with OAuth:
 
 `let swifter = Swifter(consumerKey: "", consumerSecret: "")`
 
