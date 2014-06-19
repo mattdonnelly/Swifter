@@ -66,7 +66,7 @@ class Swifter {
 
     init(consumerKey: String, consumerSecret: String, appOnly: Bool) {
         if appOnly {
-            self.client = SwifterAppOnlyClient()
+            self.client = SwifterAppOnlyClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
         }
         else {
             self.client = SwifterOAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret)

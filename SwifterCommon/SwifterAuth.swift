@@ -90,8 +90,14 @@ extension Swifter {
                     failure?(error: error)
                 }
             }
+            else if let errors = json["errors"] as? Dictionary<String, AnyObject> {
+                var code: AnyObject = errors["code"]!
+                var message: AnyObject = errors["message"]!
+                let error = NSError(domain: SwifterError.domain, code: code as Int, userInfo: [NSLocalizedDescriptionKey: message as String]);
+                failure?(error: error)
+            }
             else {
-                let error = NSError(domain: "Swifter", code: SwifterError.appOnlyAuthenticationErrorCode, userInfo: [NSLocalizedDescriptionKey: "Cannot find JSON dictionary in response"]);
+                let error = NSError(domain: SwifterError.domain, code: SwifterError.appOnlyAuthenticationErrorCode, userInfo: [NSLocalizedDescriptionKey: "Cannot find JSON dictionary in response"]);
                 failure?(error: error)
             }
 

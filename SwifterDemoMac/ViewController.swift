@@ -75,21 +75,18 @@ class ViewController: NSViewController {
             }
         }
         else {
-            let swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
+            let swifter = Swifter(consumerKey: "", consumerSecret: "", appOnly: true)
 
-            swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success"), success: {
-                accessToken, response in
+            swifter.authorizeAppOnlyWithSuccess({
+                token, response in
 
-                println("Successfully authorized")
+                swifter.getTrendsAvailableWithSuccess({
+                    json, response in
 
-                swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
-                    statuses in
+                    println(json)
 
-                    println(statuses)
-                    
-                    },
-                    failure: failureHandler)
-                
+                    }, failure: failureHandler)
+
                 }, failure: failureHandler)
         }
     }

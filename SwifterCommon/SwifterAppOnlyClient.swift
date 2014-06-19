@@ -27,11 +27,16 @@ import Foundation
 
 class SwifterAppOnlyClient: SwifterClientProtocol  {
 
+    var consumerKey: String
+    var consumerSecret: String
+
     var credential: SwifterCredential?
 
     var dataEncoding: NSStringEncoding
 
-    init() {
+    init(consumerKey: String, consumerSecret: String) {
+        self.consumerKey = consumerKey
+        self.consumerSecret = consumerSecret
         self.dataEncoding = NSUTF8StringEncoding
     }
 
@@ -65,8 +70,20 @@ class SwifterAppOnlyClient: SwifterClientProtocol  {
         if let bearerToken = self.credential?.accessToken?.key {
             request.headers = ["Authorization": "Bearer \(bearerToken)"];
         }
+        else {
+            let basicCredentials = SwifterAppOnlyClient.base64EncodedCredentialsWithKey(self.consumerKey, secret: self.consumerSecret)
+            request.headers = ["Authorization": "Basic \(basicCredentials)"];
+        }
 
         request.start()
+    }
+
+    class func base64EncodedCredentialsWithKey(key: String, secret: String) -> String {
+        let encodedKey = key.urlEncodedStringWithEncoding(NSUTF8StringEncoding)
+        let encodedSecret = secret.urlEncodedStringWithEncoding(NSUTF8StringEncoding)
+        let bearerTokenCredentials = "\(encodedKey):\(encodedSecret)"
+        let data = bearerTokenCredentials.dataUsingEncoding(NSUTF8StringEncoding)
+        return data.base64EncodedStringWithOptions(nil)
     }
 
 }
