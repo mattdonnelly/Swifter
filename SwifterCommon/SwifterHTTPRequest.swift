@@ -53,6 +53,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
     var headers: Dictionary<String, String>
     var parameters: Dictionary<String, AnyObject>
+    var encodeParameters: Bool
 
     var uploadData: DataUpload[]
 
@@ -79,6 +80,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.HTTPMethod = method
         self.headers = [:]
         self.parameters = parameters
+        self.encodeParameters = false
         self.uploadData = []
         self.dataEncoding = NSUTF8StringEncoding
         self.timeoutInterval = 60
@@ -92,6 +94,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.HTTPMethod = request.HTTPMethod
         self.headers = [:]
         self.parameters = [:]
+        self.encodeParameters = false
         self.uploadData = []
         self.dataEncoding = NSUTF8StringEncoding
         self.timeoutInterval = 60
@@ -146,13 +149,20 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
                     self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
                 }
                 else {
-                    var error: NSError?
-                    if let jsonData: NSData = NSJSONSerialization.dataWithJSONObject(nonOAuthParameters, options: nil, error: &error)  {
-                        self.request!.setValue("application/json; charset=\(charset)", forHTTPHeaderField: "Content-Type")
-                        self.request!.HTTPBody = jsonData
+                    if self.encodeParameters {
+                        let queryString = nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding)
+                        self.request!.URL = self.URL.URLByAppendingQueryString(queryString)
+                        self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
                     }
                     else {
-                        println(error!.localizedDescription)
+                        var error: NSError?
+                        if let jsonData: NSData = NSJSONSerialization.dataWithJSONObject(nonOAuthParameters, options: nil, error: &error)  {
+                            self.request!.setValue("application/json; charset=\(charset)", forHTTPHeaderField: "Content-Type")
+                            self.request!.HTTPBody = jsonData
+                        }
+                        else {
+                            println(error!.localizedDescription)
+                        }
                     }
                 }
             }

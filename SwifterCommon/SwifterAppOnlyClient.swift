@@ -59,7 +59,7 @@ class SwifterAppOnlyClient: SwifterClientProtocol  {
 
     func post(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let url = NSURL(string: path, relativeToURL: baseURL)
-        let method = "GET"
+        let method = "POST"
 
         let request = SwifterHTTPRequest(URL: url, method: method, parameters: parameters)
         request.downloadProgressHandler = downloadProgress
@@ -73,6 +73,7 @@ class SwifterAppOnlyClient: SwifterClientProtocol  {
         else {
             let basicCredentials = SwifterAppOnlyClient.base64EncodedCredentialsWithKey(self.consumerKey, secret: self.consumerSecret)
             request.headers = ["Authorization": "Basic \(basicCredentials)"];
+            request.encodeParameters = true
         }
 
         request.start()
