@@ -29,14 +29,9 @@ class SwifterAppOnlyClient: SwifterClientProtocol  {
 
     var credential: SwifterCredential?
 
-    var consumerKey: String
-    var consumerSecret: String
-
     var dataEncoding: NSStringEncoding
 
-    init(consumerKey: String, consumerSecret: String) {
-        self.consumerKey = consumerKey
-        self.consumerSecret = consumerSecret
+    init() {
         self.dataEncoding = NSUTF8StringEncoding
     }
 

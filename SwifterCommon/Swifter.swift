@@ -60,8 +60,17 @@ class Swifter {
 
     var client: SwifterClientProtocol
 
-    init(consumerKey: String, consumerSecret: String) {
-        self.client = SwifterOAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
+    convenience init(consumerKey: String, consumerSecret: String) {
+        self.init(consumerKey: consumerKey, consumerSecret: consumerSecret, appOnly: false)
+    }
+
+    init(consumerKey: String, consumerSecret: String, appOnly: Bool) {
+        if appOnly {
+            self.client = SwifterAppOnlyClient()
+        }
+        else {
+            self.client = SwifterOAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
+        }
 
         self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")
         self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")

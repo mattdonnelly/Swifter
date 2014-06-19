@@ -71,13 +71,8 @@ extension Swifter {
         NSNotificationCenter.defaultCenter().postNotification(notification)
     }
 
-    func postOAuth2BearerTokenWithSuccess(success: TokenSuccessHandler?, failure: FailureHandler?) {
-        let path = "/oauth2/token"
-
-        var parameters = Dictionary<String, AnyObject>()
-        parameters["grant_type"] = "client_credentials"
-
-        self.jsonRequestWithPath(path, baseURL: self.apiURL, method: "POST", parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
+    func authorizeAppOnlyWithSuccess(success: TokenSuccessHandler?, failure: FailureHandler?) {
+        self.postOAuth2BearerTokenWithSuccess({
             json, response in
 
             if let tokenType = json["token_type"] as? String {
@@ -100,7 +95,16 @@ extension Swifter {
                 failure?(error: error)
             }
 
-            }, failure: failure)
+        }, failure: failure)
+    }
+
+    func postOAuth2BearerTokenWithSuccess(success: JSONSuccessHandler?, failure: FailureHandler?) {
+        let path = "/oauth2/token"
+
+        var parameters = Dictionary<String, AnyObject>()
+        parameters["grant_type"] = "client_credentials"
+
+        self.jsonRequestWithPath(path, baseURL: self.apiURL, method: "POST", parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
 
     func postOAuth2InvalidateBearerTokenWithSuccess(success: TokenSuccessHandler?, failure: FailureHandler?) {
