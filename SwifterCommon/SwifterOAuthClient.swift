@@ -38,12 +38,12 @@ class SwifterOAuthClient: SwifterClientProtocol  {
 
     var credential: SwifterCredential?
 
-    var stringEncoding: NSStringEncoding
+    var dataEncoding: NSStringEncoding
 
     init(consumerKey: String, consumerSecret: String) {
         self.consumerKey = consumerKey
         self.consumerSecret = consumerSecret
-        self.stringEncoding = NSUTF8StringEncoding
+        self.dataEncoding = NSUTF8StringEncoding
     }
 
     init(consumerKey: String, consumerSecret: String, accessToken: String, accessTokenSecret: String) {
@@ -53,7 +53,7 @@ class SwifterOAuthClient: SwifterClientProtocol  {
         let credentialAccessToken = SwifterCredential.OAuthAccessToken(key: accessToken, secret: accessTokenSecret)
         self.credential = SwifterCredential(accessToken: credentialAccessToken)
 
-        self.stringEncoding = NSUTF8StringEncoding
+        self.dataEncoding = NSUTF8StringEncoding
     }
 
     func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
@@ -65,7 +65,7 @@ class SwifterOAuthClient: SwifterClientProtocol  {
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
-        request.dataEncoding = self.stringEncoding
+        request.dataEncoding = self.dataEncoding
 
         request.start()
     }
@@ -98,7 +98,7 @@ class SwifterOAuthClient: SwifterClientProtocol  {
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
-        request.dataEncoding = self.stringEncoding
+        request.dataEncoding = self.dataEncoding
 
         if postData {
             let fileName = postDataFileName ? postDataFileName! as String : "media.jpg"
@@ -132,7 +132,7 @@ class SwifterOAuthClient: SwifterClientProtocol  {
 
         authorizationParameters["oauth_signature"] = self.oauthSignatureForMethod(method, url: url, parameters: finalParameters, accessToken: self.credential?.accessToken)
 
-        let authorizationParameterComponents = authorizationParameters.urlEncodedQueryStringWithEncoding(self.stringEncoding).componentsSeparatedByString("&") as String[]
+        let authorizationParameterComponents = authorizationParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding).componentsSeparatedByString("&") as String[]
         authorizationParameterComponents.sort { $0 < $1 }
 
         var headerComponents = String[]()
@@ -149,24 +149,24 @@ class SwifterOAuthClient: SwifterClientProtocol  {
     func oauthSignatureForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>, accessToken token: SwifterCredential.OAuthAccessToken?) -> String {
         var tokenSecret: NSString = ""
         if token {
-            tokenSecret = token!.secret.urlEncodedStringWithEncoding(self.stringEncoding)
+            tokenSecret = token!.secret.urlEncodedStringWithEncoding(self.dataEncoding)
         }
 
-        let encodedConsumerSecret = self.consumerSecret.urlEncodedStringWithEncoding(self.stringEncoding)
+        let encodedConsumerSecret = self.consumerSecret.urlEncodedStringWithEncoding(self.dataEncoding)
 
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"
-        let signingKeyData = signingKey.bridgeToObjectiveC().dataUsingEncoding(self.stringEncoding)
+        let signingKeyData = signingKey.bridgeToObjectiveC().dataUsingEncoding(self.dataEncoding)
 
-        let parameterComponents = parameters.urlEncodedQueryStringWithEncoding(self.stringEncoding).componentsSeparatedByString("&") as String[]
+        let parameterComponents = parameters.urlEncodedQueryStringWithEncoding(self.dataEncoding).componentsSeparatedByString("&") as String[]
         parameterComponents.sort { $0 < $1 }
 
         let parameterString = parameterComponents.bridgeToObjectiveC().componentsJoinedByString("&")
-        let encodedParameterString = parameterString.urlEncodedStringWithEncoding(self.stringEncoding)
+        let encodedParameterString = parameterString.urlEncodedStringWithEncoding(self.dataEncoding)
 
-        let encodedURL = url.absoluteString.urlEncodedStringWithEncoding(self.stringEncoding)
+        let encodedURL = url.absoluteString.urlEncodedStringWithEncoding(self.dataEncoding)
 
         let signatureBaseString = "\(method)&\(encodedURL)&\(encodedParameterString)"
-        let signatureBaseStringData = signatureBaseString.dataUsingEncoding(self.stringEncoding)
+        let signatureBaseStringData = signatureBaseString.dataUsingEncoding(self.dataEncoding)
         
         return HMACSHA1Signature.signatureForKey(signingKeyData, data: signatureBaseStringData).base64EncodedStringWithOptions(nil)
     }

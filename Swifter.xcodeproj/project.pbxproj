@@ -47,6 +47,8 @@
 		8B9F51561944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */; };
 		8B9F51571944A8DC00894629 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514C1944A8DC00894629 /* Swifter.swift */; };
 		8B9F51581944A8DC00894629 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514C1944A8DC00894629 /* Swifter.swift */; };
+		8BA50EC71953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50EC61953828A00FB1829 /* SwifterAppOnlyClient.swift */; };
+		8BA50EC81953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50EC61953828A00FB1829 /* SwifterAppOnlyClient.swift */; };
 		8BCB9329194B2E1200A998EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BCB9328194B2E1200A998EA /* Images.xcassets */; };
 		8BCF43171947450A00E63301 /* SwifterTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF43161947450A00E63301 /* SwifterTweets.swift */; };
 		8BCF43181947450A00E63301 /* SwifterTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF43161947450A00E63301 /* SwifterTweets.swift */; };
@@ -150,6 +152,7 @@
 		8B9F514A1944A8DC00894629 /* String+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Swifter.swift"; sourceTree = "<group>"; };
 		8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swifter-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B9F514C1944A8DC00894629 /* Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swifter.swift; sourceTree = "<group>"; };
+		8BA50EC61953828A00FB1829 /* SwifterAppOnlyClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAppOnlyClient.swift; sourceTree = "<group>"; };
 		8BCB9328194B2E1200A998EA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8BCF43161947450A00E63301 /* SwifterTweets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTweets.swift; sourceTree = "<group>"; };
 		8BCF431919475D3C00E63301 /* SwifterSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterSearch.swift; sourceTree = "<group>"; };
@@ -310,7 +313,6 @@
 			isa = PBXGroup;
 			children = (
 				8B9F514C1944A8DC00894629 /* Swifter.swift */,
-				8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */,
 				8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */,
 				8B548F581945325E00EE2927 /* SwifterAuth.swift */,
 				8B548F5B1945331D00EE2927 /* SwifterTimelines.swift */,
@@ -328,8 +330,10 @@
 				8BF1D67B1948882700E3AA64 /* SwifterSpam.swift */,
 				8B1F259E194A663D004BD304 /* SwifterHelp.swift */,
 				8B1F25A1194A7869004BD304 /* SwifterMedia.swift */,
+				8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */,
 				8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */,
 				8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */,
+				8BA50EC61953828A00FB1829 /* SwifterAppOnlyClient.swift */,
 				8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */,
 				8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */,
 				8B9F51481944A8DC00894629 /* HMACSHA1Signature.h */,
@@ -604,6 +608,7 @@
 				8BF1D67C1948882700E3AA64 /* SwifterSpam.swift in Sources */,
 				8BCF431A19475D3C00E63301 /* SwifterSearch.swift in Sources */,
 				8BCF432C1947CED700E63301 /* SwifterLists.swift in Sources */,
+				8BA50EC71953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */,
 				8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
 				8BF1D6791948839800E3AA64 /* SwifterPlaces.swift in Sources */,
 				8BCF43231947A6C800E63301 /* SwifterUsers.swift in Sources */,
@@ -637,6 +642,7 @@
 				8BF1D67D1948882700E3AA64 /* SwifterSpam.swift in Sources */,
 				8BCF431B19475D3C00E63301 /* SwifterSearch.swift in Sources */,
 				8BCF432D1947CED700E63301 /* SwifterLists.swift in Sources */,
+				8BA50EC81953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */,
 				8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
 				8BF1D67A1948839800E3AA64 /* SwifterPlaces.swift in Sources */,
 				8BCF43241947A6C800E63301 /* SwifterUsers.swift in Sources */,

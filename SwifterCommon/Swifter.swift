@@ -44,6 +44,7 @@ class Swifter {
 
     struct SwifterError {
         static let domain = "SwifterErrorDomain"
+        static let appOnlyAuthenticationErrorCode = 1
     }
 
     struct DataParameters {
