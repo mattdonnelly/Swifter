@@ -204,11 +204,41 @@ extension Swifter {
 
         While this endpoint allows a bit of customization for the final appearance of the embedded Tweet, be aware that the appearance of the rendered Tweet may change over time to be consistent with Twitter's Display Requirements. Do not rely on any class or id parameters to stay constant in the returned markup.
     */
-    func getStatusesOEmbedWithID(id: Int, url: NSURL, maxWidth: Int?, hideMedia: Bool?, hideThread: Bool?, omitScript: Bool?, align: String?, related: String?, lang: String?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func getStatusesOEmbedWithID(id: Int, maxWidth: Int?, hideMedia: Bool?, hideThread: Bool?, omitScript: Bool?, align: String?, related: String?, lang: String?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "statuses/oembed"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
+
+        if maxWidth {
+            parameters["max_width"] = maxWidth!
+        }
+        if hideMedia {
+            parameters["hide_media"] = hideMedia!
+        }
+        if hideThread {
+            parameters["hide_thread"] = hideThread!
+        }
+        if omitScript {
+            parameters["omit_scipt"] = omitScript!
+        }
+        if align {
+            parameters["align"] = align!
+        }
+        if related {
+            parameters["related"] = related!
+        }
+        if lang {
+            parameters["lang"] = lang!
+        }
+
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
+    }
+
+    func getStatusesOEmbedWithURL(url: NSURL, maxWidth: Int?, hideMedia: Bool?, hideThread: Bool?, omitScript: Bool?, align: String?, related: String?, lang: String?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+        let path = "statuses/oembed"
+
+        var parameters = Dictionary<String, AnyObject>()
         parameters["url"] = url
 
         if maxWidth {
