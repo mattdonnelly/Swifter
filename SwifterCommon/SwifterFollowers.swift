@@ -453,7 +453,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["ids"], json["previous_cursor"], json["next_cursor"]) {
+            switch (json["users"], json["previous_cursor"], json["next_cursor"]) {
             case (let users, let previousCursor, let nextCursor):
                 success?(users: users as? Dictionary<String, AnyObject>[], previousCursor: previousCursor as? Int, nextCursor: nextCursor as? Int)
             default:
@@ -485,7 +485,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["ids"], json["previous_cursor"], json["next_cursor"]) {
+            switch (json["users"], json["previous_cursor"], json["next_cursor"]) {
             case (let users, let previousCursor, let nextCursor):
                 success?(users: users as? Dictionary<String, AnyObject>[], previousCursor: previousCursor as? Int, nextCursor: nextCursor as? Int)
             default:
@@ -524,7 +524,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["ids"], json["previous_cursor"], json["next_cursor"]) {
+            switch (json["users"], json["previous_cursor"], json["next_cursor"]) {
             case (let users, let previousCursor, let nextCursor):
                 success?(users: users as? Dictionary<String, AnyObject>[], previousCursor: previousCursor as? Int, nextCursor: nextCursor as? Int)
             default:
@@ -556,7 +556,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["ids"], json["previous_cursor"], json["next_cursor"]) {
+            switch (json["users"], json["previous_cursor"], json["next_cursor"]) {
             case (let users, let previousCursor, let nextCursor):
                 success?(users: users as? Dictionary<String, AnyObject>[], previousCursor: previousCursor as? Int, nextCursor: nextCursor as? Int)
             default:
