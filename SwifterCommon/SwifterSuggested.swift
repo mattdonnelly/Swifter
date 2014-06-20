@@ -34,7 +34,7 @@ extension Swifter {
 
         It is recommended that applications cache this data for no more than one hour.
     */
-    func getUsersSuggestionsWithSlug(slug: String, lang: String?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func getUsersSuggestionsWithSlug(slug: String, lang: String?, success: ((users: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
         let path = "users/suggestions/\(slug).json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -42,7 +42,13 @@ extension Swifter {
             parameters["lang"] = lang!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
+            json, response in
+
+            success?(users: json as? Dictionary<String, AnyObject>[])
+            return
+
+            }, failure: failure)
     }
 
     /*
@@ -50,7 +56,7 @@ extension Swifter {
 
         Access to Twitter's suggested user list. This returns the list of suggested user categories. The category can be used in GET users/suggestions/:slug to get the users in that category.
     */
-    func getUsersSuggestionsWithLang(lang: String?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func getUsersSuggestionsWithLang(lang: String?, success: ((users: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
         let path = "users/suggestions.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -58,7 +64,13 @@ extension Swifter {
             parameters["lang"] = lang!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
+            json, response in
+
+            success?(users: json as? Dictionary<String, AnyObject>[])
+            return
+
+            }, failure: failure)
     }
 
     /*
@@ -66,10 +78,16 @@ extension Swifter {
 
         Access the users in a given category of the Twitter suggested user list and return their most recent status if they are not a protected user.
     */
-    func getUsersSuggestionsForSlugMembers(slug: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func getUsersSuggestionsForSlugMembers(slug: String, success: ((users: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
         let path = "users/suggestions/\(slug)/members.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+            json, response in
+
+            success?(users: json as? Dictionary<String, AnyObject>[])
+            return
+
+            }, failure: failure)
     }
 
 }
