@@ -79,18 +79,21 @@ class SwifterOAuthClient: SwifterClientProtocol  {
         var postData: NSData?
         var postDataKey: String?
 
-        if let key : AnyObject = localParameters[Swifter.DataParameters.dataKey] {
-            postDataKey = key as? String
-            postData = localParameters[postDataKey!] as? NSData
+        if let key: AnyObject = localParameters[Swifter.DataParameters.dataKey] {
+            if let keyString = key as? String {
+                postData = localParameters[postDataKey!] as? NSData
 
-            localParameters.removeValueForKey(Swifter.DataParameters.dataKey)
-            localParameters.removeValueForKey(postDataKey!)
+                localParameters.removeValueForKey(Swifter.DataParameters.dataKey)
+                localParameters.removeValueForKey(postDataKey!)
+            }
         }
 
         var postDataFileName: String?
-        if let fileName : AnyObject = localParameters[Swifter.DataParameters.fileNameKey] {
-            postDataFileName = fileName as? String
-            localParameters.removeValueForKey(postDataFileName!)
+        if let fileName: AnyObject = localParameters[Swifter.DataParameters.fileNameKey] {
+            if let fileNameString = fileName as? String {
+                postDataFileName = fileNameString
+                localParameters.removeValueForKey(fileNameString)
+            }
         }
 
         let request = SwifterHTTPRequest(URL: url, method: method, parameters: localParameters)
