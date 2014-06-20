@@ -91,8 +91,8 @@ extension Swifter {
                 }
             }
             else if let errors = json["errors"] as? Dictionary<String, AnyObject> {
-                var code: AnyObject = errors["code"]!
-                var message: AnyObject = errors["message"]!
+                let code: AnyObject = errors["code"]!
+                let message: AnyObject = errors["message"]!
                 let error = NSError(domain: SwifterError.domain, code: code as Int, userInfo: [NSLocalizedDescriptionKey: message as String]);
                 failure?(error: error)
             }
