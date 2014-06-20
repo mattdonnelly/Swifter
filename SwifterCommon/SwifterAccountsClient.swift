@@ -38,13 +38,9 @@ class SwifterAccountsClient: SwifterClientProtocol {
     func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let url = NSURL(string: path, relativeToURL: baseURL)
 
-        var localParameters = Dictionary<String, String>()
+        var stringifiedParameters = SwifterAccountsClient.convertDictionaryValuesToStrings(parameters)
 
-        for (key, value: AnyObject) in parameters {
-            localParameters[key] = "\(value)"
-        }
-
-        let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: url, parameters: localParameters)
+        let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: url, parameters: stringifiedParameters)
         socialRequest.account = self.credential!.account!
 
         let request = SwifterHTTPRequest(request: socialRequest.preparedURLRequest())
@@ -59,33 +55,31 @@ class SwifterAccountsClient: SwifterClientProtocol {
     func post(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let url = NSURL(string: path, relativeToURL: baseURL)
 
-        var localParameters = parameters
+        var params = parameters
 
         var postData: NSData?
         var postDataKey: String?
 
-        if let key: AnyObject = localParameters[Swifter.DataParameters.dataKey] {
+        if let key: AnyObject = params[Swifter.DataParameters.dataKey] {
             if let keyString = key as? String {
-                postData = localParameters[postDataKey!] as? NSData
+                postData = params[postDataKey!] as? NSData
 
-                localParameters.removeValueForKey(Swifter.DataParameters.dataKey)
-                localParameters.removeValueForKey(postDataKey!)
+                params.removeValueForKey(Swifter.DataParameters.dataKey)
+                params.removeValueForKey(postDataKey!)
             }
         }
 
         var postDataFileName: String?
-        if let fileName: AnyObject = localParameters[Swifter.DataParameters.fileNameKey] {
+        if let fileName: AnyObject = params[Swifter.DataParameters.fileNameKey] {
             if let fileNameString = fileName as? String {
                 postDataFileName = fileNameString
-                localParameters.removeValueForKey(fileNameString)
+                params.removeValueForKey(fileNameString)
             }
         }
 
-        for (key, value: AnyObject) in localParameters {
-            localParameters[key] = "\(value)"
-        }
+        var stringifiedParameters = SwifterAccountsClient.convertDictionaryValuesToStrings(params)
 
-        let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.POST, URL: url, parameters: localParameters)
+        let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.POST, URL: url, parameters: stringifiedParameters)
         socialRequest.account = self.credential!.account!
 
         if postData {
@@ -101,6 +95,16 @@ class SwifterAccountsClient: SwifterClientProtocol {
         request.failureHandler = failure
         
         request.start()
+    }
+
+    class func convertDictionaryValuesToStrings(dictionary: Dictionary<String, AnyObject>) -> Dictionary<String, String> {
+        var result = Dictionary<String, String>()
+
+        for (key, value: AnyObject) in dictionary {
+            result[key] = "\(value)"
+        }
+
+        return result
     }
 
 }
