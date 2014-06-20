@@ -60,7 +60,7 @@ class ViewController: NSViewController {
                             let swifter = Swifter(account: twitterAccount)
 
                             swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
-                                statuses, response in
+                                statuses in
 
                                 println(statuses)
 
