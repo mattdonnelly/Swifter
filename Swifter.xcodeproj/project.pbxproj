@@ -47,6 +47,8 @@
 		8B9F51581944A8DC00894629 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514C1944A8DC00894629 /* Swifter.swift */; };
 		8BA50EC71953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50EC61953828A00FB1829 /* SwifterAppOnlyClient.swift */; };
 		8BA50EC81953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50EC61953828A00FB1829 /* SwifterAppOnlyClient.swift */; };
+		8BC32D3D1955EEE100FF75A0 /* SwifterTrends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC32D3C1955EEE100FF75A0 /* SwifterTrends.swift */; };
+		8BC32D3E1955EEE100FF75A0 /* SwifterTrends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC32D3C1955EEE100FF75A0 /* SwifterTrends.swift */; };
 		8BCB9329194B2E1200A998EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BCB9328194B2E1200A998EA /* Images.xcassets */; };
 		8BCF43171947450A00E63301 /* SwifterTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF43161947450A00E63301 /* SwifterTweets.swift */; };
 		8BCF43181947450A00E63301 /* SwifterTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF43161947450A00E63301 /* SwifterTweets.swift */; };
@@ -150,6 +152,7 @@
 		8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swifter-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B9F514C1944A8DC00894629 /* Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swifter.swift; sourceTree = "<group>"; };
 		8BA50EC61953828A00FB1829 /* SwifterAppOnlyClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAppOnlyClient.swift; sourceTree = "<group>"; };
+		8BC32D3C1955EEE100FF75A0 /* SwifterTrends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTrends.swift; sourceTree = "<group>"; };
 		8BCB9328194B2E1200A998EA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8BCF43161947450A00E63301 /* SwifterTweets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTweets.swift; sourceTree = "<group>"; };
 		8BCF431919475D3C00E63301 /* SwifterSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterSearch.swift; sourceTree = "<group>"; };
@@ -324,6 +327,7 @@
 				8BCF432B1947CED700E63301 /* SwifterLists.swift */,
 				8BF1D6751948825D00E3AA64 /* SwifterSavedSearches.swift */,
 				8BF1D6781948839800E3AA64 /* SwifterPlaces.swift */,
+				8BC32D3C1955EEE100FF75A0 /* SwifterTrends.swift */,
 				8BF1D67B1948882700E3AA64 /* SwifterSpam.swift */,
 				8B1F259E194A663D004BD304 /* SwifterHelp.swift */,
 				8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */,
@@ -607,6 +611,7 @@
 				8BA50EC71953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */,
 				8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
 				8BF1D6791948839800E3AA64 /* SwifterPlaces.swift in Sources */,
+				8BC32D3D1955EEE100FF75A0 /* SwifterTrends.swift in Sources */,
 				8BCF43231947A6C800E63301 /* SwifterUsers.swift in Sources */,
 				8B9F514D1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */,
 				8B552D2A194643CF0052EB86 /* NSURL+Swifter.swift in Sources */,
@@ -640,6 +645,7 @@
 				8BA50EC81953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */,
 				8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
 				8BF1D67A1948839800E3AA64 /* SwifterPlaces.swift in Sources */,
+				8BC32D3E1955EEE100FF75A0 /* SwifterTrends.swift in Sources */,
 				8BCF43241947A6C800E63301 /* SwifterUsers.swift in Sources */,
 				8B9F514E1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */,
 				8B552D2B194643CF0052EB86 /* NSURL+Swifter.swift in Sources */,
