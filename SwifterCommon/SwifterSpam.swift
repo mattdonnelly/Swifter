@@ -32,22 +32,34 @@ extension Swifter {
 
     Report the specified user as a spam account to Twitter. Additionally performs the equivalent of POST blocks/create on behalf of the authenticated user.
     */
-    func postUsersReportSpamWithScreenName(screenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func postUsersReportSpamWithScreenName(screenName: String, success: ((user: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "users/report_spam.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+            json, response in
+
+            success?(user: json as? Dictionary<String, AnyObject>)
+            return
+
+            }, failure: failure)
     }
 
-    func postUsersReportSpamWithScreenName(userID: Int, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func postUsersReportSpamWithScreenName(userID: Int, success: ((user: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "users/report_spam.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["user_id"] = userID
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+            json, response in
+
+            success?(user: json as? Dictionary<String, AnyObject>)
+            return
+
+            }, failure: failure)
     }
     
 }

@@ -34,10 +34,16 @@ extension Swifter {
 
     It is recommended applications request this endpoint when they are loaded, but no more than once a day.
     */
-    func getHelpConfigurationWithSuccess(success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func getHelpConfigurationWithSuccess(success: ((config: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "help/configuration.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+            json, response in
+
+            success?(config: json as? Dictionary<String, AnyObject>)
+            return
+
+            }, failure: failure)
     }
 
     /*
@@ -45,10 +51,16 @@ extension Swifter {
 
     Returns the list of languages supported by Twitter along with their ISO 639-1 code. The ISO 639-1 code is the two letter value to use if you include lang with any of your requests.
     */
-    func getHelpLanguagesWithSuccess(success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func getHelpLanguagesWithSuccess(success: ((languages: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
         let path = "help/languages.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+            json, response in
+
+            success?(languages: json as? Dictionary<String, AnyObject>[])
+            return
+
+            }, failure: failure)
     }
 
     /*
@@ -56,10 +68,20 @@ extension Swifter {
 
     Returns Twitter's Privacy Policy.
     */
-    func getHelpPrivacyWithSuccess(success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func getHelpPrivacyWithSuccess(success: ((privacy: String?) -> Void)?, failure: FailureHandler?) {
         let path = "help/privacy.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+            json, response in
+
+            if let privacy: AnyObject = json["privacy"] {
+                success?(privacy: privacy as? String)
+            }
+            else {
+                success?(privacy: nil)
+            }
+
+            }, failure: failure)
     }
 
     /*
@@ -67,10 +89,20 @@ extension Swifter {
 
     Returns the Twitter Terms of Service in the requested format. These are not the same as the Developer Rules of the Road.
     */
-    func getHelpTermsOfServiceWithSuccess(success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func getHelpTermsOfServiceWithSuccess(success: ((tos: String?) -> Void)?, failure: FailureHandler?) {
         let path = "help/tos.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+            json, response in
+
+            if let tos: AnyObject = json["tos"] {
+                success?(tos: tos as? String)
+            }
+            else {
+                success?(tos: nil)
+            }
+
+            }, failure: failure)
     }
 
     /*
@@ -88,13 +120,19 @@ extension Swifter {
 
     Read more about REST API Rate Limiting in v1.1 and review the limits.
     */
-    func getRateLimitsForResources(resources: String[], success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func getRateLimitsForResources(resources: String[], success: ((rateLimitStatus: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "application/rate_limit_status.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["resources"] = resources.bridgeToObjectiveC().componentsJoinedByString(",")
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+            json, response in
+
+            success?(rateLimitStatus: json as? Dictionary<String, AnyObject>)
+            return
+
+            }, failure: failure)
     }
     
 }
