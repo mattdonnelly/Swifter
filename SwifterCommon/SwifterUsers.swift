@@ -28,9 +28,9 @@ import Foundation
 extension Swifter {
 
     /*
-        GET    account/settings
+    GET    account/settings
 
-        Returns settings (including current trend, geo and sleep time information) for the authenticating user.
+    Returns settings (including current trend, geo and sleep time information) for the authenticating user.
     */
     func getAccountSettingsWithSuccess(success: ((settings: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "account/settings.json"
@@ -45,9 +45,9 @@ extension Swifter {
     }
 
     /*
-        GET	account/verify_credentials
+    GET	account/verify_credentials
 
-        Returns an HTTP 200 OK response code and a representation of the requesting user if authentication was successful; returns a 401 status code and an error message if not. Use this method to test if supplied user credentials are valid.
+    Returns an HTTP 200 OK response code and a representation of the requesting user if authentication was successful; returns a 401 status code and an error message if not. Use this method to test if supplied user credentials are valid.
     */
     func getAccountVerifyCredentials(includeEntities: Bool?, skipStatus: Bool?, success: ((myInfo: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "account/verify_credentials.json"
@@ -70,9 +70,9 @@ extension Swifter {
     }
 
     /*
-        POST	account/settings
+    POST	account/settings
 
-        Updates the authenticating user's settings.
+    Updates the authenticating user's settings.
     */
     func postAccountSettings(trendLocationWOEID: Int?, sleepTimeEnabled: Bool?, startSleepTime: Int?, endSleepTime: Int?, timeZone: String?, lang: String?, success: ((settings: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         assert(trendLocationWOEID || sleepTimeEnabled || startSleepTime || endSleepTime || timeZone || lang, "At least one or more should be provided when executing this request")
@@ -109,9 +109,9 @@ extension Swifter {
     }
 
     /*
-        POST	account/update_delivery_device
+    POST	account/update_delivery_device
 
-        Sets which device Twitter delivers updates to for the authenticating user. Sending none as the device parameter will disable SMS updates.
+    Sets which device Twitter delivers updates to for the authenticating user. Sending none as the device parameter will disable SMS updates.
     */
     func postAccountUpdateDeliveryDeviceSMS(device: Bool, includeEntities: Bool?, success: ((deliveryDeviceSettings: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "account/update_delivery_device.json"
@@ -137,9 +137,9 @@ extension Swifter {
     }
 
     /*
-        POST	account/update_profile
+    POST	account/update_profile
 
-        Sets values that users are able to set under the "Account" tab of their settings page. Only the parameters specified will be updated.
+    Sets values that users are able to set under the "Account" tab of their settings page. Only the parameters specified will be updated.
     */
     func postAccountUpdateProfileWithName(name: String?, url: String?, location: String?, description: String?, includeEntities: Bool?, skipStatus: Bool?, success: ((profile: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         assert(name || url || location || description || includeEntities || skipStatus)
@@ -176,9 +176,9 @@ extension Swifter {
     }
 
     /*
-        POST	account/update_profile_background_image
+    POST	account/update_profile_background_image
 
-        Updates the authenticating user's profile background image. This method can also be used to enable or disable the profile background image. Although each parameter is marked as optional, at least one of image, tile or use must be provided when making this request.
+    Updates the authenticating user's profile background image. This method can also be used to enable or disable the profile background image. Although each parameter is marked as optional, at least one of image, tile or use must be provided when making this request.
     */
     func postAccountUpdateProfileBackgroundImage(imageData: NSData?, title: String?, includeEntities: Bool?, use: Bool?, success: ((profile: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         assert(imageData || title || use, "At least one of image, tile or use must be provided when making this request")
@@ -209,9 +209,9 @@ extension Swifter {
     }
 
     /*
-        POST	account/update_profile_colors
+    POST	account/update_profile_colors
 
-        Sets one or more hex values that control the color scheme of the authenticating user's profile page on twitter.com. Each parameter's value must be a valid hexidecimal value, and may be either three or six characters (ex: #fff or #ffffff).
+    Sets one or more hex values that control the color scheme of the authenticating user's profile page on twitter.com. Each parameter's value must be a valid hexidecimal value, and may be either three or six characters (ex: #fff or #ffffff).
     */
     func postUpdateAccountProfileColors(profileBackgroundColor: String?, profileLinkColor: String?, profileSidebarBorderColor: String?, profileSidebarFillColor: String?, profileTextColor: String?, includeEntities: Bool?, skipStatus: Bool?, success: ((profile: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler) {
         let path = "account/update_profile_colors.json"
@@ -250,11 +250,11 @@ extension Swifter {
     }
 
     /*
-        POST	account/update_profile_image
+    POST	account/update_profile_image
 
-        Updates the authenticating user's profile image. Note that this method expects raw multipart data, not a URL to an image.
+    Updates the authenticating user's profile image. Note that this method expects raw multipart data, not a URL to an image.
 
-        This method asynchronously processes the uploaded file before updating the user's profile image URL. You can either update your local cache the next time you request the user's information, or, at least 5 seconds after uploading the image, ask for the updated URL using GET users/show.
+    This method asynchronously processes the uploaded file before updating the user's profile image URL. You can either update your local cache the next time you request the user's information, or, at least 5 seconds after uploading the image, ask for the updated URL using GET users/show.
     */
     func postAccountUpdateProfileImage(imageData: NSData?, includeEntities: Bool?, skipStatus: Bool?, success: ((profile: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "account/update_profile_image.json"
@@ -280,9 +280,9 @@ extension Swifter {
     }
 
     /*
-        GET    blocks/list
+    GET    blocks/list
 
-        Returns a collection of user objects that the authenticating user is blocking.
+    Returns a collection of user objects that the authenticating user is blocking.
     */
     func getBlockListWithIncludeEntities(includeEntities: Bool?, skipStatus: Bool?, cursor: Int?, success: ((users: Dictionary<String, AnyObject>[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "blocks/list.json"
@@ -312,9 +312,9 @@ extension Swifter {
     }
 
     /*
-        GET    blocks/ids
+    GET    blocks/ids
 
-        Returns an array of numeric user ids the authenticating user is blocking.
+    Returns an array of numeric user ids the authenticating user is blocking.
     */
     func getBlockIDsWithStingifyIDs(stringifyIDs: String?, cursor: Int?, success: ((ids: Int[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler) {
         let path = "blocks/ids.json"
@@ -341,9 +341,9 @@ extension Swifter {
     }
 
     /*
-        POST	blocks/create
+    POST	blocks/create
 
-        Blocks the specified user from following the authenticating user. In addition the blocked user will not show in the authenticating users mentions or timeline (unless retweeted by another user). If a follow or friend relationship exists it is destroyed.
+    Blocks the specified user from following the authenticating user. In addition the blocked user will not show in the authenticating users mentions or timeline (unless retweeted by another user). If a follow or friend relationship exists it is destroyed.
     */
     func postBlocksCreateWithScreenName(screenName: String, includeEntities: Bool?, skipStatus: Bool?, success: ((user: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler) {
         let path = "blocks/create.json"
@@ -390,9 +390,9 @@ extension Swifter {
     }
 
     /*
-        POST	blocks/destroy
+    POST	blocks/destroy
 
-        Un-blocks the user specified in the ID parameter for the authenticating user. Returns the un-blocked user in the requested format when successful. If relationships existed before the block was instated, they will not be restored.
+    Un-blocks the user specified in the ID parameter for the authenticating user. Returns the un-blocked user in the requested format when successful. If relationships existed before the block was instated, they will not be restored.
     */
     func postDestroyBlocksWithUserID(userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: ((user: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler) {
         let path = "blocks/destroy.json"
@@ -439,21 +439,21 @@ extension Swifter {
     }
 
     /*
-        GET    users/lookup
+    GET    users/lookup
 
-        Returns fully-hydrated user objects for up to 100 users per request, as specified by comma-separated values passed to the user_id and/or screen_name parameters.
+    Returns fully-hydrated user objects for up to 100 users per request, as specified by comma-separated values passed to the user_id and/or screen_name parameters.
 
-        This method is especially useful when used in conjunction with collections of user IDs returned from GET friends/ids and GET followers/ids.
+    This method is especially useful when used in conjunction with collections of user IDs returned from GET friends/ids and GET followers/ids.
 
-        GET users/show is used to retrieve a single user object.
+    GET users/show is used to retrieve a single user object.
 
-        There are a few things to note when using this method.
+    There are a few things to note when using this method.
 
-        - You must be following a protected user to be able to see their most recent status update. If you don't follow a protected user their status will be removed.
-        - The order of user IDs or screen names may not match the order of users in the returned array.
-        - If a requested user is unknown, suspended, or deleted, then that user will not be returned in the results list.
-        - If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown.
-        - You are strongly encouraged to use a POST for larger requests.
+    - You must be following a protected user to be able to see their most recent status update. If you don't follow a protected user their status will be removed.
+    - The order of user IDs or screen names may not match the order of users in the returned array.
+    - If a requested user is unknown, suspended, or deleted, then that user will not be returned in the results list.
+    - If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown.
+    - You are strongly encouraged to use a POST for larger requests.
     */
     func getUsersLookupWithScreenNames(screenNames: String[], includeEntities: Bool?, success: ((users: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler) {
         let path = "users/lookup.json"
@@ -494,11 +494,11 @@ extension Swifter {
     }
 
     /*
-        GET    users/show
+    GET    users/show
 
-        Returns a variety of information about the user specified by the required user_id or screen_name parameter. The author's most recent Tweet will be returned inline when possible. GET users/lookup is used to retrieve a bulk collection of user objects.
+    Returns a variety of information about the user specified by the required user_id or screen_name parameter. The author's most recent Tweet will be returned inline when possible. GET users/lookup is used to retrieve a bulk collection of user objects.
 
-        You must be following a protected user to be able to see their most recent Tweet. If you don't follow a protected user, the users Tweet will be removed. A Tweet will not always be returned in the current_status field.
+    You must be following a protected user to be able to see their most recent Tweet. If you don't follow a protected user, the users Tweet will be removed. A Tweet will not always be returned in the current_status field.
     */
     func getUsersShowWithScreenName(screenName: String, includeEntities: Bool?, success: ((user: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler) {
         let path = "users/show.json"
@@ -539,11 +539,11 @@ extension Swifter {
     }
 
     /*
-        GET    users/search
+    GET    users/search
 
-        Provides a simple, relevance-based search interface to public user accounts on Twitter. Try querying by topical interest, full name, company name, location, or other criteria. Exact match searches are not supported.
+    Provides a simple, relevance-based search interface to public user accounts on Twitter. Try querying by topical interest, full name, company name, location, or other criteria. Exact match searches are not supported.
 
-        Only the first 1,000 matching results are available.
+    Only the first 1,000 matching results are available.
     */
     func getUsersSearchWithQuery(q: String, page: Int?, count: Int?, includeEntities: Bool?, success: ((users: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler) {
         let path = "users/search/json"
@@ -620,9 +620,9 @@ extension Swifter {
     }
 
     /*
-        GET    users/contributors
+    GET    users/contributors
 
-        Returns a collection of users who can contribute to the specified account.
+    Returns a collection of users who can contribute to the specified account.
     */
     func getUsersContributorsWithUserID(id: Int, includeEntities: Bool?, skipStatus: Bool?, success: ((users: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
         let path = "users/contributors.json"
@@ -669,9 +669,9 @@ extension Swifter {
     }
 
     /*
-        POST   account/remove_profile_banner
+    POST   account/remove_profile_banner
 
-        Removes the uploaded profile banner for the authenticating user. Returns HTTP 200 upon success.
+    Removes the uploaded profile banner for the authenticating user. Returns HTTP 200 upon success.
     */
     func postAccountRemoveProfileBannerWithSuccess(success: ((response: AnyObject) -> Void)?, failure: FailureHandler?) {
         let path = "account/remove_profile_banner.json"
@@ -686,18 +686,18 @@ extension Swifter {
     }
 
     /*
-        POST    account/update_profile_banner
+    POST    account/update_profile_banner
 
-        Uploads a profile banner on behalf of the authenticating user. For best results, upload an <5MB image that is exactly 1252px by 626px. Images will be resized for a number of display options. Users with an uploaded profile banner will have a profile_banner_url node in their Users objects. More information about sizing variations can be found in User Profile Images and Banners and GET users/profile_banner.
+    Uploads a profile banner on behalf of the authenticating user. For best results, upload an <5MB image that is exactly 1252px by 626px. Images will be resized for a number of display options. Users with an uploaded profile banner will have a profile_banner_url node in their Users objects. More information about sizing variations can be found in User Profile Images and Banners and GET users/profile_banner.
 
-        Profile banner images are processed asynchronously. The profile_banner_url and its variant sizes will not necessary be available directly after upload.
+    Profile banner images are processed asynchronously. The profile_banner_url and its variant sizes will not necessary be available directly after upload.
 
-        If providing any one of the height, width, offset_left, or offset_top parameters, you must provide all of the sizing parameters.
+    If providing any one of the height, width, offset_left, or offset_top parameters, you must provide all of the sizing parameters.
 
-        HTTP Response Codes
-        200, 201, 202	Profile banner image succesfully uploaded
-        400	Either an image was not provided or the image data could not be processed
-        422	The image could not be resized or is too large.
+    HTTP Response Codes
+    200, 201, 202	Profile banner image succesfully uploaded
+    400	Either an image was not provided or the image data could not be processed
+    422	The image could not be resized or is too large.
     */
     func postAccountUpdateProfileBannerWithImageData(imageData: NSData?, width: Int?, height: Int?, offsetLeft: Int?, offsetTop: Int?, success: ((response: AnyObject) -> Void)?, failure: FailureHandler?) {
         let path = "account/update_profile_banner.json"
@@ -729,13 +729,13 @@ extension Swifter {
     }
 
     /*
-        GET    users/profile_banner
+    GET    users/profile_banner
 
-        Returns a map of the available size variations of the specified user's profile banner. If the user has not uploaded a profile banner, a HTTP 404 will be served instead. This method can be used instead of string manipulation on the profile_banner_url returned in user objects as described in User Profile Images and Banners.
+    Returns a map of the available size variations of the specified user's profile banner. If the user has not uploaded a profile banner, a HTTP 404 will be served instead. This method can be used instead of string manipulation on the profile_banner_url returned in user objects as described in User Profile Images and Banners.
     */
     func getUsersProfileBannerWithUserID(userID: Int, success: ((response: AnyObject) -> Void)?, failure: FailureHandler?) {
         let path = "users/profile_banner.json"
-        
+
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
@@ -746,13 +746,13 @@ extension Swifter {
     }
 
     /*
-        POST   mutes/users/create
+    POST   mutes/users/create
 
-        Mutes the user specified in the ID parameter for the authenticating user.
+    Mutes the user specified in the ID parameter for the authenticating user.
 
-        Returns the muted user in the requested format when successful. Returns a string describing the failure condition when unsuccessful.
+    Returns the muted user in the requested format when successful. Returns a string describing the failure condition when unsuccessful.
 
-        Actions taken in this method are asynchronous and changes will be eventually consistent.
+    Actions taken in this method are asynchronous and changes will be eventually consistent.
     */
     func postMutesUsersCreateForScreenName(screenName: String, success: ((user: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "mutes/users/create.json"
@@ -785,13 +785,13 @@ extension Swifter {
     }
 
     /*
-        POST   mutes/users/destroy
+    POST   mutes/users/destroy
 
-        Un-mutes the user specified in the ID parameter for the authenticating user.
+    Un-mutes the user specified in the ID parameter for the authenticating user.
 
-        Returns the unmuted user in the requested format when successful. Returns a string describing the failure condition when unsuccessful.
+    Returns the unmuted user in the requested format when successful. Returns a string describing the failure condition when unsuccessful.
 
-        Actions taken in this method are asynchronous and changes will be eventually consistent.
+    Actions taken in this method are asynchronous and changes will be eventually consistent.
     */
     func postMutesUsersDestroyForScreenName(screenName: String, success: ((user: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "mutes/users/destroy.json"
@@ -824,9 +824,9 @@ extension Swifter {
     }
 
     /*
-        GET    mutes/users/ids
+    GET    mutes/users/ids
 
-        Returns an array of numeric user ids the authenticating user has muted.
+    Returns an array of numeric user ids the authenticating user has muted.
     */
     func getMutesUsersIDsWithCursor(cursor: Int?, success: ((ids: Int[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "mutes/users/ids.json"
@@ -848,15 +848,15 @@ extension Swifter {
 
             }, failure: failure)
     }
-
+    
     /*
-        GET    mutes/users/list
-
-        Returns an array of user objects the authenticating user has muted.
+    GET    mutes/users/list
+    
+    Returns an array of user objects the authenticating user has muted.
     */
     func getMutesUsersListWithCursor(cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: ((users: Dictionary<String, AnyObject>[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "mutes/users/list.json"
-
+        
         var parameters = Dictionary<String, AnyObject>()
         if includeEntities {
             parameters["include_entities"] = includeEntities!
@@ -867,18 +867,18 @@ extension Swifter {
         if cursor {
             parameters["cursor"] = cursor!
         }
-
+        
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
-
+            
             switch (json["users"], json["previous_cursor"], json["next_cursor"]) {
             case (let users, let previousCursor, let nextCursor):
                 success?(users: users as? Dictionary<String, AnyObject>[], previousCursor: previousCursor as? Int, nextCursor: nextCursor as? Int)
             default:
                 success?(users: nil, previousCursor: nil, nextCursor: nil)
             }
-
+            
             }, failure: failure)
     }
-
+    
 }

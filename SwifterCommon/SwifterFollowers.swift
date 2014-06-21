@@ -28,9 +28,9 @@ import Foundation
 extension Swifter {
 
     /*
-        GET    friendships/no_retweets/ids
+    GET    friendships/no_retweets/ids
 
-        Returns a collection of user_ids that the currently authenticated user does not want to receive retweets from. Use POST friendships/update to set the "no retweets" status for a given user account on behalf of the current user.
+    Returns a collection of user_ids that the currently authenticated user does not want to receive retweets from. Use POST friendships/update to set the "no retweets" status for a given user account on behalf of the current user.
     */
     func getFriendshipsNoRetweetsIDsWithStringifyIDs(stringifyIDs: Bool?, success: ((ids: Int[]?) -> Void)?, failure: FailureHandler?) {
         let path = "friendships/no_retweets/ids.json"
@@ -48,14 +48,14 @@ extension Swifter {
     }
 
     /*
-        GET    friends/ids
-        Returns Users (*: user IDs for followees)
+    GET    friends/ids
+    Returns Users (*: user IDs for followees)
 
-        Returns a cursored collection of user IDs for every user the specified user is following (otherwise known as their "friends").
+    Returns a cursored collection of user IDs for every user the specified user is following (otherwise known as their "friends").
 
-        At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 5,000 user IDs and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests. See Using cursors to navigate collections for more information.
+    At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 5,000 user IDs and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests. See Using cursors to navigate collections for more information.
 
-        This method is especially powerful when used in conjunction with GET users/lookup, a method that allows you to convert user IDs into full user objects in bulk.
+    This method is especially powerful when used in conjunction with GET users/lookup, a method that allows you to convert user IDs into full user objects in bulk.
     */
     func getFriendsIDsWithID(id: Int, cursor: Int?, stringifyIDs: Bool?, count: Int?, success: ((ids: Int[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "friends/ids.json"
@@ -116,13 +116,13 @@ extension Swifter {
     }
 
     /*
-        GET    followers/ids
+    GET    followers/ids
 
-        Returns a cursored collection of user IDs for every user following the specified user.
+    Returns a cursored collection of user IDs for every user following the specified user.
 
-        At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 5,000 user IDs and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests. See Using cursors to navigate collections for more information.
+    At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 5,000 user IDs and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests. See Using cursors to navigate collections for more information.
 
-        This method is especially powerful when used in conjunction with GET users/lookup, a method that allows you to convert user IDs into full user objects in bulk.
+    This method is especially powerful when used in conjunction with GET users/lookup, a method that allows you to convert user IDs into full user objects in bulk.
     */
     func getFollowersIDsWithID(id: Int, cursor: Int?, stringifyIDs: Bool?, count: Int?, success: ((ids: Int[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "followers/ids.json"
@@ -183,9 +183,9 @@ extension Swifter {
     }
 
     /*
-        GET    friendships/incoming
+    GET    friendships/incoming
 
-        Returns a collection of numeric IDs for every user who has a pending request to follow the authenticating user.
+    Returns a collection of numeric IDs for every user who has a pending request to follow the authenticating user.
     */
     func getFriendshipsIncomingWithCursor(cursor: String?, stringifyIDs: String?, success: ((ids: Int[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "friendships/incoming.json"
@@ -212,9 +212,9 @@ extension Swifter {
     }
 
     /*
-        GET    friendships/outgoing
+    GET    friendships/outgoing
 
-        Returns a collection of numeric IDs for every protected user for whom the authenticating user has a pending follow request.
+    Returns a collection of numeric IDs for every protected user for whom the authenticating user has a pending follow request.
     */
     func getFriendshipsOutgoingWithCursor(cursor: String?, stringifyIDs: String?, success: ((ids: Int[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "friendships/outgoing.json"
@@ -241,13 +241,13 @@ extension Swifter {
     }
 
     /*
-        POST   friendships/create
+    POST   friendships/create
 
-        Allows the authenticating users to follow the user specified in the ID parameter.
+    Allows the authenticating users to follow the user specified in the ID parameter.
 
-        Returns the befriended user in the requested format when successful. Returns a string describing the failure condition when unsuccessful. If you are already friends with the user a HTTP 403 may be returned, though for performance reasons you may get a 200 OK message even if the friendship already exists.
+    Returns the befriended user in the requested format when successful. Returns a string describing the failure condition when unsuccessful. If you are already friends with the user a HTTP 403 may be returned, though for performance reasons you may get a 200 OK message even if the friendship already exists.
 
-        Actions taken in this method are asynchronous and changes will be eventually consistent.
+    Actions taken in this method are asynchronous and changes will be eventually consistent.
     */
     func postCreateFriendshipWithID(id: Int, follow: Bool?, success: ((user: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "friendships/create.json"
@@ -288,13 +288,13 @@ extension Swifter {
     }
 
     /*
-        POST	friendships/destroy
+    POST	friendships/destroy
 
-        Allows the authenticating user to unfollow the user specified in the ID parameter.
+    Allows the authenticating user to unfollow the user specified in the ID parameter.
 
-        Returns the unfollowed user in the requested format when successful. Returns a string describing the failure condition when unsuccessful.
+    Returns the unfollowed user in the requested format when successful. Returns a string describing the failure condition when unsuccessful.
 
-        Actions taken in this method are asynchronous and changes will be eventually consistent.
+    Actions taken in this method are asynchronous and changes will be eventually consistent.
     */
     func postDestroyFriendshipWithID(id: Int, success: ((user: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "friendships/destroy.json"
@@ -327,9 +327,9 @@ extension Swifter {
     }
 
     /*
-        POST	friendships/update
+    POST	friendships/update
 
-        Allows one to enable or disable retweets and device notifications from the specified user.
+    Allows one to enable or disable retweets and device notifications from the specified user.
     */
     func postUpdateFriendshipWithID(id: Int, device: Bool?, retweets: Bool?, success: ((user: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "friendships/update.json"
@@ -376,9 +376,9 @@ extension Swifter {
     }
 
     /*
-        GET    friendships/show
+    GET    friendships/show
 
-        Returns detailed information about the relationship between two arbitrary users.
+    Returns detailed information about the relationship between two arbitrary users.
     */
     func getFriendshipsShowWithSourceID(sourceID: Int?, targetID: Int?, orTargetScreenName targetScreenName: String?, success: ((user: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "friendships/show.json"
@@ -425,11 +425,11 @@ extension Swifter {
     }
 
     /*
-        GET    friends/list
+    GET    friends/list
 
-        Returns a cursored collection of user objects for every user the specified user is following (otherwise known as their "friends").
+    Returns a cursored collection of user objects for every user the specified user is following (otherwise known as their "friends").
 
-        At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests. See Using cursors to navigate collections for more information.
+    At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests. See Using cursors to navigate collections for more information.
     */
     func getFriendsListWithID(id: Int, cursor: Int?, count: Int?, skipStatus: Bool?, includeUserEntities: Bool?, success: ((users: Dictionary<String, AnyObject>[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "friendships/list.json"
@@ -496,11 +496,11 @@ extension Swifter {
     }
 
     /*
-        GET    followers/list
+    GET    followers/list
 
-        Returns a cursored collection of user objects for users following the specified user.
+    Returns a cursored collection of user objects for users following the specified user.
 
-        At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests. See Using cursors to navigate collections for more information.
+    At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests. See Using cursors to navigate collections for more information.
     */
     func getFollowersListWithID(id: Int, cursor: Int?, count: Int?, skipStatus: Bool?, includeUserEntities: Bool?, success: ((users: Dictionary<String, AnyObject>[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "followers/list.json"
@@ -567,9 +567,9 @@ extension Swifter {
     }
 
     /*
-        GET    friendships/lookup
+    GET    friendships/lookup
 
-        Returns the relationships of the authenticating user to the comma-separated list of up to 100 screen_names or user_ids provided. Values for connections can be: following, following_requested, followed_by, none.
+    Returns the relationships of the authenticating user to the comma-separated list of up to 100 screen_names or user_ids provided. Values for connections can be: following, following_requested, followed_by, none.
     */
     func getFriendshipsLookupWithScreenNames(screenNames: String[], success: ((friendships: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
         let path = "followers/lookup.json"
@@ -579,26 +579,26 @@ extension Swifter {
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
-
+            
             success?(friendships: json as? Dictionary<String, AnyObject>[])
             return
-
+            
             }, failure: failure)
     }
-
+    
     func getFriendshipsLookupWithIDs(ids: Int[], success: ((friendships: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
         let path = "followers/lookup.json"
-
+        
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = ids.bridgeToObjectiveC().componentsJoinedByString(",")
-
+        
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
-
+            
             success?(friendships: json as? Dictionary<String, AnyObject>[])
             return
-
+            
             }, failure: failure)
     }
-
+    
 }

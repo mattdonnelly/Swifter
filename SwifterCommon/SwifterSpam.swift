@@ -28,9 +28,9 @@ import Foundation
 extension Swifter {
 
     /*
-        POST   users/report_spam
+    POST   users/report_spam
 
-        Report the specified user as a spam account to Twitter. Additionally performs the equivalent of POST blocks/create on behalf of the authenticated user.
+    Report the specified user as a spam account to Twitter. Additionally performs the equivalent of POST blocks/create on behalf of the authenticated user.
     */
     func postUsersReportSpamWithScreenName(screenName: String, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "users/report_spam.json"
@@ -49,5 +49,5 @@ extension Swifter {
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: success, failure: failure)
     }
-
+    
 }

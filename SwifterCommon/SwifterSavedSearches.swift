@@ -28,9 +28,9 @@ import Foundation
 extension Swifter {
 
     /*
-        GET    saved_searches/list
+    GET    saved_searches/list
 
-        Returns the authenticated user's saved search queries.
+    Returns the authenticated user's saved search queries.
     */
     func getSavedSearchesListWithSuccess(success: ((savedSearches: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
         let path = "saved_searches/list.json"
@@ -45,9 +45,9 @@ extension Swifter {
     }
 
     /*
-        GET    saved_searches/show/:id
+    GET    saved_searches/show/:id
 
-        Retrieve the information for the saved search represented by the given id. The authenticating user must be the owner of saved search ID being requested.
+    Retrieve the information for the saved search represented by the given id. The authenticating user must be the owner of saved search ID being requested.
     */
     func getSavedSearchesShowWithID(id: Int, success: ((savedSearch: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "saved_searches/show/\(id).json"
@@ -62,9 +62,9 @@ extension Swifter {
     }
 
     /*
-        POST   saved_searches/create
+    POST   saved_searches/create
 
-        Create a new saved search for the authenticated user. A user may only have 25 saved searches.
+    Create a new saved search for the authenticated user. A user may only have 25 saved searches.
     */
     func postSavedSearchesCreateShowWithQuery(query: String, success: ((savedSearch: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "saved_searches/create.json"
@@ -82,9 +82,9 @@ extension Swifter {
     }
 
     /*
-        POST   saved_searches/destroy/:id
+    POST   saved_searches/destroy/:id
 
-        Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.
+    Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.
     */
     func postSavedSearchesDestroyWithID(id: Int, success: ((savedSearch: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
         let path = "saved_searches/destroy/\(id).json"
@@ -94,8 +94,8 @@ extension Swifter {
 
             success?(savedSearch: json as? Dictionary<String, AnyObject>)
             return
-
+            
             }, failure: failure)
     }
-
+    
 }

@@ -28,11 +28,11 @@ import Foundation
 extension Swifter {
 
     /*
-        GET    users/suggestions/:slug
+    GET    users/suggestions/:slug
 
-        Access the users in a given category of the Twitter suggested user list.
+    Access the users in a given category of the Twitter suggested user list.
 
-        It is recommended that applications cache this data for no more than one hour.
+    It is recommended that applications cache this data for no more than one hour.
     */
     func getUsersSuggestionsWithSlug(slug: String, lang: String?, success: ((users: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
         let path = "users/suggestions/\(slug).json"
@@ -52,9 +52,9 @@ extension Swifter {
     }
 
     /*
-        GET    users/suggestions
+    GET    users/suggestions
 
-        Access to Twitter's suggested user list. This returns the list of suggested user categories. The category can be used in GET users/suggestions/:slug to get the users in that category.
+    Access to Twitter's suggested user list. This returns the list of suggested user categories. The category can be used in GET users/suggestions/:slug to get the users in that category.
     */
     func getUsersSuggestionsWithLang(lang: String?, success: ((users: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
         let path = "users/suggestions.json"
@@ -74,9 +74,9 @@ extension Swifter {
     }
 
     /*
-        GET    users/suggestions/:slug/members
+    GET    users/suggestions/:slug/members
 
-        Access the users in a given category of the Twitter suggested user list and return their most recent status if they are not a protected user.
+    Access the users in a given category of the Twitter suggested user list and return their most recent status if they are not a protected user.
     */
     func getUsersSuggestionsForSlugMembers(slug: String, success: ((users: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
         let path = "users/suggestions/\(slug)/members.json"
@@ -86,8 +86,8 @@ extension Swifter {
 
             success?(users: json as? Dictionary<String, AnyObject>[])
             return
-
+            
             }, failure: failure)
     }
-
+    
 }
