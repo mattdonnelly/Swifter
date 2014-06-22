@@ -102,6 +102,7 @@ class SwifterOAuthClient: SwifterClientProtocol  {
         request.successHandler = success
         request.failureHandler = failure
         request.dataEncoding = self.dataEncoding
+        request.encodeParameters = postData == nil
 
         if postData {
             let fileName = postDataFileName ? postDataFileName! as String : "media.jpg"

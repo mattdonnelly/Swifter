@@ -53,13 +53,26 @@ extension Dictionary {
         return filteredDictionary
     }
 
+    func queryStringWithEncoding() -> String {
+        var parts = String[]()
+
+        for (key, value) in self {
+            let keyString: String = "\(key)"
+            let valueString: String = "\(value)"
+            let query: String = "\(keyString)=\(valueString)"
+            parts.append(query)
+        }
+
+        return parts.bridgeToObjectiveC().componentsJoinedByString("&") as String
+    }
+
     func urlEncodedQueryStringWithEncoding(encoding: NSStringEncoding) -> String {
         var parts = String[]()
 
         for (key, value) in self {
-            let keyString = "\(key)".urlEncodedStringWithEncoding(encoding)
-            let valueString = "\(value)".urlEncodedStringWithEncoding(encoding)
-            let query = "\(keyString)=\(valueString)" as String
+            let keyString: String = "\(key)".urlEncodedStringWithEncoding(encoding)
+            let valueString: String = "\(value)".urlEncodedStringWithEncoding(encoding)
+            let query: String = "\(keyString)=\(valueString)"
             parts.append(query)
         }
 

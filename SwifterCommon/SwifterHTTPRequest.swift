@@ -94,7 +94,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.HTTPMethod = request.HTTPMethod
         self.headers = [:]
         self.parameters = [:]
-        self.encodeParameters = false
+        self.encodeParameters = true
         self.uploadData = []
         self.dataEncoding = NSUTF8StringEncoding
         self.timeoutInterval = 60
@@ -149,21 +149,19 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
                     self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
                 }
                 else {
+                    var queryString = String()
                     if self.encodeParameters {
-                        let queryString = nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding)
-                        self.request!.URL = self.URL.URLByAppendingQueryString(queryString)
+                        queryString = nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding)
                         self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
                     }
                     else {
-                        var error: NSError?
-                        if let jsonData: NSData = NSJSONSerialization.dataWithJSONObject(nonOAuthParameters, options: nil, error: &error)  {
-                            self.request!.setValue("application/json; charset=\(charset)", forHTTPHeaderField: "Content-Type")
-                            self.request!.HTTPBody = jsonData
-                        }
-                        else {
-                            println(error!.localizedDescription)
-                        }
+                        queryString = nonOAuthParameters.queryStringWithEncoding()
                     }
+
+                    let data = queryString.dataUsingEncoding(self.dataEncoding)
+
+                    self.request!.setValue(String(data.length), forHTTPHeaderField: "Content-Length")
+                    self.request!.HTTPBody = data
                 }
             }
         }
