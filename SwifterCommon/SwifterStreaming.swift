@@ -38,7 +38,7 @@ extension Swifter {
 
     At least one predicate parameter (follow, locations, or track) must be specified.
     */
-    func postStatusesFilter(follow: String[]?, track: String[]?, locations: String[]?, delimited: Bool?, stallWarnings: Bool?, progress: ((status: Dictionary<String, AnyObject>?) -> Void)?, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)?, failure: FailureHandler?) {
+    func postStatusesFilterWithFollow(follow: String[]?, track: String[]?, locations: String[]?, delimited: Bool?, stallWarnings: Bool?, progress: ((status: Dictionary<String, AnyObject>?) -> Void)?, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)?, failure: FailureHandler?) {
         assert(follow || track || locations, "At least one predicate parameter (follow, locations, or track) must be specified")
 
         let path = "statuses/filter.json"
