@@ -34,13 +34,13 @@ extension Swifter {
 
     It is recommended applications request this endpoint when they are loaded, but no more than once a day.
     */
-    func getHelpConfigurationWithSuccess(success: ((config: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
+    func getHelpConfigurationWithSuccess(success: ((config: Dictionary<String, JSON>?) -> Void)?, failure: FailureHandler?) {
         let path = "help/configuration.json"
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(config: json as? Dictionary<String, AnyObject>)
+            success?(config: json.dictionary)
             return
 
             }, failure: failure)
@@ -51,13 +51,13 @@ extension Swifter {
 
     Returns the list of languages supported by Twitter along with their ISO 639-1 code. The ISO 639-1 code is the two letter value to use if you include lang with any of your requests.
     */
-    func getHelpLanguagesWithSuccess(success: ((languages: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
+    func getHelpLanguagesWithSuccess(success: ((languages: JSON[]?) -> Void)?, failure: FailureHandler?) {
         let path = "help/languages.json"
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(languages: json as? Dictionary<String, AnyObject>[])
+            success?(languages: json.array)
             return
 
             }, failure: failure)
@@ -74,12 +74,8 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            if let privacy: AnyObject = json["privacy"] {
-                success?(privacy: privacy as? String)
-            }
-            else {
-                success?(privacy: nil)
-            }
+            success?(privacy: json["privacy"]?.string)
+            return
 
             }, failure: failure)
     }
@@ -95,12 +91,8 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            if let tos: AnyObject = json["tos"] {
-                success?(tos: tos as? String)
-            }
-            else {
-                success?(tos: nil)
-            }
+            success?(tos: json["tos"]?.string)
+            return
 
             }, failure: failure)
     }
@@ -120,7 +112,7 @@ extension Swifter {
 
     Read more about REST API Rate Limiting in v1.1 and review the limits.
     */
-    func getRateLimitsForResources(resources: String[], success: ((rateLimitStatus: Dictionary<String, AnyObject>?) -> Void)?, failure: FailureHandler?) {
+    func getRateLimitsForResources(resources: String[], success: ((rateLimitStatus: Dictionary<String, JSON>?) -> Void)?, failure: FailureHandler?) {
         let path = "application/rate_limit_status.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -129,7 +121,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(rateLimitStatus: json as? Dictionary<String, AnyObject>)
+            success?(rateLimitStatus: json.dictionary)
             return
 
             }, failure: failure)

@@ -19,7 +19,7 @@ extension Swifter {
 
     This information is cached for 5 minutes. Requesting more frequently than that will not return any more data, and will count against your rate limit usage.
     */
-    func getTrendsPlaceWithWOEID(id: Int, excludeHashtags: Bool?, success: ((trends: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
+    func getTrendsPlaceWithWOEID(id: Int, excludeHashtags: Bool?, success: ((trends: JSON[]?) -> Void)?, failure: FailureHandler?) {
         let path = "trends/place.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -34,7 +34,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(trends: json as? Dictionary<String, AnyObject>[])
+            success?(trends: json.array)
             return
 
             }, failure: failure)
@@ -49,13 +49,13 @@ extension Swifter {
 
     A WOEID is a Yahoo! Where On Earth ID.
     */
-    func getTrendsAvailableWithSuccess(success: ((trends: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
+    func getTrendsAvailableWithSuccess(success: ((trends: JSON[]?) -> Void)?, failure: FailureHandler?) {
         let path = "trends/available.json"
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(trends: json as? Dictionary<String, AnyObject>[])
+            success?(trends: json.array)
             return
 
             }, failure: failure)
@@ -70,7 +70,7 @@ extension Swifter {
 
     A WOEID is a Yahoo! Where On Earth ID.
     */
-    func getTrendsClosestWithLat(lat: Int, long: Int, success: ((trends: Dictionary<String, AnyObject>[]?) -> Void)?, failure: FailureHandler?) {
+    func getTrendsClosestWithLat(lat: Int, long: Int, success: ((trends: JSON[]?) -> Void)?, failure: FailureHandler?) {
         let path = "trends/closest.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -80,7 +80,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(trends: json as? Dictionary<String, AnyObject>[])
+            success?(trends: json.array)
             return
 
             }, failure: failure)

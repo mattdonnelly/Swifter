@@ -34,7 +34,7 @@ import Accounts
 
 class Swifter {
 
-    typealias JSONSuccessHandler = (json: AnyObject, response: NSHTTPURLResponse) -> Void
+    typealias JSONSuccessHandler = (json: JSON, response: NSHTTPURLResponse) -> Void
     typealias FailureHandler = (error: NSError) -> Void
 
     struct CallbackNotification {
@@ -112,7 +112,7 @@ class Swifter {
             }
 
             var error: NSError?
-            if let jsonResult: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error) {
+            if let jsonResult = JSON.parse(data, error: &error) {
                 downloadProgress?(json: jsonResult, response: response)
             }
             else {
@@ -126,8 +126,7 @@ class Swifter {
 
                     let chunkData = chunk.dataUsingEncoding(NSUTF8StringEncoding)
 
-
-                    if let jsonResult: AnyObject = NSJSONSerialization.JSONObjectWithData(chunkData, options: nil, error: &error) {
+                    if let jsonResult = JSON.parse(data, error: &error)  {
                         downloadProgress?(json: jsonResult, response: response)
                     }
                 }
@@ -138,13 +137,11 @@ class Swifter {
             data, response in
 
             var error: NSError?
-            let jsonResult: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
-
-            if error {
-                failure?(error: error!)
+            if let jsonResult = JSON.parse(data, error: &error) {
+                success?(json: jsonResult, response: response)
             }
             else {
-                success?(json: jsonResult!, response: response)
+                failure?(error: error!)
             }
         }
 
