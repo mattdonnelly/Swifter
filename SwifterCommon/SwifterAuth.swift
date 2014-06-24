@@ -90,7 +90,7 @@ extension Swifter {
                     failure?(error: error)
                 }
             }
-            else if let errors = json["errors"]?.dictionary {
+            else if let errors = json["errors"]?.object {
                 let error = NSError(domain: SwifterError.domain, code: errors["code"]!.integer!, userInfo: [NSLocalizedDescriptionKey: errors["message"]!.string!]);
                 failure?(error: error)
             }

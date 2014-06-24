@@ -112,7 +112,7 @@ class Swifter {
             }
 
             var error: NSError?
-            if let jsonResult = JSON.parse(data, error: &error) {
+            if let jsonResult = JSON.parseJSONData(data, error: &error) {
                 downloadProgress?(json: jsonResult, response: response)
             }
             else {
@@ -126,7 +126,7 @@ class Swifter {
 
                     let chunkData = chunk.dataUsingEncoding(NSUTF8StringEncoding)
 
-                    if let jsonResult = JSON.parse(data, error: &error)  {
+                    if let jsonResult = JSON.parseJSONData(data, error: &error)  {
                         downloadProgress?(json: jsonResult, response: response)
                     }
                 }
@@ -137,7 +137,7 @@ class Swifter {
             data, response in
 
             var error: NSError?
-            if let jsonResult = JSON.parse(data, error: &error) {
+            if let jsonResult = JSON.parseJSONData(data, error: &error) {
                 success?(json: jsonResult, response: response)
             }
             else {

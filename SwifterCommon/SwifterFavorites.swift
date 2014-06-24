@@ -34,7 +34,7 @@ extension Swifter {
 
     If you do not provide either a user_id or screen_name to this method, it will assume you are requesting on behalf of the authenticating user. Specify one or the other for best results.
     */
-    func getFavoritesListWithCount(count: Int?, sinceID: Int?, maxID: Int?, success: ((statuses: JSON[]?) -> Void)?, failure: FailureHandler?) {
+    func getFavoritesListWithCount(count: Int?, sinceID: Int?, maxID: Int?, success: ((statuses: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -57,7 +57,7 @@ extension Swifter {
             }, failure: failure)
     }
 
-    func getFavoritesListWithUserID(userID: Int, count: Int?, sinceID: Int?, maxID: Int?, success: ((statuses: JSON[]?) -> Void)?, failure: FailureHandler?) {
+    func getFavoritesListWithUserID(userID: Int, count: Int?, sinceID: Int?, maxID: Int?, success: ((statuses: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -82,7 +82,7 @@ extension Swifter {
             }, failure: failure)
     }
 
-    func getFavoritesListWithScreenName(screenName: String, count: Int?, sinceID: Int?, maxID: Int?, success: ((statuses: JSON[]?) -> Void)?, failure: FailureHandler?) {
+    func getFavoritesListWithScreenName(screenName: String, count: Int?, sinceID: Int?, maxID: Int?, success: ((statuses: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -114,7 +114,7 @@ extension Swifter {
 
     This process invoked by this method is asynchronous. The immediately returned status may not indicate the resultant favorited status of the tweet. A 200 OK response from this method will indicate whether the intended action was successful or not.
     */
-    func postDestroyFavoriteWithID(id: Int, includeEntities: Bool?, success: ((status: Dictionary<String, JSON>?) -> Void)?, failure: FailureHandler?) {
+    func postDestroyFavoriteWithID(id: Int, includeEntities: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "favorites/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -127,7 +127,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(status: json.dictionary)
+            success?(status: json.object)
             return
 
             }, failure: failure)
@@ -140,7 +140,7 @@ extension Swifter {
 
     This process invoked by this method is asynchronous. The immediately returned status may not indicate the resultant favorited status of the tweet. A 200 OK response from this method will indicate whether the intended action was successful or not.
     */
-    func postCreateFavoriteWithID(id: Int, includeEntities: Bool?, success: ((status: Dictionary<String, JSON>?) -> Void)?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func postCreateFavoriteWithID(id: Int, includeEntities: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "favorites/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -153,7 +153,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
             
-            success?(status: json.dictionary)
+            success?(status: json.object)
             return
             
             }, failure: failure)
