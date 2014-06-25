@@ -30,7 +30,7 @@ Instantiation with App Only Auth:
 let swifter = Swifter(consumerKey: "", consumerSecret: "", appOnly: true)
 ```
 
-###Example Requests
+##Example Requests
 
 ####OAuth Authorization:
 
@@ -104,7 +104,7 @@ swifter.postStatusUpdate("Hello, world", inReplyToStatusID: nil, lat: nil, long:
 
 ##JSON Handling
 
-To make accessing data returned by twitter requests, Swifter provides a class for representing JSON which you interact with similarly to a dictionary. The main advantage of this over using a Dictionary<String, AnyObject> is that it's much easier to work with Swift's strict typing system and doesnt require you to constantly downcast objects. It also removes the need for lots optional chaining.
+To make accessing data returned by twitter requests, Swifter provides a class for representing JSON which you interact with similarly to a dictionary. The main advantage of using this instead of a Dictionary<String, AnyObject> is that it works better with Swift's strict typing system and doesnt require you to constantly downcast accessed objects. It also removes the need for lots optional chaining, making your code much cleaner and easier to read.
 
 Here's an example of how you would access the text of the first element in list of statuses:
 
