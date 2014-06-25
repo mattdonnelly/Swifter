@@ -75,9 +75,9 @@ extension Swifter {
         self.postOAuth2BearerTokenWithSuccess({
             json, response in
 
-            if let tokenType = json["token_type"]?.string {
+            if let tokenType = json["token_type"].string {
                 if tokenType == "bearer" {
-                    let accessToken = json["access_token"]?.string
+                    let accessToken = json["access_token"].string
 
                     let credentialToken = SwifterCredential.OAuthAccessToken(key: accessToken!, secret: "")
 
@@ -90,7 +90,7 @@ extension Swifter {
                     failure?(error: error)
                 }
             }
-            else if let errors = json["errors"]?.object {
+            else if let errors = json["errors"].object {
                 let error = NSError(domain: SwifterError.domain, code: errors["code"]!.integer!, userInfo: [NSLocalizedDescriptionKey: errors["message"]!.string!]);
                 failure?(error: error)
             }
@@ -117,7 +117,7 @@ extension Swifter {
         self.jsonRequestWithPath(path, baseURL: self.apiURL, method: "POST", parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            if let accessToken = json["access_token"]?.string {
+            if let accessToken = json["access_token"].string {
                 self.client.credential = nil
 
                 let credentialToken = SwifterCredential.OAuthAccessToken(key: accessToken, secret: "")

@@ -74,7 +74,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(privacy: json["privacy"]?.string)
+            success?(privacy: json["privacy"].string)
             return
 
             }, failure: failure)
@@ -91,7 +91,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(tos: json["tos"]?.string)
+            success?(tos: json["tos"].string)
             return
 
             }, failure: failure)

@@ -63,7 +63,7 @@ extension Swifter {
         self.postJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
             json, response in
 
-            if let stallWarning = json["warning"]?.object {
+            if let stallWarning = json["warning"].object {
                 switch (stallWarning["code"]?.string, stallWarning["message"]?.string, stallWarning["percent_full"]?.integer) {
                 case (let code , let message, let percentFull):
                     stallWarningHandler?(code: code, message: message, percentFull: percentFull)
@@ -103,7 +103,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
             json, response in
 
-            if let stallWarning = json["warning"]?.object {
+            if let stallWarning = json["warning"].object {
                 switch (stallWarning["code"]?.string, stallWarning["message"]?.string, stallWarning["percent_full"]?.integer) {
                 case (let code , let message, let percentFull):
                     stallWarningHandler?(code: code, message: message, percentFull: percentFull)
@@ -148,7 +148,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
             json, response in
 
-            if let stallWarning = json["warning"]?.object {
+            if let stallWarning = json["warning"].object {
                 switch (stallWarning["code"]?.string, stallWarning["message"]?.string, stallWarning["percent_full"]?.integer) {
                 case (let code , let message, let percentFull):
                     stallWarningHandler?(code: code, message: message, percentFull: percentFull)
@@ -207,7 +207,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
             json, response in
 
-            if let stallWarning = json["warning"]?.object {
+            if let stallWarning = json["warning"].object {
                 switch (stallWarning["code"]?.string, stallWarning["message"]?.string, stallWarning["percent_full"]?.integer) {
                 case (let code , let message, let percentFull):
                     stallWarningHandler?(code: code, message: message, percentFull: percentFull)
@@ -260,18 +260,13 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
             json, response in
 
-            if let stallWarning = json["warning"]?.object {
-                switch (stallWarning["code"]?.string, stallWarning["message"]?.string, stallWarning["percent_full"]?.integer) {
-                case (let code , let message, let percentFull):
-                    stallWarningHandler?(code: code, message: message, percentFull: percentFull)
-                default:
-                    stallWarningHandler?(code: nil, message: nil, percentFull: nil)
-                }
+            switch (json["warning"]["code"].string, json["warning"]["message"].string, json["warning"]["percent_full"].integer) {
+            case (let code , let message, let percentFull):
+                stallWarningHandler?(code: code, message: message, percentFull: percentFull)
+            default:
+                stallWarningHandler?(code: nil, message: nil, percentFull: nil)
             }
-            else {
-                progress?(status: json.object)
-            }
-            
+
             }, success: {
                 json, response in
                 

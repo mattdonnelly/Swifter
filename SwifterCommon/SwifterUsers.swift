@@ -301,7 +301,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["users"]?.array, json["previous_cursor"]?.integer, json["next_cursor"]?.integer) {
+            switch (json["users"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
             case (let users, let previousCursor, let nextCursor):
                 success?(users: users, previousCursor: previousCursor, nextCursor: nextCursor)
             default:
@@ -330,7 +330,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["ids"]?.array, json["previous_cursor"]?.integer, json["next_cursor"]?.integer) {
+            switch (json["ids"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
             case (let ids, let previousCursor, let nextCursor):
                 success?(ids: ids, previousCursor: previousCursor, nextCursor: nextCursor)
             default:
@@ -839,7 +839,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["ids"]?.array, json["previous_cursor"]?.integer, json["next_cursor"]?.integer) {
+            switch (json["ids"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
             case (let ids, let previousCursor, let nextCursor):
                 success?(ids: ids, previousCursor: previousCursor, nextCursor: nextCursor)
             default:
@@ -871,7 +871,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
             
-            switch (json["users"]?.array, json["previous_cursor"]?.integer, json["next_cursor"]?.integer) {
+            switch (json["users"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
             case (let users, let previousCursor, let nextCursor):
                 success?(users: users, previousCursor: previousCursor, nextCursor: nextCursor)
             default:

@@ -68,7 +68,7 @@ extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["statuses"]?.array, json["search_metadata"]?.object) {
+            switch (json["statuses"].array, json["search_metadata"].object) {
             case (let statuses, let searchMetadata):
                 success?(statuses: statuses, searchMetadata: searchMetadata)
             default:

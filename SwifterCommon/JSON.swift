@@ -47,7 +47,7 @@ enum JSON : Equatable, Printable {
             self = .JSONBool(bool)
         }
         else {
-            self = .JSONNull
+            self = .JSONInvalid
         }
     }
     
@@ -56,7 +56,7 @@ enum JSON : Equatable, Printable {
             self = .JSONNumber(number)
         }
         else {
-            self = .JSONNull
+            self = .JSONInvalid
         }
     }
     
@@ -65,7 +65,7 @@ enum JSON : Equatable, Printable {
             self = .JSONNumber(Double(number))
         }
         else {
-            self = .JSONNull
+            self = .JSONInvalid
         }
     }
     
@@ -74,7 +74,7 @@ enum JSON : Equatable, Printable {
             self = .JSONString(string)
         }
         else {
-            self = .JSONNull
+            self = .JSONInvalid
         }
     }
     
@@ -83,7 +83,7 @@ enum JSON : Equatable, Printable {
             self = .JSONArray(array)
         }
         else {
-            self = .JSONNull
+            self = .JSONInvalid
         }
     }
     
@@ -92,7 +92,7 @@ enum JSON : Equatable, Printable {
             self = .JSONObject(dict)
         }
         else {
-            self = .JSONNull
+            self = .JSONInvalid
         }
     }
     
@@ -148,7 +148,7 @@ enum JSON : Equatable, Printable {
             }
         }
         else {
-            self = .JSONNull
+            self = .JSONInvalid
         }
     }
 
@@ -212,23 +212,28 @@ enum JSON : Equatable, Printable {
         }
     }
 
-    subscript(key: String) -> JSONValue? {
+    subscript(key: String) -> JSONValue {
         switch self {
         case .JSONObject(let dict):
-            return dict[key]
+            if let value = dict[key] {
+                return value
+            }
+            else {
+                return .JSONInvalid
+            }
 
         default:
-            return nil
+            return .JSONInvalid
         }
     }
 
-    subscript(index: Int) -> JSONValue? {
+    subscript(index: Int) -> JSONValue {
         switch self {
-        case .JSONArray(let array):
+        case .JSONArray(let array) where array.count > index:
             return array[index]
 
         default:
-            return nil
+            return .JSONInvalid
         }
     }
 
