@@ -27,10 +27,10 @@ import Foundation
 
 typealias JSONValue = JSON
 
-let JSTrue = JSON(true)
-let JSFalse = JSON(false)
+let JSTrue = JSONValue(true)
+let JSFalse = JSONValue(false)
 
-let JSONNull = JSON.JSONNull
+let JSONNull = JSONValue.JSONNull
 
 enum JSON : Equatable, Printable {
     
@@ -78,7 +78,7 @@ enum JSON : Equatable, Printable {
         }
     }
     
-    init(_ value: Array<JSON>?) {
+    init(_ value: Array<JSONValue>?) {
         if let array = value {
             self = .JSONArray(array)
         }
@@ -192,7 +192,7 @@ enum JSON : Equatable, Printable {
         }
     }
 
-    var array : Array<JSON>? {
+    var array : Array<JSONValue>? {
         switch self {
         case .JSONArray(let value):
             return value
@@ -325,6 +325,7 @@ extension JSON: Printable {
 }
 
 extension JSONValue: LogicValue {
+
     func getLogicValue() -> Bool {
         switch self {
         case .JSONInvalid:
@@ -333,6 +334,7 @@ extension JSONValue: LogicValue {
             return true
         }
     }
+
 }
 
 
