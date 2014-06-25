@@ -159,7 +159,6 @@ class SwifterOAuthClient: SwifterClientProtocol  {
         let encodedConsumerSecret = self.consumerSecret.urlEncodedStringWithEncoding(self.dataEncoding)
 
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"
-        let signingKeyData = signingKey.bridgeToObjectiveC().dataUsingEncoding(self.dataEncoding)
 
         let parameterComponents = parameters.urlEncodedQueryStringWithEncoding(self.dataEncoding).componentsSeparatedByString("&") as String[]
         parameterComponents.sort { $0 < $1 }
@@ -170,9 +169,10 @@ class SwifterOAuthClient: SwifterClientProtocol  {
         let encodedURL = url.absoluteString.urlEncodedStringWithEncoding(self.dataEncoding)
 
         let signatureBaseString = "\(method)&\(encodedURL)&\(encodedParameterString)"
-        let signatureBaseStringData = signatureBaseString.dataUsingEncoding(self.dataEncoding)
-        
-        return HMACSHA1Signature.signatureForKey(signingKeyData, data: signatureBaseStringData).base64EncodedStringWithOptions(nil)
+
+        let signature = signatureBaseString.SHA1DigestWithKey(signingKey)
+
+        return signatureBaseString.SHA1DigestWithKey(signingKey).base64EncodedStringWithOptions(nil)
     }
     
 }

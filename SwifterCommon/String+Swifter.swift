@@ -60,6 +60,19 @@ extension String {
         
         return parameters
     }
+
+    func SHA1DigestWithKey(key: String) -> NSData {
+        let str = self.cStringUsingEncoding(NSUTF8StringEncoding)
+        let strLen = UInt(self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
+        let digestLen = Int(CC_SHA1_DIGEST_LENGTH)
+        let result = UnsafePointer<CUnsignedChar>.alloc(digestLen)
+        let keyStr = key.cStringUsingEncoding(NSUTF8StringEncoding)
+        let keyLen = UInt(key.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
+
+        CCHmac(CCHmacAlgorithm(kCCHmacAlgSHA1), keyStr!, keyLen, str!, strLen, result)
+
+        return NSData(bytes: result, length: digestLen)
+    }
     
 }
 

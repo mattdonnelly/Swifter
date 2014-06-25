@@ -37,10 +37,6 @@
 		8B9F51181944A61D00894629 /* SwifterMac.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F51171944A61D00894629 /* SwifterMac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B9F514D1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */; };
 		8B9F514E1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */; };
-		8B9F514F1944A8DC00894629 /* HMACSHA1Signature.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F51481944A8DC00894629 /* HMACSHA1Signature.h */; };
-		8B9F51501944A8DC00894629 /* HMACSHA1Signature.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F51481944A8DC00894629 /* HMACSHA1Signature.h */; };
-		8B9F51511944A8DC00894629 /* HMACSHA1Signature.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51491944A8DC00894629 /* HMACSHA1Signature.m */; };
-		8B9F51521944A8DC00894629 /* HMACSHA1Signature.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51491944A8DC00894629 /* HMACSHA1Signature.m */; };
 		8B9F51531944A8DC00894629 /* String+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514A1944A8DC00894629 /* String+Swifter.swift */; };
 		8B9F51541944A8DC00894629 /* String+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514A1944A8DC00894629 /* String+Swifter.swift */; };
 		8B9F51551944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */; };
@@ -149,8 +145,6 @@
 		8B9F51161944A61D00894629 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B9F51171944A61D00894629 /* SwifterMac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwifterMac.h; sourceTree = "<group>"; };
 		8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Swifter.swift"; sourceTree = "<group>"; };
-		8B9F51481944A8DC00894629 /* HMACSHA1Signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMACSHA1Signature.h; sourceTree = "<group>"; };
-		8B9F51491944A8DC00894629 /* HMACSHA1Signature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMACSHA1Signature.m; sourceTree = "<group>"; };
 		8B9F514A1944A8DC00894629 /* String+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Swifter.swift"; sourceTree = "<group>"; };
 		8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swifter-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B9F514C1944A8DC00894629 /* Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swifter.swift; sourceTree = "<group>"; };
@@ -315,6 +309,7 @@
 		8B9F51461944A8DC00894629 /* SwifterCommon */ = {
 			isa = PBXGroup;
 			children = (
+				8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */,
 				8B9F514C1944A8DC00894629 /* Swifter.swift */,
 				8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */,
 				8B548F581945325E00EE2927 /* SwifterAuth.swift */,
@@ -339,9 +334,6 @@
 				8BA50EC61953828A00FB1829 /* SwifterAppOnlyClient.swift */,
 				8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */,
 				8B33CA3E19587C6D00739FCB /* JSON.swift */,
-				8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */,
-				8B9F51481944A8DC00894629 /* HMACSHA1Signature.h */,
-				8B9F51491944A8DC00894629 /* HMACSHA1Signature.m */,
 				8B9F51591944A8E100894629 /* Extensions */,
 			);
 			path = SwifterCommon;
@@ -366,7 +358,6 @@
 			files = (
 				8B9F50F41944A5AB00894629 /* SwifteriOS.h in Headers */,
 				8B9F51551944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */,
-				8B9F514F1944A8DC00894629 /* HMACSHA1Signature.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,7 +367,6 @@
 			files = (
 				8B9F51181944A61D00894629 /* SwifterMac.h in Headers */,
 				8B9F51561944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */,
-				8B9F51501944A8DC00894629 /* HMACSHA1Signature.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,7 +598,6 @@
 				8B548F591945325E00EE2927 /* SwifterAuth.swift in Sources */,
 				8BCF431D1947907300E63301 /* SwifterMessages.swift in Sources */,
 				8B9F51531944A8DC00894629 /* String+Swifter.swift in Sources */,
-				8B9F51511944A8DC00894629 /* HMACSHA1Signature.m in Sources */,
 				8BF1D67C1948882700E3AA64 /* SwifterSpam.swift in Sources */,
 				8BCF431A19475D3C00E63301 /* SwifterSearch.swift in Sources */,
 				8B33CA3F19587C6D00739FCB /* JSON.swift in Sources */,
@@ -643,7 +632,6 @@
 				8B548F5A1945325E00EE2927 /* SwifterAuth.swift in Sources */,
 				8BCF431E1947907300E63301 /* SwifterMessages.swift in Sources */,
 				8B9F51541944A8DC00894629 /* String+Swifter.swift in Sources */,
-				8B9F51521944A8DC00894629 /* HMACSHA1Signature.m in Sources */,
 				8BF1D67D1948882700E3AA64 /* SwifterSpam.swift in Sources */,
 				8BCF431B19475D3C00E63301 /* SwifterSearch.swift in Sources */,
 				8B33CA4019587C6D00739FCB /* JSON.swift in Sources */,

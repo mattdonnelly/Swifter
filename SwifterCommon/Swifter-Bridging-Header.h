@@ -23,4 +23,4 @@
 //  THE SOFTWARE.
 //
 
-#import "HMACSHA1Signature.h"
+#import <CommonCrypto/CommonCrypto.h>
