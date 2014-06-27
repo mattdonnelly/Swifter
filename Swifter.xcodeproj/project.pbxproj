@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F714875195E177A002B8BEB /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F714872195E177A002B8BEB /* AuthView.swift */; };
+		6F714877195E177A002B8BEB /* RecentTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F714874195E177A002B8BEB /* RecentTweets.swift */; };
+		6F714879195E17CB002B8BEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F714878195E17CB002B8BEB /* Main.storyboard */; };
 		8B116AF1194601970019A4DC /* SwifterHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */; };
 		8B116AF2194601970019A4DC /* SwifterHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */; };
 		8B1F259F194A663D004BD304 /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
 		8B1F25A0194A663D004BD304 /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
 		8B300C241944AA1A00993175 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C231944AA1A00993175 /* AppDelegate.swift */; };
-		8B300C261944AA1A00993175 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C251944AA1A00993175 /* ViewController.swift */; };
-		8B300C291944AA1A00993175 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C271944AA1A00993175 /* Main.storyboard */; };
 		8B300C3E1944AA6600993175 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; };
 		8B300C3F1944AA6600993175 /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8B300C4C1944AECB00993175 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4B1944AECB00993175 /* main.swift */; };
@@ -121,13 +122,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6F714872195E177A002B8BEB /* AuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		6F714874195E177A002B8BEB /* RecentTweets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentTweets.swift; sourceTree = "<group>"; };
+		6F714878195E17CB002B8BEB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterHTTPRequest.swift; sourceTree = "<group>"; };
 		8B1F259E194A663D004BD304 /* SwifterHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterHelp.swift; sourceTree = "<group>"; };
 		8B300C1F1944AA1A00993175 /* SwifterDemoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B300C221944AA1A00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B300C231944AA1A00993175 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8B300C251944AA1A00993175 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8B300C281944AA1A00993175 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B300C471944AECB00993175 /* SwifterDemoMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B300C4A1944AECB00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B300C4B1944AECB00993175 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -216,10 +218,11 @@
 		8B300C201944AA1A00993175 /* SwifterDemoiOS */ = {
 			isa = PBXGroup;
 			children = (
+				6F714878195E17CB002B8BEB /* Main.storyboard */,
+				6F714872195E177A002B8BEB /* AuthView.swift */,
+				6F714874195E177A002B8BEB /* RecentTweets.swift */,
 				8B300C231944AA1A00993175 /* AppDelegate.swift */,
-				8B300C251944AA1A00993175 /* ViewController.swift */,
 				8BCB9328194B2E1200A998EA /* Images.xcassets */,
-				8B300C271944AA1A00993175 /* Main.storyboard */,
 				8B300C211944AA1A00993175 /* Supporting Files */,
 			);
 			path = SwifterDemoiOS;
@@ -528,8 +531,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B300C291944AA1A00993175 /* Main.storyboard in Resources */,
 				8BCB9329194B2E1200A998EA /* Images.xcassets in Resources */,
+				6F714879195E17CB002B8BEB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,8 +573,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B300C261944AA1A00993175 /* ViewController.swift in Sources */,
 				8B300C241944AA1A00993175 /* AppDelegate.swift in Sources */,
+				6F714877195E177A002B8BEB /* RecentTweets.swift in Sources */,
+				6F714875195E177A002B8BEB /* AuthView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,14 +687,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8B300C271944AA1A00993175 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8B300C281944AA1A00993175 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8B300C531944AECB00993175 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
