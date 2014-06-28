@@ -34,8 +34,8 @@
 		8B5EFF08195F064400B354F9 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5EFF04195F064400B354F9 /* AuthViewController.swift */; };
 		8B5EFF09195F064400B354F9 /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5EFF05195F064400B354F9 /* TweetsViewController.swift */; };
 		8B5EFF0A195F064400B354F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B5EFF06195F064400B354F9 /* Main.storyboard */; };
-		8B9F50F41944A5AB00894629 /* SwifteriOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F50F31944A5AB00894629 /* SwifteriOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8B9F51181944A61D00894629 /* SwifterMac.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F51171944A61D00894629 /* SwifterMac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B5EFF15195F09F600B354F9 /* Swifter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5EFF14195F09F600B354F9 /* Swifter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B5EFF16195F09F600B354F9 /* Swifter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5EFF14195F09F600B354F9 /* Swifter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B9F514D1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */; };
 		8B9F514E1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */; };
 		8B9F51531944A8DC00894629 /* String+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514A1944A8DC00894629 /* String+Swifter.swift */; };
@@ -140,12 +140,10 @@
 		8B5EFF04195F064400B354F9 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8B5EFF05195F064400B354F9 /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
 		8B5EFF06195F064400B354F9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8B5EFF11195F087000B354F9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B5EFF14195F09F600B354F9 /* Swifter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Swifter.h; sourceTree = "<group>"; };
 		8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwifteriOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B9F50F21944A5AB00894629 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B9F50F31944A5AB00894629 /* SwifteriOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwifteriOS.h; sourceTree = "<group>"; };
 		8B9F51131944A61D00894629 /* SwifterMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwifterMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B9F51161944A61D00894629 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B9F51171944A61D00894629 /* SwifterMac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwifterMac.h; sourceTree = "<group>"; };
 		8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Swifter.swift"; sourceTree = "<group>"; };
 		8B9F514A1944A8DC00894629 /* String+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Swifter.swift"; sourceTree = "<group>"; };
 		8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swifter-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -251,14 +249,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8B5EFF10195F085B00B354F9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8B5EFF11195F087000B354F9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		8B9F50E41944A5AB00894629 = {
 			isa = PBXGroup;
 			children = (
+				8B9F51461944A8DC00894629 /* Swifter */,
 				8B300C201944AA1A00993175 /* SwifterDemoiOS */,
 				8B300C481944AECB00993175 /* SwifterDemoMac */,
-				8B9F51461944A8DC00894629 /* SwifterCommon */,
-				8B9F50F01944A5AB00894629 /* SwifteriOS */,
-				8B9F51141944A61D00894629 /* SwifterMac */,
 				8B9F50EF1944A5AB00894629 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -275,43 +279,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8B9F50F01944A5AB00894629 /* SwifteriOS */ = {
+		8B9F51461944A8DC00894629 /* Swifter */ = {
 			isa = PBXGroup;
 			children = (
-				8B9F50F31944A5AB00894629 /* SwifteriOS.h */,
-				8B9F50F11944A5AB00894629 /* Supporting Files */,
-			);
-			path = SwifteriOS;
-			sourceTree = "<group>";
-		};
-		8B9F50F11944A5AB00894629 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8B9F50F21944A5AB00894629 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		8B9F51141944A61D00894629 /* SwifterMac */ = {
-			isa = PBXGroup;
-			children = (
-				8B9F51171944A61D00894629 /* SwifterMac.h */,
-				8B9F51151944A61D00894629 /* Supporting Files */,
-			);
-			path = SwifterMac;
-			sourceTree = "<group>";
-		};
-		8B9F51151944A61D00894629 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8B9F51161944A61D00894629 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		8B9F51461944A8DC00894629 /* SwifterCommon */ = {
-			isa = PBXGroup;
-			children = (
+				8B5EFF14195F09F600B354F9 /* Swifter.h */,
 				8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */,
 				8B9F514C1944A8DC00894629 /* Swifter.swift */,
 				8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */,
@@ -338,8 +309,9 @@
 				8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */,
 				8B33CA3E19587C6D00739FCB /* JSON.swift */,
 				8B9F51591944A8E100894629 /* Extensions */,
+				8B5EFF10195F085B00B354F9 /* Supporting Files */,
 			);
-			path = SwifterCommon;
+			path = Swifter;
 			sourceTree = "<group>";
 		};
 		8B9F51591944A8E100894629 /* Extensions */ = {
@@ -359,8 +331,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B9F50F41944A5AB00894629 /* SwifteriOS.h in Headers */,
 				8B9F51551944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */,
+				8B5EFF15195F09F600B354F9 /* Swifter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,8 +340,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B9F51181944A61D00894629 /* SwifterMac.h in Headers */,
 				8B9F51561944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */,
+				8B5EFF16195F09F600B354F9 /* Swifter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -887,12 +859,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwifteriOS/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Swifter/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "SwifterCommon/Swifter-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -903,12 +875,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwifteriOS/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Swifter/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "SwifterCommon/Swifter-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -925,7 +897,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = SwifterMac/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Swifter/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -933,7 +905,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "SwifterCommon/Swifter-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -947,7 +919,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = SwifterMac/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Swifter/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -955,7 +927,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "SwifterCommon/Swifter-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
 			};
 			name = Release;
 		};

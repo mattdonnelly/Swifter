@@ -26,12 +26,6 @@
 import Foundation
 import Accounts
 
-#if os(iOS)
-    import UIKit
-#else
-    import AppKit
-#endif
-
 class Swifter {
 
     typealias JSONSuccessHandler = (json: JSON, response: NSHTTPURLResponse) -> Void
