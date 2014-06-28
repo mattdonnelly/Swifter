@@ -1,6 +1,6 @@
 //
-//  HMACSHA1Signature.m
-//  Swifter
+//  TweetsViewController.swift
+//  SwifterDemoiOS
 //
 //  Copyright (c) 2014 Matt Donnelly.
 //
@@ -23,20 +23,35 @@
 //  THE SOFTWARE.
 //
 
-#import "HMACSHA1Signature.h"
-#import <CommonCrypto/CommonHMAC.h>
+import UIKit
+import SwifteriOS
 
-@implementation HMACSHA1Signature
+class TweetsViewController: UITableViewController {
 
-+ (NSData *)signatureForKey:(NSData *)keyData data:(NSData *)data
-{
-    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
-    CCHmacContext cx;
-    CCHmacInit(&cx, kCCHmacAlgSHA1, keyData.bytes, keyData.length);
-    CCHmacUpdate(&cx, data.bytes, data.length);
-    CCHmacFinal(&cx, digest);
+    var tweets : JSONValue[] = []
 
-    return [NSData dataWithBytes:digest length:CC_SHA1_DIGEST_LENGTH];
+    override func viewWillLayoutSubviews()
+    {
+        super.viewWillLayoutSubviews()
+        self.tableView.contentInset = UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0)
+        self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0)
+    }
+
+    override func didReceiveMemoryWarning()
+    {
+        super.didReceiveMemoryWarning()
+    }
+
+    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+        return tweets.count
+    }
+
+    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: nil)
+
+        cell.textLabel.text = tweets[indexPath.row]["text"].string
+        
+        return cell
+    }
+
 }
-
-@end
