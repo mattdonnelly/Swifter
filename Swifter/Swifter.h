@@ -1,6 +1,6 @@
 //
-//  SwifterMac.h
-//  SwifterMac
+//  Swifter.h
+//  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
 //
@@ -23,9 +23,8 @@
 //  THE SOFTWARE.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 
-FOUNDATION_EXPORT double SwifterMacVersionNumber;
+FOUNDATION_EXPORT double SwifterVersionNumber;
 
-FOUNDATION_EXPORT const unsigned char SwifterMacVersionString[];
-
+FOUNDATION_EXPORT const unsigned char SwifterVersionString[];

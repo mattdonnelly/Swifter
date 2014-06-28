@@ -102,8 +102,7 @@ class AuthViewController: UIViewController
             // Successfully fetched timeline, so lets create and push the table view
             let tweetsViewController = self.storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as TweetsViewController
                 
-            if statuses
-            {
+            if statuses {
                 tweetsViewController.tweets = statuses!
                 self.presentViewController(tweetsViewController, animated: true, completion: nil)
             }
