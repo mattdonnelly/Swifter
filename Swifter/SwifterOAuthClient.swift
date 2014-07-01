@@ -70,34 +70,32 @@ class SwifterOAuthClient: SwifterClientProtocol  {
         request.start()
     }
 
-    func post(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    func post(path: String, baseURL: NSURL, var parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let url = NSURL(string: path, relativeToURL: baseURL)
         let method = "POST"
-
-        var localParameters = parameters
 
         var postData: NSData?
         var postDataKey: String?
 
-        if let key: AnyObject = localParameters[Swifter.DataParameters.dataKey] {
+        if let key: AnyObject = parameters[Swifter.DataParameters.dataKey] {
             if let keyString = key as? String {
-                postData = localParameters[postDataKey!] as? NSData
+                postData = parameters[postDataKey!] as? NSData
 
-                localParameters.removeValueForKey(Swifter.DataParameters.dataKey)
-                localParameters.removeValueForKey(postDataKey!)
+                parameters.removeValueForKey(Swifter.DataParameters.dataKey)
+                parameters.removeValueForKey(postDataKey!)
             }
         }
 
         var postDataFileName: String?
-        if let fileName: AnyObject = localParameters[Swifter.DataParameters.fileNameKey] {
+        if let fileName: AnyObject = parameters[Swifter.DataParameters.fileNameKey] {
             if let fileNameString = fileName as? String {
                 postDataFileName = fileNameString
-                localParameters.removeValueForKey(fileNameString)
+                parameters.removeValueForKey(fileNameString)
             }
         }
 
-        let request = SwifterHTTPRequest(URL: url, method: method, parameters: localParameters)
-        request.headers = ["Authorization": self.authorizationHeaderForMethod(method, url: url, parameters: localParameters, isMediaUpload: postData != nil)]
+        let request = SwifterHTTPRequest(URL: url, method: method, parameters: parameters)
+        request.headers = ["Authorization": self.authorizationHeaderForMethod(method, url: url, parameters: parameters, isMediaUpload: postData != nil)]
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
