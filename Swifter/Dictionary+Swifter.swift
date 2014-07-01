@@ -28,25 +28,21 @@ import Foundation
 extension Dictionary {
 
     func join(other: Dictionary) -> Dictionary {
-        var joinedDictionary = Dictionary()
-
-        for (key, value) in self {
-            joinedDictionary.updateValue(value, forKey: key)
-        }
+        var joinedDictionary = self
 
         for (key, value) in other {
-            joinedDictionary.updateValue(value, forKey: key)
+            joinedDictionary[key] = value
         }
 
         return joinedDictionary
     }
 
-    func filter(predicate: (key: KeyType, value: ValueType) -> Bool) -> Dictionary {
+    func filter(predicate: Element -> Bool) -> Dictionary {
         var filteredDictionary = Dictionary()
 
         for (key, value) in self {
-            if predicate(key: key, value: value) {
-                filteredDictionary.updateValue(value, forKey: key)
+            if predicate(key, value) {
+                filteredDictionary[key] = value
             }
         }
 
