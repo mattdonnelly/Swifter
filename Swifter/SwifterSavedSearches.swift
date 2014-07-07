@@ -32,7 +32,7 @@ extension Swifter {
 
     Returns the authenticated user's saved search queries.
     */
-    func getSavedSearchesListWithSuccess(success: ((savedSearches: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
+    func getSavedSearchesListWithSuccess(success: ((savedSearches: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "saved_searches/list.json"
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {

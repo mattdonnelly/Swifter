@@ -51,7 +51,7 @@ extension Swifter {
 
     Returns the list of languages supported by Twitter along with their ISO 639-1 code. The ISO 639-1 code is the two letter value to use if you include lang with any of your requests.
     */
-    func getHelpLanguagesWithSuccess(success: ((languages: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
+    func getHelpLanguagesWithSuccess(success: ((languages: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "help/languages.json"
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
@@ -112,7 +112,7 @@ extension Swifter {
 
     Read more about REST API Rate Limiting in v1.1 and review the limits.
     */
-    func getRateLimitsForResources(resources: String[], success: ((rateLimitStatus: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    func getRateLimitsForResources(resources: [String], success: ((rateLimitStatus: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "application/rate_limit_status.json"
 
         var parameters = Dictionary<String, AnyObject>()

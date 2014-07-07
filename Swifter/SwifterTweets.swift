@@ -32,7 +32,7 @@ extension Swifter {
 
     Returns up to 100 of the first retweets of a given tweet.
     */
-    func getStatusesRetweetsWithID(id: Int, count: Int?, trimUser: Bool?, success: ((statuses: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
+    func getStatusesRetweetsWithID(id: Int, count: Int?, trimUser: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "statuses/retweets/\(id).json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -321,7 +321,7 @@ extension Swifter {
 
     This method offers similar data to GET statuses/retweets/:id and replaces API v1's GET statuses/:id/retweeted_by/ids method.
     */
-    func getStatusesRetweetersWithID(id: Int, cursor: Int?, stringifyIDs: Bool?, success: ((ids: JSONValue[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
+    func getStatusesRetweetersWithID(id: Int, cursor: Int?, stringifyIDs: Bool?, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "statuses/retweeters/ids.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -352,7 +352,7 @@ extension Swifter {
 
     Returns fully-hydrated tweet objects for up to 100 tweets per request, as specified by comma-separated values passed to the id parameter. This method is especially useful to get the details (hydrate) a collection of Tweet IDs. GET statuses/show/:id is used to retrieve a single tweet object.
     */
-    func getStatusesLookupTweetIDs(tweetIDs: Int[], includeEntities: Bool?, map: Bool?, success: ((statuses: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
+    func getStatusesLookupTweetIDs(tweetIDs: [Int], includeEntities: Bool?, map: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "statuses/lookup.json"
 
         var parameters = Dictionary<String, AnyObject>()

@@ -55,7 +55,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     var parameters: Dictionary<String, AnyObject>
     var encodeParameters: Bool
 
-    var uploadData: DataUpload[]
+    var uploadData: [DataUpload]
 
     var dataEncoding: NSStringEncoding
 
@@ -158,10 +158,10 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
                         queryString = nonOAuthParameters.queryStringWithEncoding()
                     }
 
-                    let data = queryString.dataUsingEncoding(self.dataEncoding)
-
-                    self.request!.setValue(String(data.length), forHTTPHeaderField: "Content-Length")
-                    self.request!.HTTPBody = data
+                    if let data = queryString.dataUsingEncoding(self.dataEncoding) {
+                        self.request!.setValue(String(data.length), forHTTPHeaderField: "Content-Length")
+                        self.request!.HTTPBody = data
+                    }
                 }
             }
         }
