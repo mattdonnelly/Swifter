@@ -33,7 +33,7 @@ class AuthViewController: UIViewController
     var swifter: Swifter!
 
     // Default to using the iOS account framework for handling twitter auth
-    let useACAccount = false
+    let useACAccount = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,8 +65,7 @@ class AuthViewController: UIViewController
                     {
                         self.alertWithTitle("Error", message: "There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
                     }
-                    else
-                    {
+                    else {
                         let twitterAccount = twitterAccounts[0] as ACAccount
                         self.swifter = Swifter(account: twitterAccount)
                         self.fetchTwitterHomeStream()
