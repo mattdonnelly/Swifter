@@ -33,7 +33,7 @@ class AuthViewController: UIViewController
     var swifter: Swifter!
 
     // Default to using the iOS account framework for handling twitter auth
-    let useACAccount = true
+    let useACAccount = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +72,9 @@ class AuthViewController: UIViewController
                         self.fetchTwitterHomeStream()
                     }
                 }
+                else {
+                    self.alertWithTitle("Error", message: error.localizedDescription)
+                }
             }
         }
         else
@@ -80,8 +83,6 @@ class AuthViewController: UIViewController
 
             swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success"), success: {
                 accessToken, response in
-
-                self.alertWithTitle("Success", message: "Logged into Twitter")
 
                 self.fetchTwitterHomeStream()
 
