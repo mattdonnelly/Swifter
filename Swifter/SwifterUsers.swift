@@ -284,7 +284,7 @@ extension Swifter {
 
     Returns a collection of user objects that the authenticating user is blocking.
     */
-    func getBlockListWithIncludeEntities(includeEntities: Bool?, skipStatus: Bool?, cursor: Int?, success: ((users: JSONValue[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
+    func getBlockListWithIncludeEntities(includeEntities: Bool?, skipStatus: Bool?, cursor: Int?, success: ((users: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "blocks/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -316,7 +316,7 @@ extension Swifter {
 
     Returns an array of numeric user ids the authenticating user is blocking.
     */
-    func getBlockIDsWithStingifyIDs(stringifyIDs: String?, cursor: Int?, success: ((ids: JSONValue[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler) {
+    func getBlockIDsWithStingifyIDs(stringifyIDs: String?, cursor: Int?, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler) {
         let path = "blocks/ids.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -455,7 +455,7 @@ extension Swifter {
     - If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown.
     - You are strongly encouraged to use a POST for larger requests.
     */
-    func getUsersLookupWithScreenNames(screenNames: String[], includeEntities: Bool?, success: ((users: JSONValue[]?) -> Void)?, failure: FailureHandler) {
+    func getUsersLookupWithScreenNames(screenNames: [String], includeEntities: Bool?, success: ((users: [JSONValue]?) -> Void)?, failure: FailureHandler) {
         let path = "users/lookup.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -474,7 +474,7 @@ extension Swifter {
             }, failure: failure)
     }
 
-    func getUsersLookupWithUserIDs(userIDs: Int[], includeEntities: Bool?, success: ((users: JSONValue[]?) -> Void)?, failure: FailureHandler) {
+    func getUsersLookupWithUserIDs(userIDs: [Int], includeEntities: Bool?, success: ((users: [JSONValue]?) -> Void)?, failure: FailureHandler) {
         let path = "users/lookup.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -545,7 +545,7 @@ extension Swifter {
 
     Only the first 1,000 matching results are available.
     */
-    func getUsersSearchWithQuery(q: String, page: Int?, count: Int?, includeEntities: Bool?, success: ((users: JSONValue[]?) -> Void)?, failure: FailureHandler) {
+    func getUsersSearchWithQuery(q: String, page: Int?, count: Int?, includeEntities: Bool?, success: ((users: [JSONValue]?) -> Void)?, failure: FailureHandler) {
         let path = "users/search/json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -575,7 +575,7 @@ extension Swifter {
 
     Returns a collection of users that the specified user can "contribute" to.
     */
-    func getUsersContributeesWithUserID(id: Int, includeEntities: Bool?, skipStatus: Bool?, success: ((users: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
+    func getUsersContributeesWithUserID(id: Int, includeEntities: Bool?, skipStatus: Bool?, success: ((users: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "users/contributees.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -597,7 +597,7 @@ extension Swifter {
             }, failure: failure)
     }
 
-    func getUsersContributeesWithScreenName(screenName: String, includeEntities: Bool?, skipStatus: Bool?, success: ((users: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
+    func getUsersContributeesWithScreenName(screenName: String, includeEntities: Bool?, skipStatus: Bool?, success: ((users: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "users/contributees.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -624,7 +624,7 @@ extension Swifter {
 
     Returns a collection of users who can contribute to the specified account.
     */
-    func getUsersContributorsWithUserID(id: Int, includeEntities: Bool?, skipStatus: Bool?, success: ((users: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
+    func getUsersContributorsWithUserID(id: Int, includeEntities: Bool?, skipStatus: Bool?, success: ((users: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "users/contributors.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -646,7 +646,7 @@ extension Swifter {
             }, failure: failure)
     }
 
-    func getUsersContributorsWithScreenName(screenName: String, includeEntities: Bool?, skipStatus: Bool?, success: ((users: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
+    func getUsersContributorsWithScreenName(screenName: String, includeEntities: Bool?, skipStatus: Bool?, success: ((users: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "users/contributors.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -828,7 +828,7 @@ extension Swifter {
 
     Returns an array of numeric user ids the authenticating user has muted.
     */
-    func getMutesUsersIDsWithCursor(cursor: Int?, success: ((ids: JSONValue[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
+    func getMutesUsersIDsWithCursor(cursor: Int?, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "mutes/users/ids.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -854,7 +854,7 @@ extension Swifter {
     
     Returns an array of user objects the authenticating user has muted.
     */
-    func getMutesUsersListWithCursor(cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: ((users: JSONValue[]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
+    func getMutesUsersListWithCursor(cursor: Int?, includeEntities: Bool?, skipStatus: Bool?, success: ((users: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "mutes/users/list.json"
         
         var parameters = Dictionary<String, AnyObject>()

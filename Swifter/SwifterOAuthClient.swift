@@ -134,12 +134,12 @@ class SwifterOAuthClient: SwifterClientProtocol  {
 
         authorizationParameters["oauth_signature"] = self.oauthSignatureForMethod(method, url: url, parameters: finalParameters, accessToken: self.credential?.accessToken)
 
-        let authorizationParameterComponents = authorizationParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding).componentsSeparatedByString("&") as String[]
+        var authorizationParameterComponents = authorizationParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding).componentsSeparatedByString("&") as [String]
         authorizationParameterComponents.sort { $0 < $1 }
 
-        var headerComponents = String[]()
+        var headerComponents = [String]()
         for component in authorizationParameterComponents {
-            let subcomponent = component.componentsSeparatedByString("=") as String[]
+            let subcomponent = component.componentsSeparatedByString("=") as [String]
             if subcomponent.count == 2 {
                 headerComponents.append("\(subcomponent[0])=\"\(subcomponent[1])\"")
             }
@@ -158,7 +158,7 @@ class SwifterOAuthClient: SwifterClientProtocol  {
 
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"
 
-        let parameterComponents = parameters.urlEncodedQueryStringWithEncoding(self.dataEncoding).componentsSeparatedByString("&") as String[]
+        var parameterComponents = parameters.urlEncodedQueryStringWithEncoding(self.dataEncoding).componentsSeparatedByString("&") as [String]
         parameterComponents.sort { $0 < $1 }
 
         let parameterString = parameterComponents.bridgeToObjectiveC().componentsJoinedByString("&")

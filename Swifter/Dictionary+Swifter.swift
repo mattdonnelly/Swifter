@@ -50,7 +50,7 @@ extension Dictionary {
     }
 
     func queryStringWithEncoding() -> String {
-        var parts = String[]()
+        var parts = [String]()
 
         for (key, value) in self {
             let keyString: String = "\(key)"
@@ -63,7 +63,7 @@ extension Dictionary {
     }
 
     func urlEncodedQueryStringWithEncoding(encoding: NSStringEncoding) -> String {
-        var parts = String[]()
+        var parts = [String]()
 
         for (key, value) in self {
             let keyString: String = "\(key)".urlEncodedStringWithEncoding(encoding)

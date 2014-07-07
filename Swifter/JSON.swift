@@ -108,7 +108,7 @@ enum JSON : Equatable, Printable {
                 }
 
             case let array as NSArray:
-                var newArray : JSONValue[] = []
+                var newArray : [JSONValue] = []
                 for item : AnyObject in array {
                     newArray += JSON(item)
                 }
@@ -240,13 +240,15 @@ enum JSON : Equatable, Printable {
     static func parseJSONData(jsonData : NSData, error: NSErrorPointer) -> JSON? {
         var JSONObject : AnyObject! = NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers, error: error)
 
-        return JSONObject == nil ? nil : JSON(JSONObject)
+        return !(JSONObject) ? nil : JSON(JSONObject)
     }
 
     static func parseJSONString(jsonString : String, error: NSErrorPointer) -> JSON? {
-        var data = jsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-
-        return parseJSONData(data, error: error)
+        if let data = jsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+            return parseJSONData(data, error: error)
+        }
+        
+        return nil
     }
 
     func stringify(indent: String = "  ") -> String? {

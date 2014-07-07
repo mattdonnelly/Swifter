@@ -38,7 +38,7 @@ extension Swifter {
 
     At least one predicate parameter (follow, locations, or track) must be specified.
     */
-    func postStatusesFilterWithFollow(follow: String[]?, track: String[]?, locations: String[]?, delimited: Bool?, stallWarnings: Bool?, progress: ((status: Dictionary<String, JSONValue>?) -> Void)?, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)?, failure: FailureHandler?) {
+    func postStatusesFilterWithFollow(follow: [String]?, track: [String]?, locations: [String]?, delimited: Bool?, stallWarnings: Bool?, progress: ((status: Dictionary<String, JSONValue>?) -> Void)?, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)?, failure: FailureHandler?) {
         assert(follow || track || locations, "At least one predicate parameter (follow, locations, or track) must be specified")
 
         let path = "statuses/filter.json"
@@ -174,7 +174,7 @@ extension Swifter {
 
     Streams messages for a single user, as described in User streams https://dev.twitter.com/docs/streaming-apis/streams/user
     */
-    func getUserStreamDelimited(delimited: Bool?, stallWarnings: Bool?, includeMessagesFromFollowedAccounts: Bool?, includeReplies: Bool?, track: String[]?, locations: String[]?, stringifyFriendIDs: Bool?, progress: ((status: Dictionary<String, JSONValue>?) -> Void)?, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)?, failure: FailureHandler?) {
+    func getUserStreamDelimited(delimited: Bool?, stallWarnings: Bool?, includeMessagesFromFollowedAccounts: Bool?, includeReplies: Bool?, track: [String]?, locations: [String]?, stringifyFriendIDs: Bool?, progress: ((status: Dictionary<String, JSONValue>?) -> Void)?, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "user.json"
 
         var parameters = Dictionary<String, AnyObject>()

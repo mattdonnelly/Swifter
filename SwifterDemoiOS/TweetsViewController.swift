@@ -28,7 +28,7 @@ import SwifteriOS
 
 class TweetsViewController: UITableViewController {
 
-    var tweets : JSONValue[] = []
+    var tweets : [JSONValue] = []
 
     override func viewWillLayoutSubviews()
     {

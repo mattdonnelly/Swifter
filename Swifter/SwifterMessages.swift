@@ -32,7 +32,7 @@ extension Swifter {
 
     Returns the 20 most recent direct messages sent to the authenticating user. Includes detailed information about the sender and recipient user. You can request up to 200 direct messages per call, up to a maximum of 800 incoming DMs.
     */
-    func getDirectMessagesSinceID(sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, skipStatus: Bool?, success: ((messages: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
+    func getDirectMessagesSinceID(sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, skipStatus: Bool?, success: ((messages: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "direct_messages.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -66,7 +66,7 @@ extension Swifter {
 
     Returns the 20 most recent direct messages sent by the authenticating user. Includes detailed information about the sender and recipient user. You can request up to 200 direct messages per call, up to a maximum of 800 outgoing DMs.
     */
-    func getSentDirectMessagesSinceID(sinceID: Int?, maxID: Int?, count: Int?, page: Int?, includeEntities: Bool?, success: ((messages: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
+    func getSentDirectMessagesSinceID(sinceID: Int?, maxID: Int?, count: Int?, page: Int?, includeEntities: Bool?, success: ((messages: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "direct_messages/sent.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -100,7 +100,7 @@ extension Swifter {
 
     Returns a single direct message, specified by an id parameter. Like the /1.1/direct_messages.format request, this method will include the user objects of the sender and recipient.
     */
-    func getDirectMessagesShowWithID(id: Int, success: ((messages: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
+    func getDirectMessagesShowWithID(id: Int, success: ((messages: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "direct_messages/show.json"
 
         var parameters = Dictionary<String, AnyObject>()

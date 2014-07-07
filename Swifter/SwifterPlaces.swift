@@ -89,7 +89,7 @@ extension Swifter {
 
     This is the recommended method to use find places that can be attached to statuses/update. Unlike GET geo/reverse_geocode which provides raw data access, this endpoint can potentially re-order places with regards to the user who is authenticated. This approach is also preferred for interactive place matching with the user.
     */
-    func getGeoSearchWithLat(lat: Double?, long: Double?, query: String?, ipAddress: String?, accuracy: String?, granularity: String?, maxResults: Int?, containedWithin: String?, attributeStreetAddress: String?, callback: String?, success: ((places: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
+    func getGeoSearchWithLat(lat: Double?, long: Double?, query: String?, ipAddress: String?, accuracy: String?, granularity: String?, maxResults: Int?, containedWithin: String?, attributeStreetAddress: String?, callback: String?, success: ((places: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         assert(lat || long || query || ipAddress, "At least one of the following parameters must be provided to this resource: lat, long, ipAddress, or query")
 
         let path = "geo/search.json"
@@ -145,7 +145,7 @@ extension Swifter {
 
     The token contained in the response is the token needed to be able to create a new place.
     */
-    func getGeoSimilarPlacesWithLat(lat: Double, long: Double, name: String, containedWithin: String?, attributeStreetAddress: String?, callback: String?, success: ((places: JSONValue[]?) -> Void)?, failure: FailureHandler?) {
+    func getGeoSimilarPlacesWithLat(lat: Double, long: Double, name: String, containedWithin: String?, attributeStreetAddress: String?, callback: String?, success: ((places: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "geo/similar_places.json"
 
         var parameters = Dictionary<String, AnyObject>()

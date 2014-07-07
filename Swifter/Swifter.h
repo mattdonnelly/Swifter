@@ -27,4 +27,4 @@
 
 FOUNDATION_EXPORT double SwifterVersionNumber;
 
-FOUNDATION_EXPORT const unsigned char SwifterVersionString[];
+FOUNDATION_EXPORT const unsigned char SwifterVersion[String;

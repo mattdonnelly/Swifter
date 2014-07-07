@@ -55,7 +55,7 @@ class AuthViewController: UIViewController
             let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
 
             // Prompt the user for permission to their twitter account stored in the phone's settings
-            accountStore.requestAccessToAccountsWithType(accountType) {
+            accountStore.requestAccessToAccountsWithType(accountType, options: nil) {
                 granted, error in
 
                 if granted {
@@ -97,7 +97,7 @@ class AuthViewController: UIViewController
         }
 
         self.swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
-            (statuses: JSONValue[]?) in
+            (statuses: [JSONValue]?) in
                 
             // Successfully fetched timeline, so lets create and push the table view
             let tweetsViewController = self.storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as TweetsViewController
