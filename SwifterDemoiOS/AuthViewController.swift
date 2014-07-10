@@ -30,20 +30,17 @@ import SwifteriOS
 
 class AuthViewController: UIViewController
 {
-    var swifter: Swifter!
+    var swifter: Swifter
 
     // Default to using the iOS account framework for handling twitter auth
     let useACAccount = true
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    init(coder aDecoder: NSCoder!) {
+        self.swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
+        super.init(coder: aDecoder)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
-    @IBAction func didTouchUpInsideLoginButton(sender : AnyObject) {
+    @IBAction func didTouchUpInsideLoginButton(sender: AnyObject) {
         let failureHandler: ((NSError) -> Void) = {
             error in
 
@@ -76,10 +73,7 @@ class AuthViewController: UIViewController
                 }
             }
         }
-        else
-        {
-            self.swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
-
+        else {
             swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success"), success: {
                 accessToken, response in
 
