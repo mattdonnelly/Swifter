@@ -1470,7 +1470,7 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(list: json.object)
@@ -1486,7 +1486,7 @@ extension Swifter {
         parameters["slug"] = slug
         parameters["owner_id"] = ownerID
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(list: json.object)
@@ -1502,7 +1502,7 @@ extension Swifter {
         parameters["slug"] = slug
         parameters["owner_screen_name"] = ownerScreenName
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(list: json.object)
