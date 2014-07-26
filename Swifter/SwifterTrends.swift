@@ -19,7 +19,7 @@ extension Swifter {
 
     This information is cached for 5 minutes. Requesting more frequently than that will not return any more data, and will count against your rate limit usage.
     */
-    func getTrendsPlaceWithWOEID(id: Int, excludeHashtags: Bool?, success: ((trends: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getTrendsPlaceWithWOEID(id: Int, excludeHashtags: Bool?, success: ((trends: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "trends/place.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -49,7 +49,7 @@ extension Swifter {
 
     A WOEID is a Yahoo! Where On Earth ID.
     */
-    func getTrendsAvailableWithSuccess(success: ((trends: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getTrendsAvailableWithSuccess(success: ((trends: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "trends/available.json"
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
@@ -70,7 +70,7 @@ extension Swifter {
 
     A WOEID is a Yahoo! Where On Earth ID.
     */
-    func getTrendsClosestWithLat(lat: Int, long: Int, success: ((trends: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getTrendsClosestWithLat(lat: Int, long: Int, success: ((trends: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "trends/closest.json"
 
         var parameters = Dictionary<String, AnyObject>()

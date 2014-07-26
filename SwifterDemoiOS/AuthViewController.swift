@@ -28,8 +28,8 @@ import Accounts
 import Social
 import SwifteriOS
 
-class AuthViewController: UIViewController
-{
+class AuthViewController: UIViewController {
+    
     var swifter: Swifter
 
     // Default to using the iOS account framework for handling twitter auth

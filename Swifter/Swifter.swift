@@ -26,39 +26,45 @@
 import Foundation
 import Accounts
 
-class Swifter {
+public class Swifter {
 
-    typealias JSONSuccessHandler = (json: JSON, response: NSHTTPURLResponse) -> Void
-    typealias FailureHandler = (error: NSError) -> Void
+    // MARK: - Types
 
-    struct CallbackNotification {
+    public typealias JSONSuccessHandler = (json: JSON, response: NSHTTPURLResponse) -> Void
+    public typealias FailureHandler = (error: NSError) -> Void
+
+    internal struct CallbackNotification {
         static let notificationName = "SwifterCallbackNotificationName"
         static let optionsURLKey = "SwifterCallbackNotificationOptionsURLKey"
     }
 
-    struct SwifterError {
+    internal struct SwifterError {
         static let domain = "SwifterErrorDomain"
         static let appOnlyAuthenticationErrorCode = 1
     }
 
-    struct DataParameters {
+    internal struct DataParameters {
         static let dataKey = "SwifterDataParameterKey"
         static let fileNameKey = "SwifterDataParameterFilename"
     }
 
-    var apiURL: NSURL
-    var uploadURL: NSURL
-    var streamURL: NSURL
-    var userStreamURL: NSURL
-    var siteStreamURL: NSURL
+    // MARK: - Properties
 
-    var client: SwifterClientProtocol
+    internal(set) var apiURL: NSURL
+    internal(set) var uploadURL: NSURL
+    internal(set) var streamURL: NSURL
+    internal(set) var userStreamURL: NSURL
+    internal(set) var siteStreamURL: NSURL
 
-    convenience init(consumerKey: String, consumerSecret: String) {
+    internal var client: SwifterClientProtocol
+
+    // MARK: - Initializers
+
+    public convenience init(consumerKey: String, consumerSecret: String) {
         self.init(consumerKey: consumerKey, consumerSecret: consumerSecret, appOnly: false)
     }
 
-    init(consumerKey: String, consumerSecret: String, appOnly: Bool) {
+    public init(consumerKey: String, consumerSecret: String, appOnly: Bool) {
         if appOnly {
             self.client = SwifterAppOnlyClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
         }
@@ -73,7 +79,7 @@ class Swifter {
         self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")
     }
 
-    init(consumerKey: String, consumerSecret: String, oauthToken: String, oauthTokenSecret: String) {
+    public init(consumerKey: String, consumerSecret: String, oauthToken: String, oauthTokenSecret: String) {
         self.client = SwifterOAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret , accessToken: oauthToken, accessTokenSecret: oauthTokenSecret)
 
         self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")
@@ -83,7 +89,7 @@ class Swifter {
         self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")
     }
 
-    init(account: ACAccount) {
+    public init(account: ACAccount) {
         self.client = SwifterAccountsClient(account: account)
 
         self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")
@@ -97,7 +103,9 @@ class Swifter {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
-    func jsonRequestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: JSONSuccessHandler?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    // MARK: - JSON Requests
+
+    internal func jsonRequestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: JSONSuccessHandler?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let jsonDownloadProgressHandler: SwifterHTTPRequest.DownloadProgressHandler = {
             data, _, _, response in
 
@@ -114,7 +122,7 @@ class Swifter {
                 let jsonChunks = jsonString.componentsSeparatedByString("\r\n") as [String]
 
                 for chunk in jsonChunks {
-                    if chunk.utf16count == 0 {
+                    if chunk.utf16Count == 0 {
                         continue
                     }
 
@@ -147,11 +155,11 @@ class Swifter {
         }
     }
 
-    func getJSONWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: JSONSuccessHandler?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    internal func getJSONWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: JSONSuccessHandler?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         self.jsonRequestWithPath(path, baseURL: baseURL, method: "GET", parameters: parameters, uploadProgress: uploadProgress, downloadProgress: downloadProgress, success: success, failure: failure)
     }
 
-    func postJSONWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: JSONSuccessHandler?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    internal func postJSONWithPath(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: JSONSuccessHandler?, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         self.jsonRequestWithPath(path, baseURL: baseURL, method: "POST", parameters: parameters, uploadProgress: uploadProgress, downloadProgress: downloadProgress, success: success, failure: failure)
     }
     

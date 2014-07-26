@@ -26,14 +26,37 @@
 import Foundation
 
 extension String {
+
+    internal func indexOf(sub: String) -> Int? {
+        var pos: Int?
+
+        if let range = self.rangeOfString(sub) {
+            if !range.isEmpty {
+                pos = distance(self.startIndex, range.startIndex)
+            }
+        }
+
+        return pos
+    }
+
+    internal subscript (r: Range<Int>) -> String {
+        get {
+            let startIndex = advance(self.startIndex, r.startIndex)
+            let endIndex = advance(startIndex, r.endIndex - r.startIndex)
+
+            return self[Range(start: startIndex, end: endIndex)]
+        }
+    }
     
     func urlEncodedStringWithEncoding(encoding: NSStringEncoding) -> String {
         let charactersToBeEscaped = ":/?&=;+!@#$()',*" as CFStringRef
         let charactersToLeaveUnescaped = "[]." as CFStringRef
 
-        let result = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, self.bridgeToObjectiveC(), charactersToLeaveUnescaped, charactersToBeEscaped, CFStringConvertNSStringEncodingToEncoding(encoding)) as String
+        let str = self as NSString
 
-        return result
+        let result = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, str as CFString, charactersToLeaveUnescaped, charactersToBeEscaped, CFStringConvertNSStringEncodingToEncoding(encoding)) as NSString
+
+        return result as String
     }
 
     func parametersFromQueryString() -> Dictionary<String, String> {

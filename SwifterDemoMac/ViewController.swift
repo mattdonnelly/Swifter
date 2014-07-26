@@ -29,7 +29,7 @@ import SwifterMac
 
 class ViewController: NSViewController {
 
-    let useACAccount = false
+    let useACAccount = true
                             
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,7 @@ class ViewController: NSViewController {
             let accountStore = ACAccountStore()
             let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
 
-            accountStore.requestAccessToAccountsWithType(accountType) {
+            accountStore.requestAccessToAccountsWithType(accountType, options: nil) {
                 granted, error in
 
                 if granted {

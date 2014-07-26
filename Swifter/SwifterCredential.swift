@@ -26,23 +26,23 @@
 import Foundation
 import Accounts
 
-class SwifterCredential {
+public class SwifterCredential {
 
-    struct OAuthAccessToken {
+    public struct OAuthAccessToken {
 
-        var key: String
-        var secret: String
-        var verifier: String?
+        internal(set) var key: String
+        internal(set) var secret: String
+        internal(set) var verifier: String?
 
-        var screenName: String?
-        var userID: String?
+        internal(set) var screenName: String?
+        internal(set) var userID: String?
 
-        init(key: String, secret: String) {
+        internal init(key: String, secret: String) {
             self.key = key
             self.secret = secret
         }
 
-        init(queryString: String) {
+        internal init(queryString: String) {
             var attributes = queryString.parametersFromQueryString()
 
             self.key = attributes["oauth_token"]!
@@ -54,14 +54,14 @@ class SwifterCredential {
         
     }
 
-    var accessToken: OAuthAccessToken?
-    var account: ACAccount?
+    internal(set) var accessToken: OAuthAccessToken?
+    internal(set) var account: ACAccount?
 
-    init(accessToken: OAuthAccessToken) {
+    internal init(accessToken: OAuthAccessToken) {
         self.accessToken = accessToken
     }
 
-    init(account: ACAccount) {
+    internal init(account: ACAccount) {
         self.account = account
     }
 

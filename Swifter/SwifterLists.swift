@@ -1335,7 +1335,7 @@ extension Swifter {
 
     Updates the specified list. The authenticated user must own the list to be able to update it.
     */
-    func postListsUpdateWithListID(listID: Int, name: String?, public: Bool?, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    func postListsUpdateWithListID(listID: Int, name: String?, publicMode: Bool?, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -1344,8 +1344,8 @@ extension Swifter {
         if name {
             parameters["name"] = name!
         }
-        if public {
-            if public! {
+        if publicMode {
+            if publicMode! {
                 parameters["mode"] = "public"
             }
             else {
@@ -1365,7 +1365,7 @@ extension Swifter {
             }, failure: failure)
     }
 
-    func postListsUpdateWithSlug(slug: String, ownerID: Int, name: String?, public: Bool?, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    func postListsUpdateWithSlug(slug: String, ownerID: Int, name: String?, publicMode: Bool?, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -1375,8 +1375,8 @@ extension Swifter {
         if name {
             parameters["name"] = name!
         }
-        if public {
-            if public! {
+        if publicMode {
+            if publicMode! {
                 parameters["mode"] = "public"
             }
             else {
@@ -1396,7 +1396,7 @@ extension Swifter {
             }, failure: failure)
     }
 
-    func postListsUpdateWithSlug(slug: String, ownerScreenName: String, name: String?, public: Bool?, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    func postListsUpdateWithSlug(slug: String, ownerScreenName: String, name: String?, publicMode: Bool?, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -1406,8 +1406,8 @@ extension Swifter {
         if name {
             parameters["name"] = name!
         }
-        if public {
-            if public! {
+        if publicMode {
+            if publicMode! {
                 parameters["mode"] = "public"
             }
             else {
@@ -1432,14 +1432,14 @@ extension Swifter {
 
     Creates a new list for the authenticated user. Note that you can't create more than 20 lists per account.
     */
-    func postListsCreateWithName(name: String, public: Bool?, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    func postListsCreateWithName(name: String, publicMode: Bool?, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["name"] = name
 
-        if public {
-            if public! {
+        if publicMode {
+            if publicMode! {
                 parameters["mode"] = "public"
             }
             else {

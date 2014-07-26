@@ -27,7 +27,7 @@ import Foundation
 import Accounts
 import Social
 
-class SwifterAccountsClient: SwifterClientProtocol {
+internal class SwifterAccountsClient: SwifterClientProtocol {
 
     var credential: SwifterCredential?
 
