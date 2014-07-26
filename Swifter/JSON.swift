@@ -25,14 +25,14 @@
 
 import Foundation
 
-typealias JSONValue = JSON
+public typealias JSONValue = JSON
 
-let JSTrue = JSONValue(true)
-let JSFalse = JSONValue(false)
+public let JSONTrue = JSONValue(true)
+public let JSONFalse = JSONValue(false)
 
-let JSONNull = JSONValue.JSONNull
+public let JSONNull = JSONValue.JSONNull
 
-enum JSON : Equatable, Printable {
+public enum JSON : Equatable, Printable {
     
     case JSONString(Swift.String)
     case JSONNumber(Double)
@@ -264,7 +264,7 @@ enum JSON : Equatable, Printable {
 
 }
 
-func ==(lhs: JSON, rhs: JSON) -> Bool {
+public func ==(lhs: JSON, rhs: JSON) -> Bool {
     switch (lhs, rhs) {
     case (.JSONNull, .JSONNull):
         return true
@@ -291,7 +291,7 @@ func ==(lhs: JSON, rhs: JSON) -> Bool {
 
 extension JSON: Printable {
 
-    var description: String {
+    public var description: String {
         if let jsonString = stringify() {
             return jsonString
         }
@@ -300,7 +300,7 @@ extension JSON: Printable {
         }
     }
 
-    func _prettyPrint(indent: String, _ level: Int) -> String {
+    private func _prettyPrint(indent: String, _ level: Int) -> String {
         let currentIndent = join(indent, map(0...level, { _ in "" }))
         let nextIndent = currentIndent + "  "
         
@@ -333,7 +333,7 @@ extension JSON: Printable {
 
 extension JSONValue: LogicValue {
 
-    func getLogicValue() -> Bool {
+    public func getLogicValue() -> Bool {
         switch self {
         case .JSONInvalid:
             return false
@@ -347,7 +347,7 @@ extension JSONValue: LogicValue {
 
 extension JSON : IntegerLiteralConvertible {
 
-    static func convertFromIntegerLiteral(value: Int) -> JSON {
+    public static func convertFromIntegerLiteral(value: Int) -> JSON {
         return .JSONNumber(Double(value))
     }
 
@@ -355,7 +355,7 @@ extension JSON : IntegerLiteralConvertible {
 
 extension JSON : FloatLiteralConvertible {
 
-    static func convertFromFloatLiteral(value: Double) -> JSON {
+    public static func convertFromFloatLiteral(value: Double) -> JSON {
         return .JSONNumber(value)
     }
 
@@ -363,11 +363,11 @@ extension JSON : FloatLiteralConvertible {
 
 extension JSON : StringLiteralConvertible {
 
-    static func convertFromStringLiteral(value: String) -> JSON {
+    public static func convertFromStringLiteral(value: String) -> JSON {
         return .JSONString(value)
     }
 
-    static func convertFromExtendedGraphemeClusterLiteral(value: String) -> JSON {
+    public static func convertFromExtendedGraphemeClusterLiteral(value: String) -> JSON {
         return .JSONString(value)
     }
 
@@ -375,7 +375,7 @@ extension JSON : StringLiteralConvertible {
 
 extension JSON : ArrayLiteralConvertible {
 
-    static func convertFromArrayLiteral(elements: JSON...) -> JSON {
+    public static func convertFromArrayLiteral(elements: JSON...) -> JSON {
         return .JSONArray(elements)
     }
 
@@ -383,7 +383,7 @@ extension JSON : ArrayLiteralConvertible {
 
 extension JSON : DictionaryLiteralConvertible {
 
-    static func convertFromDictionaryLiteral(elements: (String, JSON)...) -> JSON {
+    public static func convertFromDictionaryLiteral(elements: (String, JSON)...) -> JSON {
         var dict = Dictionary<String, JSONValue>()
         for (k, v) in elements {
             dict[k] = v

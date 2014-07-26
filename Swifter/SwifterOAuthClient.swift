@@ -26,7 +26,7 @@
 import Foundation
 import Accounts
 
-class SwifterOAuthClient: SwifterClientProtocol  {
+internal class SwifterOAuthClient: SwifterClientProtocol  {
 
     struct OAuth {
         static let version = "1.0"

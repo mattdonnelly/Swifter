@@ -25,7 +25,7 @@
 
 import Foundation
 
-class SwifterAppOnlyClient: SwifterClientProtocol  {
+internal class SwifterAppOnlyClient: SwifterClientProtocol  {
 
     var consumerKey: String
     var consumerSecret: String

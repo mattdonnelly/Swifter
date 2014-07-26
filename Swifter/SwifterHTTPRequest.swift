@@ -31,22 +31,22 @@ import Foundation
     import AppKit
 #endif
 
-class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
+public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
-    typealias UploadProgressHandler = (bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) -> Void
-    typealias DownloadProgressHandler = (data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void
-    typealias SuccessHandler = (data: NSData, response: NSHTTPURLResponse) -> Void
-    typealias FailureHandler = (error: NSError) -> Void
+    public typealias UploadProgressHandler = (bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) -> Void
+    public typealias DownloadProgressHandler = (data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void
+    public typealias SuccessHandler = (data: NSData, response: NSHTTPURLResponse) -> Void
+    public typealias FailureHandler = (error: NSError) -> Void
 
-    struct DataUpload {
+    internal struct DataUpload {
         var data: NSData
         var parameterName: String
         var mimeType: String?
         var fileName: String?
     }
 
-    var URL: NSURL
-    var HTTPMethod: String
+    let URL: NSURL
+    let HTTPMethod: String
 
     var request: NSMutableURLRequest?
     var connection: NSURLConnection!
@@ -71,11 +71,11 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     var successHandler: SuccessHandler?
     var failureHandler: FailureHandler?
 
-    convenience init(URL: NSURL) {
+    public convenience init(URL: NSURL) {
         self.init(URL: URL, method: "GET", parameters: [:])
     }
 
-    init(URL: NSURL, method: String, parameters: Dictionary<String, AnyObject>) {
+    public init(URL: NSURL, method: String, parameters: Dictionary<String, AnyObject>) {
         self.URL = URL
         self.HTTPMethod = method
         self.headers = [:]
@@ -88,7 +88,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.responseData = NSMutableData()
     }
 
-    init(request: NSURLRequest) {
+    public init(request: NSURLRequest) {
         self.request = request as? NSMutableURLRequest
         self.URL = request.URL
         self.HTTPMethod = request.HTTPMethod
@@ -102,7 +102,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.responseData = NSMutableData()
     }
 
-    func start() {
+    public func start() {
         if !request {
             self.request = NSMutableURLRequest(URL: self.URL)
             self.request!.HTTPMethod = self.HTTPMethod
@@ -176,12 +176,12 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         }
     }
 
-    func addMultipartData(data: NSData, parameterName: String, mimeType: String?, fileName: String?) -> Void {
+    public func addMultipartData(data: NSData, parameterName: String, mimeType: String?, fileName: String?) -> Void {
         let dataUpload = DataUpload(data: data, parameterName: parameterName, mimeType: mimeType, fileName: fileName)
         self.uploadData.append(dataUpload)
     }
 
-    class func mulipartContentWithBounday(boundary: String, data: NSData, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> NSData {
+    private class func mulipartContentWithBounday(boundary: String, data: NSData, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> NSData {
         let mimeType = mimeTypeOrNil ? mimeTypeOrNil! : "application/octet-stream"
 
         let tempData = NSMutableData()
@@ -199,17 +199,17 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         return tempData
     }
 
-    func connection(connection: NSURLConnection!, didReceiveResponse response: NSURLResponse!) {
+    public func connection(connection: NSURLConnection!, didReceiveResponse response: NSURLResponse!) {
         self.response = response as? NSHTTPURLResponse
 
         self.responseData.length = 0
     }
 
-    func connection(connection: NSURLConnection!, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
+    public func connection(connection: NSURLConnection!, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
         self.uploadProgressHandler?(bytesWritten: bytesWritten, totalBytesWritten: totalBytesWritten, totalBytesExpectedToWrite: totalBytesExpectedToWrite)
     }
 
-    func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
+    public func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
         self.responseData.appendData(data)
 
         let expectedContentLength = Int(self.response!.expectedContentLength)
@@ -220,7 +220,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         }
     }
 
-    func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
+    public func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
         #if os(iOS)
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         #endif
@@ -228,7 +228,7 @@ class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.failureHandler?(error: error)
     }
 
-    func connectionDidFinishLoading(connection: NSURLConnection!) {
+    public func connectionDidFinishLoading(connection: NSURLConnection!) {
         #if os(iOS)
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         #endif
