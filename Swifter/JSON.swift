@@ -152,7 +152,7 @@ public enum JSON : Equatable, Printable {
         }
     }
 
-    var string : String? {
+    public var string : String? {
         switch self {
         case .JSONString(let value):
             return value
@@ -162,7 +162,7 @@ public enum JSON : Equatable, Printable {
         }
     }
 
-    var integer : Int? {
+    public var integer : Int? {
         switch self {
         case .JSONNumber(let value):
             return Int(value)
@@ -172,7 +172,7 @@ public enum JSON : Equatable, Printable {
         }
     }
 
-    var double : Double? {
+    public var double : Double? {
         switch self {
         case .JSONNumber(let value):
             return value
@@ -182,7 +182,7 @@ public enum JSON : Equatable, Printable {
         }
     }
 
-    var object : Dictionary<String, JSONValue>? {
+    public var object : Dictionary<String, JSONValue>? {
         switch self {
         case .JSONObject(let value):
             return value
@@ -192,7 +192,7 @@ public enum JSON : Equatable, Printable {
         }
     }
 
-    var array : Array<JSONValue>? {
+    public var array : Array<JSONValue>? {
         switch self {
         case .JSONArray(let value):
             return value
@@ -202,7 +202,7 @@ public enum JSON : Equatable, Printable {
         }
     }
 
-    var bool : Bool? {
+    public var bool : Bool? {
         switch self {
         case .JSONBool(let value):
             return value
@@ -212,7 +212,7 @@ public enum JSON : Equatable, Printable {
         }
     }
 
-    subscript(key: String) -> JSONValue {
+    public subscript(key: String) -> JSONValue {
         switch self {
         case .JSONObject(let dict):
             if let value = dict[key] {
@@ -227,7 +227,7 @@ public enum JSON : Equatable, Printable {
         }
     }
 
-    subscript(index: Int) -> JSONValue {
+    public subscript(index: Int) -> JSONValue {
         switch self {
         case .JSONArray(let array) where array.count > index:
             return array[index]
