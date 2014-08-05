@@ -82,8 +82,8 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
         let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.POST, URL: url, parameters: stringifiedParameters)
         socialRequest.account = self.credential!.account!
 
-        if postData {
-            let fileName = postDataFileName ? postDataFileName! as String : "media.jpg"
+        if postData != nil {
+            let fileName = postDataFileName ?? "media.jpg"
 
             socialRequest.addMultipartData(postData!, withName: postDataKey!, type: "application/octet-stream", filename: fileName)
         }

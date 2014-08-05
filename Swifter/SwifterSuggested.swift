@@ -38,7 +38,7 @@ extension Swifter {
         let path = "users/suggestions/\(slug).json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if lang {
+        if lang != nil {
             parameters["lang"] = lang!
         }
 
@@ -60,7 +60,7 @@ extension Swifter {
         let path = "users/suggestions.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if lang {
+        if lang != nil {
             parameters["lang"] = lang!
         }
 

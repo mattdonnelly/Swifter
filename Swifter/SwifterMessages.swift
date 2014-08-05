@@ -36,19 +36,19 @@ extension Swifter {
         let path = "direct_messages.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if sinceID {
+        if sinceID != nil {
             parameters["since_id"] = sinceID!
         }
-        if maxID {
+        if maxID != nil {
             parameters["max_id"] = maxID!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -70,19 +70,19 @@ extension Swifter {
         let path = "direct_messages/sent.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if sinceID {
+        if sinceID != nil {
             parameters["since_id"] = sinceID!
         }
-        if maxID {
+        if maxID != nil {
             parameters["max_id"] = maxID!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if page {
+        if page != nil {
             parameters["page"] = page!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
 
@@ -126,7 +126,7 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
 

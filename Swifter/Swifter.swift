@@ -109,7 +109,7 @@ public class Swifter {
         let jsonDownloadProgressHandler: SwifterHTTPRequest.DownloadProgressHandler = {
             data, _, _, response in
 
-            if !downloadProgress {
+            if downloadProgress == nil {
                 return
             }
 

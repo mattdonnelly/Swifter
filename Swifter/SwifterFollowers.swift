@@ -63,13 +63,13 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
 
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if stringifyIDs {
+        if stringifyIDs != nil {
             parameters["stringify_ids"] = stringifyIDs!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
 
@@ -92,13 +92,13 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if stringifyIDs {
+        if stringifyIDs != nil {
             parameters["stringify_ids"] = stringifyIDs!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
 
@@ -130,13 +130,13 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
 
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if stringifyIDs {
+        if stringifyIDs != nil {
             parameters["stringify_ids"] = stringifyIDs!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
 
@@ -159,13 +159,13 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if stringifyIDs {
+        if stringifyIDs != nil {
             parameters["stringify_ids"] = stringifyIDs!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
 
@@ -191,10 +191,10 @@ extension Swifter {
         let path = "friendships/incoming.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if stringifyIDs {
+        if stringifyIDs != nil {
             parameters["stringify_urls"] = stringifyIDs!
         }
 
@@ -220,10 +220,10 @@ extension Swifter {
         let path = "friendships/outgoing.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if stringifyIDs {
+        if stringifyIDs != nil {
             parameters["stringify_urls"] = stringifyIDs!
         }
 
@@ -255,7 +255,7 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
 
-        if follow {
+        if follow != nil {
             parameters["follow"] = follow!
         }
 
@@ -274,7 +274,7 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if follow {
+        if follow != nil {
             parameters["follow"] = follow!
         }
 
@@ -337,10 +337,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
 
-        if device {
+        if device != nil {
             parameters["device"] = device!
         }
-        if retweets {
+        if retweets != nil {
             parameters["retweets"] = retweets!
         }
 
@@ -359,10 +359,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if device {
+        if device != nil {
             parameters["device"] = device!
         }
-        if retweets {
+        if retweets != nil {
             parameters["retweets"] = retweets!
         }
 
@@ -386,10 +386,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["source_id"] = sourceID!
 
-        if targetID {
+        if targetID != nil {
             parameters["target_id"] = targetID!
         }
-        else if targetScreenName {
+        else if targetScreenName != nil {
             parameters["targetScreenName"] = targetScreenName!
         }
 
@@ -408,10 +408,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["source_screen_name"] = sourceScreenName!
 
-        if targetID {
+        if targetID != nil {
             parameters["target_id"] = targetID!
         }
-        else if targetScreenName {
+        else if targetScreenName != nil {
             parameters["targetScreenName"] = targetScreenName!
         }
 
@@ -437,16 +437,16 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
 
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
-        if includeUserEntities {
+        if includeUserEntities != nil {
             parameters["include_user_entities"] = includeUserEntities!
         }
 
@@ -469,16 +469,16 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
-        if includeUserEntities {
+        if includeUserEntities != nil {
             parameters["include_user_entities"] = includeUserEntities!
         }
 
@@ -508,16 +508,16 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
 
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
-        if includeUserEntities {
+        if includeUserEntities != nil {
             parameters["include_user_entities"] = includeUserEntities!
         }
 
@@ -540,16 +540,16 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
-        if includeUserEntities {
+        if includeUserEntities != nil {
             parameters["include_user_entities"] = includeUserEntities!
         }
 
@@ -575,7 +575,7 @@ extension Swifter {
         let path = "followers/lookup.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenNames.bridgeToObjectiveC().componentsJoinedByString(",")
+        parameters["screen_name"] = join(",", screenNames)
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
@@ -590,7 +590,9 @@ extension Swifter {
         let path = "followers/lookup.json"
         
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = ids.bridgeToObjectiveC().componentsJoinedByString(",")
+
+        let idStrings = ids.map { String($0) }
+        parameters["id"] = join(",", idStrings)
         
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in

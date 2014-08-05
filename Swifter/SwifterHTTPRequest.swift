@@ -103,7 +103,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     }
 
     public func start() {
-        if !request {
+        if request == nil {
             self.request = NSMutableURLRequest(URL: self.URL)
             self.request!.HTTPMethod = self.HTTPMethod
             self.request!.timeoutInterval = self.timeoutInterval
@@ -182,13 +182,13 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     }
 
     private class func mulipartContentWithBounday(boundary: String, data: NSData, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> NSData {
-        let mimeType = mimeTypeOrNil ? mimeTypeOrNil! : "application/octet-stream"
+        let mimeType = mimeTypeOrNil ?? "application/octet-stream"
 
         let tempData = NSMutableData()
 
         tempData.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding))
 
-        let fileNameContentDisposition = fileName ? "filename=\"\(fileName)\"" : ""
+        let fileNameContentDisposition = fileName != nil ? "filename=\"\(fileName)\"" : ""
         let contentDisposition = "Content-Disposition: form-data; name=\"\(parameterName)\"; \(fileNameContentDisposition)\r\n"
 
         tempData.appendData(contentDisposition.dataUsingEncoding(NSUTF8StringEncoding))
@@ -248,8 +248,8 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     class func stringWithData(data: NSData, encodingName: String?) -> String {
         var encoding: UInt = NSUTF8StringEncoding
 
-        if encodingName {
-            let encodingNameString = encodingName!.bridgeToObjectiveC() as CFStringRef
+        if encodingName != nil {
+            let encodingNameString = encodingName! as NSString as CFStringRef
             encoding = CFStringConvertEncodingToNSStringEncoding(CFStringConvertIANACharSetNameToEncoding(encodingNameString))
 
             if encoding == UInt(kCFStringEncodingInvalidId) {
@@ -307,7 +307,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         if status == 510 { description = "Not Extended" }
         if status == 511 { description = "Network Authentication Required" }
         
-        if description {
+        if description != nil {
             s = s + ": " + description! + ", Response: " + responseString
         }
         

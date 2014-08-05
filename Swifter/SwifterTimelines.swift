@@ -31,22 +31,22 @@ extension Swifter {
     private func getTimelineAtPath(path: String, parameters: Dictionary<String, AnyObject>, count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         var params = parameters
 
-        if count {
+        if count != nil {
             params["count"] = count!
         }
-        if sinceID {
+        if sinceID != nil {
             params["since_id"] = sinceID!
         }
-        if maxID {
+        if maxID != nil {
             params["max_id"] = maxID!
         }
-        if trimUser {
+        if trimUser != nil {
             params["trim_user"] = Int(trimUser!)
         }
-        if contributorDetails {
+        if contributorDetails != nil {
             params["contributor_details"] = Int(!contributorDetails!)
         }
-        if includeEntities {
+        if includeEntities != nil {
             params["include_entities"] = Int(includeEntities!)
         }
 
@@ -87,7 +87,7 @@ extension Swifter {
     This method can only return up to 3,200 of a user's most recent Tweets. Native retweets of other statuses by the user is included in this total, regardless of whether include_rts is set to false when requesting this resource.
     */
     public func getStatusesUserTimelineWithUserID(userID: String, count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
-        var parameters: Dictionary<String, AnyObject> = ["user_id": userID.bridgeToObjectiveC()]
+        var parameters: Dictionary<String, AnyObject> = ["user_id": userID]
 
         self.getTimelineAtPath("statuses/mentions_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }

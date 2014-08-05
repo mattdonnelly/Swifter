@@ -35,7 +35,7 @@ class AuthViewController: UIViewController {
     // Default to using the iOS account framework for handling twitter auth
     let useACAccount = true
 
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder!) {
         self.swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
         super.init(coder: aDecoder)
     }
@@ -96,7 +96,7 @@ class AuthViewController: UIViewController {
             // Successfully fetched timeline, so lets create and push the table view
             let tweetsViewController = self.storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as TweetsViewController
                 
-            if statuses {
+            if statuses != nil {
                 tweetsViewController.tweets = statuses!
                 self.presentViewController(tweetsViewController, animated: true, completion: nil)
             }

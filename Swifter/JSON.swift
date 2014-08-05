@@ -110,7 +110,7 @@ public enum JSON : Equatable, Printable {
             case let array as NSArray:
                 var newArray : [JSONValue] = []
                 for item : AnyObject in array {
-                    newArray += JSON(item)
+                    newArray.append(JSON(item))
                 }
                 self = .JSONArray(newArray)
                 
@@ -331,9 +331,9 @@ extension JSON: Printable {
 
 }
 
-extension JSONValue: LogicValue {
+extension JSONValue: BooleanType {
 
-    public func getLogicValue() -> Bool {
+    public var boolValue: Bool {
         switch self {
         case .JSONInvalid:
             return false

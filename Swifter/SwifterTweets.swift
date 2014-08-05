@@ -36,10 +36,10 @@ extension Swifter {
         let path = "statuses/retweets/\(id).json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if trimUser {
+        if trimUser != nil {
             parameters["trim_user"] = trimUser!
         }
 
@@ -75,16 +75,16 @@ extension Swifter {
         let path = "statuses/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if trimUser {
+        if trimUser != nil {
             parameters["trim_user"] = trimUser!
         }
-        if includeMyRetweet {
+        if includeMyRetweet != nil {
             parameters["include_my_retweet"] = includeMyRetweet!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
 
@@ -106,7 +106,7 @@ extension Swifter {
         let path = "statuses/destroy/\(id).json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if trimUser {
+        if trimUser != nil {
             parameters["trim_user"] = trimUser!
         }
 
@@ -147,19 +147,19 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["status"] = status
 
-        if inReplyToStatusID {
+        if inReplyToStatusID != nil {
             parameters["in_reply_to_status_id"] = inReplyToStatusID!
         }
-        if placeID {
+        if placeID != nil {
             parameters["place_id"] = placeID!
             parameters["display_coordinates"] = true
         }
-        else if lat && long {
+        else if lat != nil && long != nil {
             parameters["lat"] = lat!
             parameters["long"] = long!
             parameters["display_coordinates"] = true
         }
-        if trimUser {
+        if trimUser != nil {
             parameters["trim_user"] = trimUser!
         }
 
@@ -180,19 +180,19 @@ extension Swifter {
         parameters["media[]"] = media
         parameters[Swifter.DataParameters.dataKey] = "media[]"
 
-        if inReplyToStatusID {
+        if inReplyToStatusID != nil {
             parameters["in_reply_to_status_id"] = inReplyToStatusID!
         }
-        if placeID {
+        if placeID != nil {
             parameters["place_id"] = placeID!
             parameters["display_coordinates"] = true
         }
-        else if lat && long {
+        else if lat != nil && long != nil {
             parameters["lat"] = lat!
             parameters["long"] = long!
             parameters["display_coordinates"] = true
         }
-        if trimUser {
+        if trimUser != nil {
             parameters["trim_user"] = trimUser!
         }
 
@@ -220,7 +220,7 @@ extension Swifter {
         let path = "statuses/retweet/\(id).json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if trimUser {
+        if trimUser != nil {
             parameters["trim_user"] = trimUser!
         }
 
@@ -246,25 +246,25 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
 
-        if maxWidth {
+        if maxWidth != nil {
             parameters["max_width"] = maxWidth!
         }
-        if hideMedia {
+        if hideMedia != nil {
             parameters["hide_media"] = hideMedia!
         }
-        if hideThread {
+        if hideThread != nil {
             parameters["hide_thread"] = hideThread!
         }
-        if omitScript {
+        if omitScript != nil {
             parameters["omit_scipt"] = omitScript!
         }
-        if align {
+        if align != nil {
             parameters["align"] = align!
         }
-        if related {
+        if related != nil {
             parameters["related"] = related!
         }
-        if lang {
+        if lang != nil {
             parameters["lang"] = lang!
         }
 
@@ -283,25 +283,25 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["url"] = url.absoluteString
 
-        if maxWidth {
+        if maxWidth != nil {
             parameters["max_width"] = maxWidth!
         }
-        if hideMedia {
+        if hideMedia != nil {
             parameters["hide_media"] = hideMedia!
         }
-        if hideThread {
+        if hideThread != nil {
             parameters["hide_thread"] = hideThread!
         }
-        if omitScript {
+        if omitScript != nil {
             parameters["omit_scipt"] = omitScript!
         }
-        if align {
+        if align != nil {
             parameters["align"] = align!
         }
-        if related {
+        if related != nil {
             parameters["related"] = related!
         }
-        if lang {
+        if lang != nil {
             parameters["lang"] = lang!
         }
 
@@ -327,10 +327,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
 
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if stringifyIDs {
+        if stringifyIDs != nil {
             parameters["stringify_ids"] = cursor!
         }
 
@@ -356,12 +356,13 @@ extension Swifter {
         let path = "statuses/lookup.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = tweetIDs.bridgeToObjectiveC().componentsJoinedByString(",")
+        let tweetIDStrings = tweetIDs.map { String($0) }
+        parameters["id"] = join(",", tweetIDStrings)
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if map {
+        if map != nil {
             parameters["map"] = map!
         }
         

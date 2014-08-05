@@ -38,13 +38,13 @@ extension Swifter {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if sinceID {
+        if sinceID != nil {
             parameters["since_id"] = sinceID!
         }
-        if maxID {
+        if maxID != nil {
             parameters["max_id"] = maxID!
         }
 
@@ -63,13 +63,13 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["user_id"] = userID
 
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if sinceID {
+        if sinceID != nil {
             parameters["since_id"] = sinceID!
         }
-        if maxID {
+        if maxID != nil {
             parameters["max_id"] = maxID!
         }
 
@@ -88,13 +88,13 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if sinceID {
+        if sinceID != nil {
             parameters["since_id"] = sinceID!
         }
-        if maxID {
+        if maxID != nil {
             parameters["max_id"] = maxID!
         }
 
@@ -120,7 +120,7 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
 
@@ -146,7 +146,7 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
 

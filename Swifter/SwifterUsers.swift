@@ -53,10 +53,10 @@ extension Swifter {
         let path = "account/verify_credentials.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -75,27 +75,27 @@ extension Swifter {
     Updates the authenticating user's settings.
     */
     public func postAccountSettings(trendLocationWOEID: Int?, sleepTimeEnabled: Bool?, startSleepTime: Int?, endSleepTime: Int?, timeZone: String?, lang: String?, success: ((settings: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
-        assert(trendLocationWOEID || sleepTimeEnabled || startSleepTime || endSleepTime || timeZone || lang, "At least one or more should be provided when executing this request")
+        assert(trendLocationWOEID != nil || sleepTimeEnabled != nil || startSleepTime != nil || endSleepTime != nil || timeZone != nil || lang != nil, "At least one or more should be provided when executing this request")
 
         let path = "account/settings.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if trendLocationWOEID {
+        if trendLocationWOEID != nil {
             parameters["trend_location_woeid"] = trendLocationWOEID!
         }
-        if sleepTimeEnabled {
+        if sleepTimeEnabled != nil {
             parameters["sleep_time_enabled"] = sleepTimeEnabled!
         }
-        if startSleepTime {
+        if startSleepTime != nil {
             parameters["start_sleep_time"] = startSleepTime!
         }
-        if endSleepTime {
+        if endSleepTime != nil {
             parameters["end_sleep_time"] = endSleepTime!
         }
-        if timeZone {
+        if timeZone != nil {
             parameters["time_zone"] = timeZone!
         }
-        if lang {
+        if lang != nil {
             parameters["lang"] = lang!
         }
 
@@ -123,7 +123,7 @@ extension Swifter {
         else {
             parameters["device"] = "none"
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
 
@@ -142,27 +142,27 @@ extension Swifter {
     Sets values that users are able to set under the "Account" tab of their settings page. Only the parameters specified will be updated.
     */
     public func postAccountUpdateProfileWithName(name: String?, url: String?, location: String?, description: String?, includeEntities: Bool?, skipStatus: Bool?, success: ((profile: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
-        assert(name || url || location || description || includeEntities || skipStatus)
+        assert(name != nil || url != nil || location != nil || description != nil || includeEntities != nil || skipStatus != nil)
 
         let path = "account/update_profile.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if name {
+        if name != nil {
             parameters["name"] = name!
         }
-        if url {
+        if url != nil {
             parameters["url"] = url!
         }
-        if location {
+        if location != nil {
             parameters["location"] = location!
         }
-        if description {
+        if description != nil {
             parameters["description"] = description!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -181,21 +181,21 @@ extension Swifter {
     Updates the authenticating user's profile background image. This method can also be used to enable or disable the profile background image. Although each parameter is marked as optional, at least one of image, tile or use must be provided when making this request.
     */
     public func postAccountUpdateProfileBackgroundImage(imageData: NSData?, title: String?, includeEntities: Bool?, use: Bool?, success: ((profile: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
-        assert(imageData || title || use, "At least one of image, tile or use must be provided when making this request")
+        assert(imageData != nil || title != nil || use != nil, "At least one of image, tile or use must be provided when making this request")
 
         let path = "account/update_profile_background_image.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if imageData {
+        if imageData != nil {
             parameters["image"] = imageData!.base64EncodedStringWithOptions(nil)
         }
-        if title {
+        if title != nil {
             parameters["title"] = title!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if use {
+        if use != nil {
             parameters["use"] = use!
         }
 
@@ -218,25 +218,25 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
 
-        if profileBackgroundColor {
+        if profileBackgroundColor != nil {
             parameters["profile_background_color"] = profileBackgroundColor!
         }
-        if profileLinkColor {
+        if profileLinkColor != nil {
             parameters["profile_link_color"] = profileLinkColor!
         }
-        if profileSidebarBorderColor {
+        if profileSidebarBorderColor != nil {
             parameters["profile_sidebar_link_color"] = profileSidebarBorderColor!
         }
-        if profileSidebarFillColor {
+        if profileSidebarFillColor != nil {
             parameters["profile_sidebar_fill_color"] = profileSidebarFillColor!
         }
-        if profileTextColor {
+        if profileTextColor != nil {
             parameters["profile_text_color"] = profileTextColor!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -260,13 +260,13 @@ extension Swifter {
         let path = "account/update_profile_image.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if imageData {
+        if imageData != nil {
             parameters["image"] = imageData!.base64EncodedStringWithOptions(nil)
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -288,13 +288,13 @@ extension Swifter {
         let path = "blocks/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
 
@@ -320,10 +320,10 @@ extension Swifter {
         let path = "blocks/ids.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if stringifyIDs {
+        if stringifyIDs != nil {
             parameters["stringify_ids"] = stringifyIDs!
         }
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
 
@@ -351,10 +351,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -373,10 +373,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["user_id"] = userID
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -400,10 +400,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["user_id"] = userID
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -422,10 +422,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -459,9 +459,9 @@ extension Swifter {
         let path = "users/lookup.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["screen_name"] = screenNames.bridgeToObjectiveC().componentsJoinedByString(",")
+        parameters["screen_name"] = join(",", screenNames)
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
 
@@ -478,9 +478,11 @@ extension Swifter {
         let path = "users/lookup.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["user_id"] = userIDs.bridgeToObjectiveC().componentsJoinedByString(",")
 
-        if includeEntities {
+        let userIDStrings = userIDs.map { String($0) }
+        parameters["user_id"] = join(",", userIDStrings)
+
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
 
@@ -506,7 +508,7 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
 
@@ -525,7 +527,7 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["user_id"] = userID
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
 
@@ -551,13 +553,13 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["q"] = q
 
-        if page {
+        if page != nil {
             parameters["page"] = page!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
 
@@ -581,10 +583,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -603,10 +605,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -630,10 +632,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -652,10 +654,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -703,19 +705,19 @@ extension Swifter {
         let path = "account/update_profile_banner.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if imageData {
+        if imageData != nil {
             parameters["banner"] = imageData!.base64EncodedStringWithOptions(nil)
         }
-        if width {
+        if width != nil {
             parameters["width"] = width!
         }
-        if height {
+        if height != nil {
             parameters["height"] = height!
         }
-        if offsetLeft {
+        if offsetLeft != nil {
             parameters["offset_left"] = offsetLeft!
         }
-        if offsetTop {
+        if offsetTop != nil {
             parameters["offset_top"] = offsetTop!
         }
 
@@ -832,7 +834,7 @@ extension Swifter {
         let path = "mutes/users/ids.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
 
@@ -858,13 +860,13 @@ extension Swifter {
         let path = "mutes/users/list.json"
         
         var parameters = Dictionary<String, AnyObject>()
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
         

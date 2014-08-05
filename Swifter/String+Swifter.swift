@@ -76,7 +76,7 @@ extension String {
             scanner.scanUpToString("&", intoString: &value)
             scanner.scanString("&", intoString: nil)
 
-            if key && value {
+            if key != nil && value != nil {
                 parameters.updateValue(value!, forKey: key!)
             }
         }
@@ -88,7 +88,7 @@ extension String {
         let str = self.cStringUsingEncoding(NSUTF8StringEncoding)
         let strLen = UInt(self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
         let digestLen = Int(CC_SHA1_DIGEST_LENGTH)
-        let result = UnsafePointer<CUnsignedChar>.alloc(digestLen)
+        let result = UnsafeMutablePointer<CUnsignedChar>(digestLen)
         let keyStr = key.cStringUsingEncoding(NSUTF8StringEncoding)
         let keyLen = UInt(key.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
 

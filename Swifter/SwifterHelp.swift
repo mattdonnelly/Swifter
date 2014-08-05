@@ -116,7 +116,7 @@ extension Swifter {
         let path = "application/rate_limit_status.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["resources"] = resources.bridgeToObjectiveC().componentsJoinedByString(",")
+        parameters["resources"] = join(",", resources)
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
             json, response in

@@ -40,7 +40,7 @@ extension Swifter {
         let path = "lists/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if reverse {
+        if reverse != nil {
             parameters["reverse"] = reverse!
         }
 
@@ -59,7 +59,7 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["userID"] = userID
 
-        if reverse {
+        if reverse != nil {
             parameters["reverse"] = reverse!
         }
 
@@ -78,7 +78,7 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if reverse {
+        if reverse != nil {
             parameters["reverse"] = reverse!
         }
 
@@ -103,19 +103,19 @@ extension Swifter {
         parameters["list_id"] = listID
         parameters["owner_screen_name"] = ownerScreenName
 
-        if sinceID {
+        if sinceID != nil {
             parameters["since_id"] = sinceID!
         }
-        if maxID {
+        if maxID != nil {
             parameters["max_id"] = maxID!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if includeRTs {
+        if includeRTs != nil {
             parameters["include_rts"] = includeRTs!
         }
 
@@ -135,19 +135,19 @@ extension Swifter {
         parameters["list_id"] = listID
         parameters["owner_id"] = ownerID
 
-        if sinceID {
+        if sinceID != nil {
             parameters["since_id"] = sinceID!
         }
-        if maxID {
+        if maxID != nil {
             parameters["max_id"] = maxID!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if includeRTs {
+        if includeRTs != nil {
             parameters["include_rts"] = includeRTs!
         }
 
@@ -167,19 +167,19 @@ extension Swifter {
         parameters["slug"] = slug
         parameters["owner_screen_name"] = ownerScreenName
 
-        if sinceID {
+        if sinceID != nil {
             parameters["since_id"] = sinceID!
         }
-        if maxID {
+        if maxID != nil {
             parameters["max_id"] = maxID!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if includeRTs {
+        if includeRTs != nil {
             parameters["include_rts"] = includeRTs!
         }
 
@@ -199,19 +199,19 @@ extension Swifter {
         parameters["slug"] = slug
         parameters["owner_id"] = ownerID
 
-        if sinceID {
+        if sinceID != nil {
             parameters["since_id"] = sinceID!
         }
-        if maxID {
+        if maxID != nil {
             parameters["max_id"] = maxID!
         }
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if includeRTs {
+        if includeRTs != nil {
             parameters["include_rts"] = includeRTs!
         }
 
@@ -340,10 +340,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["user_id"] = userID
 
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if filterToOwnedLists {
+        if filterToOwnedLists != nil {
             parameters["filter_to_owned_lists"] = filterToOwnedLists!
         }
 
@@ -366,10 +366,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if filterToOwnedLists {
+        if filterToOwnedLists != nil {
             parameters["filter_to_owned_lists"] = filterToOwnedLists!
         }
 
@@ -396,16 +396,16 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
-        if ownerScreenName {
+        if ownerScreenName != nil {
             parameters["owner_screen_name"] = ownerScreenName!
         }
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -427,16 +427,16 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
-        if ownerID {
+        if ownerID != nil {
             parameters["owner_id"] = ownerID!
         }
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -458,16 +458,16 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
-        if ownerScreenName {
+        if ownerScreenName != nil {
             parameters["owner_screen_name"] = ownerScreenName!
         }
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -489,16 +489,16 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
-        if ownerID {
+        if ownerID != nil {
             parameters["owner_id"] = ownerID!
         }
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -596,10 +596,10 @@ extension Swifter {
         parameters["list_id"] = listID
         parameters["user_id"] = userID
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -619,10 +619,10 @@ extension Swifter {
         parameters["list_id"] = listID
         parameters["screen_name"] = screenName
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -643,10 +643,10 @@ extension Swifter {
         parameters["owner_id"] = ownerID
         parameters["user_id"] = userID
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -667,10 +667,10 @@ extension Swifter {
         parameters["owner_id"] = ownerID
         parameters["screen_name"] = screenName
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -691,10 +691,10 @@ extension Swifter {
         parameters["owner_screen_name"] = ownerScreenName
         parameters["user_id"] = userID
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -715,10 +715,10 @@ extension Swifter {
         parameters["owner_screen_name"] = ownerScreenName
         parameters["screen_name"] = screenName
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -795,12 +795,14 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
-        parameters["user_id"] = userIDs.bridgeToObjectiveC().componentsJoinedByString(",")
 
-        if includeEntities {
+        let userIDStrings = userIDs.map { String($0) }
+        parameters["user_id"] = join(",", userIDStrings)
+
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -818,12 +820,12 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
-        parameters["screen_name"] = screenNames.bridgeToObjectiveC().componentsJoinedByString(",")
+        parameters["screen_name"] = join(",", screenNames)
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -842,12 +844,14 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
         parameters["owner_id"] = ownerID
-        parameters["user_id"] = userIDs.bridgeToObjectiveC().componentsJoinedByString(",")
 
-        if includeEntities {
+        let userIDStrings = userIDs.map { String($0) }
+        parameters["user_id"] = join(",", userIDStrings)
+
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -866,12 +870,12 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
         parameters["owner_id"] = ownerID
-        parameters["screen_name"] = screenNames.bridgeToObjectiveC().componentsJoinedByString(",")
+        parameters["screen_name"] = join(",", screenNames)
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -890,12 +894,14 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
         parameters["owner_screen_name"] = ownerScreenName
-        parameters["user_id"] = userIDs.bridgeToObjectiveC().componentsJoinedByString(",")
 
-        if includeEntities {
+        let userIDStrings = userIDs.map { String($0) }
+        parameters["user_id"] = join(",", userIDStrings)
+
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -914,12 +920,12 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
         parameters["owner_screen_name"] = ownerScreenName
-        parameters["screen_name"] = screenNames.bridgeToObjectiveC().componentsJoinedByString(",")
+        parameters["screen_name"] = join(",", screenNames)
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -944,10 +950,10 @@ extension Swifter {
         parameters["list_id"] = listID
         parameters["user_id"] = userID
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -967,10 +973,10 @@ extension Swifter {
         parameters["list_id"] = listID
         parameters["screen_name"] = screenName
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -991,10 +997,10 @@ extension Swifter {
         parameters["owner_id"] = ownerID
         parameters["user_id"] = userID
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -1015,10 +1021,10 @@ extension Swifter {
         parameters["owner_id"] = ownerID
         parameters["screen_name"] = screenName
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -1039,10 +1045,10 @@ extension Swifter {
         parameters["owner_screen_name"] = ownerScreenName
         parameters["user_id"] = userID
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -1068,10 +1074,10 @@ extension Swifter {
         parameters["owner_screen_name"] = ownerScreenName
         parameters["screen_name"] = screenName
 
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -1089,16 +1095,16 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
-        if ownerScreenName {
+        if ownerScreenName != nil {
             parameters["owner_screen_name"] = ownerScreenName!
         }
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -1120,16 +1126,16 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
-        if ownerID {
+        if ownerID != nil {
             parameters["owner_id"] = ownerID!
         }
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -1151,16 +1157,16 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
-        if ownerScreenName {
+        if ownerScreenName != nil {
             parameters["owner_screen_name"] = ownerScreenName!
         }
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -1182,16 +1188,16 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
-        if ownerID {
+        if ownerID != nil {
             parameters["owner_id"] = ownerID!
         }
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
-        if includeEntities {
+        if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
-        if skipStatus {
+        if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
 
@@ -1341,10 +1347,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
 
-        if name {
+        if name != nil {
             parameters["name"] = name!
         }
-        if publicMode {
+        if publicMode != nil {
             if publicMode! {
                 parameters["mode"] = "public"
             }
@@ -1352,7 +1358,7 @@ extension Swifter {
                 parameters["mode"] = "private"
             }
         }
-        if description {
+        if description != nil {
             parameters["description"] = description!
         }
 
@@ -1372,10 +1378,10 @@ extension Swifter {
         parameters["slug"] = slug
         parameters["owner_id"] = ownerID
 
-        if name {
+        if name != nil {
             parameters["name"] = name!
         }
-        if publicMode {
+        if publicMode != nil {
             if publicMode! {
                 parameters["mode"] = "public"
             }
@@ -1383,7 +1389,7 @@ extension Swifter {
                 parameters["mode"] = "private"
             }
         }
-        if description {
+        if description != nil {
             parameters["description"] = description!
         }
 
@@ -1403,10 +1409,10 @@ extension Swifter {
         parameters["slug"] = slug
         parameters["owner_screen_name"] = ownerScreenName
 
-        if name {
+        if name != nil {
             parameters["name"] = name!
         }
-        if publicMode {
+        if publicMode != nil {
             if publicMode! {
                 parameters["mode"] = "public"
             }
@@ -1414,7 +1420,7 @@ extension Swifter {
                 parameters["mode"] = "private"
             }
         }
-        if description {
+        if description != nil {
             parameters["description"] = description!
         }
 
@@ -1438,7 +1444,7 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["name"] = name
 
-        if publicMode {
+        if publicMode != nil {
             if publicMode! {
                 parameters["mode"] = "public"
             }
@@ -1446,7 +1452,7 @@ extension Swifter {
                 parameters["mode"] = "private"
             }
         }
-        if description {
+        if description != nil {
             parameters["description"] = description!
         }
 
@@ -1522,10 +1528,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["user_id"] = userID
 
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
 
@@ -1548,10 +1554,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
 
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
 
@@ -1580,7 +1586,9 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
-        parameters["user_id"] = userIDs.bridgeToObjectiveC().componentsJoinedByString(",")
+
+        let userIDStrings = userIDs.map { String($0) }
+        parameters["user_id"] = join(",", userIDStrings)
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
@@ -1596,7 +1604,7 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
-        parameters["screen_name"] = screenNames.bridgeToObjectiveC().componentsJoinedByString(",")
+        parameters["screen_name"] = join(",", screenNames)
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
@@ -1612,7 +1620,10 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
-        parameters["userID"] = userIDs.bridgeToObjectiveC().componentsJoinedByString(",")
+
+        let userIDStrings = userIDs.map { String($0) }
+        parameters["user_id"] = join(",", userIDStrings)
+
         parameters["owner_screen_name"] = ownerScreenName
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
@@ -1629,7 +1640,7 @@ extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
-        parameters["screen_name"] = screenNames.bridgeToObjectiveC().componentsJoinedByString(",")
+        parameters["screen_name"] = join(",", screenNames)
         parameters["owner_screen_name"] = ownerScreenName
         
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
@@ -1646,7 +1657,10 @@ extension Swifter {
         
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
-        parameters["userID"] = userIDs.bridgeToObjectiveC().componentsJoinedByString(",")
+
+        let userIDStrings = userIDs.map { String($0) }
+        parameters["user_id"] = join(",", userIDStrings)
+
         parameters["owner_id"] = ownerID
         
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
@@ -1663,7 +1677,7 @@ extension Swifter {
         
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
-        parameters["screen_name"] = screenNames.bridgeToObjectiveC().componentsJoinedByString(",")
+        parameters["screen_name"] = join(",", screenNames)
         parameters["owner_id"] = ownerID
         
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
@@ -1686,10 +1700,10 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["user_id"] = userID
         
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if cursor {
+        if cursor != nil {
             parameters["cursor"] = cursor!
         }
         

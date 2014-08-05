@@ -102,8 +102,8 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         request.dataEncoding = self.dataEncoding
         request.encodeParameters = postData == nil
 
-        if postData {
-            let fileName = postDataFileName ? postDataFileName! as String : "media.jpg"
+        if postData != nil {
+            let fileName = postDataFileName ?? "media.jpg"
             request.addMultipartData(postData!, parameterName: postDataKey!, mimeType: "application/octet-stream", fileName: fileName)
         }
 
@@ -116,9 +116,9 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         authorizationParameters["oauth_signature_method"] =  OAuth.signatureMethod
         authorizationParameters["oauth_consumer_key"] = self.consumerKey
         authorizationParameters["oauth_timestamp"] = String(Int(NSDate().timeIntervalSince1970))
-        authorizationParameters["oauth_nonce"] = NSUUID().UUIDString.bridgeToObjectiveC()
+        authorizationParameters["oauth_nonce"] = NSUUID().UUIDString
 
-        if self.credential?.accessToken {
+        if self.credential?.accessToken != nil {
             authorizationParameters["oauth_token"] = self.credential!.accessToken!.key
         }
 
@@ -128,7 +128,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
             }
         }
 
-        let combinedParameters = authorizationParameters.join(parameters)
+        let combinedParameters = authorizationParameters + parameters
 
         let finalParameters = isMediaUpload ? authorizationParameters : combinedParameters
 
@@ -145,12 +145,12 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
             }
         }
 
-        return "OAuth " + headerComponents.bridgeToObjectiveC().componentsJoinedByString(", ")
+        return "OAuth " + join(", ", headerComponents)
     }
 
     func oauthSignatureForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>, accessToken token: SwifterCredential.OAuthAccessToken?) -> String {
         var tokenSecret: NSString = ""
-        if token {
+        if token != nil {
             tokenSecret = token!.secret.urlEncodedStringWithEncoding(self.dataEncoding)
         }
 
@@ -161,7 +161,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         var parameterComponents = parameters.urlEncodedQueryStringWithEncoding(self.dataEncoding).componentsSeparatedByString("&") as [String]
         parameterComponents.sort { $0 < $1 }
 
-        let parameterString = parameterComponents.bridgeToObjectiveC().componentsJoinedByString("&")
+        let parameterString = join("&", parameterComponents)
         let encodedParameterString = parameterString.urlEncodedStringWithEncoding(self.dataEncoding)
 
         let encodedURL = url.absoluteString.urlEncodedStringWithEncoding(self.dataEncoding)

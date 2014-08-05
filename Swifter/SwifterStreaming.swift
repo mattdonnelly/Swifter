@@ -39,24 +39,24 @@ extension Swifter {
     At least one predicate parameter (follow, locations, or track) must be specified.
     */
     public func postStatusesFilterWithFollow(follow: [String]?, track: [String]?, locations: [String]?, delimited: Bool?, stallWarnings: Bool?, progress: ((status: Dictionary<String, JSONValue>?) -> Void)?, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)?, failure: FailureHandler?) {
-        assert(follow || track || locations, "At least one predicate parameter (follow, locations, or track) must be specified")
+        assert(follow != nil || track != nil || locations != nil, "At least one predicate parameter (follow, locations, or track) must be specified")
 
         let path = "statuses/filter.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if follow {
-            parameters["follow"] = follow!.bridgeToObjectiveC().componentsJoinedByString(",")
+        if follow != nil {
+            parameters["follow"] = join(",", follow!)
         }
-        if track {
-            parameters["track"] = track!.bridgeToObjectiveC().componentsJoinedByString(",")
+        if track != nil {
+            parameters["track"] = join(",", track!)
         }
-        if locations {
-            parameters["locations"] = locations!.bridgeToObjectiveC().componentsJoinedByString(",")
+        if locations != nil {
+            parameters["locations"] = join(",", locations!)
         }
-        if delimited {
+        if delimited != nil {
             parameters["delimited"] = delimited!
         }
-        if stallWarnings {
+        if stallWarnings != nil {
             parameters["stall_warnings"] = stallWarnings!
         }
 
@@ -93,10 +93,10 @@ extension Swifter {
         let path = "statuses/sample.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if delimited {
+        if delimited != nil {
             parameters["delimited"] = delimited!
         }
-        if stallWarnings {
+        if stallWarnings != nil {
             parameters["stall_warnings"] = stallWarnings!
         }
 
@@ -135,13 +135,13 @@ extension Swifter {
         let path = "statuses/firehose.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if count {
+        if count != nil {
             parameters["count"] = count!
         }
-        if delimited {
+        if delimited != nil {
             parameters["delimited"] = delimited!
         }
-        if stallWarnings {
+        if stallWarnings != nil {
             parameters["stall_warnings"] = stallWarnings!
         }
 
@@ -178,29 +178,29 @@ extension Swifter {
         let path = "user.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if delimited {
+        if delimited != nil {
             parameters["delimited"] = delimited!
         }
-        if stallWarnings {
+        if stallWarnings != nil {
             parameters["stall_warnings"] = stallWarnings!
         }
-        if includeMessagesFromFollowedAccounts {
+        if includeMessagesFromFollowedAccounts != nil {
             if includeMessagesFromFollowedAccounts! {
                 parameters["with"] = "user"
             }
         }
-        if includeReplies {
+        if includeReplies != nil {
             if includeReplies! {
                 parameters["replies"] = "all"
             }
         }
-        if track {
-            parameters["track"] = track!.bridgeToObjectiveC().componentsJoinedByString(",")
+        if track != nil {
+            parameters["track"] = join(",", track!)
         }
-        if locations {
-            parameters["locations"] = locations!.bridgeToObjectiveC().componentsJoinedByString(",")
+        if locations != nil {
+            parameters["locations"] = join(",", locations!)
         }
-        if stringifyFriendIDs {
+        if stringifyFriendIDs != nil {
             parameters["stringify_friend_ids"] = stringifyFriendIDs!
         }
 
@@ -237,23 +237,23 @@ extension Swifter {
         let path = "site.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        if delimited {
+        if delimited != nil {
             parameters["delimited"] = delimited!
         }
-        if stallWarnings {
+        if stallWarnings != nil {
             parameters["stall_warnings"] = stallWarnings!
         }
-        if restrictToUserMessages {
+        if restrictToUserMessages != nil {
             if restrictToUserMessages! {
                 parameters["with"] = "user"
             }
         }
-        if includeReplies {
+        if includeReplies != nil {
             if includeReplies! {
                 parameters["replies"] = "all"
             }
         }
-        if stringifyFriendIDs {
+        if stringifyFriendIDs != nil {
             parameters["stringify_friend_ids"] = stringifyFriendIDs!
         }
 

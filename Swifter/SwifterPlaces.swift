@@ -58,16 +58,16 @@ extension Swifter {
         parameters["lat"] = lat
         parameters["long"] = long
 
-        if accuracy {
+        if accuracy != nil {
             parameters["accuracy"] = accuracy!
         }
-        if granularity {
+        if granularity != nil {
             parameters["granularity"] = granularity!
         }
-        if maxResults {
+        if maxResults != nil {
             parameters["max_results"] = maxResults!
         }
-        if callback {
+        if callback != nil {
             parameters["callback"] = callback!
         }
 
@@ -90,40 +90,40 @@ extension Swifter {
     This is the recommended method to use find places that can be attached to statuses/update. Unlike GET geo/reverse_geocode which provides raw data access, this endpoint can potentially re-order places with regards to the user who is authenticated. This approach is also preferred for interactive place matching with the user.
     */
     public func getGeoSearchWithLat(lat: Double?, long: Double?, query: String?, ipAddress: String?, accuracy: String?, granularity: String?, maxResults: Int?, containedWithin: String?, attributeStreetAddress: String?, callback: String?, success: ((places: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
-        assert(lat || long || query || ipAddress, "At least one of the following parameters must be provided to this resource: lat, long, ipAddress, or query")
+        assert(lat != nil || long != nil || query != nil || ipAddress != nil, "At least one of the following parameters must be provided to access this resource: lat, long, ipAddress, or query")
 
         let path = "geo/search.json"
 
         var parameters = Dictionary<String, AnyObject>()
 
-        if lat {
+        if lat != nil {
             parameters["lat"] = lat!
         }
-        if long {
+        if long != nil {
             parameters["long"] = long!
         }
-        if query {
+        if query != nil {
             parameters["query"] = query!
         }
-        if ipAddress {
+        if ipAddress != nil {
             parameters["ipAddress"] = ipAddress!
         }
-        if accuracy {
+        if accuracy != nil {
             parameters["accuracy"] = accuracy!
         }
-        if granularity {
+        if granularity != nil {
             parameters["granularity"] = granularity!
         }
-        if maxResults {
+        if maxResults != nil {
             parameters["max_results"] = maxResults!
         }
-        if containedWithin {
+        if containedWithin != nil {
             parameters["contained_within"] = containedWithin!
         }
-        if attributeStreetAddress {
+        if attributeStreetAddress != nil {
             parameters["attribute:street_address"] = attributeStreetAddress
         }
-        if callback {
+        if callback != nil {
             parameters["callback"] = callback!
         }
 
@@ -153,13 +153,13 @@ extension Swifter {
         parameters["long"] = long
         parameters["name"] = name
 
-        if containedWithin {
+        if containedWithin != nil {
             parameters["contained_within"] = containedWithin!
         }
-        if attributeStreetAddress {
+        if attributeStreetAddress != nil {
             parameters["attribute:street_address"] = attributeStreetAddress
         }
-        if callback {
+        if callback != nil {
             parameters["callback"] = callback!
         }
 

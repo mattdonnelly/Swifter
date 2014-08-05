@@ -25,7 +25,7 @@ extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
 
-        if excludeHashtags {
+        if excludeHashtags != nil {
             if excludeHashtags! {
                 parameters["exclude"] = "hashtags"
             }

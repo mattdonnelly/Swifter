@@ -27,16 +27,6 @@ import Foundation
 
 extension Dictionary {
 
-    func join(other: Dictionary) -> Dictionary {
-        var joinedDictionary = self
-
-        for (key, value) in other {
-            joinedDictionary[key] = value
-        }
-
-        return joinedDictionary
-    }
-
     func filter(predicate: Element -> Bool) -> Dictionary {
         var filteredDictionary = Dictionary()
 
@@ -59,7 +49,7 @@ extension Dictionary {
             parts.append(query)
         }
 
-        return parts.bridgeToObjectiveC().componentsJoinedByString("&") as String
+        return join("&", parts)
     }
 
     func urlEncodedQueryStringWithEncoding(encoding: NSStringEncoding) -> String {
@@ -72,7 +62,19 @@ extension Dictionary {
             parts.append(query)
         }
 
-        return parts.bridgeToObjectiveC().componentsJoinedByString("&") as String
+        return join("&", parts)
     }
     
+}
+
+infix operator + {}
+func + <K,V>(left: Dictionary<K,V>, right: Dictionary<K,V>) -> Dictionary<K,V> {
+    var map = Dictionary<K,V>()
+    for (k, v) in left {
+        map[k] = v
+    }
+    for (k, v) in right {
+        map[k] = v
+    }
+    return map
 }
