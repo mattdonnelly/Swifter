@@ -128,7 +128,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func getListsStatuesWithListID(listID: Int, ownerID: Int, sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getListsStatusesWithListID(listID: Int, ownerID: Int, sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/statuses.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -160,7 +160,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func getListsStatuesWithSlug(slug: String, ownerScreenName: String, sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getListsStatusesWithSlug(slug: String, ownerScreenName: String, sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/statuses.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -192,7 +192,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func getListsStatuesWithSlug(slug: String, ownerID: Int, sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getListsStatusesWithSlug(slug: String, ownerID: Int, sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/statuses.json"
 
         var parameters = Dictionary<String, AnyObject>()
