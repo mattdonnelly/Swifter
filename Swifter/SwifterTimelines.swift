@@ -25,7 +25,7 @@
 
 import Foundation
 
-extension Swifter {
+public extension Swifter {
 
     // Convenience method
     private func getTimelineAtPath(path: String, parameters: Dictionary<String, AnyObject>, count: Int?, sinceID: Int?, maxID: Int?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {

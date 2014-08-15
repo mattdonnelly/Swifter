@@ -25,7 +25,7 @@
 
 import Foundation
 
-extension Swifter {
+public extension Swifter {
 
     /*
     GET    friendships/no_retweets/ids

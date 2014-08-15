@@ -25,7 +25,7 @@
 
 import Foundation
 
-extension Swifter {
+public extension Swifter {
 
     //	GET		search/tweets
     public func getSearchTweetsWithQuery(q: String, geocode: String?, lang: String?, locale: String?, resultType: String?, count: Int?, until: String?, sinceID: Int?, maxID: Int?, includeEntities: Bool?, callback: String?, success: ((statuses: [JSONValue]?, searchMetadata: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler) {

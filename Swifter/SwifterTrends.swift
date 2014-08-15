@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Swifter {
+public extension Swifter {
 
     /*
     GET    trends/place
