@@ -36,7 +36,7 @@ let swifter = Swifter(consumerKey: "", consumerSecret: "", appOnly: true)
 
 ```swift
 swifter.authorizeWithCallbackURL(callbackURL, success: {
-	(accessToken: SwifterCredential.OAuthAccessToken, response: NSURLResponse) in
+	(accessToken: SwifterCredential.OAuthAccessToken?, response: NSURLResponse) in
 
 	// ...
 
