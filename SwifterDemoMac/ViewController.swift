@@ -50,7 +50,7 @@ class ViewController: NSViewController {
                 if granted {
                     let twitterAccounts = accountStore.accountsWithAccountType(accountType)
 
-                    if twitterAccounts {
+                    if (twitterAccounts != nil) {
                         if twitterAccounts.count == 0 {
                             println("There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
                         }

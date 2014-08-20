@@ -88,7 +88,7 @@ extension String {
         let str = self.cStringUsingEncoding(NSUTF8StringEncoding)
         let strLen = UInt(self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
         let digestLen = Int(CC_SHA1_DIGEST_LENGTH)
-        let result = UnsafeMutablePointer<CUnsignedChar>(digestLen)
+        let result = UnsafeMutablePointer<CUnsignedChar>(bitPattern: digestLen)
         let keyStr = key.cStringUsingEncoding(NSUTF8StringEncoding)
         let keyLen = UInt(key.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
 
