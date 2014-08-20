@@ -132,12 +132,12 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
                 }
 
                 for (key, value : AnyObject) in nonOAuthParameters {
-                    body.appendData("\r\n--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding))
-                    body.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding))
-                    body.appendData("\(value)".dataUsingEncoding(NSUTF8StringEncoding))
+                    body.appendData("\r\n--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+                    body.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+                    body.appendData("\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
                 }
 
-                body.appendData("\r\n--\(boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding))
+                body.appendData("\r\n--\(boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
 
                 self.request!.setValue("\(body.length)", forHTTPHeaderField: "Content-Length")
                 self.request!.HTTPBody = body
@@ -186,15 +186,15 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
         let tempData = NSMutableData()
 
-        tempData.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding))
+        tempData.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
 
         let fileNameContentDisposition = fileName != nil ? "filename=\"\(fileName)\"" : ""
         let contentDisposition = "Content-Disposition: form-data; name=\"\(parameterName)\"; \(fileNameContentDisposition)\r\n"
 
-        tempData.appendData(contentDisposition.dataUsingEncoding(NSUTF8StringEncoding))
-        tempData.appendData("Content-Type: \(mimeType)\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding))
+        tempData.appendData(contentDisposition.dataUsingEncoding(NSUTF8StringEncoding)!)
+        tempData.appendData("Content-Type: \(mimeType)\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
         tempData.appendData(data)
-        tempData.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding))
+        tempData.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
 
         return tempData
     }
@@ -215,7 +215,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         let expectedContentLength = Int(self.response!.expectedContentLength)
         let totalBytesReceived = self.responseData.length
 
-        if data {
+        if (data != nil) {
             self.downloadProgressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)
         }
     }

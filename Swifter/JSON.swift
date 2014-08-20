@@ -240,7 +240,7 @@ public enum JSON : Equatable, Printable {
     static func parseJSONData(jsonData : NSData, error: NSErrorPointer) -> JSON? {
         var JSONObject : AnyObject! = NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers, error: error)
 
-        return !(JSONObject) ? nil : JSON(JSONObject)
+        return (JSONObject == nil) ? nil : JSON(JSONObject)
     }
 
     static func parseJSONString(jsonString : String, error: NSErrorPointer) -> JSON? {
