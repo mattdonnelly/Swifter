@@ -70,14 +70,14 @@ public extension Swifter {
 
     A WOEID is a Yahoo! Where On Earth ID.
     */
-    public func getTrendsClosestWithLat(lat: Int, long: Int, success: ((trends: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getTrendsClosestWithLat(lat: Double, long: Double, success: ((trends: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "trends/closest.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["lat"] = lat
         parameters["long"] = long
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(trends: json.array)
