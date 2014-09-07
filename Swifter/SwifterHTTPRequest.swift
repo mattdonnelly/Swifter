@@ -91,7 +91,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     public init(request: NSURLRequest) {
         self.request = request as? NSMutableURLRequest
         self.URL = request.URL
-        self.HTTPMethod = request.HTTPMethod
+        self.HTTPMethod = request.HTTPMethod!
         self.headers = [:]
         self.parameters = [:]
         self.encodeParameters = true

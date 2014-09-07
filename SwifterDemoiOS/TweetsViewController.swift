@@ -42,14 +42,14 @@ class TweetsViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets.count
     }
 
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: nil)
 
-        cell.textLabel.text = tweets[indexPath.row]["text"].string
+        cell.textLabel!.text = tweets[indexPath.row]["text"].string
         
         return cell
     }
