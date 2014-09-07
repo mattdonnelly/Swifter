@@ -75,6 +75,7 @@ public extension Swifter {
         let path = "statuses/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
+        parameters["id"] = id
         if count != nil {
             parameters["count"] = count!
         }
