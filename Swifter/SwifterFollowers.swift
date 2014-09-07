@@ -432,7 +432,7 @@ public extension Swifter {
     At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests. See Using cursors to navigate collections for more information.
     */
     public func getFriendsListWithID(id: Int, cursor: Int?, count: Int?, skipStatus: Bool?, includeUserEntities: Bool?, success: ((users: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
-        let path = "friendships/list.json"
+        let path = "friends/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["id"] = id
@@ -464,7 +464,7 @@ public extension Swifter {
     }
 
     public func getFriendsListWithScreenName(screenName: String, cursor: Int?, count: Int?, skipStatus: Bool?, includeUserEntities: Bool?, success: ((users: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
-        let path = "friendships/list.json"
+        let path = "friends/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = screenName
