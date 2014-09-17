@@ -370,6 +370,10 @@ extension JSON : StringLiteralConvertible {
     public static func convertFromExtendedGraphemeClusterLiteral(value: String) -> JSON {
         return .JSONString(value)
     }
+    
+    public static func convertFromUnicodeScalarLiteral(value: String) -> JSON {
+        return .JSONString(value)
+    }
 
 }
 
