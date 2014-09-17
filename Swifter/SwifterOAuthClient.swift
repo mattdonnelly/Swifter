@@ -128,7 +128,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
             }
         }
 
-        let combinedParameters = authorizationParameters + parameters
+        let combinedParameters = authorizationParameters +| parameters
 
         let finalParameters = isMediaUpload ? authorizationParameters : combinedParameters
 
