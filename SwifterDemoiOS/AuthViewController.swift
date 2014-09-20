@@ -74,7 +74,7 @@ class AuthViewController: UIViewController {
             }
         }
         else {
-            swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success"), success: {
+            swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success")!, success: {
                 accessToken, response in
 
                 self.fetchTwitterHomeStream()
