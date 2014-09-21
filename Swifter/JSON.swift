@@ -36,6 +36,7 @@ public enum JSON : Equatable, Printable {
     
     case JSONString(Swift.String)
     case JSONNumber(Double)
+    case JSONInt(Int)
     case JSONObject(Dictionary<String, JSONValue>)
     case JSONArray(Array<JSON>)
     case JSONBool(Bool)
@@ -62,7 +63,7 @@ public enum JSON : Equatable, Printable {
     
     init(_ value: Int?) {
         if let number = value {
-            self = .JSONNumber(Double(number))
+            self = .JSONInt(number)
         }
         else {
             self = .JSONInvalid
@@ -135,6 +136,9 @@ public enum JSON : Equatable, Printable {
                 if number.objCType == "c" {
                     self = .JSONBool(number.boolValue)
                 }
+                else if number.isEqualToNumber(number.integerValue) {
+                    self = .JSONInt(number.integerValue)
+                }
                 else {
                     self = .JSONNumber(number.doubleValue)
                 }
@@ -166,6 +170,9 @@ public enum JSON : Equatable, Printable {
         switch self {
         case .JSONNumber(let value):
             return Int(value)
+            
+        case .JSONInt(let value):
+            return value
             
         default:
             return nil
@@ -274,6 +281,9 @@ public func ==(lhs: JSON, rhs: JSON) -> Bool {
 
     case (.JSONString(let lhsValue), .JSONString(let rhsValue)):
         return lhsValue == rhsValue
+        
+    case (.JSONInt(let lhsValue), .JSONInt(let rhsValue)):
+        return lhsValue == rhsValue
 
     case (.JSONNumber(let lhsValue), .JSONNumber(let rhsValue)):
         return lhsValue == rhsValue
@@ -307,6 +317,9 @@ extension JSON: Printable {
         switch self {
         case .JSONBool(let bool):
             return bool ? "true" : "false"
+            
+        case .JSONInt(let integer):
+            return "\(integer)"
             
         case .JSONNumber(let number):
             return "\(number)"
@@ -348,7 +361,7 @@ extension JSONValue: BooleanType {
 extension JSON : IntegerLiteralConvertible {
 
     public static func convertFromIntegerLiteral(value: Int) -> JSON {
-        return .JSONNumber(Double(value))
+        return .JSONInt(value)
     }
 
 }
