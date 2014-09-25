@@ -89,7 +89,7 @@ class AuthViewController: UIViewController {
             error in
             self.alertWithTitle("Error", message: error.localizedDescription)
         }
-
+        
         self.swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
             (statuses: [JSONValue]?) in
                 
