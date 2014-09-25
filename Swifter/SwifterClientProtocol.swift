@@ -27,7 +27,7 @@ import Foundation
 import Accounts
 import Social
 
-internal protocol SwifterClientProtocol {
+public protocol SwifterClientProtocol {
 
     var credential: SwifterCredential? { get set }
 

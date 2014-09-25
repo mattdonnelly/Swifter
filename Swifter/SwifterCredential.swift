@@ -30,19 +30,19 @@ public class SwifterCredential {
 
     public struct OAuthAccessToken {
 
-        internal(set) var key: String
-        internal(set) var secret: String
-        internal(set) var verifier: String?
+        public internal(set) var key: String
+        public internal(set) var secret: String
+        public internal(set) var verifier: String?
 
-        internal(set) var screenName: String?
-        internal(set) var userID: String?
+        public internal(set) var screenName: String?
+        public internal(set) var userID: String?
 
-        internal init(key: String, secret: String) {
+        public init(key: String, secret: String) {
             self.key = key
             self.secret = secret
         }
 
-        internal init(queryString: String) {
+        public init(queryString: String) {
             var attributes = queryString.parametersFromQueryString()
 
             self.key = attributes["oauth_token"]!
@@ -54,14 +54,14 @@ public class SwifterCredential {
         
     }
 
-    internal(set) var accessToken: OAuthAccessToken?
-    internal(set) var account: ACAccount?
+    public internal(set) var accessToken: OAuthAccessToken?
+    public internal(set) var account: ACAccount?
 
-    internal init(accessToken: OAuthAccessToken) {
+    public init(accessToken: OAuthAccessToken) {
         self.accessToken = accessToken
     }
 
-    internal init(account: ACAccount) {
+    public init(account: ACAccount) {
         self.account = account
     }
 

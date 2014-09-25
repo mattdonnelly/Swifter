@@ -56,7 +56,7 @@ public class Swifter {
     internal(set) var userStreamURL: NSURL
     internal(set) var siteStreamURL: NSURL
 
-    internal var client: SwifterClientProtocol
+    public var client: SwifterClientProtocol
 
     // MARK: - Initializers
 
