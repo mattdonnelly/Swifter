@@ -8,6 +8,8 @@
 
 If you're using Xcode 6, Swifter can be installed by simply dragging the Swifter Xcode project into your own project and adding either the SwifteriOS or SwifterMac framework as an embedded framework.
 
+**Note: If you're using Xcode 6.1, be sure to use the beta6-1 branch.**
+
 ###Usage
 
 Swifter can be used with the 3 different kinds of authentication protocols Twitter allows. You can specify which protocol to use as show below.
