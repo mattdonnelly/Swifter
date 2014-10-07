@@ -204,7 +204,7 @@ public extension Swifter {
             parameters["stringify_friend_ids"] = stringifyFriendIDs!
         }
 
-        self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
+        self.getJSONWithPath(path, baseURL: self.userStreamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
             json, response in
 
             if let stallWarning = json["warning"].object {
