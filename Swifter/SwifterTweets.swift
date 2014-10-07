@@ -32,7 +32,7 @@ public extension Swifter {
 
     Returns up to 100 of the first retweets of a given tweet.
     */
-    public func getStatusesRetweetsWithID(id: Int, count: Int?, trimUser: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getStatusesRetweetsWithID(id: String, count: Int?, trimUser: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "statuses/retweets/\(id).json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -71,7 +71,7 @@ public extension Swifter {
 
     This object contains an array of user IDs for users who have contributed to this status (an example of a status that has been contributed to is this one). In practice, there is usually only one ID in this array. The JSON renders as such "contributors":[8285392].
     */
-    public func getStatusesShowWithID(id: Int, count: Int?, trimUser: Bool?, includeMyRetweet: Bool?, includeEntities: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func getStatusesShowWithID(id: String, count: Int?, trimUser: Bool?, includeMyRetweet: Bool?, includeEntities: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "statuses/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -103,7 +103,7 @@ public extension Swifter {
 
     Destroys the status specified by the required ID parameter. The authenticating user must be the author of the specified status. Returns the destroyed status if successful.
     */
-    public func postStatusesDestroyWithID(id: Int, trimUser: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postStatusesDestroyWithID(id: String, trimUser: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "statuses/destroy/\(id).json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -142,7 +142,7 @@ public extension Swifter {
     - https://dev.twitter.com/notifications/multiple-media-entities-in-tweets
     - https://dev.twitter.com/docs/api/multiple-media-extended-entities
     */
-    public func postStatusUpdate(status: String, inReplyToStatusID: Int?, lat: Double?, long: Double?, placeID: Double?, displayCoordinates: Bool?, trimUser: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postStatusUpdate(status: String, inReplyToStatusID: String?, lat: Double?, long: Double?, placeID: Double?, displayCoordinates: Bool?, trimUser: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         var path: String = "statuses/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -173,7 +173,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func postStatusUpdate(status: String, media: NSData, inReplyToStatusID: Int?, lat: Double?, long: Double?, placeID: Double?, displayCoordinates: Bool?, trimUser: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postStatusUpdate(status: String, media: NSData, inReplyToStatusID: String?, lat: Double?, long: Double?, placeID: Double?, displayCoordinates: Bool?, trimUser: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         var path: String = "statuses/update_with_media.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -217,7 +217,7 @@ public extension Swifter {
 
     Returns Tweets (1: the new tweet)
     */
-    public func postStatusRetweetWithID(id: Int, trimUser: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postStatusRetweetWithID(id: String, trimUser: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "statuses/retweet/\(id).json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -241,7 +241,7 @@ public extension Swifter {
 
     While this endpoint allows a bit of customization for the final appearance of the embedded Tweet, be aware that the appearance of the rendered Tweet may change over time to be consistent with Twitter's Display Requirements. Do not rely on any class or id parameters to stay constant in the returned markup.
     */
-    public func getStatusesOEmbedWithID(id: Int, maxWidth: Int?, hideMedia: Bool?, hideThread: Bool?, omitScript: Bool?, align: String?, related: String?, lang: String?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func getStatusesOEmbedWithID(id: String, maxWidth: Int?, hideMedia: Bool?, hideThread: Bool?, omitScript: Bool?, align: String?, related: String?, lang: String?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "statuses/oembed.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -322,7 +322,7 @@ public extension Swifter {
 
     This method offers similar data to GET statuses/retweets/:id and replaces API v1's GET statuses/:id/retweeted_by/ids method.
     */
-    public func getStatusesRetweetersWithID(id: Int, cursor: Int?, stringifyIDs: Bool?, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
+    public func getStatusesRetweetersWithID(id: String, cursor: Int?, stringifyIDs: Bool?, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
         let path = "statuses/retweeters/ids.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -353,12 +353,11 @@ public extension Swifter {
 
     Returns fully-hydrated tweet objects for up to 100 tweets per request, as specified by comma-separated values passed to the id parameter. This method is especially useful to get the details (hydrate) a collection of Tweet IDs. GET statuses/show/:id is used to retrieve a single tweet object.
     */
-    public func getStatusesLookupTweetIDs(tweetIDs: [Int], includeEntities: Bool?, map: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getStatusesLookupTweetIDs(tweetIDs: [String], includeEntities: Bool?, map: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "statuses/lookup.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        let tweetIDStrings = tweetIDs.map { String($0) }
-        parameters["id"] = join(",", tweetIDStrings)
+        parameters["id"] = join(",", tweetIDs)
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
