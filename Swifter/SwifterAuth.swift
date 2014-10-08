@@ -66,7 +66,7 @@ public extension Swifter {
             #if os(iOS)
                 UIApplication.sharedApplication().openURL(queryURL!)
             #else
-                NSWorkspace.sharedWorkspace().openURL(queryURL)
+                NSWorkspace.sharedWorkspace().openURL(queryURL!)
             #endif
             }, failure: failure)
     }
