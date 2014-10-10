@@ -343,3 +343,72 @@ extension JSONValue: BooleanType {
     }
 
 }
+
+extension JSON: StringLiteralConvertible {
+    
+    public init(stringLiteral value: StringLiteralType) {
+        self.init(value)
+    }
+    
+    public init(extendedGraphemeClusterLiteral value: StringLiteralType) {
+        self.init(value)
+    }
+    
+    public init(unicodeScalarLiteral value: StringLiteralType) {
+        self.init(value)
+    }
+
+}
+
+extension JSON: IntegerLiteralConvertible {
+    
+    public init(integerLiteral value: IntegerLiteralType) {
+        self.init(value)
+    }
+
+}
+
+extension JSON: BooleanLiteralConvertible {
+    
+    public init(booleanLiteral value: BooleanLiteralType) {
+        self.init(value)
+    }
+
+}
+
+extension JSON: FloatLiteralConvertible {
+    
+    public init(floatLiteral value: FloatLiteralType) {
+        self.init(value)
+    }
+
+}
+
+extension JSON: DictionaryLiteralConvertible {
+    
+    public init(dictionaryLiteral elements: (String, AnyObject)...) {
+        var dict = [String : AnyObject]()
+        
+        for (key, value) in elements {
+            dict[key] = value
+        }
+       
+        self.init(dict)
+    }
+
+}
+
+extension JSON: ArrayLiteralConvertible {
+    
+    public init(arrayLiteral elements: AnyObject...) {
+        self.init(elements)
+    }
+}
+
+extension JSON: NilLiteralConvertible {
+    
+    public init(nilLiteral: ()) {
+        self.init(NSNull())
+    }
+
+}
