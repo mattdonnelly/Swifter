@@ -62,6 +62,7 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
 
         if let key: AnyObject = params[Swifter.DataParameters.dataKey] {
             if let keyString = key as? String {
+                postDataKey = keyString
                 postData = params[postDataKey!] as? NSData
 
                 params.removeValueForKey(Swifter.DataParameters.dataKey)
