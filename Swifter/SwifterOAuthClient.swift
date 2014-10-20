@@ -79,6 +79,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
 
         if let key: AnyObject = parameters[Swifter.DataParameters.dataKey] {
             if let keyString = key as? String {
+                postDataKey = keyString
                 postData = parameters[postDataKey!] as? NSData
 
                 parameters.removeValueForKey(Swifter.DataParameters.dataKey)
