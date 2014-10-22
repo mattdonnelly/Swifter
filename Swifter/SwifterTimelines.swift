@@ -89,7 +89,7 @@ public extension Swifter {
     public func getStatusesUserTimelineWithUserID(userID: String, count: Int?, sinceID: String?, maxID: String?, trimUser: Bool?, contributorDetails: Bool?, includeEntities: Bool?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         var parameters: Dictionary<String, AnyObject> = ["user_id": userID]
 
-        self.getTimelineAtPath("statuses/user_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
+        self.getTimelineAtPath("statuses/user_timeline.json", parameters: parameters, count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 
     /*
