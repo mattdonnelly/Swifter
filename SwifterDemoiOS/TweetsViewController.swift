@@ -47,9 +47,9 @@ class TweetsViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: nil)!
+        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: nil)
 
-        cell.textLabel!.text = tweets[indexPath.row]["text"].string
+        cell.textLabel.text = tweets[indexPath.row]["text"].string
         
         return cell
     }
