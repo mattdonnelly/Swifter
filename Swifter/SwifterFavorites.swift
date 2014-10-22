@@ -57,7 +57,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func getFavoritesListWithUserID(userID: Int, count: Int?, sinceID: String?, maxID: String?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getFavoritesListWithUserID(userID: String, count: Int?, sinceID: String?, maxID: String?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, AnyObject>()

@@ -367,7 +367,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func postBlocksCreateWithUserID(userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: ((user: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler) {
+    public func postBlocksCreateWithUserID(userID: String, includeEntities: Bool?, skipStatus: Bool?, success: ((user: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler) {
         let path = "blocks/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -394,7 +394,7 @@ public extension Swifter {
 
     Un-blocks the user specified in the ID parameter for the authenticating user. Returns the un-blocked user in the requested format when successful. If relationships existed before the block was instated, they will not be restored.
     */
-    public func postDestroyBlocksWithUserID(userID: Int, includeEntities: Bool?, skipStatus: Bool?, success: ((user: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler) {
+    public func postDestroyBlocksWithUserID(userID: String, includeEntities: Bool?, skipStatus: Bool?, success: ((user: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler) {
         let path = "blocks/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -474,7 +474,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func getUsersLookupWithUserIDs(userIDs: [Int], includeEntities: Bool?, success: ((users: [JSONValue]?) -> Void)?, failure: FailureHandler) {
+    public func getUsersLookupWithUserIDs(userIDs: [String], includeEntities: Bool?, success: ((users: [JSONValue]?) -> Void)?, failure: FailureHandler) {
         let path = "users/lookup.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -521,7 +521,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func getUsersShowWithUserID(userID: Int, includeEntities: Bool?, success: ((user: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler) {
+    public func getUsersShowWithUserID(userID: String, includeEntities: Bool?, success: ((user: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler) {
         let path = "users/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -735,7 +735,7 @@ public extension Swifter {
 
     Returns a map of the available size variations of the specified user's profile banner. If the user has not uploaded a profile banner, a HTTP 404 will be served instead. This method can be used instead of string manipulation on the profile_banner_url returned in user objects as described in User Profile Images and Banners.
     */
-    public func getUsersProfileBannerWithUserID(userID: Int, success: ((response: JSON) -> Void)?, failure: FailureHandler?) {
+    public func getUsersProfileBannerWithUserID(userID: String, success: ((response: JSON) -> Void)?, failure: FailureHandler?) {
         let path = "users/profile_banner.json"
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
@@ -771,7 +771,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func postMutesUsersCreateForUserID(userID: Int, success: ((user: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postMutesUsersCreateForUserID(userID: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "mutes/users/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -810,7 +810,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func postMutesUsersDestroyForUserID(userID: Int, success: ((user: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postMutesUsersDestroyForUserID(userID: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "mutes/users/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
