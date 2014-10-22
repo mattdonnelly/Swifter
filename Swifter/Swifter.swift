@@ -72,31 +72,31 @@ public class Swifter {
             self.client = SwifterOAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
         }
 
-        self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")
-        self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")
-        self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")
-        self.userStreamURL = NSURL(string: "https://userstream.twitter.com/1.1/")
-        self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")
+        self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")!
+        self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")!
+        self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")!
+        self.userStreamURL = NSURL(string: "https://userstream.twitter.com/1.1/")!
+        self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")!
     }
 
     public init(consumerKey: String, consumerSecret: String, oauthToken: String, oauthTokenSecret: String) {
         self.client = SwifterOAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret , accessToken: oauthToken, accessTokenSecret: oauthTokenSecret)
 
-        self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")
-        self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")
-        self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")
-        self.userStreamURL = NSURL(string: "https://userstream.twitter.com/1.1/")
-        self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")
+        self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")!
+        self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")!
+        self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")!
+        self.userStreamURL = NSURL(string: "https://userstream.twitter.com/1.1/")!
+        self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")!
     }
 
     public init(account: ACAccount) {
         self.client = SwifterAccountsClient(account: account)
 
-        self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")
-        self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")
-        self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")
-        self.userStreamURL = NSURL(string: "https://userstream.twitter.com/1.1/")
-        self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")
+        self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")!
+        self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")!
+        self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")!
+        self.userStreamURL = NSURL(string: "https://userstream.twitter.com/1.1/")!
+        self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")!
     }
 
     deinit {
@@ -119,7 +119,7 @@ public class Swifter {
             }
             else {
                 let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                let jsonChunks = jsonString.componentsSeparatedByString("\r\n") as [String]
+                let jsonChunks = jsonString!.componentsSeparatedByString("\r\n") as [String]
 
                 for chunk in jsonChunks {
                     if chunk.utf16Count == 0 {

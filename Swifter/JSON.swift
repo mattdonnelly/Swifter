@@ -344,52 +344,71 @@ extension JSONValue: BooleanType {
 
 }
 
-
-extension JSON : IntegerLiteralConvertible {
-
-    public static func convertFromIntegerLiteral(value: Int) -> JSON {
-        return .JSONNumber(Double(value))
+extension JSON: StringLiteralConvertible {
+    
+    public init(stringLiteral value: StringLiteralType) {
+        self.init(value)
+    }
+    
+    public init(extendedGraphemeClusterLiteral value: StringLiteralType) {
+        self.init(value)
+    }
+    
+    public init(unicodeScalarLiteral value: StringLiteralType) {
+        self.init(value)
     }
 
 }
 
-extension JSON : FloatLiteralConvertible {
-
-    public static func convertFromFloatLiteral(value: Double) -> JSON {
-        return .JSONNumber(value)
+extension JSON: IntegerLiteralConvertible {
+    
+    public init(integerLiteral value: IntegerLiteralType) {
+        self.init(value)
     }
 
 }
 
-extension JSON : StringLiteralConvertible {
-
-    public static func convertFromStringLiteral(value: String) -> JSON {
-        return .JSONString(value)
-    }
-
-    public static func convertFromExtendedGraphemeClusterLiteral(value: String) -> JSON {
-        return .JSONString(value)
+extension JSON: BooleanLiteralConvertible {
+    
+    public init(booleanLiteral value: BooleanLiteralType) {
+        self.init(value)
     }
 
 }
 
-extension JSON : ArrayLiteralConvertible {
-
-    public static func convertFromArrayLiteral(elements: JSON...) -> JSON {
-        return .JSONArray(elements)
+extension JSON: FloatLiteralConvertible {
+    
+    public init(floatLiteral value: FloatLiteralType) {
+        self.init(value)
     }
 
 }
 
-extension JSON : DictionaryLiteralConvertible {
-
-    public static func convertFromDictionaryLiteral(elements: (String, JSON)...) -> JSON {
-        var dict = Dictionary<String, JSONValue>()
-        for (k, v) in elements {
-            dict[k] = v
-        }
+extension JSON: DictionaryLiteralConvertible {
+    
+    public init(dictionaryLiteral elements: (String, AnyObject)...) {
+        var dict = [String : AnyObject]()
         
-        return .JSONObject(dict)
+        for (key, value) in elements {
+            dict[key] = value
+        }
+       
+        self.init(dict)
+    }
+
+}
+
+extension JSON: ArrayLiteralConvertible {
+    
+    public init(arrayLiteral elements: AnyObject...) {
+        self.init(elements)
+    }
+}
+
+extension JSON: NilLiteralConvertible {
+    
+    public init(nilLiteral: ()) {
+        self.init(NSNull())
     }
 
 }

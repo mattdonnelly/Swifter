@@ -61,12 +61,12 @@ public extension Swifter {
                 })
 
             let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.apiURL)
-            let queryURL = NSURL(string: authorizeURL.absoluteString! + "?oauth_token=\(token!.key)")
+            let queryURL = NSURL(string: authorizeURL!.absoluteString! + "?oauth_token=\(token!.key)")
 
             #if os(iOS)
-                UIApplication.sharedApplication().openURL(queryURL)
+                UIApplication.sharedApplication().openURL(queryURL!)
             #else
-                NSWorkspace.sharedWorkspace().openURL(queryURL)
+                NSWorkspace.sharedWorkspace().openURL(queryURL!)
             #endif
             }, failure: failure)
     }
@@ -150,7 +150,7 @@ public extension Swifter {
             data, response in
 
             let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
-            let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString)
+            let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString!)
             success(accessToken: accessToken, response: response)
 
             }, failure: failure)
@@ -168,7 +168,7 @@ public extension Swifter {
                 data, response in
 
                 let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString)
+                let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString!)
                 success(accessToken: accessToken, response: response)
 
                 }, failure: failure)

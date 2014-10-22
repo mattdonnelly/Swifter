@@ -44,7 +44,7 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
         let url = NSURL(string: path, relativeToURL: baseURL)
         let method = "GET"
 
-        let request = SwifterHTTPRequest(URL: url, method: method, parameters: parameters)
+        let request = SwifterHTTPRequest(URL: url!, method: method, parameters: parameters)
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
@@ -61,7 +61,7 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
         let url = NSURL(string: path, relativeToURL: baseURL)
         let method = "POST"
 
-        let request = SwifterHTTPRequest(URL: url, method: method, parameters: parameters)
+        let request = SwifterHTTPRequest(URL: url!, method: method, parameters: parameters)
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
