@@ -34,7 +34,7 @@ public extension Swifter {
 
     If you do not provide either a user_id or screen_name to this method, it will assume you are requesting on behalf of the authenticating user. Specify one or the other for best results.
     */
-    public func getFavoritesListWithCount(count: Int?, sinceID: Int?, maxID: Int?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getFavoritesListWithCount(count: Int?, sinceID: String?, maxID: String?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -57,7 +57,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func getFavoritesListWithUserID(userID: Int, count: Int?, sinceID: Int?, maxID: Int?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getFavoritesListWithUserID(userID: String, count: Int?, sinceID: String?, maxID: String?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -82,7 +82,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func getFavoritesListWithScreenName(screenName: String, count: Int?, sinceID: Int?, maxID: Int?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getFavoritesListWithScreenName(screenName: String, count: Int?, sinceID: String?, maxID: String?, success: ((statuses: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, AnyObject>()

@@ -47,7 +47,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func postUsersReportSpamWithScreenName(userID: Int, success: ((user: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postUsersReportSpamWithUserID(userID: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "users/report_spam.json"
 
         var parameters = Dictionary<String, AnyObject>()

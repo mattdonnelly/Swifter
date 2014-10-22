@@ -32,7 +32,7 @@ public extension Swifter {
 
     Returns the 20 most recent direct messages sent to the authenticating user. Includes detailed information about the sender and recipient user. You can request up to 200 direct messages per call, up to a maximum of 800 incoming DMs.
     */
-    public func getDirectMessagesSinceID(sinceID: Int?, maxID: Int?, count: Int?, includeEntities: Bool?, skipStatus: Bool?, success: ((messages: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getDirectMessagesSinceID(sinceID: String?, maxID: String?, count: Int?, includeEntities: Bool?, skipStatus: Bool?, success: ((messages: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "direct_messages.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -66,7 +66,7 @@ public extension Swifter {
 
     Returns the 20 most recent direct messages sent by the authenticating user. Includes detailed information about the sender and recipient user. You can request up to 200 direct messages per call, up to a maximum of 800 outgoing DMs.
     */
-    public func getSentDirectMessagesSinceID(sinceID: Int?, maxID: Int?, count: Int?, page: Int?, includeEntities: Bool?, success: ((messages: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getSentDirectMessagesSinceID(sinceID: String?, maxID: String?, count: Int?, page: Int?, includeEntities: Bool?, success: ((messages: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "direct_messages/sent.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -100,7 +100,7 @@ public extension Swifter {
 
     Returns a single direct message, specified by an id parameter. Like the /1.1/direct_messages.format request, this method will include the user objects of the sender and recipient.
     */
-    public func getDirectMessagesShowWithID(id: Int, success: ((messages: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getDirectMessagesShowWithID(id: String, success: ((messages: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "direct_messages/show.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -120,7 +120,7 @@ public extension Swifter {
 
     Destroys the direct message specified in the required ID parameter. The authenticating user must be the recipient of the specified direct message.
     */
-    public func postDestroyDirectMessageWithID(id: Int, includeEntities: Bool?, success: ((messages: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postDestroyDirectMessageWithID(id: String, includeEntities: Bool?, success: ((messages: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "direct_messages/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
