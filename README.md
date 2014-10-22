@@ -1,5 +1,5 @@
 <p align="center" >
-  <img src="swifter_logo.png" alt="Swifter" title="Swifter" width="692">
+  <img src="swifter_logo.png" alt="Swifter" title="Swifter" width="538">
 </p>
 
 ## Getting Started
