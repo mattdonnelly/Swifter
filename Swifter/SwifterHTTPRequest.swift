@@ -203,28 +203,28 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         return tempData
     }
 
-    public func connection(connection: NSURLConnection!, didReceiveResponse response: NSURLResponse!) {
+    public func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
         self.response = response as? NSHTTPURLResponse
 
         self.responseData.length = 0
     }
 
-    public func connection(connection: NSURLConnection!, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
+    public func connection(connection: NSURLConnection, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
         self.uploadProgressHandler?(bytesWritten: bytesWritten, totalBytesWritten: totalBytesWritten, totalBytesExpectedToWrite: totalBytesExpectedToWrite)
     }
 
-    public func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
+    public func connection(connection: NSURLConnection, didReceiveData data: NSData) {
         self.responseData.appendData(data)
 
         let expectedContentLength = Int(self.response!.expectedContentLength)
         let totalBytesReceived = self.responseData.length
 
-        if (data != nil) {
+        if (data.length > 0) {
             self.downloadProgressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)
         }
     }
 
-    public func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
+    public func connection(connection: NSURLConnection, didFailWithError error: NSError) {
         #if os(iOS)
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         #endif
@@ -232,7 +232,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.failureHandler?(error: error)
     }
 
-    public func connectionDidFinishLoading(connection: NSURLConnection!) {
+    public func connectionDidFinishLoading(connection: NSURLConnection) {
         #if os(iOS)
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         #endif
