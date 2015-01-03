@@ -166,10 +166,10 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
             }
         }
 
-        dispatch_async(dispatch_get_main_queue()) {
-            self.connection = NSURLConnection(request: self.request!, delegate: self)
-            self.connection.start()
+        self.connection = NSURLConnection(request: self.request!, delegate: self)
+        self.connection.start()
 
+        dispatch_async(dispatch_get_main_queue()) {
             #if os(iOS)
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             #endif
