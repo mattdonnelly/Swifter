@@ -176,6 +176,10 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         }
     }
 
+    public func stop() {
+        self.connection.cancel()
+    }
+
     public func addMultipartData(data: NSData, parameterName: String, mimeType: String?, fileName: String?) -> Void {
         let dataUpload = DataUpload(data: data, parameterName: parameterName, mimeType: mimeType, fileName: fileName)
         self.uploadData.append(dataUpload)
