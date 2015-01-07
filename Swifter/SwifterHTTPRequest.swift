@@ -235,8 +235,12 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
         if self.response.statusCode >= 400 {
             let responseString = NSString(data: self.responseData, encoding: self.dataEncoding)
+            let responseErrorCode = SwifterHTTPRequest.responseErrorCode(self.responseData) ?? 0
             let localizedDescription = SwifterHTTPRequest.descriptionForHTTPStatus(self.response.statusCode, responseString: responseString!)
-            let userInfo = [NSLocalizedDescriptionKey: localizedDescription, "Response-Headers": self.response.allHeaderFields]
+            let userInfo = [
+                NSLocalizedDescriptionKey: localizedDescription,
+                "Response-Headers": self.response.allHeaderFields,
+                "Response-ErrorCode": responseErrorCode]
             let error = NSError(domain: NSURLErrorDomain, code: self.response.statusCode, userInfo: userInfo)
             self.failureHandler?(error: error)
             return
@@ -258,6 +262,19 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         }
 
         return NSString(data: data, encoding: encoding)!
+    }
+
+    class func responseErrorCode(data: NSData) -> Int? {
+        if let json: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) {
+            if let dictionary = json as? NSDictionary {
+                if let errors = dictionary["errors"] as? [NSDictionary] {
+                    if let code = errors.first?["code"] as? Int {
+                        return code
+                    }
+                }
+            }
+        }
+        return nil
     }
 
     class func descriptionForHTTPStatus(status: Int, responseString: String) -> String {
