@@ -129,7 +129,9 @@ public class Swifter {
                     let chunkData = chunk.dataUsingEncoding(NSUTF8StringEncoding)
 
                     if let jsonResult = JSON.parseJSONData(data, error: &error)  {
-                        downloadProgress?(json: jsonResult, response: response)
+                        if let downloadProgress = downloadProgress {
+                            downloadProgress(json: jsonResult, response: response)
+                        }
                     }
                 }
             }
@@ -138,12 +140,22 @@ public class Swifter {
         let jsonSuccessHandler: SwifterHTTPRequest.SuccessHandler = {
             data, response in
 
-            var error: NSError?
-            if let jsonResult = JSON.parseJSONData(data, error: &error) {
-                success?(json: jsonResult, response: response)
-            }
-            else {
-                failure?(error: error!)
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
+                var error: NSError?
+                if let jsonResult = JSON.parseJSONData(data, error: &error) {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let success = success {
+                            success(json: jsonResult, response: response)
+                        }
+                    }
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let failure = failure {
+                            failure(error: error!)
+                        }
+                    }
+                }
             }
         }
 
