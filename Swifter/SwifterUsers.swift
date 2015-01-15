@@ -577,7 +577,7 @@ public extension Swifter {
 
     Returns a collection of users that the specified user can "contribute" to.
     */
-    public func getUsersContributeesWithUserID(id: Int, includeEntities: Bool?, skipStatus: Bool?, success: ((users: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getUsersContributeesWithUserID(id: String, includeEntities: Bool?, skipStatus: Bool?, success: ((users: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "users/contributees.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -626,7 +626,7 @@ public extension Swifter {
 
     Returns a collection of users who can contribute to the specified account.
     */
-    public func getUsersContributorsWithUserID(id: Int, includeEntities: Bool?, skipStatus: Bool?, success: ((users: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
+    public func getUsersContributorsWithUserID(id: String, includeEntities: Bool?, skipStatus: Bool?, success: ((users: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
         let path = "users/contributors.json"
 
         var parameters = Dictionary<String, AnyObject>()
