@@ -114,7 +114,7 @@ public extension Swifter {
 
     This process invoked by this method is asynchronous. The immediately returned status may not indicate the resultant favorited status of the tweet. A 200 OK response from this method will indicate whether the intended action was successful or not.
     */
-    public func postDestroyFavoriteWithID(id: Int, includeEntities: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postDestroyFavoriteWithID(id: String, includeEntities: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "favorites/destroy.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -140,7 +140,7 @@ public extension Swifter {
 
     This process invoked by this method is asynchronous. The immediately returned status may not indicate the resultant favorited status of the tweet. A 200 OK response from this method will indicate whether the intended action was successful or not.
     */
-    public func postCreateFavoriteWithID(id: Int, includeEntities: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: SwifterHTTPRequest.FailureHandler?) {
+    public func postCreateFavoriteWithID(id: String, includeEntities: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "favorites/create.json"
 
         var parameters = Dictionary<String, AnyObject>()

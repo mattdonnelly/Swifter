@@ -176,6 +176,10 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         }
     }
 
+    public func stop() {
+        self.connection.cancel()
+    }
+
     public func addMultipartData(data: NSData, parameterName: String, mimeType: String?, fileName: String?) -> Void {
         let dataUpload = DataUpload(data: data, parameterName: parameterName, mimeType: mimeType, fileName: fileName)
         self.uploadData.append(dataUpload)
@@ -199,28 +203,28 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         return tempData
     }
 
-    public func connection(connection: NSURLConnection!, didReceiveResponse response: NSURLResponse!) {
+    public func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
         self.response = response as? NSHTTPURLResponse
 
         self.responseData.length = 0
     }
 
-    public func connection(connection: NSURLConnection!, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
+    public func connection(connection: NSURLConnection, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
         self.uploadProgressHandler?(bytesWritten: bytesWritten, totalBytesWritten: totalBytesWritten, totalBytesExpectedToWrite: totalBytesExpectedToWrite)
     }
 
-    public func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
+    public func connection(connection: NSURLConnection, didReceiveData data: NSData) {
         self.responseData.appendData(data)
 
         let expectedContentLength = Int(self.response!.expectedContentLength)
         let totalBytesReceived = self.responseData.length
 
-        if (data != nil) {
+        if (data.length > 0) {
             self.downloadProgressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)
         }
     }
 
-    public func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
+    public func connection(connection: NSURLConnection, didFailWithError error: NSError) {
         #if os(iOS)
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         #endif
@@ -228,15 +232,19 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.failureHandler?(error: error)
     }
 
-    public func connectionDidFinishLoading(connection: NSURLConnection!) {
+    public func connectionDidFinishLoading(connection: NSURLConnection) {
         #if os(iOS)
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         #endif
 
         if self.response.statusCode >= 400 {
             let responseString = NSString(data: self.responseData, encoding: self.dataEncoding)
+            let responseErrorCode = SwifterHTTPRequest.responseErrorCode(self.responseData) ?? 0
             let localizedDescription = SwifterHTTPRequest.descriptionForHTTPStatus(self.response.statusCode, responseString: responseString!)
-            let userInfo = [NSLocalizedDescriptionKey: localizedDescription, "Response-Headers": self.response.allHeaderFields]
+            let userInfo = [
+                NSLocalizedDescriptionKey: localizedDescription,
+                "Response-Headers": self.response.allHeaderFields,
+                "Response-ErrorCode": responseErrorCode]
             let error = NSError(domain: NSURLErrorDomain, code: self.response.statusCode, userInfo: userInfo)
             self.failureHandler?(error: error)
             return
@@ -258,6 +266,19 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         }
 
         return NSString(data: data, encoding: encoding)!
+    }
+
+    class func responseErrorCode(data: NSData) -> Int? {
+        if let json: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) {
+            if let dictionary = json as? NSDictionary {
+                if let errors = dictionary["errors"] as? [NSDictionary] {
+                    if let code = errors.first?["code"] as? Int {
+                        return code
+                    }
+                }
+            }
+        }
+        return nil
     }
 
     class func descriptionForHTTPStatus(status: Int, responseString: String) -> String {
