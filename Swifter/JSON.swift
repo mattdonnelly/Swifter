@@ -132,7 +132,7 @@ public enum JSON : Equatable, Printable {
                 self = .JSONString(string)
                 
             case let number as NSNumber:
-                if number.objCType == "c" {
+                if number.isBool {
                     self = .JSONBool(number.boolValue)
                 }
                 else {
@@ -335,6 +335,8 @@ extension JSONValue: BooleanType {
 
     public var boolValue: Bool {
         switch self {
+        case .JSONBool(let bool):
+            return bool
         case .JSONInvalid:
             return false
         default:
@@ -411,4 +413,22 @@ extension JSON: NilLiteralConvertible {
         self.init(NSNull())
     }
 
+}
+
+private let trueNumber = NSNumber(bool: true)
+private let falseNumber = NSNumber(bool: false)
+private let trueObjCType = String.fromCString(trueNumber.objCType)
+private let falseObjCType = String.fromCString(falseNumber.objCType)
+
+private extension NSNumber {
+    var isBool:Bool {
+        get {
+            let objCType = String.fromCString(self.objCType)
+            if (self.compare(trueNumber) == NSComparisonResult.OrderedSame &&  objCType == trueObjCType) ||  (self.compare(falseNumber) == NSComparisonResult.OrderedSame && objCType == falseObjCType){
+                return true
+            } else {
+                return false
+            }
+        }
+    }
 }
