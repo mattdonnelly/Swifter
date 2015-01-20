@@ -144,17 +144,17 @@ public extension Swifter {
 
     Sends a new direct message to the specified user from the authenticating user. Requires both the user and text parameters and must be a POST. Returns the sent message in the requested format if successful.
     */
-    public func postDirectMessagesWithStatus(status: String, to screenName: String, success: ((messages: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postDirectMessageToUser(userID: String, text: String, success: ((statuses: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "direct_messages/new.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["status"] = status
-        parameters["sceen_name"] = screenName
+        parameters["user_id"] = userID
+        parameters["text"] = text
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
             
-            success?(messages: json.object)
+            success?(statuses: json.object)
             return
             
             }, failure: failure)
