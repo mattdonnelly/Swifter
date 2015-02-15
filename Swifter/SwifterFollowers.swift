@@ -572,7 +572,7 @@ public extension Swifter {
     Returns the relationships of the authenticating user to the comma-separated list of up to 100 screen_names or user_ids provided. Values for connections can be: following, following_requested, followed_by, none.
     */
     public func getFriendshipsLookupWithScreenNames(screenNames: [String], success: ((friendships: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
-        let path = "followers/lookup.json"
+        let path = "friendships/lookup.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["screen_name"] = join(",", screenNames)
@@ -587,7 +587,7 @@ public extension Swifter {
     }
     
     public func getFriendshipsLookupWithIDs(ids: [Int], success: ((friendships: [JSONValue]?) -> Void)?, failure: FailureHandler?) {
-        let path = "followers/lookup.json"
+        let path = "friendships/lookup.json"
         
         var parameters = Dictionary<String, AnyObject>()
 
