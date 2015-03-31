@@ -55,7 +55,7 @@ class ViewController: NSViewController {
                             println("There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
                         }
                         else {
-                            let twitterAccount = twitterAccounts[0] as ACAccount
+                            let twitterAccount = twitterAccounts[0] as! ACAccount
 
                             let swifter = Swifter(account: twitterAccount)
 
@@ -77,7 +77,7 @@ class ViewController: NSViewController {
         else {
             let swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
 
-            swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success"), success: {
+            swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success")!, success: {
                 accessToken, response in
 
                 println("Successfully authorized")

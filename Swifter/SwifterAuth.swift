@@ -46,7 +46,7 @@ public extension Swifter {
 
                 NSNotificationCenter.defaultCenter().removeObserver(self)
 
-                let url = notification.userInfo![CallbackNotification.optionsURLKey] as NSURL
+                let url = notification.userInfo![CallbackNotification.optionsURLKey] as! NSURL
 
                 let parameters = url.query!.parametersFromQueryString()
                 requestToken.verifier = parameters["oauth_verifier"]
@@ -150,7 +150,7 @@ public extension Swifter {
             data, response in
 
             let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
-            let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString!)
+            let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString as String!)
             success(accessToken: accessToken, response: response)
 
             }, failure: failure)
@@ -168,7 +168,7 @@ public extension Swifter {
                 data, response in
 
                 let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString!)
+                let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString! as String)
                 success(accessToken: accessToken, response: response)
 
                 }, failure: failure)

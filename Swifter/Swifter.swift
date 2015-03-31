@@ -119,10 +119,10 @@ public class Swifter {
             }
             else {
                 let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                let jsonChunks = jsonString!.componentsSeparatedByString("\r\n") as [String]
+                let jsonChunks = jsonString!.componentsSeparatedByString("\r\n") as! [String]
 
                 for chunk in jsonChunks {
-                    if chunk.utf16Count == 0 {
+                    if count(chunk.utf16) == 0 {
                         continue
                     }
 
