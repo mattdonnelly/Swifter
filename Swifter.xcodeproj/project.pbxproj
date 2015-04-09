@@ -77,7 +77,7 @@
 		8BF1D6861948BCC100E3AA64 /* SwifterAccountsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */; };
 		8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
 		8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
-		CAEA7E991AD64D4E00750957 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA7E981AD64D4E00750957 /* PhotoViewController.swift */; };
+		CAEA7E991AD64D4E00750957 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA7E981AD64D4E00750957 /* CameraViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,7 +166,7 @@
 		8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterClientProtocol.swift; sourceTree = "<group>"; };
 		8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAccountsClient.swift; sourceTree = "<group>"; };
 		8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterCredential.swift; sourceTree = "<group>"; };
-		CAEA7E981AD64D4E00750957 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		CAEA7E981AD64D4E00750957 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,7 +218,7 @@
 				8B5EFF06195F064400B354F9 /* Main.storyboard */,
 				8BCB9328194B2E1200A998EA /* Images.xcassets */,
 				8B300C211944AA1A00993175 /* Supporting Files */,
-				CAEA7E981AD64D4E00750957 /* PhotoViewController.swift */,
+				CAEA7E981AD64D4E00750957 /* CameraViewController.swift */,
 			);
 			path = SwifterDemoiOS;
 			sourceTree = "<group>";
@@ -453,6 +453,7 @@
 				TargetAttributes = {
 					8B300C1E1944AA1A00993175 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = XD75XYY267;
 					};
 					8B300C461944AECB00993175 = {
 						CreatedOnToolsVersion = 6.0;
@@ -539,7 +540,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B5EFF08195F064400B354F9 /* AuthViewController.swift in Sources */,
-				CAEA7E991AD64D4E00750957 /* PhotoViewController.swift in Sources */,
+				CAEA7E991AD64D4E00750957 /* CameraViewController.swift in Sources */,
 				8B5EFF07195F064400B354F9 /* AppDelegate.swift in Sources */,
 				8B5EFF09195F064400B354F9 /* TweetsViewController.swift in Sources */,
 			);

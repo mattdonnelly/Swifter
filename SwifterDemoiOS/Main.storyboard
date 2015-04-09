@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXU-QM-xXY">
-                                <rect key="frame" x="-12" y="209" width="345" height="62"/>
+                                <rect key="frame" x="-12" y="89" width="345" height="62"/>
                                 <state key="normal" image="ButtonTwitterNormal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -31,7 +31,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LdL-ES-p0u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="124" y="350"/>
+            <point key="canvasLocation" x="-66" y="350"/>
         </scene>
         <!--Tweets View Controller-->
         <scene sceneID="2VR-oP-K8C">
@@ -65,12 +65,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1RD-M2-ZAd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="755" y="350"/>
+            <point key="canvasLocation" x="-66" y="910"/>
         </scene>
-        <!--Photo View Controller-->
+        <!--Camera View Controller-->
         <scene sceneID="005-td-jsF">
             <objects>
-                <viewController storyboardIdentifier="PhotoViewController" id="NXV-X1-aZg" customClass="PhotoViewController" customModule="SwifterDemoiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CameraViewController" id="NXV-X1-aZg" customClass="CameraViewController" customModule="SwifterDemoiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cUV-fA-UQH"/>
                         <viewControllerLayoutGuide type="bottom" id="oDi-0q-Gzb"/>
@@ -78,12 +78,48 @@
                     <view key="view" contentMode="scaleToFill" id="cIB-eO-lfb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Greetings from #bitcamp and @TwitterDev!" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nmd-0r-kYL">
+                                <rect key="frame" x="115" y="43" width="177" height="30"/>
+                                <accessibility key="accessibilityConfiguration" label="Hi from #bitcamp!"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OOM-Sk-R36">
+                                <rect key="frame" x="115" y="430" width="80" height="30"/>
+                                <state key="normal" title="Send Tweet">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTouchUpInsideTweetButton:" destination="NXV-X1-aZg" eventType="touchUpInside" id="IZB-XV-PaP"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Rw-WM-lEJ">
+                                <rect key="frame" x="0.0" y="43" width="104" height="181"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aht-u0-ZzX">
+                                <rect key="frame" x="16" y="237" width="77" height="30"/>
+                                <state key="normal" title="Take Photo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTouchUpInsidePhotoButton:" destination="NXV-X1-aZg" eventType="touchUpInside" id="AKL-ON-iPA"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="5Rw-WM-lEJ" id="mXq-ND-7bT"/>
+                        <outlet property="sendTweetButton" destination="OOM-Sk-R36" id="YGk-wB-Iz0"/>
+                        <outlet property="statusTextField" destination="nmd-0r-kYL" id="kaR-os-rsY"/>
+                        <outlet property="takePhotoButton" destination="Aht-u0-ZzX" id="0jF-Re-3ai"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3BD-mH-QbI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="428" y="959"/>
+            <point key="canvasLocation" x="321" y="350"/>
         </scene>
     </scenes>
     <resources>
