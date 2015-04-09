@@ -46,7 +46,7 @@ public extension Swifter {
 
                 NSNotificationCenter.defaultCenter().removeObserver(self)
 
-                let url = notification.userInfo![CallbackNotification.optionsURLKey] as! NSURL
+                let url = notification.userInfo![CallbackNotification.optionsURLKey] as NSURL
 
                 let parameters = url.query!.parametersFromQueryString()
                 requestToken.verifier = parameters["oauth_verifier"]
