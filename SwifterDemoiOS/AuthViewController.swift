@@ -65,7 +65,9 @@ class AuthViewController: UIViewController {
                     else {
                         let twitterAccount = twitterAccounts[0] as ACAccount
                         self.swifter = Swifter(account: twitterAccount)
-                        self.fetchTwitterHomeStream()
+
+//                        self.fetchTwitterHomeStream()
+                        self.showPhotoView()
                     }
                 }
                 else {
@@ -82,6 +84,20 @@ class AuthViewController: UIViewController {
                 },failure: failureHandler
             )
         }
+    }
+    
+    func showPhotoView() {
+        
+        let failureHandler: ((NSError) -> Void) = {
+            error in
+            self.alertWithTitle("Error", message: error.localizedDescription)
+        }
+        
+        // Successfully fetched timeline, so lets create and push the table view
+        let photoViewController = self.storyboard!.instantiateViewControllerWithIdentifier("PhotoViewController") as PhotoViewController
+
+        self.presentViewController(photoViewController, animated: true, completion: nil)
+        
     }
 
     func fetchTwitterHomeStream() {
