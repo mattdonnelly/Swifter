@@ -47,10 +47,10 @@ class AuthViewController: UIViewController {
             self.alertWithTitle("Error", message: error.localizedDescription)
         }
         
-        if true {
-            self.showPhotoView()
-            return;
-        }
+//        if true {
+//            self.showPhotoView()
+//            return;
+//        }
 
         if useACAccount {
             let accountStore = ACAccountStore()
@@ -97,11 +97,13 @@ class AuthViewController: UIViewController {
             error in
             self.alertWithTitle("Error", message: error.localizedDescription)
         }
-        
-        // Successfully fetched timeline, so lets create and push the table view
-        let photoViewController = self.storyboard!.instantiateViewControllerWithIdentifier("CameraViewController") as CameraViewController
 
-        self.presentViewController(photoViewController, animated: true, completion: nil)
+        // ensure that presentViewController happens from the main thread/queue
+        dispatch_async(dispatch_get_main_queue(), {
+            let photoViewController = self.storyboard!.instantiateViewControllerWithIdentifier("CameraViewController") as CameraViewController
+            self.presentViewController(photoViewController, animated: true, completion: nil)
+        });
+        
         
     }
 

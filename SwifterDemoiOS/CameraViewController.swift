@@ -23,6 +23,8 @@
 
 import UIKit
 import MobileCoreServices
+import SwifteriOS
+
 
 class CameraViewController: UIViewController,
 UINavigationControllerDelegate, UIImagePickerControllerDelegate /*, UITextViewDelegate */ {
@@ -164,29 +166,35 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate /*, UITextViewDe
         
     }
     
+    // hide keyboard for UITextView
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         view.endEditing(true)
         super.touchesBegan(touches, withEvent: event)
     }
     
-//    func textViewDidEndEditing(textView: UITextView) {
-//        let failureHandler: ((NSError) -> Void) = {
-//            error in
-//            
-//            self.alertWithTitle("Error", message: error.localizedDescription)
-//        }
-//        
-//        self.statusTextField.resignFirstResponder();
-//        
-//        println("textViewDidEndEditing")
-//    }
-
     @IBAction func didTouchUpInsideTweetButton(sender: AnyObject) {
         let failureHandler: ((NSError) -> Void) = {
             error in
             
             self.alertWithTitle("Error", message: error.localizedDescription)
         }
+
+        // Successfully fetched timeline, so lets create and push the table view
+        let authViewController = self.storyboard!.instantiateViewControllerWithIdentifier("AuthViewController") as AuthViewController
+        
+        let imageData: NSData = UIImagePNGRepresentation(self.imageView.image)
+        
+        authViewController.swifter.postStatusUpdate(self.statusTextField.text, media: imageData, inReplyToStatusID: nil, lat: nil, long: nil, placeID: nil, displayCoordinates: nil, trimUser: nil, success: {
+            (status: Dictionary<String, JSONValue>?) in
+            
+            // ...
+            
+            }, failure: {
+                (error: NSError) in
+                
+                // ...
+                
+        })
 
         println("didTouchUpInsideTweetButton")
 

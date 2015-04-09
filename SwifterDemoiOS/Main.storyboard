@@ -7,7 +7,7 @@
         <!--Auth View Controller-->
         <scene sceneID="DDj-JH-UoW">
             <objects>
-                <viewController id="hVp-wC-ZGs" customClass="AuthViewController" customModule="SwifterDemoiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthViewController" id="hVp-wC-ZGs" customClass="AuthViewController" customModule="SwifterDemoiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="utr-qu-ieQ"/>
                         <viewControllerLayoutGuide type="bottom" id="mnl-yE-msX"/>
