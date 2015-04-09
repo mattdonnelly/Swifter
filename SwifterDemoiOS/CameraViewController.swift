@@ -25,7 +25,7 @@ import UIKit
 import MobileCoreServices
 
 class CameraViewController: UIViewController,
-UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+UINavigationControllerDelegate, UIImagePickerControllerDelegate /*, UITextViewDelegate */ {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var takePhotoButton: UIButton!
@@ -75,25 +75,30 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate {
             beenHereBefore = true
         }
         
-        if isCameraAvailable() && doesCameraSupportTakingPhotos(){
+        self.showPhotoModal();
+        
+    }
+    
+    func showPhotoModal() {
+        
+        controller = UIImagePickerController()
             
-            controller = UIImagePickerController()
-            
-            if let theController = controller{
+        if let theController = controller{
+                
+            if isCameraAvailable() && doesCameraSupportTakingPhotos(){
                 theController.sourceType = .Camera
-                
-                theController.mediaTypes = [kUTTypeImage as String]
-                
-                theController.allowsEditing = true
-                theController.delegate = self
-                
-                presentViewController(theController, animated: true, completion: nil)
+            } else {
+                theController.sourceType = .PhotoLibrary
             }
             
-        } else {
-            println("Camera is not available")
+            theController.mediaTypes = [kUTTypeImage as String]
+            
+            theController.allowsEditing = true
+            theController.delegate = self
+            
+            presentViewController(theController, animated: true, completion: nil)
         }
-        
+            
     }
     
     func imagePickerController(picker: UIImagePickerController,
@@ -155,7 +160,26 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         
         println("didTouchUpInsidePhotoButton")
         
+        self.showPhotoModal()
+        
     }
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        view.endEditing(true)
+        super.touchesBegan(touches, withEvent: event)
+    }
+    
+//    func textViewDidEndEditing(textView: UITextView) {
+//        let failureHandler: ((NSError) -> Void) = {
+//            error in
+//            
+//            self.alertWithTitle("Error", message: error.localizedDescription)
+//        }
+//        
+//        self.statusTextField.resignFirstResponder();
+//        
+//        println("textViewDidEndEditing")
+//    }
 
     @IBAction func didTouchUpInsideTweetButton(sender: AnyObject) {
         let failureHandler: ((NSError) -> Void) = {

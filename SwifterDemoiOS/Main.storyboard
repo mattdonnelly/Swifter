@@ -79,12 +79,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Greetings from #bitcamp and @TwitterDev!" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nmd-0r-kYL">
-                                <rect key="frame" x="115" y="43" width="177" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Hi from #bitcamp!"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OOM-Sk-R36">
                                 <rect key="frame" x="115" y="430" width="80" height="30"/>
                                 <state key="normal" title="Send Tweet">
@@ -95,12 +89,18 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Rw-WM-lEJ">
-                                <rect key="frame" x="0.0" y="43" width="104" height="181"/>
+                                <rect key="frame" x="0.0" y="43" width="104" height="136"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Greetings from #bitcamp and @TwitterDev!" translatesAutoresizingMaskIntoConstraints="NO" id="dHb-hh-PMJ">
+                                <rect key="frame" x="112" y="43" width="197" height="136"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aht-u0-ZzX">
-                                <rect key="frame" x="16" y="237" width="77" height="30"/>
-                                <state key="normal" title="Take Photo">
+                                <rect key="frame" x="5" y="187" width="99" height="30"/>
+                                <state key="normal" title="Re-take Photo">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -113,7 +113,6 @@
                     <connections>
                         <outlet property="imageView" destination="5Rw-WM-lEJ" id="mXq-ND-7bT"/>
                         <outlet property="sendTweetButton" destination="OOM-Sk-R36" id="YGk-wB-Iz0"/>
-                        <outlet property="statusTextField" destination="nmd-0r-kYL" id="kaR-os-rsY"/>
                         <outlet property="takePhotoButton" destination="Aht-u0-ZzX" id="0jF-Re-3ai"/>
                     </connections>
                 </viewController>
