@@ -78,6 +78,9 @@
 		8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
 		8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
 		CAEA7E991AD64D4E00750957 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA7E981AD64D4E00750957 /* CameraViewController.swift */; };
+		CAF1D6BC1AD75EA8005CCD89 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF1D6B91AD75EA8005CCD89 /* TwitterKit.framework */; };
+		CAF1D6BD1AD75EA8005CCD89 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CAF1D6BA1AD75EA8005CCD89 /* TwitterKitResources.bundle */; };
+		CAF1D6BE1AD75EA8005CCD89 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF1D6BB1AD75EA8005CCD89 /* Fabric.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +170,9 @@
 		8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAccountsClient.swift; sourceTree = "<group>"; };
 		8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterCredential.swift; sourceTree = "<group>"; };
 		CAEA7E981AD64D4E00750957 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		CAF1D6B91AD75EA8005CCD89 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = SOURCE_ROOT; };
+		CAF1D6BA1AD75EA8005CCD89 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = SOURCE_ROOT; };
+		CAF1D6BB1AD75EA8005CCD89 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +181,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B300C3E1944AA6600993175 /* SwifteriOS.framework in Frameworks */,
+				CAF1D6BC1AD75EA8005CCD89 /* TwitterKit.framework in Frameworks */,
+				CAF1D6BE1AD75EA8005CCD89 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,10 +223,13 @@
 				8B5EFF03195F064400B354F9 /* AppDelegate.swift */,
 				8B5EFF04195F064400B354F9 /* AuthViewController.swift */,
 				8B5EFF05195F064400B354F9 /* TweetsViewController.swift */,
+				CAEA7E981AD64D4E00750957 /* CameraViewController.swift */,
 				8B5EFF06195F064400B354F9 /* Main.storyboard */,
 				8BCB9328194B2E1200A998EA /* Images.xcassets */,
+				CAF1D6BA1AD75EA8005CCD89 /* TwitterKitResources.bundle */,
 				8B300C211944AA1A00993175 /* Supporting Files */,
-				CAEA7E981AD64D4E00750957 /* CameraViewController.swift */,
+				CAF1D6B91AD75EA8005CCD89 /* TwitterKit.framework */,
+				CAF1D6BB1AD75EA8005CCD89 /* Fabric.framework */,
 			);
 			path = SwifterDemoiOS;
 			sourceTree = "<group>";
@@ -359,6 +370,7 @@
 				8B300C1C1944AA1A00993175 /* Frameworks */,
 				8B300C1D1944AA1A00993175 /* Resources */,
 				8B300C421944AA6600993175 /* Embed Frameworks */,
+				CAF1D6B81AD75E71005CCD89 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -498,6 +510,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BCB9329194B2E1200A998EA /* Images.xcassets in Resources */,
+				CAF1D6BD1AD75EA8005CCD89 /* TwitterKitResources.bundle in Resources */,
 				8B5EFF0A195F064400B354F9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,6 +546,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CAF1D6B81AD75E71005CCD89 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run e25f12ebcd18f645af83d9627a5c28edf281af1d f2695c8656524bed4f4b9b72bbd1624b70d49a126a0c4e8d28bee591dffc0410";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8B300C1B1944AA1A00993175 /* Sources */ = {
@@ -669,6 +698,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -678,6 +711,7 @@
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -687,10 +721,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SwifterDemoiOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -27,6 +27,9 @@ import UIKit
 import SwifteriOS
 import Accounts
 
+import Fabric
+import TwitterKit
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
@@ -35,10 +38,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var account: ACAccount?
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+
+        Fabric.with([Twitter()])
+
         Swifter.handleOpenURL(url)
 
         return true
     }
+    
+//    func fetchTwitterHomeStream() {
+//        TweetsViewController.showTweets();
+//    }
+
 
 }
 

@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXU-QM-xXY">
-                                <rect key="frame" x="-12" y="89" width="345" height="62"/>
+                                <rect key="frame" x="-12" y="191" width="345" height="62"/>
                                 <state key="normal" image="ButtonTwitterNormal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -31,7 +31,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LdL-ES-p0u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-66" y="350"/>
+            <point key="canvasLocation" x="-74" y="350"/>
         </scene>
         <!--Tweets View Controller-->
         <scene sceneID="2VR-oP-K8C">

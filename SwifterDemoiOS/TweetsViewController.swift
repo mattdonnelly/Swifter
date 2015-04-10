@@ -26,10 +26,46 @@
 import UIKit
 import SwifteriOS
 
+import TwitterKit
+
 class TweetsViewController: UITableViewController {
 
     var tweets : [JSONValue] = []
 
+    func showTweets() {
+        Twitter.sharedInstance().logInGuestWithCompletion { (session: TWTRGuestSession!, error: NSError!) in
+            Twitter.sharedInstance().APIClient.loadTweetWithID("20") { (tweet: TWTRTweet!, error: NSError!) in
+                self.view.addSubview(TWTRTweetView(tweet: tweet))
+            }
+        }
+        
+        Twitter.sharedInstance().logInGuestWithCompletion { (session: TWTRGuestSession!, error: NSError!) in
+            Twitter.sharedInstance().APIClient.loadTweetWithID("20") { (tweet: TWTRTweet!, error: NSError!) in
+                self.view.addSubview(TWTRTweetView(tweet: tweet))
+            }
+        }
+
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        let failureHandler: ((NSError) -> Void) = {
+            error in
+            self.alertWithTitle("Error", message: error.localizedDescription)
+        }
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.swifter.getStatusesUserTimelineWithUserID(appDelegate.account!.username, count: 20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
+                (statuses: [JSONValue]?) in
+                self.tweets = statuses!
+            }, failure: failureHandler
+        )
+        
+        println("TweetsViewController viewDidLoad")
+        
+    }
+    
     override func viewWillLayoutSubviews()
     {
         super.viewWillLayoutSubviews()
@@ -53,5 +89,12 @@ class TweetsViewController: UITableViewController {
         
         return cell
     }
+    
+    func alertWithTitle(title: String, message: String) {
+        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
 
 }

@@ -191,7 +191,10 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate /*, UITextViewDe
                 (status: Dictionary<String, JSONValue>?) in
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.fetchTwitterHomeStream();
+
+                    let tweetsViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as TweetsViewController
+                    self.presentViewController(tweetsViewController, animated: true, completion: nil)
+
                 });
                 
                 
@@ -203,26 +206,12 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate /*, UITextViewDe
 
     }
     
-    func fetchTwitterHomeStream() {
-        let failureHandler: ((NSError) -> Void) = {
-            error in
-            self.alertWithTitle("Error", message: error.localizedDescription)
-        }
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDelegate.swifter.getStatusesUserTimelineWithUserID(appDelegate.account!.username, count: 20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
-            (statuses: [JSONValue]?) in
-            
-            // Successfully fetched timeline, so lets create and push the table view
-            let tweetsViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as TweetsViewController
-            
-            if statuses != nil {
-                tweetsViewController.tweets = statuses!
-                self.presentViewController(tweetsViewController, animated: true, completion: nil)
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowCounterSegue"
+        {
+            if let destinationVC = segue.destinationViewController as? TweetsViewController {
             }
-            
-            }, failure: failureHandler)
-        
+        }
     }
     
     func alertWithTitle(title: String, message: String) {
@@ -230,7 +219,5 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate /*, UITextViewDe
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
-
-
     
 }
