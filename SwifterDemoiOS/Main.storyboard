@@ -9,15 +9,15 @@
             <objects>
                 <viewController storyboardIdentifier="AuthViewController" id="hVp-wC-ZGs" customClass="AuthViewController" customModule="SwifterDemoiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="utr-qu-ieQ"/>
-                        <viewControllerLayoutGuide type="bottom" id="mnl-yE-msX"/>
+                        <viewControllerLayoutGuide type="top" id="RCv-DK-9a7"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gxp-jg-Zdh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="trU-nC-MKf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXU-QM-xXY">
-                                <rect key="frame" x="-12" y="191" width="345" height="62"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXU-QM-xXY">
+                                <rect key="frame" x="-12" y="209" width="345" height="62"/>
                                 <state key="normal" image="ButtonTwitterNormal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -27,6 +27,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CXU-QM-xXY" firstAttribute="top" secondItem="RCv-DK-9a7" secondAttribute="bottom" constant="189" id="Gjc-Vi-rPB"/>
+                            <constraint firstAttribute="trailing" secondItem="CXU-QM-xXY" secondAttribute="trailing" constant="13" id="UU2-DI-XVm"/>
+                            <constraint firstItem="CXU-QM-xXY" firstAttribute="leading" secondItem="trU-nC-MKf" secondAttribute="leading" constant="12" id="cpu-4G-bZL"/>
+                            <constraint firstItem="Gxp-jg-Zdh" firstAttribute="top" secondItem="CXU-QM-xXY" secondAttribute="bottom" constant="209" id="usX-W4-XRx"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LdL-ES-p0u" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -72,8 +78,8 @@
             <objects>
                 <viewController storyboardIdentifier="CameraViewController" id="NXV-X1-aZg" customClass="CameraViewController" customModule="SwifterDemoiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cUV-fA-UQH"/>
-                        <viewControllerLayoutGuide type="bottom" id="oDi-0q-Gzb"/>
+                        <viewControllerLayoutGuide type="top" id="9PR-gp-LcG"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qgw-E4-vKf"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cIB-eO-lfb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -88,25 +94,32 @@
                                     <action selector="didTouchUpInsideTweetButton:" destination="NXV-X1-aZg" eventType="touchUpInside" id="IZB-XV-PaP"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Rw-WM-lEJ">
-                                <rect key="frame" x="0.0" y="43" width="104" height="136"/>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
-                            </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Test " translatesAutoresizingMaskIntoConstraints="NO" id="dHb-hh-PMJ">
-                                <rect key="frame" x="112" y="43" width="197" height="136"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dHb-hh-PMJ">
+                                <rect key="frame" x="117" y="43" width="192" height="136"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Test ">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aht-u0-ZzX">
-                                <rect key="frame" x="5" y="187" width="99" height="30"/>
-                                <state key="normal" title="Re-take Photo">
+                                <rect key="frame" x="5" y="187" width="76" height="30"/>
+                                <state key="normal" title="Take photo">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="didTouchUpInsidePhotoButton:" destination="NXV-X1-aZg" eventType="touchUpInside" id="AKL-ON-iPA"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Rw-WM-lEJ">
+                                <rect key="frame" x="5" y="43" width="104" height="136"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

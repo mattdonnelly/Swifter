@@ -30,8 +30,12 @@ import TwitterKit
 
 class TweetsViewController: UITableViewController {
 
-    var tweets : [JSONValue] = []
-
+    var tweets: [TWTRTweet] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     func showTweets() {
         Twitter.sharedInstance().logInGuestWithCompletion { (session: TWTRGuestSession!, error: NSError!) in
             Twitter.sharedInstance().APIClient.loadTweetWithID("20") { (tweet: TWTRTweet!, error: NSError!) in
@@ -39,12 +43,11 @@ class TweetsViewController: UITableViewController {
             }
         }
         
-        Twitter.sharedInstance().logInGuestWithCompletion { (session: TWTRGuestSession!, error: NSError!) in
-            Twitter.sharedInstance().APIClient.loadTweetWithID("20") { (tweet: TWTRTweet!, error: NSError!) in
-                self.view.addSubview(TWTRTweetView(tweet: tweet))
-            }
-        }
-
+//        Twitter.sharedInstance().APIClient.loadTweetsWithIDs(<#tweetIDStrings: [AnyObject]!#>, completion: <#TWTRLoadTweetsCompletion!##([AnyObject]!, NSError!) -> Void#>)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     override func viewDidLoad() {
@@ -56,10 +59,29 @@ class TweetsViewController: UITableViewController {
         }
         
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDelegate.swifter.getStatusesUserTimelineWithUserID(appDelegate.account!.username, count: 20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
+        appDelegate.swifter.getStatusesUserTimelineWithUserID(appDelegate.account!.username, count: 20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true,
+            success: {
                 (statuses: [JSONValue]?) in
-                self.tweets = statuses!
-            }, failure: failureHandler
+
+                var ids  : [AnyObject] = []
+                for s :JSONValue in statuses!.generate() {
+                    ids.append(s["id_str"].string!);
+                }
+                
+                Twitter.sharedInstance().logInGuestWithCompletion { (session: TWTRGuestSession!, error: NSError!) in
+                    Twitter.sharedInstance().APIClient.loadTweetsWithIDs(ids) { (completion: [AnyObject]!, error: NSError!) in
+
+                        var tweets : [TWTRTweet] = []
+                        for o : AnyObject in completion {
+                            
+                            print(o)
+                            
+                        }
+
+                    }
+                }
+            },
+            failure: failureHandler
         )
         
         println("TweetsViewController viewDidLoad")
@@ -83,9 +105,13 @@ class TweetsViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+//        var id = tweets[indexPath.row]["id"].string
+        
         let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: nil)
 
-        cell.textLabel?.text = tweets[indexPath.row]["text"].string
+//        cell.textLabel?.text = tweets[indexPath.row]["text"].string
+        cell.textLabel?.text = "test text"
         
         return cell
     }
