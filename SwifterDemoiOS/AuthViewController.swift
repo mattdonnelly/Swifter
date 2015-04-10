@@ -90,7 +90,7 @@ class AuthViewController: UIViewController {
             self.alertWithTitle("Error", message: error.localizedDescription)
         }
         
-        self.swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
+        self.swifter.getStatusesHomeTimelineWithCount(20, success: {
             (statuses: [JSONValue]?) in
                 
             // Successfully fetched timeline, so lets create and push the table view

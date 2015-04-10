@@ -52,7 +52,7 @@ swifter.authorizeWithCallbackURL(callbackURL, success: {
 ####Get Home Timeline:
 
 ```swift
-swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
+swifter.getStatusesHomeTimelineWithCount(20, success: {
     (statuses: JSONValue[]?) in
 
 	// ...
@@ -68,7 +68,7 @@ swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser:
 ####Streaming API:
 
 ```swift
-swifter.getStatusesSampleDelimited(nil, stallWarnings: nil, progress: {
+swifter.getStatusesSampleDelimited(progress: {
 	(status: Dictionary<String, JSONValue>?) in
 
 	// ...
@@ -89,7 +89,7 @@ swifter.getStatusesSampleDelimited(nil, stallWarnings: nil, progress: {
 ####Status Update:
 
 ```swift
-swifter.postStatusUpdate("Hello, world", inReplyToStatusID: nil, lat: nil, long: nil, placeID: nil, displayCoordinates: nil, trimUser: nil, success: {
+swifter.postStatusUpdate("Hello, world", success: {
 	(status: Dictionary<String, JSONValue>?) in
 
     // ...

@@ -38,7 +38,7 @@ public extension Swifter {
 
     At least one predicate parameter (follow, locations, or track) must be specified.
     */
-    public func postStatusesFilterWithFollow(follow: [String]?, track: [String]?, locations: [String]?, delimited: Bool?, stallWarnings: Bool?, progress: ((status: Dictionary<String, JSONValue>?) -> Void)?, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)?, failure: FailureHandler?) -> SwifterHTTPRequest {
+    public func postStatusesFilterWithFollow(follow: [String]? = nil, track: [String]? = nil, locations: [String]? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>? ) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         assert(follow != nil || track != nil || locations != nil, "At least one predicate parameter (follow, locations, or track) must be specified")
 
         let path = "statuses/filter.json"
@@ -64,12 +64,7 @@ public extension Swifter {
             json, response in
 
             if let stallWarning = json["warning"].object {
-                switch (stallWarning["code"]?.string, stallWarning["message"]?.string, stallWarning["percent_full"]?.integer) {
-                case (let code , let message, let percentFull):
-                    stallWarningHandler?(code: code, message: message, percentFull: percentFull)
-                default:
-                    stallWarningHandler?(code: nil, message: nil, percentFull: nil)
-                }
+                stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
             }
             else {
                 progress?(status: json.object)
@@ -89,7 +84,7 @@ public extension Swifter {
 
     Returns a small random sample of all public statuses. The Tweets returned by the default access level are the same, so if two different clients connect to this endpoint, they will see the same Tweets.
     */
-    public func getStatusesSampleDelimited(delimited: Bool?, stallWarnings: Bool?, progress: ((status: Dictionary<String, JSONValue>?) -> Void)?, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)?, failure: FailureHandler?) -> SwifterHTTPRequest {
+    public func getStatusesSampleDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         let path = "statuses/sample.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -104,12 +99,7 @@ public extension Swifter {
             json, response in
 
             if let stallWarning = json["warning"].object {
-                switch (stallWarning["code"]?.string, stallWarning["message"]?.string, stallWarning["percent_full"]?.integer) {
-                case (let code , let message, let percentFull):
-                    stallWarningHandler?(code: code, message: message, percentFull: percentFull)
-                default:
-                    stallWarningHandler?(code: nil, message: nil, percentFull: nil)
-                }
+                stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
             }
             else {
                 progress?(status: json.object)
@@ -131,7 +121,7 @@ public extension Swifter {
 
     Returns all public statuses. Few applications require this level of access. Creative use of a combination of other resources and various access levels can satisfy nearly every application use case.
     */
-    public func getStatusesFirehose(count: Int?, delimited: Bool?, stallWarnings: Bool?, progress: ((status: Dictionary<String, JSONValue>?) -> Void)?, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)?, failure: FailureHandler?) -> SwifterHTTPRequest {
+    public func getStatusesFirehose(count: Int? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         let path = "statuses/firehose.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -149,12 +139,7 @@ public extension Swifter {
             json, response in
 
             if let stallWarning = json["warning"].object {
-                switch (stallWarning["code"]?.string, stallWarning["message"]?.string, stallWarning["percent_full"]?.integer) {
-                case (let code , let message, let percentFull):
-                    stallWarningHandler?(code: code, message: message, percentFull: percentFull)
-                default:
-                    stallWarningHandler?(code: nil, message: nil, percentFull: nil)
-                }
+                stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
             }
             else {
                 progress?(status: json.object)
@@ -174,7 +159,7 @@ public extension Swifter {
 
     Streams messages for a single user, as described in User streams https://dev.twitter.com/docs/streaming-apis/streams/user
     */
-    public func getUserStreamDelimited(delimited: Bool?, stallWarnings: Bool?, includeMessagesFromFollowedAccounts: Bool?, includeReplies: Bool?, track: [String]?, locations: [String]?, stringifyFriendIDs: Bool?, progress: ((status: Dictionary<String, JSONValue>?) -> Void)?, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)?, failure: FailureHandler?) -> SwifterHTTPRequest {
+    public func getUserStreamDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, includeMessagesFromFollowedAccounts: Bool? = nil, includeReplies: Bool? = nil, track: [String]? = nil, locations: [String]? = nil, stringifyFriendIDs: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         let path = "user.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -208,12 +193,7 @@ public extension Swifter {
             json, response in
 
             if let stallWarning = json["warning"].object {
-                switch (stallWarning["code"]?.string, stallWarning["message"]?.string, stallWarning["percent_full"]?.integer) {
-                case (let code , let message, let percentFull):
-                    stallWarningHandler?(code: code, message: message, percentFull: percentFull)
-                default:
-                    stallWarningHandler?(code: nil, message: nil, percentFull: nil)
-                }
+                stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
             }
             else {
                 progress?(status: json.object)
@@ -233,7 +213,7 @@ public extension Swifter {
 
     Streams messages for a set of users, as described in Site streams https://dev.twitter.com/docs/streaming-apis/streams/site
     */
-    public func getSiteStreamDelimited(delimited: Bool?, stallWarnings: Bool?, restrictToUserMessages: Bool?, includeReplies: Bool?, stringifyFriendIDs: Bool?, progress: ((status: Dictionary<String, JSONValue>?) -> Void)?, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)?, failure: FailureHandler?) -> SwifterHTTPRequest {
+    public func getSiteStreamDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, restrictToUserMessages: Bool? = nil, includeReplies: Bool? = nil, stringifyFriendIDs: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         let path = "site.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -260,12 +240,7 @@ public extension Swifter {
         return self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
             json, response in
 
-            switch (json["warning"]["code"].string, json["warning"]["message"].string, json["warning"]["percent_full"].integer) {
-            case (let code , let message, let percentFull):
-                stallWarningHandler?(code: code, message: message, percentFull: percentFull)
-            default:
-                stallWarningHandler?(code: nil, message: nil, percentFull: nil)
-            }
+            stallWarningHandler?(code: json["warning"]["code"].string, message: json["warning"]["message"].string, percentFull: json["warning"]["percent_full"].integer)
 
             }, success: {
                 json, response in

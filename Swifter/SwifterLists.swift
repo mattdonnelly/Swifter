@@ -350,12 +350,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["lists"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
-            case (let lists, let previousCursor, let nextCursor):
-                success?(lists: lists, previousCursor: previousCursor, nextCursor: nextCursor)
-            default:
-                success?(lists: nil, previousCursor: nil, nextCursor: nil)
-            }
+            success?(lists: json["lists"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
 
             }, failure: failure)
     }
@@ -376,12 +371,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["lists"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
-            case (let lists, let previousCursor, let nextCursor):
-                success?(lists: lists, previousCursor: previousCursor, nextCursor: nextCursor)
-            default:
-                success?(lists: nil, previousCursor: nil, nextCursor: nil)
-            }
+            success?(lists: json["lists"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
 
             }, failure: failure)
     }
@@ -411,13 +401,8 @@ public extension Swifter {
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
-
-            switch (json["users"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
-            case (let users, let previousCursor, let nextCursor):
-                success?(users: users, previousCursor: previousCursor, nextCursor: nextCursor)
-            default:
-                success?(users: nil, previousCursor: nil, nextCursor: nil)
-            }
+            
+            success?(users: json["users"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
 
             }, failure: failure)
     }
@@ -443,12 +428,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["users"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
-            case (let users, let previousCursor, let nextCursor):
-                success?(users: users, previousCursor: previousCursor, nextCursor: nextCursor)
-            default:
-                success?(users: nil, previousCursor: nil, nextCursor: nil)
-            }
+            success?(users: json["users"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
 
             }, failure: failure)
     }
@@ -474,12 +454,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["users"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
-            case (let users, let previousCursor, let nextCursor):
-                success?(users: users, previousCursor: previousCursor, nextCursor: nextCursor)
-            default:
-                success?(users: nil, previousCursor: nil, nextCursor: nil)
-            }
+            success?(users: json["users"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
 
             }, failure: failure)
     }
@@ -505,12 +480,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["users"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
-            case (let users, let previousCursor, let nextCursor):
-                success?(users: users, previousCursor: previousCursor, nextCursor: nextCursor)
-            default:
-                success?(users: nil, previousCursor: nil, nextCursor: nil)
-            }
+            success?(users: json["users"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
 
             }, failure: failure)
     }
@@ -1111,12 +1081,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["users"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
-            case (let users, let previousCursor, let nextCursor):
-                success?(users: users, previousCursor: previousCursor, nextCursor: nextCursor)
-            default:
-                success?(users: nil, previousCursor: nil, nextCursor: nil)
-            }
+            success?(users: json["users"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
 
             }, failure: failure)
     }
@@ -1142,12 +1107,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["users"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
-            case (let users, let previousCursor, let nextCursor):
-                success?(users: users, previousCursor: previousCursor, nextCursor: nextCursor)
-            default:
-                success?(users: nil, previousCursor: nil, nextCursor: nil)
-            }
+            success?(users: json["users"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
 
             }, failure: failure)
     }
@@ -1173,12 +1133,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["users"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
-            case (let users, let previousCursor, let nextCursor):
-                success?(users: users, previousCursor: previousCursor, nextCursor: nextCursor)
-            default:
-                success?(users: nil, previousCursor: nil, nextCursor: nil)
-            }
+            success?(users: json["users"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
 
             }, failure: failure)
     }
@@ -1204,12 +1159,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["users"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
-            case (let users, let previousCursor, let nextCursor):
-                success?(users: users, previousCursor: previousCursor, nextCursor: nextCursor)
-            default:
-                success?(users: nil, previousCursor: nil, nextCursor: nil)
-            }
+            success?(users: json["users"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
 
             }, failure: failure)
     }
@@ -1538,12 +1488,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["lists"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
-            case (let lists, let previousCursor, let nextCursor):
-                success?(lists: lists, previousCursor: previousCursor, nextCursor: nextCursor)
-            default:
-                success?(lists: nil, previousCursor: nil, nextCursor: nil)
-            }
+            success?(lists: json["lists"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
 
             }, failure: failure)
     }
@@ -1564,12 +1509,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            switch (json["lists"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
-            case (let lists, let previousCursor, let nextCursor):
-                success?(lists: lists, previousCursor: previousCursor, nextCursor: nextCursor)
-            default:
-                success?(lists: nil, previousCursor: nil, nextCursor: nil)
-            }
+            success?(lists: json["lists"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
 
             }, failure: failure)
     }
@@ -1710,13 +1650,8 @@ public extension Swifter {
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
             
-            switch (json["lists"].array, json["previous_cursor"].integer, json["next_cursor"].integer) {
-            case (let lists, let previousCursor, let nextCursor):
-                success?(lists: lists, previousCursor: previousCursor, nextCursor: nextCursor)
-            default:
-                success?(lists: nil, previousCursor: nil, nextCursor: nil)
-            }
-            
+            success?(lists: json["lists"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
+
             }, failure: failure)
         
     }
