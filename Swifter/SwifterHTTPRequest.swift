@@ -90,7 +90,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
     public init(request: NSURLRequest) {
         self.request = request as? NSMutableURLRequest
-        self.URL = request.URL
+        self.URL = request.URL!
         self.HTTPMethod = request.HTTPMethod!
         self.headers = [:]
         self.parameters = [:]
@@ -240,12 +240,12 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         if self.response.statusCode >= 400 {
             let responseString = NSString(data: self.responseData, encoding: self.dataEncoding)
             let responseErrorCode = SwifterHTTPRequest.responseErrorCode(self.responseData) ?? 0
-            let localizedDescription = SwifterHTTPRequest.descriptionForHTTPStatus(self.response.statusCode, responseString: responseString!)
+            let localizedDescription = SwifterHTTPRequest.descriptionForHTTPStatus(self.response.statusCode, responseString: responseString! as String)
             let userInfo = [
                 NSLocalizedDescriptionKey: localizedDescription,
                 "Response-Headers": self.response.allHeaderFields,
                 "Response-ErrorCode": responseErrorCode]
-            let error = NSError(domain: NSURLErrorDomain, code: self.response.statusCode, userInfo: userInfo)
+            let error = NSError(domain: NSURLErrorDomain, code: self.response.statusCode, userInfo: userInfo as [NSObject : AnyObject])
             self.failureHandler?(error: error)
             return
         }
@@ -265,7 +265,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
             }
         }
 
-        return NSString(data: data, encoding: encoding)!
+        return NSString(data: data, encoding: encoding)! as String
     }
 
     class func responseErrorCode(data: NSData) -> Int? {

@@ -63,7 +63,7 @@ class AuthViewController: UIViewController {
                         self.alertWithTitle("Error", message: "There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
                     }
                     else {
-                        let twitterAccount = twitterAccounts[0] as ACAccount
+                        let twitterAccount = twitterAccounts[0] as! ACAccount
                         self.swifter = Swifter(account: twitterAccount)
                         self.fetchTwitterHomeStream()
                     }
@@ -94,7 +94,7 @@ class AuthViewController: UIViewController {
             (statuses: [JSONValue]?) in
                 
             // Successfully fetched timeline, so lets create and push the table view
-            let tweetsViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as TweetsViewController
+            let tweetsViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
                 
             if statuses != nil {
                 tweetsViewController.tweets = statuses!
