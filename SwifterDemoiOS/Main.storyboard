@@ -7,7 +7,7 @@
         <!--Auth View Controller-->
         <scene sceneID="DDj-JH-UoW">
             <objects>
-                <viewController storyboardIdentifier="AuthViewController" id="hVp-wC-ZGs" customClass="AuthViewController" customModule="SwifterDemoiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthViewController" id="hVp-wC-ZGs" customClass="AuthViewController" customModule="PhotoboothDemoiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RCv-DK-9a7"/>
                         <viewControllerLayoutGuide type="bottom" id="Gxp-jg-Zdh"/>
@@ -41,7 +41,7 @@
         <!--Camera View Controller-->
         <scene sceneID="005-td-jsF">
             <objects>
-                <viewController storyboardIdentifier="CameraViewController" id="NXV-X1-aZg" customClass="CameraViewController" customModule="SwifterDemoiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CameraViewController" id="NXV-X1-aZg" customClass="CameraViewController" customModule="PhotoboothDemoiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9PR-gp-LcG"/>
                         <viewControllerLayoutGuide type="bottom" id="Qgw-E4-vKf"/>
@@ -102,7 +102,7 @@
         <!--Container Controller-->
         <scene sceneID="I7x-Nv-crk">
             <objects>
-                <viewController storyboardIdentifier="ContainerController" id="ZQJ-Ne-UPM" userLabel="Container Controller" customClass="ContainerController" customModule="SwifterDemoiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContainerController" id="ZQJ-Ne-UPM" userLabel="Container Controller" customClass="ContainerController" customModule="PhotoboothDemoiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZlR-3p-eZz"/>
                         <viewControllerLayoutGuide type="bottom" id="LU6-F5-d74"/>

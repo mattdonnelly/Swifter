@@ -23,8 +23,7 @@
 
 import UIKit
 import MobileCoreServices
-import SwifteriOS
-
+import PhotoboothiOS
 
 class ContainerController: UIViewController {
     

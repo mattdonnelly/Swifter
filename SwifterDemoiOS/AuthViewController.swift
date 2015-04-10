@@ -26,7 +26,7 @@
 import UIKit
 import Accounts
 import Social
-import SwifteriOS
+import PhotoboothiOS
 import TwitterKit
 
 class AuthViewController: UIViewController {

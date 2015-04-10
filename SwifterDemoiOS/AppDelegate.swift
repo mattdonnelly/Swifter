@@ -24,7 +24,7 @@
 //
 
 import UIKit 
-import SwifteriOS
+import PhotoboothiOS
 import Accounts
 
 import Fabric
