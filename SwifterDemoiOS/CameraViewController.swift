@@ -191,12 +191,11 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate /*, UITextViewDe
                 
                 dispatch_async(dispatch_get_main_queue(), {
 
-                    let tweetsViewController = TweetsViewController()
-                    self.presentViewController(tweetsViewController, animated: true, completion: nil)
+                    let controller = TweetViewController()
+                    self.presentViewController(controller, animated: true, completion: nil)
 
                 });
-                
-                
+
                 }, failure: failureHandler)
 
         }
@@ -205,12 +204,35 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate /*, UITextViewDe
 
     }
     
+    @IBAction func showTweets(){
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            let controller = TweetViewController()
+
+            // trying to do the following to maintain the navigation bar:
+            // 1. create a new container that is a UIViewController
+            // 2. inside that have a view
+            // 3. set that view to be my TweetViewController
+            let container = self.storyboard!.instantiateViewControllerWithIdentifier("ContainerController") as ContainerController
+            
+            self.presentViewController(controller, animated: true, completion: nil)
+
+        });
+
+        
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ShowCounterSegue"
+        println("Found \(segue.identifier) to \(segue.destinationViewController)")
+        if segue.identifier == "ViewTweets"
         {
-            if let destinationVC = segue.destinationViewController as? TweetsViewController {
+            if let destinationVC = segue.destinationViewController as? UIViewController {
+                println("Targeted")
+                
             }
         }
+
     }
     
     func alertWithTitle(title: String, message: String) {

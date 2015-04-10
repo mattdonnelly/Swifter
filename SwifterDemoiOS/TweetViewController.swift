@@ -1,5 +1,5 @@
 //
-//  AuthViewController.swift
+//  TweetViewController.swift
 //  SwifterDemoiOS
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -24,57 +24,46 @@
 //
 
 import UIKit
-import Accounts
-import Social
 import SwifteriOS
+
 import TwitterKit
 
-class AuthViewController: UIViewController {
+class TweetViewController : TWTRTimelineViewController {
+
+    convenience init() {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let client = Twitter.sharedInstance().APIClient
+        let dataSource = TWTRUserTimelineDataSource(screenName: appDelegate.username, APIClient: client)
+        
+        self.init(dataSource: dataSource)
+    }
+    
+    override required init(dataSource: TWTRTimelineDataSource) {
+        super.init(dataSource: dataSource)
+    }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        let logInButton = TWTRLogInButton(logInCompletion: {
-            (session: TWTRSession!, error: NSError!) in
+    override func viewWillAppear(animated: Bool) {
 
-            let twitter = Twitter.sharedInstance()
-            
-            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-            appDelegate.username = session.userName
-            appDelegate.swifter = Swifter(consumerKey: twitter.authConfig.consumerKey!, consumerSecret: twitter.authConfig.consumerSecret!, oauthToken: session.authToken!, oauthTokenSecret: session.authTokenSecret!)
-            
-            self.showPhotoView()
-            
-        })
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let client = Twitter.sharedInstance().APIClient
+        self.dataSource = TWTRUserTimelineDataSource(screenName: appDelegate.username, APIClient: client)
         
-        logInButton.center = self.view.center
-        self.view.addSubview(logInButton)
+        // kick off actual rendering
+        super.viewWillAppear(animated)
+        
+        println("TweetViewController.viewWillAppear: \(self.dataSource)")
     }
     
-    func showPhotoView() {
-        
-        let failureHandler: ((NSError) -> Void) = {
-            error in
-            self.alertWithTitle("Error", message: error.localizedDescription)
-        }
-        
-        // ensure that presentViewController happens from the main thread/queue
-        dispatch_async(dispatch_get_main_queue(), {
-            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("NavigationController") as UINavigationController
-            self.presentViewController(controller, animated: true, completion: nil)
-        });
-        
-    }
-
     func alertWithTitle(title: String, message: String) {
         var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
+
 
 }
