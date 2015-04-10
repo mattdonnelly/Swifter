@@ -27,6 +27,7 @@ import UIKit
 import Accounts
 import Social
 import SwifteriOS
+import TwitterKit
 
 class AuthViewController: UIViewController {
     
@@ -36,52 +37,23 @@ class AuthViewController: UIViewController {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let logInButton = TWTRLogInButton(logInCompletion: {
+            (session: TWTRSession!, error: NSError!) in
 
-    @IBAction func didTouchUpInsideLoginButton(sender: AnyObject) {
-        let failureHandler: ((NSError) -> Void) = {
-            error in
-
-            self.alertWithTitle("Error", message: error.localizedDescription)
-        }
-
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-
-        if useACAccount {
-
-            let accountStore = ACAccountStore()
-            let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
-
-            // Prompt the user for permission to their twitter account stored in the phone's settings
-            accountStore.requestAccessToAccountsWithType(accountType, options: nil) {
-                granted, error in
-
-                if granted {
-                    let twitterAccounts = accountStore.accountsWithAccountType(accountType)
-
-                    if twitterAccounts?.count == 0
-                    {
-                        self.alertWithTitle("Error", message: "There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
-                    }
-                    else {
-                        appDelegate.account = twitterAccounts[2] as ACAccount
-                        appDelegate.swifter = Swifter(account: appDelegate.account!)
-
-                        self.showPhotoView()
-                    }
-                }
-                else {
-                    self.alertWithTitle("Error", message: error.localizedDescription)
-                }
-            }
-        }
-        else {
-
-            appDelegate.swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success")!, success: {
-                accessToken, response in
-
-                },failure: failureHandler
-            )
-        }
+            let twitter = Twitter.sharedInstance()
+            
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            appDelegate.username = session.userName
+            appDelegate.swifter = Swifter(consumerKey: twitter.authConfig.consumerKey!, consumerSecret: twitter.authConfig.consumerSecret!, oauthToken: session.authToken!, oauthTokenSecret: session.authTokenSecret!)
+            
+            self.showPhotoView()
+            
+        })
+        logInButton.center = self.view.center
+        self.view.addSubview(logInButton)
     }
     
     func showPhotoView() {
@@ -90,13 +62,12 @@ class AuthViewController: UIViewController {
             error in
             self.alertWithTitle("Error", message: error.localizedDescription)
         }
-
+        
         // ensure that presentViewController happens from the main thread/queue
         dispatch_async(dispatch_get_main_queue(), {
-            let photoViewController = self.storyboard!.instantiateViewControllerWithIdentifier("CameraViewController") as CameraViewController
-            self.presentViewController(photoViewController, animated: true, completion: nil)
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("CameraViewController") as CameraViewController
+            self.presentViewController(controller, animated: true, completion: nil)
         });
-        
         
     }
 

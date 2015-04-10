@@ -28,92 +28,23 @@ import SwifteriOS
 
 import TwitterKit
 
-class TweetsViewController: UITableViewController {
+class TweetsViewController : TWTRTimelineViewController {
 
-    var tweets: [TWTRTweet] = [] {
-        didSet {
-            tableView.reloadData()
-        }
+    convenience init() {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let client = Twitter.sharedInstance().APIClient
+        let dataSource = TWTRUserTimelineDataSource(screenName: appDelegate.username, APIClient: client)
+        
+        self.init(dataSource: dataSource)
     }
     
-    func showTweets() {
-        Twitter.sharedInstance().logInGuestWithCompletion { (session: TWTRGuestSession!, error: NSError!) in
-            Twitter.sharedInstance().APIClient.loadTweetWithID("20") { (tweet: TWTRTweet!, error: NSError!) in
-                self.view.addSubview(TWTRTweetView(tweet: tweet))
-            }
-        }
-        
-//        Twitter.sharedInstance().APIClient.loadTweetsWithIDs(<#tweetIDStrings: [AnyObject]!#>, completion: <#TWTRLoadTweetsCompletion!##([AnyObject]!, NSError!) -> Void#>)
+    override required init(dataSource: TWTRTimelineDataSource) {
+        super.init(dataSource: dataSource)
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        let failureHandler: ((NSError) -> Void) = {
-            error in
-            self.alertWithTitle("Error", message: error.localizedDescription)
-        }
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDelegate.swifter.getStatusesUserTimelineWithUserID(appDelegate.account!.username, count: 20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true,
-            success: {
-                (statuses: [JSONValue]?) in
-
-                var ids  : [AnyObject] = []
-                for s :JSONValue in statuses!.generate() {
-                    ids.append(s["id_str"].string!);
-                }
-                
-                Twitter.sharedInstance().logInGuestWithCompletion { (session: TWTRGuestSession!, error: NSError!) in
-                    Twitter.sharedInstance().APIClient.loadTweetsWithIDs(ids) { (completion: [AnyObject]!, error: NSError!) in
-
-                        var tweets : [TWTRTweet] = []
-                        for o : AnyObject in completion {
-                            
-                            print(o)
-                            
-                        }
-
-                    }
-                }
-            },
-            failure: failureHandler
-        )
-        
-        println("TweetsViewController viewDidLoad")
-        
-    }
-    
-    override func viewWillLayoutSubviews()
-    {
-        super.viewWillLayoutSubviews()
-        self.tableView.contentInset = UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0)
-        self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0)
-    }
-
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tweets.count
-    }
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-//        var id = tweets[indexPath.row]["id"].string
-        
-        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: nil)
-
-//        cell.textLabel?.text = tweets[indexPath.row]["text"].string
-        cell.textLabel?.text = "test text"
-        
-        return cell
     }
     
     func alertWithTitle(title: String, message: String) {

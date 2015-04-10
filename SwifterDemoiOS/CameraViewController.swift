@@ -180,7 +180,6 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate /*, UITextViewDe
         println("Image = \(uiImage)")
 
         let imageData = UIImageJPEGRepresentation(uiImage, 0.5)
-//        let imageData: NSData = NSData.dataWithContentsOfMappedFile(self.imageView.image.)
 
         let status = self.statusTextField.text
         
@@ -192,7 +191,7 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate /*, UITextViewDe
                 
                 dispatch_async(dispatch_get_main_queue(), {
 
-                    let tweetsViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as TweetsViewController
+                    let tweetsViewController = TweetsViewController()
                     self.presentViewController(tweetsViewController, animated: true, completion: nil)
 
                 });

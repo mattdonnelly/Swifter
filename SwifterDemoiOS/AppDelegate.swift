@@ -34,22 +34,19 @@ import TwitterKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
+    var username: String?
     var swifter: Swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
-    var account: ACAccount?
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
 
-        Fabric.with([Twitter()])
-
         Swifter.handleOpenURL(url)
-
         return true
     }
-    
-//    func fetchTwitterHomeStream() {
-//        TweetsViewController.showTweets();
-//    }
 
+    // initializing Fabric after app loads works better for me
+    func applicationDidFinishLaunching(application: UIApplication) {
+        Fabric.with([Twitter()]).debug = true
+    }
 
 }
 
