@@ -113,6 +113,7 @@
                     <connections>
                         <outlet property="imageView" destination="5Rw-WM-lEJ" id="mXq-ND-7bT"/>
                         <outlet property="sendTweetButton" destination="OOM-Sk-R36" id="YGk-wB-Iz0"/>
+                        <outlet property="statusTextField" destination="dHb-hh-PMJ" id="dj4-Ll-lfY"/>
                         <outlet property="takePhotoButton" destination="Aht-u0-ZzX" id="0jF-Re-3ai"/>
                     </connections>
                 </viewController>

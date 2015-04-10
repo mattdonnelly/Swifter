@@ -30,13 +30,10 @@ import SwifteriOS
 
 class AuthViewController: UIViewController {
     
-    var swifter: Swifter
-
     // Default to using the iOS account framework for handling twitter auth
     let useACAccount = true
 
     required init(coder aDecoder: NSCoder) {
-        self.swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
         super.init(coder: aDecoder)
     }
 
@@ -69,7 +66,9 @@ class AuthViewController: UIViewController {
                     }
                     else {
                         let twitterAccount = twitterAccounts[0] as ACAccount
-                        self.swifter = Swifter(account: twitterAccount)
+                        
+                        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+                        appDelegate.swifter = Swifter(account: twitterAccount)
 
 //                        self.fetchTwitterHomeStream()
                         self.showPhotoView()
@@ -81,7 +80,8 @@ class AuthViewController: UIViewController {
             }
         }
         else {
-            swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success")!, success: {
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            appDelegate.swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success")!, success: {
                 accessToken, response in
 
                 self.fetchTwitterHomeStream()
@@ -113,7 +113,8 @@ class AuthViewController: UIViewController {
             self.alertWithTitle("Error", message: error.localizedDescription)
         }
         
-        self.swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
             (statuses: [JSONValue]?) in
                 
             // Successfully fetched timeline, so lets create and push the table view

@@ -31,7 +31,7 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate /*, UITextViewDe
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var takePhotoButton: UIButton!
-    @IBOutlet weak var statusTextField: UITextField!
+    @IBOutlet weak var statusTextField: UITextView!
     @IBOutlet weak var sendTweetButton: UIButton!
     
     /* We will use this variable to determine if the viewDidAppear:
@@ -133,10 +133,7 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate /*, UITextViewDe
                                 println("Image Metadata = \(theMetaData)")
                                 println("Image = \(theImage)")
                                 
-                                // BUGBUG: associate image with Image
-                                
                                 imageView.image = image
-                                
                                 picker.dismissViewControllerAnimated(true, completion: nil)
                             }
                         }
@@ -179,22 +176,21 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate /*, UITextViewDe
             self.alertWithTitle("Error", message: error.localizedDescription)
         }
 
-        // Successfully fetched timeline, so lets create and push the table view
-        let authViewController = self.storyboard!.instantiateViewControllerWithIdentifier("AuthViewController") as AuthViewController
+        let uiImage = self.imageView.image
+        println("Image = \(uiImage)")
+
+        let imageData = UIImageJPEGRepresentation(uiImage, 0.5)
+//        let imageData: NSData = NSData.dataWithContentsOfMappedFile(self.imageView.image.)
+
+        let status = self.statusTextField.text
         
-        let imageData: NSData = UIImagePNGRepresentation(self.imageView.image)
-        
-        authViewController.swifter.postStatusUpdate(self.statusTextField.text, media: imageData, inReplyToStatusID: nil, lat: nil, long: nil, placeID: nil, displayCoordinates: nil, trimUser: nil, success: {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.swifter.postStatusUpdate(self.statusTextField.text, media:imageData, inReplyToStatusID: nil, lat: nil, long: nil, placeID: nil, displayCoordinates: nil, trimUser: nil, success: {
             (status: Dictionary<String, JSONValue>?) in
             
             // ...
             
-            }, failure: {
-                (error: NSError) in
-                
-                // ...
-                
-        })
+            }, failure: failureHandler)
 
         println("didTouchUpInsideTweetButton")
 
