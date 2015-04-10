@@ -13,11 +13,6 @@
 		8B1F25A0194A663D004BD304 /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
 		8B300C3E1944AA6600993175 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; };
 		8B300C3F1944AA6600993175 /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8B300C4C1944AECB00993175 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4B1944AECB00993175 /* main.swift */; };
-		8B300C4E1944AECB00993175 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4D1944AECB00993175 /* ViewController.swift */; };
-		8B300C501944AECB00993175 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4F1944AECB00993175 /* AppDelegate.swift */; };
-		8B300C521944AECB00993175 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C511944AECB00993175 /* Images.xcassets */; };
-		8B300C551944AECB00993175 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C531944AECB00993175 /* Main.storyboard */; };
 		8B33CA3F19587C6D00739FCB /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B33CA3E19587C6D00739FCB /* JSON.swift */; };
 		8B33CA4019587C6D00739FCB /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B33CA3E19587C6D00739FCB /* JSON.swift */; };
 		8B548F5619450BDB00EE2927 /* SwifterOAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */; };
@@ -32,7 +27,7 @@
 		8B552D2E194695F80052EB86 /* SwifterStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D2C194695F80052EB86 /* SwifterStreaming.swift */; };
 		8B5EFF07195F064400B354F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5EFF03195F064400B354F9 /* AppDelegate.swift */; };
 		8B5EFF08195F064400B354F9 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5EFF04195F064400B354F9 /* AuthViewController.swift */; };
-		8B5EFF09195F064400B354F9 /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5EFF05195F064400B354F9 /* TweetsViewController.swift */; };
+		8B5EFF09195F064400B354F9 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5EFF05195F064400B354F9 /* TweetViewController.swift */; };
 		8B5EFF0A195F064400B354F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B5EFF06195F064400B354F9 /* Main.storyboard */; };
 		8B5EFF15195F09F600B354F9 /* Swifter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5EFF14195F09F600B354F9 /* Swifter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B5EFF16195F09F600B354F9 /* Swifter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5EFF14195F09F600B354F9 /* Swifter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -77,6 +72,7 @@
 		8BF1D6861948BCC100E3AA64 /* SwifterAccountsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */; };
 		8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
 		8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
+		CA67CF951AD860BB007AD74D /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA67CF941AD860BB007AD74D /* ContainerController.swift */; };
 		CAEA7E991AD64D4E00750957 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA7E981AD64D4E00750957 /* CameraViewController.swift */; };
 		CAF1D6BC1AD75EA8005CCD89 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF1D6B91AD75EA8005CCD89 /* TwitterKit.framework */; };
 		CAF1D6BD1AD75EA8005CCD89 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CAF1D6BA1AD75EA8005CCD89 /* TwitterKitResources.bundle */; };
@@ -127,12 +123,6 @@
 		8B300C1F1944AA1A00993175 /* SwifterDemoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B300C221944AA1A00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B300C471944AECB00993175 /* SwifterDemoMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B300C4A1944AECB00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B300C4B1944AECB00993175 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		8B300C4D1944AECB00993175 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8B300C4F1944AECB00993175 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8B300C511944AECB00993175 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		8B300C541944AECB00993175 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B300C5A1944AECB00993175 /* SwifterDemoMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwifterDemoMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B33CA3E19587C6D00739FCB /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterOAuthClient.swift; sourceTree = "<group>"; };
@@ -142,7 +132,7 @@
 		8B552D2C194695F80052EB86 /* SwifterStreaming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterStreaming.swift; sourceTree = "<group>"; };
 		8B5EFF03195F064400B354F9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B5EFF04195F064400B354F9 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
-		8B5EFF05195F064400B354F9 /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
+		8B5EFF05195F064400B354F9 /* TweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
 		8B5EFF06195F064400B354F9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8B5EFF11195F087000B354F9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B5EFF14195F09F600B354F9 /* Swifter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Swifter.h; sourceTree = "<group>"; };
@@ -169,6 +159,7 @@
 		8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterClientProtocol.swift; sourceTree = "<group>"; };
 		8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAccountsClient.swift; sourceTree = "<group>"; };
 		8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterCredential.swift; sourceTree = "<group>"; };
+		CA67CF941AD860BB007AD74D /* ContainerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
 		CAEA7E981AD64D4E00750957 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		CAF1D6B91AD75EA8005CCD89 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = SOURCE_ROOT; };
 		CAF1D6BA1AD75EA8005CCD89 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = SOURCE_ROOT; };
@@ -222,7 +213,8 @@
 			children = (
 				8B5EFF03195F064400B354F9 /* AppDelegate.swift */,
 				8B5EFF04195F064400B354F9 /* AuthViewController.swift */,
-				8B5EFF05195F064400B354F9 /* TweetsViewController.swift */,
+				8B5EFF05195F064400B354F9 /* TweetViewController.swift */,
+				CA67CF941AD860BB007AD74D /* ContainerController.swift */,
 				CAEA7E981AD64D4E00750957 /* CameraViewController.swift */,
 				8B5EFF06195F064400B354F9 /* Main.storyboard */,
 				8BCB9328194B2E1200A998EA /* Images.xcassets */,
@@ -242,27 +234,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8B300C481944AECB00993175 /* SwifterDemoMac */ = {
-			isa = PBXGroup;
-			children = (
-				8B300C4F1944AECB00993175 /* AppDelegate.swift */,
-				8B300C4D1944AECB00993175 /* ViewController.swift */,
-				8B300C511944AECB00993175 /* Images.xcassets */,
-				8B300C531944AECB00993175 /* Main.storyboard */,
-				8B300C491944AECB00993175 /* Supporting Files */,
-			);
-			path = SwifterDemoMac;
-			sourceTree = "<group>";
-		};
-		8B300C491944AECB00993175 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8B300C4A1944AECB00993175 /* Info.plist */,
-				8B300C4B1944AECB00993175 /* main.swift */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		8B5EFF10195F085B00B354F9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,7 +247,6 @@
 			children = (
 				8B9F51461944A8DC00894629 /* Swifter */,
 				8B300C201944AA1A00993175 /* SwifterDemoiOS */,
-				8B300C481944AECB00993175 /* SwifterDemoMac */,
 				8B9F50EF1944A5AB00894629 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -519,8 +489,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B300C521944AECB00993175 /* Images.xcassets in Resources */,
-				8B300C551944AECB00993175 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,9 +537,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B5EFF08195F064400B354F9 /* AuthViewController.swift in Sources */,
+				CA67CF951AD860BB007AD74D /* ContainerController.swift in Sources */,
 				CAEA7E991AD64D4E00750957 /* CameraViewController.swift in Sources */,
 				8B5EFF07195F064400B354F9 /* AppDelegate.swift in Sources */,
-				8B5EFF09195F064400B354F9 /* TweetsViewController.swift in Sources */,
+				8B5EFF09195F064400B354F9 /* TweetViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,9 +548,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B300C501944AECB00993175 /* AppDelegate.swift in Sources */,
-				8B300C4E1944AECB00993175 /* ViewController.swift in Sources */,
-				8B300C4C1944AECB00993175 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,17 +645,6 @@
 			targetProxy = 8B300C681944AECC00993175 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		8B300C531944AECB00993175 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8B300C541944AECB00993175 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8B300C381944AA1A00993175 /* Debug */ = {
