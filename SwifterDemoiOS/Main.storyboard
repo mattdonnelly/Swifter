@@ -92,7 +92,7 @@
                                 <rect key="frame" x="0.0" y="43" width="104" height="136"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Greetings from #bitcamp and @TwitterDev!" translatesAutoresizingMaskIntoConstraints="NO" id="dHb-hh-PMJ">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Test " translatesAutoresizingMaskIntoConstraints="NO" id="dHb-hh-PMJ">
                                 <rect key="frame" x="112" y="43" width="197" height="136"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

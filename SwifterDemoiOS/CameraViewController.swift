@@ -184,16 +184,45 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate /*, UITextViewDe
 
         let status = self.statusTextField.text
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDelegate.swifter.postStatusUpdate(self.statusTextField.text, media:imageData, inReplyToStatusID: nil, lat: nil, long: nil, placeID: nil, displayCoordinates: nil, trimUser: nil, success: {
-            (status: Dictionary<String, JSONValue>?) in
-            
-            // ...
-            
-            }, failure: failureHandler)
+        if status != nil && imageData != nil {
+
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            appDelegate.swifter.postStatusUpdate(self.statusTextField.text, media:imageData, inReplyToStatusID: nil, lat: nil, long: nil, placeID: nil, displayCoordinates: nil, trimUser: nil, success: {
+                (status: Dictionary<String, JSONValue>?) in
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.fetchTwitterHomeStream();
+                });
+                
+                
+                }, failure: failureHandler)
+
+        }
 
         println("didTouchUpInsideTweetButton")
 
+    }
+    
+    func fetchTwitterHomeStream() {
+        let failureHandler: ((NSError) -> Void) = {
+            error in
+            self.alertWithTitle("Error", message: error.localizedDescription)
+        }
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.swifter.getStatusesUserTimelineWithUserID(appDelegate.account!.username, count: 20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
+            (statuses: [JSONValue]?) in
+            
+            // Successfully fetched timeline, so lets create and push the table view
+            let tweetsViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as TweetsViewController
+            
+            if statuses != nil {
+                tweetsViewController.tweets = statuses!
+                self.presentViewController(tweetsViewController, animated: true, completion: nil)
+            }
+            
+            }, failure: failureHandler)
+        
     }
     
     func alertWithTitle(title: String, message: String) {

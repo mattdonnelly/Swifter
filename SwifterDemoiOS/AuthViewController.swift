@@ -43,13 +43,11 @@ class AuthViewController: UIViewController {
 
             self.alertWithTitle("Error", message: error.localizedDescription)
         }
-        
-//        if true {
-//            self.showPhotoView()
-//            return;
-//        }
+
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 
         if useACAccount {
+
             let accountStore = ACAccountStore()
             let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
 
@@ -65,12 +63,9 @@ class AuthViewController: UIViewController {
                         self.alertWithTitle("Error", message: "There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
                     }
                     else {
-                        let twitterAccount = twitterAccounts[0] as ACAccount
-                        
-                        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-                        appDelegate.swifter = Swifter(account: twitterAccount)
+                        appDelegate.account = twitterAccounts[2] as ACAccount
+                        appDelegate.swifter = Swifter(account: appDelegate.account!)
 
-//                        self.fetchTwitterHomeStream()
                         self.showPhotoView()
                     }
                 }
@@ -80,11 +75,9 @@ class AuthViewController: UIViewController {
             }
         }
         else {
-            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+
             appDelegate.swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success")!, success: {
                 accessToken, response in
-
-                self.fetchTwitterHomeStream()
 
                 },failure: failureHandler
             )
@@ -104,28 +97,6 @@ class AuthViewController: UIViewController {
             self.presentViewController(photoViewController, animated: true, completion: nil)
         });
         
-        
-    }
-
-    func fetchTwitterHomeStream() {
-        let failureHandler: ((NSError) -> Void) = {
-            error in
-            self.alertWithTitle("Error", message: error.localizedDescription)
-        }
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDelegate.swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
-            (statuses: [JSONValue]?) in
-                
-            // Successfully fetched timeline, so lets create and push the table view
-            let tweetsViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as TweetsViewController
-                
-            if statuses != nil {
-                tweetsViewController.tweets = statuses!
-                self.presentViewController(tweetsViewController, animated: true, completion: nil)
-            }
-
-            }, failure: failureHandler)
         
     }
 
