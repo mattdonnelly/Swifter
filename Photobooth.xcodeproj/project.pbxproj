@@ -11,8 +11,8 @@
 		8B116AF2194601970019A4DC /* SwifterHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */; };
 		8B1F259F194A663D004BD304 /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
 		8B1F25A0194A663D004BD304 /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
-		8B300C3E1944AA6600993175 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; };
-		8B300C3F1944AA6600993175 /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8B300C3E1944AA6600993175 /* PhotoboothiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* PhotoboothiOS.framework */; };
+		8B300C3F1944AA6600993175 /* PhotoboothiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* PhotoboothiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8B33CA3F19587C6D00739FCB /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B33CA3E19587C6D00739FCB /* JSON.swift */; };
 		8B33CA4019587C6D00739FCB /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B33CA3E19587C6D00739FCB /* JSON.swift */; };
 		8B548F5619450BDB00EE2927 /* SwifterOAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */; };
@@ -110,7 +110,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8B300C3F1944AA6600993175 /* SwifteriOS.framework in Embed Frameworks */,
+				8B300C3F1944AA6600993175 /* PhotoboothiOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,10 +120,10 @@
 /* Begin PBXFileReference section */
 		8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterHTTPRequest.swift; sourceTree = "<group>"; };
 		8B1F259E194A663D004BD304 /* SwifterHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterHelp.swift; sourceTree = "<group>"; };
-		8B300C1F1944AA1A00993175 /* SwifterDemoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B300C1F1944AA1A00993175 /* PhotoboothDemoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoboothDemoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B300C221944AA1A00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B300C471944AECB00993175 /* SwifterDemoMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B300C5A1944AECB00993175 /* SwifterDemoMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwifterDemoMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B300C471944AECB00993175 /* PhotoboothDemoMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoboothDemoMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B300C5A1944AECB00993175 /* PhotoboothDemoMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoboothDemoMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B33CA3E19587C6D00739FCB /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterOAuthClient.swift; sourceTree = "<group>"; };
 		8B548F581945325E00EE2927 /* SwifterAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAuth.swift; sourceTree = "<group>"; };
@@ -136,8 +136,8 @@
 		8B5EFF06195F064400B354F9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8B5EFF11195F087000B354F9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B5EFF14195F09F600B354F9 /* Swifter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Swifter.h; sourceTree = "<group>"; };
-		8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwifteriOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B9F51131944A61D00894629 /* SwifterMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwifterMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B9F50EE1944A5AB00894629 /* PhotoboothiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PhotoboothiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B9F51131944A61D00894629 /* PhotoboothMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PhotoboothMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Swifter.swift"; sourceTree = "<group>"; };
 		8B9F514A1944A8DC00894629 /* String+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Swifter.swift"; sourceTree = "<group>"; };
 		8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swifter-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -171,7 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B300C3E1944AA6600993175 /* SwifteriOS.framework in Frameworks */,
+				8B300C3E1944AA6600993175 /* PhotoboothiOS.framework in Frameworks */,
 				CAF1D6BC1AD75EA8005CCD89 /* TwitterKit.framework in Frameworks */,
 				CAF1D6BE1AD75EA8005CCD89 /* Fabric.framework in Frameworks */,
 			);
@@ -208,7 +208,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8B300C201944AA1A00993175 /* SwifterDemoiOS */ = {
+		8B300C201944AA1A00993175 /* Photobooth */ = {
 			isa = PBXGroup;
 			children = (
 				8B5EFF03195F064400B354F9 /* AppDelegate.swift */,
@@ -223,6 +223,7 @@
 				CAF1D6B91AD75EA8005CCD89 /* TwitterKit.framework */,
 				CAF1D6BB1AD75EA8005CCD89 /* Fabric.framework */,
 			);
+			name = Photobooth;
 			path = SwifterDemoiOS;
 			sourceTree = "<group>";
 		};
@@ -246,7 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				8B9F51461944A8DC00894629 /* Swifter */,
-				8B300C201944AA1A00993175 /* SwifterDemoiOS */,
+				8B300C201944AA1A00993175 /* Photobooth */,
 				8B9F50EF1944A5AB00894629 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -254,11 +255,11 @@
 		8B9F50EF1944A5AB00894629 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */,
-				8B9F51131944A61D00894629 /* SwifterMac.framework */,
-				8B300C1F1944AA1A00993175 /* SwifterDemoiOS.app */,
-				8B300C471944AECB00993175 /* SwifterDemoMac.app */,
-				8B300C5A1944AECB00993175 /* SwifterDemoMacTests.xctest */,
+				8B9F50EE1944A5AB00894629 /* PhotoboothiOS.framework */,
+				8B9F51131944A61D00894629 /* PhotoboothMac.framework */,
+				8B300C1F1944AA1A00993175 /* PhotoboothDemoiOS.app */,
+				8B300C471944AECB00993175 /* PhotoboothDemoMac.app */,
+				8B300C5A1944AECB00993175 /* PhotoboothDemoMacTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -332,9 +333,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8B300C1E1944AA1A00993175 /* SwifterDemoiOS */ = {
+		8B300C1E1944AA1A00993175 /* PhotoboothDemoiOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B300C3C1944AA1A00993175 /* Build configuration list for PBXNativeTarget "SwifterDemoiOS" */;
+			buildConfigurationList = 8B300C3C1944AA1A00993175 /* Build configuration list for PBXNativeTarget "PhotoboothDemoiOS" */;
 			buildPhases = (
 				8B300C1B1944AA1A00993175 /* Sources */,
 				8B300C1C1944AA1A00993175 /* Frameworks */,
@@ -347,14 +348,14 @@
 			dependencies = (
 				8B300C411944AA6600993175 /* PBXTargetDependency */,
 			);
-			name = SwifterDemoiOS;
+			name = PhotoboothDemoiOS;
 			productName = SwifterDemoiOS;
-			productReference = 8B300C1F1944AA1A00993175 /* SwifterDemoiOS.app */;
+			productReference = 8B300C1F1944AA1A00993175 /* PhotoboothDemoiOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8B300C461944AECB00993175 /* SwifterDemoMac */ = {
+		8B300C461944AECB00993175 /* PhotoboothDemoMac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B300C621944AECB00993175 /* Build configuration list for PBXNativeTarget "SwifterDemoMac" */;
+			buildConfigurationList = 8B300C621944AECB00993175 /* Build configuration list for PBXNativeTarget "PhotoboothDemoMac" */;
 			buildPhases = (
 				8B300C431944AECB00993175 /* Sources */,
 				8B300C441944AECB00993175 /* Frameworks */,
@@ -364,14 +365,14 @@
 			);
 			dependencies = (
 			);
-			name = SwifterDemoMac;
+			name = PhotoboothDemoMac;
 			productName = SwifterDemoMac;
-			productReference = 8B300C471944AECB00993175 /* SwifterDemoMac.app */;
+			productReference = 8B300C471944AECB00993175 /* PhotoboothDemoMac.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8B300C591944AECB00993175 /* SwifterDemoMacTests */ = {
+		8B300C591944AECB00993175 /* PhotoboothDemoMacTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B300C651944AECB00993175 /* Build configuration list for PBXNativeTarget "SwifterDemoMacTests" */;
+			buildConfigurationList = 8B300C651944AECB00993175 /* Build configuration list for PBXNativeTarget "PhotoboothDemoMacTests" */;
 			buildPhases = (
 				8B300C561944AECB00993175 /* Sources */,
 				8B300C571944AECB00993175 /* Frameworks */,
@@ -383,14 +384,14 @@
 				8B300C5C1944AECB00993175 /* PBXTargetDependency */,
 				8B300C691944AECC00993175 /* PBXTargetDependency */,
 			);
-			name = SwifterDemoMacTests;
+			name = PhotoboothDemoMacTests;
 			productName = SwifterDemoMacTests;
-			productReference = 8B300C5A1944AECB00993175 /* SwifterDemoMacTests.xctest */;
+			productReference = 8B300C5A1944AECB00993175 /* PhotoboothDemoMacTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8B9F50ED1944A5AB00894629 /* SwifteriOS */ = {
+		8B9F50ED1944A5AB00894629 /* PhotoboothiOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B9F51041944A5AB00894629 /* Build configuration list for PBXNativeTarget "SwifteriOS" */;
+			buildConfigurationList = 8B9F51041944A5AB00894629 /* Build configuration list for PBXNativeTarget "PhotoboothiOS" */;
 			buildPhases = (
 				8B9F50E91944A5AB00894629 /* Sources */,
 				8B9F50EA1944A5AB00894629 /* Frameworks */,
@@ -401,14 +402,14 @@
 			);
 			dependencies = (
 			);
-			name = SwifteriOS;
+			name = PhotoboothiOS;
 			productName = SwifteriOS;
-			productReference = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */;
+			productReference = 8B9F50EE1944A5AB00894629 /* PhotoboothiOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		8B9F51121944A61D00894629 /* SwifterMac */ = {
+		8B9F51121944A61D00894629 /* PhotoboothMac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B9F512A1944A61D00894629 /* Build configuration list for PBXNativeTarget "SwifterMac" */;
+			buildConfigurationList = 8B9F512A1944A61D00894629 /* Build configuration list for PBXNativeTarget "PhotoboothMac" */;
 			buildPhases = (
 				8B9F510E1944A61D00894629 /* Sources */,
 				8B9F510F1944A61D00894629 /* Frameworks */,
@@ -419,9 +420,9 @@
 			);
 			dependencies = (
 			);
-			name = SwifterMac;
+			name = PhotoboothMac;
 			productName = SwifterMac;
-			productReference = 8B9F51131944A61D00894629 /* SwifterMac.framework */;
+			productReference = 8B9F51131944A61D00894629 /* PhotoboothMac.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -452,7 +453,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8B9F50E81944A5AB00894629 /* Build configuration list for PBXProject "Swifter" */;
+			buildConfigurationList = 8B9F50E81944A5AB00894629 /* Build configuration list for PBXProject "Photobooth" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -465,11 +466,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8B300C1E1944AA1A00993175 /* SwifterDemoiOS */,
-				8B9F50ED1944A5AB00894629 /* SwifteriOS */,
-				8B9F51121944A61D00894629 /* SwifterMac */,
-				8B300C461944AECB00993175 /* SwifterDemoMac */,
-				8B300C591944AECB00993175 /* SwifterDemoMacTests */,
+				8B300C1E1944AA1A00993175 /* PhotoboothDemoiOS */,
+				8B9F50ED1944A5AB00894629 /* PhotoboothiOS */,
+				8B9F51121944A61D00894629 /* PhotoboothMac */,
+				8B300C461944AECB00993175 /* PhotoboothDemoMac */,
+				8B300C591944AECB00993175 /* PhotoboothDemoMacTests */,
 			);
 		};
 /* End PBXProject section */
@@ -631,17 +632,17 @@
 /* Begin PBXTargetDependency section */
 		8B300C411944AA6600993175 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B9F50ED1944A5AB00894629 /* SwifteriOS */;
+			target = 8B9F50ED1944A5AB00894629 /* PhotoboothiOS */;
 			targetProxy = 8B300C401944AA6600993175 /* PBXContainerItemProxy */;
 		};
 		8B300C5C1944AECB00993175 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B300C461944AECB00993175 /* SwifterDemoMac */;
+			target = 8B300C461944AECB00993175 /* PhotoboothDemoMac */;
 			targetProxy = 8B300C5B1944AECB00993175 /* PBXContainerItemProxy */;
 		};
 		8B300C691944AECC00993175 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B300C461944AECB00993175 /* SwifterDemoMac */;
+			target = 8B300C461944AECB00993175 /* PhotoboothDemoMac */;
 			targetProxy = 8B300C681944AECC00993175 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -664,7 +665,7 @@
 				INFOPLIST_FILE = SwifterDemoiOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PhotoboothDemoiOS;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -683,7 +684,7 @@
 				INFOPLIST_FILE = SwifterDemoiOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PhotoboothDemoiOS;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -702,7 +703,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PhotoboothDemoMac;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -718,7 +719,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PhotoboothDemoMac;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -740,7 +741,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PhotoboothDemoMacTests;
 				SDKROOT = macosx;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -760,7 +761,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PhotoboothDemoMacTests;
 				SDKROOT = macosx;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -861,7 +862,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Swifter/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PhotoboothiOS;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
 			};
@@ -877,7 +878,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Swifter/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PhotoboothiOS;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
 			};
@@ -901,7 +902,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PhotoboothMac;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
@@ -923,7 +924,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PhotoboothMac;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
@@ -933,7 +934,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8B300C3C1944AA1A00993175 /* Build configuration list for PBXNativeTarget "SwifterDemoiOS" */ = {
+		8B300C3C1944AA1A00993175 /* Build configuration list for PBXNativeTarget "PhotoboothDemoiOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B300C381944AA1A00993175 /* Debug */,
@@ -942,7 +943,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B300C621944AECB00993175 /* Build configuration list for PBXNativeTarget "SwifterDemoMac" */ = {
+		8B300C621944AECB00993175 /* Build configuration list for PBXNativeTarget "PhotoboothDemoMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B300C631944AECB00993175 /* Debug */,
@@ -951,7 +952,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B300C651944AECB00993175 /* Build configuration list for PBXNativeTarget "SwifterDemoMacTests" */ = {
+		8B300C651944AECB00993175 /* Build configuration list for PBXNativeTarget "PhotoboothDemoMacTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B300C661944AECB00993175 /* Debug */,
@@ -960,7 +961,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B9F50E81944A5AB00894629 /* Build configuration list for PBXProject "Swifter" */ = {
+		8B9F50E81944A5AB00894629 /* Build configuration list for PBXProject "Photobooth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B9F51021944A5AB00894629 /* Debug */,
@@ -969,7 +970,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B9F51041944A5AB00894629 /* Build configuration list for PBXNativeTarget "SwifteriOS" */ = {
+		8B9F51041944A5AB00894629 /* Build configuration list for PBXNativeTarget "PhotoboothiOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B9F51051944A5AB00894629 /* Debug */,
@@ -978,7 +979,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B9F512A1944A61D00894629 /* Build configuration list for PBXNativeTarget "SwifterMac" */ = {
+		8B9F512A1944A61D00894629 /* Build configuration list for PBXNativeTarget "PhotoboothMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B9F51261944A61D00894629 /* Debug */,

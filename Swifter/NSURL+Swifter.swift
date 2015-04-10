@@ -29,14 +29,14 @@ import Foundation
 extension NSURL {
 
     func URLByAppendingQueryString(queryString: String) -> NSURL {
-        if count(queryString.utf16) == 0 {
+        if countElements(queryString.utf16) == 0 {
             return self
         }
 
         var absoluteURLString = self.absoluteString!
 
         if absoluteURLString.hasSuffix("?") {
-            absoluteURLString = absoluteURLString[0 ..< count(absoluteURLString.utf16)]
+            absoluteURLString = absoluteURLString[0 ..< countElements(absoluteURLString.utf16)]
         }
 
         let URLString = absoluteURLString + (absoluteURLString.rangeOfString("?") != nil ? "&" : "?") + queryString

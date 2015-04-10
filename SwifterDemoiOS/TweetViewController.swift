@@ -1,5 +1,5 @@
 //
-//  TweetsViewController.swift
+//  TweetViewController.swift
 //  SwifterDemoiOS
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -24,11 +24,11 @@
 //
 
 import UIKit
-import SwifteriOS
+import PhotoboothiOS
 
 import TwitterKit
 
-class TweetsViewController : TWTRTimelineViewController {
+class TweetViewController : TWTRTimelineViewController {
 
     convenience init() {
         
@@ -45,6 +45,18 @@ class TweetsViewController : TWTRTimelineViewController {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let client = Twitter.sharedInstance().APIClient
+        self.dataSource = TWTRUserTimelineDataSource(screenName: appDelegate.username, APIClient: client)
+        
+        // kick off actual rendering
+        super.viewWillAppear(animated)
+        
+        println("TweetViewController.viewWillAppear: \(self.dataSource)")
     }
     
     func alertWithTitle(title: String, message: String) {

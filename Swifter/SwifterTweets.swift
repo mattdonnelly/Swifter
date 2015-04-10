@@ -174,7 +174,7 @@ public extension Swifter {
     }
 
     public func postStatusUpdate(status: String, media: NSData, inReplyToStatusID: String?, lat: Double?, long: Double?, placeID: Double?, displayCoordinates: Bool?, trimUser: Bool?, success: ((status: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
-        var path: String = "statuses/update_with_media.json"
+        var path: String = "statuses/update_with_media.json" 
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["status"] = status
