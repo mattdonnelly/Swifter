@@ -156,6 +156,8 @@ public enum JSON : Equatable, Printable {
         switch self {
         case .JSONString(let value):
             return value
+        case .JSONNumber(let value):
+            return "\(UInt64(value))"
             
         default:
             return nil
