@@ -70,9 +70,9 @@ public extension Swifter {
         let path = "saved_searches/create.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["query"] = query
+        parameters["query"] = query as String
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(savedSearch: json.object)
