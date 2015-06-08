@@ -156,7 +156,6 @@ public enum JSON : Equatable, Printable {
         switch self {
         case .JSONString(let value):
             return value
-            
         default:
             return nil
         }
