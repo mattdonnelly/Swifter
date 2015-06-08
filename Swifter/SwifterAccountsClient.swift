@@ -38,7 +38,7 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
     func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
         let url = NSURL(string: path, relativeToURL: baseURL)
 
-        var stringifiedParameters = SwifterAccountsClient.convertDictionaryValuesToStrings(parameters)
+        let stringifiedParameters = SwifterAccountsClient.convertDictionaryValuesToStrings(parameters)
 
         let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: url, parameters: stringifiedParameters)
         socialRequest.account = self.credential!.account!
@@ -79,7 +79,7 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
             }
         }
 
-        var stringifiedParameters = SwifterAccountsClient.convertDictionaryValuesToStrings(params)
+        let stringifiedParameters = SwifterAccountsClient.convertDictionaryValuesToStrings(params)
 
         let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.POST, URL: url, parameters: stringifiedParameters)
         socialRequest.account = self.credential!.account!
@@ -103,7 +103,7 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
     class func convertDictionaryValuesToStrings(dictionary: Dictionary<String, AnyObject>) -> Dictionary<String, String> {
         var result = Dictionary<String, String>()
 
-        for (key, value: AnyObject) in dictionary {
+        for (key, value) in dictionary {
             result[key] = "\(value)"
         }
 

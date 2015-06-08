@@ -334,7 +334,7 @@ public extension Swifter {
 
     Returns the lists the specified user has been added to. If user_id or screen_name are not provided the memberships for the authenticating user are returned.
     */
-    public func getListsMembershipsWithUserID(userID: String, cursor: Int?, filterToOwnedLists: Bool?, success: ((lists: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
+    public func getListsMembershipsWithUserID(userID: String, cursor: String?, filterToOwnedLists: Bool?, success: ((lists: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/memberships.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -347,12 +347,11 @@ public extension Swifter {
             parameters["filter_to_owned_lists"] = filterToOwnedLists!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: { (json: JSON, response) -> Void in
+            success?(lists: json["lists"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
+            return
+        }, failure: failure)
 
-            success?(lists: json["lists"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
-
-            }, failure: failure)
     }
 
     public func getListsMembershipsWithScreenName(screenName: String, cursor: Int?, filterToOwnedLists: Bool?, success: ((lists: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)?, failure: FailureHandler?) {
@@ -767,7 +766,7 @@ public extension Swifter {
         parameters["list_id"] = listID
 
         let userIDStrings = userIDs.map { String($0) }
-        parameters["user_id"] = join(",", userIDStrings)
+        parameters["user_id"] = ",".join(userIDStrings)
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
@@ -790,7 +789,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
-        parameters["screen_name"] = join(",", screenNames)
+        parameters["screen_name"] = ",".join(screenNames)
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
@@ -816,7 +815,7 @@ public extension Swifter {
         parameters["owner_id"] = ownerID
 
         let userIDStrings = userIDs.map { String($0) }
-        parameters["user_id"] = join(",", userIDStrings)
+        parameters["user_id"] = ",".join(userIDStrings)
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
@@ -840,7 +839,7 @@ public extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
         parameters["owner_id"] = ownerID
-        parameters["screen_name"] = join(",", screenNames)
+        parameters["screen_name"] = ",".join(screenNames)
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
@@ -866,7 +865,7 @@ public extension Swifter {
         parameters["owner_screen_name"] = ownerScreenName
 
         let userIDStrings = userIDs.map { String($0) }
-        parameters["user_id"] = join(",", userIDStrings)
+        parameters["user_id"] = ",".join(userIDStrings)
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
@@ -890,7 +889,7 @@ public extension Swifter {
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
         parameters["owner_screen_name"] = ownerScreenName
-        parameters["screen_name"] = join(",", screenNames)
+        parameters["screen_name"] = ",".join(screenNames)
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
@@ -1528,7 +1527,7 @@ public extension Swifter {
         parameters["list_id"] = listID
 
         let userIDStrings = userIDs.map { String($0) }
-        parameters["user_id"] = join(",", userIDStrings)
+        parameters["user_id"] = ",".join(userIDStrings)
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
@@ -1544,7 +1543,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["list_id"] = listID
-        parameters["screen_name"] = join(",", screenNames)
+        parameters["screen_name"] = ",".join(screenNames)
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
@@ -1562,7 +1561,7 @@ public extension Swifter {
         parameters["slug"] = slug
 
         let userIDStrings = userIDs.map { String($0) }
-        parameters["user_id"] = join(",", userIDStrings)
+        parameters["user_id"] = ",".join(userIDStrings)
 
         parameters["owner_screen_name"] = ownerScreenName
 
@@ -1580,7 +1579,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
-        parameters["screen_name"] = join(",", screenNames)
+        parameters["screen_name"] = ",".join(screenNames)
         parameters["owner_screen_name"] = ownerScreenName
         
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
@@ -1599,7 +1598,7 @@ public extension Swifter {
         parameters["slug"] = slug
 
         let userIDStrings = userIDs.map { String($0) }
-        parameters["user_id"] = join(",", userIDStrings)
+        parameters["user_id"] = ",".join(userIDStrings)
 
         parameters["owner_id"] = ownerID
         
@@ -1617,7 +1616,7 @@ public extension Swifter {
         
         var parameters = Dictionary<String, AnyObject>()
         parameters["slug"] = slug
-        parameters["screen_name"] = join(",", screenNames)
+        parameters["screen_name"] = ",".join(screenNames)
         parameters["owner_id"] = ownerID
         
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
