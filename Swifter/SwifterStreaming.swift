@@ -43,7 +43,7 @@ public extension Swifter {
 
         let path = "statuses/filter.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if follow != nil {
             parameters["follow"] = join(",", follow!)
         }
@@ -87,7 +87,7 @@ public extension Swifter {
     public func getStatusesSampleDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         let path = "statuses/sample.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if delimited != nil {
             parameters["delimited"] = delimited!
         }
@@ -124,7 +124,7 @@ public extension Swifter {
     public func getStatusesFirehose(count: Int? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         let path = "statuses/firehose.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if count != nil {
             parameters["count"] = count!
         }
@@ -162,7 +162,7 @@ public extension Swifter {
     public func getUserStreamDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, includeMessagesFromFollowedAccounts: Bool? = nil, includeReplies: Bool? = nil, track: [String]? = nil, locations: [String]? = nil, stringifyFriendIDs: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         let path = "user.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if delimited != nil {
             parameters["delimited"] = delimited!
         }
@@ -216,7 +216,7 @@ public extension Swifter {
     public func getSiteStreamDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, restrictToUserMessages: Bool? = nil, includeReplies: Bool? = nil, stringifyFriendIDs: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         let path = "site.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if delimited != nil {
             parameters["delimited"] = delimited!
         }

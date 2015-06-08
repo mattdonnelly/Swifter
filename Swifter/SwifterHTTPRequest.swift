@@ -52,7 +52,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     var connection: NSURLConnection!
 
     var headers: Dictionary<String, String>
-    var parameters: Dictionary<String, AnyObject>
+    var parameters: Dictionary<String, Any>
     var encodeParameters: Bool
 
     var uploadData: [DataUpload]
@@ -75,7 +75,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         self.init(URL: URL, method: "GET", parameters: [:])
     }
 
-    public init(URL: NSURL, method: String, parameters: Dictionary<String, AnyObject>) {
+    public init(URL: NSURL, method: String, parameters: Dictionary<String, Any>) {
         self.URL = URL
         self.HTTPMethod = method
         self.headers = [:]
@@ -131,7 +131,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
                     body.appendData(multipartData)
                 }
 
-                for (key, value : AnyObject) in nonOAuthParameters {
+                for (key, value : Any) in nonOAuthParameters {
                     body.appendData("\r\n--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
                     body.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
                     body.appendData("\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
