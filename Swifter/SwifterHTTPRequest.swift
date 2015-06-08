@@ -115,7 +115,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
             let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.dataEncoding))
 
-            var nonOAuthParameters = self.parameters.filter { key, _ in !key.hasPrefix("oauth_") }
+            let nonOAuthParameters = self.parameters.filter { key, _ in !key.hasPrefix("oauth_") }
 
             if self.uploadData.count > 0 {
                 let boundary = "----------SwIfTeRhTtPrEqUeStBoUnDaRy"
@@ -123,7 +123,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
                 let contentType = "multipart/form-data; boundary=\(boundary)"
                 self.request!.setValue(contentType, forHTTPHeaderField:"Content-Type")
 
-                var body = NSMutableData();
+                let body = NSMutableData();
 
                 for dataUpload: DataUpload in self.uploadData {
                     let multipartData = SwifterHTTPRequest.mulipartContentWithBounday(boundary, data: dataUpload.data, fileName: dataUpload.fileName, parameterName: dataUpload.parameterName, mimeType: dataUpload.mimeType)
@@ -131,7 +131,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
                     body.appendData(multipartData)
                 }
 
-                for (key, value : AnyObject) in nonOAuthParameters {
+                for (key, value) in nonOAuthParameters {
                     body.appendData("\r\n--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
                     body.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
                     body.appendData("\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
@@ -269,7 +269,8 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     }
 
     class func responseErrorCode(data: NSData) -> Int? {
-        if let json: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) {
+        do {
+            let json: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
             if let dictionary = json as? NSDictionary {
                 if let errors = dictionary["errors"] as? [NSDictionary] {
                     if let code = errors.first?["code"] as? Int {
@@ -277,6 +278,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
                     }
                 }
             }
+        } catch _ {
         }
         return nil
     }

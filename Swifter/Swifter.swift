@@ -112,26 +112,29 @@ public class Swifter {
             if downloadProgress == nil {
                 return
             }
-
-            var error: NSError?
-            if let jsonResult = JSON.parseJSONData(data, error: &error) {
+            
+            do {
+                let jsonResult = try JSON.parseJSONData(data)
                 downloadProgress?(json: jsonResult, response: response)
-            }
-            else {
+            } catch  {
+
                 let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                let jsonChunks = jsonString!.componentsSeparatedByString("\r\n") as! [String]
+                let jsonChunks = jsonString!.componentsSeparatedByString("\r\n") as [String]
 
                 for chunk in jsonChunks {
-                    if count(chunk.utf16) == 0 {
+                    if chunk.utf16.count == 0 {
                         continue
                     }
 
-                    let chunkData = chunk.dataUsingEncoding(NSUTF8StringEncoding)
+                    _ = chunk.dataUsingEncoding(NSUTF8StringEncoding)
 
-                    if let jsonResult = JSON.parseJSONData(data, error: &error)  {
+                    do {
+                        let jsonResult = try JSON.parseJSONData(data)
                         if let downloadProgress = downloadProgress {
                             downloadProgress(json: jsonResult, response: response)
                         }
+                    } catch {
+                        fatalError()
                     }
                 }
             }
@@ -141,18 +144,17 @@ public class Swifter {
             data, response in
 
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
-                var error: NSError?
-                if let jsonResult = JSON.parseJSONData(data, error: &error) {
+                do {
+                    let jsonResult = try JSON.parseJSONData(data)
                     dispatch_async(dispatch_get_main_queue()) {
                         if let success = success {
                             success(json: jsonResult, response: response)
                         }
                     }
-                }
-                else {
+                } catch {
                     dispatch_async(dispatch_get_main_queue()) {
                         if let failure = failure {
-                            failure(error: error!)
+                            failure(error: error as NSError)
                         }
                     }
                 }

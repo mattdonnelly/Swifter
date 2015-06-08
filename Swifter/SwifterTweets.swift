@@ -143,7 +143,7 @@ public extension Swifter {
     - https://dev.twitter.com/docs/api/multiple-media-extended-entities
     */
     public func postStatusUpdate(status: String, inReplyToStatusID: String? = nil, lat: Double? = nil, long: Double? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        var path: String = "statuses/update.json"
+        let path: String = "statuses/update.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["status"] = status
@@ -174,7 +174,7 @@ public extension Swifter {
     }
 
     public func postStatusUpdate(status: String, media: NSData, inReplyToStatusID: String? = nil, lat: Double? = nil, long: Double? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        var path: String = "statuses/update_with_media.json"
+        let path: String = "statuses/update_with_media.json"
 
         var parameters = Dictionary<String, AnyObject>()
         parameters["status"] = status
@@ -322,7 +322,7 @@ public extension Swifter {
 
     This method offers similar data to GET statuses/retweets/:id and replaces API v1's GET statuses/:id/retweeted_by/ids method.
     */
-    public func getStatusesRetweetersWithID(id: String, cursor: Int? = nil, stringifyIDs: Bool? = nil, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getStatusesRetweetersWithID(id: String, cursor: String? = nil, stringifyIDs: Bool? = nil, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/retweeters/ids.json"
 
         var parameters = Dictionary<String, AnyObject>()
@@ -338,7 +338,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(ids: json["ids"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
+            success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].integer, nextCursor: json["next_cursor_str"].integer)
 
             }, failure: failure)
     }
@@ -352,7 +352,7 @@ public extension Swifter {
         let path = "statuses/lookup.json"
 
         var parameters = Dictionary<String, AnyObject>()
-        parameters["id"] = join(",", tweetIDs)
+        parameters["id"] = ",".join(tweetIDs)
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
