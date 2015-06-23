@@ -37,7 +37,7 @@ public extension Swifter {
     public func getUsersSuggestionsWithSlug(slug: String, lang: String? = nil, success: ((users: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "users/suggestions/\(slug).json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if lang != nil {
             parameters["lang"] = lang!
         }
@@ -59,7 +59,7 @@ public extension Swifter {
     public func getUsersSuggestionsWithLang(lang: String? = nil, success: ((users: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "users/suggestions.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if lang != nil {
             parameters["lang"] = lang!
         }

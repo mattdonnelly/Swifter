@@ -56,7 +56,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         self.dataEncoding = NSUTF8StringEncoding
     }
 
-    func get(path: String, baseURL: NSURL, parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
+    func get(path: String, baseURL: NSURL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
         let url = NSURL(string: path, relativeToURL: baseURL)!
         let method = "GET"
 
@@ -71,14 +71,14 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         return request
     }
 
-    func post(path: String, baseURL: NSURL, var parameters: Dictionary<String, AnyObject>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
+    func post(path: String, baseURL: NSURL, var parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
         let url = NSURL(string: path, relativeToURL: baseURL)!
         let method = "POST"
 
         var postData: NSData?
         var postDataKey: String?
 
-        if let key: AnyObject = parameters[Swifter.DataParameters.dataKey] {
+        if let key: Any = parameters[Swifter.DataParameters.dataKey] {
             if let keyString = key as? String {
                 postDataKey = keyString
                 postData = parameters[postDataKey!] as? NSData
@@ -89,7 +89,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         }
 
         var postDataFileName: String?
-        if let fileName: AnyObject = parameters[Swifter.DataParameters.fileNameKey] {
+        if let fileName: Any = parameters[Swifter.DataParameters.fileNameKey] {
             if let fileNameString = fileName as? String {
                 postDataFileName = fileNameString
                 parameters.removeValueForKey(fileNameString)
@@ -113,8 +113,8 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         return request
     }
 
-    func authorizationHeaderForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>, isMediaUpload: Bool) -> String {
-        var authorizationParameters = Dictionary<String, AnyObject>()
+    func authorizationHeaderForMethod(method: String, url: NSURL, parameters: Dictionary<String, Any>, isMediaUpload: Bool) -> String {
+        var authorizationParameters = Dictionary<String, Any>()
         authorizationParameters["oauth_version"] = OAuth.version
         authorizationParameters["oauth_signature_method"] =  OAuth.signatureMethod
         authorizationParameters["oauth_consumer_key"] = self.consumerKey
@@ -125,7 +125,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
             authorizationParameters["oauth_token"] = self.credential!.accessToken!.key
         }
 
-        for (key, value: AnyObject) in parameters {
+        for (key, value: Any) in parameters {
             if key.hasPrefix("oauth_") {
                 authorizationParameters.updateValue(value, forKey: key)
             }
@@ -151,7 +151,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         return "OAuth " + join(", ", headerComponents)
     }
 
-    func oauthSignatureForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>, accessToken token: SwifterCredential.OAuthAccessToken?) -> String {
+    func oauthSignatureForMethod(method: String, url: NSURL, parameters: Dictionary<String, Any>, accessToken token: SwifterCredential.OAuthAccessToken?) -> String {
         var tokenSecret: NSString = ""
         if token != nil {
             tokenSecret = token!.secret.urlEncodedStringWithEncoding(self.dataEncoding)

@@ -54,7 +54,7 @@ public extension Swifter {
     public func getGeoReverseGeocodeWithLat(lat: Double, long: Double, accuracy: String? = nil, granularity: String? = nil, maxResults: Int? = nil, callback: String? = nil, success: ((place: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "geo/reverse_geocode.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["lat"] = lat
         parameters["long"] = long
 
@@ -71,7 +71,7 @@ public extension Swifter {
             parameters["callback"] = callback!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(place: json.object)
@@ -94,7 +94,7 @@ public extension Swifter {
 
         let path = "geo/search.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
 
         if lat != nil {
             parameters["lat"] = lat!
@@ -127,7 +127,7 @@ public extension Swifter {
             parameters["callback"] = callback!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(places: json.array)
@@ -148,7 +148,7 @@ public extension Swifter {
     public func getGeoSimilarPlacesWithLat(lat: Double, long: Double, name: String, containedWithin: String? = nil, attributeStreetAddress: String? = nil, callback: String? = nil, success: ((places: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "geo/similar_places.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["lat"] = lat
         parameters["long"] = long
         parameters["name"] = name
@@ -163,7 +163,7 @@ public extension Swifter {
             parameters["callback"] = callback!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
             
             success?(places: json.array)
