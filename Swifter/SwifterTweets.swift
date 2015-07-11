@@ -143,7 +143,7 @@ public extension Swifter {
     - https://dev.twitter.com/docs/api/multiple-media-extended-entities
     */
     public func postStatusUpdate(status: String, inReplyToStatusID: String? = nil, lat: Double? = nil, long: Double? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, media_ids: [String]? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        var path: String = "statuses/update.json"
+        let path: String = "statuses/update.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["status"] = status
@@ -177,7 +177,7 @@ public extension Swifter {
     }
 
     public func postStatusUpdate(status: String, media: NSData, inReplyToStatusID: String? = nil, lat: Double? = nil, long: Double? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        var path: String = "statuses/update_with_media.json"
+        let path: String = "statuses/update_with_media.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["status"] = status
@@ -220,7 +220,7 @@ public extension Swifter {
     - https://dev.twitter.com/rest/reference/post/media/upload
     */
     public func postMedia(media: NSData, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        var path: String = "media/upload.json"
+        let path: String = "media/upload.json"
         var parameters = Dictionary<String, AnyObject>()
         parameters["media"] = media
         parameters[Swifter.DataParameters.dataKey] = "media"
@@ -380,7 +380,7 @@ public extension Swifter {
         let path = "statuses/lookup.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["id"] = join(",", tweetIDs)
+        parameters["id"] = ",".join(tweetIDs)
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!

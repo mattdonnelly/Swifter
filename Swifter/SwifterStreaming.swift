@@ -45,13 +45,13 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         if follow != nil {
-            parameters["follow"] = join(",", follow!)
+            parameters["follow"] = ",".join(follow!)
         }
         if track != nil {
-            parameters["track"] = join(",", track!)
+            parameters["track"] = ",".join(track!)
         }
         if locations != nil {
-            parameters["locations"] = join(",", locations!)
+            parameters["locations"] = ",".join(locations!)
         }
         if delimited != nil {
             parameters["delimited"] = delimited!
@@ -180,10 +180,10 @@ public extension Swifter {
             }
         }
         if track != nil {
-            parameters["track"] = join(",", track!)
+            parameters["track"] = ",".join(track!)
         }
         if locations != nil {
-            parameters["locations"] = join(",", locations!)
+            parameters["locations"] = ",".join(locations!)
         }
         if stringifyFriendIDs != nil {
             parameters["stringify_friend_ids"] = stringifyFriendIDs!
