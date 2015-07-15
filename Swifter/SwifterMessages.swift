@@ -35,7 +35,7 @@ public extension Swifter {
     public func getDirectMessagesSinceID(sinceID: String? = nil, maxID: String? = nil, count: Int? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((messages: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if sinceID != nil {
             parameters["since_id"] = sinceID!
         }
@@ -69,7 +69,7 @@ public extension Swifter {
     public func getSentDirectMessagesSinceID(sinceID: String? = nil, maxID: String? = nil, count: Int? = nil, page: Int? = nil, includeEntities: Bool? = nil, success: ((messages: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages/sent.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if sinceID != nil {
             parameters["since_id"] = sinceID!
         }
@@ -103,7 +103,7 @@ public extension Swifter {
     public func getDirectMessagesShowWithID(id: String, success: ((messages: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages/show.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["id"] = id
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
@@ -123,7 +123,7 @@ public extension Swifter {
     public func postDestroyDirectMessageWithID(id: String, includeEntities: Bool? = nil, success: ((messages: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages/destroy.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["id"] = id
 
         if includeEntities != nil {
@@ -147,7 +147,7 @@ public extension Swifter {
     public func postDirectMessageToUser(userID: String, text: String, success: ((statuses: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages/new.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
         parameters["text"] = text
 

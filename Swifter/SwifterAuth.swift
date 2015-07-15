@@ -111,7 +111,7 @@ public extension Swifter {
     public func postOAuth2BearerTokenWithSuccess(success: JSONSuccessHandler?, failure: FailureHandler?) {
         let path = "/oauth2/token"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["grant_type"] = "client_credentials"
 
         self.jsonRequestWithPath(path, baseURL: self.apiURL, method: "POST", parameters: parameters, success: success, failure: failure)
@@ -140,7 +140,7 @@ public extension Swifter {
     public func postOAuthRequestTokenWithCallbackURL(callbackURL: NSURL, success: TokenSuccessHandler, failure: FailureHandler?) {
         let path = "/oauth/request_token"
 
-        var parameters =  Dictionary<String, AnyObject>()
+        var parameters =  Dictionary<String, Any>()
 
         if let callbackURLString = callbackURL.absoluteString {
             parameters["oauth_callback"] = callbackURLString
@@ -160,7 +160,7 @@ public extension Swifter {
         if let verifier = requestToken.verifier {
             let path =  "/oauth/access_token"
 
-            var parameters = Dictionary<String, AnyObject>()
+            var parameters = Dictionary<String, Any>()
             parameters["oauth_token"] = requestToken.key
             parameters["oauth_verifier"] = verifier
 

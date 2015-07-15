@@ -37,7 +37,7 @@ public extension Swifter {
     public func getFavoritesListWithCount(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, success: ((statuses: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "favorites/list.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if count != nil {
             parameters["count"] = count!
         }
@@ -60,7 +60,7 @@ public extension Swifter {
     public func getFavoritesListWithUserID(userID: String, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, success: ((statuses: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "favorites/list.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
 
         if count != nil {
@@ -85,7 +85,7 @@ public extension Swifter {
     public func getFavoritesListWithScreenName(screenName: String, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, success: ((statuses: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "favorites/list.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
         if count != nil {
@@ -117,7 +117,7 @@ public extension Swifter {
     public func postDestroyFavoriteWithID(id: String, includeEntities: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "favorites/destroy.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["id"] = id
 
         if includeEntities != nil {
@@ -143,7 +143,7 @@ public extension Swifter {
     public func postCreateFavoriteWithID(id: String, includeEntities: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: SwifterHTTPRequest.FailureHandler? = nil) {
         let path = "favorites/create.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["id"] = id
 
         if includeEntities != nil {

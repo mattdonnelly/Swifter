@@ -35,7 +35,7 @@ public extension Swifter {
     public func getStatusesRetweetsWithID(id: String, count: Int? = nil, trimUser: Bool? = nil, success: ((statuses: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/retweets/\(id).json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if count != nil {
             parameters["count"] = count!
         }
@@ -74,7 +74,7 @@ public extension Swifter {
     public func getStatusesShowWithID(id: String, count: Int? = nil, trimUser: Bool? = nil, includeMyRetweet: Bool? = nil, includeEntities: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/show.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["id"] = id
         if count != nil {
             parameters["count"] = count!
@@ -106,7 +106,7 @@ public extension Swifter {
     public func postStatusesDestroyWithID(id: String, trimUser: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/destroy/\(id).json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if trimUser != nil {
             parameters["trim_user"] = trimUser!
         }
@@ -145,7 +145,7 @@ public extension Swifter {
     public func postStatusUpdate(status: String, inReplyToStatusID: String? = nil, lat: Double? = nil, long: Double? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, media_ids: [String]? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         var path: String = "statuses/update.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["status"] = status
 
         if inReplyToStatusID != nil {
@@ -179,7 +179,7 @@ public extension Swifter {
     public func postStatusUpdate(status: String, media: NSData, inReplyToStatusID: String? = nil, lat: Double? = nil, long: Double? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         var path: String = "statuses/update_with_media.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["status"] = status
         parameters["media[]"] = media
         parameters[Swifter.DataParameters.dataKey] = "media[]"
@@ -248,7 +248,7 @@ public extension Swifter {
     public func postStatusRetweetWithID(id: String, trimUser: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/retweet/\(id).json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if trimUser != nil {
             parameters["trim_user"] = trimUser!
         }
@@ -272,7 +272,7 @@ public extension Swifter {
     public func getStatusesOEmbedWithID(id: String, maxWidth: Int? = nil, hideMedia: Bool? = nil, hideThread: Bool? = nil, omitScript: Bool? = nil, align: String? = nil, related: String? = nil, lang: String? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/oembed.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["id"] = id
 
         if maxWidth != nil {
@@ -309,7 +309,7 @@ public extension Swifter {
     public func getStatusesOEmbedWithURL(url: NSURL, maxWidth: Int? = nil, hideMedia: Bool? = nil, hideThread: Bool? = nil, omitScript: Bool? = nil, align: String? = nil, related: String? = nil, lang: String? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/oembed.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["url"] = url.absoluteString
 
         if maxWidth != nil {
@@ -353,7 +353,7 @@ public extension Swifter {
     public func getStatusesRetweetersWithID(id: String, cursor: Int? = nil, stringifyIDs: Bool? = nil, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/retweeters/ids.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["id"] = id
 
         if cursor != nil {
@@ -379,7 +379,7 @@ public extension Swifter {
     public func getStatusesLookupTweetIDs(tweetIDs: [String], includeEntities: Bool? = nil, map: Bool? = nil, success: ((statuses: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/lookup.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["id"] = join(",", tweetIDs)
 
         if includeEntities != nil {

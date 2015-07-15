@@ -52,7 +52,7 @@ public extension Swifter {
     public func getAccountVerifyCredentials(includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((myInfo: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "account/verify_credentials.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
@@ -79,7 +79,7 @@ public extension Swifter {
 
         let path = "account/settings.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if trendLocationWOEID != nil {
             parameters["trend_location_woeid"] = trendLocationWOEID!
         }
@@ -116,7 +116,7 @@ public extension Swifter {
     public func postAccountUpdateDeliveryDeviceSMS(device: Bool, includeEntities: Bool? = nil, success: ((deliveryDeviceSettings: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "account/update_delivery_device.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if device {
             parameters["device"] = "sms"
         }
@@ -146,7 +146,7 @@ public extension Swifter {
 
         let path = "account/update_profile.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if name != nil {
             parameters["name"] = name!
         }
@@ -185,7 +185,7 @@ public extension Swifter {
 
         let path = "account/update_profile_background_image.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if imageData != nil {
             parameters["image"] = imageData!.base64EncodedStringWithOptions(nil)
         }
@@ -216,7 +216,7 @@ public extension Swifter {
     public func postUpdateAccountProfileColors(profileBackgroundColor: String? = nil, profileLinkColor: String? = nil, profileSidebarBorderColor: String? = nil, profileSidebarFillColor: String? = nil, profileTextColor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((profile: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler) {
         let path = "account/update_profile_colors.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
 
         if profileBackgroundColor != nil {
             parameters["profile_background_color"] = profileBackgroundColor!
@@ -259,7 +259,7 @@ public extension Swifter {
     public func postAccountUpdateProfileImage(imageData: NSData? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((profile: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "account/update_profile_image.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if imageData != nil {
             parameters["image"] = imageData!.base64EncodedStringWithOptions(nil)
         }
@@ -287,7 +287,7 @@ public extension Swifter {
     public func getBlockListWithIncludeEntities(includeEntities: Bool? = nil, skipStatus: Bool? = nil, cursor: Int? = nil, success: ((users: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "blocks/list.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
@@ -314,7 +314,7 @@ public extension Swifter {
     public func getBlockIDsWithStingifyIDs(stringifyIDs: String? = nil, cursor: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler) {
         let path = "blocks/ids.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if stringifyIDs != nil {
             parameters["stringify_ids"] = stringifyIDs!
         }
@@ -338,7 +338,7 @@ public extension Swifter {
     public func postBlocksCreateWithScreenName(screenName: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler) {
         let path = "blocks/create.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
         if includeEntities != nil {
@@ -360,7 +360,7 @@ public extension Swifter {
     public func postBlocksCreateWithUserID(userID: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler) {
         let path = "blocks/create.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
 
         if includeEntities != nil {
@@ -387,7 +387,7 @@ public extension Swifter {
     public func postDestroyBlocksWithUserID(userID: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler) {
         let path = "blocks/destroy.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
 
         if includeEntities != nil {
@@ -409,7 +409,7 @@ public extension Swifter {
     public func postDestroyBlocksWithScreenName(screenName: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler) {
         let path = "blocks/destroy.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
         if includeEntities != nil {
@@ -448,7 +448,7 @@ public extension Swifter {
     public func getUsersLookupWithScreenNames(screenNames: [String], includeEntities: Bool? = nil, success: ((users: [JSONValue]?) -> Void)? = nil, failure: FailureHandler) {
         let path = "users/lookup.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = join(",", screenNames)
 
         if includeEntities != nil {
@@ -467,7 +467,7 @@ public extension Swifter {
     public func getUsersLookupWithUserIDs(userIDs: [String], includeEntities: Bool? = nil, success: ((users: [JSONValue]?) -> Void)? = nil, failure: FailureHandler) {
         let path = "users/lookup.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
 
         let userIDStrings = userIDs.map { String($0) }
         parameters["user_id"] = join(",", userIDStrings)
@@ -495,7 +495,7 @@ public extension Swifter {
     public func getUsersShowWithScreenName(screenName: String, includeEntities: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler) {
         let path = "users/show.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
         if includeEntities != nil {
@@ -514,7 +514,7 @@ public extension Swifter {
     public func getUsersShowWithUserID(userID: String, includeEntities: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler) {
         let path = "users/show.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
 
         if includeEntities != nil {
@@ -537,10 +537,10 @@ public extension Swifter {
 
     Only the first 1,000 matching results are available.
     */
-    public func getUsersSearchWithQuery(q: String, page: Int? = nil, count: Int? = nil, includeEntities: Bool? = nil, success: ((users: [JSONValue]?) -> Void)? = nil, failure: FailureHandler) {
-        let path = "users/search/json"
+    public func getUsersSearchWithQuery(q: String, page: Int?, count: Int?, includeEntities: Bool?, success: ((users: [JSONValue]?) -> Void)? = nil, failure: FailureHandler) {
+        let path = "users/search.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["q"] = q
 
         if page != nil {
@@ -570,7 +570,7 @@ public extension Swifter {
     public func getUsersContributeesWithUserID(id: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((users: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "users/contributees.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["id"] = id
 
         if includeEntities != nil {
@@ -592,7 +592,7 @@ public extension Swifter {
     public func getUsersContributeesWithScreenName(screenName: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((users: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "users/contributees.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
         if includeEntities != nil {
@@ -619,7 +619,7 @@ public extension Swifter {
     public func getUsersContributorsWithUserID(id: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((users: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "users/contributors.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["id"] = id
 
         if includeEntities != nil {
@@ -641,7 +641,7 @@ public extension Swifter {
     public func getUsersContributorsWithScreenName(screenName: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((users: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "users/contributors.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
         if includeEntities != nil {
@@ -694,7 +694,7 @@ public extension Swifter {
     public func postAccountUpdateProfileBannerWithImageData(imageData: NSData? = nil, width: Int? = nil, height: Int? = nil, offsetLeft: Int? = nil, offsetTop: Int? = nil, success: ((response: JSON) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "account/update_profile_banner.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if imageData != nil {
             parameters["banner"] = imageData!.base64EncodedStringWithOptions(nil)
         }
@@ -749,7 +749,7 @@ public extension Swifter {
     public func postMutesUsersCreateForScreenName(screenName: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/create.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
@@ -764,7 +764,7 @@ public extension Swifter {
     public func postMutesUsersCreateForUserID(userID: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/create.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
@@ -788,7 +788,7 @@ public extension Swifter {
     public func postMutesUsersDestroyForScreenName(screenName: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/destroy.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
@@ -803,7 +803,7 @@ public extension Swifter {
     public func postMutesUsersDestroyForUserID(userID: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/destroy.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
@@ -823,7 +823,7 @@ public extension Swifter {
     public func getMutesUsersIDsWithCursor(cursor: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/ids.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if cursor != nil {
             parameters["cursor"] = cursor!
         }
@@ -844,7 +844,7 @@ public extension Swifter {
     public func getMutesUsersListWithCursor(cursor: Int? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((users: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/list.json"
         
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
         }
