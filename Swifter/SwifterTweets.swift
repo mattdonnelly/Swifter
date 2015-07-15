@@ -221,7 +221,7 @@ public extension Swifter {
     */
     public func postMedia(media: NSData, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path: String = "media/upload.json"
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["media"] = media
         parameters[Swifter.DataParameters.dataKey] = "media"
 
