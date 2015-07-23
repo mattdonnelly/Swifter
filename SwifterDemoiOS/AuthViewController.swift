@@ -27,15 +27,16 @@ import UIKit
 import Accounts
 import Social
 import SwifteriOS
+import SafariServices
 
-class AuthViewController: UIViewController {
+class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
     
     var swifter: Swifter
 
     // Default to using the iOS account framework for handling twitter auth
-    let useACAccount = true
+    let useACAccount = false
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         self.swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
         super.init(coder: aDecoder)
     }
@@ -74,13 +75,23 @@ class AuthViewController: UIViewController {
             }
         }
         else {
-            swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success")!, success: {
-                accessToken, response in
-
+            let url = NSURL(string: "swifter://success")!
+            swifter.authorizeWithCallbackURL(url, success: { (accessToken, response) -> Void in
                 self.fetchTwitterHomeStream()
-
-                },failure: failureHandler
-            )
+                }, failure: { (error) -> Void in
+                    failureHandler
+                }, openQueryURL: { (url) -> Void in
+                    if #available(iOS 9.0, *) {
+                        let webView = SFSafariViewController(URL: url)
+                        webView.delegate = self
+                        self.presentViewController(webView, animated: true, completion: nil)
+                    } else {
+                        // Fallback on earlier versions
+                        UIApplication.sharedApplication().openURL(url)
+                    }
+                }, closeQueryURL: { () -> Void in
+                    self.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+            })
         }
     }
 
@@ -98,7 +109,8 @@ class AuthViewController: UIViewController {
                 
             if statuses != nil {
                 tweetsViewController.tweets = statuses!
-                self.presentViewController(tweetsViewController, animated: true, completion: nil)
+                self.navigationController?.pushViewController(tweetsViewController, animated: true)
+//                self.presentViewController(tweetsViewController, animated: true, completion: nil)
             }
 
             }, failure: failureHandler)
@@ -106,9 +118,16 @@ class AuthViewController: UIViewController {
     }
 
     func alertWithTitle(title: String, message: String) {
-        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
+    
+    @available(iOS 9.0, *)
+    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+        NSNotificationCenter.defaultCenter().removeObserver(swifter, name: "SwifterCallbackNotificationName", object: nil)
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+
 
 }
