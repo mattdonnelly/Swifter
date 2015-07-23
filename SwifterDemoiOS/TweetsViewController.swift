@@ -33,6 +33,7 @@ class TweetsViewController: UITableViewController {
     override func viewWillLayoutSubviews()
     {
         super.viewWillLayoutSubviews()
+        self.title = "Timeline"
         self.tableView.contentInset = UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0)
         self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0)
     }
