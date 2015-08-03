@@ -60,7 +60,7 @@ public extension Swifter {
             parameters["skip_status"] = skipStatus!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(myInfo: json.object)
@@ -99,7 +99,7 @@ public extension Swifter {
             parameters["lang"] = lang!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(settings: json.object)
@@ -127,7 +127,7 @@ public extension Swifter {
             parameters["include_entities"] = includeEntities!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(deliveryDeviceSettings: json.object)
@@ -165,8 +165,9 @@ public extension Swifter {
         if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
-
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        print(parameters)
+        
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(profile: json.object)
@@ -199,7 +200,7 @@ public extension Swifter {
             parameters["use"] = use!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(profile: json.object)
@@ -240,7 +241,7 @@ public extension Swifter {
             parameters["skip_status"] = skipStatus!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(profile: json.object)
@@ -270,7 +271,7 @@ public extension Swifter {
             parameters["skip_status"] = skipStatus!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(profile: json.object)
@@ -711,7 +712,7 @@ public extension Swifter {
             parameters["offset_top"] = offsetTop!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(response: json)
