@@ -270,7 +270,7 @@ public extension Swifter {
             parameters["skip_status"] = skipStatus!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(profile: json.object)
