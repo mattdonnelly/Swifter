@@ -304,7 +304,7 @@ public extension Swifter {
     public func postUpdateFriendshipWithID(id: String, device: Bool? = nil, retweets: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/update.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["id"] = id
 
         if device != nil {
