@@ -40,11 +40,12 @@ public extension Swifter {
             token, response in
 
             var requestToken = token!
+            var observer: NSObjectProtocol?
 
-            NSNotificationCenter.defaultCenter().addObserverForName(CallbackNotification.notificationName, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock:{
+            observer = NSNotificationCenter.defaultCenter().addObserverForName(CallbackNotification.notificationName, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock:{
                 notification in
 
-                NSNotificationCenter.defaultCenter().removeObserver(self)
+                NSNotificationCenter.defaultCenter().removeObserver(observer!)
 
                 let url = notification.userInfo![CallbackNotification.optionsURLKey] as! NSURL
 
