@@ -106,6 +106,7 @@ public class Swifter {
     // MARK: - JSON Requests
 
     internal func jsonRequestWithPath(path: String, baseURL: NSURL, method: String, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler? = nil, failure: SwifterHTTPRequest.FailureHandler? = nil) -> SwifterHTTPRequest {
+        let buffer = NSMutableData()
         let jsonDownloadProgressHandler: SwifterHTTPRequest.DownloadProgressHandler = {
             data, _, _, response in
 
@@ -113,27 +114,35 @@ public class Swifter {
                 return
             }
 
-            var error: NSError?
-            if let jsonResult = JSON.parseJSONData(data, error: &error) {
-                downloadProgress?(json: jsonResult, response: response)
-            }
-            else {
-                let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                let jsonChunks = jsonString!.componentsSeparatedByString("\r\n") as! [String]
-
-                for chunk in jsonChunks {
-                    if count(chunk.utf16) == 0 {
-                        continue
-                    }
-
-                    let chunkData = chunk.dataUsingEncoding(NSUTF8StringEncoding)
-
-                    if let jsonResult = JSON.parseJSONData(data, error: &error)  {
-                        if let downloadProgress = downloadProgress {
-                            downloadProgress(json: jsonResult, response: response)
+            do {
+                buffer.appendData(data)
+                let object = try NSJSONSerialization.JSONObjectWithData(buffer, options: .MutableContainers)
+                let json = JSON(object)
+                buffer.setData(NSData())
+                downloadProgress?(json: json, response: response)
+            } catch _ as NSError {
+                if let jsonString = NSString(data: buffer, encoding: NSUTF8StringEncoding) {
+                    let chunks = jsonString.componentsSeparatedByString("\r\n")
+                    for chunk in chunks {
+                        if chunk.utf16.count == 0 {
+                            continue
+                        }
+                        if let chunkData = chunk.dataUsingEncoding(NSUTF8StringEncoding) {
+                            do {
+                                let object = try NSJSONSerialization.JSONObjectWithData(chunkData, options: .MutableContainers)
+                                let json = JSON(object)
+                                buffer.setData(NSData())
+                                downloadProgress?(json: json, response: response)
+                            } catch _ as NSError {
+                                buffer.setData(chunkData)
+                            } catch {
+                                fatalError()
+                            }
                         }
                     }
                 }
+            } catch {
+                fatalError()
             }
         }
 
@@ -142,19 +151,22 @@ public class Swifter {
 
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
                 var error: NSError?
-                if let jsonResult = JSON.parseJSONData(data, error: &error) {
+                do {
+                    let jsonResult = try JSON.parseJSONData(data)
                     dispatch_async(dispatch_get_main_queue()) {
                         if let success = success {
                             success(json: jsonResult, response: response)
                         }
                     }
-                }
-                else {
+                } catch let error1 as NSError {
+                    error = error1
                     dispatch_async(dispatch_get_main_queue()) {
                         if let failure = failure {
                             failure(error: error!)
                         }
                     }
+                } catch {
+                    fatalError()
                 }
             }
         }
