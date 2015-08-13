@@ -538,7 +538,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func postListsSubscribersCreateWithSlug(slug: String, ownerID: Int, success: ((user: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postListsSubscribersCreateWithSlug(slug: String, ownerID: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, Any>()
