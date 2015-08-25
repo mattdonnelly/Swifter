@@ -164,7 +164,7 @@ public extension Swifter {
             parameters["trim_user"] = trimUser!
         }
         if media_ids != nil && media_ids?.count > 0 {
-            parameters["media_ids"] = ",".join(media_ids!)
+            parameters["media_ids"] = media_ids!.joinWithSeparator(",")
         }
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
@@ -380,7 +380,7 @@ public extension Swifter {
         let path = "statuses/lookup.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["id"] = ",".join(tweetIDs)
+        parameters["id"] = tweetIDs.joinWithSeparator(",")
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!

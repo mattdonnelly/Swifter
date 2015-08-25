@@ -306,7 +306,7 @@ extension JSON {
     }
 
     private func _prettyPrint(indent: String, _ level: Int) -> String {
-        let currentIndent = indent.join((0...level).map({ _ in "" }))
+        let currentIndent = (0...level).map({ _ in "" }).joinWithSeparator(indent)
         let nextIndent = currentIndent + "  "
         
         switch self {
@@ -320,10 +320,10 @@ extension JSON {
             return "\"\(string)\""
             
         case .JSONArray(let array):
-            return "[\n" + ",\n".join(array.map({ "\(nextIndent)\($0._prettyPrint(indent, level + 1))" })) + "\n\(currentIndent)]"
+            return "[\n" + array.map({ "\(nextIndent)\($0._prettyPrint(indent, level + 1))" }).joinWithSeparator(",\n") + "\n\(currentIndent)]"
             
         case .JSONObject(let dict):
-            return "{\n" + ",\n".join(dict.map({ "\(nextIndent)\"\($0)\" : \($1._prettyPrint(indent, level + 1))"})) + "\n\(currentIndent)}"
+            return "{\n" + dict.map({ "\(nextIndent)\"\($0)\" : \($1._prettyPrint(indent, level + 1))"}).joinWithSeparator(",\n") + "\n\(currentIndent)}"
             
         case .JSONNull:
             return "null"

@@ -148,7 +148,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
             }
         }
 
-        return "OAuth " + ", ".join(headerComponents)
+        return "OAuth " + headerComponents.joinWithSeparator(", ")
     }
 
     func oauthSignatureForMethod(method: String, url: NSURL, parameters: Dictionary<String, Any>, accessToken token: SwifterCredential.OAuthAccessToken?) -> String {
@@ -164,7 +164,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         var parameterComponents = parameters.urlEncodedQueryStringWithEncoding(self.dataEncoding).componentsSeparatedByString("&") as [String]
         parameterComponents.sortInPlace { $0 < $1 }
 
-        let parameterString = "&".join(parameterComponents)
+        let parameterString = parameterComponents.joinWithSeparator("&")
         let encodedParameterString = parameterString.urlEncodedStringWithEncoding(self.dataEncoding)
 
         let encodedURL = url.absoluteString.urlEncodedStringWithEncoding(self.dataEncoding)

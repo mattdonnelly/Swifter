@@ -115,7 +115,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
             let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.dataEncoding))
 
-            var nonOAuthParameters = self.parameters.filter { key, _ in !key.hasPrefix("oauth_") }
+            let nonOAuthParameters = self.parameters.filter { key, _ in !key.hasPrefix("oauth_") }
 
             if self.uploadData.count > 0 {
                 let boundary = "----------SwIfTeRhTtPrEqUeStBoUnDaRy"

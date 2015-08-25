@@ -449,7 +449,7 @@ public extension Swifter {
         let path = "users/lookup.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["screen_name"] = ",".join(screenNames)
+        parameters["screen_name"] = screenNames.joinWithSeparator(",")
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
@@ -470,7 +470,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
 
         let userIDStrings = userIDs.map { String($0) }
-        parameters["user_id"] = ",".join(userIDStrings)
+        parameters["user_id"] = userIDStrings.joinWithSeparator(",")
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
