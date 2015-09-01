@@ -284,7 +284,7 @@ public extension Swifter {
 
     Returns a collection of user objects that the authenticating user is blocking.
     */
-    public func getBlockListWithIncludeEntities(includeEntities: Bool? = nil, skipStatus: Bool? = nil, cursor: Int? = nil, success: ((users: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getBlockListWithIncludeEntities(includeEntities: Bool? = nil, skipStatus: Bool? = nil, cursor: String? = nil, success: ((users: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "blocks/list.json"
 
         var parameters = Dictionary<String, Any>()
@@ -301,7 +301,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(users: json["users"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
+            success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
     }
@@ -311,7 +311,7 @@ public extension Swifter {
 
     Returns an array of numeric user ids the authenticating user is blocking.
     */
-    public func getBlockIDsWithStingifyIDs(stringifyIDs: String? = nil, cursor: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler) {
+    public func getBlockIDsWithStingifyIDs(stringifyIDs: String? = nil, cursor: String? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler) {
         let path = "blocks/ids.json"
 
         var parameters = Dictionary<String, Any>()
@@ -325,7 +325,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(ids: json["ids"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
+            success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
     }
@@ -820,7 +820,7 @@ public extension Swifter {
 
     Returns an array of numeric user ids the authenticating user has muted.
     */
-    public func getMutesUsersIDsWithCursor(cursor: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getMutesUsersIDsWithCursor(cursor: String? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/ids.json"
 
         var parameters = Dictionary<String, Any>()
@@ -831,7 +831,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(ids: json["ids"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
+            success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
     }
@@ -841,7 +841,7 @@ public extension Swifter {
     
     Returns an array of user objects the authenticating user has muted.
     */
-    public func getMutesUsersListWithCursor(cursor: Int? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((users: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getMutesUsersListWithCursor(cursor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((users: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/list.json"
         
         var parameters = Dictionary<String, Any>()
@@ -858,7 +858,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
             
-            success?(users: json["users"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
+            success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
     }

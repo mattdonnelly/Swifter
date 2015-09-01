@@ -536,13 +536,11 @@ public extension Swifter {
             }, failure: failure)
     }
     
-    public func getFriendshipsLookupWithIDs(ids: [Int], success: ((friendships: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFriendshipsLookupWithIDs(ids: [String], success: ((friendships: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "followers/lookup.json"
         
         var parameters = Dictionary<String, Any>()
-
-        let idStrings = ids.map { String($0) }
-        parameters["id"] = idStrings.joinWithSeparator(",")
+        parameters["id"] = ids.joinWithSeparator(",")
         
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in

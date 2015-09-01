@@ -350,7 +350,7 @@ public extension Swifter {
 
     This method offers similar data to GET statuses/retweets/:id and replaces API v1's GET statuses/:id/retweeted_by/ids method.
     */
-    public func getStatusesRetweetersWithID(id: String, cursor: Int? = nil, stringifyIDs: Bool? = nil, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getStatusesRetweetersWithID(id: String, cursor: String? = nil, stringifyIDs: Bool? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/retweeters/ids.json"
 
         var parameters = Dictionary<String, Any>()
@@ -360,13 +360,13 @@ public extension Swifter {
             parameters["cursor"] = cursor!
         }
         if stringifyIDs != nil {
-            parameters["stringify_ids"] = cursor!
+            parameters["stringify_ids"] = stringifyIDs!
         }
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(ids: json["ids"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
+            success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
     }
