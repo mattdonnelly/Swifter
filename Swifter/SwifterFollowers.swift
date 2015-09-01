@@ -537,7 +537,7 @@ public extension Swifter {
     }
     
     public func getFriendshipsLookupWithIDs(ids: [String], success: ((friendships: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        let path = "followers/lookup.json"
+        let path = "friendships/lookup.json"
         
         var parameters = Dictionary<String, Any>()
         parameters["id"] = ids.joinWithSeparator(",")
