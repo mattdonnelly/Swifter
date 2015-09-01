@@ -540,7 +540,7 @@ public extension Swifter {
         let path = "friendships/lookup.json"
         
         var parameters = Dictionary<String, Any>()
-        parameters["id"] = ids.joinWithSeparator(",")
+        parameters["user_id"] = ids.joinWithSeparator(",")
         
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
