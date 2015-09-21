@@ -37,7 +37,7 @@ class AuthViewController: UIViewController {
 
     required init(coder aDecoder: NSCoder) {
         self.swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
 
     @IBAction func didTouchUpInsideLoginButton(sender: AnyObject) {
@@ -106,7 +106,7 @@ class AuthViewController: UIViewController {
     }
 
     func alertWithTitle(title: String, message: String) {
-        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }

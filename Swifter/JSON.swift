@@ -32,7 +32,7 @@ public let JSONFalse = JSONValue(false)
 
 public let JSONNull = JSONValue.JSONNull
 
-public enum JSON : Equatable, Printable {
+public enum JSON : Equatable, CustomStringConvertible {
     
     case JSONString(String)
     case JSONNumber(Double)
@@ -100,10 +100,10 @@ public enum JSON : Equatable, Printable {
         if let value : AnyObject = rawValue {
             switch value {
             case let data as NSData:
-                if let jsonObject : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) {
+                do {
+                    let jsonObject : AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
                     self = JSON(jsonObject)
-                }
-                else {
+                }catch {
                     self = .JSONInvalid
                 }
 
@@ -116,7 +116,7 @@ public enum JSON : Equatable, Printable {
                 
             case let dict as NSDictionary:
                 var newDict : Dictionary<String, JSONValue> = [:]
-                for (k : AnyObject, v : AnyObject) in dict {
+                for (k, v) in dict {
                     if let key = k as? String {
                         newDict[key] = JSON(v)
                     }
@@ -139,7 +139,7 @@ public enum JSON : Equatable, Printable {
                     self = .JSONNumber(number.doubleValue)
                 }
                 
-            case let null as NSNull:
+            case _ as NSNull:
                 self = .JSONNull
                 
             default:
@@ -237,7 +237,7 @@ public enum JSON : Equatable, Printable {
     }
 
     static func parseJSONData(jsonData : NSData, error: NSErrorPointer) -> JSON? {
-        var JSONObject : AnyObject! = NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers, error: error)
+        let JSONObject : AnyObject? = try? NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers)
 
         return (JSONObject == nil) ? nil : JSON(JSONObject)
     }
@@ -288,7 +288,7 @@ public func ==(lhs: JSON, rhs: JSON) -> Bool {
     }
 }
 
-extension JSON: Printable {
+extension JSON {
 
     public var description: String {
         if let jsonString = stringify() {
@@ -300,7 +300,7 @@ extension JSON: Printable {
     }
 
     private func _prettyPrint(indent: String, _ level: Int) -> String {
-        let currentIndent = join(indent, map(0...level, { _ in "" }))
+        let currentIndent = (Array<Int>)(0...level).map({ _ in "" }).joinWithSeparator(indent)
         let nextIndent = currentIndent + "  "
         
         switch self {
@@ -314,10 +314,10 @@ extension JSON: Printable {
             return "\"\(string)\""
             
         case .JSONArray(let array):
-            return "[\n" + join(",\n", array.map({ "\(nextIndent)\($0._prettyPrint(indent, level + 1))" })) + "\n\(currentIndent)]"
+            return "[\n" + array.map({"\(nextIndent)\($0._prettyPrint(indent, level + 1))"}).joinWithSeparator(",\n") + "\n\(currentIndent)]"
             
         case .JSONObject(let dict):
-            return "{\n" + join(",\n", map(dict, { "\(nextIndent)\"\($0)\" : \($1._prettyPrint(indent, level + 1))"})) + "\n\(currentIndent)}"
+            return "{\n" + dict.map({ "\(nextIndent)\"\($0)\" : \($1._prettyPrint(indent, level + 1))"}).joinWithSeparator(",\n") + "\n\(currentIndent)}"
             
         case .JSONNull:
             return "null"
