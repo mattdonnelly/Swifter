@@ -35,7 +35,7 @@ public extension Swifter {
 
     public typealias TokenSuccessHandler = (accessToken: SwifterCredential.OAuthAccessToken?, response: NSURLResponse) -> Void
 
-    public func authorizeWithCallbackURL(callbackURL: NSURL, success: TokenSuccessHandler?, failure: ((error: NSError) -> Void)? = nil) {
+    public func authorizeWithCallbackURL(callbackURL: NSURL, success: TokenSuccessHandler?, failure: ((error: NSError) -> Void)? = nil, openQueryURL: ((url: NSURL) -> Void)?, closeQueryURL:(() -> Void)? = nil) {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: {
             token, response in
 
@@ -45,7 +45,7 @@ public extension Swifter {
                 notification in
 
                 NSNotificationCenter.defaultCenter().removeObserver(self)
-
+                closeQueryURL?()
                 let url = notification.userInfo![CallbackNotification.optionsURLKey] as! NSURL
 
                 let parameters = url.query!.parametersFromQueryString()
@@ -61,13 +61,18 @@ public extension Swifter {
                 })
 
             let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.apiURL)
-            let queryURL = NSURL(string: authorizeURL!.absoluteString! + "?oauth_token=\(token!.key)")
-
-            #if os(iOS)
-                UIApplication.sharedApplication().openURL(queryURL!)
-            #else
-                NSWorkspace.sharedWorkspace().openURL(queryURL!)
-            #endif
+            let queryURL = NSURL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")
+            
+            if openQueryURL != nil {
+                openQueryURL?(url: queryURL!)
+            } else {
+                #if os(iOS)
+                    UIApplication.sharedApplication().openURL(queryURL!)
+                #else
+                    NSWorkspace.sharedWorkspace().openURL(queryURL!)
+                #endif
+            }
+            
             }, failure: failure)
     }
 
@@ -142,9 +147,7 @@ public extension Swifter {
 
         var parameters =  Dictionary<String, Any>()
 
-        if let callbackURLString = callbackURL.absoluteString {
-            parameters["oauth_callback"] = callbackURLString
-        }
+        parameters["oauth_callback"] = callbackURL.absoluteString
 
         self.client.post(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             data, response in

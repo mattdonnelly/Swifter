@@ -60,7 +60,7 @@ public extension Swifter {
             parameters["skip_status"] = skipStatus!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(myInfo: json.object)
@@ -74,7 +74,7 @@ public extension Swifter {
 
     Updates the authenticating user's settings.
     */
-    public func postAccountSettings(trendLocationWOEID: Int? = nil, sleepTimeEnabled: Bool? = nil, startSleepTime: Int? = nil, endSleepTime: Int? = nil, timeZone: String? = nil, lang: String? = nil, success: ((settings: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postAccountSettings(trendLocationWOEID: String? = nil, sleepTimeEnabled: Bool? = nil, startSleepTime: Int? = nil, endSleepTime: Int? = nil, timeZone: String? = nil, lang: String? = nil, success: ((settings: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         assert(trendLocationWOEID != nil || sleepTimeEnabled != nil || startSleepTime != nil || endSleepTime != nil || timeZone != nil || lang != nil, "At least one or more should be provided when executing this request")
 
         let path = "account/settings.json"
@@ -99,7 +99,7 @@ public extension Swifter {
             parameters["lang"] = lang!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(settings: json.object)
@@ -127,7 +127,7 @@ public extension Swifter {
             parameters["include_entities"] = includeEntities!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(deliveryDeviceSettings: json.object)
@@ -165,8 +165,8 @@ public extension Swifter {
         if skipStatus != nil {
             parameters["skip_status"] = skipStatus!
         }
-
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(profile: json.object)
@@ -187,7 +187,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         if imageData != nil {
-            parameters["image"] = imageData!.base64EncodedStringWithOptions(nil)
+            parameters["image"] = imageData!.base64EncodedStringWithOptions([])
         }
         if title != nil {
             parameters["title"] = title!
@@ -199,7 +199,7 @@ public extension Swifter {
             parameters["use"] = use!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(profile: json.object)
@@ -240,7 +240,7 @@ public extension Swifter {
             parameters["skip_status"] = skipStatus!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(profile: json.object)
@@ -261,7 +261,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         if imageData != nil {
-            parameters["image"] = imageData!.base64EncodedStringWithOptions(nil)
+            parameters["image"] = imageData!.base64EncodedStringWithOptions([])
         }
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
@@ -270,7 +270,7 @@ public extension Swifter {
             parameters["skip_status"] = skipStatus!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(profile: json.object)
@@ -284,7 +284,7 @@ public extension Swifter {
 
     Returns a collection of user objects that the authenticating user is blocking.
     */
-    public func getBlockListWithIncludeEntities(includeEntities: Bool? = nil, skipStatus: Bool? = nil, cursor: Int? = nil, success: ((users: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getBlockListWithIncludeEntities(includeEntities: Bool? = nil, skipStatus: Bool? = nil, cursor: String? = nil, success: ((users: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "blocks/list.json"
 
         var parameters = Dictionary<String, Any>()
@@ -301,7 +301,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(users: json["users"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
+            success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
     }
@@ -311,7 +311,7 @@ public extension Swifter {
 
     Returns an array of numeric user ids the authenticating user is blocking.
     */
-    public func getBlockIDsWithStingifyIDs(stringifyIDs: String? = nil, cursor: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler) {
+    public func getBlockIDsWithStingifyIDs(stringifyIDs: String? = nil, cursor: String? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler) {
         let path = "blocks/ids.json"
 
         var parameters = Dictionary<String, Any>()
@@ -325,7 +325,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(ids: json["ids"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
+            success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
     }
@@ -449,7 +449,7 @@ public extension Swifter {
         let path = "users/lookup.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["screen_name"] = join(",", screenNames)
+        parameters["screen_name"] = screenNames.joinWithSeparator(",")
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
@@ -470,7 +470,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
 
         let userIDStrings = userIDs.map { String($0) }
-        parameters["user_id"] = join(",", userIDStrings)
+        parameters["user_id"] = userIDStrings.joinWithSeparator(",")
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
@@ -696,7 +696,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         if imageData != nil {
-            parameters["banner"] = imageData!.base64EncodedStringWithOptions(nil)
+            parameters["banner"] = imageData!.base64EncodedStringWithOptions([])
         }
         if width != nil {
             parameters["width"] = width!
@@ -711,7 +711,7 @@ public extension Swifter {
             parameters["offset_top"] = offsetTop!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(response: json)
@@ -820,7 +820,7 @@ public extension Swifter {
 
     Returns an array of numeric user ids the authenticating user has muted.
     */
-    public func getMutesUsersIDsWithCursor(cursor: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getMutesUsersIDsWithCursor(cursor: String? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/ids.json"
 
         var parameters = Dictionary<String, Any>()
@@ -831,7 +831,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(ids: json["ids"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
+            success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
     }
@@ -841,7 +841,7 @@ public extension Swifter {
     
     Returns an array of user objects the authenticating user has muted.
     */
-    public func getMutesUsersListWithCursor(cursor: Int? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((users: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getMutesUsersListWithCursor(cursor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((users: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/list.json"
         
         var parameters = Dictionary<String, Any>()
@@ -858,7 +858,7 @@ public extension Swifter {
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
             
-            success?(users: json["users"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
+            success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
     }

@@ -304,7 +304,7 @@ public extension Swifter {
     public func postUpdateFriendshipWithID(id: String, device: Bool? = nil, retweets: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/update.json"
 
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["id"] = id
 
         if device != nil {
@@ -525,7 +525,7 @@ public extension Swifter {
         let path = "friendships/lookup.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["screen_name"] = join(",", screenNames)
+        parameters["screen_name"] = screenNames.joinWithSeparator(",")
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
@@ -536,13 +536,11 @@ public extension Swifter {
             }, failure: failure)
     }
     
-    public func getFriendshipsLookupWithIDs(ids: [Int], success: ((friendships: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        let path = "followers/lookup.json"
+    public func getFriendshipsLookupWithIDs(ids: [String], success: ((friendships: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+        let path = "friendships/lookup.json"
         
         var parameters = Dictionary<String, Any>()
-
-        let idStrings = ids.map { String($0) }
-        parameters["id"] = join(",", idStrings)
+        parameters["user_id"] = ids.joinWithSeparator(",")
         
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in

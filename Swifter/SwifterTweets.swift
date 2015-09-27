@@ -123,7 +123,7 @@ public extension Swifter {
     /*
     POST	statuses/update
 
-    Updates the authenticating user's current status, also known as tweeting. To upload an image to accompany the tweet, use POST statuses/update_with_media.
+    Updates the authenticating user's current status, also known as tweeting. To upload an image to accompany the tweet, use POST media/upload.
 
     For each update attempt, the update text is compared with the authenticating user's recent tweets. Any attempt that would result in duplication will be blocked, resulting in a 403 error. Therefore, a user cannot submit the same status twice in a row.
 
@@ -142,11 +142,47 @@ public extension Swifter {
     - https://dev.twitter.com/notifications/multiple-media-entities-in-tweets
     - https://dev.twitter.com/docs/api/multiple-media-extended-entities
     */
-    public func postStatusUpdate(status: String, inReplyToStatusID: String? = nil, lat: Double? = nil, long: Double? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        var path: String = "statuses/update.json"
+    public func postStatusUpdate(status: String, inReplyToStatusID: String? = nil, lat: Double? = nil, long: Double? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, media_ids: [String]? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+        let path: String = "statuses/update.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["status"] = status
+
+        if inReplyToStatusID != nil {
+            parameters["in_reply_to_status_id"] = inReplyToStatusID!
+        }
+        if placeID != nil {
+            parameters["place_id"] = placeID!
+            parameters["display_coordinates"] = true
+        }
+        else if lat != nil && long != nil {
+            parameters["lat"] = lat!
+            parameters["long"] = long!
+            parameters["display_coordinates"] = true
+        }
+        if trimUser != nil {
+            parameters["trim_user"] = trimUser!
+        }
+        if media_ids != nil && media_ids?.count > 0 {
+            parameters["media_ids"] = media_ids!.joinWithSeparator(",")
+        }
+
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
+            json, response in
+
+            success?(status: json.object)
+            return
+
+            }, failure: failure)
+    }
+
+    public func postStatusUpdate(status: String, media: NSData, inReplyToStatusID: String? = nil, lat: Double? = nil, long: Double? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+        let path: String = "statuses/update_with_media.json"
+
+        var parameters = Dictionary<String, Any>()
+        parameters["status"] = status
+        parameters["media[]"] = media
+        parameters[Swifter.DataParameters.dataKey] = "media[]"
 
         if inReplyToStatusID != nil {
             parameters["in_reply_to_status_id"] = inReplyToStatusID!
@@ -173,31 +209,23 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func postStatusUpdate(status: String, media: NSData, inReplyToStatusID: String? = nil, lat: Double? = nil, long: Double? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        var path: String = "statuses/update_with_media.json"
+    /*
+    POST	media/upload
 
+    Upload media (images) to Twitter for use in a Tweet or Twitter-hosted Card. For uploading videos or for chunked image uploads (useful for lower bandwidth connections), see our chunked POST media/upload endpoint.
+
+    See:
+
+    - https://dev.twitter.com/rest/public/uploading-media
+    - https://dev.twitter.com/rest/reference/post/media/upload
+    */
+    public func postMedia(media: NSData, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+        let path: String = "media/upload.json"
         var parameters = Dictionary<String, Any>()
-        parameters["status"] = status
-        parameters["media[]"] = media
-        parameters[Swifter.DataParameters.dataKey] = "media[]"
+        parameters["media"] = media
+        parameters[Swifter.DataParameters.dataKey] = "media"
 
-        if inReplyToStatusID != nil {
-            parameters["in_reply_to_status_id"] = inReplyToStatusID!
-        }
-        if placeID != nil {
-            parameters["place_id"] = placeID!
-            parameters["display_coordinates"] = true
-        }
-        else if lat != nil && long != nil {
-            parameters["lat"] = lat!
-            parameters["long"] = long!
-            parameters["display_coordinates"] = true
-        }
-        if trimUser != nil {
-            parameters["trim_user"] = trimUser!
-        }
-
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
+        self.postJSONWithPath(path, baseURL: self.uploadURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
             success?(status: json.object)
@@ -322,7 +350,7 @@ public extension Swifter {
 
     This method offers similar data to GET statuses/retweets/:id and replaces API v1's GET statuses/:id/retweeted_by/ids method.
     */
-    public func getStatusesRetweetersWithID(id: String, cursor: Int? = nil, stringifyIDs: Bool? = nil, success: ((ids: [JSONValue]?, previousCursor: Int?, nextCursor: Int?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getStatusesRetweetersWithID(id: String, cursor: String? = nil, stringifyIDs: Bool? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/retweeters/ids.json"
 
         var parameters = Dictionary<String, Any>()
@@ -332,13 +360,13 @@ public extension Swifter {
             parameters["cursor"] = cursor!
         }
         if stringifyIDs != nil {
-            parameters["stringify_ids"] = cursor!
+            parameters["stringify_ids"] = stringifyIDs!
         }
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
 
-            success?(ids: json["ids"].array, previousCursor: json["previous_cursor"].integer, nextCursor: json["next_cursor"].integer)
+            success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
     }
@@ -352,7 +380,7 @@ public extension Swifter {
         let path = "statuses/lookup.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["id"] = join(",", tweetIDs)
+        parameters["id"] = tweetIDs.joinWithSeparator(",")
 
         if includeEntities != nil {
             parameters["include_entities"] = includeEntities!
