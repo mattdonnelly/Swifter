@@ -159,7 +159,7 @@ public extension Swifter {
 
     Streams messages for a single user, as described in User streams https://dev.twitter.com/docs/streaming-apis/streams/user
     */
-    public func getUserStreamDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, includeMessagesFromFollowedAccounts: Bool? = nil, includeReplies: Bool? = nil, track: [String]? = nil, locations: [String]? = nil, stringifyFriendIDs: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
+    public func getUserStreamDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, includeMessagesFromUserOnly: Bool? = nil, includeReplies: Bool? = nil, track: [String]? = nil, locations: [String]? = nil, stringifyFriendIDs: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         let path = "user.json"
 
         var parameters = Dictionary<String, Any>()
@@ -169,8 +169,8 @@ public extension Swifter {
         if stallWarnings != nil {
             parameters["stall_warnings"] = stallWarnings!
         }
-        if includeMessagesFromFollowedAccounts != nil {
-            if includeMessagesFromFollowedAccounts! {
+        if includeMessagesFromUserOnly != nil {
+            if includeMessagesFromUserOnly! {
                 parameters["with"] = "user"
             }
         }
