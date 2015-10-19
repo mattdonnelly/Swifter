@@ -60,7 +60,7 @@ public extension Swifter {
     public func getFriendsIDsWithID(id: String, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friends/ids.json"
         
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["id"] = id
         
         if cursor != nil {
@@ -84,7 +84,7 @@ public extension Swifter {
     public func getFriendsIDsWithScreenName(screenName: String, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friends/ids.json"
         
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
         
         if cursor != nil {
@@ -117,7 +117,7 @@ public extension Swifter {
     public func getFollowersIDsWithID(id: String, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "followers/ids.json"
         
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["id"] = id
         
         if cursor != nil {
@@ -141,7 +141,7 @@ public extension Swifter {
     public func getFollowersIDsWithScreenName(screenName: String, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "followers/ids.json"
         
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
         
         if cursor != nil {
@@ -170,7 +170,7 @@ public extension Swifter {
     public func getFriendshipsIncomingWithCursor(cursor: String? = nil, stringifyIDs: String? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/incoming.json"
         
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if cursor != nil {
             parameters["cursor"] = cursor!
         }
@@ -194,7 +194,7 @@ public extension Swifter {
     public func getFriendshipsOutgoingWithCursor(cursor: String? = nil, stringifyIDs: String? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/outgoing.json"
         
-        var parameters = Dictionary<String, AnyObject>()
+        var parameters = Dictionary<String, Any>()
         if cursor != nil {
             parameters["cursor"] = cursor!
         }
