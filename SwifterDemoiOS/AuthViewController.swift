@@ -79,7 +79,7 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
             swifter.authorizeWithCallbackURL(url, success: { (accessToken, response) -> Void in
                 self.fetchTwitterHomeStream()
                 }, failure: { (error) -> Void in
-                    failureHandler
+                    self.alertWithTitle("Error", message: error.localizedDescription)
                 }, openQueryURL: { (url) -> Void in
                     if #available(iOS 9.0, *) {
                         let webView = SFSafariViewController(URL: url)
