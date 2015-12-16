@@ -1647,7 +1647,7 @@ public extension Swifter {
             parameters["cursor"] = cursor!
         }
         
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             json, response in
             
             success?(lists: json["lists"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
