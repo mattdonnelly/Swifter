@@ -271,15 +271,15 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     class func responseErrorCode(data: NSData) -> Int? {
         do {
             let json: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
-            if let dictionary = json as? NSDictionary {
-                if let errors = dictionary["errors"] as? [NSDictionary] {
-                    if let code = errors.first?["code"] as? Int {
-                        return code
-                    }
-                }
+            
+            if let
+                dictionary = json as? NSDictionary,
+                errors = dictionary["errors"] as? [NSDictionary],
+                code = errors.first?["code"] as? Int {
+                return code
             }
-        } catch _ {
-        }
+        } catch _ { }
+        
         return nil
     }
 
