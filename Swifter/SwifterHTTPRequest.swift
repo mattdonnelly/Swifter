@@ -289,6 +289,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         let description: String
         
         // http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
+        // https://dev.twitter.com/overview/api/response-codes
         switch(status) {
         case 400:	description = "Bad Request"
         case 401:	description = "Unauthorized"
@@ -308,6 +309,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         case 415:	description = "Unsupported Media Type"
         case 416:	description = "Requested Range Not Satisfiable"
         case 417:	description = "Expectation Failed"
+        case 420:	description = "Enhance Your Calm"
         case 422:	description = "Unprocessable Entity"
         case 423:	description = "Locked"
         case 424:	description = "Failed Dependency"
