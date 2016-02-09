@@ -169,9 +169,9 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         dispatch_async(dispatch_get_main_queue()) {
             self.connection = NSURLConnection(request: self.request!, delegate: self)
             self.connection.start()
-
+            
             #if os(iOS)
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+                UIApplication.safeSharedApplication()?.networkActivityIndicatorVisible = true
             #endif
         }
     }
@@ -226,7 +226,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
     public func connection(connection: NSURLConnection, didFailWithError error: NSError) {
         #if os(iOS)
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            UIApplication.safeSharedApplication()?.networkActivityIndicatorVisible = false
         #endif
 
         self.failureHandler?(error: error)
@@ -234,7 +234,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
     public func connectionDidFinishLoading(connection: NSURLConnection) {
         #if os(iOS)
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            UIApplication.safeSharedApplication()?.networkActivityIndicatorVisible = false
         #endif
 
         if self.response.statusCode >= 400 {

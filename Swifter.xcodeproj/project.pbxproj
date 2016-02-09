@@ -78,6 +78,8 @@
 		8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
 		8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
 		A1DD65C51B618D7E0070E6FC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */; };
+		BF0CED0F1C6A2B52003169D9 /* UIApplication+Swifter.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0CED0D1C6A2B52003169D9 /* UIApplication+Swifter.h */; };
+		BF0CED101C6A2B52003169D9 /* UIApplication+Swifter.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0CED0E1C6A2B52003169D9 /* UIApplication+Swifter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +154,8 @@
 		8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAccountsClient.swift; sourceTree = "<group>"; };
 		8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterCredential.swift; sourceTree = "<group>"; };
 		A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "../Swifter/Launch Screen.storyboard"; sourceTree = "<group>"; };
+		BF0CED0D1C6A2B52003169D9 /* UIApplication+Swifter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+Swifter.h"; sourceTree = "<group>"; };
+		BF0CED0E1C6A2B52003169D9 /* UIApplication+Swifter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+Swifter.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,6 +304,8 @@
 				8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */,
 				8B552D29194643CF0052EB86 /* NSURL+Swifter.swift */,
 				8B9F514A1944A8DC00894629 /* String+Swifter.swift */,
+				BF0CED0D1C6A2B52003169D9 /* UIApplication+Swifter.h */,
+				BF0CED0E1C6A2B52003169D9 /* UIApplication+Swifter.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -312,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B9F51551944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */,
+				BF0CED0F1C6A2B52003169D9 /* UIApplication+Swifter.h in Headers */,
 				8B5EFF15195F09F600B354F9 /* Swifter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,6 +531,7 @@
 				8B33CA3F19587C6D00739FCB /* JSON.swift in Sources */,
 				8BCF432C1947CED700E63301 /* SwifterLists.swift in Sources */,
 				8BA50EC71953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */,
+				BF0CED101C6A2B52003169D9 /* UIApplication+Swifter.m in Sources */,
 				8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
 				8BF1D6791948839800E3AA64 /* SwifterPlaces.swift in Sources */,
 				8BC32D3D1955EEE100FF75A0 /* SwifterTrends.swift in Sources */,
@@ -750,6 +758,7 @@
 		8B9F51051944A5AB00894629 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -767,6 +776,7 @@
 		8B9F51061944A5AB00894629 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

@@ -67,7 +67,11 @@ public extension Swifter {
                 openQueryURL?(url: queryURL!)
             } else {
                 #if os(iOS)
-                    UIApplication.sharedApplication().openURL(queryURL!)
+                    guard let application = UIApplication.safeSharedApplication() else {
+                        NSLog("Unable to get a UIApplication instance. Are you running in an app extension?")
+                        return
+                    }
+                    application.safeOpenURL(queryURL!)
                 #else
                     NSWorkspace.sharedWorkspace().openURL(queryURL!)
                 #endif

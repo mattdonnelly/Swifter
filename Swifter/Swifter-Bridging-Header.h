@@ -24,3 +24,9 @@
 //
 
 #import <CommonCrypto/CommonCrypto.h>
+
+#if TARGET_OS_IOS || TARGET_IPHONE_SIMULATOR
+
+#import "UIApplication+Swifter.h"
+
+#endif
