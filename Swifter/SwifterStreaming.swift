@@ -38,7 +38,7 @@ public extension Swifter {
 
     At least one predicate parameter (follow, locations, or track) must be specified.
     */
-    public func postStatusesFilterWithFollow(follow: [String]? = nil, track: [String]? = nil, locations: [String]? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>? ) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
+    public func postStatusesFilterWithFollow(follow: [String]? = nil, track: [String]? = nil, locations: [String]? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: ((status: Dictionary<String, JSONValue>? ) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         assert(follow != nil || track != nil || locations != nil, "At least one predicate parameter (follow, locations, or track) must be specified")
 
         let path = "statuses/filter.json"
@@ -58,6 +58,12 @@ public extension Swifter {
         }
         if stallWarnings != nil {
             parameters["stall_warnings"] = stallWarnings!
+        }
+        if filter_level != nil {
+            parameters["filter_level"] = filter_level!
+        }
+        if language != nil {
+            parameters["language"] = language!.joinWithSeparator(",")
         }
 
         return self.postJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
@@ -84,7 +90,7 @@ public extension Swifter {
 
     Returns a small random sample of all public statuses. The Tweets returned by the default access level are the same, so if two different clients connect to this endpoint, they will see the same Tweets.
     */
-    public func getStatusesSampleDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
+    public func getStatusesSampleDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         let path = "statuses/sample.json"
 
         var parameters = Dictionary<String, Any>()
@@ -93,6 +99,12 @@ public extension Swifter {
         }
         if stallWarnings != nil {
             parameters["stall_warnings"] = stallWarnings!
+        }
+        if filter_level != nil {
+            parameters["filter_level"] = filter_level!
+        }
+        if language != nil {
+            parameters["language"] = language!.joinWithSeparator(",")
         }
 
         return self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
@@ -121,7 +133,7 @@ public extension Swifter {
 
     Returns all public statuses. Few applications require this level of access. Creative use of a combination of other resources and various access levels can satisfy nearly every application use case.
     */
-    public func getStatusesFirehose(count: Int? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
+    public func getStatusesFirehose(count: Int? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         let path = "statuses/firehose.json"
 
         var parameters = Dictionary<String, Any>()
@@ -133,6 +145,12 @@ public extension Swifter {
         }
         if stallWarnings != nil {
             parameters["stall_warnings"] = stallWarnings!
+        }
+        if filter_level != nil {
+            parameters["filter_level"] = filter_level!
+        }
+        if language != nil {
+            parameters["language"] = language!.joinWithSeparator(",")
         }
 
         return self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
@@ -159,7 +177,7 @@ public extension Swifter {
 
     Streams messages for a single user, as described in User streams https://dev.twitter.com/docs/streaming-apis/streams/user
     */
-    public func getUserStreamDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, includeMessagesFromUserOnly: Bool? = nil, includeReplies: Bool? = nil, track: [String]? = nil, locations: [String]? = nil, stringifyFriendIDs: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
+    public func getUserStreamDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, includeMessagesFromUserOnly: Bool? = nil, includeReplies: Bool? = nil, track: [String]? = nil, locations: [String]? = nil, stringifyFriendIDs: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         let path = "user.json"
 
         var parameters = Dictionary<String, Any>()
@@ -183,6 +201,12 @@ public extension Swifter {
         }
         if stringifyFriendIDs != nil {
             parameters["stringify_friend_ids"] = stringifyFriendIDs!
+        }
+        if filter_level != nil {
+            parameters["filter_level"] = filter_level!
+        }
+        if language != nil {
+            parameters["language"] = language!.joinWithSeparator(",")
         }
 
         return self.getJSONWithPath(path, baseURL: self.userStreamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
