@@ -169,15 +169,11 @@ public extension Swifter {
         if stallWarnings != nil {
             parameters["stall_warnings"] = stallWarnings!
         }
-        if includeMessagesFromUserOnly != nil {
-            if includeMessagesFromUserOnly! {
-                parameters["with"] = "user"
-            }
+        if includeMessagesFromUserOnly != nil && includeMessagesFromUserOnly! {
+            parameters["with"] = "user"
         }
-        if includeReplies != nil {
-            if includeReplies! {
-                parameters["replies"] = "all"
-            }
+        if includeReplies != nil && includeReplies! {
+            parameters["replies"] = "all"
         }
         if track != nil {
             parameters["track"] = track!.joinWithSeparator(",")
@@ -223,15 +219,11 @@ public extension Swifter {
         if stallWarnings != nil {
             parameters["stall_warnings"] = stallWarnings!
         }
-        if restrictToUserMessages != nil {
-            if restrictToUserMessages! {
-                parameters["with"] = "user"
-            }
+        if restrictToUserMessages != nil && restrictToUserMessages! {
+            parameters["with"] = "user"
         }
-        if includeReplies != nil {
-            if includeReplies! {
-                parameters["replies"] = "all"
-            }
+        if includeReplies != nil && includeReplies! {
+            parameters["replies"] = "all"
         }
         if stringifyFriendIDs != nil {
             parameters["stringify_friend_ids"] = stringifyFriendIDs!
