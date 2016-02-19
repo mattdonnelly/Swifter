@@ -42,8 +42,7 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
     }
 
     @IBAction func didTouchUpInsideLoginButton(sender: AnyObject) {
-        let failureHandler: ((NSError) -> Void) = {
-            error in
+        let failureHandler: ((NSError) -> Void) = { error in
 
             self.alertWithTitle("Error", message: error.localizedDescription)
         }
@@ -53,56 +52,35 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
             let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
 
             // Prompt the user for permission to their twitter account stored in the phone's settings
-            accountStore.requestAccessToAccountsWithType(accountType, options: nil) {
-                granted, error in
+            accountStore.requestAccessToAccountsWithType(accountType, options: nil) { granted, error in
 
                 if granted {
                     let twitterAccounts = accountStore.accountsWithAccountType(accountType)
-
-                    if twitterAccounts?.count == 0
-                    {
+                    if twitterAccounts?.count == 0 {
                         self.alertWithTitle("Error", message: "There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
-                    }
-                    else {
+                    } else {
                         let twitterAccount = twitterAccounts[0] as! ACAccount
                         self.swifter = Swifter(account: twitterAccount)
                         self.fetchTwitterHomeStream()
                     }
-                }
-                else {
+                } else {
                     self.alertWithTitle("Error", message: error.localizedDescription)
                 }
             }
-        }
-        else {
+        } else {
             let url = NSURL(string: "swifter://success")!
-            swifter.authorizeWithCallbackURL(url, success: { (accessToken, response) -> Void in
-                self.fetchTwitterHomeStream()
-                }, failure: { (error) -> Void in
-                    self.alertWithTitle("Error", message: error.localizedDescription)
-                }, openQueryURL: { (url) -> Void in
-                    if #available(iOS 9.0, *) {
-                        let webView = SFSafariViewController(URL: url)
-                        webView.delegate = self
-                        self.presentViewController(webView, animated: true, completion: nil)
-                    } else {
-                        // Fallback on earlier versions
-                        UIApplication.sharedApplication().openURL(url)
-                    }
-                }, closeQueryURL: { () -> Void in
-                    self.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
-            })
+            swifter.authorizeWithCallbackURL(url, presentFromViewController: self, success: { accessToken, response in
+                    self.fetchTwitterHomeStream()
+                }, failure: failureHandler)
         }
     }
 
     func fetchTwitterHomeStream() {
-        let failureHandler: ((NSError) -> Void) = {
-            error in
+        let failureHandler: ((NSError) -> Void) = { error in
             self.alertWithTitle("Error", message: error.localizedDescription)
         }
         
-        self.swifter.getStatusesHomeTimelineWithCount(20, success: {
-            (statuses: [JSONValue]?) in
+        self.swifter.getStatusesHomeTimelineWithCount(20, success: { statuses in
                 
             // Successfully fetched timeline, so lets create and push the table view
             let tweetsViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
@@ -125,7 +103,6 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
     
     @available(iOS 9.0, *)
     func safariViewControllerDidFinish(controller: SFSafariViewController) {
-        NSNotificationCenter.defaultCenter().removeObserver(swifter, name: "SwifterCallbackNotificationName", object: nil)
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
 

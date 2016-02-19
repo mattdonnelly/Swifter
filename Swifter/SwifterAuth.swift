@@ -27,6 +27,7 @@ import Foundation
 
 #if os(iOS)
     import UIKit
+    import SafariServices
 #else
     import AppKit
 #endif
@@ -35,7 +36,13 @@ public extension Swifter {
 
     public typealias TokenSuccessHandler = (accessToken: SwifterCredential.OAuthAccessToken?, response: NSURLResponse) -> Void
 
-    public func authorizeWithCallbackURL(callbackURL: NSURL, success: TokenSuccessHandler?, failure: ((error: NSError) -> Void)? = nil, openQueryURL: ((url: NSURL) -> Void)?, closeQueryURL:(() -> Void)? = nil) {
+
+    /**
+        Begin Authorization with a Callback URL.
+        - Parameter presentFromViewController: The viewController used to present the SFSafariViewController.
+            The UIViewController must inherit SFSafariViewControllerDelegate
+    */
+    public func authorizeWithCallbackURL(callbackURL: NSURL, presentFromViewController presentingViewController: UIViewController? = nil, success: TokenSuccessHandler?, failure: ((error: NSError) -> Void)? = nil) {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: {
             token, response in
 
@@ -45,7 +52,7 @@ public extension Swifter {
                 notification in
 
                 NSNotificationCenter.defaultCenter().removeObserver(self)
-                closeQueryURL?()
+                presentingViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
                 let url = notification.userInfo![CallbackNotification.optionsURLKey] as! NSURL
 
                 let parameters = url.query!.parametersFromQueryString()
@@ -61,17 +68,23 @@ public extension Swifter {
                 })
 
             let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.apiURL)
-            let queryURL = NSURL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")
+            let queryURL = NSURL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
             
-            if openQueryURL != nil {
-                openQueryURL?(url: queryURL!)
-            } else {
-                #if os(iOS)
-                    UIApplication.sharedApplication().openURL(queryURL!)
-                #else
-                    NSWorkspace.sharedWorkspace().openURL(queryURL!)
-                #endif
-            }
+            #if os(iOS)
+                if #available (iOS 9.0, *) {
+                    if let viewControllerDelegate = presentingViewController as? SFSafariViewControllerDelegate {
+                        let webView = SFSafariViewController(URL: queryURL)
+                        webView.delegate = viewControllerDelegate
+                        presentingViewController?.presentViewController(webView, animated: true, completion: nil)
+                    } else {
+                        UIApplication.sharedApplication().openURL(queryURL)
+                    }
+                } else {
+                    UIApplication.sharedApplication().openURL(queryURL)
+                }
+            #else
+                NSWorkspace.sharedWorkspace().openURL(queryURL)
+            #endif
             
             }, failure: failure)
     }
