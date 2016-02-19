@@ -38,7 +38,7 @@ public extension Swifter {
 
     At least one predicate parameter (follow, locations, or track) must be specified.
     */
-  public func postStatusesFilterWithFollow(follow: [String]? = nil, track: [String]? = nil, locations: [String]? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: ((status: Dictionary<String, JSONValue>? ) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
+    public func postStatusesFilterWithFollow(follow: [String]? = nil, track: [String]? = nil, locations: [String]? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: ((status: Dictionary<String, JSONValue>? ) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         assert(follow != nil || track != nil || locations != nil, "At least one predicate parameter (follow, locations, or track) must be specified")
 
         let path = "statuses/filter.json"
@@ -60,10 +60,10 @@ public extension Swifter {
             parameters["stall_warnings"] = stallWarnings!
         }
         if filter_level != nil {
-          parameters["filter_level"] = filter_level!
+            parameters["filter_level"] = filter_level!
         }
         if language != nil {
-          parameters["language"] = language!.joinWithSeparator(",")
+            parameters["language"] = language!.joinWithSeparator(",")
         }
 
         return self.postJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
@@ -101,10 +101,10 @@ public extension Swifter {
             parameters["stall_warnings"] = stallWarnings!
         }
         if filter_level != nil {
-          parameters["filter_level"] = filter_level!
+            parameters["filter_level"] = filter_level!
         }
         if language != nil {
-          parameters["language"] = language!.joinWithSeparator(",")
+            parameters["language"] = language!.joinWithSeparator(",")
         }
 
         return self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
@@ -147,10 +147,10 @@ public extension Swifter {
             parameters["stall_warnings"] = stallWarnings!
         }
         if filter_level != nil {
-          parameters["filter_level"] = filter_level!
+            parameters["filter_level"] = filter_level!
         }
         if language != nil {
-          parameters["language"] = language!.joinWithSeparator(",")
+            parameters["language"] = language!.joinWithSeparator(",")
         }
 
         return self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
@@ -207,10 +207,10 @@ public extension Swifter {
             parameters["stringify_friend_ids"] = stringifyFriendIDs!
         }
         if filter_level != nil {
-          parameters["filter_level"] = filter_level!
+            parameters["filter_level"] = filter_level!
         }
         if language != nil {
-          parameters["language"] = language!.joinWithSeparator(",")
+            parameters["language"] = language!.joinWithSeparator(",")
         }
 
         return self.getJSONWithPath(path, baseURL: self.userStreamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
