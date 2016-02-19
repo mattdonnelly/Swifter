@@ -271,70 +271,75 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     class func responseErrorCode(data: NSData) -> Int? {
         do {
             let json: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
-            if let dictionary = json as? NSDictionary {
-                if let errors = dictionary["errors"] as? [NSDictionary] {
-                    if let code = errors.first?["code"] as? Int {
-                        return code
-                    }
-                }
+            
+            if let
+                dictionary = json as? NSDictionary,
+                errors = dictionary["errors"] as? [NSDictionary],
+                code = errors.first?["code"] as? Int {
+                return code
             }
-        } catch _ {
-        }
+        } catch _ { }
+        
         return nil
     }
 
     class func descriptionForHTTPStatus(status: Int, responseString: String) -> String {
         var s = "HTTP Status \(status)"
-
-        var description: String?
-        // http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
-        if status == 400 { description = "Bad Request" }
-        if status == 401 { description = "Unauthorized" }
-        if status == 402 { description = "Payment Required" }
-        if status == 403 { description = "Forbidden" }
-        if status == 404 { description = "Not Found" }
-        if status == 405 { description = "Method Not Allowed" }
-        if status == 406 { description = "Not Acceptable" }
-        if status == 407 { description = "Proxy Authentication Required" }
-        if status == 408 { description = "Request Timeout" }
-        if status == 409 { description = "Conflict" }
-        if status == 410 { description = "Gone" }
-        if status == 411 { description = "Length Required" }
-        if status == 412 { description = "Precondition Failed" }
-        if status == 413 { description = "Payload Too Large" }
-        if status == 414 { description = "URI Too Long" }
-        if status == 415 { description = "Unsupported Media Type" }
-        if status == 416 { description = "Requested Range Not Satisfiable" }
-        if status == 417 { description = "Expectation Failed" }
-        if status == 422 { description = "Unprocessable Entity" }
-        if status == 423 { description = "Locked" }
-        if status == 424 { description = "Failed Dependency" }
-        if status == 425 { description = "Unassigned" }
-        if status == 426 { description = "Upgrade Required" }
-        if status == 427 { description = "Unassigned" }
-        if status == 428 { description = "Precondition Required" }
-        if status == 429 { description = "Too Many Requests" }
-        if status == 430 { description = "Unassigned" }
-        if status == 431 { description = "Request Header Fields Too Large" }
-        if status == 432 { description = "Unassigned" }
-        if status == 500 { description = "Internal Server Error" }
-        if status == 501 { description = "Not Implemented" }
-        if status == 502 { description = "Bad Gateway" }
-        if status == 503 { description = "Service Unavailable" }
-        if status == 504 { description = "Gateway Timeout" }
-        if status == 505 { description = "HTTP Version Not Supported" }
-        if status == 506 { description = "Variant Also Negotiates" }
-        if status == 507 { description = "Insufficient Storage" }
-        if status == 508 { description = "Loop Detected" }
-        if status == 509 { description = "Unassigned" }
-        if status == 510 { description = "Not Extended" }
-        if status == 511 { description = "Network Authentication Required" }
         
-        if description != nil {
-            s = s + ": " + description! + ", Response: " + responseString
+        let description: String
+        
+        // http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
+        // https://dev.twitter.com/overview/api/response-codes
+        switch(status) {
+        case 400:	description = "Bad Request"
+        case 401:	description = "Unauthorized"
+        case 402:	description = "Payment Required"
+        case 403:	description = "Forbidden"
+        case 404:	description = "Not Found"
+        case 405:	description = "Method Not Allowed"
+        case 406:	description = "Not Acceptable"
+        case 407:	description = "Proxy Authentication Required"
+        case 408:	description = "Request Timeout"
+        case 409:	description = "Conflict"
+        case 410:	description = "Gone"
+        case 411:	description = "Length Required"
+        case 412:	description = "Precondition Failed"
+        case 413:	description = "Payload Too Large"
+        case 414:	description = "URI Too Long"
+        case 415:	description = "Unsupported Media Type"
+        case 416:	description = "Requested Range Not Satisfiable"
+        case 417:	description = "Expectation Failed"
+        case 420:	description = "Enhance Your Calm"
+        case 422:	description = "Unprocessable Entity"
+        case 423:	description = "Locked"
+        case 424:	description = "Failed Dependency"
+        case 425:	description = "Unassigned"
+        case 426:	description = "Upgrade Required"
+        case 427:	description = "Unassigned"
+        case 428:	description = "Precondition Required"
+        case 429:	description = "Too Many Requests"
+        case 430:	description = "Unassigned"
+        case 431:	description = "Request Header Fields Too Large"
+        case 432:	description = "Unassigned"
+        case 500:	description = "Internal Server Error"
+        case 501:	description = "Not Implemented"
+        case 502:	description = "Bad Gateway"
+        case 503:	description = "Service Unavailable"
+        case 504:	description = "Gateway Timeout"
+        case 505:	description = "HTTP Version Not Supported"
+        case 506:	description = "Variant Also Negotiates"
+        case 507:	description = "Insufficient Storage"
+        case 508:	description = "Loop Detected"
+        case 509:	description = "Unassigned"
+        case 510:	description = "Not Extended"
+        case 511:	description = "Network Authentication Required"
+        default:    description = ""
+        }
+        
+        if !description.isEmpty {
+            s = s + ": " + description + ", Response: " + responseString
         }
         
         return s
     }
-
 }
