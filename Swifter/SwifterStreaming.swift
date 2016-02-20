@@ -66,23 +66,16 @@ public extension Swifter {
             parameters["language"] = language!.joinWithSeparator(",")
         }
 
-        return self.postJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
-            json, response in
-
+        return self.postJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
                 stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
-            }
-            else {
+            } else {
                 progress?(status: json.object)
             }
 
-            }, success: {
-                json, response in
-
+            }, success: { json, _ in
                 progress?(status: json.object)
-                return
-
-            }, failure: failure)
+                }, failure: failure)
     }
 
     /*
@@ -107,23 +100,16 @@ public extension Swifter {
             parameters["language"] = language!.joinWithSeparator(",")
         }
 
-        return self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
-            json, response in
-
+        return self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
                 stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
-            }
-            else {
+            } else {
                 progress?(status: json.object)
             }
 
-            }, success: {
-                json, response in
-
+            }, success: { json, _ in
                 progress?(status: json.object)
-                return
-
-            }, failure: failure)
+                }, failure: failure)
     }
 
     /*
@@ -153,23 +139,16 @@ public extension Swifter {
             parameters["language"] = language!.joinWithSeparator(",")
         }
 
-        return self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
-            json, response in
-
+        return self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
                 stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
-            }
-            else {
+            } else {
                 progress?(status: json.object)
             }
 
-            }, success: {
-                json, response in
-
+            }, success: { json, _ in
                 progress?(status: json.object)
-                return
-
-            }, failure: failure)
+                }, failure: failure)
     }
 
     /*
@@ -209,23 +188,16 @@ public extension Swifter {
             parameters["language"] = language!.joinWithSeparator(",")
         }
 
-        return self.getJSONWithPath(path, baseURL: self.userStreamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
-            json, response in
-
+        return self.getJSONWithPath(path, baseURL: self.userStreamURL, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
                 stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
-            }
-            else {
+            } else {
                 progress?(status: json.object)
             }
 
-            }, success: {
-                json, response in
-
+            }, success: { json, _ in
                 progress?(status: json.object)
-                return
-
-            }, failure: failure)
+                }, failure: failure)
     }
 
     /*
@@ -253,17 +225,10 @@ public extension Swifter {
             parameters["stringify_friend_ids"] = stringifyFriendIDs!
         }
 
-        return self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, uploadProgress: nil, downloadProgress: {
-            json, response in
-
+        return self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, downloadProgress: { json, _ in
             stallWarningHandler?(code: json["warning"]["code"].string, message: json["warning"]["message"].string, percentFull: json["warning"]["percent_full"].integer)
-
-            }, success: {
-                json, response in
-                
+            }, success: { json, _ in
                 progress?(status: json.object)
-                return
-                
             }, failure: failure)
     }
     

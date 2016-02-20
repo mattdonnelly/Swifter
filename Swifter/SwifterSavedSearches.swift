@@ -35,12 +35,8 @@ public extension Swifter {
     public func getSavedSearchesListWithSuccess(success: ((savedSearches: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "saved_searches/list.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
             success?(savedSearches: json.array)
-            return
-
             }, failure: failure)
     }
 
@@ -52,12 +48,8 @@ public extension Swifter {
     public func getSavedSearchesShowWithID(id: String, success: ((savedSearch: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "saved_searches/show/\(id).json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
             success?(savedSearch: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -72,12 +64,8 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["query"] = query
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(savedSearch: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -89,12 +77,8 @@ public extension Swifter {
     public func postSavedSearchesDestroyWithID(id: String, success: ((savedSearch: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "saved_searches/destroy/\(id).json"
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
             success?(savedSearch: json.object)
-            return
-            
             }, failure: failure)
     }
     

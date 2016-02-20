@@ -35,12 +35,8 @@ public extension Swifter {
     public func getGeoIDWithPlaceID(placeID: String, success: ((place: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "geo/id/\(placeID).json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
             success?(place: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -71,12 +67,8 @@ public extension Swifter {
             parameters["callback"] = callback!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(place: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -127,12 +119,8 @@ public extension Swifter {
             parameters["callback"] = callback!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(places: json.array)
-            return
-
             }, failure: failure)
     }
 
@@ -163,12 +151,8 @@ public extension Swifter {
             parameters["callback"] = callback!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-            
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(places: json.array)
-            return
-            
             }, failure: failure)
     }
     

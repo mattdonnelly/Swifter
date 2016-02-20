@@ -65,9 +65,7 @@ public extension Swifter {
             parameters["callback"] = callback!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             switch (json["statuses"].array, json["search_metadata"].object) {
             case (let statuses, let searchMetadata):
                 success?(statuses: statuses, searchMetadata: searchMetadata)

@@ -38,12 +38,8 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -53,12 +49,8 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
-            return
-
             }, failure: failure)
     }
     

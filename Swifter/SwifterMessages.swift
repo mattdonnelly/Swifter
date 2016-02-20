@@ -52,12 +52,8 @@ public extension Swifter {
             parameters["skip_status"] = skipStatus!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(messages: json.array)
-            return
-
             }, failure: failure)
     }
 
@@ -86,12 +82,8 @@ public extension Swifter {
             parameters["include_entities"] = includeEntities!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(messages: json.array)
-            return
-
             }, failure: failure)
     }
 
@@ -106,12 +98,8 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(messages: json.array)
-            return
-
             }, failure: failure)
     }
 
@@ -130,12 +118,8 @@ public extension Swifter {
             parameters["include_entities"] = includeEntities!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(messages: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -151,12 +135,8 @@ public extension Swifter {
         parameters["user_id"] = userID
         parameters["text"] = text
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-            
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(statuses: json.object)
-            return
-            
             }, failure: failure)
     }
     

@@ -48,12 +48,9 @@ public extension Swifter {
             parameters["max_id"] = maxID!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
 
             success?(statuses: json.array)
-            return
-
             }, failure: failure)
     }
 
@@ -73,12 +70,8 @@ public extension Swifter {
             parameters["max_id"] = maxID!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(statuses: json.array)
-            return
-
             }, failure: failure)
     }
 
@@ -98,12 +91,8 @@ public extension Swifter {
             parameters["max_id"] = maxID!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(statuses: json.array)
-            return
-
             }, failure: failure)
     }
 
@@ -124,12 +113,8 @@ public extension Swifter {
             parameters["include_entities"] = includeEntities!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(status: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -150,12 +135,8 @@ public extension Swifter {
             parameters["include_entities"] = includeEntities!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-            
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(status: json.object)
-            return
-            
             }, failure: failure)
     }
     
