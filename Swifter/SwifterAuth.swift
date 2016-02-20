@@ -33,78 +33,94 @@ import Foundation
 #endif
 
 public extension Swifter {
-
-    public typealias TokenSuccessHandler = (accessToken: SwifterCredential.OAuthAccessToken?, response: NSURLResponse) -> Void
-
-    /**
-        Begin Authorization with a Callback URL.
-        - Parameter presentFromViewController: The viewController used to present the SFSafariViewController.
-            The UIViewController must inherit SFSafariViewControllerDelegate
-    */
     
-    public func authorizeWithCallbackURL(callbackURL: NSURL, presentFromViewController presentingViewController: UIViewController? = nil, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
-        self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: {
-            token, response in
-
+    public typealias TokenSuccessHandler = (accessToken: SwifterCredential.OAuthAccessToken?, response: NSURLResponse) -> Void
+    
+    /**
+     Begin Authorization with a Callback URL.
+     - OS X only
+     */
+    #if os(OSX)
+    public func authorizeWithCallbackURL(callbackURL: NSURL, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
+        self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: { token, response in
             var requestToken = token!
-
-            NSNotificationCenter.defaultCenter().addObserverForName(CallbackNotification.notificationName, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock:{
-                notification in
-
+            
+            NSNotificationCenter.defaultCenter().addObserverForName(CallbackNotification.notificationName, object: nil, queue: NSOperationQueue.mainQueue()) { notification in
+                NSNotificationCenter.defaultCenter().removeObserver(self)
+                let url = notification.userInfo![CallbackNotification.optionsURLKey] as! NSURL
+                let parameters = url.query!.parametersFromQueryString()
+                requestToken.verifier = parameters["oauth_verifier"]
+                
+                self.postOAuthAccessTokenWithRequestToken(requestToken, success: { accessToken, response in
+                    self.client.credential = SwifterCredential(accessToken: accessToken!)
+                    success?(accessToken: accessToken!, response: response)
+                    }, failure: failure)
+            }
+            
+            let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.apiURL)
+            let queryURL = NSURL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
+            NSWorkspace.sharedWorkspace().openURL(queryURL)
+        }, failure: failure)
+    }
+    #endif
+    
+    /**
+     Begin Authorization with a Callback URL
+     
+     - Parameter presentFromViewController: The viewController used to present the SFSafariViewController.
+     The UIViewController must inherit SFSafariViewControllerDelegate
+     
+     */
+    
+    #if os(iOS)
+    public func authorizeWithCallbackURL(callbackURL: NSURL, presentFromViewController presentingViewController: UIViewController? , success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
+        self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: { token, response in
+            var requestToken = token!
+            
+            NSNotificationCenter.defaultCenter().addObserverForName(CallbackNotification.notificationName, object: nil, queue: NSOperationQueue.mainQueue()) { notification in
                 NSNotificationCenter.defaultCenter().removeObserver(self)
                 presentingViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
                 let url = notification.userInfo![CallbackNotification.optionsURLKey] as! NSURL
-
+                
                 let parameters = url.query!.parametersFromQueryString()
                 requestToken.verifier = parameters["oauth_verifier"]
-
-                self.postOAuthAccessTokenWithRequestToken(requestToken, success: {
-                    accessToken, response in
-
+                
+                self.postOAuthAccessTokenWithRequestToken(requestToken, success: { accessToken, response in
                     self.client.credential = SwifterCredential(accessToken: accessToken!)
                     success?(accessToken: accessToken!, response: response)
-
                     }, failure: failure)
-                })
-
+            }
+            
             let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.apiURL)
             let queryURL = NSURL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
             
-            #if os(iOS)
-                if #available (iOS 9.0, *) {
-                    if let viewControllerDelegate = presentingViewController as? SFSafariViewControllerDelegate {
-                        let webView = SFSafariViewController(URL: queryURL)
-                        webView.delegate = viewControllerDelegate
-                        presentingViewController?.presentViewController(webView, animated: true, completion: nil)
-                    } else {
-                        UIApplication.sharedApplication().openURL(queryURL)
-                    }
-                } else {
-                    UIApplication.sharedApplication().openURL(queryURL)
-                }
-            #else
-                NSWorkspace.sharedWorkspace().openURL(queryURL)
-            #endif
-            
-            }, failure: failure)
+            if #available(iOS 9.0, *) , let delegate = presentingViewController as? SFSafariViewControllerDelegate {
+                let safariView = SFSafariViewController(URL: queryURL)
+                safariView.delegate = delegate
+                presentingViewController?.presentViewController(safariView, animated: true, completion: nil)
+            } else {
+                UIApplication.sharedApplication().openURL(queryURL)
+            }
+        }, failure: failure)
     }
-
+    #endif
+    
     public class func handleOpenURL(url: NSURL) {
         let notification = NSNotification(name: CallbackNotification.notificationName, object: nil,
-            userInfo: [CallbackNotification.optionsURLKey: url])
+                                                                                       userInfo: [CallbackNotification.optionsURLKey: url])
         NSNotificationCenter.defaultCenter().postNotification(notification)
     }
-
+    
     public func authorizeAppOnlyWithSuccess(success: TokenSuccessHandler?, failure: FailureHandler?) {
         self.postOAuth2BearerTokenWithSuccess({ json, response in
             if let tokenType = json["token_type"].string {
                 if tokenType == "bearer" {
                     let accessToken = json["access_token"].string
-
+                    
                     let credentialToken = SwifterCredential.OAuthAccessToken(key: accessToken!, secret: "")
-
+                    
                     self.client.credential = SwifterCredential(accessToken: credentialToken)
-
+                    
                     success?(accessToken: credentialToken, response: response)
                 } else {
                     let error = NSError(domain: "Swifter", code: SwifterError.appOnlyAuthenticationErrorCode, userInfo: [NSLocalizedDescriptionKey: "Cannot find bearer token in server response"]);
@@ -117,69 +133,69 @@ public extension Swifter {
                 let error = NSError(domain: SwifterError.domain, code: SwifterError.appOnlyAuthenticationErrorCode, userInfo: [NSLocalizedDescriptionKey: "Cannot find JSON dictionary in response"]);
                 failure?(error: error)
             }
-
-        }, failure: failure)
+            
+            }, failure: failure)
     }
-
+    
     public func postOAuth2BearerTokenWithSuccess(success: JSONSuccessHandler?, failure: FailureHandler?) {
         let path = "/oauth2/token"
-
+        
         var parameters = Dictionary<String, Any>()
         parameters["grant_type"] = "client_credentials"
-
+        
         self.jsonRequestWithPath(path, baseURL: self.apiURL, method: .POST, parameters: parameters, success: success, failure: failure)
     }
-
+    
     public func postOAuth2InvalidateBearerTokenWithSuccess(success: TokenSuccessHandler?, failure: FailureHandler?) {
         let path = "/oauth2/invalidate_token"
-
+        
         self.jsonRequestWithPath(path, baseURL: self.apiURL, method: .POST, parameters: [:], success: { json, response in
             if let accessToken = json["access_token"].string {
                 self.client.credential = nil
-
+                
                 let credentialToken = SwifterCredential.OAuthAccessToken(key: accessToken, secret: "")
-
+                
                 success?(accessToken: credentialToken, response: response)
             }
             else {
                 success?(accessToken: nil, response: response)
             }
-
+            
             }, failure: failure)
     }
-
+    
     public func postOAuthRequestTokenWithCallbackURL(callbackURL: NSURL, success: TokenSuccessHandler, failure: FailureHandler?) {
         let path = "/oauth/request_token"
-
+        
         var parameters =  Dictionary<String, Any>()
-
+        
         parameters["oauth_callback"] = callbackURL.absoluteString
-
+        
         self.client.post(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             data, response in
-
+            
             let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
             let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString as String!)
             success(accessToken: accessToken, response: response)
-
+            
             }, failure: failure)
     }
-
+    
     public func postOAuthAccessTokenWithRequestToken(requestToken: SwifterCredential.OAuthAccessToken, success: TokenSuccessHandler, failure: FailureHandler?) {
         if let verifier = requestToken.verifier {
             let path =  "/oauth/access_token"
-
+            
             var parameters = Dictionary<String, Any>()
             parameters["oauth_token"] = requestToken.key
             parameters["oauth_verifier"] = verifier
-
+            
             self.client.post(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
                 data, response in
-
+                
                 let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
                 let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString! as String)
                 success(accessToken: accessToken, response: response)
-
+                
                 }, failure: failure)
         }
         else {
@@ -188,5 +204,5 @@ public extension Swifter {
             failure?(error: error)
         }
     }
-
+    
 }
