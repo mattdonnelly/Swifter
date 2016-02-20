@@ -44,27 +44,13 @@ public extension Swifter {
         let path = "statuses/filter.json"
 
         var parameters = Dictionary<String, Any>()
-        if follow != nil {
-            parameters["follow"] = follow!.joinWithSeparator(",")
-        }
-        if track != nil {
-            parameters["track"] = track!.joinWithSeparator(",")
-        }
-        if locations != nil {
-            parameters["locations"] = locations!.joinWithSeparator(",")
-        }
-        if delimited != nil {
-            parameters["delimited"] = delimited!
-        }
-        if stallWarnings != nil {
-            parameters["stall_warnings"] = stallWarnings!
-        }
-        if filter_level != nil {
-            parameters["filter_level"] = filter_level!
-        }
-        if language != nil {
-            parameters["language"] = language!.joinWithSeparator(",")
-        }
+        parameters["delimited"] ??= delimited
+        parameters["stall_warnings"] ??= stallWarnings
+        parameters["filter_level"] ??= filter_level
+        parameters["language"] ??= language?.joinWithSeparator(",")
+        parameters["follow"] ??= follow?.joinWithSeparator(",")
+        parameters["track"] ??= track?.joinWithSeparator(",")
+        parameters["locations"] ??= locations?.joinWithSeparator(",")
 
         return self.postJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
@@ -87,18 +73,10 @@ public extension Swifter {
         let path = "statuses/sample.json"
 
         var parameters = Dictionary<String, Any>()
-        if delimited != nil {
-            parameters["delimited"] = delimited!
-        }
-        if stallWarnings != nil {
-            parameters["stall_warnings"] = stallWarnings!
-        }
-        if filter_level != nil {
-            parameters["filter_level"] = filter_level!
-        }
-        if language != nil {
-            parameters["language"] = language!.joinWithSeparator(",")
-        }
+        parameters["delimited"] ??= delimited
+        parameters["stall_warnings"] ??= stallWarnings
+        parameters["filter_level"] ??= filter_level
+        parameters["language"] ??= language?.joinWithSeparator(",")
 
         return self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
@@ -123,21 +101,11 @@ public extension Swifter {
         let path = "statuses/firehose.json"
 
         var parameters = Dictionary<String, Any>()
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if delimited != nil {
-            parameters["delimited"] = delimited!
-        }
-        if stallWarnings != nil {
-            parameters["stall_warnings"] = stallWarnings!
-        }
-        if filter_level != nil {
-            parameters["filter_level"] = filter_level!
-        }
-        if language != nil {
-            parameters["language"] = language!.joinWithSeparator(",")
-        }
+        parameters["count"] ??= count
+        parameters["delimited"] ??= delimited
+        parameters["stall_warnings"] ??= stallWarnings
+        parameters["filter_level"] ??= filter_level
+        parameters["language"] ??= language?.joinWithSeparator(",")
 
         return self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
@@ -156,37 +124,19 @@ public extension Swifter {
 
     Streams messages for a single user, as described in User streams https://dev.twitter.com/docs/streaming-apis/streams/user
     */
-    public func getUserStreamDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, includeMessagesFromUserOnly: Bool? = nil, includeReplies: Bool? = nil, track: [String]? = nil, locations: [String]? = nil, stringifyFriendIDs: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
+    public func getUserStreamDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, includeMessagesFromUserOnly: Bool = false, includeReplies: Bool = false, track: [String]? = nil, locations: [String]? = nil, stringifyFriendIDs: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         let path = "user.json"
 
         var parameters = Dictionary<String, Any>()
-        if delimited != nil {
-            parameters["delimited"] = delimited!
-        }
-        if stallWarnings != nil {
-            parameters["stall_warnings"] = stallWarnings!
-        }
-        if includeMessagesFromUserOnly != nil && includeMessagesFromUserOnly! {
-            parameters["with"] = "user"
-        }
-        if includeReplies != nil && includeReplies! {
-            parameters["replies"] = "all"
-        }
-        if track != nil {
-            parameters["track"] = track!.joinWithSeparator(",")
-        }
-        if locations != nil {
-            parameters["locations"] = locations!.joinWithSeparator(",")
-        }
-        if stringifyFriendIDs != nil {
-            parameters["stringify_friend_ids"] = stringifyFriendIDs!
-        }
-        if filter_level != nil {
-            parameters["filter_level"] = filter_level!
-        }
-        if language != nil {
-            parameters["language"] = language!.joinWithSeparator(",")
-        }
+        parameters["delimited"] ??= delimited
+        parameters["stall_warnings"] ??= stallWarnings
+        parameters["filter_level"] ??= filter_level
+        parameters["language"] ??= language?.joinWithSeparator(",")
+        parameters["stringify_friend_ids"] ??= stringifyFriendIDs
+        parameters["track"] ??= track?.joinWithSeparator(",")
+        parameters["locations"] ??= locations?.joinWithSeparator(",")
+        parameters["with"] ??= includeMessagesFromUserOnly ? "user" : nil
+        parameters["replies"] ??= includeReplies ? "all" : nil
 
         return self.getJSONWithPath(path, baseURL: self.userStreamURL, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
@@ -205,25 +155,15 @@ public extension Swifter {
 
     Streams messages for a set of users, as described in Site streams https://dev.twitter.com/docs/streaming-apis/streams/site
     */
-    public func getSiteStreamDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, restrictToUserMessages: Bool? = nil, includeReplies: Bool? = nil, stringifyFriendIDs: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
+    public func getSiteStreamDelimited(delimited: Bool? = nil, stallWarnings: Bool? = nil, restrictToUserMessages: Bool = false, includeReplies: Bool = false, stringifyFriendIDs: Bool? = nil, progress: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> SwifterHTTPRequest {
         let path = "site.json"
 
         var parameters = Dictionary<String, Any>()
-        if delimited != nil {
-            parameters["delimited"] = delimited!
-        }
-        if stallWarnings != nil {
-            parameters["stall_warnings"] = stallWarnings!
-        }
-        if restrictToUserMessages != nil && restrictToUserMessages! {
-            parameters["with"] = "user"
-        }
-        if includeReplies != nil && includeReplies! {
-            parameters["replies"] = "all"
-        }
-        if stringifyFriendIDs != nil {
-            parameters["stringify_friend_ids"] = stringifyFriendIDs!
-        }
+        parameters["delimited"] ??= delimited
+        parameters["stall_warnings"] ??= stallWarnings
+        parameters["stringify_friend_ids"] ??= stringifyFriendIDs
+        parameters["with"] ??= restrictToUserMessages ? "user" : nil
+        parameters["replies"] ??= includeReplies ? "all" : nil
 
         return self.getJSONWithPath(path, baseURL: self.streamURL, parameters: parameters, downloadProgress: { json, _ in
             stallWarningHandler?(code: json["warning"]["code"].string, message: json["warning"]["message"].string, percentFull: json["warning"]["percent_full"].integer)

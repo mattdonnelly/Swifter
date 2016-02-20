@@ -30,25 +30,12 @@ public extension Swifter {
     // Convenience method
     private func getTimelineAtPath(path: String, parameters: Dictionary<String, Any>, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, success: ((statuses: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         var params = parameters
-
-        if count != nil {
-            params["count"] = count!
-        }
-        if sinceID != nil {
-            params["since_id"] = sinceID!
-        }
-        if maxID != nil {
-            params["max_id"] = maxID!
-        }
-        if trimUser != nil {
-            params["trim_user"] = Int(trimUser!)
-        }
-        if contributorDetails != nil {
-            params["contributor_details"] = Int(!contributorDetails!)
-        }
-        if includeEntities != nil {
-            params["include_entities"] = Int(includeEntities!)
-        }
+        params["count"] ??= count
+        params["since_id"] ??= sinceID
+        params["max_id"] ??= maxID
+        params["trim_user"] ??= trimUser
+        params["contributor_details"] ??= contributorDetails
+        params["include_entities"] ??= includeEntities
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: params, success: { json, _ in
             success?(statuses: json.array)

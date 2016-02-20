@@ -36,21 +36,11 @@ public extension Swifter {
         let path = "direct_messages.json"
 
         var parameters = Dictionary<String, Any>()
-        if sinceID != nil {
-            parameters["since_id"] = sinceID!
-        }
-        if maxID != nil {
-            parameters["max_id"] = maxID!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["since_id"] ??= sinceID
+        parameters["max_id"] ??= maxID
+        parameters["count"] ??= count
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(messages: json.array)
@@ -66,21 +56,11 @@ public extension Swifter {
         let path = "direct_messages/sent.json"
 
         var parameters = Dictionary<String, Any>()
-        if sinceID != nil {
-            parameters["since_id"] = sinceID!
-        }
-        if maxID != nil {
-            parameters["max_id"] = maxID!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if page != nil {
-            parameters["page"] = page!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
+        parameters["since_id"] ??= sinceID
+        parameters["max_id"] ??= maxID
+        parameters["count"] ??= count
+        parameters["page"] ??= page
+        parameters["include_entities"] ??= includeEntities
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(messages: json.array)
@@ -94,9 +74,7 @@ public extension Swifter {
     */
     public func getDirectMessagesShowWithID(id: String, success: ((messages: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages/show.json"
-
-        var parameters = Dictionary<String, Any>()
-        parameters["id"] = id
+        let parameters: [String: Any] = ["id" : id]
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(messages: json.array)
@@ -113,11 +91,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-
+        parameters["include_entities"] ??= includeEntities
+        
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(messages: json.object)
             }, failure: failure)

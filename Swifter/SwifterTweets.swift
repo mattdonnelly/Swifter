@@ -36,12 +36,8 @@ public extension Swifter {
         let path = "statuses/retweets/\(id).json"
 
         var parameters = Dictionary<String, Any>()
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if trimUser != nil {
-            parameters["trim_user"] = trimUser!
-        }
+        parameters["count"] ??= count
+        parameters["trim_user"] ??= trimUser
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(statuses: json.array)
@@ -72,18 +68,10 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if trimUser != nil {
-            parameters["trim_user"] = trimUser!
-        }
-        if includeMyRetweet != nil {
-            parameters["include_my_retweet"] = includeMyRetweet!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
+        parameters["count"] ??= count
+        parameters["trim_user"] ??= trimUser
+        parameters["include_my_retweet"] ??= includeMyRetweet
+        parameters["include_entities"] ??= includeEntities
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(status: json.object)
@@ -99,9 +87,7 @@ public extension Swifter {
         let path = "statuses/destroy/\(id).json"
 
         var parameters = Dictionary<String, Any>()
-        if trimUser != nil {
-            parameters["trim_user"] = trimUser!
-        }
+        parameters["trim_user"] ??= trimUser
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(status: json.object)
@@ -130,29 +116,25 @@ public extension Swifter {
     - https://dev.twitter.com/notifications/multiple-media-entities-in-tweets
     - https://dev.twitter.com/docs/api/multiple-media-extended-entities
     */
-    public func postStatusUpdate(status: String, inReplyToStatusID: String? = nil, lat: Double? = nil, long: Double? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, media_ids: [String]? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postStatusUpdate(status: String, inReplyToStatusID: String? = nil, lat: Double? = nil, long: Double? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, media_ids: [String] = [], success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path: String = "statuses/update.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["status"] = status
-
-        if inReplyToStatusID != nil {
-            parameters["in_reply_to_status_id"] = inReplyToStatusID!
-        }
+        parameters["in_reply_to_status_id"] ??= inReplyToStatusID
+        parameters["trim_user"] ??= trimUser
+        
         if placeID != nil {
             parameters["place_id"] = placeID!
             parameters["display_coordinates"] = true
-        }
-        else if lat != nil && long != nil {
+        } else if lat != nil && long != nil {
             parameters["lat"] = lat!
             parameters["long"] = long!
             parameters["display_coordinates"] = true
         }
-        if trimUser != nil {
-            parameters["trim_user"] = trimUser!
-        }
-        if media_ids != nil && media_ids?.count > 0 {
-            parameters["media_ids"] = media_ids!.joinWithSeparator(",")
+        
+        if !media_ids.isEmpty {
+            parameters["media_ids"] = media_ids.joinWithSeparator(",")
         }
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
@@ -167,21 +149,16 @@ public extension Swifter {
         parameters["status"] = status
         parameters["media[]"] = media
         parameters[Swifter.DataParameters.dataKey] = "media[]"
-
-        if inReplyToStatusID != nil {
-            parameters["in_reply_to_status_id"] = inReplyToStatusID!
-        }
+        parameters["in_reply_to_status_id"] ??= inReplyToStatusID
+        parameters["trim_user"] ??= trimUser
+        
         if placeID != nil {
             parameters["place_id"] = placeID!
             parameters["display_coordinates"] = true
-        }
-        else if lat != nil && long != nil {
+        } else if lat != nil && long != nil {
             parameters["lat"] = lat!
             parameters["long"] = long!
             parameters["display_coordinates"] = true
-        }
-        if trimUser != nil {
-            parameters["trim_user"] = trimUser!
         }
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
@@ -225,9 +202,7 @@ public extension Swifter {
         let path = "statuses/retweet/\(id).json"
 
         var parameters = Dictionary<String, Any>()
-        if trimUser != nil {
-            parameters["trim_user"] = trimUser!
-        }
+        parameters["trim_user"] ??= trimUser
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(status: json.object)
@@ -246,28 +221,13 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
-
-        if maxWidth != nil {
-            parameters["max_width"] = maxWidth!
-        }
-        if hideMedia != nil {
-            parameters["hide_media"] = hideMedia!
-        }
-        if hideThread != nil {
-            parameters["hide_thread"] = hideThread!
-        }
-        if omitScript != nil {
-            parameters["omit_scipt"] = omitScript!
-        }
-        if align != nil {
-            parameters["align"] = align!
-        }
-        if related != nil {
-            parameters["related"] = related!
-        }
-        if lang != nil {
-            parameters["lang"] = lang!
-        }
+        parameters["max_width"] ??= maxWidth
+        parameters["hide_media"] ??= hideMedia
+        parameters["hide_thread"] ??= hideThread
+        parameters["omit_scipt"] ??= omitScript
+        parameters["align"] ??= align
+        parameters["related"] ??= related
+        parameters["lang"] ??= lang
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(status: json.object)
@@ -279,28 +239,13 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["url"] = url.absoluteString
-
-        if maxWidth != nil {
-            parameters["max_width"] = maxWidth!
-        }
-        if hideMedia != nil {
-            parameters["hide_media"] = hideMedia!
-        }
-        if hideThread != nil {
-            parameters["hide_thread"] = hideThread!
-        }
-        if omitScript != nil {
-            parameters["omit_scipt"] = omitScript!
-        }
-        if align != nil {
-            parameters["align"] = align!
-        }
-        if related != nil {
-            parameters["related"] = related!
-        }
-        if lang != nil {
-            parameters["lang"] = lang!
-        }
+        parameters["max_width"] ??= maxWidth
+        parameters["hide_media"] ??= hideMedia
+        parameters["hide_thread"] ??= hideThread
+        parameters["omit_scipt"] ??= omitScript
+        parameters["align"] ??= align
+        parameters["related"] ??= related
+        parameters["lang"] ??= lang
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(status: json.object)
@@ -319,13 +264,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
-
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if stringifyIDs != nil {
-            parameters["stringify_ids"] = stringifyIDs!
-        }
+        parameters["cursor"] ??= cursor
+        parameters["stringify_ids"] ??= stringifyIDs
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -342,13 +282,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = tweetIDs.joinWithSeparator(",")
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if map != nil {
-            parameters["map"] = map!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["map"] ??= map
         
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(statuses: json.array)

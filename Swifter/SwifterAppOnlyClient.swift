@@ -68,8 +68,7 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
 
         if let bearerToken = self.credential?.accessToken?.key {
             request.headers = ["Authorization": "Bearer \(bearerToken)"];
-        }
-        else {
+        } else {
             let basicCredentials = SwifterAppOnlyClient.base64EncodedCredentialsWithKey(self.consumerKey, secret: self.consumerSecret)
             request.headers = ["Authorization": "Basic \(basicCredentials)"];
             request.encodeParameters = true

@@ -38,9 +38,7 @@ public extension Swifter {
         let path = "users/suggestions/\(slug).json"
 
         var parameters = Dictionary<String, Any>()
-        if lang != nil {
-            parameters["lang"] = lang!
-        }
+        parameters["lang"] ??= lang
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json.array)
@@ -56,9 +54,7 @@ public extension Swifter {
         let path = "users/suggestions.json"
 
         var parameters = Dictionary<String, Any>()
-        if lang != nil {
-            parameters["lang"] = lang!
-        }
+        parameters["lang"] ??= lang
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json.array)

@@ -32,11 +32,11 @@ public extension Swifter {
 
     Returns a collection of user_ids that the currently authenticated user does not want to receive retweets from. Use POST friendships/update to set the "no retweets" status for a given user account on behalf of the current user.
     */
-    public func getFriendshipsNoRetweetsIDsWithStringifyIDs(stringifyIDs: Bool? = nil, success: ((ids: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFriendshipsNoRetweetsIDsWithStringifyIDs(stringifyIDs: Bool = true, success: ((ids: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/no_retweets/ids.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["stringify_ids"] = stringifyIDs!
+        parameters["stringify_ids"] = stringifyIDs
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(ids: json.array)
@@ -58,18 +58,11 @@ public extension Swifter {
         
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
+        parameters["cursor"] ??= cursor
+        parameters["stringify_ids"] ??= stringifyIDs
+        parameters["count"] ??= count
         
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if stringifyIDs != nil {
-            parameters["stringify_ids"] = stringifyIDs!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
-        
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -79,18 +72,11 @@ public extension Swifter {
         
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
+        parameters["cursor"] ??= cursor
+        parameters["stringify_ids"] ??= stringifyIDs
+        parameters["count"] ??= count
         
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if stringifyIDs != nil {
-            parameters["stringify_ids"] = stringifyIDs!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
-        
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -109,16 +95,9 @@ public extension Swifter {
         
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
-        
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if stringifyIDs != nil {
-            parameters["stringify_ids"] = stringifyIDs!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
+        parameters["cursor"] ??= cursor
+        parameters["stringify_ids"] ??= stringifyIDs
+        parameters["count"] ??= count
         
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -130,16 +109,9 @@ public extension Swifter {
         
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
-        
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if stringifyIDs != nil {
-            parameters["stringify_ids"] = stringifyIDs!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
+        parameters["cursor"] ??= cursor
+        parameters["stringify_ids"] ??= stringifyIDs
+        parameters["count"] ??= count
         
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -155,12 +127,8 @@ public extension Swifter {
         let path = "friendships/incoming.json"
         
         var parameters = Dictionary<String, Any>()
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if stringifyIDs != nil {
-            parameters["stringify_urls"] = stringifyIDs!
-        }
+        parameters["cursor"] ??= cursor
+        parameters["stringify_ids"] ??= stringifyIDs
         
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -176,12 +144,8 @@ public extension Swifter {
         let path = "friendships/outgoing.json"
         
         var parameters = Dictionary<String, Any>()
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if stringifyIDs != nil {
-            parameters["stringify_urls"] = stringifyIDs!
-        }
+        parameters["cursor"] ??= cursor
+        parameters["stringify_ids"] ??= stringifyIDs
         
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -202,10 +166,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
-
-        if follow != nil {
-            parameters["follow"] = follow!
-        }
+        parameters["follow"] ??= follow
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -217,10 +178,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
-
-        if follow != nil {
-            parameters["follow"] = follow!
-        }
+        parameters["follow"] ??= follow
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -268,13 +226,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
-
-        if device != nil {
-            parameters["device"] = device!
-        }
-        if retweets != nil {
-            parameters["retweets"] = retweets!
-        }
+        parameters["device"] ??= device
+        parameters["retweets"] ??= retweets
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -286,13 +239,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
-
-        if device != nil {
-            parameters["device"] = device!
-        }
-        if retweets != nil {
-            parameters["retweets"] = retweets!
-        }
+        parameters["device"] ??= device
+        parameters["retweets"] ??= retweets
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -304,36 +252,26 @@ public extension Swifter {
 
     Returns detailed information about the relationship between two arbitrary users.
     */
-    public func getFriendshipsShowWithSourceID(sourceID: String? = nil, targetID: String? = nil, orTargetScreenName targetScreenName: String? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFriendshipsShowWithSourceID(sourceID: String, targetID: String? = nil, orTargetScreenName targetScreenName: String? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/show.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["source_id"] = sourceID!
-
-        if targetID != nil {
-            parameters["target_id"] = targetID!
-        }
-        else if targetScreenName != nil {
-            parameters["targetScreenName"] = targetScreenName!
-        }
+        parameters["source_id"] = sourceID
+        parameters["target_id"] ??= targetID
+        parameters["targetScreenName"] ??= targetScreenName
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
 
-    public func getFriendshipsShowWithSourceScreenName(sourceScreenName: String? = nil, targetID: String? = nil, orTargetScreenName targetScreenName: String? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFriendshipsShowWithSourceScreenName(sourceScreenName: String, targetID: String? = nil, orTargetScreenName targetScreenName: String? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/show.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["source_screen_name"] = sourceScreenName!
-
-        if targetID != nil {
-            parameters["target_id"] = targetID!
-        }
-        else if targetScreenName != nil {
-            parameters["targetScreenName"] = targetScreenName!
-        }
+        parameters["source_screen_name"] = sourceScreenName
+        parameters["target_id"] ??= targetID
+        parameters["targetScreenName"] ??= targetScreenName
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -352,19 +290,10 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
-
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
-        if includeUserEntities != nil {
-            parameters["include_user_entities"] = includeUserEntities!
-        }
+        parameters["cursor"] ??= cursor
+        parameters["count"] ??= count
+        parameters["skip_status"] ??= skipStatus
+        parameters["include_user_entities"] ??= includeUserEntities
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -376,19 +305,10 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
-
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
-        if includeUserEntities != nil {
-            parameters["include_user_entities"] = includeUserEntities!
-        }
+        parameters["cursor"] ??= cursor
+        parameters["count"] ??= count
+        parameters["skip_status"] ??= skipStatus
+        parameters["include_user_entities"] ??= includeUserEntities
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -408,19 +328,10 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
-
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
-        if includeUserEntities != nil {
-            parameters["include_user_entities"] = includeUserEntities!
-        }
+        parameters["cursor"] ??= cursor
+        parameters["count"] ??= count
+        parameters["skip_status"] ??= skipStatus
+        parameters["include_user_entities"] ??= includeUserEntities
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -432,19 +343,10 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
-
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
-        if includeUserEntities != nil {
-            parameters["include_user_entities"] = includeUserEntities!
-        }
+        parameters["cursor"] ??= cursor
+        parameters["count"] ??= count
+        parameters["skip_status"] ??= skipStatus
+        parameters["include_user_entities"] ??= includeUserEntities
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
