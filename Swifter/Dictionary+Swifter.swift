@@ -65,6 +65,14 @@ extension Dictionary {
         return parts.joinWithSeparator("&")
     }
     
+    func stringifiedDictionary() -> Dictionary<String, String> {
+        let dict = self.reduce([String: String]()) { (var dict, tuple) in
+            dict["\(tuple.0)"] = "\(tuple.1)"
+            return dict
+        }
+        return dict
+    }
+    
 }
 
 infix operator +| {}
