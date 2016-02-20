@@ -79,6 +79,8 @@
 		8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
 		A17A694F1C78336200063DFD /* Operator+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17A694D1C78333400063DFD /* Operator+Swifter.swift */; };
 		A17A69501C78336300063DFD /* Operator+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17A694D1C78333400063DFD /* Operator+Swifter.swift */; };
+		A1C7F0A51C7845FD00955ADB /* SwifterMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F51131944A61D00894629 /* SwifterMac.framework */; };
+		A1C7F0A61C7845FD00955ADB /* SwifterMac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F51131944A61D00894629 /* SwifterMac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A1DD65C51B618D7E0070E6FC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +92,13 @@
 			remoteGlobalIDString = 8B9F50ED1944A5AB00894629;
 			remoteInfo = SwifteriOS;
 		};
+		A1C7F0A71C7845FD00955ADB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B9F50E51944A5AB00894629 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B9F51121944A61D00894629;
+			remoteInfo = SwifterMac;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -100,6 +109,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8B300C3F1944AA6600993175 /* SwifteriOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1C7F0A91C7845FD00955ADB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A1C7F0A61C7845FD00955ADB /* SwifterMac.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -170,6 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1C7F0A51C7845FD00955ADB /* SwifterMac.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,10 +379,12 @@
 				8B300C431944AECB00993175 /* Sources */,
 				8B300C441944AECB00993175 /* Frameworks */,
 				8B300C451944AECB00993175 /* Resources */,
+				A1C7F0A91C7845FD00955ADB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A1C7F0A81C7845FD00955ADB /* PBXTargetDependency */,
 			);
 			name = SwifterDemoMac;
 			productName = SwifterDemoMac;
@@ -585,6 +608,11 @@
 			target = 8B9F50ED1944A5AB00894629 /* SwifteriOS */;
 			targetProxy = 8B300C401944AA6600993175 /* PBXContainerItemProxy */;
 		};
+		A1C7F0A81C7845FD00955ADB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B9F51121944A61D00894629 /* SwifterMac */;
+			targetProxy = A1C7F0A71C7845FD00955ADB /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -636,6 +664,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -657,6 +686,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SwifterDemoMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
