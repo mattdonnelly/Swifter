@@ -60,7 +60,7 @@ public extension Swifter {
             let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.apiURL)
             let queryURL = NSURL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
             NSWorkspace.sharedWorkspace().openURL(queryURL)
-            }, failure: failure)
+        }, failure: failure)
     }
     #endif
     
@@ -73,32 +73,35 @@ public extension Swifter {
      */
     
     #if os(iOS)
-    public func authorizeWithCallbackURL<T: UIViewController where T: SFSafariViewControllerDelegate>(callbackURL: NSURL, presentFromViewController presentingViewController: T, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
-    self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: { token, response in
-    var requestToken = token!
-    
-    NSNotificationCenter.defaultCenter().addObserverForName(CallbackNotification.notificationName, object: nil, queue: NSOperationQueue.mainQueue()) { notification in
-    NSNotificationCenter.defaultCenter().removeObserver(self)
-    presentingViewController.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
-    let url = notification.userInfo![CallbackNotification.optionsURLKey] as! NSURL
-    
-    let parameters = url.query!.parametersFromQueryString()
-    requestToken.verifier = parameters["oauth_verifier"]
-    
-    self.postOAuthAccessTokenWithRequestToken(requestToken, success: { accessToken, response in
-    self.client.credential = SwifterCredential(accessToken: accessToken!)
-    success?(accessToken: accessToken!, response: response)
-    }, failure: failure)
-    }
-    
-    let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.apiURL)
-    let queryURL = NSURL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
-    
-    let safariView = SFSafariViewController(URL: queryURL)
-    safariView.delegate = presentingViewController
-    presentingViewController.presentViewController(webView, animated: true, completion: nil)
-    
-    }, failure: failure)
+    public func authorizeWithCallbackURL(callbackURL: NSURL, presentFromViewController presentingViewController: UIViewController? , success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
+        self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: { token, response in
+            var requestToken = token!
+            
+            NSNotificationCenter.defaultCenter().addObserverForName(CallbackNotification.notificationName, object: nil, queue: NSOperationQueue.mainQueue()) { notification in
+                NSNotificationCenter.defaultCenter().removeObserver(self)
+                presentingViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+                let url = notification.userInfo![CallbackNotification.optionsURLKey] as! NSURL
+                
+                let parameters = url.query!.parametersFromQueryString()
+                requestToken.verifier = parameters["oauth_verifier"]
+                
+                self.postOAuthAccessTokenWithRequestToken(requestToken, success: { accessToken, response in
+                    self.client.credential = SwifterCredential(accessToken: accessToken!)
+                    success?(accessToken: accessToken!, response: response)
+                    }, failure: failure)
+            }
+            
+            let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.apiURL)
+            let queryURL = NSURL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
+            
+            if #available(iOS 9.0, *) , let delegate = presentingViewController as? SFSafariViewControllerDelegate {
+                let safariView = SFSafariViewController(URL: queryURL)
+                safariView.delegate = delegate
+                presentingViewController?.presentViewController(safariView, animated: true, completion: nil)
+            } else {
+                UIApplication.sharedApplication().openURL(queryURL)
+            }
+        }, failure: failure)
     }
     #endif
     
