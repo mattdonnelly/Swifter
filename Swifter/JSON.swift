@@ -103,7 +103,7 @@ public enum JSON : Equatable, CustomStringConvertible {
                 do {
                     let jsonObject : AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
                     self = JSON(jsonObject)
-                } catch _ {
+                } catch {
                     self = .JSONInvalid
                 }
 
@@ -237,13 +237,7 @@ public enum JSON : Equatable, CustomStringConvertible {
     }
 
     static func parseJSONData(jsonData : NSData) throws -> JSON {
-        var JSONObject : AnyObject!
-        do {
-            JSONObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers)
-        } catch _ {
-            JSONObject = nil
-        }
-
+        let JSONObject = try? NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers)
         return (JSONObject == nil) ? nil : JSON(JSONObject)
     }
 
@@ -252,7 +246,6 @@ public enum JSON : Equatable, CustomStringConvertible {
         if let data = jsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
             return try parseJSONData(data)
         }
-        
         throw error
     }
 

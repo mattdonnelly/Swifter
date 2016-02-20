@@ -106,63 +106,37 @@ public class Swifter {
     // MARK: - JSON Requests
 
     internal func jsonRequestWithPath(path: String, baseURL: NSURL, method: HTTPMethodType, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler? = nil, failure: SwifterHTTPRequest.FailureHandler? = nil) -> SwifterHTTPRequest {
-        let jsonDownloadProgressHandler: SwifterHTTPRequest.DownloadProgressHandler = {
-            data, _, _, response in
+        let jsonDownloadProgressHandler: SwifterHTTPRequest.DownloadProgressHandler = { data, _, _, response in
 
-            if downloadProgress == nil {
-                return
-            }
+            guard downloadProgress != nil else { return }
 
-            do {
-                let jsonResult = try JSON.parseJSONData(data)
+            if let jsonResult = try? JSON.parseJSONData(data) {
                 downloadProgress?(json: jsonResult, response: response)
-            } catch _ as NSError {
-                
+            } else {
                 let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding)
                 let jsonChunks = jsonString!.componentsSeparatedByString("\r\n") as [String]
-
-                for chunk in jsonChunks {
-                    if chunk.utf16.count == 0 {
-                        continue
-                    }
-
-                    if let chunkData = chunk.dataUsingEncoding(NSUTF8StringEncoding) {
-                        do {
-                            let jsonResult = try JSON.parseJSONData(chunkData)
-                            downloadProgress?(json: jsonResult, response: response)
-                        } catch _ as NSError {
-                            
-                        } catch {
-                            fatalError()
-                        }
+                
+                for chunk in jsonChunks where !chunk.utf16.isEmpty {
+                    if let chunkData = chunk.dataUsingEncoding(NSUTF8StringEncoding),
+                        let jsonResult = try? JSON.parseJSONData(chunkData) {
+                        downloadProgress?(json: jsonResult, response: response)
                     }
                 }
-            } catch {
-                fatalError()
             }
         }
 
-        let jsonSuccessHandler: SwifterHTTPRequest.SuccessHandler = {
-            data, response in
+        let jsonSuccessHandler: SwifterHTTPRequest.SuccessHandler = { data, response in
 
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
-                var error: NSError?
                 do {
                     let jsonResult = try JSON.parseJSONData(data)
                     dispatch_async(dispatch_get_main_queue()) {
-                        if let success = success {
-                            success(json: jsonResult, response: response)
-                        }
+                        success?(json: jsonResult, response: response)
                     }
-                } catch let error1 as NSError {
-                    error = error1
+                } catch let error as NSError {
                     dispatch_async(dispatch_get_main_queue()) {
-                        if let failure = failure {
-                            failure(error: error!)
-                        }
+                        failure?(error: error)
                     }
-                } catch {
-                    fatalError()
                 }
             }
         }

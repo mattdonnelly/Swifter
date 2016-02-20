@@ -156,7 +156,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
             else if nonOAuthParameters.count > 0 {
                 if self.HTTPMethod == .GET || self.HTTPMethod == .HEAD || self.HTTPMethod == .DELETE {
                     let queryString = nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding)
-                    self.request!.URL = self.URL.URLByAppendingQueryString(queryString)
+                    self.request!.URL = self.URL.appendQueryString(queryString)
                     self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
                 }
                 else {
@@ -230,9 +230,8 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         let expectedContentLength = Int(self.response!.expectedContentLength)
         let totalBytesReceived = self.responseData.length
 
-        if (data.length > 0) {
-            self.downloadProgressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)
-        }
+        guard data.length > 0 else { return }
+        self.downloadProgressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)
     }
 
     public func connection(connection: NSURLConnection, didFailWithError error: NSError) {
@@ -280,17 +279,12 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     }
 
     class func responseErrorCode(data: NSData) -> Int? {
-        do {
-            let json: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
-            
-            if let
-                dictionary = json as? NSDictionary,
-                errors = dictionary["errors"] as? [NSDictionary],
-                code = errors.first?["code"] as? Int {
-                return code
-            }
-        } catch _ { }
-        
+        if let json = try? NSJSONSerialization.JSONObjectWithData(data, options: []),
+            dictionary = json as? NSDictionary,
+            errors = dictionary["errors"] as? [NSDictionary],
+            code = errors.first?["code"] as? Int {
+            return code
+        }
         return nil
     }
 

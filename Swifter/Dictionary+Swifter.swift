@@ -29,13 +29,9 @@ extension Dictionary {
 
     func filter(predicate: Element -> Bool) -> Dictionary {
         var filteredDictionary = Dictionary()
-
-        for (key, value) in self {
-            if predicate(key, value) {
-                filteredDictionary[key] = value
-            }
+        for (key, value) in self where predicate(key, value) {
+            filteredDictionary[key] = value
         }
-
         return filteredDictionary
     }
 
