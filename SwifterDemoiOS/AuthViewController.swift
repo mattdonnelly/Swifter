@@ -27,22 +27,22 @@ import UIKit
 import Accounts
 import Social
 import SwifteriOS
+import SafariServices
 
-class AuthViewController: UIViewController {
+class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
     
     var swifter: Swifter
 
     // Default to using the iOS account framework for handling twitter auth
-    let useACAccount = true
+    let useACAccount = false
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         self.swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
         super.init(coder: aDecoder)
     }
 
     @IBAction func didTouchUpInsideLoginButton(sender: AnyObject) {
-        let failureHandler: ((NSError) -> Void) = {
-            error in
+        let failureHandler: ((NSError) -> Void) = { error in
 
             self.alertWithTitle("Error", message: error.localizedDescription)
         }
@@ -52,53 +52,43 @@ class AuthViewController: UIViewController {
             let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
 
             // Prompt the user for permission to their twitter account stored in the phone's settings
-            accountStore.requestAccessToAccountsWithType(accountType, options: nil) {
-                granted, error in
+            accountStore.requestAccessToAccountsWithType(accountType, options: nil) { granted, error in
 
                 if granted {
                     let twitterAccounts = accountStore.accountsWithAccountType(accountType)
-
-                    if twitterAccounts?.count == 0
-                    {
+                    if twitterAccounts?.count == 0 {
                         self.alertWithTitle("Error", message: "There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
-                    }
-                    else {
+                    } else {
                         let twitterAccount = twitterAccounts[0] as! ACAccount
                         self.swifter = Swifter(account: twitterAccount)
                         self.fetchTwitterHomeStream()
                     }
-                }
-                else {
+                } else {
                     self.alertWithTitle("Error", message: error.localizedDescription)
                 }
             }
-        }
-        else {
-            swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success")!, success: {
-                accessToken, response in
-
-                self.fetchTwitterHomeStream()
-
-                },failure: failureHandler
-            )
+        } else {
+            let url = NSURL(string: "swifter://success")!
+            swifter.authorizeWithCallbackURL(url, presentFromViewController: self, success: { accessToken, response in
+                    self.fetchTwitterHomeStream()
+                }, failure: failureHandler)
         }
     }
 
     func fetchTwitterHomeStream() {
-        let failureHandler: ((NSError) -> Void) = {
-            error in
+        let failureHandler: ((NSError) -> Void) = { error in
             self.alertWithTitle("Error", message: error.localizedDescription)
         }
         
-        self.swifter.getStatusesHomeTimelineWithCount(20, success: {
-            (statuses: [JSONValue]?) in
+        self.swifter.getStatusesHomeTimelineWithCount(20, success: { statuses in
                 
             // Successfully fetched timeline, so lets create and push the table view
             let tweetsViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
                 
             if statuses != nil {
                 tweetsViewController.tweets = statuses!
-                self.presentViewController(tweetsViewController, animated: true, completion: nil)
+                self.navigationController?.pushViewController(tweetsViewController, animated: true)
+//                self.presentViewController(tweetsViewController, animated: true, completion: nil)
             }
 
             }, failure: failureHandler)
@@ -106,9 +96,15 @@ class AuthViewController: UIViewController {
     }
 
     func alertWithTitle(title: String, message: String) {
-        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
+    
+    @available(iOS 9.0, *)
+    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+
 
 }

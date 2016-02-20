@@ -27,6 +27,7 @@ import Foundation
 
 #if os(iOS)
     import UIKit
+    import SafariServices
 #else
     import AppKit
 #endif
@@ -35,7 +36,13 @@ public extension Swifter {
 
     public typealias TokenSuccessHandler = (accessToken: SwifterCredential.OAuthAccessToken?, response: NSURLResponse) -> Void
 
-    public func authorizeWithCallbackURL(callbackURL: NSURL, success: TokenSuccessHandler?, failure: ((error: NSError) -> Void)? = nil) {
+
+    /**
+        Begin Authorization with a Callback URL.
+        - Parameter presentFromViewController: The viewController used to present the SFSafariViewController.
+            The UIViewController must inherit SFSafariViewControllerDelegate
+    */
+    public func authorizeWithCallbackURL(callbackURL: NSURL, presentFromViewController presentingViewController: UIViewController? = nil, success: TokenSuccessHandler?, failure: ((error: NSError) -> Void)? = nil) {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: {
             token, response in
 
@@ -45,7 +52,7 @@ public extension Swifter {
                 notification in
 
                 NSNotificationCenter.defaultCenter().removeObserver(self)
-
+                presentingViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
                 let url = notification.userInfo![CallbackNotification.optionsURLKey] as! NSURL
 
                 let parameters = url.query!.parametersFromQueryString()
@@ -61,13 +68,24 @@ public extension Swifter {
                 })
 
             let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.apiURL)
-            let queryURL = NSURL(string: authorizeURL!.absoluteString! + "?oauth_token=\(token!.key)")
-
+            let queryURL = NSURL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
+            
             #if os(iOS)
-                UIApplication.sharedApplication().openURL(queryURL!)
+                if #available (iOS 9.0, *) {
+                    if let viewControllerDelegate = presentingViewController as? SFSafariViewControllerDelegate {
+                        let webView = SFSafariViewController(URL: queryURL)
+                        webView.delegate = viewControllerDelegate
+                        presentingViewController?.presentViewController(webView, animated: true, completion: nil)
+                    } else {
+                        UIApplication.sharedApplication().openURL(queryURL)
+                    }
+                } else {
+                    UIApplication.sharedApplication().openURL(queryURL)
+                }
             #else
-                NSWorkspace.sharedWorkspace().openURL(queryURL!)
+                NSWorkspace.sharedWorkspace().openURL(queryURL)
             #endif
+            
             }, failure: failure)
     }
 
@@ -142,9 +160,7 @@ public extension Swifter {
 
         var parameters =  Dictionary<String, Any>()
 
-        if let callbackURLString = callbackURL.absoluteString {
-            parameters["oauth_callback"] = callbackURLString
-        }
+        parameters["oauth_callback"] = callbackURL.absoluteString
 
         self.client.post(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             data, response in
