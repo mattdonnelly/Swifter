@@ -132,13 +132,13 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["grant_type"] = "client_credentials"
 
-        self.jsonRequestWithPath(path, baseURL: self.apiURL, method: "POST", parameters: parameters, success: success, failure: failure)
+        self.jsonRequestWithPath(path, baseURL: self.apiURL, method: .POST, parameters: parameters, success: success, failure: failure)
     }
 
     public func postOAuth2InvalidateBearerTokenWithSuccess(success: TokenSuccessHandler?, failure: FailureHandler?) {
         let path = "/oauth2/invalidate_token"
 
-        self.jsonRequestWithPath(path, baseURL: self.apiURL, method: "POST", parameters: [:], success: {
+        self.jsonRequestWithPath(path, baseURL: self.apiURL, method: .POST, parameters: [:], success: {
             json, response in
 
             if let accessToken = json["access_token"].string {

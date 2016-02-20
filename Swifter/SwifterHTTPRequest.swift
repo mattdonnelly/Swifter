@@ -31,6 +31,17 @@ import Foundation
     import AppKit
 #endif
 
+public enum HTTPMethodType: String {
+    case OPTIONS
+    case GET
+    case HEAD
+    case POST
+    case PUT
+    case DELETE
+    case TRACE
+    case CONNECT
+}
+
 public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
 
     public typealias UploadProgressHandler = (bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) -> Void
@@ -46,7 +57,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     }
 
     let URL: NSURL
-    let HTTPMethod: String
+    let HTTPMethod: HTTPMethodType
 
     var request: NSMutableURLRequest?
     var connection: NSURLConnection!
@@ -72,10 +83,10 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     var failureHandler: FailureHandler?
 
     public convenience init(URL: NSURL) {
-        self.init(URL: URL, method: "GET", parameters: [:])
+        self.init(URL: URL, method: .GET, parameters: [:])
     }
 
-    public init(URL: NSURL, method: String, parameters: Dictionary<String, Any>) {
+    public init(URL: NSURL, method: HTTPMethodType, parameters: Dictionary<String, Any>) {
         self.URL = URL
         self.HTTPMethod = method
         self.headers = [:]
@@ -91,7 +102,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     public init(request: NSURLRequest) {
         self.request = request as? NSMutableURLRequest
         self.URL = request.URL!
-        self.HTTPMethod = request.HTTPMethod!
+        self.HTTPMethod = HTTPMethodType(rawValue: request.HTTPMethod!)!
         self.headers = [:]
         self.parameters = [:]
         self.encodeParameters = true
@@ -105,7 +116,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     public func start() {
         if request == nil {
             self.request = NSMutableURLRequest(URL: self.URL)
-            self.request!.HTTPMethod = self.HTTPMethod
+            self.request!.HTTPMethod = self.HTTPMethod.rawValue
             self.request!.timeoutInterval = self.timeoutInterval
             self.request!.HTTPShouldHandleCookies = self.HTTPShouldHandleCookies
 
@@ -143,7 +154,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
                 self.request!.HTTPBody = body
             }
             else if nonOAuthParameters.count > 0 {
-                if self.HTTPMethod == "GET" || self.HTTPMethod == "HEAD" || self.HTTPMethod == "DELETE" {
+                if self.HTTPMethod == .GET || self.HTTPMethod == .HEAD || self.HTTPMethod == .DELETE {
                     let queryString = nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding)
                     self.request!.URL = self.URL.URLByAppendingQueryString(queryString)
                     self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
