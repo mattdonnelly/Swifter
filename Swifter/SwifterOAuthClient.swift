@@ -119,7 +119,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         authorizationParameters["oauth_timestamp"] = String(Int(NSDate().timeIntervalSince1970))
         authorizationParameters["oauth_nonce"] = NSUUID().UUIDString
 
-        authorizationParameters["oauth_token"] ??= self.credential!.accessToken?.key
+        authorizationParameters["oauth_token"] ??= self.credential?.accessToken?.key
 
         for (key, value) in parameters where key.hasPrefix("oauth_") {
             authorizationParameters.updateValue(value, forKey: key)
