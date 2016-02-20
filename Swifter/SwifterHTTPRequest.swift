@@ -266,8 +266,8 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     class func stringWithData(data: NSData, encodingName: String?) -> String {
         var encoding: UInt = NSUTF8StringEncoding
 
-        if encodingName != nil {
-            let encodingNameString = encodingName! as NSString as CFStringRef
+        if let encodingName = encodingName {
+            let encodingNameString = encodingName as NSString as CFStringRef
             encoding = CFStringConvertEncodingToNSStringEncoding(CFStringConvertIANACharSetNameToEncoding(encodingNameString))
 
             if encoding == UInt(kCFStringEncodingInvalidId) {

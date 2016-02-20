@@ -33,44 +33,19 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["q"] = q
-
-        if geocode != nil {
-            parameters["geocode"] = geocode!
-        }
-        if lang != nil {
-            parameters["lang"] = lang!
-        }
-        if locale != nil {
-            parameters["locale"] = locale!
-        }
-        if resultType != nil {
-            parameters["result_type"] = resultType!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if until != nil {
-            parameters["until"] = until!
-        }
-        if sinceID != nil {
-            parameters["since_id"] = sinceID!
-        }
-        if maxID != nil {
-            parameters["max_id"] = maxID!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if callback != nil {
-            parameters["callback"] = callback!
-        }
+        parameters["geocode"] ??= geocode
+        parameters["lang"] ??= lang
+        parameters["locale"] ??= locale
+        parameters["result_type"] ??= resultType
+        parameters["count"] ??= count
+        parameters["until"] ??= until
+        parameters["since_id"] ??= sinceID
+        parameters["max_id"] ??= maxID
+        parameters["include_entities"] ??= includeEntities
+        parameters["callback"] ??= callback
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
-            switch (json["statuses"].array, json["search_metadata"].object) {
-            case (let statuses, let searchMetadata):
-                success?(statuses: statuses, searchMetadata: searchMetadata)
-            }
-
+            success?(statuses: json["statuses"].array, searchMetadata: json["search_metadata"].object)
             }, failure: failure)
     }
     

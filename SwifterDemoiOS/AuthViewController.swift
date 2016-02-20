@@ -84,12 +84,10 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
                 
             // Successfully fetched timeline, so lets create and push the table view
             let tweetsViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
-                
-            if statuses != nil {
-                tweetsViewController.tweets = statuses!
+            guard let tweets = statuses else { return }
+                tweetsViewController.tweets = tweets
                 self.navigationController?.pushViewController(tweetsViewController, animated: true)
 //                self.presentViewController(tweetsViewController, animated: true, completion: nil)
-            }
 
             }, failure: failureHandler)
         

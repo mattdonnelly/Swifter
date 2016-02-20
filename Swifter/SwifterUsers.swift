@@ -49,12 +49,8 @@ public extension Swifter {
         let path = "account/verify_credentials.json"
 
         var parameters = Dictionary<String, Any>()
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(myInfo: json.object)
@@ -72,24 +68,12 @@ public extension Swifter {
         let path = "account/settings.json"
 
         var parameters = Dictionary<String, Any>()
-        if trendLocationWOEID != nil {
-            parameters["trend_location_woeid"] = trendLocationWOEID!
-        }
-        if sleepTimeEnabled != nil {
-            parameters["sleep_time_enabled"] = sleepTimeEnabled!
-        }
-        if startSleepTime != nil {
-            parameters["start_sleep_time"] = startSleepTime!
-        }
-        if endSleepTime != nil {
-            parameters["end_sleep_time"] = endSleepTime!
-        }
-        if timeZone != nil {
-            parameters["time_zone"] = timeZone!
-        }
-        if lang != nil {
-            parameters["lang"] = lang!
-        }
+        parameters["trend_location_woeid"] ??= trendLocationWOEID
+        parameters["sleep_time_enabled"] ??= sleepTimeEnabled
+        parameters["start_sleep_time"] ??= startSleepTime
+        parameters["end_sleep_time"] ??= endSleepTime
+        parameters["time_zone"] ??= timeZone
+        parameters["lang"] ??= lang
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(settings: json.object)
@@ -105,15 +89,8 @@ public extension Swifter {
         let path = "account/update_delivery_device.json"
 
         var parameters = Dictionary<String, Any>()
-        if device {
-            parameters["device"] = "sms"
-        }
-        else {
-            parameters["device"] = "none"
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
+        parameters["device"] = device ? "sms" : "none"
+        parameters["include_entities"] ??= includeEntities
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(deliveryDeviceSettings: json.object)
@@ -131,24 +108,12 @@ public extension Swifter {
         let path = "account/update_profile.json"
 
         var parameters = Dictionary<String, Any>()
-        if name != nil {
-            parameters["name"] = name!
-        }
-        if url != nil {
-            parameters["url"] = url!
-        }
-        if location != nil {
-            parameters["location"] = location!
-        }
-        if description != nil {
-            parameters["description"] = description!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["name"] ??= name
+        parameters["url"] ??= url
+        parameters["location"] ??= location
+        parameters["description"] ??= description
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
         
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(profile: json.object)
@@ -160,24 +125,16 @@ public extension Swifter {
 
     Updates the authenticating user's profile background image. This method can also be used to enable or disable the profile background image. Although each parameter is marked as optional, at least one of image, tile or use must be provided when making this request.
     */
-    public func postAccountUpdateProfileBackgroundImage(imageData: NSData? = nil, title: String? = nil, includeEntities: Bool? = nil, use: Bool? = nil, success: ((profile: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        assert(imageData != nil || title != nil || use != nil, "At least one of image, tile or use must be provided when making this request")
+    public func postAccountUpdateProfileBackgroundImage(imageData: NSData, title: String? = nil, includeEntities: Bool? = nil, use: Bool? = nil, success: ((profile: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+        assert(title != nil || use != nil, "At least one of image, tile or use must be provided when making this request")
 
         let path = "account/update_profile_background_image.json"
 
         var parameters = Dictionary<String, Any>()
-        if imageData != nil {
-            parameters["image"] = imageData!.base64EncodedStringWithOptions([])
-        }
-        if title != nil {
-            parameters["title"] = title!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if use != nil {
-            parameters["use"] = use!
-        }
+        parameters["image"] = imageData.base64EncodedStringWithOptions([])
+        parameters["title"] ??= title
+        parameters["include_entities"] ??= includeEntities
+        parameters["use"] ??= use
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(profile: json.object)
@@ -193,28 +150,13 @@ public extension Swifter {
         let path = "account/update_profile_colors.json"
 
         var parameters = Dictionary<String, Any>()
-
-        if profileBackgroundColor != nil {
-            parameters["profile_background_color"] = profileBackgroundColor!
-        }
-        if profileLinkColor != nil {
-            parameters["profile_link_color"] = profileLinkColor!
-        }
-        if profileSidebarBorderColor != nil {
-            parameters["profile_sidebar_link_color"] = profileSidebarBorderColor!
-        }
-        if profileSidebarFillColor != nil {
-            parameters["profile_sidebar_fill_color"] = profileSidebarFillColor!
-        }
-        if profileTextColor != nil {
-            parameters["profile_text_color"] = profileTextColor!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["profile_background_color"] ??= profileBackgroundColor
+        parameters["profile_link_color"] ??= profileLinkColor
+        parameters["profile_sidebar_link_color"] ??= profileSidebarBorderColor
+        parameters["profile_sidebar_fill_color"] ??= profileSidebarFillColor
+        parameters["profile_text_color"] ??= profileTextColor
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(profile: json.object)
@@ -228,19 +170,13 @@ public extension Swifter {
 
     This method asynchronously processes the uploaded file before updating the user's profile image URL. You can either update your local cache the next time you request the user's information, or, at least 5 seconds after uploading the image, ask for the updated URL using GET users/show.
     */
-    public func postAccountUpdateProfileImage(imageData: NSData? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((profile: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postAccountUpdateProfileImage(imageData: NSData, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((profile: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "account/update_profile_image.json"
 
         var parameters = Dictionary<String, Any>()
-        if imageData != nil {
-            parameters["image"] = imageData!.base64EncodedStringWithOptions([])
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["image"] = imageData.base64EncodedStringWithOptions([])
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(profile: json.object)
@@ -256,15 +192,9 @@ public extension Swifter {
         let path = "blocks/list.json"
 
         var parameters = Dictionary<String, Any>()
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
+        parameters["cursor"] ??= cursor
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -280,12 +210,8 @@ public extension Swifter {
         let path = "blocks/ids.json"
 
         var parameters = Dictionary<String, Any>()
-        if stringifyIDs != nil {
-            parameters["stringify_ids"] = stringifyIDs!
-        }
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
+        parameters["stringify_ids"] ??= stringifyIDs
+        parameters["cursor"] ??= cursor
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -302,13 +228,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -320,13 +241,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -343,13 +259,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -361,13 +272,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -396,10 +302,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenNames.joinWithSeparator(",")
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
+        parameters["include_entities"] ??= includeEntities
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json.array)
@@ -413,10 +316,7 @@ public extension Swifter {
 
         let userIDStrings = userIDs.map { String($0) }
         parameters["user_id"] = userIDStrings.joinWithSeparator(",")
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
+        parameters["include_entities"] ??= includeEntities
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json.array)
@@ -435,10 +335,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
+        parameters["include_entities"] ??= includeEntities
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -450,10 +347,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
+        parameters["include_entities"] ??= includeEntities
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -472,16 +366,9 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["q"] = q
-
-        if page != nil {
-            parameters["page"] = page!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
+        parameters["page"] ??= page
+        parameters["count"] ??= count
+        parameters["include_entities"] ??= includeEntities
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json.array)
@@ -498,13 +385,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json.array)
@@ -516,13 +398,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json.array)
@@ -539,13 +416,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json.array)
@@ -557,13 +429,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json.array)
@@ -597,25 +464,16 @@ public extension Swifter {
     400	Either an image was not provided or the image data could not be processed
     422	The image could not be resized or is too large.
     */
-    public func postAccountUpdateProfileBannerWithImageData(imageData: NSData? = nil, width: Int? = nil, height: Int? = nil, offsetLeft: Int? = nil, offsetTop: Int? = nil, success: ((response: JSON) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postAccountUpdateProfileBannerWithImageData(imageData: NSData, width: Int? = nil, height: Int? = nil, offsetLeft: Int? = nil, offsetTop: Int? = nil, success: ((response: JSON) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "account/update_profile_banner.json"
 
         var parameters = Dictionary<String, Any>()
-        if imageData != nil {
-            parameters["banner"] = imageData!.base64EncodedStringWithOptions([])
-        }
-        if width != nil {
-            parameters["width"] = width!
-        }
-        if height != nil {
-            parameters["height"] = height!
-        }
-        if offsetLeft != nil {
-            parameters["offset_left"] = offsetLeft!
-        }
-        if offsetTop != nil {
-            parameters["offset_top"] = offsetTop!
-        }
+        parameters["banner"] = imageData.base64EncodedStringWithOptions([])
+        parameters["width"] ??= width
+        parameters["height"] ??= height
+        parameters["offset_left"] ??= offsetLeft
+        parameters["offset_top"] ??= offsetTop
+
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(response: json)
@@ -706,9 +564,7 @@ public extension Swifter {
         let path = "mutes/users/ids.json"
 
         var parameters = Dictionary<String, Any>()
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
+        parameters["cursor"] ??= cursor
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -724,15 +580,9 @@ public extension Swifter {
         let path = "mutes/users/list.json"
         
         var parameters = Dictionary<String, Any>()
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
+        parameters["cursor"] ??= cursor
         
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)

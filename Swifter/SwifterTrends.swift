@@ -19,17 +19,12 @@ public extension Swifter {
 
     This information is cached for 5 minutes. Requesting more frequently than that will not return any more data, and will count against your rate limit usage.
     */
-    public func getTrendsPlaceWithWOEID(id: String, excludeHashtags: Bool? = nil, success: ((trends: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getTrendsPlaceWithWOEID(id: String, excludeHashtags: Bool = false, success: ((trends: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "trends/place.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
-
-        if excludeHashtags != nil {
-            if excludeHashtags! {
-                parameters["exclude"] = "hashtags"
-            }
-        }
+        parameters["exclude"] = excludeHashtags ? "hashtags" : nil
         
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(trends: json.array)

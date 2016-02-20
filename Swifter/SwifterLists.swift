@@ -40,9 +40,7 @@ public extension Swifter {
         let path = "lists/list.json"
 
         var parameters = Dictionary<String, Any>()
-        if reverse != nil {
-            parameters["reverse"] = reverse!
-        }
+        parameters["reverse"] ??= reverse
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(lists: json.array)
@@ -54,10 +52,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["userID"] = userID
-
-        if reverse != nil {
-            parameters["reverse"] = reverse!
-        }
+        parameters["reverse"] ??= reverse
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(lists: json.array)
@@ -69,10 +64,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
-
-        if reverse != nil {
-            parameters["reverse"] = reverse!
-        }
+        parameters["reverse"] ??= reverse
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(lists: json.array)
@@ -90,22 +82,11 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["list_id"] = listID
         parameters["owner_screen_name"] = ownerScreenName
-
-        if sinceID != nil {
-            parameters["since_id"] = sinceID!
-        }
-        if maxID != nil {
-            parameters["max_id"] = maxID!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if includeRTs != nil {
-            parameters["include_rts"] = includeRTs!
-        }
+        parameters["since_id"] ??= sinceID
+        parameters["max_id"] ??= maxID
+        parameters["count"] ??= count
+        parameters["include_entities"] ??= includeEntities
+        parameters["include_rts"] ??= includeRTs
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(statuses: json.array)
@@ -118,22 +99,11 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["list_id"] = listID
         parameters["owner_id"] = ownerID
-
-        if sinceID != nil {
-            parameters["since_id"] = sinceID!
-        }
-        if maxID != nil {
-            parameters["max_id"] = maxID!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if includeRTs != nil {
-            parameters["include_rts"] = includeRTs!
-        }
+        parameters["since_id"] ??= sinceID
+        parameters["max_id"] ??= maxID
+        parameters["count"] ??= count
+        parameters["include_entities"] ??= includeEntities
+        parameters["include_rts"] ??= includeRTs
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(statuses: json.array)
@@ -146,22 +116,11 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["slug"] = slug
         parameters["owner_screen_name"] = ownerScreenName
-
-        if sinceID != nil {
-            parameters["since_id"] = sinceID!
-        }
-        if maxID != nil {
-            parameters["max_id"] = maxID!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if includeRTs != nil {
-            parameters["include_rts"] = includeRTs!
-        }
+        parameters["since_id"] ??= sinceID
+        parameters["max_id"] ??= maxID
+        parameters["count"] ??= count
+        parameters["include_entities"] ??= includeEntities
+        parameters["include_rts"] ??= includeRTs
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(statuses: json.array)
@@ -174,22 +133,11 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["slug"] = slug
         parameters["owner_id"] = ownerID
-
-        if sinceID != nil {
-            parameters["since_id"] = sinceID!
-        }
-        if maxID != nil {
-            parameters["max_id"] = maxID!
-        }
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if includeRTs != nil {
-            parameters["include_rts"] = includeRTs!
-        }
+        parameters["since_id"] ??= sinceID
+        parameters["max_id"] ??= maxID
+        parameters["count"] ??= count
+        parameters["include_entities"] ??= includeEntities
+        parameters["include_rts"] ??= includeRTs
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(statuses: json.array)
@@ -287,13 +235,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
-
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if filterToOwnedLists != nil {
-            parameters["filter_to_owned_lists"] = filterToOwnedLists!
-        }
+        parameters["cursor"] ??= cursor
+        parameters["filter_to_owned_lists"] ??= filterToOwnedLists
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(lists: json["lists"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -307,12 +250,8 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if filterToOwnedLists != nil {
-            parameters["filter_to_owned_lists"] = filterToOwnedLists!
-        }
+        parameters["cursor"] ??= cursor
+        parameters["filter_to_owned_lists"] ??= filterToOwnedLists
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(lists: json["lists"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -330,18 +269,10 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["list_id"] = listID
-        if ownerScreenName != nil {
-            parameters["owner_screen_name"] = ownerScreenName!
-        }
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["owner_screen_name"] ??= ownerScreenName
+        parameters["cursor"] ??= cursor
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -354,18 +285,10 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["list_id"] = listID
-        if ownerID != nil {
-            parameters["owner_id"] = ownerID!
-        }
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["owner_id"] ??= ownerID
+        parameters["cursor"] ??= cursor
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -378,18 +301,10 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["slug"] = slug
-        if ownerScreenName != nil {
-            parameters["owner_screen_name"] = ownerScreenName!
-        }
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["owner_screen_name"] ??= ownerScreenName
+        parameters["cursor"] ??= cursor
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -402,18 +317,10 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["slug"] = slug
-        if ownerID != nil {
-            parameters["owner_id"] = ownerID!
-        }
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["owner_id"] ??= ownerID
+        parameters["cursor"] ??= cursor
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -486,12 +393,8 @@ public extension Swifter {
         parameters["list_id"] = listID
         parameters["user_id"] = userID
 
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -505,12 +408,8 @@ public extension Swifter {
         parameters["list_id"] = listID
         parameters["screen_name"] = screenName
 
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -525,12 +424,8 @@ public extension Swifter {
         parameters["owner_id"] = ownerID
         parameters["user_id"] = userID
 
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -545,12 +440,8 @@ public extension Swifter {
         parameters["owner_id"] = ownerID
         parameters["screen_name"] = screenName
 
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -565,12 +456,8 @@ public extension Swifter {
         parameters["owner_screen_name"] = ownerScreenName
         parameters["user_id"] = userID
 
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -585,12 +472,8 @@ public extension Swifter {
         parameters["owner_screen_name"] = ownerScreenName
         parameters["screen_name"] = screenName
 
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -653,12 +536,8 @@ public extension Swifter {
         let userIDStrings = userIDs.map { String($0) }
         parameters["user_id"] = userIDStrings.joinWithSeparator(",")
 
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(response: json)
@@ -672,12 +551,8 @@ public extension Swifter {
         parameters["list_id"] = listID
         parameters["screen_name"] = screenNames.joinWithSeparator(",")
 
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(response: json)
@@ -694,12 +569,8 @@ public extension Swifter {
         let userIDStrings = userIDs.map { String($0) }
         parameters["user_id"] = userIDStrings.joinWithSeparator(",")
 
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(response: json)
@@ -714,12 +585,8 @@ public extension Swifter {
         parameters["owner_id"] = ownerID
         parameters["screen_name"] = screenNames.joinWithSeparator(",")
 
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(response: json)
@@ -736,12 +603,8 @@ public extension Swifter {
         let userIDStrings = userIDs.map { String($0) }
         parameters["user_id"] = userIDStrings.joinWithSeparator(",")
 
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(response: json)
@@ -756,12 +619,8 @@ public extension Swifter {
         parameters["owner_screen_name"] = ownerScreenName
         parameters["screen_name"] = screenNames.joinWithSeparator(",")
 
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(response: json)
@@ -779,13 +638,8 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["list_id"] = listID
         parameters["user_id"] = userID
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -798,13 +652,8 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["list_id"] = listID
         parameters["screen_name"] = screenName
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -818,13 +667,8 @@ public extension Swifter {
         parameters["slug"] = slug
         parameters["owner_id"] = ownerID
         parameters["user_id"] = userID
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -838,13 +682,8 @@ public extension Swifter {
         parameters["slug"] = slug
         parameters["owner_id"] = ownerID
         parameters["screen_name"] = screenName
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -858,13 +697,8 @@ public extension Swifter {
         parameters["slug"] = slug
         parameters["owner_screen_name"] = ownerScreenName
         parameters["user_id"] = userID
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -883,13 +717,8 @@ public extension Swifter {
         parameters["slug"] = slug
         parameters["owner_screen_name"] = ownerScreenName
         parameters["screen_name"] = screenName
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -901,18 +730,10 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["list_id"] = listID
-        if ownerScreenName != nil {
-            parameters["owner_screen_name"] = ownerScreenName!
-        }
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["owner_screen_name"] ??= ownerScreenName
+        parameters["cursor"] ??= cursor
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -925,18 +746,10 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["list_id"] = listID
-        if ownerID != nil {
-            parameters["owner_id"] = ownerID!
-        }
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["owner_id"] ??= ownerID
+        parameters["cursor"] ??= cursor
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -949,18 +762,10 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["slug"] = slug
-        if ownerScreenName != nil {
-            parameters["owner_screen_name"] = ownerScreenName!
-        }
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["owner_screen_name"] ??= ownerScreenName
+        parameters["cursor"] ??= cursor
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -973,18 +778,10 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["slug"] = slug
-        if ownerID != nil {
-            parameters["owner_id"] = ownerID!
-        }
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
-        if skipStatus != nil {
-            parameters["skip_status"] = skipStatus!
-        }
+        parameters["owner_id"] ??= ownerID
+        parameters["cursor"] ??= cursor
+        parameters["include_entities"] ??= includeEntities
+        parameters["skip_status"] ??= skipStatus
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -1091,80 +888,44 @@ public extension Swifter {
 
     Updates the specified list. The authenticated user must own the list to be able to update it.
     */
-    public func postListsUpdateWithListID(listID: String, name: String?, publicMode: Bool?, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postListsUpdateWithListID(listID: String, name: String?, publicMode: Bool = true, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/update.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["list_id"] = listID
-
-        if name != nil {
-            parameters["name"] = name!
-        }
-        if publicMode != nil {
-            if publicMode! {
-                parameters["mode"] = "public"
-            }
-            else {
-                parameters["mode"] = "private"
-            }
-        }
-        if description != nil {
-            parameters["description"] = description!
-        }
+        parameters["name"] ??= name
+        parameters["mode"] = publicMode ? "public" : "private"
+        parameters["description"] ??= description
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(list: json.object)
             }, failure: failure)
     }
 
-    public func postListsUpdateWithSlug(slug: String, ownerID: String, name: String?, publicMode: Bool?, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postListsUpdateWithSlug(slug: String, ownerID: String, name: String?, publicMode: Bool = true, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/update.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["slug"] = slug
         parameters["owner_id"] = ownerID
-
-        if name != nil {
-            parameters["name"] = name!
-        }
-        if publicMode != nil {
-            if publicMode! {
-                parameters["mode"] = "public"
-            }
-            else {
-                parameters["mode"] = "private"
-            }
-        }
-        if description != nil {
-            parameters["description"] = description!
-        }
+        parameters["name"] ??= name
+        parameters["mode"] = publicMode ? "public" : "private"
+        parameters["description"] ??= description
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(list: json.object)
             }, failure: failure)
     }
 
-    public func postListsUpdateWithSlug(slug: String, ownerScreenName: String, name: String?, publicMode: Bool?, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postListsUpdateWithSlug(slug: String, ownerScreenName: String, name: String?, publicMode: Bool = true, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/update.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["slug"] = slug
         parameters["owner_screen_name"] = ownerScreenName
-
-        if name != nil {
-            parameters["name"] = name!
-        }
-        if publicMode != nil {
-            if publicMode! {
-                parameters["mode"] = "public"
-            }
-            else {
-                parameters["mode"] = "private"
-            }
-        }
-        if description != nil {
-            parameters["description"] = description!
-        }
+        parameters["name"] ??= name
+        parameters["mode"] = publicMode ? "public" : "private"
+        parameters["description"] ??= description
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(list: json.object)
@@ -1176,23 +937,13 @@ public extension Swifter {
 
     Creates a new list for the authenticated user. Note that you can't create more than 20 lists per account.
     */
-    public func postListsCreateWithName(name: String, publicMode: Bool?, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
+    public func postListsCreateWithName(name: String, publicMode: Bool = true, description: String?, success: ((list: Dictionary<String, JSONValue>?) -> Void)?, failure: FailureHandler?) {
         let path = "lists/create.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["name"] = name
-
-        if publicMode != nil {
-            if publicMode! {
-                parameters["mode"] = "public"
-            }
-            else {
-                parameters["mode"] = "private"
-            }
-        }
-        if description != nil {
-            parameters["description"] = description!
-        }
+        parameters["mode"] = publicMode ? "public" : "private"
+        parameters["description"] ??= description
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(list: json.object)
@@ -1249,13 +1000,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
-
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
+        parameters["count"] ??= count
+        parameters["cursor"] ??= cursor
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(lists: json["lists"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -1268,13 +1014,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
-
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
+        parameters["count"] ??= count
+        parameters["cursor"] ??= cursor
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(lists: json["lists"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
@@ -1320,10 +1061,8 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["slug"] = slug
-
         let userIDStrings = userIDs.map { String($0) }
         parameters["user_id"] = userIDStrings.joinWithSeparator(",")
-
         parameters["owner_screen_name"] = ownerScreenName
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
@@ -1352,7 +1091,6 @@ public extension Swifter {
 
         let userIDStrings = userIDs.map { String($0) }
         parameters["user_id"] = userIDStrings.joinWithSeparator(",")
-
         parameters["owner_id"] = ownerID
         
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
@@ -1383,13 +1121,8 @@ public extension Swifter {
         
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
-        
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if cursor != nil {
-            parameters["cursor"] = cursor!
-        }
+        parameters["count"] ??= count
+        parameters["cursor"] ??= cursor
         
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(lists: json["lists"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
