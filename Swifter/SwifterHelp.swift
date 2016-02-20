@@ -37,8 +37,7 @@ public extension Swifter {
     public func getHelpConfigurationWithSuccess(success: ((config: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/configuration.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: {
-            json, _ in
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
             success?(config: json.object)
             }, failure: failure)
     }

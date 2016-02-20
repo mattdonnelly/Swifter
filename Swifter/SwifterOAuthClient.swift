@@ -119,14 +119,10 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         authorizationParameters["oauth_timestamp"] = String(Int(NSDate().timeIntervalSince1970))
         authorizationParameters["oauth_nonce"] = NSUUID().UUIDString
 
-        if self.credential?.accessToken != nil {
-            authorizationParameters["oauth_token"] = self.credential!.accessToken!.key
-        }
+        authorizationParameters["oauth_token"] ??= self.credential!.accessToken?.key
 
-        for (key, value): (String, Any) in parameters {
-            if key.hasPrefix("oauth_") {
-                authorizationParameters.updateValue(value, forKey: key)
-            }
+        for (key, value) in parameters where key.hasPrefix("oauth_") {
+            authorizationParameters.updateValue(value, forKey: key)
         }
 
         let combinedParameters = authorizationParameters +| parameters
@@ -150,10 +146,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
     }
 
     func oauthSignatureForMethod(method: HTTPMethodType, url: NSURL, parameters: Dictionary<String, Any>, accessToken token: SwifterCredential.OAuthAccessToken?) -> String {
-        var tokenSecret: NSString = ""
-        if token != nil {
-            tokenSecret = token!.secret.urlEncodedStringWithEncoding(self.dataEncoding)
-        }
+        let tokenSecret: NSString = token?.secret.urlEncodedStringWithEncoding(self.dataEncoding) ?? ""
 
         let encodedConsumerSecret = self.consumerSecret.urlEncodedStringWithEncoding(self.dataEncoding)
 

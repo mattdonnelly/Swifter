@@ -38,18 +38,11 @@ public extension Swifter {
         let path = "favorites/list.json"
 
         var parameters = Dictionary<String, Any>()
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if sinceID != nil {
-            parameters["since_id"] = sinceID!
-        }
-        if maxID != nil {
-            parameters["max_id"] = maxID!
-        }
+        parameters["count"] ??= count
+        parameters["since_id"] ??= sinceID
+        parameters["max_id"] ??= maxID
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
-
             success?(statuses: json.array)
             }, failure: failure)
     }
@@ -59,16 +52,9 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
-
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if sinceID != nil {
-            parameters["since_id"] = sinceID!
-        }
-        if maxID != nil {
-            parameters["max_id"] = maxID!
-        }
+        parameters["count"] ??= count
+        parameters["since_id"] ??= sinceID
+        parameters["max_id"] ??= maxID
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(statuses: json.array)
@@ -80,16 +66,9 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
-
-        if count != nil {
-            parameters["count"] = count!
-        }
-        if sinceID != nil {
-            parameters["since_id"] = sinceID!
-        }
-        if maxID != nil {
-            parameters["max_id"] = maxID!
-        }
+        parameters["count"] ??= count
+        parameters["since_id"] ??= sinceID
+        parameters["max_id"] ??= maxID
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(statuses: json.array)
@@ -108,10 +87,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
+        parameters["include_entities"] ??= includeEntities
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(status: json.object)
@@ -130,10 +106,7 @@ public extension Swifter {
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
-
-        if includeEntities != nil {
-            parameters["include_entities"] = includeEntities!
-        }
+        parameters["include_entities"] ??= includeEntities
 
         self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(status: json.object)

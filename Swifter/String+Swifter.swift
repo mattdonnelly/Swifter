@@ -70,8 +70,8 @@ extension String {
             scanner.scanUpToString("&", intoString: &value)
             scanner.scanString("&", intoString: nil)
 
-            if key != nil && value != nil {
-                parameters.updateValue(value! as String, forKey: key! as String)
+            if let key = key as? String, let value = value as? String {
+                parameters.updateValue(value, forKey: key)
             }
         }
         

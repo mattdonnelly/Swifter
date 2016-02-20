@@ -54,18 +54,10 @@ public extension Swifter {
         parameters["lat"] = lat
         parameters["long"] = long
 
-        if accuracy != nil {
-            parameters["accuracy"] = accuracy!
-        }
-        if granularity != nil {
-            parameters["granularity"] = granularity!
-        }
-        if maxResults != nil {
-            parameters["max_results"] = maxResults!
-        }
-        if callback != nil {
-            parameters["callback"] = callback!
-        }
+        parameters["accuracy"] ??= accuracy
+        parameters["granularity"] ??= granularity
+        parameters["max_results"] ??= maxResults
+        parameters["callback"] ??= callback
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(place: json.object)
@@ -87,37 +79,16 @@ public extension Swifter {
         let path = "geo/search.json"
 
         var parameters = Dictionary<String, Any>()
-
-        if lat != nil {
-            parameters["lat"] = lat!
-        }
-        if long != nil {
-            parameters["long"] = long!
-        }
-        if query != nil {
-            parameters["query"] = query!
-        }
-        if ipAddress != nil {
-            parameters["ipAddress"] = ipAddress!
-        }
-        if accuracy != nil {
-            parameters["accuracy"] = accuracy!
-        }
-        if granularity != nil {
-            parameters["granularity"] = granularity!
-        }
-        if maxResults != nil {
-            parameters["max_results"] = maxResults!
-        }
-        if containedWithin != nil {
-            parameters["contained_within"] = containedWithin!
-        }
-        if attributeStreetAddress != nil {
-            parameters["attribute:street_address"] = attributeStreetAddress
-        }
-        if callback != nil {
-            parameters["callback"] = callback!
-        }
+        parameters["lat"] ??= lat
+        parameters["long"] ??= long
+        parameters["query"] ??= query
+        parameters["ipAddress"] ??= ipAddress
+        parameters["accuracy"] ??= accuracy
+        parameters["granularity"] ??= granularity
+        parameters["max_results"] ??= maxResults
+        parameters["contained_within"] ??= containedWithin
+        parameters["attribute:street_address"] ??= attributeStreetAddress
+        parameters["callback"] ??= callback
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(places: json.array)
@@ -140,18 +111,12 @@ public extension Swifter {
         parameters["lat"] = lat
         parameters["long"] = long
         parameters["name"] = name
+        
+        parameters["contained_within"] ??= containedWithin
+        parameters["attribute:street_address"] ??= attributeStreetAddress
+        parameters["callback"] ??= callback
 
-        if containedWithin != nil {
-            parameters["contained_within"] = containedWithin!
-        }
-        if attributeStreetAddress != nil {
-            parameters["attribute:street_address"] = attributeStreetAddress
-        }
-        if callback != nil {
-            parameters["callback"] = callback!
-        }
-
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(places: json.array)
             }, failure: failure)
     }
