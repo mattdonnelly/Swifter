@@ -77,6 +77,10 @@
 		8BF1D6861948BCC100E3AA64 /* SwifterAccountsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */; };
 		8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
 		8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
+		A17A694F1C78336200063DFD /* Operator+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17A694D1C78333400063DFD /* Operator+Swifter.swift */; };
+		A17A69501C78336300063DFD /* Operator+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17A694D1C78333400063DFD /* Operator+Swifter.swift */; };
+		A1C7F0A51C7845FD00955ADB /* SwifterMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F51131944A61D00894629 /* SwifterMac.framework */; };
+		A1C7F0A61C7845FD00955ADB /* SwifterMac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F51131944A61D00894629 /* SwifterMac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A1DD65C51B618D7E0070E6FC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +92,13 @@
 			remoteGlobalIDString = 8B9F50ED1944A5AB00894629;
 			remoteInfo = SwifteriOS;
 		};
+		A1C7F0A71C7845FD00955ADB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B9F50E51944A5AB00894629 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B9F51121944A61D00894629;
+			remoteInfo = SwifterMac;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -98,6 +109,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8B300C3F1944AA6600993175 /* SwifteriOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1C7F0A91C7845FD00955ADB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A1C7F0A61C7845FD00955ADB /* SwifterMac.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,7 +143,7 @@
 		8B548F581945325E00EE2927 /* SwifterAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAuth.swift; sourceTree = "<group>"; };
 		8B548F5B1945331D00EE2927 /* SwifterTimelines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTimelines.swift; sourceTree = "<group>"; };
 		8B552D29194643CF0052EB86 /* NSURL+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Swifter.swift"; sourceTree = "<group>"; };
-		8B552D2C194695F80052EB86 /* SwifterStreaming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterStreaming.swift; sourceTree = "<group>"; };
+		8B552D2C194695F80052EB86 /* SwifterStreaming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SwifterStreaming.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8B5EFF03195F064400B354F9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B5EFF04195F064400B354F9 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8B5EFF05195F064400B354F9 /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
@@ -137,8 +159,8 @@
 		8BA50EC61953828A00FB1829 /* SwifterAppOnlyClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAppOnlyClient.swift; sourceTree = "<group>"; };
 		8BC32D3C1955EEE100FF75A0 /* SwifterTrends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTrends.swift; sourceTree = "<group>"; };
 		8BCB9328194B2E1200A998EA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		8BCF43161947450A00E63301 /* SwifterTweets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTweets.swift; sourceTree = "<group>"; };
-		8BCF431919475D3C00E63301 /* SwifterSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterSearch.swift; sourceTree = "<group>"; };
+		8BCF43161947450A00E63301 /* SwifterTweets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SwifterTweets.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		8BCF431919475D3C00E63301 /* SwifterSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SwifterSearch.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8BCF431C1947907300E63301 /* SwifterMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterMessages.swift; sourceTree = "<group>"; };
 		8BCF431F194798FB00E63301 /* SwifterFollowers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterFollowers.swift; sourceTree = "<group>"; };
 		8BCF43221947A6C800E63301 /* SwifterUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterUsers.swift; sourceTree = "<group>"; };
@@ -151,6 +173,7 @@
 		8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterClientProtocol.swift; sourceTree = "<group>"; };
 		8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAccountsClient.swift; sourceTree = "<group>"; };
 		8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterCredential.swift; sourceTree = "<group>"; };
+		A17A694D1C78333400063DFD /* Operator+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Operator+Swifter.swift"; sourceTree = "<group>"; };
 		A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "../Swifter/Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -167,6 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1C7F0A51C7845FD00955ADB /* SwifterMac.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */,
+				A17A694D1C78333400063DFD /* Operator+Swifter.swift */,
 				8B552D29194643CF0052EB86 /* NSURL+Swifter.swift */,
 				8B9F514A1944A8DC00894629 /* String+Swifter.swift */,
 			);
@@ -354,10 +379,12 @@
 				8B300C431944AECB00993175 /* Sources */,
 				8B300C441944AECB00993175 /* Frameworks */,
 				8B300C451944AECB00993175 /* Resources */,
+				A1C7F0A91C7845FD00955ADB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A1C7F0A81C7845FD00955ADB /* PBXTargetDependency */,
 			);
 			name = SwifterDemoMac;
 			productName = SwifterDemoMac;
@@ -507,6 +534,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A17A694F1C78336200063DFD /* Operator+Swifter.swift in Sources */,
 				8BCF43291947CC7A00E63301 /* SwifterFavorites.swift in Sources */,
 				8BCF43261947CABA00E63301 /* SwifterSuggested.swift in Sources */,
 				8B116AF1194601970019A4DC /* SwifterHTTPRequest.swift in Sources */,
@@ -541,6 +569,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A17A69501C78336300063DFD /* Operator+Swifter.swift in Sources */,
 				8BCF432A1947CC7A00E63301 /* SwifterFavorites.swift in Sources */,
 				8BCF43271947CABA00E63301 /* SwifterSuggested.swift in Sources */,
 				8B116AF2194601970019A4DC /* SwifterHTTPRequest.swift in Sources */,
@@ -578,6 +607,11 @@
 			isa = PBXTargetDependency;
 			target = 8B9F50ED1944A5AB00894629 /* SwifteriOS */;
 			targetProxy = 8B300C401944AA6600993175 /* PBXContainerItemProxy */;
+		};
+		A1C7F0A81C7845FD00955ADB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B9F51121944A61D00894629 /* SwifterMac */;
+			targetProxy = A1C7F0A71C7845FD00955ADB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -630,6 +664,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -651,6 +686,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SwifterDemoMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
