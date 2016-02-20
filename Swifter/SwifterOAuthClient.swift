@@ -58,10 +58,9 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
 
     func get(path: String, baseURL: NSURL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
         let url = NSURL(string: path, relativeToURL: baseURL)!
-        let method = "GET"
 
-        let request = SwifterHTTPRequest(URL: url, method: method, parameters: parameters)
-        request.headers = ["Authorization": self.authorizationHeaderForMethod(method, url: url, parameters: parameters, isMediaUpload: false)]
+        let request = SwifterHTTPRequest(URL: url, method: .GET, parameters: parameters)
+        request.headers = ["Authorization": self.authorizationHeaderForMethod(.GET, url: url, parameters: parameters, isMediaUpload: false)]
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
@@ -73,7 +72,6 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
 
     func post(path: String, baseURL: NSURL, var parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
         let url = NSURL(string: path, relativeToURL: baseURL)!
-        let method = "POST"
 
         var postData: NSData?
         var postDataKey: String?
@@ -96,8 +94,8 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
             }
         }
 
-        let request = SwifterHTTPRequest(URL: url, method: method, parameters: parameters)
-        request.headers = ["Authorization": self.authorizationHeaderForMethod(method, url: url, parameters: parameters, isMediaUpload: postData != nil)]
+        let request = SwifterHTTPRequest(URL: url, method: .POST, parameters: parameters)
+        request.headers = ["Authorization": self.authorizationHeaderForMethod(.POST, url: url, parameters: parameters, isMediaUpload: postData != nil)]
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
@@ -113,7 +111,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         return request
     }
 
-    func authorizationHeaderForMethod(method: String, url: NSURL, parameters: Dictionary<String, Any>, isMediaUpload: Bool) -> String {
+    func authorizationHeaderForMethod(method: HTTPMethodType, url: NSURL, parameters: Dictionary<String, Any>, isMediaUpload: Bool) -> String {
         var authorizationParameters = Dictionary<String, Any>()
         authorizationParameters["oauth_version"] = OAuth.version
         authorizationParameters["oauth_signature_method"] =  OAuth.signatureMethod
@@ -151,7 +149,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         return "OAuth " + headerComponents.joinWithSeparator(", ")
     }
 
-    func oauthSignatureForMethod(method: String, url: NSURL, parameters: Dictionary<String, Any>, accessToken token: SwifterCredential.OAuthAccessToken?) -> String {
+    func oauthSignatureForMethod(method: HTTPMethodType, url: NSURL, parameters: Dictionary<String, Any>, accessToken token: SwifterCredential.OAuthAccessToken?) -> String {
         var tokenSecret: NSString = ""
         if token != nil {
             tokenSecret = token!.secret.urlEncodedStringWithEncoding(self.dataEncoding)

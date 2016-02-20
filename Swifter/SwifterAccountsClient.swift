@@ -38,7 +38,7 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
     func get(path: String, baseURL: NSURL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
         let url = NSURL(string: path, relativeToURL: baseURL)
 
-        let stringifiedParameters = SwifterAccountsClient.convertDictionaryValuesToStrings(parameters)
+        let stringifiedParameters = parameters.stringifiedDictionary()
 
         let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: url, parameters: stringifiedParameters)
         socialRequest.account = self.credential!.account!
@@ -61,33 +61,28 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
         var postData: NSData?
         var postDataKey: String?
 
-        if let key: Any = params[Swifter.DataParameters.dataKey] {
-            if let keyString = key as? String {
-                postDataKey = keyString
-                postData = params[postDataKey!] as? NSData
-
-                params.removeValueForKey(Swifter.DataParameters.dataKey)
-                params.removeValueForKey(postDataKey!)
-            }
+        if let keyString = params[Swifter.DataParameters.dataKey] as? String {
+            postDataKey = keyString
+            postData = params[postDataKey!] as? NSData
+            
+            params.removeValueForKey(Swifter.DataParameters.dataKey)
+            params.removeValueForKey(postDataKey!)
         }
 
         var postDataFileName: String?
-        if let fileName: Any = params[Swifter.DataParameters.fileNameKey] {
-            if let fileNameString = fileName as? String {
-                postDataFileName = fileNameString
-                params.removeValueForKey(fileNameString)
-            }
+        if let fileName = params[Swifter.DataParameters.fileNameKey] as? String {
+            postDataFileName = fileName
+            params.removeValueForKey(fileName)
         }
 
-        let stringifiedParameters = SwifterAccountsClient.convertDictionaryValuesToStrings(params)
+        let stringifiedParameters = params.stringifiedDictionary()
 
         let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.POST, URL: url, parameters: stringifiedParameters)
         socialRequest.account = self.credential!.account!
 
-        if postData != nil {
+        if let data = postData {
             let fileName = postDataFileName ?? "media.jpg"
-
-            socialRequest.addMultipartData(postData!, withName: postDataKey!, type: "application/octet-stream", filename: fileName)
+            socialRequest.addMultipartData(data, withName: postDataKey!, type: "application/octet-stream", filename: fileName)
         }
 
         let request = SwifterHTTPRequest(request: socialRequest.preparedURLRequest())
@@ -98,16 +93,6 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
         
         request.start()
         return request
-    }
-
-    class func convertDictionaryValuesToStrings(dictionary: Dictionary<String, Any>) -> Dictionary<String, String> {
-        var result = Dictionary<String, String>()
-
-        for (key, value): (String, Any) in dictionary {
-            result[key] = "\(value)"
-        }
-
-        return result
     }
 
 }

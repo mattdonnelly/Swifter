@@ -38,12 +38,8 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["stringify_ids"] = stringifyIDs!
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(ids: json.array)
-            return
-
             }, failure: failure)
     }
 
@@ -73,11 +69,8 @@ public extension Swifter {
             parameters["count"] = count!
         }
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-            
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
-            
             }, failure: failure)
     }
     
@@ -97,11 +90,8 @@ public extension Swifter {
             parameters["count"] = count!
         }
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-            
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
-            
             }, failure: failure)
     }
     
@@ -130,11 +120,8 @@ public extension Swifter {
             parameters["count"] = count!
         }
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-            
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
-            
             }, failure: failure)
     }
     
@@ -154,11 +141,8 @@ public extension Swifter {
             parameters["count"] = count!
         }
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-            
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
-            
             }, failure: failure)
     }
     
@@ -178,11 +162,8 @@ public extension Swifter {
             parameters["stringify_urls"] = stringifyIDs!
         }
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-            
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
-            
             }, failure: failure)
     }
     
@@ -202,11 +183,8 @@ public extension Swifter {
             parameters["stringify_urls"] = stringifyIDs!
         }
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-            
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
-            
             }, failure: failure)
     }
 
@@ -229,12 +207,8 @@ public extension Swifter {
             parameters["follow"] = follow!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -248,12 +222,8 @@ public extension Swifter {
             parameters["follow"] = follow!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -272,12 +242,8 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -287,12 +253,8 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -314,12 +276,8 @@ public extension Swifter {
             parameters["retweets"] = retweets!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -336,12 +294,8 @@ public extension Swifter {
             parameters["retweets"] = retweets!
         }
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -363,12 +317,8 @@ public extension Swifter {
             parameters["targetScreenName"] = targetScreenName!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -385,12 +335,8 @@ public extension Swifter {
             parameters["targetScreenName"] = targetScreenName!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -420,11 +366,8 @@ public extension Swifter {
             parameters["include_user_entities"] = includeUserEntities!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
-
             }, failure: failure)
     }
 
@@ -447,9 +390,7 @@ public extension Swifter {
             parameters["include_user_entities"] = includeUserEntities!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
@@ -481,11 +422,8 @@ public extension Swifter {
             parameters["include_user_entities"] = includeUserEntities!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
-
             }, failure: failure)
     }
 
@@ -508,11 +446,8 @@ public extension Swifter {
             parameters["include_user_entities"] = includeUserEntities!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
-
             }, failure: failure)
     }
 
@@ -527,12 +462,8 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenNames.joinWithSeparator(",")
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-            
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(friendships: json.array)
-            return
-            
             }, failure: failure)
     }
     
@@ -542,12 +473,8 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = ids.joinWithSeparator(",")
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-            
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(friendships: json.array)
-            return
-            
             }, failure: failure)
     }
     

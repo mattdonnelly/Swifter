@@ -31,12 +31,8 @@ public extension Swifter {
             }
         }
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-            
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(trends: json.array)
-            return
-            
             }, failure: failure)
     }
 
@@ -52,12 +48,8 @@ public extension Swifter {
     public func getTrendsAvailableWithSuccess(success: ((trends: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "trends/available.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
             success?(trends: json.array)
-            return
-
             }, failure: failure)
     }
 
@@ -77,12 +69,8 @@ public extension Swifter {
         parameters["lat"] = lat
         parameters["long"] = long
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(trends: json.array)
-            return
-
             }, failure: failure)
     }
 

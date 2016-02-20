@@ -28,23 +28,17 @@ import Foundation
 extension String {
 
     internal func indexOf(sub: String) -> Int? {
-        var pos: Int?
-
-        if let range = self.rangeOfString(sub) {
-            if !range.isEmpty {
-                pos = self.startIndex.distanceTo(range.startIndex)
-            }
+        guard let range = self.rangeOfString(sub) where !range.isEmpty else {
+            return nil
         }
-
-        return pos
+        return self.startIndex.distanceTo(range.startIndex)
     }
 
     internal subscript (r: Range<Int>) -> String {
         get {
             let startIndex = self.startIndex.advancedBy(r.startIndex)
             let endIndex = startIndex.advancedBy(r.endIndex - r.startIndex)
-
-            return self[Range(start: startIndex, end: endIndex)]
+            return self[startIndex..<endIndex]
         }
     }
     

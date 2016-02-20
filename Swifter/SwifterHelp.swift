@@ -37,12 +37,9 @@ public extension Swifter {
     public func getHelpConfigurationWithSuccess(success: ((config: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/configuration.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: {
+            json, _ in
             success?(config: json.object)
-            return
-
             }, failure: failure)
     }
 
@@ -54,12 +51,8 @@ public extension Swifter {
     public func getHelpLanguagesWithSuccess(success: ((languages: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/languages.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
             success?(languages: json.array)
-            return
-
             }, failure: failure)
     }
 
@@ -71,12 +64,8 @@ public extension Swifter {
     public func getHelpPrivacyWithSuccess(success: ((privacy: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/privacy.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
             success?(privacy: json["privacy"].string)
-            return
-
             }, failure: failure)
     }
 
@@ -88,12 +77,8 @@ public extension Swifter {
     public func getHelpTermsOfServiceWithSuccess(success: ((tos: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/tos.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
             success?(tos: json["tos"].string)
-            return
-
             }, failure: failure)
     }
 
@@ -118,12 +103,8 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["resources"] = resources.joinWithSeparator(",")
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(rateLimitStatus: json.object)
-            return
-
             }, failure: failure)
     }
     

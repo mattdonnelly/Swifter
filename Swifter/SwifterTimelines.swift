@@ -50,12 +50,8 @@ public extension Swifter {
             params["include_entities"] = Int(includeEntities!)
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: params, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: params, success: { json, _ in
             success?(statuses: json.array)
-            return
-
             }, failure: failure)
     }
 

@@ -42,12 +42,8 @@ public extension Swifter {
             parameters["lang"] = lang!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json.array)
-            return
-
             }, failure: failure)
     }
 
@@ -64,12 +60,8 @@ public extension Swifter {
             parameters["lang"] = lang!
         }
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json.array)
-            return
-
             }, failure: failure)
     }
 
@@ -81,12 +73,8 @@ public extension Swifter {
     public func getUsersSuggestionsForSlugMembers(slug: String, success: ((users: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "users/suggestions/\(slug)/members.json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], uploadProgress: nil, downloadProgress: nil, success: {
-            json, response in
-
+        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
             success?(users: json.array)
-            return
-            
             }, failure: failure)
     }
     

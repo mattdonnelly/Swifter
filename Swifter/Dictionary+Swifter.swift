@@ -29,13 +29,9 @@ extension Dictionary {
 
     func filter(predicate: Element -> Bool) -> Dictionary {
         var filteredDictionary = Dictionary()
-
-        for (key, value) in self {
-            if predicate(key, value) {
-                filteredDictionary[key] = value
-            }
+        for (key, value) in self where predicate(key, value) {
+            filteredDictionary[key] = value
         }
-
         return filteredDictionary
     }
 
@@ -63,6 +59,14 @@ extension Dictionary {
         }
 
         return parts.joinWithSeparator("&")
+    }
+    
+    func stringifiedDictionary() -> Dictionary<String, String> {
+        let dict = self.reduce([String: String]()) { (var dict, tuple) in
+            dict["\(tuple.0)"] = "\(tuple.1)"
+            return dict
+        }
+        return dict
     }
     
 }

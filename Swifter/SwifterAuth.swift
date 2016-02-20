@@ -36,13 +36,13 @@ public extension Swifter {
 
     public typealias TokenSuccessHandler = (accessToken: SwifterCredential.OAuthAccessToken?, response: NSURLResponse) -> Void
 
-
     /**
         Begin Authorization with a Callback URL.
         - Parameter presentFromViewController: The viewController used to present the SFSafariViewController.
             The UIViewController must inherit SFSafariViewControllerDelegate
     */
-    public func authorizeWithCallbackURL(callbackURL: NSURL, presentFromViewController presentingViewController: UIViewController? = nil, success: TokenSuccessHandler?, failure: ((error: NSError) -> Void)? = nil) {
+    
+    public func authorizeWithCallbackURL(callbackURL: NSURL, presentFromViewController presentingViewController: UIViewController? = nil, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: {
             token, response in
 
@@ -96,9 +96,7 @@ public extension Swifter {
     }
 
     public func authorizeAppOnlyWithSuccess(success: TokenSuccessHandler?, failure: FailureHandler?) {
-        self.postOAuth2BearerTokenWithSuccess({
-            json, response in
-
+        self.postOAuth2BearerTokenWithSuccess({ json, response in
             if let tokenType = json["token_type"].string {
                 if tokenType == "bearer" {
                     let accessToken = json["access_token"].string
@@ -108,17 +106,14 @@ public extension Swifter {
                     self.client.credential = SwifterCredential(accessToken: credentialToken)
 
                     success?(accessToken: credentialToken, response: response)
-                }
-                else {
+                } else {
                     let error = NSError(domain: "Swifter", code: SwifterError.appOnlyAuthenticationErrorCode, userInfo: [NSLocalizedDescriptionKey: "Cannot find bearer token in server response"]);
                     failure?(error: error)
                 }
-            }
-            else if let errors = json["errors"].object {
+            } else if let errors = json["errors"].object {
                 let error = NSError(domain: SwifterError.domain, code: errors["code"]!.integer!, userInfo: [NSLocalizedDescriptionKey: errors["message"]!.string!]);
                 failure?(error: error)
-            }
-            else {
+            } else {
                 let error = NSError(domain: SwifterError.domain, code: SwifterError.appOnlyAuthenticationErrorCode, userInfo: [NSLocalizedDescriptionKey: "Cannot find JSON dictionary in response"]);
                 failure?(error: error)
             }
@@ -132,15 +127,13 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["grant_type"] = "client_credentials"
 
-        self.jsonRequestWithPath(path, baseURL: self.apiURL, method: "POST", parameters: parameters, success: success, failure: failure)
+        self.jsonRequestWithPath(path, baseURL: self.apiURL, method: .POST, parameters: parameters, success: success, failure: failure)
     }
 
     public func postOAuth2InvalidateBearerTokenWithSuccess(success: TokenSuccessHandler?, failure: FailureHandler?) {
         let path = "/oauth2/invalidate_token"
 
-        self.jsonRequestWithPath(path, baseURL: self.apiURL, method: "POST", parameters: [:], success: {
-            json, response in
-
+        self.jsonRequestWithPath(path, baseURL: self.apiURL, method: .POST, parameters: [:], success: { json, response in
             if let accessToken = json["access_token"].string {
                 self.client.credential = nil
 
