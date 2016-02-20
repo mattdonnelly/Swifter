@@ -50,53 +50,28 @@ public class Swifter {
 
     // MARK: - Properties
 
-    internal(set) var apiURL: NSURL
-    internal(set) var uploadURL: NSURL
-    internal(set) var streamURL: NSURL
-    internal(set) var userStreamURL: NSURL
-    internal(set) var siteStreamURL: NSURL
+    let apiURL = NSURL(string: "https://api.twitter.com/1.1/")!
+    let uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")!
+    let streamURL = NSURL(string: "https://stream.twitter.com/1.1/")!
+    let userStreamURL = NSURL(string: "https://userstream.twitter.com/1.1/")!
+    let siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")!
 
     public var client: SwifterClientProtocol
 
     // MARK: - Initializers
-
-    public convenience init(consumerKey: String, consumerSecret: String) {
-        self.init(consumerKey: consumerKey, consumerSecret: consumerSecret, appOnly: false)
-    }
-
-    public init(consumerKey: String, consumerSecret: String, appOnly: Bool) {
-        if appOnly {
-            self.client = SwifterAppOnlyClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
-        }
-        else {
-            self.client = SwifterOAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
-        }
-
-        self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")!
-        self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")!
-        self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")!
-        self.userStreamURL = NSURL(string: "https://userstream.twitter.com/1.1/")!
-        self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")!
+    
+    public init(consumerKey: String, consumerSecret: String, appOnly: Bool = false) {
+        self.client = appOnly
+            ? SwifterAppOnlyClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
+            : SwifterOAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
     }
 
     public init(consumerKey: String, consumerSecret: String, oauthToken: String, oauthTokenSecret: String) {
         self.client = SwifterOAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret , accessToken: oauthToken, accessTokenSecret: oauthTokenSecret)
-
-        self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")!
-        self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")!
-        self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")!
-        self.userStreamURL = NSURL(string: "https://userstream.twitter.com/1.1/")!
-        self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")!
     }
 
     public init(account: ACAccount) {
         self.client = SwifterAccountsClient(account: account)
-
-        self.apiURL = NSURL(string: "https://api.twitter.com/1.1/")!
-        self.uploadURL = NSURL(string: "https://upload.twitter.com/1.1/")!
-        self.streamURL = NSURL(string: "https://stream.twitter.com/1.1/")!
-        self.userStreamURL = NSURL(string: "https://userstream.twitter.com/1.1/")!
-        self.siteStreamURL = NSURL(string: "https://sitestream.twitter.com/1.1/")!
     }
 
     deinit {
