@@ -42,7 +42,7 @@ public enum HTTPMethodType: String {
     case CONNECT
 }
 
-public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
+public class SwifterHTTPRequest: NSObject, NSURLSessionDataDelegate {
 
     public typealias UploadProgressHandler = (bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) -> Void
     public typealias DownloadProgressHandler = (data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void
@@ -60,7 +60,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     let HTTPMethod: HTTPMethodType
 
     var request: NSMutableURLRequest?
-    var connection: NSURLConnection!
+    var dataTask: NSURLSessionDataTask!
 
     var headers: Dictionary<String, String>
     var parameters: Dictionary<String, Any>
@@ -82,11 +82,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     var successHandler: SuccessHandler?
     var failureHandler: FailureHandler?
 
-    public convenience init(URL: NSURL) {
-        self.init(URL: URL, method: .GET, parameters: [:])
-    }
-
-    public init(URL: NSURL, method: HTTPMethodType, parameters: Dictionary<String, Any>) {
+    public init(URL: NSURL, method: HTTPMethodType = .GET, parameters: Dictionary<String, Any> = [:]) {
         self.URL = URL
         self.HTTPMethod = method
         self.headers = [:]
@@ -178,9 +174,10 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         }
 
         dispatch_async(dispatch_get_main_queue()) {
-            self.connection = NSURLConnection(request: self.request!, delegate: self)
-            self.connection.start()
-
+            let session = NSURLSession(configuration: .defaultSessionConfiguration(), delegate: self, delegateQueue: .mainQueue())
+            self.dataTask = session.dataTaskWithRequest(self.request!)
+            self.dataTask.resume()
+            
             #if os(iOS)
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             #endif
@@ -188,7 +185,7 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
     }
 
     public func stop() {
-        self.connection.cancel()
+        self.dataTask.cancel()
     }
 
     public func addMultipartData(data: NSData, parameterName: String, mimeType: String?, fileName: String?) -> Void {
@@ -214,39 +211,16 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
         return tempData
     }
 
-    public func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
-        self.response = response as? NSHTTPURLResponse
-
-        self.responseData.length = 0
-    }
-
-    public func connection(connection: NSURLConnection, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
-        self.uploadProgressHandler?(bytesWritten: bytesWritten, totalBytesWritten: totalBytesWritten, totalBytesExpectedToWrite: totalBytesExpectedToWrite)
-    }
-
-    public func connection(connection: NSURLConnection, didReceiveData data: NSData) {
-        self.responseData.appendData(data)
-
-        let expectedContentLength = Int(self.response!.expectedContentLength)
-        let totalBytesReceived = self.responseData.length
-
-        guard data.length > 0 else { return }
-        self.downloadProgressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)
-    }
-
-    public func connection(connection: NSURLConnection, didFailWithError error: NSError) {
+    public func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
         #if os(iOS)
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         #endif
 
-        self.failureHandler?(error: error)
-    }
-
-    public func connectionDidFinishLoading(connection: NSURLConnection) {
-        #if os(iOS)
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        #endif
-
+        if let error = error {
+            self.failureHandler?(error: error)
+            return
+        }
+        
         if self.response.statusCode >= 400 {
             let responseString = NSString(data: self.responseData, encoding: self.dataEncoding)
             let responseErrorCode = SwifterHTTPRequest.responseErrorCode(self.responseData) ?? 0
@@ -259,8 +233,28 @@ public class SwifterHTTPRequest: NSObject, NSURLConnectionDataDelegate {
             self.failureHandler?(error: error)
             return
         }
-
+        
         self.successHandler?(data: self.responseData, response: self.response)
+    }
+    
+    public func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
+        self.responseData.appendData(data)
+        
+        let expectedContentLength = Int(self.response!.expectedContentLength)
+        let totalBytesReceived = self.responseData.length
+        
+        guard data.length > 0 else { return }
+        self.downloadProgressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)
+    }
+    
+    public func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveResponse response: NSURLResponse, completionHandler: (NSURLSessionResponseDisposition) -> Void) {
+        self.response = response as? NSHTTPURLResponse
+        self.responseData.length = 0
+        completionHandler(.Allow)
+    }
+    
+    public func URLSession(session: NSURLSession, task: NSURLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+        self.uploadProgressHandler?(bytesWritten: Int(bytesSent), totalBytesWritten: Int(totalBytesSent), totalBytesExpectedToWrite: Int(totalBytesExpectedToSend))
     }
 
     class func stringWithData(data: NSData, encodingName: String?) -> String {

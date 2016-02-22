@@ -35,76 +35,58 @@ let swifter = Swifter(consumerKey: "", consumerSecret: "", appOnly: true)
 ####OAuth Authorization:
 
 ```swift
-swifter.authorizeWithCallbackURL(callbackURL, success: {
-	(accessToken: SwifterCredential.OAuthAccessToken?, response: NSURLResponse) in
+swifter.authorizeWithCallbackURL(callbackURL, success: { accessToken, response in
+	// ...
+
+  }, failure: { error in
 
 	// ...
 
-	},
-	failure: {
-		(error: NSError) in
-
-		// ...
-
-	})
+})
 ```
 
 ####Get Home Timeline:
 
 ```swift
-swifter.getStatusesHomeTimelineWithCount(20, success: {
-    (statuses: JSONValue[]?) in
-
+swifter.getStatusesHomeTimelineWithCount(20, success: { statuses in
 	// ...
 
-	}, failure: {
-        (error: NSError) in
+	}, failure: { error in
+    // ...
 
-        // ...
-
-	})
+})
 ```
 
 ####Streaming API:
 
 ```swift
-swifter.getStatusesSampleDelimited(progress: {
-	(status: Dictionary<String, JSONValue>?) in
-
+swifter.getStatusesSampleDelimited(progress: { status in
 	// ...
 
-	}, stallWarnings: {
-        (code: String?, message: String?, percentFull: Int?) in
+  }, stallWarnings: { code, message, percentFull in
+    // ...
 
-        // ...
+  }, failure: { error in
+    // ...
 
-    }, failure: {
-        (error: NSError) in
-
-        // ...
-
-	})
+})
 ```
 
 ####Status Update:
 
 ```swift
-swifter.postStatusUpdate("Hello, world", success: {
-	(status: Dictionary<String, JSONValue>?) in
-
+swifter.postStatusUpdate("Hello, world", success: { status in
     // ...
 
-    }, failure: {
-        (error: NSError) in
+  }, failure: { error in
+    // ...
 
-        // ...
-
-    })
+})
 ```
 
 ##JSON Handling
 
-To make accessing data returned by twitter requests, Swifter provides a class for representing JSON which you interact with similarly to a dictionary. The main advantage of using this instead of a Dictionary<String, AnyObject> is that it works better with Swift's strict typing system and doesnt require you to constantly downcast accessed objects. It also removes the need for lots optional chaining, making your code much cleaner and easier to read.
+To make accessing data returned by twitter requests, Swifter provides a class for representing JSON which you interact with similarly to a dictionary. The main advantage of using this instead of a Dictionary<String, AnyObject> is that it works better with Swift's strict typing system and doesn't require you to constantly downcast accessed objects. It also removes the need for lots optional chaining, making your code much cleaner and easier to read.
 
 Here's an example of how you would access the text of the first element in list of statuses:
 
