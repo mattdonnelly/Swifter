@@ -42,15 +42,12 @@ extension String {
         }
     }
     
-    func urlEncodedStringWithEncoding(encoding: NSStringEncoding) -> String {
-        let charactersToBeEscaped = ":/?&=;+!@#$()',*" as CFStringRef
-        let charactersToLeaveUnescaped = "[]." as CFStringRef
+    func urlEncodedStringWithEncoding() -> String {
+        let allowedCharacterSet = NSCharacterSet.URLQueryAllowedCharacterSet().mutableCopy() as! NSMutableCharacterSet
+        allowedCharacterSet.removeCharactersInString("\n:#/?@!$&'()*+,;=")
+        allowedCharacterSet.addCharactersInString("[]")
+        return self.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacterSet)!
 
-        let str = self as NSString
-
-        let result = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, str as CFString, charactersToLeaveUnescaped, charactersToBeEscaped, CFStringConvertNSStringEncodingToEncoding(encoding)) as NSString
-
-        return result as String
     }
 
     func parametersFromQueryString() -> Dictionary<String, String> {
