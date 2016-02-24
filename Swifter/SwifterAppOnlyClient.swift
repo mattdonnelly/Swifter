@@ -79,8 +79,8 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
     }
 
     class func base64EncodedCredentialsWithKey(key: String, secret: String) -> String {
-        let encodedKey = key.urlEncodedStringWithEncoding(NSUTF8StringEncoding)
-        let encodedSecret = secret.urlEncodedStringWithEncoding(NSUTF8StringEncoding)
+        let encodedKey = key.urlEncodedStringWithEncoding()
+        let encodedSecret = secret.urlEncodedStringWithEncoding()
         let bearerTokenCredentials = "\(encodedKey):\(encodedSecret)"
         if let data = bearerTokenCredentials.dataUsingEncoding(NSUTF8StringEncoding) {
             return data.base64EncodedStringWithOptions([])

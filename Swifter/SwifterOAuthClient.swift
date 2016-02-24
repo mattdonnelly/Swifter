@@ -146,9 +146,9 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
     }
 
     func oauthSignatureForMethod(method: HTTPMethodType, url: NSURL, parameters: Dictionary<String, Any>, accessToken token: SwifterCredential.OAuthAccessToken?) -> String {
-        let tokenSecret: NSString = token?.secret.urlEncodedStringWithEncoding(self.dataEncoding) ?? ""
+        let tokenSecret: NSString = token?.secret.urlEncodedStringWithEncoding() ?? ""
 
-        let encodedConsumerSecret = self.consumerSecret.urlEncodedStringWithEncoding(self.dataEncoding)
+        let encodedConsumerSecret = self.consumerSecret.urlEncodedStringWithEncoding()
 
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"
 
@@ -156,9 +156,9 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         parameterComponents.sortInPlace { $0 < $1 }
 
         let parameterString = parameterComponents.joinWithSeparator("&")
-        let encodedParameterString = parameterString.urlEncodedStringWithEncoding(self.dataEncoding)
+        let encodedParameterString = parameterString.urlEncodedStringWithEncoding()
 
-        let encodedURL = url.absoluteString.urlEncodedStringWithEncoding(self.dataEncoding)
+        let encodedURL = url.absoluteString.urlEncodedStringWithEncoding()
 
         let signatureBaseString = "\(method)&\(encodedURL)&\(encodedParameterString)"
 
