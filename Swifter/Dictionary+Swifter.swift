@@ -62,9 +62,9 @@ extension Dictionary {
     }
     
     func stringifiedDictionary() -> Dictionary<String, String> {
-        let dict = self.reduce([String: String]()) { (var dict, tuple) in
-            dict["\(tuple.0)"] = "\(tuple.1)"
-            return dict
+        var dict = [String: String]()
+        for (key, value) in self {
+            dict[String(key)] = String(value)
         }
         return dict
     }

@@ -70,9 +70,9 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         return request
     }
 
-    func post(path: String, baseURL: NSURL, var parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
+    func post(path: String, baseURL: NSURL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
         let url = NSURL(string: path, relativeToURL: baseURL)!
-
+        var parameters = parameters
         var postData: NSData?
         var postDataKey: String?
 
