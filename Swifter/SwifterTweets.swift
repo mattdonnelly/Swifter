@@ -208,6 +208,29 @@ public extension Swifter {
             success?(status: json.object)
             }, failure: failure)
     }
+    
+    /**
+     POST	statuses/unretweet/:id
+     
+     Untweets a retweeted status. Returns the original Tweet with retweet details embedded.
+     
+     - This method is subject to update limits. A HTTP 429 will be returned if this limit has been hit.
+     - The untweeted retweet status ID must be authored by the user backing the authentication token.
+     - An application must have write privileges to POST. A HTTP 401 will be returned for read-only applications.
+     - When passing a source status ID instead of the retweet status ID a HTTP 200 response will be returned with the same Tweet object but no action.
+     
+     Returns Tweets (1: the original tweet)
+     */
+    public func postStatusUnretweetWithID(id: String, trimUser: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+        let path = "statuses/unretweet/\(id).json"
+        
+        var parameters = Dictionary<String, Any>()
+        parameters["trim_user"] ??= trimUser
+        
+        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+            success?(status: json.object)
+            }, failure: failure)
+    }
 
     /*
     GET    statuses/oembed
