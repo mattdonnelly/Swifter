@@ -42,7 +42,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET	statuses/mentions_timeline
     Returns Tweets (*: mentions for the user)
 
@@ -57,7 +57,7 @@ public extension Swifter {
     }
 
 
-    /*
+    /**
     GET	statuses/user_timeline
     Returns Tweets (*: tweets for the user)
 
@@ -75,7 +75,7 @@ public extension Swifter {
         self.getTimelineAtPath("statuses/user_timeline.json", parameters: parameters, count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 
-    /*
+    /**
     GET	statuses/home_timeline
 
     Returns Tweets (*: tweets from people the user follows)
@@ -88,7 +88,7 @@ public extension Swifter {
         self.getTimelineAtPath("statuses/home_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
     }
 
-    /*
+    /**
     GET    statuses/retweets_of_me
 
     Returns the most recent tweets authored by the authenticating user that have been retweeted by others. This timeline is a subset of the user's GET statuses/user_timeline. See Working with Timelines for instructions on traversing timelines.

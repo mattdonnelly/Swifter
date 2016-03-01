@@ -27,7 +27,7 @@ import Foundation
 
 public extension Swifter {
 
-    /*
+    /**
     GET    users/suggestions/:slug
 
     Access the users in a given category of the Twitter suggested user list.
@@ -45,7 +45,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    users/suggestions
 
     Access to Twitter's suggested user list. This returns the list of suggested user categories. The category can be used in GET users/suggestions/:slug to get the users in that category.
@@ -61,7 +61,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    users/suggestions/:slug/members
 
     Access the users in a given category of the Twitter suggested user list and return their most recent status if they are not a protected user.

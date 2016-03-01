@@ -27,7 +27,7 @@ import Foundation
 
 public extension Swifter {
 
-    /*
+    /**
     GET    lists/list
 
     Returns all lists the authenticating or specified user subscribes to, including their own. The user is specified using the user_id or screen_name parameters. If no user is given, the authenticating user is used.
@@ -71,7 +71,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET	lists/statuses
 
     Returns a timeline of tweets authored by members of the specified list. Retweets are included by default. Use the include_rts=false parameter to omit retweets. Embedded Timelines is a great way to embed list timelines on your website.
@@ -144,7 +144,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	lists/members/destroy
 
     Removes the specified member from the list. The authenticated user must be the list's owner to remove members from the list.
@@ -225,7 +225,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    lists/memberships
 
     Returns the lists the specified user has been added to. If user_id or screen_name are not provided the memberships for the authenticating user are returned.
@@ -259,7 +259,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET	lists/subscribers
 
     Returns the subscribers of the specified list. Private list subscribers will only be shown if the authenticated user owns the specified list.
@@ -328,7 +328,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	lists/subscribers/create
 
     Subscribes the authenticated user to the specified list.
@@ -381,7 +381,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET	lists/subscribers/show
 
     Check if the specified user is a subscriber of the specified list. Returns the user if they are subscriber.
@@ -480,7 +480,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	lists/subscribers/destroy
 
     Unsubscribes the authenticated user from the specified list.
@@ -520,7 +520,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	lists/members/create_all
 
     Adds multiple members to a list, by specifying a comma-separated list of member ids or screen names. The authenticated user must own the list to be able to add members to it. Note that lists can't have more than 5,000 members, and you are limited to adding up to 100 members to a list at a time with this method.
@@ -627,7 +627,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET	lists/members/show
 
     Check if the specified user is a member of the specified list.
@@ -705,7 +705,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    lists/members
 
     Returns the members of the specified list. Private list members will only be shown if the authenticated user owns the specified list.
@@ -790,7 +790,7 @@ public extension Swifter {
     }
 
 
-    /*
+    /**
     POST	lists/members/create
 
     Creates a new list for the authenticated user. Note that you can't create more than 20 lists per account.
@@ -843,7 +843,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	lists/destroy
 
     Deletes the specified list. The authenticated user must own the list to be able to destroy it.
@@ -883,7 +883,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	lists/update
 
     Updates the specified list. The authenticated user must own the list to be able to update it.
@@ -932,7 +932,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	lists/create
 
     Creates a new list for the authenticated user. Note that you can't create more than 20 lists per account.
@@ -950,7 +950,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET	lists/show
 
     Returns the specified list. Private lists will only be shown if the authenticated user owns the specified list.
@@ -990,7 +990,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET	lists/subscriptions
 
     Obtain a collection of the lists the specified user is subscribed to, 20 lists per page by default. Does not include the user's own lists.
@@ -1023,7 +1023,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	lists/members/destroy_all
 
     Removes multiple members from a list, by specifying a comma-separated list of member ids or screen names. The authenticated user must own the list to be able to remove members from it. Note that lists can't have more than 500 members, and you are limited to removing up to 100 members to a list at a time with this method.
@@ -1111,7 +1111,7 @@ public extension Swifter {
             }, failure: failure)
     }
     
-    /*
+    /**
     GET    lists/ownerships
     
     Returns the lists owned by the specified Twitter user. Private lists will only be shown if the authenticated user is also the owner of the lists.

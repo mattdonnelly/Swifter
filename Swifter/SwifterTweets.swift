@@ -27,7 +27,7 @@ import Foundation
 
 public extension Swifter {
 
-    /*
+    /**
     GET    statuses/retweets/:id
 
     Returns up to 100 of the first retweets of a given tweet.
@@ -44,7 +44,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    statuses/show/:id
 
     Returns a single Tweet, specified by the id parameter. The Tweet's author will also be embedded within the tweet.
@@ -78,7 +78,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	statuses/destroy/:id
 
     Destroys the status specified by the required ID parameter. The authenticating user must be the author of the specified status. Returns the destroyed status if successful.
@@ -94,7 +94,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	statuses/update
 
     Updates the authenticating user's current status, also known as tweeting. To upload an image to accompany the tweet, use POST media/upload.
@@ -166,7 +166,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	media/upload
 
     Upload media (images) to Twitter for use in a Tweet or Twitter-hosted Card. For uploading videos or for chunked image uploads (useful for lower bandwidth connections), see our chunked POST media/upload endpoint.
@@ -187,7 +187,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	statuses/retweet/:id
 
     Retweets a tweet. Returns the original tweet with retweet details embedded.
@@ -232,7 +232,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    statuses/oembed
 
     Returns information allowing the creation of an embedded representation of a Tweet on third party sites. See the oEmbed specification for information about the response format.
@@ -275,7 +275,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    statuses/retweeters/ids
 
     Returns a collection of up to 100 user IDs belonging to users who have retweeted the tweet specified by the id parameter.
@@ -295,7 +295,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET statuses/lookup
 
     Returns fully-hydrated tweet objects for up to 100 tweets per request, as specified by comma-separated values passed to the id parameter. This method is especially useful to get the details (hydrate) a collection of Tweet IDs. GET statuses/show/:id is used to retrieve a single tweet object.

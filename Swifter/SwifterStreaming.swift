@@ -27,7 +27,7 @@ import Foundation
 
 public extension Swifter {
 
-    /*
+    /**
     POST	statuses/filter
 
     Returns public statuses that match one or more filter predicates. Multiple parameters may be specified which allows most clients to use a single connection to the Streaming API. Both GET and POST requests are supported, but GET requests with too many parameters may cause the request to be rejected for excessive URL length. Use a POST request to avoid long URLs.
@@ -64,7 +64,7 @@ public extension Swifter {
                 }, failure: failure)
     }
 
-    /*
+    /**
     GET    statuses/sample
 
     Returns a small random sample of all public statuses. The Tweets returned by the default access level are the same, so if two different clients connect to this endpoint, they will see the same Tweets.
@@ -90,7 +90,7 @@ public extension Swifter {
                 }, failure: failure)
     }
 
-    /*
+    /**
     GET    statuses/firehose
 
     This endpoint requires special permission to access.
@@ -119,7 +119,7 @@ public extension Swifter {
                 }, failure: failure)
     }
 
-    /*
+    /**
     GET    user
 
     Streams messages for a single user, as described in User streams https://dev.twitter.com/docs/streaming-apis/streams/user
@@ -150,7 +150,7 @@ public extension Swifter {
                 }, failure: failure)
     }
 
-    /*
+    /**
     GET    site
 
     Streams messages for a set of users, as described in Site streams https://dev.twitter.com/docs/streaming-apis/streams/site

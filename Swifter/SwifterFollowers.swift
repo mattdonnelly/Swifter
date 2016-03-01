@@ -27,7 +27,7 @@ import Foundation
 
 public extension Swifter {
 
-    /*
+    /**
     GET    friendships/no_retweets/ids
 
     Returns a collection of user_ids that the currently authenticated user does not want to receive retweets from. Use POST friendships/update to set the "no retweets" status for a given user account on behalf of the current user.
@@ -43,7 +43,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    friends/ids
     Returns Users (*: user IDs for followees)
 
@@ -81,7 +81,7 @@ public extension Swifter {
             }, failure: failure)
     }
     
-    /*
+    /**
     GET    followers/ids
     
     Returns a cursored collection of user IDs for every user following the specified user.
@@ -118,7 +118,7 @@ public extension Swifter {
             }, failure: failure)
     }
     
-    /*
+    /**
     GET    friendships/incoming
     
     Returns a collection of numeric IDs for every user who has a pending request to follow the authenticating user.
@@ -135,7 +135,7 @@ public extension Swifter {
             }, failure: failure)
     }
     
-    /*
+    /**
     GET    friendships/outgoing
     
     Returns a collection of numeric IDs for every protected user for whom the authenticating user has a pending follow request.
@@ -152,7 +152,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST   friendships/create
 
     Allows the authenticating users to follow the user specified in the ID parameter.
@@ -185,7 +185,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	friendships/destroy
 
     Allows the authenticating user to unfollow the user specified in the ID parameter.
@@ -216,7 +216,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	friendships/update
 
     Allows one to enable or disable retweets and device notifications from the specified user.
@@ -247,7 +247,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    friendships/show
 
     Returns detailed information about the relationship between two arbitrary users.
@@ -278,7 +278,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    friends/list
 
     Returns a cursored collection of user objects for every user the specified user is following (otherwise known as their "friends").
@@ -316,7 +316,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    followers/list
 
     Returns a cursored collection of user objects for users following the specified user.
@@ -353,7 +353,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    friendships/lookup
 
     Returns the relationships of the authenticating user to the comma-separated list of up to 100 screen_names or user_ids provided. Values for connections can be: following, following_requested, followed_by, none.

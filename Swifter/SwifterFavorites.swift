@@ -27,7 +27,7 @@ import Foundation
 
 public extension Swifter {
 
-    /*
+    /**
     GET    favorites/list
 
     Returns the 20 most recent Tweets favorited by the authenticating or specified user.
@@ -75,7 +75,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	favorites/destroy
 
     Un-favorites the status specified in the ID parameter as the authenticating user. Returns the un-favorited status in the requested format when successful.
@@ -94,7 +94,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	favorites/create
 
     Favorites the status specified in the ID parameter as the authenticating user. Returns the favorite status when successful.

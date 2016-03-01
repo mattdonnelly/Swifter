@@ -27,7 +27,7 @@ import Foundation
 
 public extension Swifter {
 
-    /*
+    /**
     GET    geo/id/:place_id
 
     Returns all the information about a known place.
@@ -40,7 +40,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    geo/reverse_geocode
 
     Given a latitude and a longitude, searches for up to 20 places that can be used as a place_id when updating a status.
@@ -64,7 +64,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    geo/search
 
     Search for places that can be attached to a statuses/update. Given a latitude and a longitude pair, an IP address, or a name, this request will return a list of all the valid places that can be used as the place_id when updating a status.
@@ -95,7 +95,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    geo/similar_places
 
     Locates places near the given coordinates which are similar in name.

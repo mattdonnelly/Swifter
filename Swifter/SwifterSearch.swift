@@ -27,7 +27,16 @@ import Foundation
 
 public extension Swifter {
 
-    //	GET		search/tweets
+    /**
+     GET    search/tweets
+     
+     Returns a collection of relevant Tweets matching a specified query.
+     
+     Please note that Twitter’s search service and, by extension, the Search API is not meant to be an exhaustive source of Tweets. Not all Tweets will be indexed or made available via the search interface.
+     
+     In API v1.1, the response format of the Search API has been improved to return Tweet objects more similar to the objects you’ll find across the REST API and platform. However, perspectival attributes (fields that pertain to the perspective of the authenticating user) are not currently supported on this endpoint.
+
+     */
     public func getSearchTweetsWithQuery(q: String, geocode: String? = nil, lang: String? = nil, locale: String? = nil, resultType: String? = nil, count: Int? = nil, until: String? = nil, sinceID: String? = nil, maxID: String? = nil, includeEntities: Bool? = nil, callback: String? = nil, success: ((statuses: [JSONValue]?, searchMetadata: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler) {
         let path = "search/tweets.json"
 

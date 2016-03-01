@@ -27,7 +27,7 @@ import Foundation
 
 public extension Swifter {
 
-    /*
+    /**
     GET    account/settings
 
     Returns settings (including current trend, geo and sleep time information) for the authenticating user.
@@ -40,7 +40,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET	account/verify_credentials
 
     Returns an HTTP 200 OK response code and a representation of the requesting user if authentication was successful; returns a 401 status code and an error message if not. Use this method to test if supplied user credentials are valid.
@@ -57,7 +57,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	account/settings
 
     Updates the authenticating user's settings.
@@ -80,7 +80,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	account/update_delivery_device
 
     Sets which device Twitter delivers updates to for the authenticating user. Sending none as the device parameter will disable SMS updates.
@@ -97,7 +97,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	account/update_profile
 
     Sets values that users are able to set under the "Account" tab of their settings page. Only the parameters specified will be updated.
@@ -120,7 +120,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	account/update_profile_background_image
 
     Updates the authenticating user's profile background image. This method can also be used to enable or disable the profile background image. Although each parameter is marked as optional, at least one of image, tile or use must be provided when making this request.
@@ -141,7 +141,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	account/update_profile_colors
 
     Sets one or more hex values that control the color scheme of the authenticating user's profile page on twitter.com. Each parameter's value must be a valid hexidecimal value, and may be either three or six characters (ex: #fff or #ffffff).
@@ -163,7 +163,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	account/update_profile_image
 
     Updates the authenticating user's profile image. Note that this method expects raw multipart data, not a URL to an image.
@@ -183,7 +183,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    blocks/list
 
     Returns a collection of user objects that the authenticating user is blocking.
@@ -201,7 +201,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    blocks/ids
 
     Returns an array of numeric user ids the authenticating user is blocking.
@@ -218,7 +218,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	blocks/create
 
     Blocks the specified user from following the authenticating user. In addition the blocked user will not show in the authenticating users mentions or timeline (unless retweeted by another user). If a follow or friend relationship exists it is destroyed.
@@ -249,7 +249,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST	blocks/destroy
 
     Un-blocks the user specified in the ID parameter for the authenticating user. Returns the un-blocked user in the requested format when successful. If relationships existed before the block was instated, they will not be restored.
@@ -280,7 +280,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    users/lookup
 
     Returns fully-hydrated user objects for up to 100 users per request, as specified by comma-separated values passed to the user_id and/or screen_name parameters.
@@ -323,7 +323,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    users/show
 
     Returns a variety of information about the user specified by the required user_id or screen_name parameter. The author's most recent Tweet will be returned inline when possible. GET users/lookup is used to retrieve a bulk collection of user objects.
@@ -354,7 +354,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    users/search
 
     Provides a simple, relevance-based search interface to public user accounts on Twitter. Try querying by topical interest, full name, company name, location, or other criteria. Exact match searches are not supported.
@@ -375,7 +375,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    users/contributees
 
     Returns a collection of users that the specified user can "contribute" to.
@@ -406,7 +406,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    users/contributors
 
     Returns a collection of users who can contribute to the specified account.
@@ -437,7 +437,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST   account/remove_profile_banner
 
     Removes the uploaded profile banner for the authenticating user. Returns HTTP 200 upon success.
@@ -450,7 +450,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST    account/update_profile_banner
 
     Uploads a profile banner on behalf of the authenticating user. For best results, upload an <5MB image that is exactly 1252px by 626px. Images will be resized for a number of display options. Users with an uploaded profile banner will have a profile_banner_url node in their Users objects. More information about sizing variations can be found in User Profile Images and Banners and GET users/profile_banner.
@@ -480,7 +480,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    users/profile_banner
 
     Returns a map of the available size variations of the specified user's profile banner. If the user has not uploaded a profile banner, a HTTP 404 will be served instead. This method can be used instead of string manipulation on the profile_banner_url returned in user objects as described in User Profile Images and Banners.
@@ -493,7 +493,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST   mutes/users/create
 
     Mutes the user specified in the ID parameter for the authenticating user.
@@ -524,7 +524,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST   mutes/users/destroy
 
     Un-mutes the user specified in the ID parameter for the authenticating user.
@@ -555,7 +555,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    mutes/users/ids
 
     Returns an array of numeric user ids the authenticating user has muted.
@@ -571,7 +571,7 @@ public extension Swifter {
             }, failure: failure)
     }
     
-    /*
+    /**
     GET    mutes/users/list
     
     Returns an array of user objects the authenticating user has muted.

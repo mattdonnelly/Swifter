@@ -10,7 +10,7 @@ import Foundation
 
 public extension Swifter {
 
-    /*
+    /**
     GET    trends/place
 
     Returns the top 10 trending topics for a specific WOEID, if trending information is available for it.
@@ -31,7 +31,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    trends/available
 
     Returns the locations that Twitter has trending topic information for.
@@ -48,7 +48,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    trends/closest
 
     Returns the locations that Twitter has trending topic information for, closest to a specified location.

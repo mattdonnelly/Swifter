@@ -27,7 +27,7 @@ import Foundation
 
 public extension Swifter {
 
-    /*
+    /**
     GET    saved_searches/list
 
     Returns the authenticated user's saved search queries.
@@ -40,7 +40,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    saved_searches/show/:id
 
     Retrieve the information for the saved search represented by the given id. The authenticating user must be the owner of saved search ID being requested.
@@ -53,7 +53,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST   saved_searches/create
 
     Create a new saved search for the authenticated user. A user may only have 25 saved searches.
@@ -69,7 +69,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     POST   saved_searches/destroy/:id
 
     Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.

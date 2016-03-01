@@ -27,7 +27,7 @@ import Foundation
 
 public extension Swifter {
 
-    /*
+    /**
     GET    help/configuration
 
     Returns the current configuration used by Twitter including twitter.com slugs which are not usernames, maximum photo resolutions, and t.co URL lengths.
@@ -42,7 +42,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    help/languages
 
     Returns the list of languages supported by Twitter along with their ISO 639-1 code. The ISO 639-1 code is the two letter value to use if you include lang with any of your requests.
@@ -55,7 +55,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    help/privacy
 
     Returns Twitter's Privacy Policy.
@@ -68,7 +68,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    help/tos
 
     Returns the Twitter Terms of Service in the requested format. These are not the same as the Developer Rules of the Road.
@@ -81,7 +81,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    /*
+    /**
     GET    application/rate_limit_status
 
     Returns the current rate limits for methods belonging to the specified resource families.
