@@ -71,20 +71,22 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         return request
     }
 
-    func post(path: String, baseURL: NSURL, var parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
+    func post(path: String, baseURL: NSURL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
         let url = NSURL(string: path, relativeToURL: baseURL)!
         let method = "POST"
 
         var postData: NSData?
         var postDataKey: String?
+        
+        var parametersMutable = parameters
 
         if let key: Any = parameters[Swifter.DataParameters.dataKey] {
             if let keyString = key as? String {
                 postDataKey = keyString
                 postData = parameters[postDataKey!] as? NSData
 
-                parameters.removeValueForKey(Swifter.DataParameters.dataKey)
-                parameters.removeValueForKey(postDataKey!)
+                parametersMutable.removeValueForKey(Swifter.DataParameters.dataKey)
+                parametersMutable.removeValueForKey(postDataKey!)
             }
         }
 
@@ -92,7 +94,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         if let fileName: Any = parameters[Swifter.DataParameters.fileNameKey] {
             if let fileNameString = fileName as? String {
                 postDataFileName = fileNameString
-                parameters.removeValueForKey(fileNameString)
+                parametersMutable.removeValueForKey(fileNameString)
             }
         }
 
