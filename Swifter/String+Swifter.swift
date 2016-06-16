@@ -27,45 +27,44 @@ import Foundation
 
 extension String {
 
-    internal func indexOf(sub: String) -> Int? {
-        guard let range = self.rangeOfString(sub) where !range.isEmpty else {
+    internal func indexOf(_ sub: String) -> Int? {
+        guard let range = self.range(of: sub) where !range.isEmpty else {
             return nil
         }
-        return self.startIndex.distanceTo(range.startIndex)
+        return self.characters.distance(from: self.startIndex, to: range.lowerBound)
     }
 
     internal subscript (r: Range<Int>) -> String {
         get {
-            let startIndex = self.startIndex.advancedBy(r.startIndex)
-            let endIndex = startIndex.advancedBy(r.endIndex - r.startIndex)
+            let startIndex = self.characters.index(self.startIndex, offsetBy: r.lowerBound)
+            let endIndex = self.characters.index(startIndex, offsetBy: r.upperBound - r.lowerBound)
             return self[startIndex..<endIndex]
         }
     }
     
     func urlEncodedStringWithEncoding() -> String {
-        let allowedCharacterSet = NSCharacterSet.URLQueryAllowedCharacterSet().mutableCopy() as! NSMutableCharacterSet
-        allowedCharacterSet.removeCharactersInString("\n:#/?@!$&'()*+,;=")
-        allowedCharacterSet.addCharactersInString("[]")
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacterSet)!
-
+        var allowedCharacterSet: CharacterSet = .urlQueryAllowed
+        allowedCharacterSet.remove(charactersIn: "\n:#/?@!$&'()*+,;=")
+        allowedCharacterSet.insert(charactersIn: "[]")
+        return self.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet)!
     }
 
     func parametersFromQueryString() -> Dictionary<String, String> {
         var parameters = Dictionary<String, String>()
 
-        let scanner = NSScanner(string: self)
+        let scanner = Scanner(string: self)
 
         var key: NSString?
         var value: NSString?
 
-        while !scanner.atEnd {
+        while !scanner.isAtEnd {
             key = nil
-            scanner.scanUpToString("=", intoString: &key)
-            scanner.scanString("=", intoString: nil)
+            scanner.scanUpTo("=", into: &key)
+            scanner.scanString("=", into: nil)
 
             value = nil
-            scanner.scanUpToString("&", intoString: &value)
-            scanner.scanString("&", intoString: nil)
+            scanner.scanUpTo("&", into: &value)
+            scanner.scanString("&", into: nil)
 
             if let key = key as? String, let value = value as? String {
                 parameters.updateValue(value, forKey: key)
@@ -75,19 +74,19 @@ extension String {
         return parameters
     }
 
-    func SHA1DigestWithKey(key: String) -> NSData {
-        let str = self.cStringUsingEncoding(NSUTF8StringEncoding)
-        let strLen = self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+    func SHA1DigestWithKey(_ key: String) -> Data {
+        let str = self.cString(using: String.Encoding.utf8)
+        let strLen = self.lengthOfBytes(using: String.Encoding.utf8)
         
         let digestLen = Int(CC_SHA1_DIGEST_LENGTH)
-        let result = UnsafeMutablePointer<Void>.alloc(digestLen)
+        let result = UnsafeMutablePointer<Void>(allocatingCapacity: digestLen)
         
-        let keyStr = key.cStringUsingEncoding(NSUTF8StringEncoding)!
-        let keyLen = key.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+        let keyStr = key.cString(using: String.Encoding.utf8)!
+        let keyLen = key.lengthOfBytes(using: String.Encoding.utf8)
 
         CCHmac(CCHmacAlgorithm(kCCHmacAlgSHA1), keyStr, keyLen, str!, strLen, result)
 
-        return NSData(bytes: result, length: digestLen)
+        return Data(bytes: UnsafePointer<UInt8>(result), count: digestLen)
     }
     
 }

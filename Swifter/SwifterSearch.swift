@@ -37,7 +37,7 @@ public extension Swifter {
      In API v1.1, the response format of the Search API has been improved to return Tweet objects more similar to the objects you’ll find across the REST API and platform. However, perspectival attributes (fields that pertain to the perspective of the authenticating user) are not currently supported on this endpoint.
 
      */
-    public func getSearchTweetsWithQuery(q: String, geocode: String? = nil, lang: String? = nil, locale: String? = nil, resultType: String? = nil, count: Int? = nil, until: String? = nil, sinceID: String? = nil, maxID: String? = nil, includeEntities: Bool? = nil, callback: String? = nil, success: ((statuses: [JSONValue]?, searchMetadata: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler) {
+    public func getSearchTweetsWithQuery(_ q: String, geocode: String? = nil, lang: String? = nil, locale: String? = nil, resultType: String? = nil, count: Int? = nil, until: String? = nil, sinceID: String? = nil, maxID: String? = nil, includeEntities: Bool? = nil, callback: String? = nil, success: ((statuses: [JSONValue]?, searchMetadata: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler) {
         let path = "search/tweets.json"
 
         var parameters = Dictionary<String, Any>()
@@ -53,7 +53,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["callback"] ??= callback
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(statuses: json["statuses"].array, searchMetadata: json["search_metadata"].object)
             }, failure: failure)
     }

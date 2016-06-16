@@ -32,13 +32,13 @@ public extension Swifter {
 
     Returns a collection of user_ids that the currently authenticated user does not want to receive retweets from. Use POST friendships/update to set the "no retweets" status for a given user account on behalf of the current user.
     */
-    public func getFriendshipsNoRetweetsIDsWithStringifyIDs(stringifyIDs: Bool = true, success: ((ids: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFriendshipsNoRetweetsIDsWithStringifyIDs(_ stringifyIDs: Bool = true, success: ((ids: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/no_retweets/ids.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["stringify_ids"] = stringifyIDs
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(ids: json.array)
             }, failure: failure)
     }
@@ -53,7 +53,7 @@ public extension Swifter {
 
     This method is especially powerful when used in conjunction with GET users/lookup, a method that allows you to convert user IDs into full user objects in bulk.
     */
-    public func getFriendsIDsWithID(id: String, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFriendsIDsWithID(_ id: String, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friends/ids.json"
         
         var parameters = Dictionary<String, Any>()
@@ -62,12 +62,12 @@ public extension Swifter {
         parameters["stringify_ids"] ??= stringifyIDs
         parameters["count"] ??= count
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
     
-    public func getFriendsIDsWithScreenName(screenName: String, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFriendsIDsWithScreenName(_ screenName: String, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friends/ids.json"
         
         var parameters = Dictionary<String, Any>()
@@ -76,7 +76,7 @@ public extension Swifter {
         parameters["stringify_ids"] ??= stringifyIDs
         parameters["count"] ??= count
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -90,7 +90,7 @@ public extension Swifter {
     
     This method is especially powerful when used in conjunction with GET users/lookup, a method that allows you to convert user IDs into full user objects in bulk.
     */
-    public func getFollowersIDsWithID(id: String, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFollowersIDsWithID(_ id: String, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "followers/ids.json"
         
         var parameters = Dictionary<String, Any>()
@@ -99,12 +99,12 @@ public extension Swifter {
         parameters["stringify_ids"] ??= stringifyIDs
         parameters["count"] ??= count
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
     
-    public func getFollowersIDsWithScreenName(screenName: String, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFollowersIDsWithScreenName(_ screenName: String, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "followers/ids.json"
         
         var parameters = Dictionary<String, Any>()
@@ -113,7 +113,7 @@ public extension Swifter {
         parameters["stringify_ids"] ??= stringifyIDs
         parameters["count"] ??= count
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -123,14 +123,14 @@ public extension Swifter {
     
     Returns a collection of numeric IDs for every user who has a pending request to follow the authenticating user.
     */
-    public func getFriendshipsIncomingWithCursor(cursor: String? = nil, stringifyIDs: String? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFriendshipsIncomingWithCursor(_ cursor: String? = nil, stringifyIDs: String? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/incoming.json"
         
         var parameters = Dictionary<String, Any>()
         parameters["cursor"] ??= cursor
         parameters["stringify_ids"] ??= stringifyIDs
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -140,14 +140,14 @@ public extension Swifter {
     
     Returns a collection of numeric IDs for every protected user for whom the authenticating user has a pending follow request.
     */
-    public func getFriendshipsOutgoingWithCursor(cursor: String? = nil, stringifyIDs: String? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFriendshipsOutgoingWithCursor(_ cursor: String? = nil, stringifyIDs: String? = nil, success: ((ids: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/outgoing.json"
         
         var parameters = Dictionary<String, Any>()
         parameters["cursor"] ??= cursor
         parameters["stringify_ids"] ??= stringifyIDs
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -161,26 +161,26 @@ public extension Swifter {
 
     Actions taken in this method are asynchronous and changes will be eventually consistent.
     */
-    public func postCreateFriendshipWithID(id: String, follow: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postCreateFriendshipWithID(_ id: String, follow: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/create.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
         parameters["follow"] ??= follow
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
 
-    public func postCreateFriendshipWithScreenName(screenName: String, follow: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postCreateFriendshipWithScreenName(_ screenName: String, follow: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/create.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
         parameters["follow"] ??= follow
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -194,24 +194,24 @@ public extension Swifter {
 
     Actions taken in this method are asynchronous and changes will be eventually consistent.
     */
-    public func postDestroyFriendshipWithID(id: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postDestroyFriendshipWithID(_ id: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/destroy.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
 
-    public func postDestroyFriendshipWithScreenName(screenName: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postDestroyFriendshipWithScreenName(_ screenName: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/destroy.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -221,7 +221,7 @@ public extension Swifter {
 
     Allows one to enable or disable retweets and device notifications from the specified user.
     */
-    public func postUpdateFriendshipWithID(id: String, device: Bool? = nil, retweets: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postUpdateFriendshipWithID(_ id: String, device: Bool? = nil, retweets: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/update.json"
 
         var parameters = Dictionary<String, Any>()
@@ -229,12 +229,12 @@ public extension Swifter {
         parameters["device"] ??= device
         parameters["retweets"] ??= retweets
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
 
-    public func postUpdateFriendshipWithScreenName(screenName: String, device: Bool? = nil, retweets: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postUpdateFriendshipWithScreenName(_ screenName: String, device: Bool? = nil, retweets: Bool? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/update.json"
 
         var parameters = Dictionary<String, Any>()
@@ -242,7 +242,7 @@ public extension Swifter {
         parameters["device"] ??= device
         parameters["retweets"] ??= retweets
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -252,7 +252,7 @@ public extension Swifter {
 
     Returns detailed information about the relationship between two arbitrary users.
     */
-    public func getFriendshipsShowWithSourceID(sourceID: String, targetID: String? = nil, orTargetScreenName targetScreenName: String? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFriendshipsShowWithSourceID(_ sourceID: String, targetID: String? = nil, orTargetScreenName targetScreenName: String? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/show.json"
 
         var parameters = Dictionary<String, Any>()
@@ -260,12 +260,12 @@ public extension Swifter {
         parameters["target_id"] ??= targetID
         parameters["targetScreenName"] ??= targetScreenName
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
 
-    public func getFriendshipsShowWithSourceScreenName(sourceScreenName: String, targetID: String? = nil, orTargetScreenName targetScreenName: String? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFriendshipsShowWithSourceScreenName(_ sourceScreenName: String, targetID: String? = nil, orTargetScreenName targetScreenName: String? = nil, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/show.json"
 
         var parameters = Dictionary<String, Any>()
@@ -273,7 +273,7 @@ public extension Swifter {
         parameters["target_id"] ??= targetID
         parameters["targetScreenName"] ??= targetScreenName
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -285,7 +285,7 @@ public extension Swifter {
 
     At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests. See Using cursors to navigate collections for more information.
     */
-    public func getFriendsListWithID(id: String, cursor: String? = nil, count: Int? = nil, skipStatus: Bool? = nil, includeUserEntities: Bool? = nil, success: ((users: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFriendsListWithID(_ id: String, cursor: String? = nil, count: Int? = nil, skipStatus: Bool? = nil, includeUserEntities: Bool? = nil, success: ((users: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friends/list.json"
 
         var parameters = Dictionary<String, Any>()
@@ -295,12 +295,12 @@ public extension Swifter {
         parameters["skip_status"] ??= skipStatus
         parameters["include_user_entities"] ??= includeUserEntities
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
 
-    public func getFriendsListWithScreenName(screenName: String, cursor: String? = nil, count: Int? = nil, skipStatus: Bool? = nil, includeUserEntities: Bool? = nil, success: ((users: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFriendsListWithScreenName(_ screenName: String, cursor: String? = nil, count: Int? = nil, skipStatus: Bool? = nil, includeUserEntities: Bool? = nil, success: ((users: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friends/list.json"
 
         var parameters = Dictionary<String, Any>()
@@ -310,7 +310,7 @@ public extension Swifter {
         parameters["skip_status"] ??= skipStatus
         parameters["include_user_entities"] ??= includeUserEntities
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
@@ -323,7 +323,7 @@ public extension Swifter {
 
     At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests. See Using cursors to navigate collections for more information.
     */
-    public func getFollowersListWithID(id: String, cursor: String? = nil, count: Int? = nil, skipStatus: Bool? = nil, includeUserEntities: Bool? = nil, success: ((users: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFollowersListWithID(_ id: String, cursor: String? = nil, count: Int? = nil, skipStatus: Bool? = nil, includeUserEntities: Bool? = nil, success: ((users: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "followers/list.json"
 
         var parameters = Dictionary<String, Any>()
@@ -333,12 +333,12 @@ public extension Swifter {
         parameters["skip_status"] ??= skipStatus
         parameters["include_user_entities"] ??= includeUserEntities
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
 
-    public func getFollowersListWithScreenName(screenName: String, cursor: String? = nil, count: Int? = nil, skipStatus: Bool? = nil, includeUserEntities: Bool? = nil, success: ((users: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFollowersListWithScreenName(_ screenName: String, cursor: String? = nil, count: Int? = nil, skipStatus: Bool? = nil, includeUserEntities: Bool? = nil, success: ((users: [JSONValue]?, previousCursor: String?, nextCursor: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "followers/list.json"
 
         var parameters = Dictionary<String, Any>()
@@ -348,7 +348,7 @@ public extension Swifter {
         parameters["skip_status"] ??= skipStatus
         parameters["include_user_entities"] ??= includeUserEntities
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -358,24 +358,24 @@ public extension Swifter {
 
     Returns the relationships of the authenticating user to the comma-separated list of up to 100 screen_names or user_ids provided. Values for connections can be: following, following_requested, followed_by, none.
     */
-    public func getFriendshipsLookupWithScreenNames(screenNames: [String], success: ((friendships: [JSONValue]?) -> Void)? = nil, failure: FailureHandler?) {
+    public func getFriendshipsLookupWithScreenNames(_ screenNames: [String], success: ((friendships: [JSONValue]?) -> Void)? = nil, failure: FailureHandler?) {
         let path = "friendships/lookup.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["screen_name"] = screenNames.joinWithSeparator(",")
+        parameters["screen_name"] = screenNames.joined(separator: ",")
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(friendships: json.array)
             }, failure: failure)
     }
     
-    public func getFriendshipsLookupWithIDs(ids: [String], success: ((friendships: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getFriendshipsLookupWithIDs(_ ids: [String], success: ((friendships: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/lookup.json"
         
         var parameters = Dictionary<String, Any>()
-        parameters["user_id"] = ids.joinWithSeparator(",")
+        parameters["user_id"] = ids.joined(separator: ",")
         
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(friendships: json.array)
             }, failure: failure)
     }

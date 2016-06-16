@@ -27,10 +27,10 @@ import Foundation
 
 extension Dictionary {
 
-    func filter(predicate: Element -> Bool) -> Dictionary {
+    func filter(_ predicate: (Element) -> Bool) -> Dictionary {
         var filteredDictionary = Dictionary()
-        for (key, value) in self where predicate(key, value) {
-            filteredDictionary[key] = value
+        for element in self where predicate(element) {
+            filteredDictionary[element.key] = element.value
         }
         return filteredDictionary
     }
@@ -45,10 +45,10 @@ extension Dictionary {
             parts.append(query)
         }
 
-        return parts.joinWithSeparator("&")
+        return parts.joined(separator: "&")
     }
 
-    func urlEncodedQueryStringWithEncoding(encoding: NSStringEncoding) -> String {
+    func urlEncodedQueryStringWithEncoding(_ encoding: String.Encoding) -> String {
         var parts = [String]()
 
         for (key, value) in self {
@@ -58,7 +58,7 @@ extension Dictionary {
             parts.append(query)
         }
 
-        return parts.joinWithSeparator("&")
+        return parts.joined(separator: "&")
     }
     
     func stringifiedDictionary() -> Dictionary<String, String> {

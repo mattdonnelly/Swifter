@@ -26,21 +26,21 @@
 import Foundation
 
 
-extension NSURL {
+extension URL {
     
-    func appendQueryString(queryString: String) -> NSURL {
+    func appendQueryString(_ queryString: String) -> URL {
         guard !queryString.utf16.isEmpty else {
             return self
         }
         
         var absoluteURLString = self.absoluteString
         
-        if absoluteURLString.hasSuffix("?") {
-            absoluteURLString = absoluteURLString[0 ..< absoluteURLString.utf16.count]
+        if ((absoluteURLString?.hasSuffix("?")) != nil) {
+            absoluteURLString = absoluteURLString?[0 ..< (absoluteURLString?.utf16.count)!]
         }
         
-        let URLString = absoluteURLString + (absoluteURLString.rangeOfString("?") != nil ? "&" : "?") + queryString
-        return NSURL(string: URLString)!
+        let URLString = absoluteURLString! + (absoluteURLString?.range(of: "?") != nil ? "&" : "?") + queryString
+        return URL(string: URLString)!
     }
 
 }

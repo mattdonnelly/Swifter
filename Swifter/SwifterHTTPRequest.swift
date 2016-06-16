@@ -42,25 +42,25 @@ public enum HTTPMethodType: String {
     case CONNECT
 }
 
-public class SwifterHTTPRequest: NSObject, NSURLSessionDataDelegate {
+public class SwifterHTTPRequest: NSObject, URLSessionDataDelegate {
 
     public typealias UploadProgressHandler = (bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) -> Void
-    public typealias DownloadProgressHandler = (data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void
-    public typealias SuccessHandler = (data: NSData, response: NSHTTPURLResponse) -> Void
+    public typealias DownloadProgressHandler = (data: Data, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: HTTPURLResponse) -> Void
+    public typealias SuccessHandler = (data: Data, response: HTTPURLResponse) -> Void
     public typealias FailureHandler = (error: NSError) -> Void
 
     internal struct DataUpload {
-        var data: NSData
+        var data: Data
         var parameterName: String
         var mimeType: String?
         var fileName: String?
     }
 
-    let URL: NSURL
+    let url: URL
     let HTTPMethod: HTTPMethodType
 
-    var request: NSMutableURLRequest?
-    var dataTask: NSURLSessionDataTask!
+    var request: URLRequest?
+    var dataTask: URLSessionDataTask!
 
     var headers: Dictionary<String, String>
     var parameters: Dictionary<String, Any>
@@ -68,13 +68,13 @@ public class SwifterHTTPRequest: NSObject, NSURLSessionDataDelegate {
 
     var uploadData: [DataUpload]
 
-    var dataEncoding: NSStringEncoding
+    var dataEncoding: String.Encoding
 
-    var timeoutInterval: NSTimeInterval
+    var timeoutInterval: TimeInterval
 
     var HTTPShouldHandleCookies: Bool
 
-    var response: NSHTTPURLResponse!
+    var response: HTTPURLResponse!
     var responseData: NSMutableData
 
     var uploadProgressHandler: UploadProgressHandler?
@@ -82,28 +82,28 @@ public class SwifterHTTPRequest: NSObject, NSURLSessionDataDelegate {
     var successHandler: SuccessHandler?
     var failureHandler: FailureHandler?
 
-    public init(URL: NSURL, method: HTTPMethodType = .GET, parameters: Dictionary<String, Any> = [:]) {
-        self.URL = URL
+    public init(url: URL, method: HTTPMethodType = .GET, parameters: Dictionary<String, Any> = [:]) {
+        self.url = url
         self.HTTPMethod = method
         self.headers = [:]
         self.parameters = parameters
         self.encodeParameters = false
         self.uploadData = []
-        self.dataEncoding = NSUTF8StringEncoding
+        self.dataEncoding = String.Encoding.utf8
         self.timeoutInterval = 60
         self.HTTPShouldHandleCookies = false
         self.responseData = NSMutableData()
     }
 
-    public init(request: NSURLRequest) {
-        self.request = request as? NSMutableURLRequest
-        self.URL = request.URL!
-        self.HTTPMethod = HTTPMethodType(rawValue: request.HTTPMethod!)!
+    public init(request: URLRequest) {
+        self.request = request
+        self.url = request.url!
+        self.HTTPMethod = HTTPMethodType(rawValue: request.httpMethod!)!
         self.headers = [:]
         self.parameters = [:]
         self.encodeParameters = true
         self.uploadData = []
-        self.dataEncoding = NSUTF8StringEncoding
+        self.dataEncoding = String.Encoding.utf8
         self.timeoutInterval = 60
         self.HTTPShouldHandleCookies = false
         self.responseData = NSMutableData()
@@ -111,16 +111,16 @@ public class SwifterHTTPRequest: NSObject, NSURLSessionDataDelegate {
 
     public func start() {
         if request == nil {
-            self.request = NSMutableURLRequest(URL: self.URL)
-            self.request!.HTTPMethod = self.HTTPMethod.rawValue
+            self.request = URLRequest(url: self.url)
+            self.request!.httpMethod = self.HTTPMethod.rawValue
             self.request!.timeoutInterval = self.timeoutInterval
-            self.request!.HTTPShouldHandleCookies = self.HTTPShouldHandleCookies
+            self.request!.httpShouldHandleCookies = self.HTTPShouldHandleCookies
 
             for (key, value) in headers {
                 self.request!.setValue(value, forHTTPHeaderField: key)
             }
 
-            let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.dataEncoding))
+            let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.dataEncoding.rawValue))
 
             let nonOAuthParameters = self.parameters.filter { key, _ in !key.hasPrefix("oauth_") }
 
@@ -135,24 +135,24 @@ public class SwifterHTTPRequest: NSObject, NSURLSessionDataDelegate {
                 for dataUpload: DataUpload in self.uploadData {
                     let multipartData = SwifterHTTPRequest.mulipartContentWithBounday(boundary, data: dataUpload.data, fileName: dataUpload.fileName, parameterName: dataUpload.parameterName, mimeType: dataUpload.mimeType)
 
-                    body.appendData(multipartData)
+                    body.append(multipartData)
                 }
 
                 for (key, value): (String, Any) in nonOAuthParameters {
-                    body.appendData("\r\n--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-                    body.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-                    body.appendData("\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
+                    body.append("\r\n--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
+                    body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: String.Encoding.utf8)!)
+                    body.append("\(value)".data(using: String.Encoding.utf8)!)
                 }
 
-                body.appendData("\r\n--\(boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+                body.append("\r\n--\(boundary)--\r\n".data(using: String.Encoding.utf8)!)
 
                 self.request!.setValue("\(body.length)", forHTTPHeaderField: "Content-Length")
-                self.request!.HTTPBody = body
+                self.request!.httpBody = body as Data
             }
             else if nonOAuthParameters.count > 0 {
                 if self.HTTPMethod == .GET || self.HTTPMethod == .HEAD || self.HTTPMethod == .DELETE {
                     let queryString = nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding)
-                    self.request!.URL = self.URL.appendQueryString(queryString)
+                    self.request!.url = self.url.appendQueryString(queryString)
                     self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
                 }
                 else {
@@ -165,21 +165,22 @@ public class SwifterHTTPRequest: NSObject, NSURLSessionDataDelegate {
                         queryString = nonOAuthParameters.queryStringWithEncoding()
                     }
 
-                    if let data = queryString.dataUsingEncoding(self.dataEncoding) {
-                        self.request!.setValue(String(data.length), forHTTPHeaderField: "Content-Length")
-                        self.request!.HTTPBody = data
+                    if let data = queryString.data(using: self.dataEncoding) {
+                        self.request!.setValue(String(data.count), forHTTPHeaderField: "Content-Length")
+                        self.request!.httpBody = data
                     }
                 }
             }
         }
 
-        dispatch_async(dispatch_get_main_queue()) {
-            let session = NSURLSession(configuration: .defaultSessionConfiguration(), delegate: self, delegateQueue: .mainQueue())
-            self.dataTask = session.dataTaskWithRequest(self.request!)
+        DispatchQueue.main.async {
+            let session = URLSession(configuration: .default(), delegate: self, delegateQueue: .main())
+            self.dataTask = session.dataTask(with: self.request!)
             self.dataTask.resume()
             
+            
             #if os(iOS)
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+                UIApplication.shared().isNetworkActivityIndicatorVisible = true
             #endif
         }
     }
@@ -188,32 +189,32 @@ public class SwifterHTTPRequest: NSObject, NSURLSessionDataDelegate {
         self.dataTask.cancel()
     }
 
-    public func addMultipartData(data: NSData, parameterName: String, mimeType: String?, fileName: String?) -> Void {
+    public func addMultipartData(_ data: Data, parameterName: String, mimeType: String?, fileName: String?) -> Void {
         let dataUpload = DataUpload(data: data, parameterName: parameterName, mimeType: mimeType, fileName: fileName)
         self.uploadData.append(dataUpload)
     }
 
-    private class func mulipartContentWithBounday(boundary: String, data: NSData, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> NSData {
+    private class func mulipartContentWithBounday(_ boundary: String, data: Data, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> Data {
         let mimeType = mimeTypeOrNil ?? "application/octet-stream"
 
         let tempData = NSMutableData()
 
-        tempData.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        tempData.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
 
         let fileNameContentDisposition = fileName != nil ? "filename=\"\(fileName)\"" : ""
         let contentDisposition = "Content-Disposition: form-data; name=\"\(parameterName)\"; \(fileNameContentDisposition)\r\n"
 
-        tempData.appendData(contentDisposition.dataUsingEncoding(NSUTF8StringEncoding)!)
-        tempData.appendData("Content-Type: \(mimeType)\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        tempData.appendData(data)
-        tempData.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        tempData.append(contentDisposition.data(using: String.Encoding.utf8)!)
+        tempData.append("Content-Type: \(mimeType)\r\n\r\n".data(using: String.Encoding.utf8)!)
+        tempData.append(data)
+        tempData.append("\r\n".data(using: String.Encoding.utf8)!)
 
-        return tempData
+        return tempData as Data
     }
 
-    public func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
         #if os(iOS)
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            UIApplication.shared().isNetworkActivityIndicatorVisible = false
         #endif
 
         if let error = error {
@@ -222,8 +223,8 @@ public class SwifterHTTPRequest: NSObject, NSURLSessionDataDelegate {
         }
         
         if self.response.statusCode >= 400 {
-            let responseString = NSString(data: self.responseData, encoding: self.dataEncoding)
-            let responseErrorCode = SwifterHTTPRequest.responseErrorCode(self.responseData) ?? 0
+            let responseString = NSString(data: self.responseData as Data, encoding: self.dataEncoding.rawValue)
+            let responseErrorCode = SwifterHTTPRequest.responseErrorCode(self.responseData as Data) ?? 0
             let localizedDescription = SwifterHTTPRequest.descriptionForHTTPStatus(self.response.statusCode, responseString: responseString! as String)
             let userInfo = [
                 NSLocalizedDescriptionKey: localizedDescription,
@@ -234,46 +235,31 @@ public class SwifterHTTPRequest: NSObject, NSURLSessionDataDelegate {
             return
         }
         
-        self.successHandler?(data: self.responseData, response: self.response)
+        self.successHandler?(data: self.responseData as Data, response: self.response)
     }
     
-    public func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
-        self.responseData.appendData(data)
+    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        self.responseData.append(data)
         
         let expectedContentLength = Int(self.response!.expectedContentLength)
         let totalBytesReceived = self.responseData.length
         
-        guard data.length > 0 else { return }
+        guard data.count > 0 else { return }
         self.downloadProgressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)
     }
     
-    public func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveResponse response: NSURLResponse, completionHandler: (NSURLSessionResponseDisposition) -> Void) {
-        self.response = response as? NSHTTPURLResponse
+    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: (URLSession.ResponseDisposition) -> Void) {
+        self.response = response as? HTTPURLResponse
         self.responseData.length = 0
-        completionHandler(.Allow)
+        completionHandler(.allow)
     }
     
-    public func URLSession(session: NSURLSession, task: NSURLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
         self.uploadProgressHandler?(bytesWritten: Int(bytesSent), totalBytesWritten: Int(totalBytesSent), totalBytesExpectedToWrite: Int(totalBytesExpectedToSend))
     }
 
-    class func stringWithData(data: NSData, encodingName: String?) -> String {
-        var encoding: UInt = NSUTF8StringEncoding
-
-        if let encodingName = encodingName {
-            let encodingNameString = encodingName as NSString as CFStringRef
-            encoding = CFStringConvertEncodingToNSStringEncoding(CFStringConvertIANACharSetNameToEncoding(encodingNameString))
-
-            if encoding == UInt(kCFStringEncodingInvalidId) {
-                encoding = NSUTF8StringEncoding; // by default
-            }
-        }
-
-        return NSString(data: data, encoding: encoding)! as String
-    }
-
-    class func responseErrorCode(data: NSData) -> Int? {
-        if let json = try? NSJSONSerialization.JSONObjectWithData(data, options: []),
+    class func responseErrorCode(_ data: Data) -> Int? {
+        if let json = try? JSONSerialization.jsonObject(with: data, options: []),
             dictionary = json as? NSDictionary,
             errors = dictionary["errors"] as? [NSDictionary],
             code = errors.first?["code"] as? Int {
@@ -282,7 +268,7 @@ public class SwifterHTTPRequest: NSObject, NSURLSessionDataDelegate {
         return nil
     }
 
-    class func descriptionForHTTPStatus(status: Int, responseString: String) -> String {
+    class func descriptionForHTTPStatus(_ status: Int, responseString: String) -> String {
         var s = "HTTP Status \(status)"
         
         let description: String

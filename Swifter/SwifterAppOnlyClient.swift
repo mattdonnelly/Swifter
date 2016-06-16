@@ -32,18 +32,18 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
 
     var credential: SwifterCredential?
 
-    var dataEncoding: NSStringEncoding
+    var dataEncoding: String.Encoding
 
     init(consumerKey: String, consumerSecret: String) {
         self.consumerKey = consumerKey
         self.consumerSecret = consumerSecret
-        self.dataEncoding = NSUTF8StringEncoding
+        self.dataEncoding = String.Encoding.utf8
     }
 
-    func get(path: String, baseURL: NSURL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
-        let url = NSURL(string: path, relativeToURL: baseURL)
+    func get(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
+        let url = URL(string: path, relativeTo: baseURL)
 
-        let request = SwifterHTTPRequest(URL: url!, method: .GET, parameters: parameters)
+        let request = SwifterHTTPRequest(url: url!, method: .GET, parameters: parameters)
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
@@ -57,10 +57,10 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
         return request
     }
 
-    func post(path: String, baseURL: NSURL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
-        let url = NSURL(string: path, relativeToURL: baseURL)
+    func post(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
+        let url = URL(string: path, relativeTo: baseURL)
 
-        let request = SwifterHTTPRequest(URL: url!, method: .POST, parameters: parameters)
+        let request = SwifterHTTPRequest(url: url!, method: .POST, parameters: parameters)
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
@@ -78,12 +78,12 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
         return request
     }
 
-    class func base64EncodedCredentialsWithKey(key: String, secret: String) -> String {
+    class func base64EncodedCredentialsWithKey(_ key: String, secret: String) -> String {
         let encodedKey = key.urlEncodedStringWithEncoding()
         let encodedSecret = secret.urlEncodedStringWithEncoding()
         let bearerTokenCredentials = "\(encodedKey):\(encodedSecret)"
-        if let data = bearerTokenCredentials.dataUsingEncoding(NSUTF8StringEncoding) {
-            return data.base64EncodedStringWithOptions([])
+        if let data = bearerTokenCredentials.data(using: String.Encoding.utf8) {
+            return data.base64EncodedString([])
         }
         return String()
     }

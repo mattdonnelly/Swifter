@@ -32,7 +32,7 @@ public extension Swifter {
 
     Returns the 20 most recent direct messages sent to the authenticating user. Includes detailed information about the sender and recipient user. You can request up to 200 direct messages per call, up to a maximum of 800 incoming DMs.
     */
-    public func getDirectMessagesSinceID(sinceID: String? = nil, maxID: String? = nil, count: Int? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((messages: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getDirectMessagesSinceID(_ sinceID: String? = nil, maxID: String? = nil, count: Int? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((messages: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages.json"
 
         var parameters = Dictionary<String, Any>()
@@ -42,7 +42,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(messages: json.array)
             }, failure: failure)
     }
@@ -52,7 +52,7 @@ public extension Swifter {
 
     Returns the 20 most recent direct messages sent by the authenticating user. Includes detailed information about the sender and recipient user. You can request up to 200 direct messages per call, up to a maximum of 800 outgoing DMs.
     */
-    public func getSentDirectMessagesSinceID(sinceID: String? = nil, maxID: String? = nil, count: Int? = nil, page: Int? = nil, includeEntities: Bool? = nil, success: ((messages: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getSentDirectMessagesSinceID(_ sinceID: String? = nil, maxID: String? = nil, count: Int? = nil, page: Int? = nil, includeEntities: Bool? = nil, success: ((messages: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages/sent.json"
 
         var parameters = Dictionary<String, Any>()
@@ -62,7 +62,7 @@ public extension Swifter {
         parameters["page"] ??= page
         parameters["include_entities"] ??= includeEntities
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(messages: json.array)
             }, failure: failure)
     }
@@ -72,11 +72,11 @@ public extension Swifter {
 
     Returns a single direct message, specified by an id parameter. Like the /1.1/direct_messages.format request, this method will include the user objects of the sender and recipient.
     */
-    public func getDirectMessagesShowWithID(id: String, success: ((messages: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getDirectMessagesShowWithID(_ id: String, success: ((messages: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages/show.json"
         let parameters: [String: Any] = ["id" : id]
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(messages: json.array)
             }, failure: failure)
     }
@@ -86,14 +86,14 @@ public extension Swifter {
 
     Destroys the direct message specified in the required ID parameter. The authenticating user must be the recipient of the specified direct message.
     */
-    public func postDestroyDirectMessageWithID(id: String, includeEntities: Bool? = nil, success: ((messages: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postDestroyDirectMessageWithID(_ id: String, includeEntities: Bool? = nil, success: ((messages: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages/destroy.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
         parameters["include_entities"] ??= includeEntities
         
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(messages: json.object)
             }, failure: failure)
     }
@@ -103,14 +103,14 @@ public extension Swifter {
 
     Sends a new direct message to the specified user from the authenticating user. Requires both the user and text parameters and must be a POST. Returns the sent message in the requested format if successful.
     */
-    public func postDirectMessageToUser(userID: String, text: String, success: ((statuses: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postDirectMessageToUser(_ userID: String, text: String, success: ((statuses: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages/new.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
         parameters["text"] = text
 
-        self.postJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
             success?(statuses: json.object)
             }, failure: failure)
     }

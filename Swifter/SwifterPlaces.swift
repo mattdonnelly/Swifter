@@ -32,10 +32,10 @@ public extension Swifter {
 
     Returns all the information about a known place.
     */
-    public func getGeoIDWithPlaceID(placeID: String, success: ((place: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getGeoIDWithPlaceID(_ placeID: String, success: ((place: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "geo/id/\(placeID).json"
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
             success?(place: json.object)
             }, failure: failure)
     }
@@ -47,7 +47,7 @@ public extension Swifter {
 
     This request is an informative call and will deliver generalized results about geography.
     */
-    public func getGeoReverseGeocodeWithLat(lat: Double, long: Double, accuracy: String? = nil, granularity: String? = nil, maxResults: Int? = nil, callback: String? = nil, success: ((place: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getGeoReverseGeocodeWithLat(_ lat: Double, long: Double, accuracy: String? = nil, granularity: String? = nil, maxResults: Int? = nil, callback: String? = nil, success: ((place: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "geo/reverse_geocode.json"
 
         var parameters = Dictionary<String, Any>()
@@ -59,7 +59,7 @@ public extension Swifter {
         parameters["max_results"] ??= maxResults
         parameters["callback"] ??= callback
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(place: json.object)
             }, failure: failure)
     }
@@ -73,7 +73,7 @@ public extension Swifter {
 
     This is the recommended method to use find places that can be attached to statuses/update. Unlike GET geo/reverse_geocode which provides raw data access, this endpoint can potentially re-order places with regards to the user who is authenticated. This approach is also preferred for interactive place matching with the user.
     */
-    public func getGeoSearchWithLat(lat: Double? = nil, long: Double? = nil, query: String? = nil, ipAddress: String? = nil, accuracy: String? = nil, granularity: String? = nil, maxResults: Int? = nil, containedWithin: String? = nil, attributeStreetAddress: String? = nil, callback: String? = nil, success: ((places: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getGeoSearchWithLat(_ lat: Double? = nil, long: Double? = nil, query: String? = nil, ipAddress: String? = nil, accuracy: String? = nil, granularity: String? = nil, maxResults: Int? = nil, containedWithin: String? = nil, attributeStreetAddress: String? = nil, callback: String? = nil, success: ((places: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         assert(lat != nil || long != nil || query != nil || ipAddress != nil, "At least one of the following parameters must be provided to access this resource: lat, long, ipAddress, or query")
 
         let path = "geo/search.json"
@@ -90,7 +90,7 @@ public extension Swifter {
         parameters["attribute:street_address"] ??= attributeStreetAddress
         parameters["callback"] ??= callback
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(places: json.array)
             }, failure: failure)
     }
@@ -104,7 +104,7 @@ public extension Swifter {
 
     The token contained in the response is the token needed to be able to create a new place.
     */
-    public func getGeoSimilarPlacesWithLat(lat: Double, long: Double, name: String, containedWithin: String? = nil, attributeStreetAddress: String? = nil, callback: String? = nil, success: ((places: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getGeoSimilarPlacesWithLat(_ lat: Double, long: Double, name: String, containedWithin: String? = nil, attributeStreetAddress: String? = nil, callback: String? = nil, success: ((places: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "geo/similar_places.json"
 
         var parameters = Dictionary<String, Any>()
@@ -116,7 +116,7 @@ public extension Swifter {
         parameters["attribute:street_address"] ??= attributeStreetAddress
         parameters["callback"] ??= callback
 
-        self.getJSONWithPath(path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
             success?(places: json.array)
             }, failure: failure)
     }
