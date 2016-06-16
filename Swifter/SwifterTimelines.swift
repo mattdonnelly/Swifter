@@ -37,7 +37,7 @@ public extension Swifter {
         params["contributor_details"] ??= contributorDetails
         params["include_entities"] ??= includeEntities
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: params, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: params, success: { json, _ in
             success?(statuses: json.array)
             }, failure: failure)
     }

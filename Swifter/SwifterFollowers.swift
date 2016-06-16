@@ -38,7 +38,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["stringify_ids"] = stringifyIDs
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(ids: json.array)
             }, failure: failure)
     }
@@ -62,7 +62,7 @@ public extension Swifter {
         parameters["stringify_ids"] ??= stringifyIDs
         parameters["count"] ??= count
         
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -76,7 +76,7 @@ public extension Swifter {
         parameters["stringify_ids"] ??= stringifyIDs
         parameters["count"] ??= count
         
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -99,7 +99,7 @@ public extension Swifter {
         parameters["stringify_ids"] ??= stringifyIDs
         parameters["count"] ??= count
         
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -113,7 +113,7 @@ public extension Swifter {
         parameters["stringify_ids"] ??= stringifyIDs
         parameters["count"] ??= count
         
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -130,7 +130,7 @@ public extension Swifter {
         parameters["cursor"] ??= cursor
         parameters["stringify_ids"] ??= stringifyIDs
         
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -147,7 +147,7 @@ public extension Swifter {
         parameters["cursor"] ??= cursor
         parameters["stringify_ids"] ??= stringifyIDs
         
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in            
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -168,7 +168,7 @@ public extension Swifter {
         parameters["id"] = id
         parameters["follow"] ??= follow
 
-        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -180,7 +180,7 @@ public extension Swifter {
         parameters["screen_name"] = screenName
         parameters["follow"] ??= follow
 
-        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -200,7 +200,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
 
-        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -211,7 +211,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
-        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -229,7 +229,7 @@ public extension Swifter {
         parameters["device"] ??= device
         parameters["retweets"] ??= retweets
 
-        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -242,7 +242,7 @@ public extension Swifter {
         parameters["device"] ??= device
         parameters["retweets"] ??= retweets
 
-        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -260,7 +260,7 @@ public extension Swifter {
         parameters["target_id"] ??= targetID
         parameters["targetScreenName"] ??= targetScreenName
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -273,7 +273,7 @@ public extension Swifter {
         parameters["target_id"] ??= targetID
         parameters["targetScreenName"] ??= targetScreenName
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -295,7 +295,7 @@ public extension Swifter {
         parameters["skip_status"] ??= skipStatus
         parameters["include_user_entities"] ??= includeUserEntities
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -310,7 +310,7 @@ public extension Swifter {
         parameters["skip_status"] ??= skipStatus
         parameters["include_user_entities"] ??= includeUserEntities
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
 
             }, failure: failure)
@@ -333,7 +333,7 @@ public extension Swifter {
         parameters["skip_status"] ??= skipStatus
         parameters["include_user_entities"] ??= includeUserEntities
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -348,7 +348,7 @@ public extension Swifter {
         parameters["skip_status"] ??= skipStatus
         parameters["include_user_entities"] ??= includeUserEntities
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -364,7 +364,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenNames.joined(separator: ",")
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in            
             success?(friendships: json.array)
             }, failure: failure)
     }
@@ -375,7 +375,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = ids.joined(separator: ",")
         
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in            
             success?(friendships: json.array)
             }, failure: failure)
     }

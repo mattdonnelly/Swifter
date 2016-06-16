@@ -52,7 +52,7 @@ public extension Swifter {
         parameters["track"] ??= track?.joined(separator: ",")
         parameters["locations"] ??= locations?.joined(separator: ",")
 
-        return self.postJSON(path: path, baseURL: self.streamURL, parameters: parameters, downloadProgress: { json, _ in
+        return self.postJSON(path: path, baseURL: TwitterURL.stream, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
                 stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
             } else {
@@ -78,7 +78,7 @@ public extension Swifter {
         parameters["filter_level"] ??= filter_level
         parameters["language"] ??= language?.joined(separator: ",")
 
-        return self.getJSON(path: path, baseURL: self.streamURL, parameters: parameters, downloadProgress: { json, _ in
+        return self.getJSON(path: path, baseURL: TwitterURL.stream, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
                 stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
             } else {
@@ -107,7 +107,7 @@ public extension Swifter {
         parameters["filter_level"] ??= filter_level
         parameters["language"] ??= language?.joined(separator: ",")
 
-        return self.getJSON(path: path, baseURL: self.streamURL, parameters: parameters, downloadProgress: { json, _ in
+        return self.getJSON(path: path, baseURL: TwitterURL.stream, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
                 stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
             } else {
@@ -138,7 +138,7 @@ public extension Swifter {
         parameters["with"] ??= includeMessagesFromUserOnly ? "user" : nil
         parameters["replies"] ??= includeReplies ? "all" : nil
 
-        return self.getJSON(path: path, baseURL: self.userStreamURL, parameters: parameters, downloadProgress: { json, _ in
+        return self.getJSON(path: path, baseURL: TwitterURL.userStream, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
                 stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
             } else {
@@ -165,7 +165,7 @@ public extension Swifter {
         parameters["with"] ??= restrictToUserMessages ? "user" : nil
         parameters["replies"] ??= includeReplies ? "all" : nil
 
-        return self.getJSON(path: path, baseURL: self.streamURL, parameters: parameters, downloadProgress: { json, _ in
+        return self.getJSON(path: path, baseURL: TwitterURL.stream, parameters: parameters, downloadProgress: { json, _ in
             stallWarningHandler?(code: json["warning"]["code"].string, message: json["warning"]["message"].string, percentFull: json["warning"]["percent_full"].integer)
             }, success: { json, _ in
                 progress?(status: json.object)

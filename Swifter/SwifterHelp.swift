@@ -37,7 +37,7 @@ public extension Swifter {
     public func getHelpConfigurationWithSuccess(_ success: ((config: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/configuration.json"
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
             success?(config: json.object)
             }, failure: failure)
     }
@@ -50,7 +50,7 @@ public extension Swifter {
     public func getHelpLanguagesWithSuccess(_ success: ((languages: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/languages.json"
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
             success?(languages: json.array)
             }, failure: failure)
     }
@@ -63,7 +63,7 @@ public extension Swifter {
     public func getHelpPrivacyWithSuccess(_ success: ((privacy: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/privacy.json"
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
             success?(privacy: json["privacy"].string)
             }, failure: failure)
     }
@@ -76,7 +76,7 @@ public extension Swifter {
     public func getHelpTermsOfServiceWithSuccess(_ success: ((tos: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/tos.json"
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
             success?(tos: json["tos"].string)
             }, failure: failure)
     }
@@ -102,7 +102,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["resources"] = resources.joined(separator: ",")
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(rateLimitStatus: json.object)
             }, failure: failure)
     }

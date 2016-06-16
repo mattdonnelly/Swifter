@@ -35,7 +35,7 @@ public extension Swifter {
     public func getGeoIDWithPlaceID(_ placeID: String, success: ((place: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "geo/id/\(placeID).json"
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
             success?(place: json.object)
             }, failure: failure)
     }
@@ -59,7 +59,7 @@ public extension Swifter {
         parameters["max_results"] ??= maxResults
         parameters["callback"] ??= callback
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(place: json.object)
             }, failure: failure)
     }
@@ -90,7 +90,7 @@ public extension Swifter {
         parameters["attribute:street_address"] ??= attributeStreetAddress
         parameters["callback"] ??= callback
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(places: json.array)
             }, failure: failure)
     }
@@ -116,7 +116,7 @@ public extension Swifter {
         parameters["attribute:street_address"] ??= attributeStreetAddress
         parameters["callback"] ??= callback
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(places: json.array)
             }, failure: failure)
     }

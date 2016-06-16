@@ -58,7 +58,7 @@ public extension Swifter {
                     }, failure: failure)
             }
             
-            let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: self.apiURL)
+            let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: TwitterURL.api)
             let queryURL = NSURL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
             NSWorkspace.sharedWorkspace().openURL(queryURL)
         }, failure: failure)
@@ -91,7 +91,7 @@ public extension Swifter {
                     }, failure: failure)
             }
             
-            let authorizeURL = URL(string: "/oauth/authorize", relativeTo: self.apiURL as URL)
+            let authorizeURL = URL(string: "/oauth/authorize", relativeTo: TwitterURL.api as URL)
             let queryURL = URL(string: authorizeURL!.absoluteString! + "?oauth_token=\(token!.key)")!
             
             if #available(iOS 9.0, *) , let delegate = presentingViewController as? SFSafariViewControllerDelegate {
@@ -142,13 +142,13 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["grant_type"] = "client_credentials"
         
-        self.jsonRequest(path: path, baseURL: self.apiURL, method: .POST, parameters: parameters, success: success, failure: failure)
+        self.jsonRequest(path: path, baseURL: TwitterURL.api, method: .POST, parameters: parameters, success: success, failure: failure)
     }
     
     public func postOAuth2InvalidateBearerTokenWithSuccess(_ success: TokenSuccessHandler?, failure: FailureHandler?) {
         let path = "/oauth2/invalidate_token"
         
-        self.jsonRequest(path: path, baseURL: self.apiURL, method: .POST, parameters: [:], success: { json, response in
+        self.jsonRequest(path: path, baseURL: TwitterURL.api, method: .POST, parameters: [:], success: { json, response in
             if let accessToken = json["access_token"].string {
                 self.client.credential = nil
                 
@@ -170,7 +170,7 @@ public extension Swifter {
         
         parameters["oauth_callback"] = callbackURL.absoluteString
         
-        self.client.post(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
+        self.client.post(path, baseURL: TwitterURL.api, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             data, response in
             let responseString = String(data: data, encoding: .utf8)!
             let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString)
@@ -187,7 +187,7 @@ public extension Swifter {
             parameters["oauth_token"] = requestToken.key
             parameters["oauth_verifier"] = verifier
             
-            self.client.post(path, baseURL: self.apiURL, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
+            self.client.post(path, baseURL: TwitterURL.api, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
                 data, response in
                 
                 let responseString = String(data: data, encoding: .utf8)!

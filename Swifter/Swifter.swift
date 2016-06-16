@@ -30,8 +30,17 @@ extension Notification.Name {
     static let SwifterCallbackNotification: Notification.Name = Notification.Name(rawValue: "SwifterCallbackNotificationName")
 }
 
-public class Swifter {
+// MARK: - Twitter URL
+public struct TwitterURL {
+    static let api = URL(string: "https://api.twitter.com/1.1/")!
+    static let upload = URL(string: "https://upload.twitter.com/1.1/")!
+    static let stream = URL(string: "https://stream.twitter.com/1.1/")!
+    static let userStream = URL(string: "https://userstream.twitter.com/1.1/")!
+    static let siteStream = URL(string: "https://sitestream.twitter.com/1.1/")!
+}
 
+public class Swifter {
+    
     // MARK: - Types
 
     public typealias JSONSuccessHandler = (json: JSON, response: HTTPURLResponse) -> Void
@@ -52,13 +61,7 @@ public class Swifter {
     }
 
     // MARK: - Properties
-
-    let apiURL = URL(string: "https://api.twitter.com/1.1/")!
-    let uploadURL = URL(string: "https://upload.twitter.com/1.1/")!
-    let streamURL = URL(string: "https://stream.twitter.com/1.1/")!
-    let userStreamURL = URL(string: "https://userstream.twitter.com/1.1/")!
-    let siteStreamURL = URL(string: "https://sitestream.twitter.com/1.1/")!
-
+    
     public var client: SwifterClientProtocol
 
     // MARK: - Initializers

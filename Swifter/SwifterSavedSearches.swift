@@ -35,7 +35,7 @@ public extension Swifter {
     public func getSavedSearchesListWithSuccess(_ success: ((savedSearches: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "saved_searches/list.json"
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
             success?(savedSearches: json.array)
             }, failure: failure)
     }
@@ -48,7 +48,7 @@ public extension Swifter {
     public func getSavedSearchesShowWithID(_ id: String, success: ((savedSearch: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "saved_searches/show/\(id).json"
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
             success?(savedSearch: json.object)
             }, failure: failure)
     }
@@ -64,7 +64,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["query"] = query
 
-        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(savedSearch: json.object)
             }, failure: failure)
     }
@@ -77,7 +77,7 @@ public extension Swifter {
     public func postSavedSearchesDestroyWithID(_ id: String, success: ((savedSearch: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "saved_searches/destroy/\(id).json"
 
-        self.postJSON(path: path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
+        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
             success?(savedSearch: json.object)
             }, failure: failure)
     }

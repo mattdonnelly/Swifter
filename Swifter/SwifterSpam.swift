@@ -38,7 +38,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
-        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -49,7 +49,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
 
-        self.postJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }

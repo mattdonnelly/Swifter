@@ -26,7 +26,7 @@ public extension Swifter {
         parameters["id"] = id
         parameters["exclude"] = excludeHashtags ? "hashtags" : nil
         
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in            
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in            
             success?(trends: json.array)
             }, failure: failure)
     }
@@ -43,7 +43,7 @@ public extension Swifter {
     public func getTrendsAvailableWithSuccess(_ success: ((trends: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "trends/available.json"
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
             success?(trends: json.array)
             }, failure: failure)
     }
@@ -64,7 +64,7 @@ public extension Swifter {
         parameters["lat"] = lat
         parameters["long"] = long
 
-        self.getJSON(path: path, baseURL: self.apiURL, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
             success?(trends: json.array)
             }, failure: failure)
     }
