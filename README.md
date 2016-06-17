@@ -6,7 +6,11 @@
 
 ###Installation
 
-If you're using Xcode 6, Swifter can be installed by simply dragging the Swifter Xcode project into your own project and adding either the SwifteriOS or SwifterMac framework as an embedded framework.
+If you're using Xcode 6 and above, Swifter can be installed by simply dragging the Swifter Xcode project into your own project and adding either the SwifteriOS or SwifterMac framework as an embedded framework.
+
+### Swift 3
+
+There is a [swift-3 branch](/mattdonnelly/Swifter/tree/swift-3) of Swifter available for those using Xcode 8, and Swift 3.0
 
 ###Usage
 
