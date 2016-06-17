@@ -41,14 +41,13 @@ public extension Swifter {
      - OS X only
      */
     #if os(OSX)
-    public func authorizeWithCallbackURL(callbackURL: NSURL, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
+    public func authorizeWithCallbackURL(_ callbackURL: URL, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: { token, response in
             var requestToken = token!
-    
-//            NotificationCenter.default().ad
-            NSNotificationCenter.defaultCenter().addObserverForName(CallbackNotification.notificationName, object: nil, queue: NSOperationQueue.mainQueue()) { notification in
-                NSNotificationCenter.defaultCenter().removeObserver(self)
-                let url = notification.userInfo![CallbackNotification.optionsURLKey] as! NSURL
+            
+            NotificationCenter.default().addObserver(forName: .SwifterCallbackNotification, object: nil, queue: .main()) { notification in
+                NotificationCenter.default().removeObserver(self)
+                let url = notification.userInfo![CallbackNotification.optionsURLKey] as! URL
                 let parameters = url.query!.parametersFromQueryString()
                 requestToken.verifier = parameters["oauth_verifier"]
                 
@@ -58,9 +57,9 @@ public extension Swifter {
                     }, failure: failure)
             }
             
-            let authorizeURL = NSURL(string: "/oauth/authorize", relativeToURL: TwitterURL.api)
-            let queryURL = NSURL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
-            NSWorkspace.sharedWorkspace().openURL(queryURL)
+            let authorizeURL = URL(string: "/oauth/authorize", relativeTo: TwitterURL.api)
+            let queryURL = URL(string: authorizeURL!.absoluteString! + "?oauth_token=\(token!.key)")!
+            NSWorkspace.shared().open(queryURL)
         }, failure: failure)
     }
     #endif
@@ -80,7 +79,7 @@ public extension Swifter {
             NotificationCenter.default().addObserver(forName: .SwifterCallbackNotification, object: nil, queue: .main()) { notification in
                 NotificationCenter.default().removeObserver(self)
                 presentingViewController?.presentedViewController?.dismiss(animated: true, completion: nil)
-                let url = (notification as NSNotification).userInfo![CallbackNotification.optionsURLKey] as! URL
+                let url = notification.userInfo![CallbackNotification.optionsURLKey] as! URL
                 
                 let parameters = url.query!.parametersFromQueryString()
                 requestToken.verifier = parameters["oauth_verifier"]
