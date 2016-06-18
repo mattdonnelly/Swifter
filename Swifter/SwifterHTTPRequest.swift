@@ -62,20 +62,20 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
     var request: URLRequest?
     var dataTask: URLSessionDataTask!
 
-    var headers: Dictionary<String, String>
+    var headers: Dictionary<String, String> = [:]
     var parameters: Dictionary<String, Any>
     var encodeParameters: Bool
 
-    var uploadData: [DataUpload]
+    var uploadData: [DataUpload] = []
 
-    var dataEncoding: String.Encoding
+    var dataEncoding: String.Encoding = .utf8
 
-    var timeoutInterval: TimeInterval
+    var timeoutInterval: TimeInterval = 60
 
-    var HTTPShouldHandleCookies: Bool
+    var HTTPShouldHandleCookies: Bool = false
 
     var response: HTTPURLResponse!
-    var responseData: NSMutableData
+    var responseData: Data = Data()
 
     var uploadProgressHandler: UploadProgressHandler?
     var downloadProgressHandler: DownloadProgressHandler?
@@ -85,31 +85,21 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
     public init(url: URL, method: HTTPMethodType = .GET, parameters: Dictionary<String, Any> = [:]) {
         self.url = url
         self.HTTPMethod = method
-        self.headers = [:]
         self.parameters = parameters
         self.encodeParameters = false
-        self.uploadData = []
-        self.dataEncoding = String.Encoding.utf8
-        self.timeoutInterval = 60
-        self.HTTPShouldHandleCookies = false
-        self.responseData = NSMutableData()
     }
 
     public init(request: URLRequest) {
         self.request = request
         self.url = request.url!
         self.HTTPMethod = HTTPMethodType(rawValue: request.httpMethod!)!
-        self.headers = [:]
         self.parameters = [:]
         self.encodeParameters = true
-        self.uploadData = []
-        self.dataEncoding = String.Encoding.utf8
-        self.timeoutInterval = 60
-        self.HTTPShouldHandleCookies = false
-        self.responseData = NSMutableData()
     }
 
     public func start() {
+        
+        
         if request == nil {
             self.request = URLRequest(url: self.url)
             self.request!.httpMethod = self.HTTPMethod.rawValue
@@ -119,22 +109,21 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
             for (key, value) in headers {
                 self.request!.setValue(value, forHTTPHeaderField: key)
             }
-
+            
             let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.dataEncoding.rawValue))
 
             let nonOAuthParameters = self.parameters.filter { key, _ in !key.hasPrefix("oauth_") }
 
-            if self.uploadData.count > 0 {
+            if !self.uploadData.isEmpty {
                 let boundary = "----------HTTPRequestBoUnDaRy"
 
                 let contentType = "multipart/form-data; boundary=\(boundary)"
                 self.request!.setValue(contentType, forHTTPHeaderField:"Content-Type")
 
-                let body = NSMutableData();
+                var body = Data()
 
                 for dataUpload: DataUpload in self.uploadData {
-                    let multipartData = HTTPRequest.mulipartContentWithBounday(boundary, data: dataUpload.data, fileName: dataUpload.fileName, parameterName: dataUpload.parameterName, mimeType: dataUpload.mimeType)
-
+                    let multipartData = HTTPRequest.mulipartContent(with: boundary, data: dataUpload.data, fileName: dataUpload.fileName, parameterName: dataUpload.parameterName, mimeType: dataUpload.mimeType)
                     body.append(multipartData)
                 }
 
@@ -146,22 +135,19 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
 
                 body.append("\r\n--\(boundary)--\r\n".data(using: String.Encoding.utf8)!)
 
-                self.request!.setValue("\(body.length)", forHTTPHeaderField: "Content-Length")
-                self.request!.httpBody = body as Data
-            }
-            else if nonOAuthParameters.count > 0 {
+                self.request!.setValue("\(body.count)", forHTTPHeaderField: "Content-Length")
+                self.request!.httpBody = body
+            } else if !nonOAuthParameters.isEmpty {
                 if self.HTTPMethod == .GET || self.HTTPMethod == .HEAD || self.HTTPMethod == .DELETE {
                     let queryString = nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding)
                     self.request!.url = self.url.appendQueryString(queryString)
                     self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
-                }
-                else {
-                    var queryString = String()
+                } else {
+                    var queryString = ""
                     if self.encodeParameters {
                         queryString = nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding)
                         self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
-                    }
-                    else {
+                    } else {
                         queryString = nonOAuthParameters.queryStringWithEncoding()
                     }
 
@@ -178,7 +164,6 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
             self.dataTask = session.dataTask(with: self.request!)
             self.dataTask.resume()
             
-            
             #if os(iOS)
                 UIApplication.shared().isNetworkActivityIndicatorVisible = true
             #endif
@@ -189,29 +174,27 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
         self.dataTask.cancel()
     }
 
-    public func addMultipartData(_ data: Data, parameterName: String, mimeType: String?, fileName: String?) -> Void {
+    public func add(multipartData data: Data, parameterName: String, mimeType: String?, fileName: String?) -> Void {
         let dataUpload = DataUpload(data: data, parameterName: parameterName, mimeType: mimeType, fileName: fileName)
         self.uploadData.append(dataUpload)
     }
 
-    private class func mulipartContentWithBounday(_ boundary: String, data: Data, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> Data {
+    private class func mulipartContent(with boundary: String, data: Data, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> Data {
         let mimeType = mimeTypeOrNil ?? "application/octet-stream"
-
-        let tempData = NSMutableData()
-
-        tempData.append("--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
-
         let fileNameContentDisposition = fileName != nil ? "filename=\"\(fileName)\"" : ""
         let contentDisposition = "Content-Disposition: form-data; name=\"\(parameterName)\"; \(fileNameContentDisposition)\r\n"
-
-        tempData.append(contentDisposition.data(using: String.Encoding.utf8)!)
-        tempData.append("Content-Type: \(mimeType)\r\n\r\n".data(using: String.Encoding.utf8)!)
+        
+        var tempData = Data()
+        tempData.append("--\(boundary)\r\n".data(using: .utf8)!)
+        tempData.append(contentDisposition.data(using: .utf8)!)
+        tempData.append("Content-Type: \(mimeType)\r\n\r\n".data(using: .utf8)!)
         tempData.append(data)
-        tempData.append("\r\n".data(using: String.Encoding.utf8)!)
-
-        return tempData as Data
+        tempData.append("\r\n".data(using: .utf8)!)
+        return tempData
     }
 
+    // MARK: - URLSessionDataDelegate
+    
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
         #if os(iOS)
             UIApplication.shared().isNetworkActivityIndicatorVisible = false
@@ -222,53 +205,52 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
             return
         }
         
-        if self.response.statusCode >= 400 {
-            let responseString = NSString(data: self.responseData as Data, encoding: self.dataEncoding.rawValue)
-            let responseErrorCode = HTTPRequest.responseErrorCode(self.responseData as Data) ?? 0
-            let localizedDescription = HTTPRequest.descriptionForHTTPStatus(self.response.statusCode, responseString: responseString! as String)
-            let userInfo = [
-                NSLocalizedDescriptionKey: localizedDescription,
-                "Response-Headers": self.response.allHeaderFields,
-                "Response-ErrorCode": responseErrorCode]
-            let error = NSError(domain: NSURLErrorDomain, code: self.response.statusCode, userInfo: userInfo as [NSObject : AnyObject])
-            self.failureHandler?(error: error)
+        guard self.response.statusCode >= 400 else {
+            self.successHandler?(data: self.responseData, response: self.response)
             return
         }
-        
-        self.successHandler?(data: self.responseData as Data, response: self.response)
+        let responseString = String(data: responseData, encoding: dataEncoding)!
+        let errorCode = HTTPRequest.responseErrorCode(for: responseData) ?? 0
+        let localizedDescription = HTTPRequest.description(for: response.statusCode, response: responseString)
+        let userInfo: [NSObject: AnyObject] = [
+            NSLocalizedDescriptionKey: localizedDescription,
+            "Response-Header": response.allHeaderFields,
+            "Response-ErroCode": errorCode
+        ]
+        let error = NSError(domain: NSURLErrorDomain, code: response.statusCode, userInfo: userInfo)
+        self.failureHandler?(error: error)
     }
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         self.responseData.append(data)
         
         let expectedContentLength = Int(self.response!.expectedContentLength)
-        let totalBytesReceived = self.responseData.length
+        let totalBytesReceived = self.responseData.count
         
-        guard data.count > 0 else { return }
+        guard !data.isEmpty else { return }
         self.downloadProgressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)
     }
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: (URLSession.ResponseDisposition) -> Void) {
         self.response = response as? HTTPURLResponse
-        self.responseData.length = 0
+        self.responseData.count = 0
         completionHandler(.allow)
     }
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
         self.uploadProgressHandler?(bytesWritten: Int(bytesSent), totalBytesWritten: Int(totalBytesSent), totalBytesExpectedToWrite: Int(totalBytesExpectedToSend))
     }
+    
+    // MARK: - Error Responses
 
-    class func responseErrorCode(_ data: Data) -> Int? {
-        if let json = try? JSONSerialization.jsonObject(with: data, options: []),
-            dictionary = json as? NSDictionary,
-            errors = dictionary["errors"] as? [NSDictionary],
-            code = errors.first?["code"] as? Int {
-            return code
+    class func responseErrorCode(for data: Data) -> Int? {
+        guard let code = JSON(data)["errors"].array?.first?["code"].integer else {
+            return nil
         }
-        return nil
+        return code
     }
 
-    class func descriptionForHTTPStatus(_ status: Int, responseString: String) -> String {
+    class func description(for status: Int, response string: String) -> String {
         var s = "HTTP Status \(status)"
         
         let description: String
@@ -322,7 +304,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
         }
         
         if !description.isEmpty {
-            s = s + ": " + description + ", Response: " + responseString
+            s = s + ": " + description + ", Response: " + string
         }
         
         return s

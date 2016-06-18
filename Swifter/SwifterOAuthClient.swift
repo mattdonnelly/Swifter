@@ -102,9 +102,9 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         request.dataEncoding = self.dataEncoding
         request.encodeParameters = postData == nil
 
-        if postData != nil {
+        if let postData = postData {
             let fileName = postDataFileName ?? "media.jpg"
-            request.addMultipartData(postData!, parameterName: postDataKey!, mimeType: "application/octet-stream", fileName: fileName)
+            request.add(multipartData: postData, parameterName: postDataKey!, mimeType: "application/octet-stream", fileName: fileName)
         }
 
         request.start()
