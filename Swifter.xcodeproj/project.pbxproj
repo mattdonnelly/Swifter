@@ -26,8 +26,8 @@
 		8B548F5A1945325E00EE2927 /* SwifterAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B548F581945325E00EE2927 /* SwifterAuth.swift */; };
 		8B548F5C1945331D00EE2927 /* SwifterTimelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B548F5B1945331D00EE2927 /* SwifterTimelines.swift */; };
 		8B548F5D1945331D00EE2927 /* SwifterTimelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B548F5B1945331D00EE2927 /* SwifterTimelines.swift */; };
-		8B552D2A194643CF0052EB86 /* NSURL+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D29194643CF0052EB86 /* NSURL+Swifter.swift */; };
-		8B552D2B194643CF0052EB86 /* NSURL+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D29194643CF0052EB86 /* NSURL+Swifter.swift */; };
+		8B552D2A194643CF0052EB86 /* URL+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D29194643CF0052EB86 /* URL+Swifter.swift */; };
+		8B552D2B194643CF0052EB86 /* URL+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D29194643CF0052EB86 /* URL+Swifter.swift */; };
 		8B552D2D194695F80052EB86 /* SwifterStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D2C194695F80052EB86 /* SwifterStreaming.swift */; };
 		8B552D2E194695F80052EB86 /* SwifterStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D2C194695F80052EB86 /* SwifterStreaming.swift */; };
 		8B5EFF07195F064400B354F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5EFF03195F064400B354F9 /* AppDelegate.swift */; };
@@ -152,7 +152,7 @@
 		8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterOAuthClient.swift; sourceTree = "<group>"; };
 		8B548F581945325E00EE2927 /* SwifterAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAuth.swift; sourceTree = "<group>"; };
 		8B548F5B1945331D00EE2927 /* SwifterTimelines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTimelines.swift; sourceTree = "<group>"; };
-		8B552D29194643CF0052EB86 /* NSURL+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Swifter.swift"; sourceTree = "<group>"; };
+		8B552D29194643CF0052EB86 /* URL+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Swifter.swift"; sourceTree = "<group>"; };
 		8B552D2C194695F80052EB86 /* SwifterStreaming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SwifterStreaming.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8B5EFF03195F064400B354F9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B5EFF04195F064400B354F9 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -347,7 +347,7 @@
 			children = (
 				8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */,
 				A17A694D1C78333400063DFD /* Operator+Swifter.swift */,
-				8B552D29194643CF0052EB86 /* NSURL+Swifter.swift */,
+				8B552D29194643CF0052EB86 /* URL+Swifter.swift */,
 				8B9F514A1944A8DC00894629 /* String+Swifter.swift */,
 			);
 			name = Extensions;
@@ -621,7 +621,7 @@
 				8BC32D3D1955EEE100FF75A0 /* SwifterTrends.swift in Sources */,
 				8BCF43231947A6C800E63301 /* SwifterUsers.swift in Sources */,
 				8B9F514D1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */,
-				8B552D2A194643CF0052EB86 /* NSURL+Swifter.swift in Sources */,
+				8B552D2A194643CF0052EB86 /* URL+Swifter.swift in Sources */,
 				8BCF4320194798FB00E63301 /* SwifterFollowers.swift in Sources */,
 				8B548F5C1945331D00EE2927 /* SwifterTimelines.swift in Sources */,
 				8BF1D67F194889B900E3AA64 /* SwifterClientProtocol.swift in Sources */,
@@ -656,7 +656,7 @@
 				8BC32D3E1955EEE100FF75A0 /* SwifterTrends.swift in Sources */,
 				8BCF43241947A6C800E63301 /* SwifterUsers.swift in Sources */,
 				8B9F514E1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */,
-				8B552D2B194643CF0052EB86 /* NSURL+Swifter.swift in Sources */,
+				8B552D2B194643CF0052EB86 /* URL+Swifter.swift in Sources */,
 				8BCF4321194798FB00E63301 /* SwifterFollowers.swift in Sources */,
 				8B548F5D1945331D00EE2927 /* SwifterTimelines.swift in Sources */,
 				8BF1D680194889B900E3AA64 /* SwifterClientProtocol.swift in Sources */,

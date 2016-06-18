@@ -43,7 +43,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
     init(consumerKey: String, consumerSecret: String) {
         self.consumerKey = consumerKey
         self.consumerSecret = consumerSecret
-        self.dataEncoding = String.Encoding.utf8
+        self.dataEncoding = .utf8
     }
 
     init(consumerKey: String, consumerSecret: String, accessToken: String, accessTokenSecret: String) {
@@ -53,7 +53,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         let credentialAccessToken = SwifterCredential.OAuthAccessToken(key: accessToken, secret: accessTokenSecret)
         self.credential = SwifterCredential(accessToken: credentialAccessToken)
 
-        self.dataEncoding = String.Encoding.utf8
+        self.dataEncoding = .utf8
     }
 
     func get(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
@@ -131,12 +131,11 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
 
         authorizationParameters["oauth_signature"] = self.oauthSignatureForMethod(method, url: url, parameters: finalParameters, accessToken: self.credential?.accessToken)
 
-        var authorizationParameterComponents = authorizationParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding).components(separatedBy: "&") as [String]
-        authorizationParameterComponents.sort { $0 < $1 }
+        let authorizationParameterComponents = authorizationParameters.urlEncodedQueryString(using: self.dataEncoding).components(separatedBy: "&").sorted()
 
         var headerComponents = [String]()
         for component in authorizationParameterComponents {
-            let subcomponent = component.components(separatedBy: "=") as [String]
+            let subcomponent = component.components(separatedBy: "=")
             if subcomponent.count == 2 {
                 headerComponents.append("\(subcomponent[0])=\"\(subcomponent[1])\"")
             }
@@ -146,25 +145,21 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
     }
 
     func oauthSignatureForMethod(_ method: HTTPMethodType, url: URL, parameters: Dictionary<String, Any>, accessToken token: SwifterCredential.OAuthAccessToken?) -> String {
-        let tokenSecret: NSString = token?.secret.urlEncodedStringWithEncoding() ?? ""
-
-        let encodedConsumerSecret = self.consumerSecret.urlEncodedStringWithEncoding()
-
+        let tokenSecret = token?.secret.urlEncodedString ?? ""
+        let encodedConsumerSecret = self.consumerSecret.urlEncodedString
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"
-
-        var parameterComponents = parameters.urlEncodedQueryStringWithEncoding(self.dataEncoding).components(separatedBy: "&") as [String]
-        parameterComponents.sort { $0 < $1 }
+        let parameterComponents = parameters.urlEncodedQueryString(using: dataEncoding).components(separatedBy: "&").sorted()
 
         let parameterString = parameterComponents.joined(separator: "&")
-        let encodedParameterString = parameterString.urlEncodedStringWithEncoding()
+        let encodedParameterString = parameterString.urlEncodedString
 
-        let encodedURL = url.absoluteString?.urlEncodedStringWithEncoding()
+        let encodedURL = url.absoluteString?.urlEncodedString
 
         let signatureBaseString = "\(method)&\(encodedURL)&\(encodedParameterString)"
 
         // let signature = signatureBaseString.SHA1DigestWithKey(signingKey)
 
-        return signatureBaseString.SHA1DigestWithKey(signingKey).base64EncodedString([])
+        return signatureBaseString.SHA1Digest(with: signingKey).base64EncodedString([])
     }
     
 }

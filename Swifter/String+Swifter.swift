@@ -42,14 +42,14 @@ extension String {
         }
     }
     
-    func urlEncodedStringWithEncoding() -> String {
+    var urlEncodedString: String {
         var allowedCharacterSet: CharacterSet = .urlQueryAllowed
         allowedCharacterSet.remove(charactersIn: "\n:#/?@!$&'()*+,;=")
         allowedCharacterSet.insert(charactersIn: "[]")
         return self.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet)!
     }
 
-    func parametersFromQueryString() -> Dictionary<String, String> {
+    var queryStringParameters: Dictionary<String, String> {
         var parameters = Dictionary<String, String>()
 
         let scanner = Scanner(string: self)
@@ -74,15 +74,15 @@ extension String {
         return parameters
     }
 
-    func SHA1DigestWithKey(_ key: String) -> Data {
-        let str = self.cString(using: String.Encoding.utf8)
-        let strLen = self.lengthOfBytes(using: String.Encoding.utf8)
+    func SHA1Digest(with key: String) -> Data {
+        let str = self.cString(using: .utf8)
+        let strLen = self.lengthOfBytes(using: .utf8)
         
         let digestLen = Int(CC_SHA1_DIGEST_LENGTH)
         let result = UnsafeMutablePointer<Void>(allocatingCapacity: digestLen)
         
-        let keyStr = key.cString(using: String.Encoding.utf8)!
-        let keyLen = key.lengthOfBytes(using: String.Encoding.utf8)
+        let keyStr = key.cString(using: .utf8)!
+        let keyLen = key.lengthOfBytes(using: .utf8)
 
         CCHmac(CCHmacAlgorithm(kCCHmacAlgSHA1), keyStr, keyLen, str!, strLen, result)
 

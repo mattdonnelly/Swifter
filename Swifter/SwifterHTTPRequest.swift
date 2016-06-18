@@ -128,27 +128,27 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
                 }
 
                 for (key, value): (String, Any) in nonOAuthParameters {
-                    body.append("\r\n--\(boundary)\r\n".data(using: String.Encoding.utf8)!)
-                    body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: String.Encoding.utf8)!)
-                    body.append("\(value)".data(using: String.Encoding.utf8)!)
+                    body.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+                    body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
+                    body.append("\(value)".data(using: .utf8)!)
                 }
 
-                body.append("\r\n--\(boundary)--\r\n".data(using: String.Encoding.utf8)!)
+                body.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
 
                 self.request!.setValue("\(body.count)", forHTTPHeaderField: "Content-Length")
                 self.request!.httpBody = body
             } else if !nonOAuthParameters.isEmpty {
                 if self.HTTPMethod == .GET || self.HTTPMethod == .HEAD || self.HTTPMethod == .DELETE {
-                    let queryString = nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding)
-                    self.request!.url = self.url.appendQueryString(queryString)
+                    let queryString = nonOAuthParameters.urlEncodedQueryString(using: self.dataEncoding)
+                    self.request!.url = self.url.append(queryString: queryString)
                     self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
                 } else {
                     var queryString = ""
                     if self.encodeParameters {
-                        queryString = nonOAuthParameters.urlEncodedQueryStringWithEncoding(self.dataEncoding)
+                        queryString = nonOAuthParameters.urlEncodedQueryString(using: self.dataEncoding)
                         self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
                     } else {
-                        queryString = nonOAuthParameters.queryStringWithEncoding()
+                        queryString = nonOAuthParameters.queryString
                     }
 
                     if let data = queryString.data(using: self.dataEncoding) {

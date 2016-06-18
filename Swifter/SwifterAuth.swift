@@ -81,7 +81,7 @@ public extension Swifter {
                 presentingViewController?.presentedViewController?.dismiss(animated: true, completion: nil)
                 let url = notification.userInfo![CallbackNotification.optionsURLKey] as! URL
                 
-                let parameters = url.query!.parametersFromQueryString()
+                let parameters = url.query!.queryStringParameters
                 requestToken.verifier = parameters["oauth_verifier"]
                 
                 self.postOAuthAccessTokenWithRequestToken(requestToken, success: { accessToken, response in
@@ -90,7 +90,7 @@ public extension Swifter {
                     }, failure: failure)
             }
             
-            let authorizeURL = URL(string: "/oauth/authorize", relativeTo: TwitterURL.api as URL)
+            let authorizeURL = URL(string: "/oauth/authorize", relativeTo: TwitterURL.api)
             let queryURL = URL(string: authorizeURL!.absoluteString! + "?oauth_token=\(token!.key)")!
             
             if #available(iOS 9.0, *) , let delegate = presentingViewController as? SFSafariViewControllerDelegate {

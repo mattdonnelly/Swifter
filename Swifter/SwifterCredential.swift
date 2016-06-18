@@ -43,7 +43,7 @@ public class SwifterCredential {
         }
 
         public init(queryString: String) {
-            var attributes = queryString.parametersFromQueryString()
+            var attributes = queryString.queryStringParameters
 
             self.key = attributes["oauth_token"]!
             self.secret = attributes["oauth_token_secret"]!

@@ -37,7 +37,7 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
     init(consumerKey: String, consumerSecret: String) {
         self.consumerKey = consumerKey
         self.consumerSecret = consumerSecret
-        self.dataEncoding = String.Encoding.utf8
+        self.dataEncoding = .utf8
     }
 
     func get(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
@@ -79,10 +79,10 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
     }
 
     class func base64EncodedCredentialsWithKey(_ key: String, secret: String) -> String {
-        let encodedKey = key.urlEncodedStringWithEncoding()
-        let encodedSecret = secret.urlEncodedStringWithEncoding()
+        let encodedKey = key.urlEncodedString
+        let encodedSecret = secret.urlEncodedString
         let bearerTokenCredentials = "\(encodedKey):\(encodedSecret)"
-        if let data = bearerTokenCredentials.data(using: String.Encoding.utf8) {
+        if let data = bearerTokenCredentials.data(using: .utf8) {
             return data.base64EncodedString([])
         }
         return String()

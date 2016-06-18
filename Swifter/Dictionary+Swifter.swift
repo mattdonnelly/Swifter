@@ -35,25 +35,23 @@ extension Dictionary {
         return filteredDictionary
     }
 
-    func queryStringWithEncoding() -> String {
+    var queryString: String {
         var parts = [String]()
 
         for (key, value) in self {
-            let keyString: String = "\(key)"
-            let valueString: String = "\(value)"
-            let query: String = "\(keyString)=\(valueString)"
+            let query: String = "\(key)=\(value)"
             parts.append(query)
         }
 
         return parts.joined(separator: "&")
     }
 
-    func urlEncodedQueryStringWithEncoding(_ encoding: String.Encoding) -> String {
+    func urlEncodedQueryString(using encoding: String.Encoding) -> String {
         var parts = [String]()
 
         for (key, value) in self {
-            let keyString: String = "\(key)".urlEncodedStringWithEncoding()
-            let valueString: String = "\(value)".urlEncodedStringWithEncoding()
+            let keyString = "\(key)".urlEncodedString
+            let valueString = "\(value)".urlEncodedString
             let query: String = "\(keyString)=\(valueString)"
             parts.append(query)
         }
