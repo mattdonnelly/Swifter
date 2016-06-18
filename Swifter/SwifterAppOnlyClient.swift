@@ -40,10 +40,10 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
         self.dataEncoding = String.Encoding.utf8
     }
 
-    func get(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
+    func get(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
         let url = URL(string: path, relativeTo: baseURL)
 
-        let request = SwifterHTTPRequest(url: url!, method: .GET, parameters: parameters)
+        let request = HTTPRequest(url: url!, method: .GET, parameters: parameters)
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
@@ -57,10 +57,10 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
         return request
     }
 
-    func post(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
+    func post(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
         let url = URL(string: path, relativeTo: baseURL)
 
-        let request = SwifterHTTPRequest(url: url!, method: .POST, parameters: parameters)
+        let request = HTTPRequest(url: url!, method: .POST, parameters: parameters)
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure

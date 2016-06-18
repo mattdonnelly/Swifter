@@ -56,10 +56,10 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         self.dataEncoding = String.Encoding.utf8
     }
 
-    func get(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
+    func get(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
         let url = URL(string: path, relativeTo: baseURL)!
 
-        let request = SwifterHTTPRequest(url: url, method: .GET, parameters: parameters)
+        let request = HTTPRequest(url: url, method: .GET, parameters: parameters)
         request.headers = ["Authorization": self.authorizationHeaderForMethod(.GET, url: url, parameters: parameters, isMediaUpload: false)]
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
@@ -70,7 +70,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         return request
     }
 
-    func post(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
+    func post(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
         let url = URL(string: path, relativeTo: baseURL)!
         var parameters = parameters
         var postData: Data?
@@ -94,7 +94,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
             }
         }
 
-        let request = SwifterHTTPRequest(url: url, method: .POST, parameters: parameters)
+        let request = HTTPRequest(url: url, method: .POST, parameters: parameters)
         request.headers = ["Authorization": self.authorizationHeaderForMethod(.POST, url: url, parameters: parameters, isMediaUpload: postData != nil)]
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success

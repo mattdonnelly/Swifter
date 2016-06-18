@@ -101,7 +101,7 @@ public extension Swifter {
 
     This process invoked by this method is asynchronous. The immediately returned status may not indicate the resultant favorited status of the tweet. A 200 OK response from this method will indicate whether the intended action was successful or not.
     */
-    public func postCreateFavoriteWithID(_ id: String, includeEntities: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: SwifterHTTPRequest.FailureHandler? = nil) {
+    public func postCreateFavoriteWithID(_ id: String, includeEntities: Bool? = nil, success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: HTTPRequest.FailureHandler? = nil) {
         let path = "favorites/create.json"
 
         var parameters = Dictionary<String, Any>()

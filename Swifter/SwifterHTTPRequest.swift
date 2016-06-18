@@ -1,5 +1,5 @@
 //
-//  SwifterHTTPRequest.swift
+//  HTTPRequest.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -42,7 +42,7 @@ public enum HTTPMethodType: String {
     case CONNECT
 }
 
-public class SwifterHTTPRequest: NSObject, URLSessionDataDelegate {
+public class HTTPRequest: NSObject, URLSessionDataDelegate {
 
     public typealias UploadProgressHandler = (bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) -> Void
     public typealias DownloadProgressHandler = (data: Data, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: HTTPURLResponse) -> Void
@@ -125,7 +125,7 @@ public class SwifterHTTPRequest: NSObject, URLSessionDataDelegate {
             let nonOAuthParameters = self.parameters.filter { key, _ in !key.hasPrefix("oauth_") }
 
             if self.uploadData.count > 0 {
-                let boundary = "----------SwIfTeRhTtPrEqUeStBoUnDaRy"
+                let boundary = "----------HTTPRequestBoUnDaRy"
 
                 let contentType = "multipart/form-data; boundary=\(boundary)"
                 self.request!.setValue(contentType, forHTTPHeaderField:"Content-Type")
@@ -133,7 +133,7 @@ public class SwifterHTTPRequest: NSObject, URLSessionDataDelegate {
                 let body = NSMutableData();
 
                 for dataUpload: DataUpload in self.uploadData {
-                    let multipartData = SwifterHTTPRequest.mulipartContentWithBounday(boundary, data: dataUpload.data, fileName: dataUpload.fileName, parameterName: dataUpload.parameterName, mimeType: dataUpload.mimeType)
+                    let multipartData = HTTPRequest.mulipartContentWithBounday(boundary, data: dataUpload.data, fileName: dataUpload.fileName, parameterName: dataUpload.parameterName, mimeType: dataUpload.mimeType)
 
                     body.append(multipartData)
                 }
@@ -224,8 +224,8 @@ public class SwifterHTTPRequest: NSObject, URLSessionDataDelegate {
         
         if self.response.statusCode >= 400 {
             let responseString = NSString(data: self.responseData as Data, encoding: self.dataEncoding.rawValue)
-            let responseErrorCode = SwifterHTTPRequest.responseErrorCode(self.responseData as Data) ?? 0
-            let localizedDescription = SwifterHTTPRequest.descriptionForHTTPStatus(self.response.statusCode, responseString: responseString! as String)
+            let responseErrorCode = HTTPRequest.responseErrorCode(self.responseData as Data) ?? 0
+            let localizedDescription = HTTPRequest.descriptionForHTTPStatus(self.response.statusCode, responseString: responseString! as String)
             let userInfo = [
                 NSLocalizedDescriptionKey: localizedDescription,
                 "Response-Headers": self.response.allHeaderFields,

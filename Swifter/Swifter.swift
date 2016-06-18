@@ -87,8 +87,8 @@ public class Swifter {
     // MARK: - JSON Requests
 
     @discardableResult
-    internal func jsonRequest(path: String, baseURL: URL, method: HTTPMethodType, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler? = nil, failure: SwifterHTTPRequest.FailureHandler? = nil) -> SwifterHTTPRequest {
-        let jsonDownloadProgressHandler: SwifterHTTPRequest.DownloadProgressHandler = { data, _, _, response in
+    internal func jsonRequest(path: String, baseURL: URL, method: HTTPMethodType, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler? = nil, failure: HTTPRequest.FailureHandler? = nil) -> HTTPRequest {
+        let jsonDownloadProgressHandler: HTTPRequest.DownloadProgressHandler = { data, _, _, response in
 
             guard downloadProgress != nil else { return }
 
@@ -107,7 +107,7 @@ public class Swifter {
             }
         }
 
-        let jsonSuccessHandler: SwifterHTTPRequest.SuccessHandler = { data, response in
+        let jsonSuccessHandler: HTTPRequest.SuccessHandler = { data, response in
 
             DispatchQueue.global(attributes: .qosUtility).async {
                 do {
@@ -131,12 +131,12 @@ public class Swifter {
     }
 
     @discardableResult
-    internal func getJSON(path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
+    internal func getJSON(path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
         return self.jsonRequest(path: path, baseURL: baseURL, method: .GET, parameters: parameters, uploadProgress: uploadProgress, downloadProgress: downloadProgress, success: success, failure: failure)
     }
 
     @discardableResult
-    internal func postJSON(path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
+    internal func postJSON(path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
         return self.jsonRequest(path: path, baseURL: baseURL, method: .POST, parameters: parameters, uploadProgress: uploadProgress, downloadProgress: downloadProgress, success: success, failure: failure)
     }
     

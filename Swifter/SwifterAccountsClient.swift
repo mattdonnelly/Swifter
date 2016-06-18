@@ -35,7 +35,7 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
         self.credential = SwifterCredential(account: account)
     }
 
-    func get(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
+    func get(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
         let url = URL(string: path, relativeTo: baseURL)
 
         let stringifiedParameters = parameters.stringifiedDictionary()
@@ -43,7 +43,7 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
         let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, url: url, parameters: stringifiedParameters)!
         socialRequest.account = self.credential!.account!
 
-        let request = SwifterHTTPRequest(request: socialRequest.preparedURLRequest())
+        let request = HTTPRequest(request: socialRequest.preparedURLRequest())
         request.parameters = parameters
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
@@ -53,7 +53,7 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
         return request
     }
 
-    func post(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
+    func post(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
         let url = URL(string: path, relativeTo: baseURL)
 
         var params = parameters
@@ -85,7 +85,7 @@ internal class SwifterAccountsClient: SwifterClientProtocol {
             socialRequest.addMultipartData(data, withName: postDataKey!, type: "application/octet-stream", filename: fileName)
         }
 
-        let request = SwifterHTTPRequest(request: socialRequest.preparedURLRequest())
+        let request = HTTPRequest(request: socialRequest.preparedURLRequest())
         request.parameters = parameters
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
