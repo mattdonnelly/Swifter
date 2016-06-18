@@ -34,7 +34,7 @@ public extension Swifter {
 
     It is recommended applications request this endpoint when they are loaded, but no more than once a day.
     */
-    public func getHelpConfigurationWithSuccess(_ success: ((config: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getHelpConfigurationWithSuccess(_ success: ((config: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/configuration.json"
 
         self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
@@ -47,7 +47,7 @@ public extension Swifter {
 
     Returns the list of languages supported by Twitter along with their ISO 639-1 code. The ISO 639-1 code is the two letter value to use if you include lang with any of your requests.
     */
-    public func getHelpLanguagesWithSuccess(_ success: ((languages: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getHelpLanguagesWithSuccess(_ success: ((languages: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/languages.json"
 
         self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
@@ -96,7 +96,7 @@ public extension Swifter {
 
     Read more about REST API Rate Limiting in v1.1 and review the limits.
     */
-    public func getRateLimitsForResources(_ resources: [String], success: ((rateLimitStatus: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getRateLimitsForResources(_ resources: [String], success: ((rateLimitStatus: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "application/rate_limit_status.json"
 
         var parameters = Dictionary<String, Any>()

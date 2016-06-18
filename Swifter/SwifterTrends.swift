@@ -19,7 +19,7 @@ public extension Swifter {
 
     This information is cached for 5 minutes. Requesting more frequently than that will not return any more data, and will count against your rate limit usage.
     */
-    public func getTrendsPlaceWithWOEID(_ id: String, excludeHashtags: Bool = false, success: ((trends: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getTrendsPlaceWithWOEID(_ id: String, excludeHashtags: Bool = false, success: ((trends: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "trends/place.json"
 
         var parameters = Dictionary<String, Any>()
@@ -40,7 +40,7 @@ public extension Swifter {
 
     A WOEID is a Yahoo! Where On Earth ID.
     */
-    public func getTrendsAvailableWithSuccess(_ success: ((trends: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getTrendsAvailableWithSuccess(_ success: ((trends: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "trends/available.json"
 
         self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
@@ -57,7 +57,7 @@ public extension Swifter {
 
     A WOEID is a Yahoo! Where On Earth ID.
     */
-    public func getTrendsClosestWithLat(_ lat: Double, long: Double, success: ((trends: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getTrendsClosestWithLat(_ lat: Double, long: Double, success: ((trends: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "trends/closest.json"
 
         var parameters = Dictionary<String, Any>()

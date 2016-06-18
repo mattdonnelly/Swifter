@@ -32,7 +32,7 @@ public extension Swifter {
 
     Returns the authenticated user's saved search queries.
     */
-    public func getSavedSearchesListWithSuccess(_ success: ((savedSearches: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getSavedSearchesListWithSuccess(_ success: ((savedSearches: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "saved_searches/list.json"
 
         self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
@@ -45,7 +45,7 @@ public extension Swifter {
 
     Retrieve the information for the saved search represented by the given id. The authenticating user must be the owner of saved search ID being requested.
     */
-    public func getSavedSearchesShowWithID(_ id: String, success: ((savedSearch: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getSavedSearchesShowWithID(_ id: String, success: ((savedSearch: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "saved_searches/show/\(id).json"
 
         self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
@@ -58,7 +58,7 @@ public extension Swifter {
 
     Create a new saved search for the authenticated user. A user may only have 25 saved searches.
     */
-    public func postSavedSearchesCreateShowWithQuery(_ query: String, success: ((savedSearch: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postSavedSearchesCreateShowWithQuery(_ query: String, success: ((savedSearch: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "saved_searches/create.json"
 
         var parameters = Dictionary<String, Any>()
@@ -74,7 +74,7 @@ public extension Swifter {
 
     Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.
     */
-    public func postSavedSearchesDestroyWithID(_ id: String, success: ((savedSearch: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postSavedSearchesDestroyWithID(_ id: String, success: ((savedSearch: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "saved_searches/destroy/\(id).json"
 
         self.postJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in

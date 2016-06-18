@@ -85,14 +85,14 @@ public class Swifter {
     }
 
     // MARK: - JSON Requests
-
+    
     @discardableResult
     internal func jsonRequest(path: String, baseURL: URL, method: HTTPMethodType, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler? = nil, failure: HTTPRequest.FailureHandler? = nil) -> HTTPRequest {
         let jsonDownloadProgressHandler: HTTPRequest.DownloadProgressHandler = { data, _, _, response in
 
             guard downloadProgress != nil else { return }
 
-            if let jsonResult = try? JSON.parseJSONData(data) {
+            if let jsonResult = try? JSON.parse(jsonData: data) {
                 downloadProgress?(json: jsonResult, response: response)
             } else {
                 let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
@@ -100,7 +100,7 @@ public class Swifter {
                 
                 for chunk in jsonChunks where !chunk.utf16.isEmpty {
                     if let chunkData = chunk.data(using: String.Encoding.utf8),
-                        let jsonResult = try? JSON.parseJSONData(chunkData) {
+                        let jsonResult = try? JSON.parse(jsonData: chunkData) {
                         downloadProgress?(json: jsonResult, response: response)
                     }
                 }
@@ -111,7 +111,7 @@ public class Swifter {
 
             DispatchQueue.global(attributes: .qosUtility).async {
                 do {
-                    let jsonResult = try JSON.parseJSONData(data)
+                    let jsonResult = try JSON.parse(jsonData: data)
                     DispatchQueue.main.async {
                         success?(json: jsonResult, response: response)
                     }
