@@ -90,21 +90,20 @@ public class Swifter {
     internal func jsonRequest(path: String, baseURL: URL, method: HTTPMethodType, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler? = nil, failure: HTTPRequest.FailureHandler? = nil) -> HTTPRequest {
         let jsonDownloadProgressHandler: HTTPRequest.DownloadProgressHandler = { data, _, _, response in
 
-            guard downloadProgress != nil else { return }
-
-            if let jsonResult = try? JSON.parse(jsonData: data) {
-                downloadProgress?(json: jsonResult, response: response)
-            } else {
-                let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
-                let jsonChunks = jsonString!.components(separatedBy: "\r\n") as [String]
+            guard let _ = downloadProgress else { return }
+            
+            guard let jsonResult = try? JSON.parse(jsonData: data) else {
+                let jsonString = String(data: data, encoding: .utf8)
+                let jsonChunks = jsonString!.components(separatedBy: "\r\n")
                 
                 for chunk in jsonChunks where !chunk.utf16.isEmpty {
-                    if let chunkData = chunk.data(using: String.Encoding.utf8),
-                        let jsonResult = try? JSON.parse(jsonData: chunkData) {
-                        downloadProgress?(json: jsonResult, response: response)
-                    }
+                    guard let chunkData = chunk.data(using: .utf8), let jsonResult = try? JSON.parse(jsonData: chunkData) else { continue }
+                    downloadProgress?(json: jsonResult, response: response)
                 }
+                return
             }
+            
+            downloadProgress?(json: jsonResult, response: response)
         }
 
         let jsonSuccessHandler: HTTPRequest.SuccessHandler = { data, response in
