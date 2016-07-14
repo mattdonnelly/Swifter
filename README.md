@@ -10,7 +10,7 @@ If you're using Xcode 6 and above, Swifter can be installed by simply dragging t
 
 ### Swift 3
 
-For those using Xcode 8 and Swift 3, there is a [swift-3 branch](/mattdonnelly/Swifter/tree/swift-3) of Swifter available. It will be merged to master once Swift 3 exits beta later this year. 
+For those using Xcode 8 and Swift 3, there is a [swift-3 branch](https://github.com/mattdonnelly/Swifter/tree/swift-3) of Swifter available. It will be merged to master once Swift 3 exits beta later this year. 
 
 
 ###Usage
