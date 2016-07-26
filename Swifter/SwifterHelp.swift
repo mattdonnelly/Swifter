@@ -34,7 +34,7 @@ public extension Swifter {
 
     It is recommended applications request this endpoint when they are loaded, but no more than once a day.
     */
-    public func getHelpConfigurationWithSuccess(success: ((config: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getHelpConfigurationWithSuccess(success: ((config: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: SwifterHTTPRequest.FailureHandler? = nil) {
         let path = "help/configuration.json"
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
@@ -47,7 +47,7 @@ public extension Swifter {
 
     Returns the list of languages supported by Twitter along with their ISO 639-1 code. The ISO 639-1 code is the two letter value to use if you include lang with any of your requests.
     */
-    public func getHelpLanguagesWithSuccess(success: ((languages: [JSONValue]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getHelpLanguagesWithSuccess(success: ((languages: [JSONValue]?) -> Void)? = nil, failure: SwifterHTTPRequest.FailureHandler? = nil) {
         let path = "help/languages.json"
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
@@ -60,7 +60,7 @@ public extension Swifter {
 
     Returns Twitter's Privacy Policy.
     */
-    public func getHelpPrivacyWithSuccess(success: ((privacy: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getHelpPrivacyWithSuccess(success: ((privacy: String?) -> Void)? = nil, failure: SwifterHTTPRequest.FailureHandler? = nil) {
         let path = "help/privacy.json"
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
@@ -73,7 +73,7 @@ public extension Swifter {
 
     Returns the Twitter Terms of Service in the requested format. These are not the same as the Developer Rules of the Road.
     */
-    public func getHelpTermsOfServiceWithSuccess(success: ((tos: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getHelpTermsOfServiceWithSuccess(success: ((tos: String?) -> Void)? = nil, failure: SwifterHTTPRequest.FailureHandler? = nil) {
         let path = "help/tos.json"
 
         self.getJSONWithPath(path, baseURL: self.apiURL, parameters: [:], success: { json, _ in
@@ -96,7 +96,7 @@ public extension Swifter {
 
     Read more about REST API Rate Limiting in v1.1 and review the limits.
     */
-    public func getRateLimitsForResources(resources: [String], success: ((rateLimitStatus: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getRateLimitsForResources(resources: [String], success: ((rateLimitStatus: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: SwifterHTTPRequest.FailureHandler? = nil) {
         let path = "application/rate_limit_status.json"
 
         var parameters = Dictionary<String, Any>()

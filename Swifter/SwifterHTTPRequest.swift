@@ -80,7 +80,7 @@ public class SwifterHTTPRequest: NSObject, NSURLSessionDataDelegate {
     var uploadProgressHandler: UploadProgressHandler?
     var downloadProgressHandler: DownloadProgressHandler?
     var successHandler: SuccessHandler?
-    var failureHandler: FailureHandler?
+    var failureHandler: SwifterHTTPRequest.FailureHandler?
 
     public init(URL: NSURL, method: HTTPMethodType = .GET, parameters: Dictionary<String, Any> = [:]) {
         self.URL = URL

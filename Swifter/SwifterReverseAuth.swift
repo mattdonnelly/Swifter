@@ -28,7 +28,7 @@ let swifterApiURL = NSURL(string: "https://api.twitter.com")!
 
 public extension Swifter {
     
-    public func postReverseOAuthTokenRequest(success: (authenticationHeader: String) -> Void, failure: FailureHandler?) {
+    public func postReverseOAuthTokenRequest(success: (authenticationHeader: String) -> Void, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "/oauth/request_token"
         
         var parameters = Dictionary<String, Any>()
@@ -40,7 +40,7 @@ public extension Swifter {
         }, failure: failure)
     }
     
-    public func postReverseAuthAccessTokenWithAuthenticationHeader(authenticationHeader: String, success: TokenSuccessHandler, failure: FailureHandler?) {
+    public func postReverseAuthAccessTokenWithAuthenticationHeader(authenticationHeader: String, success: TokenSuccessHandler, failure: SwifterHTTPRequest.FailureHandler?) {
         let path =  "/oauth/access_token"
         
         let shortHeader = authenticationHeader.stringByReplacingOccurrencesOfString("OAuth ", withString: "")
