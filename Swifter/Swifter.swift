@@ -31,6 +31,7 @@ public class Swifter {
     // MARK: - Types
 
     public typealias JSONSuccessHandler = (json: JSON, response: NSHTTPURLResponse) -> Void
+    public typealias SuccessHandler = (data: NSData, response: NSHTTPURLResponse) -> Void
     public typealias FailureHandler = (error: NSError) -> Void
 
     internal struct CallbackNotification {

@@ -46,8 +46,7 @@ public class SwifterHTTPRequest: NSObject, NSURLSessionDataDelegate {
 
     public typealias UploadProgressHandler = (bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) -> Void
     public typealias DownloadProgressHandler = (data: NSData, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: NSHTTPURLResponse) -> Void
-    public typealias SuccessHandler = (data: NSData, response: NSHTTPURLResponse) -> Void
-    public typealias FailureHandler = (error: NSError) -> Void
+    // Some typealias are already defined in the main Swifter class
 
     internal struct DataUpload {
         var data: NSData
@@ -79,8 +78,8 @@ public class SwifterHTTPRequest: NSObject, NSURLSessionDataDelegate {
 
     var uploadProgressHandler: UploadProgressHandler?
     var downloadProgressHandler: DownloadProgressHandler?
-    var successHandler: SuccessHandler?
-    var failureHandler: SwifterHTTPRequest.FailureHandler?
+    var successHandler: Swifter.SuccessHandler?
+    var failureHandler: Swifter.FailureHandler?
 
     public init(URL: NSURL, method: HTTPMethodType = .GET, parameters: Dictionary<String, Any> = [:]) {
         self.URL = URL
