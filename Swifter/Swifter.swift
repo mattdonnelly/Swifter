@@ -101,7 +101,7 @@ public class Swifter {
             }
         }
 
-        let jsonSuccessHandler: SwifterHTTPRequest.SuccessHandler = { data, response in
+        let jsonSuccessHandler: Swifter.SuccessHandler = { data, response in
 
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
                 do {
