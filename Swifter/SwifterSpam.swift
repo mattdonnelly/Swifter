@@ -32,7 +32,7 @@ public extension Swifter {
 
     Report the specified user as a spam account to Twitter. Additionally performs the equivalent of POST blocks/create on behalf of the authenticated user.
     */
-    public func postUsersReportSpamWithScreenName(screenName: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: SwifterHTTPRequest.FailureHandler? = nil) {
+    public func postUsersReportSpamWithScreenName(screenName: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: Swifter.FailureHandler? = nil) {
         let path = "users/report_spam.json"
 
         var parameters = Dictionary<String, Any>()
@@ -43,7 +43,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func postUsersReportSpamWithUserID(userID: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: SwifterHTTPRequest.FailureHandler? = nil) {
+    public func postUsersReportSpamWithUserID(userID: String, success: ((user: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: Swifter.FailureHandler? = nil) {
         let path = "users/report_spam.json"
 
         var parameters = Dictionary<String, Any>()
