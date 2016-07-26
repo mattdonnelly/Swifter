@@ -137,7 +137,7 @@ public extension Swifter {
             }, failure: failure)
     }
     
-    public func postOAuth2BearerTokenWithSuccess(success: JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
+    public func postOAuth2BearerTokenWithSuccess(success: Swifter.JSONSuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) {
         let path = "/oauth2/token"
         
         var parameters = Dictionary<String, Any>()
