@@ -76,20 +76,22 @@ extension String {
         
         return parameters
     }
-
-    func SHA1DigestWithKey(key: String) -> NSData {
-        let str = self.cStringUsingEncoding(NSUTF8StringEncoding)
-        let strLen = self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+    
+    func parametersDictionaryFromCommaSeparatedParametersString() -> Dictionary<String, String> {
+        var dict = Dictionary<String, String>()
         
-        let digestLen = Int(CC_SHA1_DIGEST_LENGTH)
-        let result = UnsafeMutablePointer<Void>.alloc(digestLen)
+        for parameter in self.componentsSeparatedByString(", ") {
+            // transform k="v" into {'k':'v'}
+            let keyValue = parameter.componentsSeparatedByString("=")
+            if keyValue.count != 2 {
+                continue
+            }
+            
+            let value = keyValue[1].stringByReplacingOccurrencesOfString("\"", withString:"")
+            dict.updateValue(value, forKey: keyValue[0])
+        }
         
-        let keyStr = key.cStringUsingEncoding(NSUTF8StringEncoding)!
-        let keyLen = key.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
-
-        CCHmac(CCHmacAlgorithm(kCCHmacAlgSHA1), keyStr, keyLen, str!, strLen, result)
-
-        return NSData(bytes: result, length: digestLen)
+        return dict
     }
     
 }
