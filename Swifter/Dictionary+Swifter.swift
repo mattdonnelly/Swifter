@@ -53,7 +53,7 @@ extension Dictionary {
 
         for (key, value) in self {
             let keyString: String = "\(key)".urlEncodedStringWithEncoding()
-            let valueString: String = "\(value)".urlEncodedStringWithEncoding()
+            let valueString: String = "\(value)".urlEncodedStringWithEncoding(keyString == "status")
             let query: String = "\(keyString)=\(valueString)"
             parts.append(query)
         }
