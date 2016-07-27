@@ -42,10 +42,12 @@ extension String {
         }
     }
     
-    func urlEncodedStringWithEncoding() -> String {
+    func urlEncodedStringWithEncoding(all: Bool = false) -> String {
         let allowedCharacterSet = NSCharacterSet.URLQueryAllowedCharacterSet().mutableCopy() as! NSMutableCharacterSet
         allowedCharacterSet.removeCharactersInString("\n:#/?@!$&'()*+,;=")
-        allowedCharacterSet.addCharactersInString("[]")
+        if !all {
+            allowedCharacterSet.addCharactersInString("[]")
+        }
         return self.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacterSet)!
 
     }
