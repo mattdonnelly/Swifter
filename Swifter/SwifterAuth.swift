@@ -57,7 +57,7 @@ public extension Swifter {
                     }, failure: failure)
             }
             
-            let authorizeURL = URL(string: "/oauth/authorize", relativeTo: TwitterURL.api)
+            let authorizeURL = URL(string: "oauth/authorize", relativeTo: TwitterURL.oauth.url)
             let queryURL = URL(string: authorizeURL!.absoluteString! + "?oauth_token=\(token!.key)")!
             NSWorkspace.shared().open(queryURL)
         }, failure: failure)
@@ -90,7 +90,7 @@ public extension Swifter {
                     }, failure: failure)
             }
             
-            let authorizeURL = URL(string: "/oauth/authorize", relativeTo: TwitterURL.api)
+            let authorizeURL = URL(string: "oauth/authorize", relativeTo: TwitterURL.oauth.url)
             let queryURL = URL(string: authorizeURL!.absoluteString! + "?oauth_token=\(token!.key)")!
             
             if #available(iOS 9.0, *) , let delegate = presentingViewController as? SFSafariViewControllerDelegate {
@@ -136,18 +136,18 @@ public extension Swifter {
     }
     
     public func postOAuth2BearerTokenWithSuccess(_ success: JSONSuccessHandler?, failure: FailureHandler?) {
-        let path = "/oauth2/token"
+        let path = "oauth2/token"
         
         var parameters = Dictionary<String, Any>()
         parameters["grant_type"] = "client_credentials"
         
-        self.jsonRequest(path: path, baseURL: TwitterURL.api, method: .POST, parameters: parameters, success: success, failure: failure)
+        self.jsonRequest(path: path, baseURL: .oauth, method: .POST, parameters: parameters, success: success, failure: failure)
     }
     
     public func postOAuth2InvalidateBearerTokenWithSuccess(_ success: TokenSuccessHandler?, failure: FailureHandler?) {
-        let path = "/oauth2/invalidate_token"
+        let path = "oauth2/invalidate_token"
         
-        self.jsonRequest(path: path, baseURL: TwitterURL.api, method: .POST, parameters: [:], success: { json, response in
+        self.jsonRequest(path: path, baseURL: .oauth, method: .POST, parameters: [:], success: { json, response in
             if let accessToken = json["access_token"].string {
                 self.client.credential = nil
                 
@@ -163,30 +163,33 @@ public extension Swifter {
     }
     
     public func postOAuthRequestTokenWithCallbackURL(_ callbackURL: URL, success: TokenSuccessHandler, failure: FailureHandler?) {
-        let path = "/oauth/request_token"
+        let path = "oauth/request_token"
         
         var parameters =  Dictionary<String, Any>()
         
         parameters["oauth_callback"] = callbackURL.absoluteString
         
-        self.client.post(path, baseURL: TwitterURL.api, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
+        self.client.post(path, baseURL: .oauth, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             data, response in
             let responseString = String(data: data, encoding: .utf8)!
             let accessToken = Credential.OAuthAccessToken(queryString: responseString)
             success(accessToken: accessToken, response: response)
             
-            }, failure: failure)
+            }, failure: { error in
+                failure?(error: error)
+                print(#function)
+        })
     }
     
     public func postOAuthAccessTokenWithRequestToken(_ requestToken: Credential.OAuthAccessToken, success: TokenSuccessHandler, failure: FailureHandler?) {
         if let verifier = requestToken.verifier {
-            let path =  "/oauth/access_token"
+            let path =  "oauth/access_token"
             
             var parameters = Dictionary<String, Any>()
             parameters["oauth_token"] = requestToken.key
             parameters["oauth_verifier"] = verifier
             
-            self.client.post(path, baseURL: TwitterURL.api, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
+            self.client.post(path, baseURL: .oauth, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
                 data, response in
                 
                 let responseString = String(data: data, encoding: .utf8)!
@@ -194,8 +197,7 @@ public extension Swifter {
                 success(accessToken: accessToken, response: response)
                 
                 }, failure: failure)
-        }
-        else {
+        } else {
             let userInfo = [NSLocalizedFailureReasonErrorKey: "Bad OAuth response received from server"]
             let error = NSError(domain: SwifterError.domain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
             failure?(error: error)
