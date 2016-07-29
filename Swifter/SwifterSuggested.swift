@@ -40,7 +40,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["lang"] ??= lang
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(users: json.array)
             }, failure: failure)
     }
@@ -56,7 +56,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["lang"] ??= lang
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(users: json.array)
             }, failure: failure)
     }
@@ -69,7 +69,7 @@ public extension Swifter {
     public func getUsersSuggestionsForSlugMembers(_ slug: String, success: ((users: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "users/suggestions/\(slug)/members.json"
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
             success?(users: json.array)
             }, failure: failure)
     }

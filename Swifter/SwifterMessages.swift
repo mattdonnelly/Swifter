@@ -42,7 +42,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(messages: json.array)
             }, failure: failure)
     }
@@ -62,7 +62,7 @@ public extension Swifter {
         parameters["page"] ??= page
         parameters["include_entities"] ??= includeEntities
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(messages: json.array)
             }, failure: failure)
     }
@@ -76,7 +76,7 @@ public extension Swifter {
         let path = "direct_messages/show.json"
         let parameters: [String: Any] = ["id" : id]
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(messages: json.array)
             }, failure: failure)
     }
@@ -93,7 +93,7 @@ public extension Swifter {
         parameters["id"] = id
         parameters["include_entities"] ??= includeEntities
         
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(messages: json.object)
             }, failure: failure)
     }
@@ -110,7 +110,7 @@ public extension Swifter {
         parameters["user_id"] = userID
         parameters["text"] = text
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in            
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in            
             success?(statuses: json.object)
             }, failure: failure)
     }

@@ -53,7 +53,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["callback"] ??= callback
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(statuses: json["statuses"].array, searchMetadata: json["search_metadata"].object)
             }, failure: failure)
     }

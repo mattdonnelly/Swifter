@@ -42,7 +42,7 @@ public extension Swifter {
         parameters["since_id"] ??= sinceID
         parameters["max_id"] ??= maxID
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(statuses: json.array)
             }, failure: failure)
     }
@@ -56,7 +56,7 @@ public extension Swifter {
         parameters["since_id"] ??= sinceID
         parameters["max_id"] ??= maxID
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(statuses: json.array)
             }, failure: failure)
     }
@@ -70,7 +70,7 @@ public extension Swifter {
         parameters["since_id"] ??= sinceID
         parameters["max_id"] ??= maxID
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(statuses: json.array)
             }, failure: failure)
     }
@@ -89,7 +89,7 @@ public extension Swifter {
         parameters["id"] = id
         parameters["include_entities"] ??= includeEntities
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(status: json.object)
             }, failure: failure)
     }
@@ -108,7 +108,7 @@ public extension Swifter {
         parameters["id"] = id
         parameters["include_entities"] ??= includeEntities
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in            
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in            
             success?(status: json.object)
             }, failure: failure)
     }

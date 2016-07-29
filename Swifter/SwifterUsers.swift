@@ -35,7 +35,7 @@ public extension Swifter {
     public func getAccountSettingsWithSuccess(_ success: ((settings: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "account/settings.json"
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
             success?(settings: json.object)
             }, failure: failure)
     }
@@ -52,7 +52,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(myInfo: json.object)
             }, failure: failure)
     }
@@ -75,7 +75,7 @@ public extension Swifter {
         parameters["time_zone"] ??= timeZone
         parameters["lang"] ??= lang
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(settings: json.object)
             }, failure: failure)
     }
@@ -92,7 +92,7 @@ public extension Swifter {
         parameters["device"] = device ? "sms" : "none"
         parameters["include_entities"] ??= includeEntities
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(deliveryDeviceSettings: json.object)
             }, failure: failure)
     }
@@ -115,7 +115,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
         
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(profile: json.object)
             }, failure: failure)
     }
@@ -136,7 +136,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["use"] ??= use
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(profile: json.object)
             }, failure: failure)
     }
@@ -158,7 +158,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(profile: json.object)
             }, failure: failure)
     }
@@ -178,7 +178,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(profile: json.object)
             }, failure: failure)
     }
@@ -196,7 +196,7 @@ public extension Swifter {
         parameters["skip_status"] ??= skipStatus
         parameters["cursor"] ??= cursor
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -213,7 +213,7 @@ public extension Swifter {
         parameters["stringify_ids"] ??= stringifyIDs
         parameters["cursor"] ??= cursor
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -231,7 +231,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -244,7 +244,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -262,7 +262,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -275,7 +275,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -304,7 +304,7 @@ public extension Swifter {
         parameters["screen_name"] = screenNames.joined(separator: ",")
         parameters["include_entities"] ??= includeEntities
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(users: json.array)
             }, failure: failure)
     }
@@ -318,7 +318,7 @@ public extension Swifter {
         parameters["user_id"] = userIDStrings.joined(separator: ",")
         parameters["include_entities"] ??= includeEntities
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(users: json.array)
             }, failure: failure)
     }
@@ -337,7 +337,7 @@ public extension Swifter {
         parameters["screen_name"] = screenName
         parameters["include_entities"] ??= includeEntities
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -349,7 +349,7 @@ public extension Swifter {
         parameters["user_id"] = userID
         parameters["include_entities"] ??= includeEntities
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -370,7 +370,7 @@ public extension Swifter {
         parameters["count"] ??= count
         parameters["include_entities"] ??= includeEntities
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(users: json.array)
             }, failure: failure)
     }
@@ -388,7 +388,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(users: json.array)
             }, failure: failure)
     }
@@ -401,7 +401,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(users: json.array)
             }, failure: failure)
     }
@@ -419,7 +419,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(users: json.array)
             }, failure: failure)
     }
@@ -432,7 +432,7 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(users: json.array)
             }, failure: failure)
     }
@@ -445,7 +445,7 @@ public extension Swifter {
     public func postAccountRemoveProfileBannerWithSuccess(_ success: ((response: JSON) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "account/remove_profile_banner.json"
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
             success?(response: json)
             }, failure: failure)
     }
@@ -475,7 +475,7 @@ public extension Swifter {
         parameters["offset_top"] ??= offsetTop
 
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(response: json)
             }, failure: failure)
     }
@@ -488,7 +488,7 @@ public extension Swifter {
     public func getUsersProfileBannerWithUserID(_ userID: String, success: ((response: JSON) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "users/profile_banner.json"
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: [:], success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
             success?(response: json)
             }, failure: failure)
     }
@@ -508,7 +508,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -519,7 +519,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -539,7 +539,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["screen_name"] = screenName
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -550,7 +550,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["user_id"] = userID
 
-        self.postJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
             }, failure: failure)
     }
@@ -566,7 +566,7 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["cursor"] ??= cursor
 
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(ids: json["ids"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }
@@ -584,7 +584,7 @@ public extension Swifter {
         parameters["skip_status"] ??= skipStatus
         parameters["cursor"] ??= cursor
         
-        self.getJSON(path: path, baseURL: TwitterURL.api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(users: json["users"].array, previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
             }, failure: failure)
     }

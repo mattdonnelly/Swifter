@@ -40,8 +40,8 @@ internal class AppOnlyClient: SwifterClientProtocol  {
         self.dataEncoding = .utf8
     }
 
-    func get(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
-        let url = URL(string: path, relativeTo: baseURL)
+    func get(_ path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+        let url = URL(string: path, relativeTo: baseURL.url)
 
         let request = HTTPRequest(url: url!, method: .GET, parameters: parameters)
         request.downloadProgressHandler = downloadProgress
@@ -57,8 +57,8 @@ internal class AppOnlyClient: SwifterClientProtocol  {
         return request
     }
 
-    func post(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
-        let url = URL(string: path, relativeTo: baseURL)
+    func post(_ path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+        let url = URL(string: path, relativeTo: baseURL.url)
 
         let request = HTTPRequest(url: url!, method: .POST, parameters: parameters)
         request.downloadProgressHandler = downloadProgress
