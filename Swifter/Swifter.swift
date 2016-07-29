@@ -68,16 +68,16 @@ public class Swifter {
     
     public init(consumerKey: String, consumerSecret: String, appOnly: Bool = false) {
         self.client = appOnly
-            ? SwifterAppOnlyClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
-            : SwifterOAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
+            ? AppOnlyClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
+            : OAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
     }
 
     public init(consumerKey: String, consumerSecret: String, oauthToken: String, oauthTokenSecret: String) {
-        self.client = SwifterOAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret , accessToken: oauthToken, accessTokenSecret: oauthTokenSecret)
+        self.client = OAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret , accessToken: oauthToken, accessTokenSecret: oauthTokenSecret)
     }
 
     public init(account: ACAccount) {
-        self.client = SwifterAccountsClient(account: account)
+        self.client = AccountsClient(account: account)
     }
 
     deinit {

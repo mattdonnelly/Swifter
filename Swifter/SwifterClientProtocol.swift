@@ -29,7 +29,7 @@ import Social
 
 public protocol SwifterClientProtocol {
 
-    var credential: SwifterCredential? { get set }
+    var credential: Credential? { get set }
 
     @discardableResult
     func get(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest

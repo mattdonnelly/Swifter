@@ -1,5 +1,5 @@
 //
-//  SwifterAccountsClient.swift
+//  AccountsClient.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -27,12 +27,12 @@ import Foundation
 import Accounts
 import Social
 
-internal class SwifterAccountsClient: SwifterClientProtocol {
+internal class AccountsClient: SwifterClientProtocol {
 
-    var credential: SwifterCredential?
+    var credential: Credential?
 
     init(account: ACAccount) {
-        self.credential = SwifterCredential(account: account)
+        self.credential = Credential(account: account)
     }
 
     func get(_ path: String, baseURL: URL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {

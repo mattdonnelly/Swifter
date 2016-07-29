@@ -1,5 +1,5 @@
 //
-//  SwifterOAuthClient.swift
+//  OAuthClient.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -26,7 +26,7 @@
 import Foundation
 import Accounts
 
-internal class SwifterOAuthClient: SwifterClientProtocol  {
+internal class OAuthClient: SwifterClientProtocol  {
 
     struct OAuth {
         static let version = "1.0"
@@ -36,7 +36,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
     var consumerKey: String
     var consumerSecret: String
 
-    var credential: SwifterCredential?
+    var credential: Credential?
 
     var dataEncoding: String.Encoding
 
@@ -50,8 +50,8 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         self.consumerKey = consumerKey
         self.consumerSecret = consumerSecret
 
-        let credentialAccessToken = SwifterCredential.OAuthAccessToken(key: accessToken, secret: accessTokenSecret)
-        self.credential = SwifterCredential(accessToken: credentialAccessToken)
+        let credentialAccessToken = Credential.OAuthAccessToken(key: accessToken, secret: accessTokenSecret)
+        self.credential = Credential(accessToken: credentialAccessToken)
 
         self.dataEncoding = .utf8
     }
@@ -144,7 +144,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         return "OAuth " + headerComponents.joined(separator: ", ")
     }
 
-    func oauthSignatureForMethod(_ method: HTTPMethodType, url: URL, parameters: Dictionary<String, Any>, accessToken token: SwifterCredential.OAuthAccessToken?) -> String {
+    func oauthSignatureForMethod(_ method: HTTPMethodType, url: URL, parameters: Dictionary<String, Any>, accessToken token: Credential.OAuthAccessToken?) -> String {
         let tokenSecret = token?.secret.urlEncodedString ?? ""
         let encodedConsumerSecret = self.consumerSecret.urlEncodedString
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"

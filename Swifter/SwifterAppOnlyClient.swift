@@ -1,5 +1,5 @@
 //
-//  SwifterAppOnlyClient.swift
+//  AppOnlyClient.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -25,12 +25,12 @@
 
 import Foundation
 
-internal class SwifterAppOnlyClient: SwifterClientProtocol  {
+internal class AppOnlyClient: SwifterClientProtocol  {
 
     var consumerKey: String
     var consumerSecret: String
 
-    var credential: SwifterCredential?
+    var credential: Credential?
 
     var dataEncoding: String.Encoding
 
@@ -69,7 +69,7 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
         if let bearerToken = self.credential?.accessToken?.key {
             request.headers = ["Authorization": "Bearer \(bearerToken)"];
         } else {
-            let basicCredentials = SwifterAppOnlyClient.base64EncodedCredentialsWithKey(self.consumerKey, secret: self.consumerSecret)
+            let basicCredentials = AppOnlyClient.base64EncodedCredentialsWithKey(self.consumerKey, secret: self.consumerSecret)
             request.headers = ["Authorization": "Basic \(basicCredentials)"];
             request.encodeParameters = true
         }

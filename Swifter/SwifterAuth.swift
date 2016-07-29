@@ -34,7 +34,7 @@ import Foundation
 
 public extension Swifter {
     
-    public typealias TokenSuccessHandler = (accessToken: SwifterCredential.OAuthAccessToken?, response: URLResponse) -> Void
+    public typealias TokenSuccessHandler = (accessToken: Credential.OAuthAccessToken?, response: URLResponse) -> Void
     
     /**
      Begin Authorization with a Callback URL.
@@ -52,7 +52,7 @@ public extension Swifter {
                 requestToken.verifier = parameters["oauth_verifier"]
                 
                 self.postOAuthAccessTokenWithRequestToken(requestToken, success: { accessToken, response in
-                    self.client.credential = SwifterCredential(accessToken: accessToken!)
+                    self.client.credential = Credential(accessToken: accessToken!)
                     success?(accessToken: accessToken!, response: response)
                     }, failure: failure)
             }
@@ -85,7 +85,7 @@ public extension Swifter {
                 requestToken.verifier = parameters["oauth_verifier"]
                 
                 self.postOAuthAccessTokenWithRequestToken(requestToken, success: { accessToken, response in
-                    self.client.credential = SwifterCredential(accessToken: accessToken!)
+                    self.client.credential = Credential(accessToken: accessToken!)
                     success?(accessToken: accessToken!, response: response)
                     }, failure: failure)
             }
@@ -115,9 +115,9 @@ public extension Swifter {
                 if tokenType == "bearer" {
                     let accessToken = json["access_token"].string
                     
-                    let credentialToken = SwifterCredential.OAuthAccessToken(key: accessToken!, secret: "")
+                    let credentialToken = Credential.OAuthAccessToken(key: accessToken!, secret: "")
                     
-                    self.client.credential = SwifterCredential(accessToken: credentialToken)
+                    self.client.credential = Credential(accessToken: credentialToken)
                     
                     success?(accessToken: credentialToken, response: response)
                 } else {
@@ -151,7 +151,7 @@ public extension Swifter {
             if let accessToken = json["access_token"].string {
                 self.client.credential = nil
                 
-                let credentialToken = SwifterCredential.OAuthAccessToken(key: accessToken, secret: "")
+                let credentialToken = Credential.OAuthAccessToken(key: accessToken, secret: "")
                 
                 success?(accessToken: credentialToken, response: response)
             }
@@ -172,13 +172,13 @@ public extension Swifter {
         self.client.post(path, baseURL: TwitterURL.api, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
             data, response in
             let responseString = String(data: data, encoding: .utf8)!
-            let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString)
+            let accessToken = Credential.OAuthAccessToken(queryString: responseString)
             success(accessToken: accessToken, response: response)
             
             }, failure: failure)
     }
     
-    public func postOAuthAccessTokenWithRequestToken(_ requestToken: SwifterCredential.OAuthAccessToken, success: TokenSuccessHandler, failure: FailureHandler?) {
+    public func postOAuthAccessTokenWithRequestToken(_ requestToken: Credential.OAuthAccessToken, success: TokenSuccessHandler, failure: FailureHandler?) {
         if let verifier = requestToken.verifier {
             let path =  "/oauth/access_token"
             
@@ -190,7 +190,7 @@ public extension Swifter {
                 data, response in
                 
                 let responseString = String(data: data, encoding: .utf8)!
-                let accessToken = SwifterCredential.OAuthAccessToken(queryString: responseString)
+                let accessToken = Credential.OAuthAccessToken(queryString: responseString)
                 success(accessToken: accessToken, response: response)
                 
                 }, failure: failure)
