@@ -154,11 +154,9 @@ internal class OAuthClient: SwifterClientProtocol  {
         let parameterString = parameterComponents.joined(separator: "&")
         let encodedParameterString = parameterString.urlEncodedString
 
-        let encodedURL = url.absoluteString?.urlEncodedString
+        let encodedURL = url.absoluteString!.urlEncodedString
 
         let signatureBaseString = "\(method)&\(encodedURL)&\(encodedParameterString)"
-
-        // let signature = signatureBaseString.SHA1DigestWithKey(signingKey)
         
         let key = signingKey.data(using: .utf8)!
         let msg = signatureBaseString.data(using: .utf8)!
