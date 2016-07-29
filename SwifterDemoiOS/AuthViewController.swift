@@ -41,7 +41,7 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
         super.init(coder: aDecoder)
     }
 
-    @IBAction func didTouchUpInsideLoginButton(sender: AnyObject) {
+    @IBAction func didTouchUpInsideLoginButton(_ sender: AnyObject) {
         let failureHandler: ((NSError) -> Void) = { error in
             self.alert(title: "Error", message: error.localizedDescription)
             
