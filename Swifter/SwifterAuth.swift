@@ -45,8 +45,8 @@ public extension Swifter {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: { token, response in
             var requestToken = token!
             
-            NotificationCenter.default().addObserver(forName: .SwifterCallbackNotification, object: nil, queue: .main()) { notification in
-                NotificationCenter.default().removeObserver(self)
+            NotificationCenter.default.addObserver(forName: .SwifterCallbackNotification, object: nil, queue: .main) { notification in
+                NotificationCenter.default.removeObserver(self)
                 let url = notification.userInfo![CallbackNotification.optionsURLKey] as! URL
                 let parameters = url.query!.parametersFromQueryString()
                 requestToken.verifier = parameters["oauth_verifier"]
@@ -76,8 +76,8 @@ public extension Swifter {
     public func authorizeWithCallbackURL(_ callbackURL: URL, presentFromViewController presentingViewController: UIViewController? , success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: { token, response in
             var requestToken = token!
-            NotificationCenter.default().addObserver(forName: .SwifterCallbackNotification, object: nil, queue: .main()) { notification in
-                NotificationCenter.default().removeObserver(self)
+            NotificationCenter.default.addObserver(forName: .SwifterCallbackNotification, object: nil, queue: .main) { notification in
+                NotificationCenter.default.removeObserver(self)
                 presentingViewController?.presentedViewController?.dismiss(animated: true, completion: nil)
                 let url = notification.userInfo![CallbackNotification.optionsURLKey] as! URL
                 
@@ -106,7 +106,7 @@ public extension Swifter {
     
     public class func handleOpenURL(_ url: URL) {
         let notification = Notification(name: .SwifterCallbackNotification, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
-        NotificationCenter.default().post(notification)
+        NotificationCenter.default.post(notification)
     }
     
     public func authorizeAppOnlyWithSuccess(_ success: TokenSuccessHandler?, failure: FailureHandler?) {

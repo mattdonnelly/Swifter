@@ -160,7 +160,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
         }
 
         DispatchQueue.main.async {
-            let session = URLSession(configuration: .default(), delegate: self, delegateQueue: .main())
+            let session = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
             self.dataTask = session.dataTask(with: self.request!)
             self.dataTask.resume()
             

@@ -131,7 +131,7 @@ public extension Swifter {
         let path = "account/update_profile_background_image.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["image"] = imageData.base64EncodedString([])
+        parameters["image"] = imageData.base64EncodedString(options: [])
         parameters["title"] ??= title
         parameters["include_entities"] ??= includeEntities
         parameters["use"] ??= use
@@ -174,7 +174,7 @@ public extension Swifter {
         let path = "account/update_profile_image.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["image"] = imageData.base64EncodedString([])
+        parameters["image"] = imageData.base64EncodedString(options: [])
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
@@ -468,7 +468,7 @@ public extension Swifter {
         let path = "account/update_profile_banner.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["banner"] = imageData.base64EncodedString([])
+        parameters["banner"] = imageData.base64EncodedString(options: [])
         parameters["width"] ??= width
         parameters["height"] ??= height
         parameters["offset_left"] ??= offsetLeft

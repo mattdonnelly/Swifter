@@ -159,7 +159,7 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
 
         // let signature = signatureBaseString.SHA1DigestWithKey(signingKey)
 
-        return signatureBaseString.SHA1Digest(with: signingKey).base64EncodedString([])
+        return signatureBaseString.SHA1Digest(with: signingKey).base64EncodedString(options: [])
     }
     
 }

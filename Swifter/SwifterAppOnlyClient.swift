@@ -83,7 +83,7 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
         let encodedSecret = secret.urlEncodedString
         let bearerTokenCredentials = "\(encodedKey):\(encodedSecret)"
         if let data = bearerTokenCredentials.data(using: .utf8) {
-            return data.base64EncodedString([])
+            return data.base64EncodedString(options: [])
         }
         return String()
     }

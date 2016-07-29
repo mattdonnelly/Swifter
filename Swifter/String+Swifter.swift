@@ -28,7 +28,7 @@ import Foundation
 extension String {
 
     internal func indexOf(_ sub: String) -> Int? {
-        guard let range = self.range(of: sub) where !range.isEmpty else {
+        guard let range = self.range(of: sub), !range.isEmpty else {
             return nil
         }
         return self.characters.distance(from: self.startIndex, to: range.lowerBound)

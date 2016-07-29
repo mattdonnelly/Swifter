@@ -183,7 +183,7 @@ public enum JSON : Equatable, CustomStringConvertible {
     }
 
     public subscript(index: Int) -> JSON {
-        guard case .array(let array) = self where array.count > index else {
+        guard case .array(let array) = self, array.count > index else {
             return .invalid
         }
         return array[index]

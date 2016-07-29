@@ -81,7 +81,7 @@ public class Swifter {
     }
 
     deinit {
-        NotificationCenter.default().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - JSON Requests
