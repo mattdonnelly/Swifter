@@ -158,8 +158,11 @@ internal class SwifterOAuthClient: SwifterClientProtocol  {
         let signatureBaseString = "\(method)&\(encodedURL)&\(encodedParameterString)"
 
         // let signature = signatureBaseString.SHA1DigestWithKey(signingKey)
-
-        return signatureBaseString.SHA1Digest(with: signingKey).base64EncodedString(options: [])
+        
+        let key = signingKey.data(using: .utf8)!
+        let msg = signatureBaseString.data(using: .utf8)!
+        let sha1 = HMAC.sha1(key: key, message: msg)!
+        return sha1.base64EncodedString(options: [])
     }
     
 }

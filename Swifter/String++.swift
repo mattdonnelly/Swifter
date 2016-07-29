@@ -74,20 +74,5 @@ extension String {
         return parameters
     }
 
-    func SHA1Digest(with key: String) -> Data {
-        let str = self.cString(using: .utf8)
-        let strLen = self.lengthOfBytes(using: .utf8)
-        
-        let digestLen = Int(CC_SHA1_DIGEST_LENGTH)
-        let result = UnsafeMutablePointer<Void>(allocatingCapacity: digestLen)
-        
-        let keyStr = key.cString(using: .utf8)!
-        let keyLen = key.lengthOfBytes(using: .utf8)
-
-        CCHmac(CCHmacAlgorithm(kCCHmacAlgSHA1), keyStr, keyLen, str!, strLen, result)
-
-        return Data(bytes: UnsafePointer<UInt8>(result), count: digestLen)
-    }
-    
 }
 
