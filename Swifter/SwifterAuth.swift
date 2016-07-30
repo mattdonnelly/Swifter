@@ -42,16 +42,16 @@ public extension Swifter {
      */
     #if os(OSX)
     public func authorize(with callbackURL: URL, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
-        self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: { token, response in
+        self.postOAuthRequestToken(with: callbackURL, success: { token, response in
             var requestToken = token!
             
             NotificationCenter.default.addObserver(forName: .SwifterCallbackNotification, object: nil, queue: .main) { notification in
                 NotificationCenter.default.removeObserver(self)
                 let url = notification.userInfo![CallbackNotification.optionsURLKey] as! URL
-                let parameters = url.query!.parametersFromQueryString()
+                let parameters = url.query!.queryStringParameters
                 requestToken.verifier = parameters["oauth_verifier"]
                 
-                self.postOAuthAccessTokenWithRequestToken(requestToken, success: { accessToken, response in
+                    self.postOAuthAccessToken(with: requestToken, success: { accessToken, response in
                     self.client.credential = Credential(accessToken: accessToken!)
                     success?(accessToken: accessToken!, response: response)
                     }, failure: failure)
@@ -74,7 +74,7 @@ public extension Swifter {
     
     #if os(iOS)
     public func authorize(with callbackURL: URL, presentFrom presentingViewController: UIViewController? , success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
-        self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: { token, response in
+        self.postOAuthRequestToken(with: callbackURL, success: { token, response in
             var requestToken = token!
             NotificationCenter.default.addObserver(forName: .SwifterCallbackNotification, object: nil, queue: .main) { notification in
                 NotificationCenter.default.removeObserver(self)
@@ -84,7 +84,7 @@ public extension Swifter {
                 let parameters = url.query!.queryStringParameters
                 requestToken.verifier = parameters["oauth_verifier"]
                 
-                self.postOAuthAccessTokenWithRequestToken(requestToken, success: { accessToken, response in
+                self.postOAuthAccessToken(with: requestToken, success: { accessToken, response in
                     self.client.credential = Credential(accessToken: accessToken!)
                     success?(accessToken: accessToken!, response: response)
                     }, failure: failure)
@@ -110,7 +110,7 @@ public extension Swifter {
     }
     
     public func authorizeAppOnly(success: TokenSuccessHandler?, failure: FailureHandler?) {
-        self.postOAuth2BearerTokenWithSuccess({ json, response in
+        self.postOAuth2BearerToken(success: { json, response in
             if let tokenType = json["token_type"].string {
                 if tokenType == "bearer" {
                     let accessToken = json["access_token"].string

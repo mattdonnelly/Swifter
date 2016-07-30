@@ -29,11 +29,11 @@ import SwifterMac
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ notification: Notification) {
-        NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(AppDelegate.handleEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
-        LSSetDefaultHandlerForURLScheme("swifter", Bundle.main().bundleIdentifier!)
+        NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(AppDelegate.handleEvent(_:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
+        LSSetDefaultHandlerForURLScheme("swifter", Bundle.main.bundleIdentifier!)
     }
 
-    func handleEvent(event: NSAppleEventDescriptor!, withReplyEvent: NSAppleEventDescriptor!) {
+    func handleEvent(_ event: NSAppleEventDescriptor!, withReplyEvent: NSAppleEventDescriptor!) {
         Swifter.handleOpenURL(URL(string: event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))!.stringValue!)!)
     }
 

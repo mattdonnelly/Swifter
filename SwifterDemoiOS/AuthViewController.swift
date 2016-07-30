@@ -71,7 +71,7 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
         } else {
             let url = URL(string: "swifter://success")!
        
-            swifter.authorizeWithCallbackURL(url, presentFromViewController: self, success: { _ in
+            swifter.authorize(with: url, presentFrom: self, success: { _ in
                     self.fetchTwitterHomeStream()
                 }, failure: failureHandler)
         }
@@ -82,7 +82,7 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
             self.alert(title: "Error", message: error.localizedDescription)
         }
         
-        self.swifter.getStatusesHomeTimelineWithCount(20, success: { statuses in
+        self.swifter.getStatusesHomeTimeline(count: 20, success: { statuses in
             // Successfully fetched timeline, so lets create and push the table view
             
             let tweetsViewController = self.storyboard!.instantiateViewController(withIdentifier: "TweetsViewController") as! TweetsViewController

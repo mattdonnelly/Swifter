@@ -47,7 +47,7 @@ class ViewController: NSViewController {
                     return
                 }
                 
-                guard let twitterAccounts = accountStore.accounts(with: accountType) where !twitterAccounts.isEmpty else {
+                guard let twitterAccounts = accountStore.accounts(with: accountType) , !twitterAccounts.isEmpty else {
                     print("There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
                     return
                 }
@@ -55,14 +55,14 @@ class ViewController: NSViewController {
                 let twitterAccount = twitterAccounts[0] as! ACAccount
                 let swifter = Swifter(account: twitterAccount)
                 
-                swifter.getStatusesHomeTimelineWithCount(20, success: { statuses in
+                swifter.getStatusesHomeTimeline(count: 20, success: { statuses in
                     print(statuses)
                     }, failure: failureHandler)
             }
         } else {
             let swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
-            swifter.authorizeWithCallbackURL(URL(string: "swifter://success")!, success: { _ in
-                swifter.getStatusesHomeTimelineWithCount(100, success: { statuses in
+            swifter.authorize(with: URL(string: "swifter://success")!, success: { _ in
+                swifter.getStatusesHomeTimeline(count: 100, success: { statuses in
                     guard let tweets = statuses else { return }
                     self.tweets = tweets.map {
                         let tweet = Tweet()
