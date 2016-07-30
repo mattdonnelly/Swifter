@@ -223,24 +223,11 @@ public extension Swifter {
 
     Blocks the specified user from following the authenticating user. In addition the blocked user will not show in the authenticating users mentions or timeline (unless retweeted by another user). If a follow or friend relationship exists it is destroyed.
     */
-    public func postBlocksCreate(withScreenName screenName: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler) {
+    public func postBlocksCreate(for userTag: UserTag, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler) {
         let path = "blocks/create.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["screen_name"] = screenName
-        parameters["include_entities"] ??= includeEntities
-        parameters["skip_status"] ??= skipStatus
-
-        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(user: json.object)
-            }, failure: failure)
-    }
-
-    public func postBlocksCreate(withUserId userID: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler) {
-        let path = "blocks/create.json"
-
-        var parameters = Dictionary<String, Any>()
-        parameters["user_id"] = userID
+        parameters[userTag.key] = userTag.value
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
@@ -254,24 +241,11 @@ public extension Swifter {
 
     Un-blocks the user specified in the ID parameter for the authenticating user. Returns the un-blocked user in the requested format when successful. If relationships existed before the block was instated, they will not be restored.
     */
-    public func postDestroyBlocks(withUserId userID: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler) {
+    public func postDestroyBlocks(for userTag: UserTag, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler) {
         let path = "blocks/destroy.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["user_id"] = userID
-        parameters["include_entities"] ??= includeEntities
-        parameters["skip_status"] ??= skipStatus
-
-        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(user: json.object)
-            }, failure: failure)
-    }
-
-    public func postDestroyBlocks(withScreenName screenName: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler) {
-        let path = "blocks/destroy.json"
-
-        var parameters = Dictionary<String, Any>()
-        parameters["screen_name"] = screenName
+        parameters[userTag.key] = userTag.value
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
@@ -297,25 +271,11 @@ public extension Swifter {
     - If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown.
     - You are strongly encouraged to use a POST for larger requests.
     */
-    public func getUsersLookup(withScreenNames screenNames: [String], includeEntities: Bool? = nil, success: ((users: [JSON]?) -> Void)? = nil, failure: FailureHandler) {
+    public func getUsersLookup(for usersTag: UsersTag, includeEntities: Bool? = nil, success: ((users: [JSON]?) -> Void)? = nil, failure: FailureHandler) {
         let path = "users/lookup.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["screen_name"] = screenNames.joined(separator: ",")
-        parameters["include_entities"] ??= includeEntities
-
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(users: json.array)
-            }, failure: failure)
-    }
-
-    public func getUsersLookup(withUserIds userIDs: [String], includeEntities: Bool? = nil, success: ((users: [JSON]?) -> Void)? = nil, failure: FailureHandler) {
-        let path = "users/lookup.json"
-
-        var parameters = Dictionary<String, Any>()
-
-        let userIDStrings = userIDs.map { String($0) }
-        parameters["user_id"] = userIDStrings.joined(separator: ",")
+        parameters[usersTag.key] = usersTag.value
         parameters["include_entities"] ??= includeEntities
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
@@ -330,23 +290,11 @@ public extension Swifter {
 
     You must be following a protected user to be able to see their most recent Tweet. If you don't follow a protected user, the users Tweet will be removed. A Tweet will not always be returned in the current_status field.
     */
-    public func getUsersShow(withScreenName screenName: String, includeEntities: Bool? = nil, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler) {
+    public func getUsersShow(for userTag: UserTag, includeEntities: Bool? = nil, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler) {
         let path = "users/show.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["screen_name"] = screenName
-        parameters["include_entities"] ??= includeEntities
-
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(user: json.object)
-            }, failure: failure)
-    }
-
-    public func getUsersShow(withUserId userID: String, includeEntities: Bool? = nil, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler) {
-        let path = "users/show.json"
-
-        var parameters = Dictionary<String, Any>()
-        parameters["user_id"] = userID
+        parameters[userTag.key] = userTag.value
         parameters["include_entities"] ??= includeEntities
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
@@ -369,37 +317,6 @@ public extension Swifter {
         parameters["page"] ??= page
         parameters["count"] ??= count
         parameters["include_entities"] ??= includeEntities
-
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(users: json.array)
-            }, failure: failure)
-    }
-
-    /**
-    GET    users/contributees
-
-    Returns a collection of users that the specified user can "contribute" to.
-    */
-    public func getUsersContributees(withUserId id: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((users: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        let path = "users/contributees.json"
-
-        var parameters = Dictionary<String, Any>()
-        parameters["id"] = id
-        parameters["include_entities"] ??= includeEntities
-        parameters["skip_status"] ??= skipStatus
-
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(users: json.array)
-            }, failure: failure)
-    }
-
-    public func getUsersContributees(withScreenName screenName: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((users: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        let path = "users/contributees.json"
-
-        var parameters = Dictionary<String, Any>()
-        parameters["screen_name"] = screenName
-        parameters["include_entities"] ??= includeEntities
-        parameters["skip_status"] ??= skipStatus
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(users: json.array)
@@ -454,10 +371,11 @@ public extension Swifter {
 
     Returns a map of the available size variations of the specified user's profile banner. If the user has not uploaded a profile banner, a HTTP 404 will be served instead. This method can be used instead of string manipulation on the profile_banner_url returned in user objects as described in User Profile Images and Banners.
     */
-    public func getUsersProfileBanner(withUserId userID: String, success: ((response: JSON) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getUsersProfileBanner(for userTag: UserTag, success: ((response: JSON) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "users/profile_banner.json"
+        let parameters: [String: Any] = [userTag.key: userTag.value]
 
-        self.postJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(response: json)
             }, failure: failure)
     }
@@ -471,22 +389,9 @@ public extension Swifter {
 
     Actions taken in this method are asynchronous and changes will be eventually consistent.
     */
-    public func postMutesUsersCreate(forScreenName screenName: String, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postMutesUsersCreate(for userTag: UserTag, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/create.json"
-
-        var parameters = Dictionary<String, Any>()
-        parameters["screen_name"] = screenName
-
-        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(user: json.object)
-            }, failure: failure)
-    }
-
-    public func postMutesUsersCreate(forUserId userID: String, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        let path = "mutes/users/create.json"
-
-        var parameters = Dictionary<String, Any>()
-        parameters["user_id"] = userID
+        let parameters: [String: Any] = [userTag.key: userTag.value]
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(user: json.object)
@@ -502,22 +407,11 @@ public extension Swifter {
 
     Actions taken in this method are asynchronous and changes will be eventually consistent.
     */
-    public func postMutesUsersDestroy(forScreenName screenName: String, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func postMutesUsersDestroy(for userTag: UserTag, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/destroy.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["screen_name"] = screenName
-
-        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(user: json.object)
-            }, failure: failure)
-    }
-
-    public func postMutesUsersDestroy(forUserId userID: String, success: ((user: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        let path = "mutes/users/destroy.json"
-
-        var parameters = Dictionary<String, Any>()
-        parameters["user_id"] = userID
+        parameters[userTag.key] = userTag.value
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(user: json.object)

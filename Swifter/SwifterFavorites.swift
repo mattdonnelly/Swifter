@@ -46,30 +46,19 @@ public extension Swifter {
             success?(statuses: json.array)
             }, failure: failure)
     }
-
-    public func getFavoritesList(withUserID userID: String, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, success: ((statuses: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    
+    public func getFavoritesList(for userTag: UserTag, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, success: ((statuses: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "favorites/list.json"
-
+        
         var parameters = Dictionary<String, Any>()
-        parameters["user_id"] = userID
+        switch userTag {
+        case .id(let id):           parameters["user_id"] = id
+        case .screenName(let user): parameters["screen_name"] = user
+        }
         parameters["count"] ??= count
         parameters["since_id"] ??= sinceID
         parameters["max_id"] ??= maxID
-
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(statuses: json.array)
-            }, failure: failure)
-    }
-
-    public func getFavoritesList(withScreenName screenName: String, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, success: ((statuses: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        let path = "favorites/list.json"
-
-        var parameters = Dictionary<String, Any>()
-        parameters["screen_name"] = screenName
-        parameters["count"] ??= count
-        parameters["since_id"] ??= sinceID
-        parameters["max_id"] ??= maxID
-
+        
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(statuses: json.array)
             }, failure: failure)
