@@ -146,16 +146,13 @@ internal class OAuthClient: SwifterClientProtocol  {
     }
 
     func oauthSignature(for method: HTTPMethodType, url: URL, parameters: Dictionary<String, Any>, accessToken token: Credential.OAuthAccessToken?) -> String {
-        let tokenSecret = token?.secret.urlEncodedString ?? ""
-        let encodedConsumerSecret = self.consumerSecret.urlEncodedString
+        let tokenSecret = token?.secret.urlEncodedString() ?? ""
+        let encodedConsumerSecret = self.consumerSecret.urlEncodedString()
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"
         let parameterComponents = parameters.urlEncodedQueryString(using: dataEncoding).components(separatedBy: "&").sorted()
-
         let parameterString = parameterComponents.joined(separator: "&")
-        let encodedParameterString = parameterString.urlEncodedString
-
-        let encodedURL = url.absoluteString!.urlEncodedString
-
+        let encodedParameterString = parameterString.urlEncodedString()
+        let encodedURL = url.absoluteString!.urlEncodedString()
         let signatureBaseString = "\(method)&\(encodedURL)&\(encodedParameterString)"
         
         let key = signingKey.data(using: .utf8)!
