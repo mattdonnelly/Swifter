@@ -13,7 +13,6 @@
 		8B1F25A0194A663D004BD304 /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
 		8B300C3E1944AA6600993175 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; };
 		8B300C3F1944AA6600993175 /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8B300C4C1944AECB00993175 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4B1944AECB00993175 /* main.swift */; };
 		8B300C4E1944AECB00993175 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4D1944AECB00993175 /* ViewController.swift */; };
 		8B300C501944AECB00993175 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4F1944AECB00993175 /* AppDelegate.swift */; };
 		8B300C521944AECB00993175 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C511944AECB00993175 /* Images.xcassets */; };
@@ -153,7 +152,6 @@
 		8B300C221944AA1A00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B300C471944AECB00993175 /* SwifterDemoMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B300C4A1944AECB00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B300C4B1944AECB00993175 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		8B300C4D1944AECB00993175 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8B300C4F1944AECB00993175 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B300C511944AECB00993175 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -275,8 +273,6 @@
 			children = (
 				8B300C4F1944AECB00993175 /* AppDelegate.swift */,
 				8B300C4D1944AECB00993175 /* ViewController.swift */,
-				8B300C511944AECB00993175 /* Images.xcassets */,
-				8B300C531944AECB00993175 /* Main.storyboard */,
 				8B300C491944AECB00993175 /* Supporting Files */,
 			);
 			path = SwifterDemoMac;
@@ -285,8 +281,9 @@
 		8B300C491944AECB00993175 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8B300C511944AECB00993175 /* Images.xcassets */,
+				8B300C531944AECB00993175 /* Main.storyboard */,
 				8B300C4A1944AECB00993175 /* Info.plist */,
-				8B300C4B1944AECB00993175 /* main.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -619,7 +616,6 @@
 			files = (
 				8B300C501944AECB00993175 /* AppDelegate.swift in Sources */,
 				8B300C4E1944AECB00993175 /* ViewController.swift in Sources */,
-				8B300C4C1944AECB00993175 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

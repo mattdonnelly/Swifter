@@ -26,6 +26,7 @@
 import Cocoa
 import SwifterMac
 
+@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ notification: Notification) {
