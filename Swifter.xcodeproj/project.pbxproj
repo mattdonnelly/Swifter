@@ -252,9 +252,6 @@
 				8B5EFF03195F064400B354F9 /* AppDelegate.swift */,
 				8B5EFF04195F064400B354F9 /* AuthViewController.swift */,
 				8B5EFF05195F064400B354F9 /* TweetsViewController.swift */,
-				8B5EFF06195F064400B354F9 /* Main.storyboard */,
-				A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */,
-				8BCB9328194B2E1200A998EA /* Images.xcassets */,
 				8B300C211944AA1A00993175 /* Supporting Files */,
 			);
 			path = SwifterDemoiOS;
@@ -263,6 +260,9 @@
 		8B300C211944AA1A00993175 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8B5EFF06195F064400B354F9 /* Main.storyboard */,
+				A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */,
+				8BCB9328194B2E1200A998EA /* Images.xcassets */,
 				8B300C221944AA1A00993175 /* Info.plist */,
 			);
 			name = "Supporting Files";
