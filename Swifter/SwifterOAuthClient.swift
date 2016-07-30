@@ -60,7 +60,7 @@ internal class OAuthClient: SwifterClientProtocol  {
         let url = URL(string: path, relativeTo: baseURL.url)!
 
         let request = HTTPRequest(url: url, method: .GET, parameters: parameters)
-        request.headers = ["Authorization": self.authorizationHeaderForMethod(.GET, url: url, parameters: parameters, isMediaUpload: false)]
+        request.headers = ["Authorization": self.authorizationHeader(for: .GET, url: url, parameters: parameters, isMediaUpload: false)]
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
@@ -96,7 +96,7 @@ internal class OAuthClient: SwifterClientProtocol  {
         }
 
         let request = HTTPRequest(url: url, method: .POST, parameters: parameters)
-        request.headers = ["Authorization": self.authorizationHeaderForMethod(.POST, url: url, parameters: parameters, isMediaUpload: postData != nil)]
+        request.headers = ["Authorization": self.authorizationHeader(for: .POST, url: url, parameters: parameters, isMediaUpload: postData != nil)]
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
@@ -112,7 +112,7 @@ internal class OAuthClient: SwifterClientProtocol  {
         return request
     }
 
-    func authorizationHeaderForMethod(_ method: HTTPMethodType, url: URL, parameters: Dictionary<String, Any>, isMediaUpload: Bool) -> String {
+    func authorizationHeader(for method: HTTPMethodType, url: URL, parameters: Dictionary<String, Any>, isMediaUpload: Bool) -> String {
         var authorizationParameters = Dictionary<String, Any>()
         authorizationParameters["oauth_version"] = OAuth.version
         authorizationParameters["oauth_signature_method"] =  OAuth.signatureMethod
@@ -130,7 +130,7 @@ internal class OAuthClient: SwifterClientProtocol  {
 
         let finalParameters = isMediaUpload ? authorizationParameters : combinedParameters
 
-        authorizationParameters["oauth_signature"] = self.oauthSignatureForMethod(method, url: url, parameters: finalParameters, accessToken: self.credential?.accessToken)
+        authorizationParameters["oauth_signature"] = self.oauthSignature(for: method, url: url, parameters: finalParameters, accessToken: self.credential?.accessToken)
 
         let authorizationParameterComponents = authorizationParameters.urlEncodedQueryString(using: self.dataEncoding).components(separatedBy: "&").sorted()
 
@@ -145,7 +145,7 @@ internal class OAuthClient: SwifterClientProtocol  {
         return "OAuth " + headerComponents.joined(separator: ", ")
     }
 
-    func oauthSignatureForMethod(_ method: HTTPMethodType, url: URL, parameters: Dictionary<String, Any>, accessToken token: Credential.OAuthAccessToken?) -> String {
+    func oauthSignature(for method: HTTPMethodType, url: URL, parameters: Dictionary<String, Any>, accessToken token: Credential.OAuthAccessToken?) -> String {
         let tokenSecret = token?.secret.urlEncodedString ?? ""
         let encodedConsumerSecret = self.consumerSecret.urlEncodedString
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"
