@@ -56,6 +56,8 @@ public class Swifter {
     
     // MARK: - Types
 
+    public typealias SuccessHandler = (JSON) -> Void
+    public typealias CursorSuccessHandler = (JSON, previousCursor: String?, nextCursor: String?) -> Void
     public typealias JSONSuccessHandler = (json: JSON, response: HTTPURLResponse) -> Void
     public typealias FailureHandler = (error: NSError) -> Void
 

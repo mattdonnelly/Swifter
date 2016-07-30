@@ -19,16 +19,14 @@ public extension Swifter {
 
     This information is cached for 5 minutes. Requesting more frequently than that will not return any more data, and will count against your rate limit usage.
     */
-    public func getTrendsPlace(with woeid: String, excludeHashtags: Bool = false, success: ((trends: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getTrendsPlace(with woeid: String, excludeHashtags: Bool = false, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "trends/place.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = woeid
         parameters["exclude"] = excludeHashtags ? "hashtags" : nil
         
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in            
-            success?(trends: json.array)
-            }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
     }
 
     /**
@@ -40,12 +38,10 @@ public extension Swifter {
 
     A WOEID is a Yahoo! Where On Earth ID.
     */
-    public func getTrendsAvailable(success: ((trends: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getTrendsAvailable(success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "trends/available.json"
 
-        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
-            success?(trends: json.array)
-            }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json) }, failure: failure)
     }
 
     /**
@@ -57,16 +53,14 @@ public extension Swifter {
 
     A WOEID is a Yahoo! Where On Earth ID.
     */
-    public func getTrendsClosest(lat: Double, long: Double, success: ((trends: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getTrendsClosest(lat: Double, long: Double, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "trends/closest.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["lat"] = lat
         parameters["long"] = long
 
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(trends: json.array)
-            }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
     }
 
 }
