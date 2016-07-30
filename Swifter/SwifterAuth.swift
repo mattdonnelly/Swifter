@@ -41,7 +41,7 @@ public extension Swifter {
      - OS X only
      */
     #if os(OSX)
-    public func authorizeWithCallbackURL(_ callbackURL: URL, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
+    public func authorize(with callbackURL: URL, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: { token, response in
             var requestToken = token!
             
@@ -73,7 +73,7 @@ public extension Swifter {
      */
     
     #if os(iOS)
-    public func authorizeWithCallbackURL(_ callbackURL: URL, presentFromViewController presentingViewController: UIViewController? , success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
+    public func authorize(with callbackURL: URL, presentFrom presentingViewController: UIViewController? , success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: { token, response in
             var requestToken = token!
             NotificationCenter.default.addObserver(forName: .SwifterCallbackNotification, object: nil, queue: .main) { notification in
@@ -109,7 +109,7 @@ public extension Swifter {
         NotificationCenter.default.post(notification)
     }
     
-    public func authorizeAppOnlyWithSuccess(_ success: TokenSuccessHandler?, failure: FailureHandler?) {
+    public func authorizeAppOnly(success: TokenSuccessHandler?, failure: FailureHandler?) {
         self.postOAuth2BearerTokenWithSuccess({ json, response in
             if let tokenType = json["token_type"].string {
                 if tokenType == "bearer" {
@@ -135,7 +135,7 @@ public extension Swifter {
             }, failure: failure)
     }
     
-    public func postOAuth2BearerTokenWithSuccess(_ success: JSONSuccessHandler?, failure: FailureHandler?) {
+    public func postOAuth2BearerToken(success: JSONSuccessHandler?, failure: FailureHandler?) {
         let path = "oauth2/token"
         
         var parameters = Dictionary<String, Any>()
@@ -144,7 +144,7 @@ public extension Swifter {
         self.jsonRequest(path: path, baseURL: .oauth, method: .POST, parameters: parameters, success: success, failure: failure)
     }
     
-    public func postOAuth2InvalidateBearerTokenWithSuccess(_ success: TokenSuccessHandler?, failure: FailureHandler?) {
+    public func postOAuth2InvalidateBearerToken(success: TokenSuccessHandler?, failure: FailureHandler?) {
         let path = "oauth2/invalidate_token"
         
         self.jsonRequest(path: path, baseURL: .oauth, method: .POST, parameters: [:], success: { json, response in
@@ -162,7 +162,7 @@ public extension Swifter {
             }, failure: failure)
     }
     
-    public func postOAuthRequestTokenWithCallbackURL(_ callbackURL: URL, success: TokenSuccessHandler, failure: FailureHandler?) {
+    public func postOAuthRequestToken(with callbackURL: URL, success: TokenSuccessHandler, failure: FailureHandler?) {
         let path = "oauth/request_token"
         
         var parameters =  Dictionary<String, Any>()
@@ -181,7 +181,7 @@ public extension Swifter {
         })
     }
     
-    public func postOAuthAccessTokenWithRequestToken(_ requestToken: Credential.OAuthAccessToken, success: TokenSuccessHandler, failure: FailureHandler?) {
+    public func postOAuthAccessToken(with requestToken: Credential.OAuthAccessToken, success: TokenSuccessHandler, failure: FailureHandler?) {
         if let verifier = requestToken.verifier {
             let path =  "oauth/access_token"
             

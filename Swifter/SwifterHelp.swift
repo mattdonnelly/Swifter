@@ -34,7 +34,7 @@ public extension Swifter {
 
     It is recommended applications request this endpoint when they are loaded, but no more than once a day.
     */
-    public func getHelpConfigurationWithSuccess(_ success: ((config: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getHelpConfiguration(success: ((config: Dictionary<String, JSON>?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/configuration.json"
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
@@ -47,7 +47,7 @@ public extension Swifter {
 
     Returns the list of languages supported by Twitter along with their ISO 639-1 code. The ISO 639-1 code is the two letter value to use if you include lang with any of your requests.
     */
-    public func getHelpLanguagesWithSuccess(_ success: ((languages: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getHelpLanguages(success: ((languages: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/languages.json"
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
@@ -60,7 +60,7 @@ public extension Swifter {
 
     Returns Twitter's Privacy Policy.
     */
-    public func getHelpPrivacyWithSuccess(_ success: ((privacy: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getHelpPrivacy(success: ((privacy: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/privacy.json"
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
@@ -73,7 +73,7 @@ public extension Swifter {
 
     Returns the Twitter Terms of Service in the requested format. These are not the same as the Developer Rules of the Road.
     */
-    public func getHelpTermsOfServiceWithSuccess(_ success: ((tos: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
+    public func getHelpTermsOfService(success: ((tos: String?) -> Void)? = nil, failure: FailureHandler? = nil) {
         let path = "help/tos.json"
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
