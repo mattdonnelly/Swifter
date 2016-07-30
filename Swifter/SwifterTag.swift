@@ -46,4 +46,22 @@ public enum UsersTag {
     }
 }
 
+public enum ListTag {
+    case id(String)
+    case slug(String, owner: UserTag)
+    
+    var key: String {
+        switch self {
+        case .id:   return "list_id"
+        case .slug: return "slug"
+        }
+    }
+    
+    var value: String {
+        switch self {
+        case .id(let id):           return id
+        case .slug(let slug, _):    return slug
+        }
+    }
+    
 }
