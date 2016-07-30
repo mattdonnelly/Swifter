@@ -407,37 +407,6 @@ public extension Swifter {
     }
 
     /**
-    GET    users/contributors
-
-    Returns a collection of users who can contribute to the specified account.
-    */
-    public func getUsersContributors(withUserId id: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((users: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        let path = "users/contributors.json"
-
-        var parameters = Dictionary<String, Any>()
-        parameters["id"] = id
-        parameters["include_entities"] ??= includeEntities
-        parameters["skip_status"] ??= skipStatus
-
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(users: json.array)
-            }, failure: failure)
-    }
-
-    public func getUsersContributors(withScreenName screenName: String, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: ((users: [JSON]?) -> Void)? = nil, failure: FailureHandler? = nil) {
-        let path = "users/contributors.json"
-
-        var parameters = Dictionary<String, Any>()
-        parameters["screen_name"] = screenName
-        parameters["include_entities"] ??= includeEntities
-        parameters["skip_status"] ??= skipStatus
-
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(users: json.array)
-            }, failure: failure)
-    }
-
-    /**
     POST   account/remove_profile_banner
 
     Removes the uploaded profile banner for the authenticating user. Returns HTTP 200 upon success.
