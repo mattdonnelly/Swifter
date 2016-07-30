@@ -42,10 +42,13 @@ extension String {
         }
     }
     
-    var urlEncodedString: String {
+
+    func urlEncodedString(_ encodeAll: Bool = false) -> String {
         var allowedCharacterSet: CharacterSet = .urlQueryAllowed
         allowedCharacterSet.remove(charactersIn: "\n:#/?@!$&'()*+,;=")
-        allowedCharacterSet.insert(charactersIn: "[]")
+        if !all {
+            allowedCharacterSet.insert(charactersIn: "[]")
+        }
         return self.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet)!
     }
 
