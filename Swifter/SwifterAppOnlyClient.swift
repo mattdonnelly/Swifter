@@ -32,12 +32,11 @@ internal class AppOnlyClient: SwifterClientProtocol  {
 
     var credential: Credential?
 
-    var dataEncoding: String.Encoding
+    let dataEncoding: String.Encoding = .utf8
 
     init(consumerKey: String, consumerSecret: String) {
         self.consumerKey = consumerKey
         self.consumerSecret = consumerSecret
-        self.dataEncoding = .utf8
     }
 
     func get(_ path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
