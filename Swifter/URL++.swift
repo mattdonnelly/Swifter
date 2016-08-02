@@ -32,7 +32,7 @@ extension URL {
             return self
         }
         
-        var absoluteURLString = self.absoluteString!
+        var absoluteURLString = self.absoluteString
         
         if absoluteURLString.hasSuffix("?") {
             absoluteURLString = absoluteURLString[0..<absoluteURLString.utf16.count]

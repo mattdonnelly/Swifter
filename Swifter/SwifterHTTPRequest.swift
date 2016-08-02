@@ -165,7 +165,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
             self.dataTask.resume()
             
             #if os(iOS)
-                UIApplication.shared().isNetworkActivityIndicatorVisible = true
+                UIApplication.shared.isNetworkActivityIndicatorVisible = true
             #endif
         }
     }
@@ -195,9 +195,9 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
 
     // MARK: - URLSessionDataDelegate
     
-    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         #if os(iOS)
-            UIApplication.shared().isNetworkActivityIndicatorVisible = false
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         #endif
 
         if let error = error {

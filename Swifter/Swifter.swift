@@ -123,7 +123,7 @@ public class Swifter {
 
         let jsonSuccessHandler: HTTPRequest.SuccessHandler = { data, response in
 
-            DispatchQueue.global(attributes: .qosUtility).async {
+            DispatchQueue.global(qos: .utility).async {
                 do {
                     let jsonResult = try JSON.parse(jsonData: data)
                     DispatchQueue.main.async {

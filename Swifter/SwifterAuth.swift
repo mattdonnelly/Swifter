@@ -91,14 +91,14 @@ public extension Swifter {
             }
             
             let authorizeURL = URL(string: "oauth/authorize", relativeTo: TwitterURL.oauth.url)
-            let queryURL = URL(string: authorizeURL!.absoluteString! + "?oauth_token=\(token!.key)")!
+            let queryURL = URL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
             
             if #available(iOS 9.0, *) , let delegate = presentingViewController as? SFSafariViewControllerDelegate {
                 let safariView = SFSafariViewController(url: queryURL)
                 safariView.delegate = delegate
                 presentingViewController?.present(safariView, animated: true, completion: nil)
             } else {
-                UIApplication.shared().openURL(queryURL)
+                UIApplication.shared.openURL(queryURL)
             }
         }, failure: failure)
     }

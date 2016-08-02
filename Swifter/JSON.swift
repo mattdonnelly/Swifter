@@ -25,7 +25,7 @@
 
 import Foundation
 
-enum JSONError: ErrorProtocol {
+enum JSONError: Error {
     case parseError(String)
 }
 
@@ -284,22 +284,7 @@ extension JSON {
 
 }
 
-extension JSON: Boolean {
-
-    public var boolValue: Bool {
-        switch self {
-        case .bool(let bool):
-            return bool
-        case .invalid:
-            return false
-        default:
-            return true
-        }
-    }
-
-}
-
-extension JSON: StringLiteralConvertible {
+extension JSON: ExpressibleByStringLiteral {
     
     public init(stringLiteral value: StringLiteralType) {
         self.init(value)
@@ -315,7 +300,7 @@ extension JSON: StringLiteralConvertible {
 
 }
 
-extension JSON: IntegerLiteralConvertible {
+extension JSON: ExpressibleByIntegerLiteral {
     
     public init(integerLiteral value: IntegerLiteralType) {
         self.init(value)
@@ -323,7 +308,7 @@ extension JSON: IntegerLiteralConvertible {
 
 }
 
-extension JSON: BooleanLiteralConvertible {
+extension JSON: ExpressibleByBooleanLiteral {
     
     public init(booleanLiteral value: BooleanLiteralType) {
         self.init(value)
@@ -331,7 +316,7 @@ extension JSON: BooleanLiteralConvertible {
 
 }
 
-extension JSON: FloatLiteralConvertible {
+extension JSON: ExpressibleByFloatLiteral {
     
     public init(floatLiteral value: FloatLiteralType) {
         self.init(value)
@@ -339,7 +324,7 @@ extension JSON: FloatLiteralConvertible {
 
 }
 
-extension JSON: DictionaryLiteralConvertible {
+extension JSON: ExpressibleByDictionaryLiteral {
     
     public init(dictionaryLiteral elements: (String, AnyObject)...) {
         var dict = [String : AnyObject]()
@@ -353,14 +338,14 @@ extension JSON: DictionaryLiteralConvertible {
 
 }
 
-extension JSON: ArrayLiteralConvertible {
+extension JSON: ExpressibleByArrayLiteral {
     
     public init(arrayLiteral elements: AnyObject...) {
         self.init(elements)
     }
 }
 
-extension JSON: NilLiteralConvertible {
+extension JSON: ExpressibleByNilLiteral {
     
     public init(nilLiteral: ()) {
         self.init(NSNull())
