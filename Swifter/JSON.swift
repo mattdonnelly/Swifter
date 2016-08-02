@@ -117,7 +117,7 @@ public enum JSON : Equatable, CustomStringConvertible {
             self = .string(string)
             
         case let number as NSNumber:
-            if number.isBool {
+            if number.isBoolean {
                 self = .bool(number.boolValue)
             } else {
                 self = .number(number.doubleValue)
@@ -353,20 +353,10 @@ extension JSON: ExpressibleByNilLiteral {
 
 }
 
-private let trueNumber = NSNumber(value: true)
-private let falseNumber = NSNumber(value: false)
-private let trueObjCType = String(cString: trueNumber.objCType)
-private let falseObjCType = String(cString: falseNumber.objCType)
-
 private extension NSNumber {
-    var isBool:Bool {
-        get {
-            let objCType = String(cString: self.objCType)
-            if (self.compare(trueNumber) == .orderedSame &&  objCType == trueObjCType) ||  (self.compare(falseNumber) == .orderedSame && objCType == falseObjCType){
-                return true
-            } else {
-                return false
-            }
-        }
+    
+    var isBoolean: Bool {
+        return self.objCType == NSNumber(value: true).objCType
     }
+    
 }
