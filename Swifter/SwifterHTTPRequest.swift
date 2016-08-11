@@ -47,7 +47,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
     public typealias UploadProgressHandler = (bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) -> Void
     public typealias DownloadProgressHandler = (data: Data, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: HTTPURLResponse) -> Void
     public typealias SuccessHandler = (data: Data, response: HTTPURLResponse) -> Void
-    public typealias FailureHandler = (error: NSError) -> Void
+    public typealias FailureHandler = (error: Error) -> Void
 
     internal struct DataUpload {
         var data: Data
@@ -212,12 +212,8 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
         let responseString = String(data: responseData, encoding: dataEncoding)!
         let errorCode = HTTPRequest.responseErrorCode(for: responseData) ?? 0
         let localizedDescription = HTTPRequest.description(for: response.statusCode, response: responseString)
-        let userInfo: [NSObject: AnyObject] = [
-            NSLocalizedDescriptionKey: localizedDescription,
-            "Response-Header": response.allHeaderFields,
-            "Response-ErroCode": errorCode
-        ]
-        let error = NSError(domain: NSURLErrorDomain, code: response.statusCode, userInfo: userInfo)
+        
+        let error = SwifterError(message: localizedDescription, kind: .urlResponseError(status: response.statusCode, headers: response.allHeaderFields, errorCode: errorCode))
         self.failureHandler?(error: error)
     }
     

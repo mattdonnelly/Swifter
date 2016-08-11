@@ -76,6 +76,8 @@
 		8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
 		A17A694F1C78336200063DFD /* Operator++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17A694D1C78333400063DFD /* Operator++.swift */; };
 		A17A69501C78336300063DFD /* Operator++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17A694D1C78333400063DFD /* Operator++.swift */; };
+		A1AA8B001D5C514E00CE7F17 /* SwifterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */; };
+		A1AA8B011D5C515000CE7F17 /* SwifterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */; };
 		A1BDB38C1D4C864200B0080F /* SwifterTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BDB38A1D4C859200B0080F /* SwifterTag.swift */; };
 		A1BDB38D1D4C864200B0080F /* SwifterTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BDB38A1D4C859200B0080F /* SwifterTag.swift */; };
 		A1C7F0A51C7845FD00955ADB /* SwifterMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F51131944A61D00894629 /* SwifterMac.framework */; };
@@ -191,6 +193,7 @@
 		8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAccountsClient.swift; sourceTree = "<group>"; };
 		8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterCredential.swift; sourceTree = "<group>"; };
 		A17A694D1C78333400063DFD /* Operator++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Operator++.swift"; sourceTree = "<group>"; };
+		A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterError.swift; sourceTree = "<group>"; };
 		A1BDB38A1D4C859200B0080F /* SwifterTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTag.swift; sourceTree = "<group>"; };
 		A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "../Swifter/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A1E207A61D4B85D90093E498 /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
@@ -342,6 +345,7 @@
 				8BC32D3C1955EEE100FF75A0 /* SwifterTrends.swift */,
 				8BF1D67B1948882700E3AA64 /* SwifterSpam.swift */,
 				8B1F259E194A663D004BD304 /* SwifterHelp.swift */,
+				A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */,
 				8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */,
 				8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */,
 				8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */,
@@ -646,6 +650,7 @@
 				8BCF432C1947CED700E63301 /* SwifterLists.swift in Sources */,
 				8BA50EC71953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */,
 				8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
+				A1AA8B001D5C514E00CE7F17 /* SwifterError.swift in Sources */,
 				A1E207AB1D4B85D90093E498 /* SHA1.swift in Sources */,
 				A1E207AD1D4B85D90093E498 /* Utils.swift in Sources */,
 				8BF1D6791948839800E3AA64 /* SwifterPlaces.swift in Sources */,
@@ -687,6 +692,7 @@
 				8BCF432D1947CED700E63301 /* SwifterLists.swift in Sources */,
 				8BA50EC81953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */,
 				8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
+				A1AA8B011D5C515000CE7F17 /* SwifterError.swift in Sources */,
 				A1E207AC1D4B85D90093E498 /* SHA1.swift in Sources */,
 				A1E207AE1D4B85D90093E498 /* Utils.swift in Sources */,
 				8BF1D67A1948839800E3AA64 /* SwifterPlaces.swift in Sources */,

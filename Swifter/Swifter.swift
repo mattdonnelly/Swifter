@@ -59,17 +59,12 @@ public class Swifter {
     public typealias SuccessHandler = (JSON) -> Void
     public typealias CursorSuccessHandler = (JSON, previousCursor: String?, nextCursor: String?) -> Void
     public typealias JSONSuccessHandler = (json: JSON, response: HTTPURLResponse) -> Void
-    public typealias FailureHandler = (error: NSError) -> Void
+    public typealias FailureHandler = (error: Error) -> Void
 
     internal struct CallbackNotification {
         static let optionsURLKey = "SwifterCallbackNotificationOptionsURLKey"
     }
-
-    internal struct SwifterError {
-        static let domain = "SwifterErrorDomain"
-        static let appOnlyAuthenticationErrorCode = 1
-    }
-
+    
     internal struct DataParameters {
         static let dataKey = "SwifterDataParameterKey"
         static let fileNameKey = "SwifterDataParameterFilename"
@@ -129,7 +124,7 @@ public class Swifter {
                     DispatchQueue.main.async {
                         success?(json: jsonResult, response: response)
                     }
-                } catch let error as NSError {
+                } catch {
                     DispatchQueue.main.async {
                         failure?(error: error)
                     }

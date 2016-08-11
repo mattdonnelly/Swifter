@@ -35,7 +35,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let failureHandler: (NSError) -> Void = { print($0.localizedDescription) }
+        let failureHandler: (Error) -> Void = { print($0.localizedDescription) }
 
         if useACAccount {
             let accountStore = ACAccountStore()

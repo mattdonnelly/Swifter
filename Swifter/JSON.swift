@@ -25,10 +25,6 @@
 
 import Foundation
 
-enum JSONError: Error {
-    case parseError(String)
-}
-
 public enum JSON : Equatable, CustomStringConvertible {
     
     case string(String)
@@ -194,18 +190,18 @@ public enum JSON : Equatable, CustomStringConvertible {
             let object = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
             return JSON(object)
         } catch {
-            throw JSONError.parseError("\(error)")
+            throw SwifterError(message: "\(error)", kind: .jsonParseError)
         }
     }
 
     static func parse(string : String) throws -> JSON {
         do {
             guard let data = string.data(using: .utf8, allowLossyConversion: false) else {
-                throw JSONError.parseError("Cannot parse invalid string")
+                throw SwifterError(message: "Cannot parse invalid string", kind: .jsonParseError)
             }
             return try parse(jsonData: data)
         } catch {
-            throw JSONError.parseError("\(error)")
+            throw SwifterError(message: "\(error)", kind: .jsonParseError)
         }
     }
 

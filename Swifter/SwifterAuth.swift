@@ -121,14 +121,14 @@ public extension Swifter {
                     
                     success?(accessToken: credentialToken, response: response)
                 } else {
-                    let error = NSError(domain: "Swifter", code: SwifterError.appOnlyAuthenticationErrorCode, userInfo: [NSLocalizedDescriptionKey: "Cannot find bearer token in server response"]);
+                    let error: SwifterError = SwifterError(message: "Cannot find bearer token in server response", kind: .invalidAppOnlyBearerToken)
                     failure?(error: error)
                 }
-            } else if let errors = json["errors"].object {
-                let error = NSError(domain: SwifterError.domain, code: errors["code"]!.integer!, userInfo: [NSLocalizedDescriptionKey: errors["message"]!.string!]);
+            } else if case .object = json["errors"] {
+                let error = SwifterError(message: json["errors"]["message"].string!, kind: .responseError(code: json["errors"]["code"].integer!))
                 failure?(error: error)
             } else {
-                let error = NSError(domain: SwifterError.domain, code: SwifterError.appOnlyAuthenticationErrorCode, userInfo: [NSLocalizedDescriptionKey: "Cannot find JSON dictionary in response"]);
+                let error = SwifterError(message: "Cannot find JSON dictionary in response", kind: .invalidJSONResponse)
                 failure?(error: error)
             }
             
@@ -198,8 +198,7 @@ public extension Swifter {
                 
                 }, failure: failure)
         } else {
-            let userInfo = [NSLocalizedFailureReasonErrorKey: "Bad OAuth response received from server"]
-            let error = NSError(domain: SwifterError.domain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
+            let error = SwifterError(message: "Bad OAuth response received from server", kind: .badOAuthResponse)
             failure?(error: error)
         }
     }

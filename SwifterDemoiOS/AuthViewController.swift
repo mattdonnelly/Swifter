@@ -42,7 +42,7 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
     }
 
     @IBAction func didTouchUpInsideLoginButton(_ sender: AnyObject) {
-        let failureHandler: ((NSError) -> Void) = { error in
+        let failureHandler: (Error) -> Void = { error in
             self.alert(title: "Error", message: error.localizedDescription)
             
         }
@@ -78,7 +78,7 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
     }
 
     func fetchTwitterHomeStream() {
-        let failureHandler: ((NSError) -> Void) = { error in
+        let failureHandler: (Error) -> Void = { error in
             self.alert(title: "Error", message: error.localizedDescription)
         }
         
