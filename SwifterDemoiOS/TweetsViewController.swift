@@ -25,16 +25,22 @@
 
 import UIKit
 import SwifteriOS
+import SafariServices
 
 class TweetsViewController: UITableViewController {
 
     var tweets : [JSON] = []
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    let reuseIdentifier: String = "reuseIdentifier"
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         self.title = "Timeline"
-        self.tableView.contentInset = UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0)
-        self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0)
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44
+        tableView.contentInset = UIEdgeInsets(top: self.topLayoutGuide.length, left: 0, bottom: 0, right: 0)
+        tableView.scrollIndicatorInsets = UIEdgeInsets(top: self.topLayoutGuide.length, left: 0, bottom: 0, right: 0)
+        tableView.register(TweetCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,9 +48,21 @@ class TweetsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         cell.textLabel?.text = tweets[indexPath.row]["text"].string
+        cell.detailTextLabel?.text = "By \(tweets[indexPath.row]["user"]["name"].string!), @\(tweets[indexPath.row]["user"]["screen_name"].string!)"
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard #available(iOS 9.0, *) else { return }
+        let screenName = tweets[indexPath.row]["user"]["screen_name"].string!
+        let id = tweets[indexPath.row]["id_str"].string!
+        let url = URL(string: "https://twitter.com/\(screenName)/status/\(id)")!
+        let safariView = SFSafariViewController(url: url)
+        self.present(safariView, animated: true, completion: nil)
+    }
+    
 }
+
