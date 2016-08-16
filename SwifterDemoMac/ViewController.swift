@@ -55,15 +55,15 @@ class ViewController: NSViewController {
                 let twitterAccount = twitterAccounts[0] as! ACAccount
                 let swifter = Swifter(account: twitterAccount)
                 
-                swifter.getStatusesHomeTimeline(count: 20, success: { statuses in
+                swifter.getHomeTimeline(count: 20, success: { statuses in
                     print(statuses)
                     }, failure: failureHandler)
             }
         } else {
             let swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
             swifter.authorize(with: URL(string: "swifter://success")!, success: { _ in
-                swifter.getStatusesHomeTimeline(count: 100, success: { statuses in
-                    guard let tweets = statuses else { return }
+                swifter.getHomeTimeline(count: 100, success: { statuses in
+                    guard let tweets = statuses.array else { return }
                     self.tweets = tweets.map {
                         let tweet = Tweet()
                         tweet.text = $0["text"].string!

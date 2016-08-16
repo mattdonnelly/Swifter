@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(AppDelegate.handleEvent(_:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
-        LSSetDefaultHandlerForURLScheme("swifter", Bundle.main.bundleIdentifier!)
+        LSSetDefaultHandlerForURLScheme("swifter" as CFString, Bundle.main.bundleIdentifier! as CFString)
     }
 
     func handleEvent(_ event: NSAppleEventDescriptor!, withReplyEvent: NSAppleEventDescriptor!) {
