@@ -45,12 +45,12 @@ public extension Swifter {
 
     This request is an informative call and will deliver generalized results about geography.
     */
-    public func getGeoReverseGeocode(lat: Double, long: Double, accuracy: String? = nil, granularity: String? = nil, maxResults: Int? = nil, callback: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getReverseGeocode(for coordinate: (lat: Double, long: Double), accuracy: String? = nil, granularity: String? = nil, maxResults: Int? = nil, callback: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "geo/reverse_geocode.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["lat"] = lat
-        parameters["long"] = long
+        parameters["lat"] = coordinate.lat
+        parameters["long"] = coordinate.long
 
         parameters["accuracy"] ??= accuracy
         parameters["granularity"] ??= granularity
@@ -69,16 +69,20 @@ public extension Swifter {
 
     This is the recommended method to use find places that can be attached to statuses/update. Unlike GET geo/reverse_geocode which provides raw data access, this endpoint can potentially re-order places with regards to the user who is authenticated. This approach is also preferred for interactive place matching with the user.
     */
-    public func getGeoSearch(lat: Double? = nil, long: Double? = nil, query: String? = nil, ipAddress: String? = nil, accuracy: String? = nil, granularity: String? = nil, maxResults: Int? = nil, containedWithin: String? = nil, attributeStreetAddress: String? = nil, callback: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
-        assert(lat != nil || long != nil || query != nil || ipAddress != nil, "At least one of the following parameters must be provided to access this resource: lat, long, ipAddress, or query")
+    public func searchGeo(coordinate: (lat: Double, long: Double)? = nil, query: String? = nil, ipAddress: String? = nil, accuracy: String? = nil, granularity: String? = nil, maxResults: Int? = nil, containedWithin: String? = nil, attributeStreetAddress: String? = nil, callback: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+        assert(coordinate != nil || query != nil || ipAddress != nil, "At least one of the following parameters must be provided to access this resource: coordinate, ipAddress, or query")
 
         let path = "geo/search.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["lat"] ??= lat
-        parameters["long"] ??= long
-        parameters["query"] ??= query
-        parameters["ipAddress"] ??= ipAddress
+        if let coordinate = coordinate {
+            parameters["lat"] = coordinate.lat
+            parameters["long"] = coordinate.long
+        } else if let query = query {
+            parameters["query"] = query
+        } else if let ip = ipAddress {
+            parameters["ipAddress"] = ip
+        }
         parameters["accuracy"] ??= accuracy
         parameters["granularity"] ??= granularity
         parameters["max_results"] ??= maxResults
@@ -98,12 +102,12 @@ public extension Swifter {
 
     The token contained in the response is the token needed to be able to create a new place.
     */
-    public func getGeoSimilarPlaces(lat: Double, long: Double, name: String, containedWithin: String? = nil, attributeStreetAddress: String? = nil, callback: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getSimilarPlaces(for coordinate: (lat: Double, long: Double), name: String, containedWithin: String? = nil, attributeStreetAddress: String? = nil, callback: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "geo/similar_places.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["lat"] = lat
-        parameters["long"] = long
+        parameters["lat"] = coordinate.lat
+        parameters["long"] = coordinate.long
         parameters["name"] = name
         
         parameters["contained_within"] ??= containedWithin

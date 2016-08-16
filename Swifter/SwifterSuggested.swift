@@ -34,7 +34,7 @@ public extension Swifter {
 
     It is recommended that applications cache this data for no more than one hour.
     */
-    public func getUsersSuggestions(slug: String, lang: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getUserSuggestions(slug: String, lang: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "users/suggestions/\(slug).json"
 
         var parameters = Dictionary<String, Any>()

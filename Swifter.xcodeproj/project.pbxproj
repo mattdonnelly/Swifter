@@ -330,7 +330,6 @@
 			children = (
 				8B5EFF14195F09F600B354F9 /* Swifter.h */,
 				8B9F514C1944A8DC00894629 /* Swifter.swift */,
-				A1BDB38A1D4C859200B0080F /* SwifterTag.swift */,
 				8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */,
 				8B548F581945325E00EE2927 /* SwifterAuth.swift */,
 				8B548F5B1945331D00EE2927 /* SwifterTimelines.swift */,
@@ -348,6 +347,7 @@
 				8BC32D3C1955EEE100FF75A0 /* SwifterTrends.swift */,
 				8BF1D67B1948882700E3AA64 /* SwifterSpam.swift */,
 				8B1F259E194A663D004BD304 /* SwifterHelp.swift */,
+				A1BDB38A1D4C859200B0080F /* SwifterTag.swift */,
 				A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */,
 				8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */,
 				8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */,

@@ -53,12 +53,12 @@ public extension Swifter {
                 
                     self.postOAuthAccessToken(with: requestToken, success: { accessToken, response in
                     self.client.credential = Credential(accessToken: accessToken!)
-                    success?(accessToken: accessToken!, response: response)
+                    success?(accessToken!, response)
                     }, failure: failure)
             }
             
             let authorizeURL = URL(string: "oauth/authorize", relativeTo: TwitterURL.oauth.url)
-            let queryURL = URL(string: authorizeURL!.absoluteString! + "?oauth_token=\(token!.key)")!
+            let queryURL = URL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
             NSWorkspace.shared().open(queryURL)
         }, failure: failure)
     }
@@ -144,53 +144,37 @@ public extension Swifter {
         self.jsonRequest(path: path, baseURL: .oauth, method: .POST, parameters: parameters, success: success, failure: failure)
     }
     
-    public func postOAuth2InvalidateBearerToken(success: TokenSuccessHandler?, failure: FailureHandler?) {
+    public func invalidateOAuth2BearerToken(success: TokenSuccessHandler?, failure: FailureHandler?) {
         let path = "oauth2/invalidate_token"
         
         self.jsonRequest(path: path, baseURL: .oauth, method: .POST, parameters: [:], success: { json, response in
             if let accessToken = json["access_token"].string {
                 self.client.credential = nil
-                
                 let credentialToken = Credential.OAuthAccessToken(key: accessToken, secret: "")
-                
                 success?(credentialToken, response)
-            }
-            else {
+            } else {
                 success?(nil, response)
             }
-            
-            }, failure: failure)
+        }, failure: failure)
     }
     
     public func postOAuthRequestToken(with callbackURL: URL, success: TokenSuccessHandler, failure: FailureHandler?) {
         let path = "oauth/request_token"
+        let parameters: [String: Any] =  ["oauth_callback": callbackURL.absoluteString]
         
-        var parameters =  Dictionary<String, Any>()
-        
-        parameters["oauth_callback"] = callbackURL.absoluteString
-        
-        self.client.post(path, baseURL: .oauth, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-            data, response in
+        self.client.post(path, baseURL: .oauth, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: { data, response in
             let responseString = String(data: data, encoding: .utf8)!
             let accessToken = Credential.OAuthAccessToken(queryString: responseString)
             success(accessToken, response)
-            
-            }, failure: { error in
-                failure?(error)
-                print(#function)
-        })
+        }, failure: failure)
     }
     
     public func postOAuthAccessToken(with requestToken: Credential.OAuthAccessToken, success: TokenSuccessHandler, failure: FailureHandler?) {
         if let verifier = requestToken.verifier {
             let path =  "oauth/access_token"
+            let parameters: [String: Any] = ["oauth_token": requestToken.key, "oauth_verifier": verifier]
             
-            var parameters = Dictionary<String, Any>()
-            parameters["oauth_token"] = requestToken.key
-            parameters["oauth_verifier"] = verifier
-            
-            self.client.post(path, baseURL: .oauth, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: {
-                data, response in
+            self.client.post(path, baseURL: .oauth, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: { data, response in
                 
                 let responseString = String(data: data, encoding: .utf8)!
                 let accessToken = Credential.OAuthAccessToken(queryString: responseString)

@@ -88,7 +88,7 @@ public extension Swifter {
 
     Read more about REST API Rate Limiting in v1.1 and review the limits.
     */
-    public func getRateLimitsForResources(_ resources: [String], success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getRateLimits(for resources: [String], success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "application/rate_limit_status.json"
 
         var parameters = Dictionary<String, Any>()
