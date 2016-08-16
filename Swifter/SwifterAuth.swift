@@ -34,7 +34,7 @@ import Foundation
 
 public extension Swifter {
     
-    public typealias TokenSuccessHandler = (accessToken: Credential.OAuthAccessToken?, response: URLResponse) -> Void
+    public typealias TokenSuccessHandler = (Credential.OAuthAccessToken?, URLResponse) -> Void
     
     /**
      Begin Authorization with a Callback URL.
@@ -86,7 +86,7 @@ public extension Swifter {
                 
                 self.postOAuthAccessToken(with: requestToken, success: { accessToken, response in
                     self.client.credential = Credential(accessToken: accessToken!)
-                    success?(accessToken: accessToken!, response: response)
+                    success?(accessToken!, response)
                     }, failure: failure)
             }
             
@@ -119,17 +119,17 @@ public extension Swifter {
                     
                     self.client.credential = Credential(accessToken: credentialToken)
                     
-                    success?(accessToken: credentialToken, response: response)
+                    success?(credentialToken, response)
                 } else {
-                    let error: SwifterError = SwifterError(message: "Cannot find bearer token in server response", kind: .invalidAppOnlyBearerToken)
-                    failure?(error: error)
+                    let error = SwifterError(message: "Cannot find bearer token in server response", kind: .invalidAppOnlyBearerToken)
+                    failure?(error)
                 }
             } else if case .object = json["errors"] {
                 let error = SwifterError(message: json["errors"]["message"].string!, kind: .responseError(code: json["errors"]["code"].integer!))
-                failure?(error: error)
+                failure?(error)
             } else {
                 let error = SwifterError(message: "Cannot find JSON dictionary in response", kind: .invalidJSONResponse)
-                failure?(error: error)
+                failure?(error)
             }
             
             }, failure: failure)
@@ -153,10 +153,10 @@ public extension Swifter {
                 
                 let credentialToken = Credential.OAuthAccessToken(key: accessToken, secret: "")
                 
-                success?(accessToken: credentialToken, response: response)
+                success?(credentialToken, response)
             }
             else {
-                success?(accessToken: nil, response: response)
+                success?(nil, response)
             }
             
             }, failure: failure)
@@ -173,10 +173,10 @@ public extension Swifter {
             data, response in
             let responseString = String(data: data, encoding: .utf8)!
             let accessToken = Credential.OAuthAccessToken(queryString: responseString)
-            success(accessToken: accessToken, response: response)
+            success(accessToken, response)
             
             }, failure: { error in
-                failure?(error: error)
+                failure?(error)
                 print(#function)
         })
     }
@@ -194,12 +194,12 @@ public extension Swifter {
                 
                 let responseString = String(data: data, encoding: .utf8)!
                 let accessToken = Credential.OAuthAccessToken(queryString: responseString)
-                success(accessToken: accessToken, response: response)
+                success(accessToken, response)
                 
                 }, failure: failure)
         } else {
             let error = SwifterError(message: "Bad OAuth response received from server", kind: .badOAuthResponse)
-            failure?(error: error)
+            failure?(error)
         }
     }
     

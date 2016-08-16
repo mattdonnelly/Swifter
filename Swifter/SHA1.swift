@@ -63,7 +63,7 @@ struct SHA1 {
                 switch (x) {
                 case 0...15:
                     var le: UInt32 = 0
-                    let range = NSRange(location:x * sizeofValue(M[x]), length: sizeofValue(M[x]))
+                    let range = NSRange(location:x * MemoryLayout<UInt32>.size, length: MemoryLayout<UInt32>.size)
                     (chunk as NSData).getBytes(&le, range: range)
                     M[x] = le.bigEndian
                     break
@@ -124,7 +124,7 @@ struct SHA1 {
         let mutableBuff = NSMutableData()
         hh.forEach {
             var i = $0.bigEndian
-            mutableBuff.append(&i, length: sizeofValue(i))
+            mutableBuff.append(&i, length: MemoryLayout<UInt32>.size)
         }
         
         return mutableBuff as Data

@@ -44,10 +44,10 @@ public enum HTTPMethodType: String {
 
 public class HTTPRequest: NSObject, URLSessionDataDelegate {
 
-    public typealias UploadProgressHandler = (bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) -> Void
-    public typealias DownloadProgressHandler = (data: Data, totalBytesReceived: Int, totalBytesExpectedToReceive: Int, response: HTTPURLResponse) -> Void
-    public typealias SuccessHandler = (data: Data, response: HTTPURLResponse) -> Void
-    public typealias FailureHandler = (error: Error) -> Void
+    public typealias UploadProgressHandler = (_ bytesWritten: Int, _ totalBytesWritten: Int, _ totalBytesExpectedToWrite: Int) -> Void
+    public typealias DownloadProgressHandler = (Data, _ totalBytesReceived: Int, _ totalBytesExpectedToReceive: Int, HTTPURLResponse) -> Void
+    public typealias SuccessHandler = (Data, HTTPURLResponse) -> Void
+    public typealias FailureHandler = (Error) -> Void
 
     internal struct DataUpload {
         var data: Data
@@ -201,20 +201,20 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
         #endif
 
         if let error = error {
-            self.failureHandler?(error: error)
+            self.failureHandler?(error)
             return
         }
         
         guard self.response.statusCode >= 400 else {
-            self.successHandler?(data: self.responseData, response: self.response)
+            self.successHandler?(self.responseData, self.response)
             return
         }
         let responseString = String(data: responseData, encoding: dataEncoding)!
         let errorCode = HTTPRequest.responseErrorCode(for: responseData) ?? 0
         let localizedDescription = HTTPRequest.description(for: response.statusCode, response: responseString)
         
-        let error = SwifterError(message: localizedDescription, kind: .urlResponseError(status: response.statusCode, headers: response.allHeaderFields, errorCode: errorCode))
-        self.failureHandler?(error: error)
+        let error = SwifterError(message: localizedDescription, kind: .urlResponseError(status: response.statusCode, headers: response.allHeaderFields as [NSObject : AnyObject], errorCode: errorCode))
+        self.failureHandler?(error)
     }
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
@@ -224,17 +224,17 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
         let totalBytesReceived = self.responseData.count
         
         guard !data.isEmpty else { return }
-        self.downloadProgressHandler?(data: data, totalBytesReceived: totalBytesReceived, totalBytesExpectedToReceive: expectedContentLength, response: self.response)
+        self.downloadProgressHandler?(data, totalBytesReceived, expectedContentLength, self.response)
     }
     
-    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: (URLSession.ResponseDisposition) -> Void) {
+    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         self.response = response as? HTTPURLResponse
         self.responseData.count = 0
         completionHandler(.allow)
     }
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
-        self.uploadProgressHandler?(bytesWritten: Int(bytesSent), totalBytesWritten: Int(totalBytesSent), totalBytesExpectedToWrite: Int(totalBytesExpectedToSend))
+        self.uploadProgressHandler?(Int(bytesSent), Int(totalBytesSent), Int(totalBytesExpectedToSend))
     }
     
     // MARK: - Error Responses

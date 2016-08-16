@@ -61,7 +61,7 @@ public extension Swifter {
         parameters["count"] ??= count
         
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(json["ids"], previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
+            success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
             }, failure: failure)
     }
     
@@ -84,7 +84,7 @@ public extension Swifter {
         parameters["count"] ??= count
         
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in            
-            success?(json["ids"], previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
+            success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
             }, failure: failure)
     }
     
@@ -101,7 +101,7 @@ public extension Swifter {
         parameters["stringify_ids"] ??= stringifyIDs
         
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in            
-            success?(json["ids"], previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
+            success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
             }, failure: failure)
     }
     
@@ -118,7 +118,7 @@ public extension Swifter {
         parameters["stringify_ids"] ??= stringifyIDs
         
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in            
-            success?(json["ids"], previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
+            success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
             }, failure: failure)
     }
 
@@ -223,7 +223,7 @@ public extension Swifter {
         parameters["include_user_entities"] ??= includeUserEntities
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(json["users"], previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
+            success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
             }, failure: failure)
     }
 
@@ -245,7 +245,7 @@ public extension Swifter {
         parameters["include_user_entities"] ??= includeUserEntities
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(json["users"], previousCursor: json["previous_cursor_str"].string, nextCursor: json["next_cursor_str"].string)
+            success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
             }, failure: failure)
     }
 

@@ -26,6 +26,8 @@
 import Foundation
 
 public extension Swifter {
+    
+    typealias StallWarningHandler = (_ code: String?, _ message: String?, _ percentFull: Int?) -> Void
 
     /**
     POST	statuses/filter
@@ -38,7 +40,7 @@ public extension Swifter {
 
     At least one predicate parameter (follow, locations, or track) must be specified.
     */
-    public func postStatusesFilter(with follow: [String]? = nil, track: [String]? = nil, locations: [String]? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
+    public func postStatusesFilter(with follow: [String]? = nil, track: [String]? = nil, locations: [String]? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         
         
         assert(follow != nil || track != nil || locations != nil, "At least one predicate parameter (follow, locations, or track) must be specified")
@@ -56,7 +58,7 @@ public extension Swifter {
 
         return self.postJSON(path: path, baseURL: .stream, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
-                stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
+                stallWarningHandler?(stallWarning["code"]?.string, stallWarning["message"]?.string, stallWarning["percent_full"]?.integer)
             } else {
                 progress?(json)
             }
@@ -69,7 +71,7 @@ public extension Swifter {
 
     Returns a small random sample of all public statuses. The Tweets returned by the default access level are the same, so if two different clients connect to this endpoint, they will see the same Tweets.
     */
-    public func getStatusesSample(delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
+    public func getStatusesSample(delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         let path = "statuses/sample.json"
 
         var parameters = Dictionary<String, Any>()
@@ -80,7 +82,7 @@ public extension Swifter {
 
         return self.getJSON(path: path, baseURL: .stream, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
-                stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
+                stallWarningHandler?(stallWarning["code"]?.string, stallWarning["message"]?.string, stallWarning["percent_full"]?.integer)
             } else {
                 progress?(json)
             }
@@ -95,7 +97,7 @@ public extension Swifter {
 
     Returns all public statuses. Few applications require this level of access. Creative use of a combination of other resources and various access levels can satisfy nearly every application use case.
     */
-    public func getStatusesFirehose(count: Int? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
+    public func getStatusesFirehose(count: Int? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         let path = "statuses/firehose.json"
 
         var parameters = Dictionary<String, Any>()
@@ -107,7 +109,7 @@ public extension Swifter {
 
         return self.getJSON(path: path, baseURL: .stream, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
-                stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
+                stallWarningHandler?(stallWarning["code"]?.string, stallWarning["message"]?.string, stallWarning["percent_full"]?.integer)
             } else {
                 progress?(json)
             }
@@ -120,7 +122,7 @@ public extension Swifter {
 
     Streams messages for a single user, as described in User streams https://dev.twitter.com/docs/streaming-apis/streams/user
     */
-    public func getUserStream(delimited: Bool? = nil, stallWarnings: Bool? = nil, includeMessagesFromUserOnly: Bool = false, includeReplies: Bool = false, track: [String]? = nil, locations: [String]? = nil, stringifyFriendIDs: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
+    public func getUserStream(delimited: Bool? = nil, stallWarnings: Bool? = nil, includeMessagesFromUserOnly: Bool = false, includeReplies: Bool = false, track: [String]? = nil, locations: [String]? = nil, stringifyFriendIDs: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         let path = "user.json"
 
         var parameters = Dictionary<String, Any>()
@@ -131,12 +133,16 @@ public extension Swifter {
         parameters["stringify_friend_ids"] ??= stringifyFriendIDs
         parameters["track"] ??= track?.joined(separator: ",")
         parameters["locations"] ??= locations?.joined(separator: ",")
-        parameters["with"] ??= includeMessagesFromUserOnly ? "user" : nil
-        parameters["replies"] ??= includeReplies ? "all" : nil
-
+        if includeMessagesFromUserOnly {
+            parameters["with"] = "user"
+        }
+        if includeReplies {
+            parameters["replies"] = "all"
+        }
+        
         return self.getJSON(path: path, baseURL: .userStream, parameters: parameters, downloadProgress: { json, _ in
             if let stallWarning = json["warning"].object {
-                stallWarningHandler?(code: stallWarning["code"]?.string, message: stallWarning["message"]?.string, percentFull: stallWarning["percent_full"]?.integer)
+                stallWarningHandler?(stallWarning["code"]?.string, stallWarning["message"]?.string, stallWarning["percent_full"]?.integer)
             } else {
                 progress?(json)
             }
@@ -149,18 +155,22 @@ public extension Swifter {
 
     Streams messages for a set of users, as described in Site streams https://dev.twitter.com/docs/streaming-apis/streams/site
     */
-    public func getSiteStream(delimited: Bool? = nil, stallWarnings: Bool? = nil, restrictToUserMessages: Bool = false, includeReplies: Bool = false, stringifyFriendIDs: Bool? = nil, progress: SuccessHandler? = nil, stallWarningHandler: ((code: String?, message: String?, percentFull: Int?) -> Void)? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
+    public func getSiteStream(delimited: Bool? = nil, stallWarnings: Bool? = nil, restrictToUserMessages: Bool = false, includeReplies: Bool = false, stringifyFriendIDs: Bool? = nil, progress: SuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         let path = "site.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["delimited"] ??= delimited
         parameters["stall_warnings"] ??= stallWarnings
         parameters["stringify_friend_ids"] ??= stringifyFriendIDs
-        parameters["with"] ??= restrictToUserMessages ? "user" : nil
-        parameters["replies"] ??= includeReplies ? "all" : nil
+        if restrictToUserMessages {
+            parameters["with"] = "user"
+        }
+        if includeReplies {
+            parameters["replies"] = "all"
+        }
 
         return self.getJSON(path: path, baseURL: .stream, parameters: parameters, downloadProgress: { json, _ in
-            stallWarningHandler?(code: json["warning"]["code"].string, message: json["warning"]["message"].string, percentFull: json["warning"]["percent_full"].integer)
+            stallWarningHandler?(json["warning"]["code"].string, json["warning"]["message"].string, json["warning"]["percent_full"].integer)
             }, success: { json, _ in progress?(json) }, failure: failure)
     }
     

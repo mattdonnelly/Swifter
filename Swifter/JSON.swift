@@ -83,7 +83,7 @@ public enum JSON : Equatable, CustomStringConvertible {
         self = .object(dict)
     }
     
-    init(_ rawValue: AnyObject?) {
+    init(_ rawValue: Any?) {
         guard let value = rawValue else {
             self = .invalid
             return
@@ -98,11 +98,11 @@ public enum JSON : Equatable, CustomStringConvertible {
                 self = .invalid
             }
             
-        case let array as NSArray:
+        case let array as [Any]:
             let newArray = array.map { JSON($0) }
             self = .array(newArray)
             
-        case let dict as [String: AnyObject]:
+        case let dict as [String: Any]:
             var newDict = [String: JSON]()
             for (key, value) in dict {
                 newDict[key] = JSON(value)
@@ -249,7 +249,7 @@ extension JSON {
         return string
     }
 
-    private func prettyPrint(_ indent: String, _ level: Int) -> String {
+    fileprivate func prettyPrint(_ indent: String, _ level: Int) -> String {
         let currentIndent = (0...level).map({ _ in "" }).joined(separator: indent)
         let nextIndent = currentIndent + "  "
         

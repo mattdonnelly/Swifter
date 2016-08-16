@@ -57,9 +57,9 @@ public class Swifter {
     // MARK: - Types
 
     public typealias SuccessHandler = (JSON) -> Void
-    public typealias CursorSuccessHandler = (JSON, previousCursor: String?, nextCursor: String?) -> Void
-    public typealias JSONSuccessHandler = (json: JSON, response: HTTPURLResponse) -> Void
-    public typealias FailureHandler = (error: Error) -> Void
+    public typealias CursorSuccessHandler = (JSON, _ previousCursor: String?, _ nextCursor: String?) -> Void
+    public typealias JSONSuccessHandler = (JSON, _ response: HTTPURLResponse) -> Void
+    public typealias FailureHandler = (_ error: Error) -> Void
 
     internal struct CallbackNotification {
         static let optionsURLKey = "SwifterCallbackNotificationOptionsURLKey"
@@ -108,12 +108,12 @@ public class Swifter {
                 
                 for chunk in jsonChunks where !chunk.utf16.isEmpty {
                     guard let chunkData = chunk.data(using: .utf8), let jsonResult = try? JSON.parse(jsonData: chunkData) else { continue }
-                    downloadProgress?(json: jsonResult, response: response)
+                    downloadProgress?(jsonResult, response)
                 }
                 return
             }
             
-            downloadProgress?(json: jsonResult, response: response)
+            downloadProgress?(jsonResult, response)
         }
 
         let jsonSuccessHandler: HTTPRequest.SuccessHandler = { data, response in
@@ -122,11 +122,11 @@ public class Swifter {
                 do {
                     let jsonResult = try JSON.parse(jsonData: data)
                     DispatchQueue.main.async {
-                        success?(json: jsonResult, response: response)
+                        success?(jsonResult, response)
                     }
                 } catch {
                     DispatchQueue.main.async {
-                        failure?(error: error)
+                        failure?(error)
                     }
                 }
             }

@@ -62,14 +62,15 @@ extension Dictionary {
     func stringifiedDictionary() -> Dictionary<String, String> {
         var dict = [String: String]()
         for (key, value) in self {
-            dict[String(key)] = String(value)
+            dict[String(describing: key)] = String(describing: value)
         }
         return dict
     }
     
 }
 
-infix operator +| {}
+infix operator +|
+
 func +| <K,V>(left: Dictionary<K,V>, right: Dictionary<K,V>) -> Dictionary<K,V> {
     var map = Dictionary<K,V>()
     for (k, v) in left {
