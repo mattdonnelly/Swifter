@@ -68,7 +68,7 @@ public extension Swifter {
 
     Returns a single direct message, specified by an id parameter. Like the /1.1/direct_messages.format request, this method will include the user objects of the sender and recipient.
     */
-    public func getDirectMessagesShow(with id: String, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func showDirectMessage(forID id: String, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages/show.json"
         let parameters: [String: Any] = ["id" : id]
 
@@ -80,7 +80,7 @@ public extension Swifter {
 
     Destroys the direct message specified in the required ID parameter. The authenticating user must be the recipient of the specified direct message.
     */
-    public func postDestroyDirectMessage(with id: String, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func destoryDirectMessage(forID id: String, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages/destroy.json"
 
         var parameters = Dictionary<String, Any>()
@@ -95,7 +95,7 @@ public extension Swifter {
 
     Sends a new direct message to the specified user from the authenticating user. Requires both the user and text parameters and must be a POST. Returns the sent message in the requested format if successful.
     */
-    public func postDirectMessage(to userID: String, text: String, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func sendDirectMessage(to userID: String, text: String, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages/new.json"
 
         var parameters = Dictionary<String, Any>()
