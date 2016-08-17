@@ -35,61 +35,17 @@ public enum JSON : Equatable, CustomStringConvertible {
     case null
     case invalid
     
-    init(_ value: Bool?) {
-        guard let bool = value else {
-            self = .invalid
-            return
-        }
-        self = .bool(bool)
-    }
-    
-    init(_ value: Double?) {
-        guard let number = value else {
-            self = .invalid
-            return
-        }
-        self = .number(number)
-    }
-    
-    init(_ value: Int?) {
-        guard let number = value else {
-            self = .invalid
-            return
-        }
-        self = .number(Double(number))
-    }
-    
-    init(_ value: String?) {
-        guard let string = value else {
-            self = .invalid
-            return
-        }
-        self = .string(string)
-    }
-    
-    init(_ value: [JSON]?) {
-        guard let array = value else {
-            self = .invalid
-            return
-        }
-        self = .array(array)
-    }
-    
-    init(_ value: [String: JSON]?) {
-        guard let dict = value else {
-            self = .invalid
-            return
-        }
-        self = .object(dict)
-    }
-    
-    init(_ rawValue: Any?) {
-        guard let value = rawValue else {
-            self = .invalid
-            return
-        }
-
-        switch value {
+    public init(_ rawValue: Any) {
+        switch rawValue {
+        case let json as JSON:
+            self = json
+            
+        case let array as [JSON]:
+            self = .array(array)
+            
+        case let dict as [String: JSON]:
+            self = .object(dict)
+            
         case let data as Data:
             do {
                 let object = try JSONSerialization.jsonObject(with: data, options: [])
@@ -113,78 +69,74 @@ public enum JSON : Equatable, CustomStringConvertible {
             self = .string(string)
             
         case let number as NSNumber:
-            if number.isBoolean {
-                self = .bool(number.boolValue)
-            } else {
-                self = .number(number.doubleValue)
-            }
+            self = number.isBoolean ? .bool(number.boolValue) : .number(number.doubleValue)
             
-        case _ as NSNull:
+        case _ as Optional<Any>:
             self = .null
             
         default:
             assert(true, "This location should never be reached")
             self = .invalid
         }
-
+        
     }
-
+    
     public var string : String? {
         guard case .string(let value) = self else {
             return nil
         }
         return value
     }
-
+    
     public var integer : Int? {
         guard case .number(let value) = self else {
             return nil
         }
-         return Int(value)
+        return Int(value)
     }
-
+    
     public var double : Double? {
         guard case .number(let value) = self else {
             return nil
         }
         return value
     }
-
+    
     public var object : [String: JSON]? {
         guard case .object(let value) = self else {
             return nil
         }
         return value
     }
-
+    
     public var array : [JSON]? {
         guard case .array(let value) = self else {
             return nil
         }
         return value
     }
-
+    
     public var bool : Bool? {
         guard case .bool(let value) = self else {
             return nil
         }
         return value
     }
-
+    
     public subscript(key: String) -> JSON {
         guard case .object(let dict) = self, let value = dict[key] else {
             return .invalid
         }
         return value
     }
-
+    
     public subscript(index: Int) -> JSON {
         guard case .array(let array) = self, array.count > index else {
             return .invalid
         }
         return array[index]
     }
-
+    
     static func parse(jsonData: Data) throws -> JSON {
         do {
             let object = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
@@ -193,7 +145,7 @@ public enum JSON : Equatable, CustomStringConvertible {
             throw SwifterError(message: "\(error)", kind: .jsonParseError)
         }
     }
-
+    
     static func parse(string : String) throws -> JSON {
         do {
             guard let data = string.data(using: .utf8, allowLossyConversion: false) else {
@@ -204,7 +156,7 @@ public enum JSON : Equatable, CustomStringConvertible {
             throw SwifterError(message: "\(error)", kind: .jsonParseError)
         }
     }
-
+    
     func stringify(_ indent: String = "  ") -> String? {
         guard self != .invalid else {
             assert(true, "The JSON value is invalid")
@@ -212,44 +164,15 @@ public enum JSON : Equatable, CustomStringConvertible {
         }
         return prettyPrint(indent, 0)
     }
-
-}
-
-public func ==(lhs: JSON, rhs: JSON) -> Bool {
-    switch (lhs, rhs) {
-    case (.null, .null):
-        return true
-        
-    case (.bool(let lhsValue), .bool(let rhsValue)):
-        return lhsValue == rhsValue
-
-    case (.string(let lhsValue), .string(let rhsValue)):
-        return lhsValue == rhsValue
-
-    case (.number(let lhsValue), .number(let rhsValue)):
-        return lhsValue == rhsValue
-
-    case (.array(let lhsValue), .array(let rhsValue)):
-        return lhsValue == rhsValue
-
-    case (.object(let lhsValue), .object(let rhsValue)):
-        return lhsValue == rhsValue
-        
-    default:
-        return false
-    }
-}
-
-extension JSON {
-
+    
     public var description: String {
         guard let string = stringify() else {
             return "<INVALID JSON>"
         }
         return string
     }
-
-    fileprivate func prettyPrint(_ indent: String, _ level: Int) -> String {
+    
+    private func prettyPrint(_ indent: String, _ level: Int) -> String {
         let currentIndent = (0...level).map({ _ in "" }).joined(separator: indent)
         let nextIndent = currentIndent + "  "
         
@@ -277,10 +200,43 @@ extension JSON {
             return ""
         }
     }
-
+    
 }
 
-extension JSON: ExpressibleByStringLiteral {
+public func ==(lhs: JSON, rhs: JSON) -> Bool {
+    switch (lhs, rhs) {
+    case (.null, .null):
+        return true
+        
+    case (.bool(let lhsValue), .bool(let rhsValue)):
+        return lhsValue == rhsValue
+        
+    case (.string(let lhsValue), .string(let rhsValue)):
+        return lhsValue == rhsValue
+        
+    case (.number(let lhsValue), .number(let rhsValue)):
+        return lhsValue == rhsValue
+        
+    case (.array(let lhsValue), .array(let rhsValue)):
+        return lhsValue == rhsValue
+        
+    case (.object(let lhsValue), .object(let rhsValue)):
+        return lhsValue == rhsValue
+        
+    default:
+        return false
+    }
+}
+
+
+
+extension JSON: ExpressibleByStringLiteral,
+    ExpressibleByIntegerLiteral,
+    ExpressibleByBooleanLiteral,
+    ExpressibleByFloatLiteral,
+    ExpressibleByArrayLiteral,
+    ExpressibleByDictionaryLiteral,
+    ExpressibleByNilLiteral {
     
     public init(stringLiteral value: StringLiteralType) {
         self.init(value)
@@ -293,66 +249,45 @@ extension JSON: ExpressibleByStringLiteral {
     public init(unicodeScalarLiteral value: StringLiteralType) {
         self.init(value)
     }
-
-}
-
-extension JSON: ExpressibleByIntegerLiteral {
     
     public init(integerLiteral value: IntegerLiteralType) {
         self.init(value)
     }
-
-}
-
-extension JSON: ExpressibleByBooleanLiteral {
     
     public init(booleanLiteral value: BooleanLiteralType) {
         self.init(value)
     }
-
-}
-
-extension JSON: ExpressibleByFloatLiteral {
     
     public init(floatLiteral value: FloatLiteralType) {
         self.init(value)
     }
-
-}
-
-extension JSON: ExpressibleByDictionaryLiteral {
     
-    public init(dictionaryLiteral elements: (String, AnyObject)...) {
-        var dict = [String : AnyObject]()
-        
-        for (key, value) in elements {
-            dict[key] = value
-        }
-       
-        self.init(dict)
+    public init(dictionaryLiteral elements: (String, Any)...) {
+        let object = elements.reduce([String: Any]()) { $0 + [$1.0: $1.1] }
+        self.init(object)
     }
-
-}
-
-extension JSON: ExpressibleByArrayLiteral {
     
     public init(arrayLiteral elements: AnyObject...) {
         self.init(elements)
     }
-}
-
-extension JSON: ExpressibleByNilLiteral {
     
     public init(nilLiteral: ()) {
         self.init(NSNull())
     }
+    
+}
 
+private func +(lhs: [String: Any], rhs: [String: Any]) -> [String: Any] {
+    var lhs = lhs
+    for element in rhs {
+        lhs[element.key] = element.value
+    }
+    return lhs
 }
 
 private extension NSNumber {
     
     var isBoolean: Bool {
-        return self.objCType == NSNumber(value: true).objCType
+        return NSNumber(value: true).objCType == self.objCType
     }
-    
 }
