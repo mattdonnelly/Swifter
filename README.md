@@ -49,6 +49,31 @@ swifter.getHomeTimeline(count: 50, success: { json in
 })
 ```
 
+#### Using API that allows for `user_id`/`screenName` or `list_id`/`slug`
+Certain  Twitter API allows you to use either the `user_id` or `screen_name` to get user related objects (and `list_id`/`slug` for lists). Swifter offers a solution so that the user won't accidentally use the wrong method, and have nothing returned. For more information, check the `SwifterTag.swift` file.
+
+```swift
+swifter.getUserFollowersIDs(for: .id(userId), success: { json, prev, next in
+    // alternatively, you can use .screenName(userName)
+    // ...
+}, failure: { error in
+    // ...
+})
+
+```
+
+```swift
+
+swifter.getListSubscribers(for: .slug(listSlug, owner: .screenName(userName)), success: { json, prev, next in
+    // alternatively, you can use .id(listId)
+    // ...
+}, failure: { error in
+    // ...
+})
+
+```
+Additionally, there is also `.screenName(arrayOfUserNames)` and `.id(arrayOfIds)` for methods that take arrays of screen names, or userIDs
+
 #### Streaming API:
 
 ```swift
