@@ -177,6 +177,32 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .upload, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
     }
+	
+	/**
+	POST	media/upload
+	
+	Upload media (images) to Twitter for use in a Tweet or Twitter-hosted Card. For uploading videos or for chunked image uploads (useful for lower bandwidth connections), see our chunked POST media/upload endpoint.
+	The parameter "additionalOwners" is corresponding to the optional parameter "addtional_owners" in the twitter's document, which is a comma-separated list of user IDs to set as additional owners allowed to use the returned media_id in Tweets or Cards. Up to 100 additional owners may be specified.
+	
+	See:
+	
+	- https://dev.twitter.com/rest/reference/post/media/upload-init
+	*/
+	
+	public func postMedia(media: NSData, additionalOwners: [String], success: ((status: Dictionary<String, JSONValue>?) -> Void)? = nil, failure: FailureHandler? = nil) {
+		guard !additionalOwners.isEmpty else { return }
+		
+		let path: String = "media/upload.json"
+		var parameters = Dictionary<String, Any>()
+		parameters["media"] = media
+		parameters["additional_owners"] = additionalOwners.joinWithSeparator(",")
+		print(parameters["additional_owners"])
+		parameters[Swifter.DataParameters.dataKey] = "media"
+		
+		self.postJSONWithPath(path, baseURL: self.uploadURL, parameters: parameters, success: { json, _ in
+			success?(status: json.object)
+			}, failure: failure)
+	}
 
     /**
     POST	statuses/retweet/:id
