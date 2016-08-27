@@ -1,0 +1,27 @@
+{
+    "name": "Swifter",
+    "version": "1.6",
+    "summary": "🐦 A Twitter framework for iOS & OS X written in Swift",
+    "description": "🐦 A Twitter framework for iOS & OS X written in Swift",
+    "homepage": "https://github.com/mattdonnelly/Swifter",
+    "license": "MIT",
+    "source": {
+        "git": "https://github.com/cjwirth/Swifter.git",
+        "branch": "master" 
+    },
+    "authors": ["Matt Donnelly"],
+    "platforms": {
+        "osx": "10.10",
+        "ios": "8.0"
+    },
+    "source_files": "Swifter/*.{h,swift}",
+    "requires_arc": true,
+    "preserve_paths":  "External/CommonCrypto/**/*",
+    "prepare_command": "External/CommonCrypto/injectXcodePath.sh",
+    "xcconfig": {
+        "SWIFT_INCLUDE_PATHS[sdk=iphoneos*]": "$(SRCROOT)/Swifter/External/CommonCrypto/iphoneos",
+        "SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]": "$(SRCROOT)/Swifter/External/CommonCrypto/iphonesimulator",
+        "SWIFT_INCLUDE_PATHS[sdk=macosx*]": "$(SRCROOT)/Swifter/External/CommonCrypto/macosx"
+    }
+}
+

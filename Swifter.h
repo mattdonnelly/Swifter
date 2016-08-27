@@ -1,5 +1,5 @@
 //
-//  Swifter-Bridging-Header.h
+//  Swifter.h
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -23,4 +23,8 @@
 //  THE SOFTWARE.
 //
 
-#import <CommonCrypto/CommonCrypto.h>
+#import <UIKit/UIKit.h>
+
+FOUNDATION_EXPORT double SwifterVersionNumber;
+
+FOUNDATION_EXPORT const unsigned char SwifterVersionString[];

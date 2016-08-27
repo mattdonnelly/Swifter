@@ -40,8 +40,6 @@
 		8B9F514E1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */; };
 		8B9F51531944A8DC00894629 /* String+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514A1944A8DC00894629 /* String+Swifter.swift */; };
 		8B9F51541944A8DC00894629 /* String+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514A1944A8DC00894629 /* String+Swifter.swift */; };
-		8B9F51551944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */; };
-		8B9F51561944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */; };
 		8B9F51571944A8DC00894629 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514C1944A8DC00894629 /* Swifter.swift */; };
 		8B9F51581944A8DC00894629 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514C1944A8DC00894629 /* Swifter.swift */; };
 		8BA50EC71953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50EC61953828A00FB1829 /* SwifterAppOnlyClient.swift */; };
@@ -164,7 +162,6 @@
 		8B9F51131944A61D00894629 /* SwifterMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwifterMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Swifter.swift"; sourceTree = "<group>"; };
 		8B9F514A1944A8DC00894629 /* String+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Swifter.swift"; sourceTree = "<group>"; };
-		8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swifter-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B9F514C1944A8DC00894629 /* Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swifter.swift; sourceTree = "<group>"; };
 		8BA50EC61953828A00FB1829 /* SwifterAppOnlyClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAppOnlyClient.swift; sourceTree = "<group>"; };
 		8BC32D3C1955EEE100FF75A0 /* SwifterTrends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTrends.swift; sourceTree = "<group>"; };
@@ -189,6 +186,11 @@
 		F6B4D5771C7BAC4500E06514 /* SwifterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwifterTests.swift; sourceTree = "<group>"; };
 		F6B4D5791C7BAC4500E06514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6B4D5801C7BAC5E00E06514 /* String+SwifterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SwifterTests.swift"; sourceTree = "<group>"; };
+		FBA2CDD11C7B0B46002A3857 /* Swifter.podspec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Swifter.podspec.json; sourceTree = "<group>"; };
+		FBA2CDD41C7B0B67002A3857 /* injectXcodePath.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = injectXcodePath.sh; path = External/CommonCrypto/injectXcodePath.sh; sourceTree = "<group>"; };
+		FBA2CDD81C7B0B8A002A3857 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = External/CommonCrypto/iphoneos/module.modulemap; sourceTree = "<group>"; };
+		FBA2CDD91C7B0B8F002A3857 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = External/CommonCrypto/iphonesimulator/module.modulemap; sourceTree = "<group>"; };
+		FBA2CDDA1C7B0B94002A3857 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = External/CommonCrypto/macosx/module.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +289,7 @@
 		8B9F50E41944A5AB00894629 = {
 			isa = PBXGroup;
 			children = (
+				FBA2CDD01C7B0B1C002A3857 /* Metadata */,
 				8B9F51461944A8DC00894629 /* Swifter */,
 				8B300C201944AA1A00993175 /* SwifterDemoiOS */,
 				8B300C481944AECB00993175 /* SwifterDemoMac */,
@@ -311,7 +314,6 @@
 			isa = PBXGroup;
 			children = (
 				8B5EFF14195F09F600B354F9 /* Swifter.h */,
-				8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */,
 				8B9F514C1944A8DC00894629 /* Swifter.swift */,
 				8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */,
 				8B548F581945325E00EE2927 /* SwifterAuth.swift */,
@@ -363,6 +365,50 @@
 			path = SwifterTests;
 			sourceTree = "<group>";
 		};
+		FBA2CDD01C7B0B1C002A3857 /* Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				FBA2CDD31C7B0B49002A3857 /* CommonCrypto */,
+				FBA2CDD11C7B0B46002A3857 /* Swifter.podspec.json */,
+			);
+			name = Metadata;
+			sourceTree = "<group>";
+		};
+		FBA2CDD31C7B0B49002A3857 /* CommonCrypto */ = {
+			isa = PBXGroup;
+			children = (
+				FBA2CDD51C7B0B75002A3857 /* iphoneos */,
+				FBA2CDD61C7B0B7B002A3857 /* iphonesimulator */,
+				FBA2CDD71C7B0B80002A3857 /* macosx */,
+				FBA2CDD41C7B0B67002A3857 /* injectXcodePath.sh */,
+			);
+			name = CommonCrypto;
+			sourceTree = "<group>";
+		};
+		FBA2CDD51C7B0B75002A3857 /* iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				FBA2CDD81C7B0B8A002A3857 /* module.modulemap */,
+			);
+			name = iphoneos;
+			sourceTree = "<group>";
+		};
+		FBA2CDD61C7B0B7B002A3857 /* iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				FBA2CDD91C7B0B8F002A3857 /* module.modulemap */,
+			);
+			name = iphonesimulator;
+			sourceTree = "<group>";
+		};
+		FBA2CDD71C7B0B80002A3857 /* macosx */ = {
+			isa = PBXGroup;
+			children = (
+				FBA2CDDA1C7B0B94002A3857 /* module.modulemap */,
+			);
+			name = macosx;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -370,7 +416,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B9F51551944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */,
 				8B5EFF15195F09F600B354F9 /* Swifter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,7 +424,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B9F51561944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */,
 				8B5EFF16195F09F600B354F9 /* Swifter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -873,7 +917,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mattdonnelly.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
+				"SWIFT_INCLUDE_PATHS[sdk=iphoneos*]" = "$(inherited) $(SRCROOT)/External/CommonCrypto/iphoneos";
+				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]" = "$(inherited) $(SRCROOT)/External/CommonCrypto/iphonesimulator";
 			};
 			name = Debug;
 		};
@@ -890,7 +935,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mattdonnelly.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
+				"SWIFT_INCLUDE_PATHS[sdk=iphoneos*]" = "$(inherited) $(SRCROOT)/External/CommonCrypto/iphoneos";
+				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]" = "$(inherited) $(SRCROOT)/External/CommonCrypto/iphonesimulator";
 			};
 			name = Release;
 		};
@@ -916,7 +962,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
+				SWIFT_INCLUDE_PATHS = "$(inherited) $(SRCROOT)/External/CommonCrypto/macosx";
 			};
 			name = Debug;
 		};
@@ -939,7 +985,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
+				SWIFT_INCLUDE_PATHS = "$(inherited) $(SRCROOT)/External/CommonCrypto/macosx";
 			};
 			name = Release;
 		};
