@@ -35,19 +35,19 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let failureHandler: NSError -> Void = { print($0.localizedDescription) }
+        let failureHandler: (Error) -> Void = { print($0.localizedDescription) }
 
         if useACAccount {
             let accountStore = ACAccountStore()
-            let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+            let accountType = accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
 
-            accountStore.requestAccessToAccountsWithType(accountType, options: nil) { granted, error in
+            accountStore.requestAccessToAccounts(with: accountType, options: nil) { granted, error in
                 guard granted else {
                     print("There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
                     return
                 }
                 
-                guard let twitterAccounts = accountStore.accountsWithAccountType(accountType) where !twitterAccounts.isEmpty else {
+                guard let twitterAccounts = accountStore.accounts(with: accountType) , !twitterAccounts.isEmpty else {
                     print("There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
                     return
                 }
@@ -55,15 +55,15 @@ class ViewController: NSViewController {
                 let twitterAccount = twitterAccounts[0] as! ACAccount
                 let swifter = Swifter(account: twitterAccount)
                 
-                swifter.getStatusesHomeTimelineWithCount(20, success: { statuses in
+                swifter.getHomeTimeline(count: 20, success: { statuses in
                     print(statuses)
                     }, failure: failureHandler)
             }
         } else {
             let swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
-            swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success")!, success: { _ in
-                swifter.getStatusesHomeTimelineWithCount(100, success: { statuses in
-                    guard let tweets = statuses else { return }
+            swifter.authorize(with: URL(string: "swifter://success")!, success: { _ in
+                swifter.getHomeTimeline(count: 100, success: { statuses in
+                    guard let tweets = statuses.array else { return }
                     self.tweets = tweets.map {
                         let tweet = Tweet()
                         tweet.text = $0["text"].string!

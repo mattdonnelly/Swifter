@@ -25,261 +25,202 @@
 
 import Foundation
 
-public typealias JSONValue = JSON
-
-public let JSONTrue = JSONValue(true)
-public let JSONFalse = JSONValue(false)
-
-public let JSONNull = JSONValue.JSONNull
-
 public enum JSON : Equatable, CustomStringConvertible {
     
-    case JSONString(String)
-    case JSONNumber(Double)
-    case JSONObject(Dictionary<String, JSONValue>)
-    case JSONArray(Array<JSON>)
-    case JSONBool(Bool)
-    case JSONNull
-    case JSONInvalid
+    case string(String)
+    case number(Double)
+    case object(Dictionary<String, JSON>)
+    case array(Array<JSON>)
+    case bool(Bool)
+    case null
+    case invalid
     
-    init(_ value: Bool?) {
-        if let bool = value {
-            self = .JSONBool(bool)
-        }
-        else {
-            self = .JSONInvalid
-        }
-    }
-    
-    init(_ value: Double?) {
-        if let number = value {
-            self = .JSONNumber(number)
-        }
-        else {
-            self = .JSONInvalid
-        }
-    }
-    
-    init(_ value: Int?) {
-        if let number = value {
-            self = .JSONNumber(Double(number))
-        }
-        else {
-            self = .JSONInvalid
-        }
-    }
-    
-    init(_ value: String?) {
-        if let string = value {
-            self = .JSONString(string)
-        }
-        else {
-            self = .JSONInvalid
-        }
-    }
-    
-    init(_ value: Array<JSONValue>?) {
-        if let array = value {
-            self = .JSONArray(array)
-        }
-        else {
-            self = .JSONInvalid
-        }
-    }
-    
-    init(_ value: Dictionary<String, JSONValue>?) {
-        if let dict = value {
-            self = .JSONObject(dict)
-        }
-        else {
-            self = .JSONInvalid
-        }
-    }
-    
-    init(_ rawValue: AnyObject?) {
-        if let value : AnyObject = rawValue {
-            switch value {
-            case let data as NSData:
-                do {
-                    let jsonObject : AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
-                    self = JSON(jsonObject)
-                } catch {
-                    self = .JSONInvalid
-                }
-
-            case let array as NSArray:
-                var newArray : [JSONValue] = []
-                for item : AnyObject in array {
-                    newArray.append(JSON(item))
-                }
-                self = .JSONArray(newArray)
-                
-            case let dict as NSDictionary:
-                var newDict : Dictionary<String, JSONValue> = [:]
-                for (k, v): (AnyObject, AnyObject) in dict {
-                    if let key = k as? String {
-                        newDict[key] = JSON(v)
-                    }
-                    else {
-                        assert(true, "Invalid key type; expected String")
-                        self = .JSONInvalid
-                        return
-                    }
-                }
-                self = .JSONObject(newDict)
-                
-            case let string as NSString:
-                self = .JSONString(string as String)
-                
-            case let number as NSNumber:
-                if number.isBool {
-                    self = .JSONBool(number.boolValue)
-                }
-                else {
-                    self = .JSONNumber(number.doubleValue)
-                }
-                
-            case _ as NSNull:
-                self = .JSONNull
-                
-            default:
-                assert(true, "This location should never be reached")
-                self = .JSONInvalid
+    public init(_ rawValue: Any) {
+        switch rawValue {
+        case let json as JSON:
+            self = json
+            
+        case let array as [JSON]:
+            self = .array(array)
+            
+        case let dict as [String: JSON]:
+            self = .object(dict)
+            
+        case let data as Data:
+            do {
+                let object = try JSONSerialization.jsonObject(with: data, options: [])
+                self = JSON(object)
+            } catch {
+                self = .invalid
             }
+            
+        case let array as [Any]:
+            let newArray = array.map { JSON($0) }
+            self = .array(newArray)
+            
+        case let dict as [String: Any]:
+            var newDict = [String: JSON]()
+            for (key, value) in dict {
+                newDict[key] = JSON(value)
+            }
+            self = .object(newDict)
+            
+        case let string as String:
+            self = .string(string)
+            
+        case let number as NSNumber:
+            self = number.isBoolean ? .bool(number.boolValue) : .number(number.doubleValue)
+            
+        case _ as Optional<Any>:
+            self = .null
+            
+        default:
+            assert(true, "This location should never be reached")
+            self = .invalid
         }
-        else {
-            self = .JSONInvalid
-        }
+        
     }
-
+    
     public var string : String? {
-        switch self {
-        case .JSONString(let value):
-            return value
-        default:
+        guard case .string(let value) = self else {
             return nil
         }
+        return value
     }
-
+    
     public var integer : Int? {
-        switch self {
-        case .JSONNumber(let value):
-            return Int(value)
-            
-        default:
+        guard case .number(let value) = self else {
             return nil
         }
+        return Int(value)
     }
-
+    
     public var double : Double? {
-        switch self {
-        case .JSONNumber(let value):
-            return value
-
-        default:
+        guard case .number(let value) = self else {
             return nil
         }
+        return value
     }
-
-    public var object : Dictionary<String, JSONValue>? {
-        switch self {
-        case .JSONObject(let value):
-            return value
-            
-        default:
+    
+    public var object : [String: JSON]? {
+        guard case .object(let value) = self else {
             return nil
         }
+        return value
     }
-
-    public var array : Array<JSONValue>? {
-        switch self {
-        case .JSONArray(let value):
-            return value
-            
-        default:
+    
+    public var array : [JSON]? {
+        guard case .array(let value) = self else {
             return nil
         }
+        return value
     }
-
+    
     public var bool : Bool? {
-        switch self {
-        case .JSONBool(let value):
-            return value
-
-        default:
+        guard case .bool(let value) = self else {
             return nil
         }
+        return value
     }
-
-    public subscript(key: String) -> JSONValue {
-        switch self {
-        case .JSONObject(let dict):
-            if let value = dict[key] {
-                return value
+    
+    public subscript(key: String) -> JSON {
+        guard case .object(let dict) = self, let value = dict[key] else {
+            return .invalid
+        }
+        return value
+    }
+    
+    public subscript(index: Int) -> JSON {
+        guard case .array(let array) = self, array.count > index else {
+            return .invalid
+        }
+        return array[index]
+    }
+    
+    static func parse(jsonData: Data) throws -> JSON {
+        do {
+            let object = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+            return JSON(object)
+        } catch {
+            throw SwifterError(message: "\(error)", kind: .jsonParseError)
+        }
+    }
+    
+    static func parse(string : String) throws -> JSON {
+        do {
+            guard let data = string.data(using: .utf8, allowLossyConversion: false) else {
+                throw SwifterError(message: "Cannot parse invalid string", kind: .jsonParseError)
             }
-            else {
-                return .JSONInvalid
-            }
-
-        default:
-            return .JSONInvalid
+            return try parse(jsonData: data)
+        } catch {
+            throw SwifterError(message: "\(error)", kind: .jsonParseError)
         }
     }
-
-    public subscript(index: Int) -> JSONValue {
-        switch self {
-        case .JSONArray(let array) where array.count > index:
-            return array[index]
-
-        default:
-            return .JSONInvalid
-        }
-    }
-
-    static func parseJSONData(jsonData : NSData) throws -> JSON {
-        let JSONObject = try? NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers)
-        return (JSONObject == nil) ? nil : JSON(JSONObject)
-    }
-
-    static func parseJSONString(jsonString : String) throws -> JSON {
-        let error: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
-        if let data = jsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
-            return try parseJSONData(data)
-        }
-        throw error
-    }
-
-    func stringify(indent: String = "  ") -> String? {
-        switch self {
-        case .JSONInvalid:
+    
+    func stringify(_ indent: String = "  ") -> String? {
+        guard self != .invalid else {
             assert(true, "The JSON value is invalid")
             return nil
-
-        default:
-            return _prettyPrint(indent, 0)
+        }
+        return prettyPrint(indent, 0)
+    }
+    
+    public var description: String {
+        guard let string = stringify() else {
+            return "<INVALID JSON>"
+        }
+        return string
+    }
+    
+    private func prettyPrint(_ indent: String, _ level: Int) -> String {
+        let currentIndent = (0...level).map({ _ in "" }).joined(separator: indent)
+        let nextIndent = currentIndent + "  "
+        
+        switch self {
+        case .bool(let bool):
+            return bool ? "true" : "false"
+            
+        case .number(let number):
+            return "\(number)"
+            
+        case .string(let string):
+            return "\"\(string)\""
+            
+        case .array(let array):
+            return "[\n" + array.map { "\(nextIndent)\($0.prettyPrint(indent, level + 1))" }.joined(separator: ",\n") + "\n\(currentIndent)]"
+            
+        case .object(let dict):
+            return "{\n" + dict.map { "\(nextIndent)\"\($0)\" : \($1.prettyPrint(indent, level + 1))"}.joined(separator: ",\n") + "\n\(currentIndent)}"
+            
+        case .null:
+            return "null"
+            
+        case .invalid:
+            assert(true, "This should never be reached")
+            return ""
         }
     }
-
+    
 }
 
 public func ==(lhs: JSON, rhs: JSON) -> Bool {
     switch (lhs, rhs) {
-    case (.JSONNull, .JSONNull):
+    case (.null, .null):
         return true
         
-    case (.JSONBool(let lhsValue), .JSONBool(let rhsValue)):
+    case (.bool(let lhsValue), .bool(let rhsValue)):
         return lhsValue == rhsValue
-
-    case (.JSONString(let lhsValue), .JSONString(let rhsValue)):
+        
+    case (.string(let lhsValue), .string(let rhsValue)):
         return lhsValue == rhsValue
-
-    case (.JSONNumber(let lhsValue), .JSONNumber(let rhsValue)):
+        
+    case (.number(let lhsValue), .number(let rhsValue)):
         return lhsValue == rhsValue
-
-    case (.JSONArray(let lhsValue), .JSONArray(let rhsValue)):
+        
+    case (.array(let lhsValue), .array(let rhsValue)):
         return lhsValue == rhsValue
-
-    case (.JSONObject(let lhsValue), .JSONObject(let rhsValue)):
+        
+    case (.object(let lhsValue), .object(let rhsValue)):
         return lhsValue == rhsValue
         
     default:
@@ -287,64 +228,15 @@ public func ==(lhs: JSON, rhs: JSON) -> Bool {
     }
 }
 
-extension JSON {
 
-    public var description: String {
-        if let jsonString = stringify() {
-            return jsonString
-        }
-        else {
-            return "<INVALID JSON>"
-        }
-    }
 
-    private func _prettyPrint(indent: String, _ level: Int) -> String {
-        let currentIndent = (0...level).map({ _ in "" }).joinWithSeparator(indent)
-        let nextIndent = currentIndent + "  "
-        
-        switch self {
-        case .JSONBool(let bool):
-            return bool ? "true" : "false"
-            
-        case .JSONNumber(let number):
-            return "\(number)"
-            
-        case .JSONString(let string):
-            return "\"\(string)\""
-            
-        case .JSONArray(let array):
-            return "[\n" + array.map({ "\(nextIndent)\($0._prettyPrint(indent, level + 1))" }).joinWithSeparator(",\n") + "\n\(currentIndent)]"
-            
-        case .JSONObject(let dict):
-            return "{\n" + dict.map({ "\(nextIndent)\"\($0)\" : \($1._prettyPrint(indent, level + 1))"}).joinWithSeparator(",\n") + "\n\(currentIndent)}"
-            
-        case .JSONNull:
-            return "null"
-            
-        case .JSONInvalid:
-            assert(true, "This should never be reached")
-            return ""
-        }
-    }
-
-}
-
-extension JSONValue: BooleanType {
-
-    public var boolValue: Bool {
-        switch self {
-        case .JSONBool(let bool):
-            return bool
-        case .JSONInvalid:
-            return false
-        default:
-            return true
-        }
-    }
-
-}
-
-extension JSON: StringLiteralConvertible {
+extension JSON: ExpressibleByStringLiteral,
+    ExpressibleByIntegerLiteral,
+    ExpressibleByBooleanLiteral,
+    ExpressibleByFloatLiteral,
+    ExpressibleByArrayLiteral,
+    ExpressibleByDictionaryLiteral,
+    ExpressibleByNilLiteral {
     
     public init(stringLiteral value: StringLiteralType) {
         self.init(value)
@@ -357,76 +249,45 @@ extension JSON: StringLiteralConvertible {
     public init(unicodeScalarLiteral value: StringLiteralType) {
         self.init(value)
     }
-
-}
-
-extension JSON: IntegerLiteralConvertible {
     
     public init(integerLiteral value: IntegerLiteralType) {
         self.init(value)
     }
-
-}
-
-extension JSON: BooleanLiteralConvertible {
     
     public init(booleanLiteral value: BooleanLiteralType) {
         self.init(value)
     }
-
-}
-
-extension JSON: FloatLiteralConvertible {
     
     public init(floatLiteral value: FloatLiteralType) {
         self.init(value)
     }
-
-}
-
-extension JSON: DictionaryLiteralConvertible {
     
-    public init(dictionaryLiteral elements: (String, AnyObject)...) {
-        var dict = [String : AnyObject]()
-        
-        for (key, value) in elements {
-            dict[key] = value
-        }
-       
-        self.init(dict)
+    public init(dictionaryLiteral elements: (String, Any)...) {
+        let object = elements.reduce([String: Any]()) { $0 + [$1.0: $1.1] }
+        self.init(object)
     }
-
-}
-
-extension JSON: ArrayLiteralConvertible {
     
     public init(arrayLiteral elements: AnyObject...) {
         self.init(elements)
     }
-}
-
-extension JSON: NilLiteralConvertible {
     
     public init(nilLiteral: ()) {
         self.init(NSNull())
     }
-
+    
 }
 
-private let trueNumber = NSNumber(bool: true)
-private let falseNumber = NSNumber(bool: false)
-private let trueObjCType = String.fromCString(trueNumber.objCType)
-private let falseObjCType = String.fromCString(falseNumber.objCType)
+private func +(lhs: [String: Any], rhs: [String: Any]) -> [String: Any] {
+    var lhs = lhs
+    for element in rhs {
+        lhs[element.key] = element.value
+    }
+    return lhs
+}
 
 private extension NSNumber {
-    var isBool:Bool {
-        get {
-            let objCType = String.fromCString(self.objCType)
-            if (self.compare(trueNumber) == NSComparisonResult.OrderedSame &&  objCType == trueObjCType) ||  (self.compare(falseNumber) == NSComparisonResult.OrderedSame && objCType == falseObjCType){
-                return true
-            } else {
-                return false
-            }
-        }
+    
+    var isBoolean: Bool {
+        return NSNumber(value: true).objCType == self.objCType
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SwifterAppOnlyClient.swift
+//  AppOnlyClient.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -25,25 +25,24 @@
 
 import Foundation
 
-internal class SwifterAppOnlyClient: SwifterClientProtocol  {
+internal class AppOnlyClient: SwifterClientProtocol  {
 
     var consumerKey: String
     var consumerSecret: String
 
-    var credential: SwifterCredential?
+    var credential: Credential?
 
-    var dataEncoding: NSStringEncoding
+    let dataEncoding: String.Encoding = .utf8
 
     init(consumerKey: String, consumerSecret: String) {
         self.consumerKey = consumerKey
         self.consumerSecret = consumerSecret
-        self.dataEncoding = NSUTF8StringEncoding
     }
 
-    func get(path: String, baseURL: NSURL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
-        let url = NSURL(string: path, relativeToURL: baseURL)
+    func get(_ path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+        let url = URL(string: path, relativeTo: baseURL.url)
 
-        let request = SwifterHTTPRequest(URL: url!, method: .GET, parameters: parameters)
+        let request = HTTPRequest(url: url!, method: .GET, parameters: parameters)
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
@@ -57,10 +56,10 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
         return request
     }
 
-    func post(path: String, baseURL: NSURL, parameters: Dictionary<String, Any>, uploadProgress: SwifterHTTPRequest.UploadProgressHandler?, downloadProgress: SwifterHTTPRequest.DownloadProgressHandler?, success: SwifterHTTPRequest.SuccessHandler?, failure: SwifterHTTPRequest.FailureHandler?) -> SwifterHTTPRequest {
-        let url = NSURL(string: path, relativeToURL: baseURL)
+    func post(_ path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+        let url = URL(string: path, relativeTo: baseURL.url)
 
-        let request = SwifterHTTPRequest(URL: url!, method: .POST, parameters: parameters)
+        let request = HTTPRequest(url: url!, method: .POST, parameters: parameters)
         request.downloadProgressHandler = downloadProgress
         request.successHandler = success
         request.failureHandler = failure
@@ -69,7 +68,7 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
         if let bearerToken = self.credential?.accessToken?.key {
             request.headers = ["Authorization": "Bearer \(bearerToken)"];
         } else {
-            let basicCredentials = SwifterAppOnlyClient.base64EncodedCredentialsWithKey(self.consumerKey, secret: self.consumerSecret)
+            let basicCredentials = AppOnlyClient.base64EncodedCredentials(withKey: self.consumerKey, secret: self.consumerSecret)
             request.headers = ["Authorization": "Basic \(basicCredentials)"];
             request.encodeParameters = true
         }
@@ -78,14 +77,14 @@ internal class SwifterAppOnlyClient: SwifterClientProtocol  {
         return request
     }
 
-    class func base64EncodedCredentialsWithKey(key: String, secret: String) -> String {
-        let encodedKey = key.urlEncodedStringWithEncoding()
-        let encodedSecret = secret.urlEncodedStringWithEncoding()
+    class func base64EncodedCredentials(withKey key: String, secret: String) -> String {
+        let encodedKey = key.urlEncodedString()
+        let encodedSecret = secret.urlEncodedString()
         let bearerTokenCredentials = "\(encodedKey):\(encodedSecret)"
-        if let data = bearerTokenCredentials.dataUsingEncoding(NSUTF8StringEncoding) {
-            return data.base64EncodedStringWithOptions([])
+        guard let data = bearerTokenCredentials.data(using: .utf8) else {
+            return ""
         }
-        return String()
+        return data.base64EncodedString(options: [])
     }
 
 }

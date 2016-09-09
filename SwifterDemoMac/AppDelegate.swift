@@ -26,15 +26,16 @@
 import Cocoa
 import SwifterMac
 
+@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
-        NSAppleEventManager.sharedAppleEventManager().setEventHandler(self, andSelector: Selector("handleEvent:withReplyEvent:"), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
-        LSSetDefaultHandlerForURLScheme("swifter", NSBundle.mainBundle().bundleIdentifier! as NSString as CFString)
+    
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(AppDelegate.handleEvent(_:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
+        LSSetDefaultHandlerForURLScheme("swifter" as CFString, Bundle.main.bundleIdentifier! as CFString)
     }
 
-    func handleEvent(event: NSAppleEventDescriptor!, withReplyEvent: NSAppleEventDescriptor!) {
-        Swifter.handleOpenURL(NSURL(string: event.paramDescriptorForKeyword(AEKeyword(keyDirectObject))!.stringValue!)!)
+    func handleEvent(_ event: NSAppleEventDescriptor!, withReplyEvent: NSAppleEventDescriptor!) {
+        Swifter.handleOpenURL(URL(string: event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))!.stringValue!)!)
     }
 
 }

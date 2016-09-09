@@ -13,7 +13,6 @@
 		8B1F25A0194A663D004BD304 /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
 		8B300C3E1944AA6600993175 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; };
 		8B300C3F1944AA6600993175 /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8B300C4C1944AECB00993175 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4B1944AECB00993175 /* main.swift */; };
 		8B300C4E1944AECB00993175 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4D1944AECB00993175 /* ViewController.swift */; };
 		8B300C501944AECB00993175 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B300C4F1944AECB00993175 /* AppDelegate.swift */; };
 		8B300C521944AECB00993175 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B300C511944AECB00993175 /* Images.xcassets */; };
@@ -26,8 +25,8 @@
 		8B548F5A1945325E00EE2927 /* SwifterAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B548F581945325E00EE2927 /* SwifterAuth.swift */; };
 		8B548F5C1945331D00EE2927 /* SwifterTimelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B548F5B1945331D00EE2927 /* SwifterTimelines.swift */; };
 		8B548F5D1945331D00EE2927 /* SwifterTimelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B548F5B1945331D00EE2927 /* SwifterTimelines.swift */; };
-		8B552D2A194643CF0052EB86 /* NSURL+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D29194643CF0052EB86 /* NSURL+Swifter.swift */; };
-		8B552D2B194643CF0052EB86 /* NSURL+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D29194643CF0052EB86 /* NSURL+Swifter.swift */; };
+		8B552D2A194643CF0052EB86 /* URL++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D29194643CF0052EB86 /* URL++.swift */; };
+		8B552D2B194643CF0052EB86 /* URL++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D29194643CF0052EB86 /* URL++.swift */; };
 		8B552D2D194695F80052EB86 /* SwifterStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D2C194695F80052EB86 /* SwifterStreaming.swift */; };
 		8B552D2E194695F80052EB86 /* SwifterStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D2C194695F80052EB86 /* SwifterStreaming.swift */; };
 		8B5EFF07195F064400B354F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5EFF03195F064400B354F9 /* AppDelegate.swift */; };
@@ -36,12 +35,10 @@
 		8B5EFF0A195F064400B354F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B5EFF06195F064400B354F9 /* Main.storyboard */; };
 		8B5EFF15195F09F600B354F9 /* Swifter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5EFF14195F09F600B354F9 /* Swifter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B5EFF16195F09F600B354F9 /* Swifter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5EFF14195F09F600B354F9 /* Swifter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8B9F514D1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */; };
-		8B9F514E1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */; };
-		8B9F51531944A8DC00894629 /* String+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514A1944A8DC00894629 /* String+Swifter.swift */; };
-		8B9F51541944A8DC00894629 /* String+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514A1944A8DC00894629 /* String+Swifter.swift */; };
-		8B9F51551944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */; };
-		8B9F51561944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */; };
+		8B9F514D1944A8DC00894629 /* Dictionary++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51471944A8DC00894629 /* Dictionary++.swift */; };
+		8B9F514E1944A8DC00894629 /* Dictionary++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F51471944A8DC00894629 /* Dictionary++.swift */; };
+		8B9F51531944A8DC00894629 /* String++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514A1944A8DC00894629 /* String++.swift */; };
+		8B9F51541944A8DC00894629 /* String++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514A1944A8DC00894629 /* String++.swift */; };
 		8B9F51571944A8DC00894629 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514C1944A8DC00894629 /* Swifter.swift */; };
 		8B9F51581944A8DC00894629 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F514C1944A8DC00894629 /* Swifter.swift */; };
 		8BA50EC71953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50EC61953828A00FB1829 /* SwifterAppOnlyClient.swift */; };
@@ -77,11 +74,26 @@
 		8BF1D6861948BCC100E3AA64 /* SwifterAccountsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */; };
 		8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
 		8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */; };
-		A17A694F1C78336200063DFD /* Operator+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17A694D1C78333400063DFD /* Operator+Swifter.swift */; };
-		A17A69501C78336300063DFD /* Operator+Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17A694D1C78333400063DFD /* Operator+Swifter.swift */; };
+		A17A694F1C78336200063DFD /* Operator++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17A694D1C78333400063DFD /* Operator++.swift */; };
+		A17A69501C78336300063DFD /* Operator++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17A694D1C78333400063DFD /* Operator++.swift */; };
+		A1AA8B001D5C514E00CE7F17 /* SwifterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */; };
+		A1AA8B011D5C515000CE7F17 /* SwifterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */; };
+		A1AA8B031D5C59D200CE7F17 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA8B021D5C59D200CE7F17 /* TweetCell.swift */; };
+		A1BDB38C1D4C864200B0080F /* SwifterTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BDB38A1D4C859200B0080F /* SwifterTag.swift */; };
+		A1BDB38D1D4C864200B0080F /* SwifterTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BDB38A1D4C859200B0080F /* SwifterTag.swift */; };
 		A1C7F0A51C7845FD00955ADB /* SwifterMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F51131944A61D00894629 /* SwifterMac.framework */; };
 		A1C7F0A61C7845FD00955ADB /* SwifterMac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F51131944A61D00894629 /* SwifterMac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A1DD65C51B618D7E0070E6FC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */; };
+		A1E207A91D4B85D90093E498 /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207A61D4B85D90093E498 /* HMAC.swift */; };
+		A1E207AA1D4B85D90093E498 /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207A61D4B85D90093E498 /* HMAC.swift */; };
+		A1E207AB1D4B85D90093E498 /* SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207A71D4B85D90093E498 /* SHA1.swift */; };
+		A1E207AC1D4B85D90093E498 /* SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207A71D4B85D90093E498 /* SHA1.swift */; };
+		A1E207AD1D4B85D90093E498 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207A81D4B85D90093E498 /* Utils.swift */; };
+		A1E207AE1D4B85D90093E498 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207A81D4B85D90093E498 /* Utils.swift */; };
+		A1E207B21D4B86170093E498 /* Int++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207B01D4B86170093E498 /* Int++.swift */; };
+		A1E207B31D4B86170093E498 /* Int++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207B01D4B86170093E498 /* Int++.swift */; };
+		A1E207B41D4B86170093E498 /* Data++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207B11D4B86170093E498 /* Data++.swift */; };
+		A1E207B51D4B86170093E498 /* Data++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207B11D4B86170093E498 /* Data++.swift */; };
 		F6B4D5781C7BAC4500E06514 /* SwifterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B4D5771C7BAC4500E06514 /* SwifterTests.swift */; };
 		F6B4D57A1C7BAC4500E06514 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; };
 		F6B4D5811C7BAC5E00E06514 /* String+SwifterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B4D5801C7BAC5E00E06514 /* String+SwifterTests.swift */; };
@@ -143,7 +155,6 @@
 		8B300C221944AA1A00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B300C471944AECB00993175 /* SwifterDemoMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B300C4A1944AECB00993175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B300C4B1944AECB00993175 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		8B300C4D1944AECB00993175 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8B300C4F1944AECB00993175 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B300C511944AECB00993175 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -152,7 +163,7 @@
 		8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterOAuthClient.swift; sourceTree = "<group>"; };
 		8B548F581945325E00EE2927 /* SwifterAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAuth.swift; sourceTree = "<group>"; };
 		8B548F5B1945331D00EE2927 /* SwifterTimelines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTimelines.swift; sourceTree = "<group>"; };
-		8B552D29194643CF0052EB86 /* NSURL+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Swifter.swift"; sourceTree = "<group>"; };
+		8B552D29194643CF0052EB86 /* URL++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL++.swift"; sourceTree = "<group>"; };
 		8B552D2C194695F80052EB86 /* SwifterStreaming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SwifterStreaming.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8B5EFF03195F064400B354F9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B5EFF04195F064400B354F9 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -162,9 +173,8 @@
 		8B5EFF14195F09F600B354F9 /* Swifter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Swifter.h; sourceTree = "<group>"; };
 		8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwifteriOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9F51131944A61D00894629 /* SwifterMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwifterMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Swifter.swift"; sourceTree = "<group>"; };
-		8B9F514A1944A8DC00894629 /* String+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Swifter.swift"; sourceTree = "<group>"; };
-		8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swifter-Bridging-Header.h"; sourceTree = "<group>"; };
+		8B9F51471944A8DC00894629 /* Dictionary++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary++.swift"; sourceTree = "<group>"; };
+		8B9F514A1944A8DC00894629 /* String++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String++.swift"; sourceTree = "<group>"; };
 		8B9F514C1944A8DC00894629 /* Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swifter.swift; sourceTree = "<group>"; };
 		8BA50EC61953828A00FB1829 /* SwifterAppOnlyClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAppOnlyClient.swift; sourceTree = "<group>"; };
 		8BC32D3C1955EEE100FF75A0 /* SwifterTrends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTrends.swift; sourceTree = "<group>"; };
@@ -183,8 +193,16 @@
 		8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterClientProtocol.swift; sourceTree = "<group>"; };
 		8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterAccountsClient.swift; sourceTree = "<group>"; };
 		8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterCredential.swift; sourceTree = "<group>"; };
-		A17A694D1C78333400063DFD /* Operator+Swifter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Operator+Swifter.swift"; sourceTree = "<group>"; };
+		A17A694D1C78333400063DFD /* Operator++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Operator++.swift"; sourceTree = "<group>"; };
+		A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterError.swift; sourceTree = "<group>"; };
+		A1AA8B021D5C59D200CE7F17 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
+		A1BDB38A1D4C859200B0080F /* SwifterTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTag.swift; sourceTree = "<group>"; };
 		A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "../Swifter/Launch Screen.storyboard"; sourceTree = "<group>"; };
+		A1E207A61D4B85D90093E498 /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
+		A1E207A71D4B85D90093E498 /* SHA1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA1.swift; sourceTree = "<group>"; };
+		A1E207A81D4B85D90093E498 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		A1E207B01D4B86170093E498 /* Int++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int++.swift"; sourceTree = "<group>"; };
+		A1E207B11D4B86170093E498 /* Data++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data++.swift"; sourceTree = "<group>"; };
 		F6B4D5751C7BAC4500E06514 /* SwifterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwifterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6B4D5771C7BAC4500E06514 /* SwifterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwifterTests.swift; sourceTree = "<group>"; };
 		F6B4D5791C7BAC4500E06514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -239,9 +257,7 @@
 				8B5EFF03195F064400B354F9 /* AppDelegate.swift */,
 				8B5EFF04195F064400B354F9 /* AuthViewController.swift */,
 				8B5EFF05195F064400B354F9 /* TweetsViewController.swift */,
-				8B5EFF06195F064400B354F9 /* Main.storyboard */,
-				A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */,
-				8BCB9328194B2E1200A998EA /* Images.xcassets */,
+				A1AA8B021D5C59D200CE7F17 /* TweetCell.swift */,
 				8B300C211944AA1A00993175 /* Supporting Files */,
 			);
 			path = SwifterDemoiOS;
@@ -250,6 +266,9 @@
 		8B300C211944AA1A00993175 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8B5EFF06195F064400B354F9 /* Main.storyboard */,
+				A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */,
+				8BCB9328194B2E1200A998EA /* Images.xcassets */,
 				8B300C221944AA1A00993175 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -260,8 +279,6 @@
 			children = (
 				8B300C4F1944AECB00993175 /* AppDelegate.swift */,
 				8B300C4D1944AECB00993175 /* ViewController.swift */,
-				8B300C511944AECB00993175 /* Images.xcassets */,
-				8B300C531944AECB00993175 /* Main.storyboard */,
 				8B300C491944AECB00993175 /* Supporting Files */,
 			);
 			path = SwifterDemoMac;
@@ -270,8 +287,9 @@
 		8B300C491944AECB00993175 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8B300C511944AECB00993175 /* Images.xcassets */,
+				8B300C531944AECB00993175 /* Main.storyboard */,
 				8B300C4A1944AECB00993175 /* Info.plist */,
-				8B300C4B1944AECB00993175 /* main.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -311,7 +329,6 @@
 			isa = PBXGroup;
 			children = (
 				8B5EFF14195F09F600B354F9 /* Swifter.h */,
-				8B9F514B1944A8DC00894629 /* Swifter-Bridging-Header.h */,
 				8B9F514C1944A8DC00894629 /* Swifter.swift */,
 				8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */,
 				8B548F581945325E00EE2927 /* SwifterAuth.swift */,
@@ -330,6 +347,8 @@
 				8BC32D3C1955EEE100FF75A0 /* SwifterTrends.swift */,
 				8BF1D67B1948882700E3AA64 /* SwifterSpam.swift */,
 				8B1F259E194A663D004BD304 /* SwifterHelp.swift */,
+				A1BDB38A1D4C859200B0080F /* SwifterTag.swift */,
+				A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */,
 				8BF1D67E194889B900E3AA64 /* SwifterClientProtocol.swift */,
 				8B548F5519450BDB00EE2927 /* SwifterOAuthClient.swift */,
 				8BF1D6841948BCC100E3AA64 /* SwifterAccountsClient.swift */,
@@ -345,12 +364,25 @@
 		8B9F51591944A8E100894629 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				8B9F51471944A8DC00894629 /* Dictionary+Swifter.swift */,
-				A17A694D1C78333400063DFD /* Operator+Swifter.swift */,
-				8B552D29194643CF0052EB86 /* NSURL+Swifter.swift */,
-				8B9F514A1944A8DC00894629 /* String+Swifter.swift */,
+				A1E207AF1D4B85F70093E498 /* CommonCrypto */,
+				8B9F51471944A8DC00894629 /* Dictionary++.swift */,
+				A1E207B01D4B86170093E498 /* Int++.swift */,
+				A1E207B11D4B86170093E498 /* Data++.swift */,
+				A17A694D1C78333400063DFD /* Operator++.swift */,
+				8B9F514A1944A8DC00894629 /* String++.swift */,
+				8B552D29194643CF0052EB86 /* URL++.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		A1E207AF1D4B85F70093E498 /* CommonCrypto */ = {
+			isa = PBXGroup;
+			children = (
+				A1E207A61D4B85D90093E498 /* HMAC.swift */,
+				A1E207A71D4B85D90093E498 /* SHA1.swift */,
+				A1E207A81D4B85D90093E498 /* Utils.swift */,
+			);
+			name = CommonCrypto;
 			sourceTree = "<group>";
 		};
 		F6B4D5761C7BAC4500E06514 /* SwifterTests */ = {
@@ -370,7 +402,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B9F51551944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */,
 				8B5EFF15195F09F600B354F9 /* Swifter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,7 +410,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B9F51561944A8DC00894629 /* Swifter-Bridging-Header.h in Headers */,
 				8B5EFF16195F09F600B354F9 /* Swifter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,20 +517,24 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Matt Donnelly";
 				TargetAttributes = {
 					8B300C1E1944AA1A00993175 = {
 						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0800;
 					};
 					8B300C461944AECB00993175 = {
 						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0800;
 					};
 					8B9F50ED1944A5AB00894629 = {
 						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0800;
 					};
 					8B9F51121944A61D00894629 = {
 						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0800;
 					};
 					F6B4D5741C7BAC4500E06514 = {
 						CreatedOnToolsVersion = 7.2;
@@ -580,6 +614,7 @@
 				8B5EFF08195F064400B354F9 /* AuthViewController.swift in Sources */,
 				8B5EFF07195F064400B354F9 /* AppDelegate.swift in Sources */,
 				8B5EFF09195F064400B354F9 /* TweetsViewController.swift in Sources */,
+				A1AA8B031D5C59D200CE7F17 /* TweetCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,7 +624,6 @@
 			files = (
 				8B300C501944AECB00993175 /* AppDelegate.swift in Sources */,
 				8B300C4E1944AECB00993175 /* ViewController.swift in Sources */,
-				8B300C4C1944AECB00993175 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,30 +631,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A17A694F1C78336200063DFD /* Operator+Swifter.swift in Sources */,
+				A17A694F1C78336200063DFD /* Operator++.swift in Sources */,
 				8BCF43291947CC7A00E63301 /* SwifterFavorites.swift in Sources */,
 				8BCF43261947CABA00E63301 /* SwifterSuggested.swift in Sources */,
+				A1BDB38C1D4C864200B0080F /* SwifterTag.swift in Sources */,
 				8B116AF1194601970019A4DC /* SwifterHTTPRequest.swift in Sources */,
 				8B552D2D194695F80052EB86 /* SwifterStreaming.swift in Sources */,
 				8B548F5619450BDB00EE2927 /* SwifterOAuthClient.swift in Sources */,
+				A1E207B21D4B86170093E498 /* Int++.swift in Sources */,
 				8B9F51571944A8DC00894629 /* Swifter.swift in Sources */,
+				A1E207B41D4B86170093E498 /* Data++.swift in Sources */,
 				8BF1D6761948825D00E3AA64 /* SwifterSavedSearches.swift in Sources */,
+				A1E207A91D4B85D90093E498 /* HMAC.swift in Sources */,
 				8BCF43171947450A00E63301 /* SwifterTweets.swift in Sources */,
 				8BF1D6851948BCC100E3AA64 /* SwifterAccountsClient.swift in Sources */,
 				8B548F591945325E00EE2927 /* SwifterAuth.swift in Sources */,
 				8BCF431D1947907300E63301 /* SwifterMessages.swift in Sources */,
-				8B9F51531944A8DC00894629 /* String+Swifter.swift in Sources */,
+				8B9F51531944A8DC00894629 /* String++.swift in Sources */,
 				8BF1D67C1948882700E3AA64 /* SwifterSpam.swift in Sources */,
 				8BCF431A19475D3C00E63301 /* SwifterSearch.swift in Sources */,
 				8B33CA3F19587C6D00739FCB /* JSON.swift in Sources */,
 				8BCF432C1947CED700E63301 /* SwifterLists.swift in Sources */,
 				8BA50EC71953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */,
 				8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
+				A1AA8B001D5C514E00CE7F17 /* SwifterError.swift in Sources */,
+				A1E207AB1D4B85D90093E498 /* SHA1.swift in Sources */,
+				A1E207AD1D4B85D90093E498 /* Utils.swift in Sources */,
 				8BF1D6791948839800E3AA64 /* SwifterPlaces.swift in Sources */,
 				8BC32D3D1955EEE100FF75A0 /* SwifterTrends.swift in Sources */,
 				8BCF43231947A6C800E63301 /* SwifterUsers.swift in Sources */,
-				8B9F514D1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */,
-				8B552D2A194643CF0052EB86 /* NSURL+Swifter.swift in Sources */,
+				8B9F514D1944A8DC00894629 /* Dictionary++.swift in Sources */,
+				8B552D2A194643CF0052EB86 /* URL++.swift in Sources */,
 				8BCF4320194798FB00E63301 /* SwifterFollowers.swift in Sources */,
 				8B548F5C1945331D00EE2927 /* SwifterTimelines.swift in Sources */,
 				8BF1D67F194889B900E3AA64 /* SwifterClientProtocol.swift in Sources */,
@@ -632,30 +673,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A17A69501C78336300063DFD /* Operator+Swifter.swift in Sources */,
+				A17A69501C78336300063DFD /* Operator++.swift in Sources */,
 				8BCF432A1947CC7A00E63301 /* SwifterFavorites.swift in Sources */,
 				8BCF43271947CABA00E63301 /* SwifterSuggested.swift in Sources */,
+				A1BDB38D1D4C864200B0080F /* SwifterTag.swift in Sources */,
 				8B116AF2194601970019A4DC /* SwifterHTTPRequest.swift in Sources */,
 				8B552D2E194695F80052EB86 /* SwifterStreaming.swift in Sources */,
 				8B548F5719450BDB00EE2927 /* SwifterOAuthClient.swift in Sources */,
+				A1E207B31D4B86170093E498 /* Int++.swift in Sources */,
 				8B9F51581944A8DC00894629 /* Swifter.swift in Sources */,
+				A1E207B51D4B86170093E498 /* Data++.swift in Sources */,
 				8BF1D6771948825D00E3AA64 /* SwifterSavedSearches.swift in Sources */,
+				A1E207AA1D4B85D90093E498 /* HMAC.swift in Sources */,
 				8BCF43181947450A00E63301 /* SwifterTweets.swift in Sources */,
 				8BF1D6861948BCC100E3AA64 /* SwifterAccountsClient.swift in Sources */,
 				8B548F5A1945325E00EE2927 /* SwifterAuth.swift in Sources */,
 				8BCF431E1947907300E63301 /* SwifterMessages.swift in Sources */,
-				8B9F51541944A8DC00894629 /* String+Swifter.swift in Sources */,
+				8B9F51541944A8DC00894629 /* String++.swift in Sources */,
 				8BF1D67D1948882700E3AA64 /* SwifterSpam.swift in Sources */,
 				8BCF431B19475D3C00E63301 /* SwifterSearch.swift in Sources */,
 				8B33CA4019587C6D00739FCB /* JSON.swift in Sources */,
 				8BCF432D1947CED700E63301 /* SwifterLists.swift in Sources */,
 				8BA50EC81953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */,
 				8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
+				A1AA8B011D5C515000CE7F17 /* SwifterError.swift in Sources */,
+				A1E207AC1D4B85D90093E498 /* SHA1.swift in Sources */,
+				A1E207AE1D4B85D90093E498 /* Utils.swift in Sources */,
 				8BF1D67A1948839800E3AA64 /* SwifterPlaces.swift in Sources */,
 				8BC32D3E1955EEE100FF75A0 /* SwifterTrends.swift in Sources */,
 				8BCF43241947A6C800E63301 /* SwifterUsers.swift in Sources */,
-				8B9F514E1944A8DC00894629 /* Dictionary+Swifter.swift in Sources */,
-				8B552D2B194643CF0052EB86 /* NSURL+Swifter.swift in Sources */,
+				8B9F514E1944A8DC00894629 /* Dictionary++.swift in Sources */,
+				8B552D2B194643CF0052EB86 /* URL++.swift in Sources */,
 				8BCF4321194798FB00E63301 /* SwifterFollowers.swift in Sources */,
 				8B548F5D1945331D00EE2927 /* SwifterTimelines.swift in Sources */,
 				8BF1D680194889B900E3AA64 /* SwifterClientProtocol.swift in Sources */,
@@ -719,6 +767,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mattdonnelly.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -732,16 +781,18 @@
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mattdonnelly.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		8B300C631944AECB00993175 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -753,17 +804,18 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mattdonnelly.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		8B300C641944AECB00993175 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SwifterDemoMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -771,6 +823,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mattdonnelly.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -798,6 +852,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -844,6 +899,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -863,6 +919,7 @@
 		8B9F51051944A5AB00894629 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -873,13 +930,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mattdonnelly.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		8B9F51061944A5AB00894629 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -890,7 +948,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mattdonnelly.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -916,7 +975,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -939,7 +998,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Swifter/Swifter-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -969,6 +1029,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattdonnelly.SwifteriOS.SwifterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -1027,6 +1088,7 @@
 				F6B4D57E1C7BAC4500E06514 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
