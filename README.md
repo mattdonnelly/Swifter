@@ -2,6 +2,7 @@
   <img src="swifter_logo.png" alt="Swifter" title="Swifter" width="563">
 </p>
 
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 ## Getting Started
 
 ### Installation
