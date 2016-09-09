@@ -52,7 +52,7 @@ public enum TwitterURL {
     
 }
 
-public class Swifter {
+open class Swifter {
     
     // MARK: - Types
 
@@ -72,7 +72,7 @@ public class Swifter {
 
     // MARK: - Properties
     
-    public var client: SwifterClientProtocol
+    open var client: SwifterClientProtocol
 
     // MARK: - Initializers
     

@@ -69,7 +69,7 @@ public extension Swifter {
 
     This is the recommended method to use find places that can be attached to statuses/update. Unlike GET geo/reverse_geocode which provides raw data access, this endpoint can potentially re-order places with regards to the user who is authenticated. This approach is also preferred for interactive place matching with the user.
     */
-    public func searchGeo(coordinate: (lat: Double, long: Double)? = nil, query: String? = nil, ipAddress: String? = nil, accuracy: String? = nil, granularity: String? = nil, maxResults: Int? = nil, containedWithin: String? = nil, attributeStreetAddress: String? = nil, callback: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func searchGeo(_ coordinate: (lat: Double, long: Double)? = nil, query: String? = nil, ipAddress: String? = nil, accuracy: String? = nil, granularity: String? = nil, maxResults: Int? = nil, containedWithin: String? = nil, attributeStreetAddress: String? = nil, callback: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         assert(coordinate != nil || query != nil || ipAddress != nil, "At least one of the following parameters must be provided to access this resource: coordinate, ipAddress, or query")
 
         let path = "geo/search.json"

@@ -36,7 +36,7 @@ public extension Swifter {
 
     A maximum of 100 results will be returned by this call. Subscribed lists are returned first, followed by owned lists. This means that if a user subscribes to 90 lists and owns 20 lists, this method returns 90 subscriptions and 10 owned lists. The reverse method returns owned lists first, so with reverse=true, 20 owned lists and 80 subscriptions would be returned. If your goal is to obtain every list a user owns or subscribes to, use GET lists/ownerships and/or GET lists/subscriptions instead.
     */
-    public func getSubscribedLists(reverse: Bool?, success: SuccessHandler?, failure: FailureHandler?) {
+    public func getSubscribedLists(_ reverse: Bool?, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/list.json"
 
         var parameters = Dictionary<String, Any>()

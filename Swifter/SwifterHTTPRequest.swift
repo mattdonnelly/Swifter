@@ -42,7 +42,7 @@ public enum HTTPMethodType: String {
     case CONNECT
 }
 
-public class HTTPRequest: NSObject, URLSessionDataDelegate {
+open class HTTPRequest: NSObject, URLSessionDataDelegate {
 
     public typealias UploadProgressHandler = (_ bytesWritten: Int, _ totalBytesWritten: Int, _ totalBytesExpectedToWrite: Int) -> Void
     public typealias DownloadProgressHandler = (Data, _ totalBytesReceived: Int, _ totalBytesExpectedToReceive: Int, HTTPURLResponse) -> Void
@@ -97,7 +97,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
         self.encodeParameters = true
     }
 
-    public func start() {
+    open func start() {
         
         
         if request == nil {
@@ -140,7 +140,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
             } else if !nonOAuthParameters.isEmpty {
                 if self.HTTPMethod == .GET || self.HTTPMethod == .HEAD || self.HTTPMethod == .DELETE {
                     let queryString = nonOAuthParameters.urlEncodedQueryString(using: self.dataEncoding)
-                    self.request!.url = self.url.append(queryString: queryString)
+                    self.request!.url = self.url.append(queryString)
                     self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
                 } else {
                     var queryString = ""
@@ -170,16 +170,16 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
         }
     }
 
-    public func stop() {
+    open func stop() {
         self.dataTask.cancel()
     }
 
-    public func add(multipartData data: Data, parameterName: String, mimeType: String?, fileName: String?) -> Void {
+    open func add(multipartData data: Data, parameterName: String, mimeType: String?, fileName: String?) -> Void {
         let dataUpload = DataUpload(data: data, parameterName: parameterName, mimeType: mimeType, fileName: fileName)
         self.uploadData.append(dataUpload)
     }
 
-    private class func mulipartContent(with boundary: String, data: Data, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> Data {
+    fileprivate class func mulipartContent(with boundary: String, data: Data, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> Data {
         let mimeType = mimeTypeOrNil ?? "application/octet-stream"
         let fileNameContentDisposition = fileName != nil ? "filename=\"\(fileName)\"" : ""
         let contentDisposition = "Content-Disposition: form-data; name=\"\(parameterName)\"; \(fileNameContentDisposition)\r\n"
@@ -195,7 +195,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
 
     // MARK: - URLSessionDataDelegate
     
-    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+    open func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         #if os(iOS)
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         #endif
@@ -213,11 +213,11 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
         let errorCode = HTTPRequest.responseErrorCode(for: responseData) ?? 0
         let localizedDescription = HTTPRequest.description(for: response.statusCode, response: responseString)
         
-        let error = SwifterError(message: localizedDescription, kind: .urlResponseError(status: response.statusCode, headers: response.allHeaderFields as [NSObject : AnyObject], errorCode: errorCode))
+        let error = SwifterError(message: localizedDescription, kind: .urlResponseError(status: response.statusCode, headers: response.allHeaderFields as [AnyHashable: Any] as [NSObject : AnyObject], errorCode: errorCode))
         self.failureHandler?(error)
     }
     
-    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+    open func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         self.responseData.append(data)
         
         let expectedContentLength = Int(self.response!.expectedContentLength)
@@ -227,13 +227,13 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
         self.downloadProgressHandler?(data, totalBytesReceived, expectedContentLength, self.response)
     }
     
-    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+    open func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         self.response = response as? HTTPURLResponse
         self.responseData.count = 0
         completionHandler(.allow)
     }
     
-    public func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+    open func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
         self.uploadProgressHandler?(Int(bytesSent), Int(totalBytesSent), Int(totalBytesExpectedToSend))
     }
     

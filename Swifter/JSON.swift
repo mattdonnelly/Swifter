@@ -146,7 +146,7 @@ public enum JSON : Equatable, CustomStringConvertible {
         }
     }
     
-    static func parse(string : String) throws -> JSON {
+    static func parse(_ string : String) throws -> JSON {
         do {
             guard let data = string.data(using: .utf8, allowLossyConversion: false) else {
                 throw SwifterError(message: "Cannot parse invalid string", kind: .jsonParseError)
@@ -172,7 +172,7 @@ public enum JSON : Equatable, CustomStringConvertible {
         return string
     }
     
-    private func prettyPrint(_ indent: String, _ level: Int) -> String {
+    fileprivate func prettyPrint(_ indent: String, _ level: Int) -> String {
         let currentIndent = (0...level).map({ _ in "" }).joined(separator: indent)
         let nextIndent = currentIndent + "  "
         

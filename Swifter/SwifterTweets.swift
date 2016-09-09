@@ -109,7 +109,7 @@ public extension Swifter {
     - https://dev.twitter.com/notifications/multiple-media-entities-in-tweets
     - https://dev.twitter.com/docs/api/multiple-media-extended-entities
     */
-    public func postTweet(status: String, inReplyToStatusID: String? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, media_ids: [String] = [], success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func postTweet(_ status: String, inReplyToStatusID: String? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, media_ids: [String] = [], success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path: String = "statuses/update.json"
 
         var parameters = Dictionary<String, Any>()
@@ -135,7 +135,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func postTweet(status: String, media: Data, inReplyToStatusID: String? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func postTweet(_ status: String, media: Data, inReplyToStatusID: String? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path: String = "statuses/update_with_media.json"
 
         var parameters = Dictionary<String, Any>()
