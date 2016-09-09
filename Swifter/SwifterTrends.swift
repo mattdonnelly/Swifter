@@ -38,7 +38,7 @@ public extension Swifter {
 
     A WOEID is a Yahoo! Where On Earth ID.
     */
-    public func getAvailableTrends(success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getAvailableTrends(_ success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "trends/available.json"
         self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json) }, failure: failure)
     }

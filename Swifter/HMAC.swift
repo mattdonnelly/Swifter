@@ -11,7 +11,7 @@ import Foundation
 
 public struct HMAC {
     
-    internal static func sha1(key: Data, message: Data) -> Data? {
+    internal static func sha1(_ key: Data, message: Data) -> Data? {
         var key = key.rawBytes
         let message = message.rawBytes
         

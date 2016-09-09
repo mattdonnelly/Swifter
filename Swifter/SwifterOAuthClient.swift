@@ -154,7 +154,7 @@ internal class OAuthClient: SwifterClientProtocol  {
         
         let key = signingKey.data(using: .utf8)!
         let msg = signatureBaseString.data(using: .utf8)!
-        let sha1 = HMAC.sha1(key: key, message: msg)!
+        let sha1 = HMAC.sha1(key, message: msg)!
         return sha1.base64EncodedString(options: [])
     }
     

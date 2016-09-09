@@ -27,7 +27,7 @@ import Foundation
 
 extension URL {
     
-    func append(queryString: String) -> URL {
+    func append(_ queryString: String) -> URL {
         guard !queryString.utf16.isEmpty else {
             return self
         }

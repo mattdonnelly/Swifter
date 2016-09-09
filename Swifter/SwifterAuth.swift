@@ -158,7 +158,7 @@ public extension Swifter {
         }, failure: failure)
     }
     
-    public func postOAuthRequestToken(with callbackURL: URL, success: TokenSuccessHandler, failure: FailureHandler?) {
+    public func postOAuthRequestToken(with callbackURL: URL, success: @escaping TokenSuccessHandler, failure: FailureHandler?) {
         let path = "oauth/request_token"
         let parameters: [String: Any] =  ["oauth_callback": callbackURL.absoluteString]
         
@@ -169,7 +169,7 @@ public extension Swifter {
         }, failure: failure)
     }
     
-    public func postOAuthAccessToken(with requestToken: Credential.OAuthAccessToken, success: TokenSuccessHandler, failure: FailureHandler?) {
+    public func postOAuthAccessToken(with requestToken: Credential.OAuthAccessToken, success: @escaping TokenSuccessHandler, failure: FailureHandler?) {
         if let verifier = requestToken.verifier {
             let path =  "oauth/access_token"
             let parameters: [String: Any] = ["oauth_token": requestToken.key, "oauth_verifier": verifier]

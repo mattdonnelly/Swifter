@@ -32,7 +32,7 @@ public extension Swifter {
 
     Returns a collection of user_ids that the currently authenticated user does not want to receive retweets from. Use POST friendships/update to set the "no retweets" status for a given user account on behalf of the current user.
     */
-    public func listOfNoRetweetsFriends(stringifyIDs: Bool = true, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func listOfNoRetweetsFriends(_ stringifyIDs: Bool = true, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/no_retweets/ids.json"
 
         var parameters = Dictionary<String, Any>()
@@ -93,7 +93,7 @@ public extension Swifter {
     
     Returns a collection of numeric IDs for every user who has a pending request to follow the authenticating user.
     */
-    public func getIncomingPendingFollowRequests(cursor: String? = nil, stringifyIDs: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getIncomingPendingFollowRequests(_ cursor: String? = nil, stringifyIDs: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/incoming.json"
         
         var parameters = Dictionary<String, Any>()
@@ -110,7 +110,7 @@ public extension Swifter {
     
     Returns a collection of numeric IDs for every protected user for whom the authenticating user has a pending follow request.
     */
-    public func getOutgoingPendingFollowRequests(cursor: String? = nil, stringifyIDs: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getOutgoingPendingFollowRequests(_ cursor: String? = nil, stringifyIDs: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/outgoing.json"
         
         var parameters = Dictionary<String, Any>()

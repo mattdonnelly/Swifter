@@ -32,7 +32,7 @@ public extension Swifter {
 
     Returns settings (including current trend, geo and sleep time information) for the authenticating user.
     */
-    public func getAccountSettings(success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getAccountSettings(_ success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "account/settings.json"
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json) }, failure: failure)
@@ -43,7 +43,7 @@ public extension Swifter {
 
     Returns an HTTP 200 OK response code and a representation of the requesting user if authentication was successful; returns a 401 status code and an error message if not. Use this method to test if supplied user credentials are valid.
     */
-    public func verifyAccountCredentials(includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func verifyAccountCredentials(_ includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "account/verify_credentials.json"
 
         var parameters = Dictionary<String, Any>()
@@ -58,7 +58,7 @@ public extension Swifter {
 
     Updates the authenticating user's settings.
     */
-    public func updateAccountSettings(trendLocationWOEID: String? = nil, sleepTimeEnabled: Bool? = nil, startSleepTime: Int? = nil, endSleepTime: Int? = nil, timeZone: String? = nil, lang: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func updateAccountSettings(_ trendLocationWOEID: String? = nil, sleepTimeEnabled: Bool? = nil, startSleepTime: Int? = nil, endSleepTime: Int? = nil, timeZone: String? = nil, lang: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         assert(trendLocationWOEID != nil || sleepTimeEnabled != nil || startSleepTime != nil || endSleepTime != nil || timeZone != nil || lang != nil, "At least one or more should be provided when executing this request")
 
         let path = "account/settings.json"
@@ -79,7 +79,7 @@ public extension Swifter {
 
     Sets values that users are able to set under the "Account" tab of their settings page. Only the parameters specified will be updated.
     */
-    public func udpateUserProfile(name: String? = nil, url: String? = nil, location: String? = nil, description: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func udpateUserProfile(_ name: String? = nil, url: String? = nil, location: String? = nil, description: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         assert(name != nil || url != nil || location != nil || description != nil || includeEntities != nil || skipStatus != nil)
 
         let path = "account/update_profile.json"
@@ -119,7 +119,7 @@ public extension Swifter {
 
     Sets one or more hex values that control the color scheme of the authenticating user's profile page on twitter.com. Each parameter's value must be a valid hexidecimal value, and may be either three or six characters (ex: #fff or #ffffff).
     */
-    public func updateProfileColors(backgroundColor: String? = nil, linkColor: String? = nil, sidebarBorderColor: String? = nil, sidebarFillColor: String? = nil, textColor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler) {
+    public func updateProfileColors(_ backgroundColor: String? = nil, linkColor: String? = nil, sidebarBorderColor: String? = nil, sidebarFillColor: String? = nil, textColor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "account/update_profile_colors.json"
 
         var parameters = Dictionary<String, Any>()
@@ -157,7 +157,7 @@ public extension Swifter {
 
     Returns a collection of user objects that the authenticating user is blocking.
     */
-    public func getBlockedUsers(includeEntities: Bool? = nil, skipStatus: Bool? = nil, cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getBlockedUsers(_ includeEntities: Bool? = nil, skipStatus: Bool? = nil, cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "blocks/list.json"
 
         var parameters = Dictionary<String, Any>()
@@ -175,7 +175,7 @@ public extension Swifter {
 
     Returns an array of numeric user ids the authenticating user is blocking.
     */
-    public func getBlockedUsersIDs(stringifyIDs: String? = nil, cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler) {
+    public func getBlockedUsersIDs(_ stringifyIDs: String? = nil, cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "blocks/ids.json"
 
         var parameters = Dictionary<String, Any>()
@@ -192,7 +192,7 @@ public extension Swifter {
 
     Blocks the specified user from following the authenticating user. In addition the blocked user will not show in the authenticating users mentions or timeline (unless retweeted by another user). If a follow or friend relationship exists it is destroyed.
     */
-    public func blockUser(for userTag: UserTag, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler) {
+    public func blockUser(for userTag: UserTag, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "blocks/create.json"
 
         var parameters = Dictionary<String, Any>()
@@ -208,7 +208,7 @@ public extension Swifter {
 
     Un-blocks the user specified in the ID parameter for the authenticating user. Returns the un-blocked user in the requested format when successful. If relationships existed before the block was instated, they will not be restored.
     */
-    public func unblockUser(for userTag: UserTag, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler) {
+    public func unblockUser(for userTag: UserTag, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "blocks/destroy.json"
 
         var parameters = Dictionary<String, Any>()
@@ -236,7 +236,7 @@ public extension Swifter {
     - If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown.
     - You are strongly encouraged to use a POST for larger requests.
     */
-    public func lookupUsers(for usersTag: UsersTag, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler) {
+    public func lookupUsers(for usersTag: UsersTag, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "users/lookup.json"
 
         var parameters = Dictionary<String, Any>()
@@ -253,7 +253,7 @@ public extension Swifter {
 
     You must be following a protected user to be able to see their most recent Tweet. If you don't follow a protected user, the users Tweet will be removed. A Tweet will not always be returned in the current_status field.
     */
-    public func showUser(for userTag: UserTag, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler) {
+    public func showUser(for userTag: UserTag, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "users/show.json"
 
         var parameters = Dictionary<String, Any>()
@@ -270,7 +270,7 @@ public extension Swifter {
 
     Only the first 1,000 matching results are available.
     */
-    public func searchUsers(using query: String, page: Int?, count: Int?, includeEntities: Bool?, success: SuccessHandler? = nil, failure: FailureHandler) {
+    public func searchUsers(using query: String, page: Int?, count: Int?, includeEntities: Bool?, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "users/search.json"
 
         var parameters = Dictionary<String, Any>()
@@ -287,7 +287,7 @@ public extension Swifter {
 
     Removes the uploaded profile banner for the authenticating user. Returns HTTP 200 upon success.
     */
-    public func removeProfileBanner(success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func removeProfileBanner(_ success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "account/remove_profile_banner.json"
 
         self.postJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json) }, failure: failure)
@@ -373,7 +373,7 @@ public extension Swifter {
 
     Returns an array of numeric user ids the authenticating user has muted.
     */
-    public func getMuteUsersIDs(cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getMuteUsersIDs(_ cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/ids.json"
 
         var parameters = Dictionary<String, Any>()
@@ -389,7 +389,7 @@ public extension Swifter {
     
     Returns an array of user objects the authenticating user has muted.
     */
-    public func getMuteUsers(cursor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getMuteUsers(_ cursor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/list.json"
         
         var parameters = Dictionary<String, Any>()
