@@ -8,6 +8,10 @@
 
 If you're using Xcode 6 and above, Swifter can be installed by simply dragging the Swifter Xcode project into your own project and adding either the SwifteriOS or SwifterMac framework as an embedded framework.
 
+### Swifter 2.0
+
+With the introduction of Swift 3, the naming convention of the language was changed. As a result, Swifter was updated to match the updated naming conventions of Swift. Additionally, we've slimmed down the framework and simplified a lot of the processes with the introduction of the `ListTag`, `UserTag`, and `UsersTag` enums for methods that allow for either id/slug for Lists, or id/screenName for Users.
+
 ### Usage
 
 Swifter can be used with the 3 different kinds of authentication protocols Twitter allows. You can specify which protocol to use as show below. For more information on each of the authentication protocols, please check [Twitter OAuth Help](https://dev.twitter.com/oauth).
@@ -49,7 +53,7 @@ swifter.getHomeTimeline(count: 50, success: { json in
 })
 ```
 
-#### Using API that allows for `user_id`/`screenName` or `list_id`/`slug`
+#### ListTag, UserTag, and UsersTag
 Certain  Twitter API allows you to use either the `user_id` or `screen_name` to get user related objects (and `list_id`/`slug` for lists). Swifter offers a solution so that the user won't accidentally use the wrong method, and have nothing returned. For more information, check the `SwifterTag.swift` file.
 
 ```swift
