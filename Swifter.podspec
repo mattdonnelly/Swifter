@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name                   = 'Swifter'
-    s.version                = '2.0'
+    s.version                = '2.0.1'
     s.summary                = 'A Twitter framework for iOS & OS X written in Swift '
     s.homepage               = 'https://github.com/mattdonnelly/Swifter'
     s.license                = { :type => "MIT" }
