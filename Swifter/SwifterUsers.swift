@@ -119,7 +119,7 @@ public extension Swifter {
 
     Sets one or more hex values that control the color scheme of the authenticating user's profile page on twitter.com. Each parameter's value must be a valid hexidecimal value, and may be either three or six characters (ex: #fff or #ffffff).
     */
-    public func updateProfileColors(backgroundColor: String? = nil, linkColor: String? = nil, sidebarBorderColor: String? = nil, sidebarFillColor: String? = nil, textColor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler) {
+    public func updateProfileColors(backgroundColor: String? = nil, linkColor: String? = nil, sidebarBorderColor: String? = nil, sidebarFillColor: String? = nil, textColor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "account/update_profile_colors.json"
 
         var parameters = Dictionary<String, Any>()
@@ -175,7 +175,7 @@ public extension Swifter {
 
     Returns an array of numeric user ids the authenticating user is blocking.
     */
-    public func getBlockedUsersIDs(stringifyIDs: String? = nil, cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler) {
+    public func getBlockedUsersIDs(stringifyIDs: String? = nil, cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "blocks/ids.json"
 
         var parameters = Dictionary<String, Any>()
@@ -192,7 +192,7 @@ public extension Swifter {
 
     Blocks the specified user from following the authenticating user. In addition the blocked user will not show in the authenticating users mentions or timeline (unless retweeted by another user). If a follow or friend relationship exists it is destroyed.
     */
-    public func blockUser(for userTag: UserTag, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler) {
+    public func blockUser(for userTag: UserTag, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "blocks/create.json"
 
         var parameters = Dictionary<String, Any>()
@@ -208,7 +208,7 @@ public extension Swifter {
 
     Un-blocks the user specified in the ID parameter for the authenticating user. Returns the un-blocked user in the requested format when successful. If relationships existed before the block was instated, they will not be restored.
     */
-    public func unblockUser(for userTag: UserTag, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler) {
+    public func unblockUser(for userTag: UserTag, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "blocks/destroy.json"
 
         var parameters = Dictionary<String, Any>()
@@ -236,7 +236,7 @@ public extension Swifter {
     - If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown.
     - You are strongly encouraged to use a POST for larger requests.
     */
-    public func lookupUsers(for usersTag: UsersTag, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler) {
+    public func lookupUsers(for usersTag: UsersTag, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "users/lookup.json"
 
         var parameters = Dictionary<String, Any>()
@@ -253,7 +253,7 @@ public extension Swifter {
 
     You must be following a protected user to be able to see their most recent Tweet. If you don't follow a protected user, the users Tweet will be removed. A Tweet will not always be returned in the current_status field.
     */
-    public func showUser(for userTag: UserTag, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler) {
+    public func showUser(for userTag: UserTag, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "users/show.json"
 
         var parameters = Dictionary<String, Any>()
@@ -270,7 +270,7 @@ public extension Swifter {
 
     Only the first 1,000 matching results are available.
     */
-    public func searchUsers(using query: String, page: Int?, count: Int?, includeEntities: Bool?, success: SuccessHandler? = nil, failure: FailureHandler) {
+    public func searchUsers(using query: String, page: Int?, count: Int?, includeEntities: Bool?, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "users/search.json"
 
         var parameters = Dictionary<String, Any>()
