@@ -32,7 +32,7 @@ public class Credential {
 
         public internal(set) var key: String
         public internal(set) var secret: String
-        public internal(set) var verifier: String?
+        public var verifier: String?
 
         public internal(set) var screenName: String?
         public internal(set) var userID: String?
