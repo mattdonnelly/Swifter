@@ -37,4 +37,5 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+.build
 
