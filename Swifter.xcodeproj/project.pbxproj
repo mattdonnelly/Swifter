@@ -83,7 +83,6 @@
 		A1BDB38D1D4C864200B0080F /* SwifterTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BDB38A1D4C859200B0080F /* SwifterTag.swift */; };
 		A1C7F0A51C7845FD00955ADB /* SwifterMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F51131944A61D00894629 /* SwifterMac.framework */; };
 		A1C7F0A61C7845FD00955ADB /* SwifterMac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F51131944A61D00894629 /* SwifterMac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A1DD65C51B618D7E0070E6FC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */; };
 		A1E207A91D4B85D90093E498 /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207A61D4B85D90093E498 /* HMAC.swift */; };
 		A1E207AA1D4B85D90093E498 /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207A61D4B85D90093E498 /* HMAC.swift */; };
 		A1E207AB1D4B85D90093E498 /* SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207A71D4B85D90093E498 /* SHA1.swift */; };
@@ -197,7 +196,6 @@
 		A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterError.swift; sourceTree = "<group>"; };
 		A1AA8B021D5C59D200CE7F17 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		A1BDB38A1D4C859200B0080F /* SwifterTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTag.swift; sourceTree = "<group>"; };
-		A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "../Swifter/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A1E207A61D4B85D90093E498 /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
 		A1E207A71D4B85D90093E498 /* SHA1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA1.swift; sourceTree = "<group>"; };
 		A1E207A81D4B85D90093E498 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -267,7 +265,6 @@
 			isa = PBXGroup;
 			children = (
 				8B5EFF06195F064400B354F9 /* Main.storyboard */,
-				A1DD65C41B618D7E0070E6FC /* Launch Screen.storyboard */,
 				8BCB9328194B2E1200A998EA /* Images.xcassets */,
 				8B300C221944AA1A00993175 /* Info.plist */,
 			);
@@ -305,7 +302,7 @@
 		8B9F50E41944A5AB00894629 = {
 			isa = PBXGroup;
 			children = (
-				8B9F51461944A8DC00894629 /* Swifter */,
+				8B9F51461944A8DC00894629 /* Sources */,
 				8B300C201944AA1A00993175 /* SwifterDemoiOS */,
 				8B300C481944AECB00993175 /* SwifterDemoMac */,
 				F6B4D5761C7BAC4500E06514 /* SwifterTests */,
@@ -325,7 +322,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8B9F51461944A8DC00894629 /* Swifter */ = {
+		8B9F51461944A8DC00894629 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				8B5EFF14195F09F600B354F9 /* Swifter.h */,
@@ -358,7 +355,7 @@
 				8B9F51591944A8E100894629 /* Extensions */,
 				8B5EFF10195F085B00B354F9 /* Supporting Files */,
 			);
-			path = Swifter;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		8B9F51591944A8E100894629 /* Extensions */ = {
@@ -568,7 +565,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1DD65C51B618D7E0070E6FC /* Launch Screen.storyboard in Resources */,
 				8BCB9329194B2E1200A998EA /* Images.xcassets in Resources */,
 				8B5EFF0A195F064400B354F9 /* Main.storyboard in Resources */,
 			);
