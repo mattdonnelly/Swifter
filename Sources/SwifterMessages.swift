@@ -95,11 +95,11 @@ public extension Swifter {
 
     Sends a new direct message to the specified user from the authenticating user. Requires both the user and text parameters and must be a POST. Returns the sent message in the requested format if successful.
     */
-    public func sendDirectMessage(to userID: String, text: String, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func sendDirectMessage(to userTag: UserTag, text: String, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages/new.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["user_id"] = userID
+        parameters[userTag.key] = userTag.value
         parameters["text"] = text
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
