@@ -24,6 +24,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Swifter-Swift.h"
 
 FOUNDATION_EXPORT double SwifterVersionNumber;
 
