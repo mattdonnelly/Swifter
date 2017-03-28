@@ -141,12 +141,12 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
                 if self.HTTPMethod == .GET || self.HTTPMethod == .HEAD || self.HTTPMethod == .DELETE {
                     let queryString = nonOAuthParameters.urlEncodedQueryString(using: self.dataEncoding)
                     self.request!.url = self.url.append(queryString: queryString)
-                    self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
+                    self.request!.setValue("application/x-www-form-urlencoded; charset=\(String(describing: charset))", forHTTPHeaderField: "Content-Type")
                 } else {
                     var queryString = ""
                     if self.encodeParameters {
                         queryString = nonOAuthParameters.urlEncodedQueryString(using: self.dataEncoding)
-                        self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
+                        self.request!.setValue("application/x-www-form-urlencoded; charset=\(String(describing: charset))", forHTTPHeaderField: "Content-Type")
                     } else {
                         queryString = nonOAuthParameters.queryString
                     }
@@ -181,7 +181,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
 
     private class func mulipartContent(with boundary: String, data: Data, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> Data {
         let mimeType = mimeTypeOrNil ?? "application/octet-stream"
-        let fileNameContentDisposition = fileName != nil ? "filename=\"\(fileName)\"" : ""
+        let fileNameContentDisposition = fileName != nil ? "filename=\"\(String(describing: fileName))\"" : ""
         let contentDisposition = "Content-Disposition: form-data; name=\"\(parameterName)\"; \(fileNameContentDisposition)\r\n"
         
         var tempData = Data()
