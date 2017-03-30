@@ -80,7 +80,7 @@ public extension Swifter {
 
     Destroys the direct message specified in the required ID parameter. The authenticating user must be the recipient of the specified direct message.
     */
-    public func destoryDirectMessage(forID id: String, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func destroyDirectMessage(forID id: String, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "direct_messages/destroy.json"
 
         var parameters = Dictionary<String, Any>()
