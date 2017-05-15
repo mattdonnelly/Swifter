@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import Accounts
 
 internal class OAuthClient: SwifterClientProtocol  {
 

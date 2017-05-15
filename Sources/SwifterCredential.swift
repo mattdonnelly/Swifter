@@ -24,7 +24,10 @@
 //
 
 import Foundation
+
+#if os(macOS) || os(iOS)
 import Accounts
+#endif
 
 public class Credential {
 
@@ -55,14 +58,17 @@ public class Credential {
     }
 
     public internal(set) var accessToken: OAuthAccessToken?
-    public internal(set) var account: ACAccount?
 
-    public init(accessToken: OAuthAccessToken) {
-        self.accessToken = accessToken
-    }
+    #if os(macOS) || os(iOS)
+    public internal(set) var account: ACAccount?
 
     public init(account: ACAccount) {
         self.account = account
+    }
+    #endif
+
+    public init(accessToken: OAuthAccessToken) {
+        self.accessToken = accessToken
     }
 
 }

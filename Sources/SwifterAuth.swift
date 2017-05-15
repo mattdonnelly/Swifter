@@ -28,7 +28,7 @@ import Foundation
 #if os(iOS)
     import UIKit
     import SafariServices
-#else
+#elseif os(macOS)
     import AppKit
 #endif
 
@@ -40,7 +40,7 @@ public extension Swifter {
      Begin Authorization with a Callback URL.
      - OS X only
      */
-    #if os(OSX)
+    #if os(macOS)
     public func authorize(with callbackURL: URL, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
         self.postOAuthRequestToken(with: callbackURL, success: { token, response in
             var requestToken = token!

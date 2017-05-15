@@ -93,9 +93,12 @@
 		A1E207B31D4B86170093E498 /* Int++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207B01D4B86170093E498 /* Int++.swift */; };
 		A1E207B41D4B86170093E498 /* Data++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207B11D4B86170093E498 /* Data++.swift */; };
 		A1E207B51D4B86170093E498 /* Data++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207B11D4B86170093E498 /* Data++.swift */; };
-		F6B4D5781C7BAC4500E06514 /* SwifterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B4D5771C7BAC4500E06514 /* SwifterTests.swift */; };
+		DC7D6B741ECA5294008586E3 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC7D6B711ECA5294008586E3 /* Info.plist */; };
+		DC7D6B751ECA5294008586E3 /* String+SwifterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D6B721ECA5294008586E3 /* String+SwifterTests.swift */; };
+		DC7D6B761ECA5294008586E3 /* SwifterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D6B731ECA5294008586E3 /* SwifterTests.swift */; };
+		DC7D6B781ECA8F3C008586E3 /* Scanner++.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D6B771ECA8F3C008586E3 /* Scanner++.swift */; };
+		DC7D6B791ECA8F3C008586E3 /* Scanner++.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D6B771ECA8F3C008586E3 /* Scanner++.swift */; };
 		F6B4D57A1C7BAC4500E06514 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; };
-		F6B4D5811C7BAC5E00E06514 /* String+SwifterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B4D5801C7BAC5E00E06514 /* String+SwifterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -201,10 +204,11 @@
 		A1E207A81D4B85D90093E498 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A1E207B01D4B86170093E498 /* Int++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int++.swift"; sourceTree = "<group>"; };
 		A1E207B11D4B86170093E498 /* Data++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data++.swift"; sourceTree = "<group>"; };
+		DC7D6B711ECA5294008586E3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC7D6B721ECA5294008586E3 /* String+SwifterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SwifterTests.swift"; sourceTree = "<group>"; };
+		DC7D6B731ECA5294008586E3 /* SwifterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTests.swift; sourceTree = "<group>"; };
+		DC7D6B771ECA8F3C008586E3 /* Scanner++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scanner++.swift"; sourceTree = "<group>"; };
 		F6B4D5751C7BAC4500E06514 /* SwifterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwifterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F6B4D5771C7BAC4500E06514 /* SwifterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwifterTests.swift; sourceTree = "<group>"; };
-		F6B4D5791C7BAC4500E06514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F6B4D5801C7BAC5E00E06514 /* String+SwifterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SwifterTests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,7 +309,7 @@
 				8B9F51461944A8DC00894629 /* Sources */,
 				8B300C201944AA1A00993175 /* SwifterDemoiOS */,
 				8B300C481944AECB00993175 /* SwifterDemoMac */,
-				F6B4D5761C7BAC4500E06514 /* SwifterTests */,
+				DC7D6B701ECA5294008586E3 /* SwifterTests */,
 				8B9F50EF1944A5AB00894629 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -368,6 +372,7 @@
 				A17A694D1C78333400063DFD /* Operator++.swift */,
 				8B9F514A1944A8DC00894629 /* String++.swift */,
 				8B552D29194643CF0052EB86 /* URL++.swift */,
+				DC7D6B771ECA8F3C008586E3 /* Scanner++.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -382,14 +387,15 @@
 			name = CommonCrypto;
 			sourceTree = "<group>";
 		};
-		F6B4D5761C7BAC4500E06514 /* SwifterTests */ = {
+		DC7D6B701ECA5294008586E3 /* SwifterTests */ = {
 			isa = PBXGroup;
 			children = (
-				F6B4D5801C7BAC5E00E06514 /* String+SwifterTests.swift */,
-				F6B4D5771C7BAC4500E06514 /* SwifterTests.swift */,
-				F6B4D5791C7BAC4500E06514 /* Info.plist */,
+				DC7D6B711ECA5294008586E3 /* Info.plist */,
+				DC7D6B721ECA5294008586E3 /* String+SwifterTests.swift */,
+				DC7D6B731ECA5294008586E3 /* SwifterTests.swift */,
 			);
-			path = SwifterTests;
+			name = SwifterTests;
+			path = Tests/SwifterTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -597,6 +603,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC7D6B741ECA5294008586E3 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,6 +644,7 @@
 				A1E207B21D4B86170093E498 /* Int++.swift in Sources */,
 				8B9F51571944A8DC00894629 /* Swifter.swift in Sources */,
 				A1E207B41D4B86170093E498 /* Data++.swift in Sources */,
+				DC7D6B781ECA8F3C008586E3 /* Scanner++.swift in Sources */,
 				8BF1D6761948825D00E3AA64 /* SwifterSavedSearches.swift in Sources */,
 				A1E207A91D4B85D90093E498 /* HMAC.swift in Sources */,
 				8BCF43171947450A00E63301 /* SwifterTweets.swift in Sources */,
@@ -679,6 +687,7 @@
 				A1E207B31D4B86170093E498 /* Int++.swift in Sources */,
 				8B9F51581944A8DC00894629 /* Swifter.swift in Sources */,
 				A1E207B51D4B86170093E498 /* Data++.swift in Sources */,
+				DC7D6B791ECA8F3C008586E3 /* Scanner++.swift in Sources */,
 				8BF1D6771948825D00E3AA64 /* SwifterSavedSearches.swift in Sources */,
 				A1E207AA1D4B85D90093E498 /* HMAC.swift in Sources */,
 				8BCF43181947450A00E63301 /* SwifterTweets.swift in Sources */,
@@ -711,8 +720,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6B4D5781C7BAC4500E06514 /* SwifterTests.swift in Sources */,
-				F6B4D5811C7BAC5E00E06514 /* String+SwifterTests.swift in Sources */,
+				DC7D6B761ECA5294008586E3 /* SwifterTests.swift in Sources */,
+				DC7D6B751ECA5294008586E3 /* String+SwifterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1008,12 +1017,13 @@
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = SwifterTests/Info.plist;
+				INFOPLIST_FILE = Tests/SwifterTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattdonnelly.SwifteriOS.SwifterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1023,13 +1033,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = SwifterTests/Info.plist;
+				INFOPLIST_FILE = Tests/SwifterTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattdonnelly.SwifteriOS.SwifterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

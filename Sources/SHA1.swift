@@ -62,9 +62,7 @@ struct SHA1 {
             for x in 0..<M.count {
                 switch (x) {
                 case 0...15:
-                    var le: UInt32 = 0
-                    let range = NSRange(location:x * MemoryLayout<UInt32>.size, length: MemoryLayout<UInt32>.size)
-                    (chunk as NSData).getBytes(&le, range: range)
+                    let le: UInt32 = chunk.withUnsafeBytes { $0[x] }
                     M[x] = le.bigEndian
                     break
                 default:
@@ -121,12 +119,19 @@ struct SHA1 {
         }
         
         // Produce the final hash value (big-endian) as a 160 bit number:
-        let mutableBuff = NSMutableData()
+        var mutableBuff = Data()
         hh.forEach {
             var i = $0.bigEndian
-            mutableBuff.append(&i, length: MemoryLayout<UInt32>.size)
+            let numBytes = MemoryLayout.size(ofValue: i) / MemoryLayout<UInt8>.size
+            withUnsafePointer(to: &i) { ptr in
+                ptr.withMemoryRebound(to: UInt8.self, capacity: numBytes) { ptr in
+                    let buffer = UnsafeBufferPointer(start: ptr,
+                                                     count: numBytes)
+                    mutableBuff.append(buffer)
+                }
+            }
         }
         
-        return mutableBuff as Data
+        return mutableBuff
     }
 }
