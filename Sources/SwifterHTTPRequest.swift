@@ -200,6 +200,10 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         #endif
 
+        defer {
+          session.finishTasksAndInvalidate()
+        }
+
         if let error = error {
             self.failureHandler?(error)
             return
