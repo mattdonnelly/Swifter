@@ -8,7 +8,16 @@
 
 import XCTest
 
+#if os(iOS)
 @testable import SwifteriOS
+#elseif os(macOS)
+@testable import SwifterMac
+#elseif os(Linux)
+@testable import Swifter
+#endif
+
+
+
 
 class String_SwifterTests: XCTestCase {
     
@@ -58,14 +67,33 @@ class String_SwifterTests: XCTestCase {
         ]
         
         for (input, output) in shouldBeTheSameAfterEncoding {
-            XCTAssertEqual(input.urlEncodedStringWithEncoding(), output, input)
+            XCTAssertEqual(input.urlEncodedString(), output, input)
         }
 
         
         for (input, output) in shouldBeDifferentAfterEcoding {
-            XCTAssertNotEqual(input.urlEncodedStringWithEncoding(), output)
+            XCTAssertNotEqual(input.urlEncodedString(), output)
         }
     }
 
+    func testQueryString() {
+        let queries = [
+            "foo=bar": ["foo": "bar"],
+            "foo=bar&baz=qux": ["foo": "bar",
+                                "baz": "qux"]
+        ]
 
+        for (input, output) in queries {
+            XCTAssertEqual(input.queryStringParameters, output)
+        }
+    }
+
+    #if os(Linux)
+    static var allTests = [
+        ("testEncoding", testEncoding),
+        ("testQueryString", testQueryString)
+    ]
+    #endif
 }
+
+

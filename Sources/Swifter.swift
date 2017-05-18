@@ -24,7 +24,11 @@
 //
 
 import Foundation
+import Dispatch
+
+#if os(macOS) || os(iOS)
 import Accounts
+#endif
 
 extension Notification.Name {
     static let SwifterCallbackNotification: Notification.Name = Notification.Name(rawValue: "SwifterCallbackNotificationName")
@@ -86,9 +90,11 @@ public class Swifter {
         self.client = OAuthClient(consumerKey: consumerKey, consumerSecret: consumerSecret , accessToken: oauthToken, accessTokenSecret: oauthTokenSecret)
     }
 
+    #if os(macOS) || os(iOS)
     public init(account: ACAccount) {
         self.client = AccountsClient(account: account)
     }
+    #endif
 
     deinit {
         NotificationCenter.default.removeObserver(self)

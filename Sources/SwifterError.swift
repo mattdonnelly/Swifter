@@ -15,7 +15,7 @@ public struct SwifterError: Error {
         case responseError(code: Int)
         case invalidJSONResponse
         case badOAuthResponse
-        case urlResponseError(status: Int, headers: [NSObject: AnyObject], errorCode: Int)
+        case urlResponseError(status: Int, headers: [AnyHashable: Any], errorCode: Int)
         case jsonParseError
         
         public var description: String {

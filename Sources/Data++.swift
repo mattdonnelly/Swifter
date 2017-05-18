@@ -12,10 +12,7 @@ import Foundation
 extension Data {
     
     var rawBytes: [UInt8] {
-        let count = self.count / MemoryLayout<UInt8>.size
-        var bytesArray = [UInt8](repeating: 0, count: count)
-        (self as NSData).getBytes(&bytesArray, length:count * MemoryLayout<UInt8>.size)
-        return bytesArray
+        return [UInt8](self)
     }
     
     init(bytes: [UInt8]) {

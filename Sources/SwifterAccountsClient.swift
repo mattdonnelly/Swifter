@@ -24,6 +24,8 @@
 //
 
 import Foundation
+
+#if os(macOS) || os(iOS)
 import Accounts
 import Social
 
@@ -96,3 +98,4 @@ internal class AccountsClient: SwifterClientProtocol {
     }
 
 }
+#endif
