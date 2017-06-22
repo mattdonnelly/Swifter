@@ -77,6 +77,7 @@ public class Swifter {
     // MARK: - Properties
     
     public var client: SwifterClientProtocol
+    private var chunkBuffer: String?
 
     // MARK: - Initializers
     
@@ -104,22 +105,10 @@ public class Swifter {
     
     @discardableResult
     internal func jsonRequest(path: String, baseURL: TwitterURL, method: HTTPMethodType, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler? = nil, failure: HTTPRequest.FailureHandler? = nil) -> HTTPRequest {
-        let jsonDownloadProgressHandler: HTTPRequest.DownloadProgressHandler = { data, _, _, response in
-
+        let jsonDownloadProgressHandler: HTTPRequest.DownloadProgressHandler = { [weak self] data, _, _, response in
+            guard let `self` = self else { return }
             guard let _ = downloadProgress else { return }
-            
-            guard let jsonResult = try? JSON.parse(jsonData: data) else {
-                let jsonString = String(data: data, encoding: .utf8)
-                let jsonChunks = jsonString!.components(separatedBy: "\r\n")
-                
-                for chunk in jsonChunks where !chunk.utf16.isEmpty {
-                    guard let chunkData = chunk.data(using: .utf8), let jsonResult = try? JSON.parse(jsonData: chunkData) else { continue }
-                    downloadProgress?(jsonResult, response)
-                }
-                return
-            }
-            
-            downloadProgress?(jsonResult, response)
+            self.handleStreamProgress(data: data, response: response, handler: downloadProgress)
         }
 
         let jsonSuccessHandler: HTTPRequest.SuccessHandler = { data, response in
@@ -142,6 +131,26 @@ public class Swifter {
             return self.client.get(path, baseURL: baseURL, parameters: parameters, uploadProgress: uploadProgress, downloadProgress: jsonDownloadProgressHandler, success: jsonSuccessHandler, failure: failure)
         } else {
             return self.client.post(path, baseURL: baseURL, parameters: parameters, uploadProgress: uploadProgress, downloadProgress: jsonDownloadProgressHandler, success: jsonSuccessHandler, failure: failure)
+        }
+    }
+    
+    private func handleStreamProgress(data: Data, response: HTTPURLResponse, handler: JSONSuccessHandler? = nil) {
+        let chunkSeparator = "\r\n"
+        if var jsonString = String(data: data, encoding: .utf8) {
+            if let remaining = chunkBuffer {
+                jsonString = remaining + jsonString
+            }
+            let jsonChunks = jsonString.components(separatedBy: chunkSeparator)
+            for chunk in jsonChunks where !chunk.utf16.isEmpty {
+                if let chunkData = chunk.data(using: .utf8) {
+                    guard let jsonResult = try? JSON.parse(jsonData: chunkData) else {
+                        self.chunkBuffer = chunk
+                        return
+                    }
+                    chunkBuffer = nil
+                    handler?(jsonResult, response)
+                }
+            }
         }
     }
 
