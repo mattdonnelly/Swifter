@@ -76,10 +76,10 @@ internal class OAuthClient: SwifterClientProtocol  {
         if let key: Any = parameters[Swifter.DataParameters.dataKey] {
             if let keyString = key as? String {
                 postDataKey = keyString
-                postData = parameters[postDataKey!] as? Data
+                postData = parameters[keyString] as? Data
 
                 parameters.removeValue(forKey: Swifter.DataParameters.dataKey)
-                parameters.removeValue(forKey: postDataKey!)
+                parameters.removeValue(forKey: keyString)
             }
         }
 
@@ -87,8 +87,8 @@ internal class OAuthClient: SwifterClientProtocol  {
         if let fileName: Any = parameters[Swifter.DataParameters.fileNameKey] {
             if let fileNameString = fileName as? String {
                 postDataFileName = fileNameString
-                parameters.removeValue(forKey: fileNameString)
-            }
+				parameters.removeValue(forKey: Swifter.DataParameters.fileNameKey)
+           }
         }
 
         let request = HTTPRequest(url: url, method: .POST, parameters: parameters)
