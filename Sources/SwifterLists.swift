@@ -144,7 +144,7 @@ public extension Swifter {
 
     Subscribes the authenticated user to the specified list.
     */
-    public func subsribeToList(for listTag: ListTag, owner ownerTag: UserTag, success: SuccessHandler?, failure: FailureHandler?) {
+    public func subscribeToList(for listTag: ListTag, owner ownerTag: UserTag, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, Any>()
