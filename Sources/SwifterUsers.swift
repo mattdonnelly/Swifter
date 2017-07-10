@@ -79,7 +79,7 @@ public extension Swifter {
 
     Sets values that users are able to set under the "Account" tab of their settings page. Only the parameters specified will be updated.
     */
-    public func udpateUserProfile(name: String? = nil, url: String? = nil, location: String? = nil, description: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func updateUserProfile(name: String? = nil, url: String? = nil, location: String? = nil, description: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         assert(name != nil || url != nil || location != nil || description != nil || includeEntities != nil || skipStatus != nil)
 
         let path = "account/update_profile.json"
@@ -100,7 +100,7 @@ public extension Swifter {
 
     Updates the authenticating user's profile background image. This method can also be used to enable or disable the profile background image. Although each parameter is marked as optional, at least one of image, tile or use must be provided when making this request.
     */
-    public func updateProfileBacground(using imageData: Data, title: String? = nil, includeEntities: Bool? = nil, use: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func updateProfileBackground(using imageData: Data, title: String? = nil, includeEntities: Bool? = nil, use: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         assert(title != nil || use != nil, "At least one of image, tile or use must be provided when making this request")
 
         let path = "account/update_profile_background_image.json"
