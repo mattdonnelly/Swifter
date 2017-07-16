@@ -39,7 +39,16 @@ internal class AppOnlyClient: SwifterClientProtocol  {
         self.consumerSecret = consumerSecret
     }
 
-    func get(_ path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+    func get(
+        _ path: String,
+        baseURL: TwitterURL,
+        parameters: Dictionary<String, Any>,
+        uploadProgress: HTTPRequest.UploadProgressHandler?,
+        downloadProgress: HTTPRequest.DownloadProgressHandler?,
+        success: HTTPRequest.SuccessHandler?,
+        failure: HTTPRequest.FailureHandler?)
+        -> HTTPRequest
+    {
         let url = URL(string: path, relativeTo: baseURL.url)
 
         let request = HTTPRequest(url: url!, method: .GET, parameters: parameters)
@@ -56,7 +65,16 @@ internal class AppOnlyClient: SwifterClientProtocol  {
         return request
     }
 
-    func post(_ path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+    func post(
+        _ path: String,
+        baseURL: TwitterURL,
+        parameters: Dictionary<String, Any>,
+        uploadProgress: HTTPRequest.UploadProgressHandler?,
+        downloadProgress: HTTPRequest.DownloadProgressHandler?,
+        success: HTTPRequest.SuccessHandler?,
+        failure: HTTPRequest.FailureHandler?)
+        -> HTTPRequest
+    {
         let url = URL(string: path, relativeTo: baseURL.url)
 
         let request = HTTPRequest(url: url!, method: .POST, parameters: parameters)
@@ -68,7 +86,9 @@ internal class AppOnlyClient: SwifterClientProtocol  {
         if let bearerToken = self.credential?.accessToken?.key {
             request.headers = ["Authorization": "Bearer \(bearerToken)"];
         } else {
-            let basicCredentials = AppOnlyClient.base64EncodedCredentials(withKey: self.consumerKey, secret: self.consumerSecret)
+            let basicCredentials =
+                AppOnlyClient.base64EncodedCredentials(withKey: self.consumerKey,
+                                                       secret: self.consumerSecret)
             request.headers = ["Authorization": "Basic \(basicCredentials)"];
             request.encodeParameters = true
         }

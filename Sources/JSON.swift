@@ -139,7 +139,8 @@ public enum JSON : Equatable, CustomStringConvertible {
     
     static func parse(jsonData: Data) throws -> JSON {
         do {
-            let object = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+            let object = try JSONSerialization.jsonObject(with: jsonData,
+                                                          options: .mutableContainers)
             return JSON(object)
         } catch {
             throw SwifterError(message: "\(error)", kind: .jsonParseError)
@@ -187,10 +188,14 @@ public enum JSON : Equatable, CustomStringConvertible {
             return "\"\(string)\""
             
         case .array(let array):
-            return "[\n" + array.map { "\(nextIndent)\($0.prettyPrint(indent, level + 1))" }.joined(separator: ",\n") + "\n\(currentIndent)]"
+            return "[\n" +
+                   array.map { "\(nextIndent)\($0.prettyPrint(indent, level + 1))" }
+                   .joined(separator: ",\n") + "\n\(currentIndent)]"
             
         case .object(let dict):
-            return "{\n" + dict.map { "\(nextIndent)\"\($0)\" : \($1.prettyPrint(indent, level + 1))"}.joined(separator: ",\n") + "\n\(currentIndent)}"
+            return "{\n" +
+                    dict.map { "\(nextIndent)\"\($0)\" : \($1.prettyPrint(indent, level + 1))"}
+                    .joined(separator: ",\n") + "\n\(currentIndent)}"
             
         case .null:
             return "null"
