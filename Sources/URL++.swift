@@ -38,7 +38,9 @@ extension URL {
             absoluteURLString = absoluteURLString[0..<absoluteURLString.utf16.count]
         }
         
-        let urlString = absoluteURLString + (absoluteURLString.range(of: "?") != nil ? "&" : "?") + queryString
+        let urlString = absoluteURLString
+                        + (absoluteURLString.range(of: "?") != nil ? "&" : "?")
+                        + queryString
         return URL(string: urlString)!
     }
 
