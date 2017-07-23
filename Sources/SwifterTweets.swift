@@ -72,6 +72,31 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
     }
+    
+    public func getWrapperTweet(
+        forID id: String,
+        count: Int? = nil,
+        trimUser: Bool? = nil,
+        includeMyRetweet: Bool? = nil,
+        includeEntities: Bool? = nil,
+        success: WrapperSuccessHandler<SwifterTweet>? = nil,
+        failure: FailureHandler? = nil)
+    {
+        let path = "statuses/show.json"
+        
+        var parameters = Dictionary<String, Any>()
+        parameters["id"] = id
+        parameters["count"] ??= count
+        parameters["trim_user"] ??= trimUser
+        parameters["include_my_retweet"] ??= includeMyRetweet
+        parameters["include_entities"] ??= includeEntities
+        
+        self.getWrapper(path: path,
+                        baseURL: .api,
+                        parameters: parameters,
+                        success: { tweet, _ in success?(tweet) },
+                        failure: failure)
+    }
 
     /**
     POST	statuses/destroy/:id

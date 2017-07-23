@@ -194,7 +194,6 @@ public class Swifter {
          }*/
         
         let jsonSuccessHandler: HTTPRequest.SuccessHandler = { data, response in
-            
             DispatchQueue.global(qos: .utility).async {
                 do {
                     let decoder = JSONDecoder()
