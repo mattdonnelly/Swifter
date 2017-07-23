@@ -98,6 +98,14 @@
 		DC7D6B761ECA5294008586E3 /* SwifterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D6B731ECA5294008586E3 /* SwifterTests.swift */; };
 		DC7D6B781ECA8F3C008586E3 /* Scanner++.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D6B771ECA8F3C008586E3 /* Scanner++.swift */; };
 		DC7D6B791ECA8F3C008586E3 /* Scanner++.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D6B771ECA8F3C008586E3 /* Scanner++.swift */; };
+		F1ADE6361F252C59008B2358 /* WrapperEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ADE6341F252C4B008B2358 /* WrapperEntities.swift */; };
+		F1ADE6371F252C5A008B2358 /* WrapperEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ADE6341F252C4B008B2358 /* WrapperEntities.swift */; };
+		F1ADE6381F252C62008B2358 /* WrapperTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ADE6331F252C4B008B2358 /* WrapperTweet.swift */; };
+		F1ADE6391F252C90008B2358 /* WrapperTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ADE6331F252C4B008B2358 /* WrapperTweet.swift */; };
+		F1ADE63A1F252C96008B2358 /* WrapperUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ADE6351F252C4B008B2358 /* WrapperUser.swift */; };
+		F1ADE63B1F252C96008B2358 /* WrapperUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ADE6351F252C4B008B2358 /* WrapperUser.swift */; };
+		F1ADE63D1F252D29008B2358 /* Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ADE63C1F252D29008B2358 /* Wrapper.swift */; };
+		F1ADE63E1F252D29008B2358 /* Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ADE63C1F252D29008B2358 /* Wrapper.swift */; };
 		F6B4D57A1C7BAC4500E06514 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -208,6 +216,10 @@
 		DC7D6B721ECA5294008586E3 /* String+SwifterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SwifterTests.swift"; sourceTree = "<group>"; };
 		DC7D6B731ECA5294008586E3 /* SwifterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTests.swift; sourceTree = "<group>"; };
 		DC7D6B771ECA8F3C008586E3 /* Scanner++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scanner++.swift"; sourceTree = "<group>"; };
+		F1ADE6331F252C4B008B2358 /* WrapperTweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WrapperTweet.swift; path = Sources/WrapperTweet.swift; sourceTree = SOURCE_ROOT; };
+		F1ADE6341F252C4B008B2358 /* WrapperEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WrapperEntities.swift; path = Sources/WrapperEntities.swift; sourceTree = SOURCE_ROOT; };
+		F1ADE6351F252C4B008B2358 /* WrapperUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WrapperUser.swift; path = Sources/WrapperUser.swift; sourceTree = SOURCE_ROOT; };
+		F1ADE63C1F252D29008B2358 /* Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Wrapper.swift; path = Sources/Wrapper.swift; sourceTree = SOURCE_ROOT; };
 		F6B4D5751C7BAC4500E06514 /* SwifterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwifterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -329,6 +341,7 @@
 		8B9F51461944A8DC00894629 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				F1ADE6321F252C30008B2358 /* Wrapper */,
 				8B5EFF14195F09F600B354F9 /* Swifter.h */,
 				8B9F514C1944A8DC00894629 /* Swifter.swift */,
 				8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */,
@@ -396,6 +409,17 @@
 			);
 			name = SwifterTests;
 			path = Tests/SwifterTests;
+			sourceTree = "<group>";
+		};
+		F1ADE6321F252C30008B2358 /* Wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				F1ADE6341F252C4B008B2358 /* WrapperEntities.swift */,
+				F1ADE63C1F252D29008B2358 /* Wrapper.swift */,
+				F1ADE6331F252C4B008B2358 /* WrapperTweet.swift */,
+				F1ADE6351F252C4B008B2358 /* WrapperUser.swift */,
+			);
+			path = Wrapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -635,6 +659,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A17A694F1C78336200063DFD /* Operator++.swift in Sources */,
+				F1ADE63D1F252D29008B2358 /* Wrapper.swift in Sources */,
 				8BCF43291947CC7A00E63301 /* SwifterFavorites.swift in Sources */,
 				8BCF43261947CABA00E63301 /* SwifterSuggested.swift in Sources */,
 				A1BDB38C1D4C864200B0080F /* SwifterTag.swift in Sources */,
@@ -659,8 +684,10 @@
 				8BA50EC71953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */,
 				8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
 				A1AA8B001D5C514E00CE7F17 /* SwifterError.swift in Sources */,
+				F1ADE63A1F252C96008B2358 /* WrapperUser.swift in Sources */,
 				A1E207AB1D4B85D90093E498 /* SHA1.swift in Sources */,
 				A1E207AD1D4B85D90093E498 /* Utils.swift in Sources */,
+				F1ADE6381F252C62008B2358 /* WrapperTweet.swift in Sources */,
 				8BF1D6791948839800E3AA64 /* SwifterPlaces.swift in Sources */,
 				8BC32D3D1955EEE100FF75A0 /* SwifterTrends.swift in Sources */,
 				8BCF43231947A6C800E63301 /* SwifterUsers.swift in Sources */,
@@ -668,6 +695,7 @@
 				8B552D2A194643CF0052EB86 /* URL++.swift in Sources */,
 				8BCF4320194798FB00E63301 /* SwifterFollowers.swift in Sources */,
 				8B548F5C1945331D00EE2927 /* SwifterTimelines.swift in Sources */,
+				F1ADE6361F252C59008B2358 /* WrapperEntities.swift in Sources */,
 				8BF1D67F194889B900E3AA64 /* SwifterClientProtocol.swift in Sources */,
 				8B1F259F194A663D004BD304 /* SwifterHelp.swift in Sources */,
 			);
@@ -678,6 +706,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A17A69501C78336300063DFD /* Operator++.swift in Sources */,
+				F1ADE63E1F252D29008B2358 /* Wrapper.swift in Sources */,
 				8BCF432A1947CC7A00E63301 /* SwifterFavorites.swift in Sources */,
 				8BCF43271947CABA00E63301 /* SwifterSuggested.swift in Sources */,
 				A1BDB38D1D4C864200B0080F /* SwifterTag.swift in Sources */,
@@ -702,8 +731,10 @@
 				8BA50EC81953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */,
 				8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
 				A1AA8B011D5C515000CE7F17 /* SwifterError.swift in Sources */,
+				F1ADE63B1F252C96008B2358 /* WrapperUser.swift in Sources */,
 				A1E207AC1D4B85D90093E498 /* SHA1.swift in Sources */,
 				A1E207AE1D4B85D90093E498 /* Utils.swift in Sources */,
+				F1ADE6391F252C90008B2358 /* WrapperTweet.swift in Sources */,
 				8BF1D67A1948839800E3AA64 /* SwifterPlaces.swift in Sources */,
 				8BC32D3E1955EEE100FF75A0 /* SwifterTrends.swift in Sources */,
 				8BCF43241947A6C800E63301 /* SwifterUsers.swift in Sources */,
@@ -711,6 +742,7 @@
 				8B552D2B194643CF0052EB86 /* URL++.swift in Sources */,
 				8BCF4321194798FB00E63301 /* SwifterFollowers.swift in Sources */,
 				8B548F5D1945331D00EE2927 /* SwifterTimelines.swift in Sources */,
+				F1ADE6371F252C5A008B2358 /* WrapperEntities.swift in Sources */,
 				8BF1D680194889B900E3AA64 /* SwifterClientProtocol.swift in Sources */,
 				8B1F25A0194A663D004BD304 /* SwifterHelp.swift in Sources */,
 			);
