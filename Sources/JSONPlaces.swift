@@ -1,5 +1,5 @@
 //
-//  SwifterPlaces.swift
+//  JSONPlaces.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -25,7 +25,7 @@
 
 import Foundation
 
-public extension Swifter {
+public extension SwifterJSON {
 
     /**
     GET    geo/id/:place_id

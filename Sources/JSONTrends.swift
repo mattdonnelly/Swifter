@@ -1,5 +1,5 @@
 //
-//  SwifterTrends.swift
+//  JSONTrends.swift
 //  Swifter
 //
 //  Created by Matt Donnelly on 21/06/2014.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension Swifter {
+public extension SwifterJSON {
 
     /**
     GET    trends/place

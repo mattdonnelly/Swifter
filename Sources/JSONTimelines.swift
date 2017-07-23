@@ -1,5 +1,5 @@
 //
-//  SwifterTimelines.swift
+//  JSONTimelines.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -25,7 +25,7 @@
 
 import Foundation
 
-public extension Swifter {
+public extension SwifterJSON {
 
     // Convenience method
     private func getTimeline(at path: String, parameters: Dictionary<String, Any>, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {

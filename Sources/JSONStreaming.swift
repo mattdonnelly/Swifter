@@ -1,5 +1,5 @@
 //
-//  SwifterStreaming.swift
+//  JSONStreaming.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.
@@ -25,7 +25,7 @@
 
 import Foundation
 
-public extension Swifter {
+public extension SwifterJSON {
     
     typealias StallWarningHandler = (_ code: String?, _ message: String?, _ percentFull: Int?) -> Void
 
