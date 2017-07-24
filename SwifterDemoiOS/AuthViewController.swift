@@ -81,16 +81,14 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
         let failureHandler: (Error) -> Void = { error in
             self.alert(title: "Error", message: error.localizedDescription)
         }
-        self.swifter.getHomeTimeline(count: 20, success: { json in
+        self.swifter.getWrapperHomeTimeline(count: 20, success: { tweets in
             // Successfully fetched timeline, so lets create and push the table view
             
             let tweetsViewController = self.storyboard!.instantiateViewController(withIdentifier: "TweetsViewController") as! TweetsViewController
-            guard let tweets = json.array else { return }
             tweetsViewController.tweets = tweets
             self.navigationController?.pushViewController(tweetsViewController, animated: true)
             
-            }, failure: failureHandler)
-        
+        }, failure: failureHandler)
     }
 
     func alert(title: String, message: String) {
