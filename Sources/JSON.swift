@@ -291,3 +291,25 @@ private extension NSNumber {
         return NSNumber(value: true).objCType == self.objCType
     }
 }
+
+extension JSON: Decodable {
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        
+        if let string = try? container.decode(String.self) {
+            self = .string(string)
+        } else if let number = try? container.decode(Double.self) {
+            self = .number(number)
+        } else if let object = try? container.decode(Dictionary<String, JSON>.self) {
+            self = .object(object)
+        } else if let array = try? container.decode(Array<JSON>.self) {
+            self = .array(array)
+        } else if let bool = try? container.decode(Bool.self) {
+            self = .bool(bool)
+        } else if let _ = try? container.decode(Optional<Any>.self) {
+            self = .null
+        } else {
+            self = .invalid
+        }
+    }
+}
