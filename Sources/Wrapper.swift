@@ -58,7 +58,7 @@ extension Swifter {
             }
         }
         
-        if method == .POST {
+        if method == .GET {
             return self.client.get(path, baseURL: baseURL, parameters: parameters, uploadProgress: uploadProgress, downloadProgress: nil, success: jsonSuccessHandler, failure: failure)
         } else {
             return self.client.post(path, baseURL: baseURL, parameters: parameters, uploadProgress: uploadProgress, downloadProgress: nil, success: jsonSuccessHandler, failure: failure)
