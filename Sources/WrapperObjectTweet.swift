@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension SwifterWrapper {
+extension Swifter {
     public final class Tweet: Object {
         public let text: String
         public let user: User

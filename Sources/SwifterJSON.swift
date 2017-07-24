@@ -6,7 +6,7 @@
 //  Copyright © 2017 Matt Donnelly. All rights reserved.
 //
 
-public class SwifterJSON : SwifterBase {
+extension Swifter {
     
     // MARK: - Types
     

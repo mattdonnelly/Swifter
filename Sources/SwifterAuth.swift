@@ -32,7 +32,7 @@ import Foundation
     import AppKit
 #endif
 
-public extension SwifterBase {
+public extension Swifter {
     
     public typealias TokenSuccessHandler = (Credential.OAuthAccessToken?, URLResponse) -> Void
     

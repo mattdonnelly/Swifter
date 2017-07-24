@@ -25,7 +25,7 @@
 
 import Foundation
 
-public extension SwifterJSON {
+public extension Swifter {
     
     typealias StallWarningHandler = (_ code: String?, _ message: String?, _ percentFull: Int?) -> Void
 

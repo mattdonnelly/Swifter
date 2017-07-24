@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension SwifterWrapper {
+extension Swifter {
     public struct User: Object {
         public let profileImageURL: URL
         public let profileImageURLHTTPS: URL

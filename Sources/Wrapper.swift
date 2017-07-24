@@ -8,14 +8,14 @@
 
 import Foundation
 
-public class SwifterWrapper: SwifterBase {
+extension Swifter {
     
     // MARK: - Types
     
     typealias Object = Decodable
     
-    public typealias SuccessHandler<T: Object> = (T) -> Void
-    public typealias CursorSuccessHandler<T: Object> = (T, _ previousCursor: String?, _ nextCursor: String?) -> Void
+    public typealias WrapperSuccessHandler<T: Object> = (T) -> Void
+    public typealias WrapperCursorSuccessHandler<T: Object> = (T, _ previousCursor: String?, _ nextCursor: String?) -> Void
     public typealias WrapperJSONSuccessHandler<T: Object> = (T, _ response: HTTPURLResponse) -> Void
     
     // MARK: - Wrapper Requests

@@ -55,7 +55,7 @@ public enum TwitterURL {
     
 }
 
-public class SwifterBase {
+public class Swifter {
     
     // MARK: - Types
     
@@ -140,6 +140,3 @@ public class SwifterBase {
         }
     }
 }
-
-@available(*, deprecated, renamed: "SwifterJSON")
-public typealias Swifter = SwifterJSON

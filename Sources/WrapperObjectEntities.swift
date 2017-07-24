@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension SwifterWrapper {
+extension Swifter {
     public struct Entities: Object {
         public let hashtags: [HashtagEntity]
         public let media: [MediaEntity]

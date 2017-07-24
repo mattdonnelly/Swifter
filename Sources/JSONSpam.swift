@@ -25,7 +25,7 @@
 
 import Foundation
 
-public extension SwifterJSON {
+public extension Swifter {
 
     /**
     POST   users/report_spam

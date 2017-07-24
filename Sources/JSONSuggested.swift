@@ -25,7 +25,7 @@
 
 import Foundation
 
-public extension SwifterJSON {
+public extension Swifter {
 
     /**
     GET    users/suggestions/:slug

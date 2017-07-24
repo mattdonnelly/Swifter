@@ -25,7 +25,7 @@
 
 import Foundation
 
-public extension SwifterJSON {
+public extension Swifter {
 
     // Convenience method
     private func getTimeline(at path: String, parameters: Dictionary<String, Any>, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
