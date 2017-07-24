@@ -26,15 +26,7 @@ extension SwifterWrapper {
      
      This object contains an array of user IDs for users who have contributed to this status (an example of a status that has been contributed to is this one). In practice, there is usually only one ID in this array. The JSON renders as such "contributors":[8285392].
      */
-    public func getTweet(
-        forID id: String,
-        count: Int? = nil,
-        trimUser: Bool? = nil,
-        includeMyRetweet: Bool? = nil,
-        includeEntities: Bool? = nil,
-        success: SuccessHandler<Tweet>? = nil,
-        failure: FailureHandler? = nil)
-    {
+    public func getTweet(forID id: String, count: Int? = nil, trimUser: Bool? = nil, includeMyRetweet: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler<Tweet>? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/show.json"
         
         var parameters = Dictionary<String, Any>()
@@ -44,11 +36,7 @@ extension SwifterWrapper {
         parameters["include_my_retweet"] ??= includeMyRetweet
         parameters["include_entities"] ??= includeEntities
         
-        self.getWrapper(path: path,
-                        baseURL: .api,
-                        parameters: parameters,
-                        success: { tweet, _ in success?(tweet) },
-                        failure: failure)
+        self.getWrapper(path: path, baseURL: .api, parameters: parameters, success: { tweet, _ in success?(tweet) }, failure: failure)
     }
 }
 

@@ -18,10 +18,7 @@ extension SwifterWrapper {
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.hashtags = try
-                container.decodeIfPresent([HashtagEntity].self,
-                                          forKey: .hashtags)
-                ?? []
+            self.hashtags = try container.decodeIfPresent([HashtagEntity].self, forKey: .hashtags) ?? []
             self.media = try container.decodeIfPresent([MediaEntity].self, forKey: .media) ?? []
         }
         
@@ -40,11 +37,11 @@ extension SwifterWrapper {
             // throw an error if we receive any more or less than 2 indices
             guard !container.isAtEnd else { throw EncodingError.invalidIndices }
             
-            self.leading = try container.decode(Int.self)
+                self.leading = try container.decode(Int.self)
             
             guard !container.isAtEnd else { throw EncodingError.invalidIndices }
             
-            self.trailing = try container.decode(Int.self)
+                self.trailing = try container.decode(Int.self)
             
             guard container.isAtEnd else { throw EncodingError.invalidIndices }
         }

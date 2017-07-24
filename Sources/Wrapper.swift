@@ -15,27 +15,14 @@ public class SwifterWrapper: SwifterBase {
     typealias Object = Decodable
     
     public typealias SuccessHandler<T: Object> = (T) -> Void
-    public typealias CursorSuccessHandler<T> =
-        (T, _ previousCursor: String?, _ nextCursor: String?) -> Void
-    where T: Object
-    public typealias WrapperJSONSuccessHandler<T> = (T, _ response: HTTPURLResponse) -> Void
-    where T: Object
+    public typealias CursorSuccessHandler<T: Object> = (T, _ previousCursor: String?, _ nextCursor: String?) -> Void
+    public typealias WrapperJSONSuccessHandler<T: Object> = (T, _ response: HTTPURLResponse) -> Void
     
     // MARK: - Wrapper Requests
     
+    //TODO: Implement download progress handlers
     @discardableResult
-    internal func wrapperRequest<T: Object>(
-        path: String,
-        baseURL: TwitterURL,
-        method: HTTPMethodType,
-        parameters: Dictionary<String, Any>,
-        uploadProgress: HTTPRequest.UploadProgressHandler? = nil,
-        // TODO: implement download progress handlers somehow
-        //downloadProgress: ((DownloadProgressData<T>, HTTPURLResponse) -> Void)? = nil,
-        success: WrapperJSONSuccessHandler<T>? = nil,
-        failure: HTTPRequest.FailureHandler? = nil)
-        -> HTTPRequest
-    {
+    internal func wrapperRequest<T: Object>(path: String, baseURL: TwitterURL, method: HTTPMethodType, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, /*downloadProgress: ((DownloadProgressData<T>, HTTPURLResponse) -> Void)? = nil,*/ success: WrapperJSONSuccessHandler<T>? = nil, failure: HTTPRequest.FailureHandler? = nil) -> HTTPRequest {
         /*
          let jsonDownloadProgressHandler: HTTPRequest.DownloadProgressHandler = { data, _, _, response in
          
@@ -72,63 +59,19 @@ public class SwifterWrapper: SwifterBase {
         }
         
         if method == .POST {
-            return self.client.get(path,
-                                   baseURL: baseURL,
-                                   parameters: parameters,
-                                   uploadProgress: uploadProgress,
-                                   downloadProgress: nil,
-                                   success: jsonSuccessHandler,
-                                   failure: failure)
+            return self.client.get(path, baseURL: baseURL, parameters: parameters, uploadProgress: uploadProgress, downloadProgress: nil, success: jsonSuccessHandler, failure: failure)
         } else {
-            return self.client.post(path,
-                                    baseURL: baseURL,
-                                    parameters: parameters,
-                                    uploadProgress: uploadProgress,
-                                    downloadProgress: nil,
-                                    success: jsonSuccessHandler,
-                                    failure: failure)
+            return self.client.post(path, baseURL: baseURL, parameters: parameters, uploadProgress: uploadProgress, downloadProgress: nil, success: jsonSuccessHandler, failure: failure)
         }
     }
     
     @discardableResult
-    internal func getWrapper<T: Object>(
-        path: String,
-        baseURL: TwitterURL,
-        parameters: Dictionary<String, Any>,
-        uploadProgress: HTTPRequest.UploadProgressHandler? = nil,
-        // see above
-        //downloadProgress: JSONSuccessHandler? = nil,
-        success: WrapperJSONSuccessHandler<T>?,
-        failure: HTTPRequest.FailureHandler?)
-        -> HTTPRequest
-    {
-        return self.wrapperRequest(path: path,
-                                   baseURL: baseURL,
-                                   method: .GET,
-                                   parameters: parameters,
-                                   uploadProgress: uploadProgress,
-                                   success: success,
-                                   failure: failure)
+    internal func getWrapper<T: Object>(path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, /*downloadProgress: JSONSuccessHandler? = nil,*/ success: WrapperJSONSuccessHandler<T>?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+        return self.wrapperRequest(path: path, baseURL: baseURL, method: .GET, parameters: parameters, uploadProgress: uploadProgress, success: success, failure: failure)
     }
     
     @discardableResult
-    internal func postWrapper<T: Object>(
-        path: String,
-        baseURL: TwitterURL,
-        parameters: Dictionary<String, Any>,
-        uploadProgress: HTTPRequest.UploadProgressHandler? = nil,
-        // see above
-        //downloadProgress: JSONSuccessHandler? = nil,
-        success: WrapperJSONSuccessHandler<T>?,
-        failure: HTTPRequest.FailureHandler?)
-        -> HTTPRequest
-    {
-        return self.wrapperRequest(path: path,
-                                   baseURL: baseURL,
-                                   method: .POST,
-                                   parameters: parameters,
-                                   uploadProgress: uploadProgress,
-                                   success: success,
-                                   failure: failure)
+    internal func postWrapper<T: Object>(path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, /*downloadProgress: JSONSuccessHandler? = nil,*/ success: WrapperJSONSuccessHandler<T>?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+        return self.wrapperRequest(path: path, baseURL: baseURL, method: .POST, parameters: parameters, uploadProgress: uploadProgress, success: success, failure: failure)
     }
 }
