@@ -104,6 +104,10 @@
 		F11A6F3A1F2554EA001234E2 /* WrapperTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11A6F381F2554EA001234E2 /* WrapperTweets.swift */; };
 		F152413E1F260C4600B9328F /* WrapperTimelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = F152413C1F260B7F00B9328F /* WrapperTimelines.swift */; };
 		F152413F1F260C4700B9328F /* WrapperTimelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = F152413C1F260B7F00B9328F /* WrapperTimelines.swift */; };
+		F15241411F2643E800B9328F /* WrapperObjectPostMediaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15241401F2643E800B9328F /* WrapperObjectPostMediaResponse.swift */; };
+		F15241421F2643E800B9328F /* WrapperObjectPostMediaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15241401F2643E800B9328F /* WrapperObjectPostMediaResponse.swift */; };
+		F15241441F26470800B9328F /* WrapperObjectRetweeters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15241431F26470800B9328F /* WrapperObjectRetweeters.swift */; };
+		F15241451F26470800B9328F /* WrapperObjectRetweeters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15241431F26470800B9328F /* WrapperObjectRetweeters.swift */; };
 		F1ADE6361F252C59008B2358 /* WrapperObjectEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ADE6341F252C4B008B2358 /* WrapperObjectEntities.swift */; };
 		F1ADE6371F252C5A008B2358 /* WrapperObjectEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ADE6341F252C4B008B2358 /* WrapperObjectEntities.swift */; };
 		F1ADE6381F252C62008B2358 /* WrapperObjectTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ADE6331F252C4B008B2358 /* WrapperObjectTweet.swift */; };
@@ -225,6 +229,8 @@
 		F11A6F331F255314001234E2 /* SwifterJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwifterJSON.swift; sourceTree = "<group>"; };
 		F11A6F381F2554EA001234E2 /* WrapperTweets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperTweets.swift; sourceTree = "<group>"; };
 		F152413C1F260B7F00B9328F /* WrapperTimelines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperTimelines.swift; sourceTree = "<group>"; };
+		F15241401F2643E800B9328F /* WrapperObjectPostMediaResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperObjectPostMediaResponse.swift; sourceTree = "<group>"; };
+		F15241431F26470800B9328F /* WrapperObjectRetweeters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperObjectRetweeters.swift; sourceTree = "<group>"; };
 		F1ADE6331F252C4B008B2358 /* WrapperObjectTweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WrapperObjectTweet.swift; path = Sources/WrapperObjectTweet.swift; sourceTree = SOURCE_ROOT; };
 		F1ADE6341F252C4B008B2358 /* WrapperObjectEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WrapperObjectEntities.swift; path = Sources/WrapperObjectEntities.swift; sourceTree = SOURCE_ROOT; };
 		F1ADE6351F252C4B008B2358 /* WrapperObjectUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WrapperObjectUser.swift; path = Sources/WrapperObjectUser.swift; sourceTree = SOURCE_ROOT; };
@@ -454,6 +460,8 @@
 				F1ADE6341F252C4B008B2358 /* WrapperObjectEntities.swift */,
 				F1ADE6331F252C4B008B2358 /* WrapperObjectTweet.swift */,
 				F1ADE6351F252C4B008B2358 /* WrapperObjectUser.swift */,
+				F15241401F2643E800B9328F /* WrapperObjectPostMediaResponse.swift */,
+				F15241431F26470800B9328F /* WrapperObjectRetweeters.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -698,6 +706,7 @@
 				F1ADE63D1F252D29008B2358 /* Wrapper.swift in Sources */,
 				8BCF43291947CC7A00E63301 /* JSONFavorites.swift in Sources */,
 				8BCF43261947CABA00E63301 /* JSONSuggested.swift in Sources */,
+				F15241441F26470800B9328F /* WrapperObjectRetweeters.swift in Sources */,
 				A1BDB38C1D4C864200B0080F /* SwifterTag.swift in Sources */,
 				8B116AF1194601970019A4DC /* SwifterHTTPRequest.swift in Sources */,
 				8B552D2D194695F80052EB86 /* JSONStreaming.swift in Sources */,
@@ -714,6 +723,7 @@
 				8B548F591945325E00EE2927 /* SwifterAuth.swift in Sources */,
 				8BCF431D1947907300E63301 /* JSONMessages.swift in Sources */,
 				8B9F51531944A8DC00894629 /* String++.swift in Sources */,
+				F15241411F2643E800B9328F /* WrapperObjectPostMediaResponse.swift in Sources */,
 				8BF1D67C1948882700E3AA64 /* JSONSpam.swift in Sources */,
 				8BCF431A19475D3C00E63301 /* JSONSearch.swift in Sources */,
 				8B33CA3F19587C6D00739FCB /* JSON.swift in Sources */,
@@ -748,6 +758,7 @@
 				F1ADE63E1F252D29008B2358 /* Wrapper.swift in Sources */,
 				8BCF432A1947CC7A00E63301 /* JSONFavorites.swift in Sources */,
 				8BCF43271947CABA00E63301 /* JSONSuggested.swift in Sources */,
+				F15241451F26470800B9328F /* WrapperObjectRetweeters.swift in Sources */,
 				A1BDB38D1D4C864200B0080F /* SwifterTag.swift in Sources */,
 				8B116AF2194601970019A4DC /* SwifterHTTPRequest.swift in Sources */,
 				8B552D2E194695F80052EB86 /* JSONStreaming.swift in Sources */,
@@ -764,6 +775,7 @@
 				8B548F5A1945325E00EE2927 /* SwifterAuth.swift in Sources */,
 				8BCF431E1947907300E63301 /* JSONMessages.swift in Sources */,
 				8B9F51541944A8DC00894629 /* String++.swift in Sources */,
+				F15241421F2643E800B9328F /* WrapperObjectPostMediaResponse.swift in Sources */,
 				8BF1D67D1948882700E3AA64 /* JSONSpam.swift in Sources */,
 				8BCF431B19475D3C00E63301 /* JSONSearch.swift in Sources */,
 				8B33CA4019587C6D00739FCB /* JSON.swift in Sources */,

@@ -6,7 +6,23 @@
 //  Copyright © 2017 Matt Donnelly. All rights reserved.
 //
 
+import Foundation
+
 extension Swifter {
+    /**
+     GET    statuses/retweets/:id
+     
+     Returns up to 100 of the first retweets of a given tweet.
+     */
+    public func getWrapperRetweets(forTweetID id: String, count: Int? = nil, trimUser: Bool? = nil, success: WrapperSuccessHandler<[Tweet]>? = nil, failure: FailureHandler? = nil) {
+        let path = "statuses/retweets/\(id).json"
+        var parameters = Dictionary<String, Any>()
+        parameters["count"] ??= count
+        parameters["trim_user"] ??= trimUser
+        
+        self.getWrapper(path: path, baseURL: .api, parameters: parameters, success: { tweets, _ in success?(tweets) }, failure: failure)
+    }
+    
     /**
      GET    statuses/show/:id
      
@@ -38,5 +54,187 @@ extension Swifter {
         
         self.getWrapper(path: path, baseURL: .api, parameters: parameters, success: { tweet, _ in success?(tweet) }, failure: failure)
     }
+    
+    /**
+     POST    statuses/destroy/:id
+     
+     Destroys the status specified by the required ID parameter. The authenticating user must be the author of the specified status. Returns the destroyed status if successful.
+     */
+    public func destroyWrapperTweet(forID id: String, trimUser: Bool? = nil, success: WrapperSuccessHandler<Tweet>? = nil, failure: FailureHandler? = nil) {
+        let path = "statuses/destroy/\(id).json"
+        
+        var parameters = Dictionary<String, Any>()
+        parameters["trim_user"] ??= trimUser
+        
+        self.postWrapper(path: path, baseURL: .api, parameters: parameters, success: { tweet, _ in success?(tweet) }, failure: failure)
+    }
+    
+    /**
+     POST    statuses/update
+     
+     Updates the authenticating user's current status, also known as tweeting. To upload an image to accompany the tweet, use POST media/upload.
+     
+     For each update attempt, the update text is compared with the authenticating user's recent tweets. Any attempt that would result in duplication will be blocked, resulting in a 403 error. Therefore, a user cannot submit the same status twice in a row.
+     
+     While not rate limited by the API a user is limited in the number of tweets they can create at a time. If the number of updates posted by the user reaches the current allowed limit this method will return an HTTP 403 error.
+     
+     - Any geo-tagging parameters in the update will be ignored if geo_enabled for the user is false (this is the default setting for all users unless the user has enabled geolocation in their settings)
+     - The number of digits passed the decimal separator passed to lat, up to 8, will be tracked so that the lat is returned in a status object it will have the same number of digits after the decimal separator.
+     - Please make sure to use to use a decimal point as the separator (and not the decimal comma) for the latitude and the longitude - usage of the decimal comma will cause the geo-tagged portion of the status update to be dropped.
+     - For JSON, the response mostly uses conventions described in GeoJSON. Unfortunately, the geo object has coordinates that Twitter renderers are reversed from the GeoJSON specification (GeoJSON specifies a longitude then a latitude, whereas we are currently representing it as a latitude then a longitude. Our JSON renders as: "geo": { "type":"Point", "coordinates":[37.78217, -122.40062] }
+     - The coordinates object is replacing the geo object (no deprecation date has been set for the geo object yet) -- the difference is that the coordinates object, in JSON, is now rendered correctly in GeoJSON.
+     - If a place_id is passed into the status update, then that place will be attached to the status. If no place_id was explicitly provided, but latitude and longitude are, we attempt to implicitly provide a place by calling geo/reverse_geocode.
+     - Users will have the ability, from their settings page, to remove all the geotags from all their tweets en masse. Currently we are not doing any automatic scrubbing nor providing a method to remove geotags from individual tweets.
+     
+     See:
+     
+     - https://dev.twitter.com/notifications/multiple-media-entities-in-tweets
+     - https://dev.twitter.com/docs/api/multiple-media-extended-entities
+     */
+    public func postWrapperTweet(status: String, inReplyToStatusID: String? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, media_ids: [String] = [], success: WrapperSuccessHandler<Tweet>? = nil, failure: FailureHandler? = nil) {
+        let path: String = "statuses/update.json"
+        
+        var parameters = Dictionary<String, Any>()
+        parameters["status"] = status
+        parameters["in_reply_to_status_id"] ??= inReplyToStatusID
+        parameters["trim_user"] ??= trimUser
+        
+        if let placeID = placeID {
+            parameters["place_id"] = placeID
+            parameters["display_coordinates"] = true
+        } else if let coordinate = coordinate {
+            parameters["lat"] = coordinate.lat
+            parameters["long"] = coordinate.long
+            parameters["display_coordinates"] = true
+        }
+        
+        if !media_ids.isEmpty {
+            parameters["media_ids"] = media_ids.joined(separator: ",")
+        }
+        
+        self.postWrapper(path: path, baseURL: .api, parameters: parameters, success: { tweet, _ in
+            success?(tweet)
+        }, failure: failure)
+    }
+    
+    public func postWrapperTweet(status: String, media: Data, inReplyToStatusID: String? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, success: WrapperSuccessHandler<Tweet>? = nil, failure: FailureHandler? = nil) {
+        let path: String = "statuses/update_with_media.json"
+        
+        var parameters = Dictionary<String, Any>()
+        parameters["status"] = status
+        parameters["media[]"] = media
+        parameters[Swifter.DataParameters.dataKey] = "media[]"
+        parameters["in_reply_to_status_id"] ??= inReplyToStatusID
+        parameters["trim_user"] ??= trimUser
+        
+        if placeID != nil {
+            parameters["place_id"] = placeID!
+            parameters["display_coordinates"] = true
+        } else if let coordinate = coordinate {
+            parameters["lat"] = coordinate.lat
+            parameters["long"] = coordinate.long
+            parameters["display_coordinates"] = true
+        }
+        
+        self.postWrapper(path: path, baseURL: .api, parameters: parameters, success: { tweet, _ in
+            success?(tweet)
+        }, failure: failure)
+    }
+    
+    /**
+     POST    media/upload
+     
+     Upload media (images) to Twitter for use in a Tweet or Twitter-hosted Card. For uploading videos or for chunked image uploads (useful for lower bandwidth connections), see our chunked POST media/upload endpoint.
+     
+     See:
+     
+     - https://dev.twitter.com/rest/public/uploading-media
+     - https://dev.twitter.com/rest/reference/post/media/upload
+     */
+    public func postWrapperMedia(_ media: Data, additionalOwners: UsersTag? = nil, success: WrapperSuccessHandler<PostMediaResponse>? = nil, failure: FailureHandler? = nil) {
+        let path: String = "media/upload.json"
+        var parameters = Dictionary<String, Any>()
+        parameters["media"] = media
+        parameters["additional_owers"] ??= additionalOwners?.value
+        parameters[Swifter.DataParameters.dataKey] = "media"
+        
+        self.postWrapper(path: path, baseURL: .upload, parameters: parameters, success: { response, _ in success?(response) }, failure: failure)
+    }
+    
+    /**
+     POST    statuses/retweet/:id
+     
+     Retweets a tweet. Returns the original tweet with retweet details embedded.
+     
+     - This method is subject to update limits. A HTTP 403 will be returned if this limit as been hit.
+     - Twitter will ignore attempts to perform duplicate retweets.
+     - The retweet_count will be current as of when the payload is generated and may not reflect the exact count. It is intended as an approximation.
+     
+     Returns Tweets (1: the new tweet)
+     */
+    public func retweetWrapperTweet(forID id: String, trimUser: Bool? = nil, success: WrapperSuccessHandler<Tweet>? = nil, failure: FailureHandler? = nil) {
+        let path = "statuses/retweet/\(id).json"
+        
+        var parameters = Dictionary<String, Any>()
+        parameters["trim_user"] ??= trimUser
+        
+        self.postWrapper(path: path, baseURL: .api, parameters: parameters, success: { tweet, _ in success?(tweet) }, failure: failure)
+    }
+    
+    /**
+     POST    statuses/unretweet/:id
+     
+     Untweets a retweeted status. Returns the original Tweet with retweet details embedded.
+     
+     - This method is subject to update limits. A HTTP 429 will be returned if this limit has been hit.
+     - The untweeted retweet status ID must be authored by the user backing the authentication token.
+     - An application must have write privileges to POST. A HTTP 401 will be returned for read-only applications.
+     - When passing a source status ID instead of the retweet status ID a HTTP 200 response will be returned with the same Tweet object but no action.
+     
+     Returns Tweets (1: the original tweet)
+     */
+    public func unretweetWrapperTweet(forID id: String, trimUser: Bool? = nil, success: WrapperSuccessHandler<Tweet>? = nil, failure: FailureHandler? = nil) {
+        let path = "statuses/unretweet/\(id).json"
+        
+        var parameters = Dictionary<String, Any>()
+        parameters["trim_user"] ??= trimUser
+        
+        self.postWrapper(path: path, baseURL: .api, parameters: parameters, success: { tweet, _ in success?(tweet) }, failure: failure)
+    }
+    
+    /**
+     GET    statuses/retweeters/ids
+     
+     Returns a collection of up to 100 user IDs belonging to users who have retweeted the tweet specified by the id parameter.
+     
+     This method offers similar data to GET statuses/retweets/:id and replaces API v1's GET statuses/:id/retweeted_by/ids method.
+     */
+    public func wrapperTweetRetweeters(forID id: String, cursor: String? = nil, stringifyIDs: Bool? = nil, success: WrapperSuccessHandler<IDList>? = nil, failure: FailureHandler? = nil) {
+        let path = "statuses/retweeters/ids.json"
+        
+        var parameters = Dictionary<String, Any>()
+        parameters["id"] = id
+        parameters["cursor"] ??= cursor
+        parameters["stringify_ids"] ??= stringifyIDs
+        
+        self.getWrapper(path: path, baseURL: .api, parameters: parameters, success: { list, _ in
+            success?(list)
+        }, failure: failure)
+    }
+    
+    /**
+     GET statuses/lookup
+     
+     Returns fully-hydrated tweet objects for up to 100 tweets per request, as specified by comma-separated values passed to the id parameter. This method is especially useful to get the details (hydrate) a collection of Tweet IDs. GET statuses/show/:id is used to retrieve a single tweet object.
+     */
+    public func lookupTweets(for tweetIDs: [String], includeEntities: Bool? = nil, map: Bool? = nil, success: WrapperSuccessHandler<[Tweet]>? = nil, failure: FailureHandler? = nil) {
+        let path = "statuses/lookup.json"
+        
+        var parameters = Dictionary<String, Any>()
+        parameters["id"] = tweetIDs.joined(separator: ",")
+        parameters["include_entities"] ??= includeEntities
+        parameters["map"] ??= map
+        
+        self.getWrapper(path: path, baseURL: .api, parameters: parameters, success: { tweets, _ in success?(tweets) }, failure: failure)
+    }
 }
-
