@@ -102,6 +102,8 @@
 		F11A6F351F255314001234E2 /* SwifterJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11A6F331F255314001234E2 /* SwifterJSON.swift */; };
 		F11A6F391F2554EA001234E2 /* WrapperTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11A6F381F2554EA001234E2 /* WrapperTweets.swift */; };
 		F11A6F3A1F2554EA001234E2 /* WrapperTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11A6F381F2554EA001234E2 /* WrapperTweets.swift */; };
+		F152413E1F260C4600B9328F /* WrapperTimelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = F152413C1F260B7F00B9328F /* WrapperTimelines.swift */; };
+		F152413F1F260C4700B9328F /* WrapperTimelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = F152413C1F260B7F00B9328F /* WrapperTimelines.swift */; };
 		F1ADE6361F252C59008B2358 /* WrapperObjectEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ADE6341F252C4B008B2358 /* WrapperObjectEntities.swift */; };
 		F1ADE6371F252C5A008B2358 /* WrapperObjectEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ADE6341F252C4B008B2358 /* WrapperObjectEntities.swift */; };
 		F1ADE6381F252C62008B2358 /* WrapperObjectTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ADE6331F252C4B008B2358 /* WrapperObjectTweet.swift */; };
@@ -222,6 +224,7 @@
 		DC7D6B771ECA8F3C008586E3 /* Scanner++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scanner++.swift"; sourceTree = "<group>"; };
 		F11A6F331F255314001234E2 /* SwifterJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwifterJSON.swift; sourceTree = "<group>"; };
 		F11A6F381F2554EA001234E2 /* WrapperTweets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperTweets.swift; sourceTree = "<group>"; };
+		F152413C1F260B7F00B9328F /* WrapperTimelines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperTimelines.swift; sourceTree = "<group>"; };
 		F1ADE6331F252C4B008B2358 /* WrapperObjectTweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WrapperObjectTweet.swift; path = Sources/WrapperObjectTweet.swift; sourceTree = SOURCE_ROOT; };
 		F1ADE6341F252C4B008B2358 /* WrapperObjectEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WrapperObjectEntities.swift; path = Sources/WrapperObjectEntities.swift; sourceTree = SOURCE_ROOT; };
 		F1ADE6351F252C4B008B2358 /* WrapperObjectUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WrapperObjectUser.swift; path = Sources/WrapperObjectUser.swift; sourceTree = SOURCE_ROOT; };
@@ -397,6 +400,7 @@
 			children = (
 				F1ADE63C1F252D29008B2358 /* Wrapper.swift */,
 				F11A6F381F2554EA001234E2 /* WrapperTweets.swift */,
+				F152413C1F260B7F00B9328F /* WrapperTimelines.swift */,
 				F11A6F371F2553E8001234E2 /* Objects */,
 			);
 			name = Wrapper;
@@ -703,6 +707,7 @@
 				A1E207B41D4B86170093E498 /* Data++.swift in Sources */,
 				DC7D6B781ECA8F3C008586E3 /* Scanner++.swift in Sources */,
 				8BF1D6761948825D00E3AA64 /* JSONSavedSearches.swift in Sources */,
+				F152413E1F260C4600B9328F /* WrapperTimelines.swift in Sources */,
 				A1E207A91D4B85D90093E498 /* HMAC.swift in Sources */,
 				8BCF43171947450A00E63301 /* JSONTweets.swift in Sources */,
 				8BF1D6851948BCC100E3AA64 /* SwifterAccountsClient.swift in Sources */,
@@ -752,6 +757,7 @@
 				A1E207B51D4B86170093E498 /* Data++.swift in Sources */,
 				DC7D6B791ECA8F3C008586E3 /* Scanner++.swift in Sources */,
 				8BF1D6771948825D00E3AA64 /* JSONSavedSearches.swift in Sources */,
+				F152413F1F260C4700B9328F /* WrapperTimelines.swift in Sources */,
 				A1E207AA1D4B85D90093E498 /* HMAC.swift in Sources */,
 				8BCF43181947450A00E63301 /* JSONTweets.swift in Sources */,
 				8BF1D6861948BCC100E3AA64 /* SwifterAccountsClient.swift in Sources */,
