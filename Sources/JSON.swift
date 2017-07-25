@@ -228,8 +228,6 @@ public func ==(lhs: JSON, rhs: JSON) -> Bool {
     }
 }
 
-
-
 extension JSON: ExpressibleByStringLiteral,
     ExpressibleByIntegerLiteral,
     ExpressibleByBooleanLiteral,
@@ -273,22 +271,6 @@ extension JSON: ExpressibleByStringLiteral,
     
     public init(nilLiteral: ()) {
         self.init(NSNull())
-    }
-    
-}
-
-private func +(lhs: [String: Any], rhs: [String: Any]) -> [String: Any] {
-    var lhs = lhs
-    for element in rhs {
-        lhs[element.key] = element.value
-    }
-    return lhs
-}
-
-private extension NSNumber {
-    
-    var isBoolean: Bool {
-        return NSNumber(value: true).objCType == self.objCType
     }
     
 }
@@ -341,6 +323,22 @@ extension JSON: Decodable {
             return nil
         }
         
+    }
+    
+}
+
+private func +(lhs: [String: Any], rhs: [String: Any]) -> [String: Any] {
+    var lhs = lhs
+    for element in rhs {
+        lhs[element.key] = element.value
+    }
+    return lhs
+}
+
+private extension NSNumber {
+    
+    var isBoolean: Bool {
+        return NSNumber(value: true).objCType == self.objCType
     }
     
 }

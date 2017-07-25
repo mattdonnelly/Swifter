@@ -77,6 +77,7 @@ public class Swifter {
     // MARK: - Properties
     
     public var client: SwifterClientProtocol
+    private let decoder = JSONDecoder()
     
     // MARK: - Initializers
     
@@ -155,4 +156,5 @@ public class Swifter {
     internal func postJSON(path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
         return self.jsonRequest(path: path, baseURL: baseURL, method: .POST, parameters: parameters, uploadProgress: uploadProgress, downloadProgress: downloadProgress, success: success, failure: failure)
     }
+    
 }
