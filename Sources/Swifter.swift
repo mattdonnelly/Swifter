@@ -121,7 +121,8 @@ public class Swifter {
             
             DispatchQueue.global(qos: .utility).async {
                 do {
-                    let jsonResult = try JSON.parse(jsonData: data)
+                    let decoder = JSONDecoder()
+                    let jsonResult = try decoder.decode(JSON.self, from: data)
                     DispatchQueue.main.async {
                         success?(jsonResult, response)
                     }

@@ -290,26 +290,57 @@ private extension NSNumber {
     var isBoolean: Bool {
         return NSNumber(value: true).objCType == self.objCType
     }
+    
 }
 
 extension JSON: Decodable {
+    
     public init(from decoder: Decoder) throws {
-        var container = try decoder.unkeyedContainer()
-        
-        if let string = try? container.decode(String.self) {
-            self = .string(string)
-        } else if let number = try? container.decode(Double.self) {
-            self = .number(number)
-        } else if let object = try? container.decode(Dictionary<String, JSON>.self) {
-            self = .object(object)
-        } else if let array = try? container.decode(Array<JSON>.self) {
+        if let container = try? decoder.singleValueContainer() {
+            if let string = try? container.decode(String.self) {
+                self = .string(string)
+            } else if let bool = try? container.decode(Bool.self) {
+                self = .bool(bool)
+            } else if let number = try? container.decode(Double.self) {
+                self = .number(number)
+            } else {
+                self = .invalid
+            }
+        } else if var container = try? decoder.unkeyedContainer() {
+            var array = [JSON]()
+            for _ in 0..<container.count! {
+                if let element = try container.decodeIfPresent(JSON.self) {
+                    array.append(element)
+                } else {
+                    array.append(.null)
+                }
+            }
             self = .array(array)
-        } else if let bool = try? container.decode(Bool.self) {
-            self = .bool(bool)
-        } else if let _ = try? container.decode(Optional<Any>.self) {
-            self = .null
+        } else if let container = try? decoder.container(keyedBy: CodingKeys.self) {
+            var object = [String: JSON]()
+            for key in container.allKeys {
+                object[key.stringValue] = try container.decodeIfPresent(JSON.self, forKey: key) ?? .null
+            }
+            self = .object(object)
         } else {
             self = .invalid
         }
     }
+    
+    struct CodingKeys: CodingKey {
+        
+        var stringValue: String
+        
+        init?(stringValue: String) {
+            self.stringValue = stringValue
+        }
+        
+        var intValue: Int?
+        
+        init?(intValue: Int) {
+            return nil
+        }
+        
+    }
+    
 }
