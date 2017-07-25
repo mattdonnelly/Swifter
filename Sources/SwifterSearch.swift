@@ -1,5 +1,5 @@
 //
-//  JSONSearch.swift
+//  SwifterSearch.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.

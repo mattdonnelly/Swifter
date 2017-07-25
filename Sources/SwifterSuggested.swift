@@ -1,5 +1,5 @@
 //
-//  JSONSuggested.swift
+//  SwifterSuggested.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.

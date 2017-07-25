@@ -1,5 +1,5 @@
 //
-//  JSONPlaces.swift
+//  SwifterPlaces.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.

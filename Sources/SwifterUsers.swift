@@ -1,5 +1,5 @@
 //
-//  JSONUsers.swift
+//  SwifterUsers.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.

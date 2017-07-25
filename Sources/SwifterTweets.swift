@@ -1,5 +1,5 @@
 //
-//  JSONTweets.swift
+//  SwifterTweets.swift
 //  Swifter
 //
 //  Copyright (c) 2014 Matt Donnelly.

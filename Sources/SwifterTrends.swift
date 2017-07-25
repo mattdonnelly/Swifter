@@ -1,5 +1,5 @@
 //
-//  JSONTrends.swift
+//  SwifterTrends.swift
 //  Swifter
 //
 //  Created by Matt Donnelly on 21/06/2014.
