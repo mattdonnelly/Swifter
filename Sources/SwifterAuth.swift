@@ -110,7 +110,7 @@ public extension Swifter {
     }
     
     public func authorizeAppOnly(success: TokenSuccessHandler?, failure: FailureHandler?) {
-        self.postOAuth2BearerToken(success: { json, response in
+        self.postOAuth2BearerToken(successType: JSON.self, success: { json, response in
             if let tokenType = json["token_type"].string {
                 if tokenType == "bearer" {
                     let accessToken = json["access_token"].string
@@ -135,19 +135,23 @@ public extension Swifter {
             }, failure: failure)
     }
     
-    public func postOAuth2BearerToken(success: JSONSuccessHandler?, failure: FailureHandler?) {
+    public func postOAuth2BearerToken<T: Decodable>(successType: T.Type, success: JSONSuccessHandler<T>?, failure: FailureHandler?) {
         let path = "oauth2/token"
         
         var parameters = Dictionary<String, Any>()
         parameters["grant_type"] = "client_credentials"
         
-        self.jsonRequest(path: path, baseURL: .oauth, method: .POST, parameters: parameters, success: success, failure: failure)
+        self.postJSON(path: path, baseURL: .oauth, parameters: parameters, successType: successType, success: success, failure: failure)
+    }
+    
+    public func postOAuth2BearerToken(success: JSONSuccessHandler<JSON>?, failure: FailureHandler) {
+        self.postOAuth2BearerToken(successType: JSON.self, success: success, failure: failure)
     }
     
     public func invalidateOAuth2BearerToken(success: TokenSuccessHandler?, failure: FailureHandler?) {
         let path = "oauth2/invalidate_token"
         
-        self.jsonRequest(path: path, baseURL: .oauth, method: .POST, parameters: [:], success: { json, response in
+        self.postJSON(path: path, baseURL: .oauth, parameters: [:], success: { json, response in
             if let accessToken = json["access_token"].string {
                 self.client.credential = nil
                 let credentialToken = Credential.OAuthAccessToken(key: accessToken, secret: "")
