@@ -260,6 +260,14 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
+    
+    public func oembedInfo(forID id: String, maxWidth: Int? = nil, hideMedia: Bool? = nil, hideThread: Bool? = nil, omitScript: Bool? = nil, align: String? = nil, related: String? = nil, lang: String? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
+        self.oembedInfo(forID: id, maxWidth: maxWidth, hideMedia: hideMedia, hideThread: hideThread, omitScript: omitScript, align: align, related: related, lang: lang, successType: JSON.self, success: success, failure: failure)
+    }
+    
+    public func oembedInfo(forUrl url: URL, maxWidth: Int? = nil, hideMedia: Bool? = nil, hideThread: Bool? = nil, omitScript: Bool? = nil, align: String? = nil, related: String? = nil, lang: String? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
+        self.oembedInfo(forUrl: url, maxWidth: maxWidth, hideMedia: hideMedia, hideThread: hideThread, omitScript: omitScript, align: align, related: related, lang: lang, successType: JSON.self, success: success, failure: failure)
+    }
 
     /**
     GET    statuses/retweeters/ids

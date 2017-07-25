@@ -37,7 +37,7 @@ public extension Swifter {
         params["contributor_details"] ??= contributorDetails
         params["include_entities"] ??= includeEntities
 
-        self.getJSON(path: path, baseURL: .api, parameters: params, successType: T.self, success: { json, _ in success?(json) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: params, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
 
     /**
