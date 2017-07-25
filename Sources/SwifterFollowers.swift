@@ -68,7 +68,7 @@ public extension Swifter {
     }
     
     public func getUserFollowingIDs(for userTag: UserTag, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
-        self.getUserFollowingIDs(for: userTag, cursor: cursor, stringifyIDs: stringifyIDs, count: count, successType: JSON.self, success: { json, _ in
+        self.getUserFollowingIDs(for: userTag, cursor: cursor, stringifyIDs: stringifyIDs, count: count, successType: JSON.self, success: { json in
             success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
@@ -95,7 +95,7 @@ public extension Swifter {
     }
     
     public func getUserFollowersIDs(for userTag: UserTag, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
-        self.getUserFollowersIDs(for: userTag, cursor: cursor, stringifyIDs: stringifyIDs, count: count, successType: JSON.self, success: { json, _ in
+        self.getUserFollowersIDs(for: userTag, cursor: cursor, stringifyIDs: stringifyIDs, count: count, successType: JSON.self, success: { json in
             success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
@@ -116,7 +116,7 @@ public extension Swifter {
     }
     
     public func getIncomingPendingFollowRequests(cursor: String? = nil, stringifyIDs: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
-        self.getIncomingPendingFollowRequests(cursor: cursor, stringifyIDs: stringifyIDs, successType: JSON.self, success: { json, _ in
+        self.getIncomingPendingFollowRequests(cursor: cursor, stringifyIDs: stringifyIDs, successType: JSON.self, success: { json in
             success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
@@ -137,7 +137,7 @@ public extension Swifter {
     }
     
     public func getOutgoingPendingFollowRequests(cursor: String? = nil, stringifyIDs: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
-        self.getOutgoingPendingFollowRequests(cursor: cursor, stringifyIDs: stringifyIDs, successType: JSON.self, success: { json, _ in
+        self.getOutgoingPendingFollowRequests(cursor: cursor, stringifyIDs: stringifyIDs, successType: JSON.self, success: { json in
             success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
@@ -254,7 +254,7 @@ public extension Swifter {
     }
     
     public func getUserFollowing(for userTag: UserTag, cursor: String? = nil, count: Int? = nil, skipStatus: Bool? = nil, includeUserEntities: Bool? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
-        self.getUserFollowing(for: userTag, cursor: cursor, count: count, skipStatus: skipStatus, includeUserEntities: includeUserEntities, successType: JSON.self, success: { json, _ in
+        self.getUserFollowing(for: userTag, cursor: cursor, count: count, skipStatus: skipStatus, includeUserEntities: includeUserEntities, successType: JSON.self, success: { json in
             success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
@@ -280,7 +280,7 @@ public extension Swifter {
     }
     
     public func getUserFollowers(for userTag: UserTag, cursor: String? = nil, count: Int? = nil, skipStatus: Bool? = nil, includeUserEntities: Bool? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
-        self.getUserFollowers(for: userTag, cursor: cursor, count: count, skipStatus: skipStatus, includeUserEntities: includeUserEntities, successType: JSON.self, success: { json, _ in
+        self.getUserFollowers(for: userTag, cursor: cursor, count: count, skipStatus: skipStatus, includeUserEntities: includeUserEntities, successType: JSON.self, success: { json in
             success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }

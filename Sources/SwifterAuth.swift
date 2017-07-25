@@ -144,7 +144,7 @@ public extension Swifter {
         self.postJSON(path: path, baseURL: .oauth, parameters: parameters, successType: successType, success: success, failure: failure)
     }
     
-    public func postOAuth2BearerToken(success: JSONSuccessHandler<JSON>?, failure: FailureHandler) {
+    public func postOAuth2BearerToken(success: JSONSuccessHandler<JSON>?, failure: FailureHandler?) {
         self.postOAuth2BearerToken(successType: JSON.self, success: success, failure: failure)
     }
     

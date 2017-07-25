@@ -128,7 +128,7 @@ public extension Swifter {
     }
     
     public func getListMemberships(for userTag: UserTag, cursor: String?, filterToOwnedLists: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
-        self.getListMemberships(for: userTag, cursor: cursor, filterToOwnedLists: filterToOwnedLists, successType: JSON.self, success: { json, _ in
+        self.getListMemberships(for: userTag, cursor: cursor, filterToOwnedLists: filterToOwnedLists, successType: JSON.self, success: { json in
             success?(json["lists"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
@@ -154,7 +154,7 @@ public extension Swifter {
     }
     
     public func getListSubscribers(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
-        self.getListSubscribers(for: listTag, cursor: cursor, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: { json, _ in
+        self.getListSubscribers(for: listTag, cursor: cursor, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: { json in
             success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
@@ -282,7 +282,7 @@ public extension Swifter {
     Returns the members of the specified list. Private list members will only be shown if the authenticated user owns the specified list.
     */
 
-    public func getListMembers<T: Decodable>(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?,successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
+    public func getListMembers<T: Decodable>(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/members.json"
 
         var parameters = Dictionary<String, Any>()
@@ -298,9 +298,9 @@ public extension Swifter {
     }
     
     public func getListMembers(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
-        self.getListMembers(for: listTag, cursor: cursor, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: { json, _ in
+        self.getListMembers(for: listTag, cursor: cursor, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: { json in
             success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
-        })
+        }, failure: failure)
     }
     
     /**
@@ -430,7 +430,7 @@ public extension Swifter {
     }
     
     public func getSubscribedList(of userTag: UserTag, count: String?, cursor: String?, success: CursorSuccessHandler?, failure: FailureHandler?) {
-        self.getSubscribedList(of: userTag, count: count, cursor: cursor, successType: JSON.self, success: { json, _ in
+        self.getSubscribedList(of: userTag, count: count, cursor: cursor, successType: JSON.self, success: { json in
             success?(json["lists"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
@@ -479,7 +479,7 @@ public extension Swifter {
     }
     
     public func getOwnedLists(for userTag: UserTag, count: String?, cursor: String?, success: CursorSuccessHandler?, failure: FailureHandler?) {
-        self.getOwnedLists(for: userTag, count: count, cursor: cursor, successType: JSON.self, success: { json, _ in
+        self.getOwnedLists(for: userTag, count: count, cursor: cursor, successType: JSON.self, success: { json in
             success?(json["lists"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }

@@ -284,13 +284,11 @@ public extension Swifter {
         parameters["cursor"] ??= cursor
         parameters["stringify_ids"] ??= stringifyIDs
 
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in
-            success?(json)
-        }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
     
     public func tweetRetweeters(forID id: String, cursor: String? = nil, stringifyIDs: Bool? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
-        self.tweetRetweeters(forID: id, cursor: cursor, stringifyIDs: stringifyIDs, successType: JSON.self, success: { json, _ in
+        self.tweetRetweeters(forID: id, cursor: cursor, stringifyIDs: stringifyIDs, successType: JSON.self, success: { json in
             success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }

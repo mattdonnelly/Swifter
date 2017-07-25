@@ -197,7 +197,7 @@ public extension Swifter {
     }
     
     public func getBlockedUsers(includeEntities: Bool? = nil, skipStatus: Bool? = nil, cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
-        self.getBlockedUsers(includeEntities: includeEntities, skipStatus: skipStatus, cursor: cursor, successType: JSON.self, success: { json, _ in
+        self.getBlockedUsers(includeEntities: includeEntities, skipStatus: skipStatus, cursor: cursor, successType: JSON.self, success: { json in
             success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
@@ -218,7 +218,7 @@ public extension Swifter {
     }
     
     public func getBlockedUsersIDs(stringifyIDs: String? = nil, cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: @escaping FailureHandler) {
-        self.getBlockedUsersIDs(stringifyIDs: stringifyIDs, cursor: cursor, successType: JSON.self, success: { json, _ in
+        self.getBlockedUsersIDs(stringifyIDs: stringifyIDs, cursor: cursor, successType: JSON.self, success: { json in
             success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
@@ -457,7 +457,7 @@ public extension Swifter {
     }
     
     public func getMuteUsersIDs(cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
-        self.getMuteUsersIDs(cursor: cursor, successType: JSON.self, success: { json, _ in
+        self.getMuteUsersIDs(cursor: cursor, successType: JSON.self, success: { json in
             success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
@@ -479,7 +479,7 @@ public extension Swifter {
     }
     
     public func getMuteUsers(cursor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
-        self.getMuteUsers(cursor: cursor, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: { json, _ in
+        self.getMuteUsers(cursor: cursor, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: { json in
             success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
