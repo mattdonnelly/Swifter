@@ -42,7 +42,7 @@ public extension Swifter {
     }
     
     public func getRetweets(forTweetID id: String, count: Int? = nil, trimUser: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
-        self.getRetweets(forTweetID: id, count: count, trimUser: trimUser, successType: JSON.self, failure: failure)
+        self.getRetweets(forTweetID: id, count: count, trimUser: trimUser, successType: JSON.self, success: success, failure: failure)
     }
 
     /**
