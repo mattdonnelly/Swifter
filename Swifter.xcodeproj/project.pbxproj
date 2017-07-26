@@ -80,6 +80,8 @@
 		DC7D6B761ECA5294008586E3 /* SwifterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D6B731ECA5294008586E3 /* SwifterTests.swift */; };
 		DC7D6B781ECA8F3C008586E3 /* Scanner++.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D6B771ECA8F3C008586E3 /* Scanner++.swift */; };
 		DC7D6B791ECA8F3C008586E3 /* Scanner++.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D6B771ECA8F3C008586E3 /* Scanner++.swift */; };
+		F130CB6D1F27FA85008CC146 /* SwifterStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D2C194695F80052EB86 /* SwifterStreaming.swift */; };
+		F130CB6E1F27FA86008CC146 /* SwifterStreaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B552D2C194695F80052EB86 /* SwifterStreaming.swift */; };
 		F6B4D57A1C7BAC4500E06514 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -647,6 +649,7 @@
 				8B9F51531944A8DC00894629 /* String++.swift in Sources */,
 				8BCF431A19475D3C00E63301 /* SwifterSearch.swift in Sources */,
 				8B33CA3F19587C6D00739FCB /* JSON.swift in Sources */,
+				F130CB6D1F27FA85008CC146 /* SwifterStreaming.swift in Sources */,
 				8BCF432C1947CED700E63301 /* SwifterLists.swift in Sources */,
 				8BA50EC71953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */,
 				8BF1D6881948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
@@ -681,6 +684,7 @@
 				8B9F51541944A8DC00894629 /* String++.swift in Sources */,
 				8BCF431B19475D3C00E63301 /* SwifterSearch.swift in Sources */,
 				8B33CA4019587C6D00739FCB /* JSON.swift in Sources */,
+				F130CB6E1F27FA86008CC146 /* SwifterStreaming.swift in Sources */,
 				8BCF432D1947CED700E63301 /* SwifterLists.swift in Sources */,
 				8BA50EC81953828A00FB1829 /* SwifterAppOnlyClient.swift in Sources */,
 				8BF1D6891948C11E00E3AA64 /* SwifterCredential.swift in Sources */,
