@@ -62,7 +62,9 @@ class ViewController: NSViewController {
                 
                 swifter.getWrapperHomeTimeline(count: 100, success: { statuses in
                     self.tweets = statuses
-                    self.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }, failure: failureHandler)
             }
         } else {
@@ -70,8 +72,11 @@ class ViewController: NSViewController {
             swifter.authorize(with: URL(string: "swifter://success")!, success: { _ in
                 swifter.getWrapperHomeTimeline(count: 100, success: { statuses in
                     self.tweets = statuses
-                    self.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }, failure: failureHandler)
+                
             }, failure: failureHandler)
         }
     }
