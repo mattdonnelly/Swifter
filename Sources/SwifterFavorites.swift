@@ -34,22 +34,13 @@ public extension Swifter {
 
     If you do not provide either a user_id or screen_name to this method, it will assume you are requesting on behalf of the authenticating user. Specify one or the other for best results.
     */
-    public func getRecentlyFavouritedTweets(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
-        let path = "favorites/list.json"
-
-        var parameters = Dictionary<String, Any>()
-        parameters["count"] ??= count
-        parameters["since_id"] ??= sinceID
-        parameters["max_id"] ??= maxID
-
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
-    }
-    
-    public func getRecentlyFavouritedTweets(for userTag: UserTag, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getRecentlyFavouritedTweets(for userTag: UserTag? = nil, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "favorites/list.json"
         
         var parameters = Dictionary<String, Any>()
-        parameters[userTag.key] = userTag.value
+        if let userTag = userTag {
+            parameters[userTag.key] = userTag.value
+        }
         parameters["count"] ??= count
         parameters["since_id"] ??= sinceID
         parameters["max_id"] ??= maxID
