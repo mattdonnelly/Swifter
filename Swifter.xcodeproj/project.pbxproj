@@ -88,6 +88,16 @@
 		F19E68EE1F29632D005A19EA /* SwifterMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF431C1947907300E63301 /* SwifterMessages.swift */; };
 		F19E68EF1F2965B0005A19EA /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
 		F19E68F01F2965B1005A19EA /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
+		F19E68F11F2969E4005A19EA /* SwifterFavorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF43281947CC7A00E63301 /* SwifterFavorites.swift */; };
+		F19E68F21F2969E4005A19EA /* SwifterFavorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF43281947CC7A00E63301 /* SwifterFavorites.swift */; };
+		F19E68F31F296C79005A19EA /* SwifterSavedSearches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6751948825D00E3AA64 /* SwifterSavedSearches.swift */; };
+		F19E68F41F296C79005A19EA /* SwifterSavedSearches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D6751948825D00E3AA64 /* SwifterSavedSearches.swift */; };
+		F19E68F51F296DEF005A19EA /* SwifterSuggested.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF43251947CABA00E63301 /* SwifterSuggested.swift */; };
+		F19E68F61F296DF0005A19EA /* SwifterSuggested.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF43251947CABA00E63301 /* SwifterSuggested.swift */; };
+		F19E68F71F296FF9005A19EA /* SwifterTrends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC32D3C1955EEE100FF75A0 /* SwifterTrends.swift */; };
+		F19E68F81F296FF9005A19EA /* SwifterTrends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC32D3C1955EEE100FF75A0 /* SwifterTrends.swift */; };
+		F19E68F91F2970E2005A19EA /* SwifterSpam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D67B1948882700E3AA64 /* SwifterSpam.swift */; };
+		F19E68FA1F2970E2005A19EA /* SwifterSpam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1D67B1948882700E3AA64 /* SwifterSpam.swift */; };
 		F6B4D57A1C7BAC4500E06514 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F50EE1944A5AB00894629 /* SwifteriOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -644,10 +654,13 @@
 				A1BDB38C1D4C864200B0080F /* SwifterTag.swift in Sources */,
 				8B116AF1194601970019A4DC /* SwifterHTTPRequest.swift in Sources */,
 				8B548F5619450BDB00EE2927 /* SwifterOAuthClient.swift in Sources */,
+				F19E68F71F296FF9005A19EA /* SwifterTrends.swift in Sources */,
 				A1E207B21D4B86170093E498 /* Int++.swift in Sources */,
 				F19E68EB1F295E6A005A19EA /* SwifterPlaces.swift in Sources */,
 				8B9F51571944A8DC00894629 /* Swifter.swift in Sources */,
 				A1E207B41D4B86170093E498 /* Data++.swift in Sources */,
+				F19E68F91F2970E2005A19EA /* SwifterSpam.swift in Sources */,
+				F19E68F11F2969E4005A19EA /* SwifterFavorites.swift in Sources */,
 				DC7D6B781ECA8F3C008586E3 /* Scanner++.swift in Sources */,
 				A1E207A91D4B85D90093E498 /* HMAC.swift in Sources */,
 				8BCF43171947450A00E63301 /* SwifterTweets.swift in Sources */,
@@ -663,6 +676,8 @@
 				A1AA8B001D5C514E00CE7F17 /* SwifterError.swift in Sources */,
 				A1E207AB1D4B85D90093E498 /* SHA1.swift in Sources */,
 				F19E68EF1F2965B0005A19EA /* SwifterHelp.swift in Sources */,
+				F19E68F51F296DEF005A19EA /* SwifterSuggested.swift in Sources */,
+				F19E68F31F296C79005A19EA /* SwifterSavedSearches.swift in Sources */,
 				F19E68ED1F29632D005A19EA /* SwifterMessages.swift in Sources */,
 				A1E207AD1D4B85D90093E498 /* Utils.swift in Sources */,
 				8BCF43231947A6C800E63301 /* SwifterUsers.swift in Sources */,
@@ -682,10 +697,13 @@
 				A1BDB38D1D4C864200B0080F /* SwifterTag.swift in Sources */,
 				8B116AF2194601970019A4DC /* SwifterHTTPRequest.swift in Sources */,
 				8B548F5719450BDB00EE2927 /* SwifterOAuthClient.swift in Sources */,
+				F19E68F81F296FF9005A19EA /* SwifterTrends.swift in Sources */,
 				A1E207B31D4B86170093E498 /* Int++.swift in Sources */,
 				F19E68EC1F295E6A005A19EA /* SwifterPlaces.swift in Sources */,
 				8B9F51581944A8DC00894629 /* Swifter.swift in Sources */,
 				A1E207B51D4B86170093E498 /* Data++.swift in Sources */,
+				F19E68FA1F2970E2005A19EA /* SwifterSpam.swift in Sources */,
+				F19E68F21F2969E4005A19EA /* SwifterFavorites.swift in Sources */,
 				DC7D6B791ECA8F3C008586E3 /* Scanner++.swift in Sources */,
 				A1E207AA1D4B85D90093E498 /* HMAC.swift in Sources */,
 				8BCF43181947450A00E63301 /* SwifterTweets.swift in Sources */,
@@ -701,6 +719,8 @@
 				A1AA8B011D5C515000CE7F17 /* SwifterError.swift in Sources */,
 				A1E207AC1D4B85D90093E498 /* SHA1.swift in Sources */,
 				F19E68F01F2965B1005A19EA /* SwifterHelp.swift in Sources */,
+				F19E68F61F296DF0005A19EA /* SwifterSuggested.swift in Sources */,
+				F19E68F41F296C79005A19EA /* SwifterSavedSearches.swift in Sources */,
 				F19E68EE1F29632D005A19EA /* SwifterMessages.swift in Sources */,
 				A1E207AE1D4B85D90093E498 /* Utils.swift in Sources */,
 				8BCF43241947A6C800E63301 /* SwifterUsers.swift in Sources */,
