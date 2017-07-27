@@ -34,10 +34,14 @@ public extension Swifter {
 
     It is recommended applications request this endpoint when they are loaded, but no more than once a day.
     */
-    public func getHelpConfiguration(success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getHelpConfiguration<T: Decodable>(successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "help/configuration.json"
 
-        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+    
+    public func getHelpConfiguration(success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
+        self.getHelpConfiguration(successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -45,10 +49,14 @@ public extension Swifter {
 
     Returns the list of languages supported by Twitter along with their ISO 639-1 code. The ISO 639-1 code is the two letter value to use if you include lang with any of your requests.
     */
-    public func getHelpLanguages(success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getHelpLanguages<T: Decodable>(successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "help/languages.json"
 
-        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+    
+    public func getHelpLanguages(success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
+        self.getHelpLanguages(successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -56,10 +64,14 @@ public extension Swifter {
 
     Returns Twitter's Privacy Policy.
     */
-    public func getHelpPrivacy(success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getHelpPrivacy<T: Decodable>(successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "help/privacy.json"
 
-        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json["privacy"]) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+    
+    public func getHelpPrivacy(success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
+        self.getHelpPrivacy(successType: JSON.self, success: { json in success?(json["privacy"]) }, failure: failure)
     }
 
     /**
@@ -67,10 +79,14 @@ public extension Swifter {
 
     Returns the Twitter Terms of Service in the requested format. These are not the same as the Developer Rules of the Road.
     */
-    public func getHelpTermsOfService(success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getHelpTermsOfService<T: Decodable>(successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "help/tos.json"
 
-        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json["tos"]) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+    
+    public func getHelpTermsOfService(success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
+        self.getHelpTermsOfService(successType: JSON.self, success: { json in success?(json["tos"]) }, failure: failure)
     }
 
     /**
@@ -88,13 +104,17 @@ public extension Swifter {
 
     Read more about REST API Rate Limiting in v1.1 and review the limits.
     */
-    public func getRateLimits(for resources: [String], success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getRateLimits<T: Decodable>(for resources: [String], successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "application/rate_limit_status.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["resources"] = resources.joined(separator: ",")
 
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+    
+    public func getRateLimits(for resources: [String], success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
+        self.getRateLimits(for: resources, successType: JSON.self, success: success, failure: failure)
     }
     
 }
