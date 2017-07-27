@@ -30,17 +30,12 @@ import SwifterMac
 class ViewController: NSViewController {
 
     let useACAccount = false
-    var tweets: [Swifter.Tweet] = []
-    
-    @IBOutlet weak var tableView: NSTableView!
-    
+    dynamic var tweets: [Tweet] = []
+                            
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
 
-        let failureHandler: (Error) -> Void = { print($0) }
+        let failureHandler: (Error) -> Void = { print($0.localizedDescription) }
 
         if useACAccount {
             let accountStore = ACAccountStore()
@@ -60,59 +55,31 @@ class ViewController: NSViewController {
                 let twitterAccount = twitterAccounts[0] as! ACAccount
                 let swifter = Swifter(account: twitterAccount)
                 
-                swifter.getWrapperHomeTimeline(count: 100, success: { statuses in
-                    self.tweets = statuses
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }, failure: failureHandler)
+                swifter.getHomeTimeline(count: 20, success: { statuses in
+                    print(statuses)
+                    }, failure: failureHandler)
             }
         } else {
             let swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
             swifter.authorize(with: URL(string: "swifter://success")!, success: { _ in
-                swifter.getWrapperHomeTimeline(count: 100, success: { statuses in
-                    self.tweets = statuses
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
+                swifter.getHomeTimeline(count: 100, success: { statuses in
+                    guard let tweets = statuses.array else { return }
+                    self.tweets = tweets.map {
+                        let tweet = Tweet()
+                        tweet.text = $0["text"].string!
+                        tweet.name = $0["user"]["name"].string!
+                        return tweet
                     }
+                    }, failure: failureHandler)
                 }, failure: failureHandler)
-                
-            }, failure: failureHandler)
         }
     }
 
 }
 
-extension ViewController: NSTableViewDataSource {
+class Tweet: NSObject {
     
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return tweets.count
-    }
-    
-}
-
-extension ViewController: NSTableViewDelegate {
-    
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let tweet = tweets[row]
-        let text: String
-        let cellID: String
-        
-        if tableColumn == tableView.tableColumns[0] {
-            text = tweet.user.name
-            cellID = "NameCell"
-        } else if tableColumn == tableView.tableColumns[1] {
-            text = tweet.text
-            cellID = "TextCell"
-        } else {
-            return nil
-        }
-        
-        if let cell = tableView.make(withIdentifier: cellID, owner: nil) as? NSTableCellView {
-            cell.textField?.stringValue = text
-            return cell
-        }
-        return nil
-    }
+    var name: String!
+    var text: String!
     
 }
