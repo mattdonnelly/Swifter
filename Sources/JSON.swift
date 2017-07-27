@@ -290,11 +290,9 @@ extension JSON: Decodable {
             }
         } else if var container = try? decoder.unkeyedContainer() {
             var array = [JSON]()
-            for _ in 0..<container.count! {
-                if let element = try container.decodeIfPresent(JSON.self) {
-                    array.append(element)
-                } else {
-                    array.append(.null)
+            if let count = container.count {
+                for _ in 0..<count {
+                    array.append(try container.decodeIfPresent(JSON.self) ?? .null)
                 }
             }
             self = .array(array)
@@ -317,7 +315,7 @@ extension JSON: Decodable {
             self.stringValue = stringValue
         }
         
-        var intValue: Int?
+        var intValue: Int? { return nil }
         
         init?(intValue: Int) {
             return nil
