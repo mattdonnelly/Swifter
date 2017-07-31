@@ -40,7 +40,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func listOfNoRetweetsFriends(stringifyIDs: Bool = true, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.listOfNoRetweetsFriends(stringifyIDs: stringifyIDs, successType: JSON.self, success: success, failure: failure)
     }
@@ -57,22 +57,22 @@ public extension Swifter {
     */
     public func getUserFollowingIDs<T: Decodable>(for userTag: UserTag, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "friends/ids.json"
-        
+
         var parameters = Dictionary<String, Any>()
         parameters[userTag.key] = userTag.value
         parameters["cursor"] ??= cursor
         parameters["stringify_ids"] ??= stringifyIDs
         parameters["count"] ??= count
-        
+
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getUserFollowingIDs(for userTag: UserTag, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         self.getUserFollowingIDs(for: userTag, cursor: cursor, stringifyIDs: stringifyIDs, count: count, successType: JSON.self, success: { json in
             success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
-    
+
     /**
     GET    followers/ids
     
@@ -84,22 +84,22 @@ public extension Swifter {
     */
     public func getUserFollowersIDs<T: Decodable>(for userTag: UserTag, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "followers/ids.json"
-        
+
         var parameters = Dictionary<String, Any>()
         parameters[userTag.key] = userTag.value
         parameters["cursor"] ??= cursor
         parameters["stringify_ids"] ??= stringifyIDs
         parameters["count"] ??= count
-        
+
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getUserFollowersIDs(for userTag: UserTag, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         self.getUserFollowersIDs(for: userTag, cursor: cursor, stringifyIDs: stringifyIDs, count: count, successType: JSON.self, success: { json in
             success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
-    
+
     /**
     GET    friendships/incoming
     
@@ -107,20 +107,20 @@ public extension Swifter {
     */
     public func getIncomingPendingFollowRequests<T: Decodable>(cursor: String? = nil, stringifyIDs: String? = nil, successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/incoming.json"
-        
+
         var parameters = Dictionary<String, Any>()
         parameters["cursor"] ??= cursor
         parameters["stringify_ids"] ??= stringifyIDs
-        
+
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getIncomingPendingFollowRequests(cursor: String? = nil, stringifyIDs: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         self.getIncomingPendingFollowRequests(cursor: cursor, stringifyIDs: stringifyIDs, successType: JSON.self, success: { json in
             success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
-    
+
     /**
     GET    friendships/outgoing
     
@@ -128,14 +128,14 @@ public extension Swifter {
     */
     public func getOutgoingPendingFollowRequests<T: Decodable>(cursor: String? = nil, stringifyIDs: String? = nil, successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/outgoing.json"
-        
+
         var parameters = Dictionary<String, Any>()
         parameters["cursor"] ??= cursor
         parameters["stringify_ids"] ??= stringifyIDs
-        
+
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getOutgoingPendingFollowRequests(cursor: String? = nil, stringifyIDs: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         self.getOutgoingPendingFollowRequests(cursor: cursor, stringifyIDs: stringifyIDs, successType: JSON.self, success: { json in
             success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
@@ -160,7 +160,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func followUser(for userTag: UserTag, follow: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.followUser(for: userTag, follow: follow, successType: JSON.self, success: success, failure: failure)
     }
@@ -182,7 +182,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func unfollowUser(for userTag: UserTag, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.unfollowUser(for: userTag, successType: JSON.self, success: success, failure: failure)
     }
@@ -202,7 +202,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func updateFriendship(with userTag: UserTag, device: Bool? = nil, retweets: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.updateFriendship(with: userTag, device: device, retweets: retweets, successType: JSON.self, success: success, failure: failure)
     }
@@ -220,7 +220,7 @@ public extension Swifter {
         case .id:           parameters["source_id"] = sourceTag.value
         case .screenName:   parameters["source_screen_name"] = sourceTag.value
         }
-        
+
         switch targetTag {
         case .id:           parameters["target_id"] = targetTag.value
         case .screenName:   parameters["target_screen_name"] = targetTag.value
@@ -228,7 +228,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func showFriendship(between sourceTag: UserTag, and targetTag: UserTag, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.showFriendship(between: sourceTag, and: targetTag, successType: JSON.self, success: success, failure: failure)
     }
@@ -252,7 +252,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getUserFollowing(for userTag: UserTag, cursor: String? = nil, count: Int? = nil, skipStatus: Bool? = nil, includeUserEntities: Bool? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         self.getUserFollowing(for: userTag, cursor: cursor, count: count, skipStatus: skipStatus, includeUserEntities: includeUserEntities, successType: JSON.self, success: { json in
             success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
@@ -278,7 +278,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getUserFollowers(for userTag: UserTag, cursor: String? = nil, count: Int? = nil, skipStatus: Bool? = nil, includeUserEntities: Bool? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         self.getUserFollowers(for: userTag, cursor: cursor, count: count, skipStatus: skipStatus, includeUserEntities: includeUserEntities, successType: JSON.self, success: { json in
             success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
@@ -298,9 +298,9 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func lookupFriendship(with usersTag: UsersTag, success: SuccessHandler<JSON>? = nil, failure: FailureHandler?) {
         self.lookupFriendship(with: usersTag, successType: JSON.self, success: success, failure: failure)
     }
-    
+
 }

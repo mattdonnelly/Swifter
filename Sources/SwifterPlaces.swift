@@ -37,7 +37,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getGeoID(for placeID: String, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getGeoID(for: placeID, successType: JSON.self, success: success, failure: failure)
     }
@@ -63,7 +63,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getReverseGeocode(for coordinate: (lat: Double, long: Double), accuracy: String? = nil, granularity: String? = nil, maxResults: Int? = nil, callback: String? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getReverseGeocode(for: coordinate, accuracy: accuracy, granularity: granularity, maxResults: maxResults, callback: callback, successType: JSON.self, success: success, failure: failure)
     }
@@ -100,7 +100,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func searchGeo(coordinate: (lat: Double, long: Double)? = nil, query: String? = nil, ipAddress: String? = nil, accuracy: String? = nil, granularity: String? = nil, maxResults: Int? = nil, containedWithin: String? = nil, attributeStreetAddress: String? = nil, callback: String? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.searchGeo(coordinate: coordinate, query: query, ipAddress: ipAddress, accuracy: accuracy, granularity: granularity, maxResults: maxResults, containedWithin: containedWithin, attributeStreetAddress: attributeStreetAddress, callback: callback, successType: JSON.self, success: success, failure: failure)
     }
@@ -121,14 +121,14 @@ public extension Swifter {
         parameters["lat"] = coordinate.lat
         parameters["long"] = coordinate.long
         parameters["name"] = name
-        
+
         parameters["contained_within"] ??= containedWithin
         parameters["attribute:street_address"] ??= attributeStreetAddress
         parameters["callback"] ??= callback
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getSimilarPlaces(for coordinate: (lat: Double, long: Double), name: String, containedWithin: String? = nil, attributeStreetAddress: String? = nil, callback: String? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getSimilarPlaces(for: coordinate, name: name, containedWithin: containedWithin, attributeStreetAddress: attributeStreetAddress, callback: callback, successType: JSON.self, success: success, failure: failure)
     }

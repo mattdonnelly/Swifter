@@ -38,9 +38,9 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func reportSpam(for userTag: UserTag, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.reportSpam(for: userTag, successType: JSON.self, success: success, failure: failure)
     }
-    
+
 }

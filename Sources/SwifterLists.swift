@@ -54,11 +54,11 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getSubscribedLists(reverse: Bool?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.getSubscribedLists(reverse: reverse, successType: JSON.self, success: success, failure: failure)
     }
-    
+
     public func getSubscribedLists(for userTag: UserTag, reverse: Bool?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.getSubscribedLists(for: userTag, reverse: reverse, successType: JSON.self, success: success, failure: failure)
     }
@@ -84,7 +84,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func listTweets(for listTag: ListTag, sinceID: String?, maxID: String?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.listTweets(for: listTag, sinceID: sinceID, maxID: maxID, count: count, includeEntities: includeEntities, includeRTs: includeRTs, successType: JSON.self, success: success, failure: failure)
     }
@@ -106,7 +106,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func removeMemberFromList(for listTag: ListTag, user userTag: UserTag, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.removeMemberFromList(for: listTag, user: userTag, successType: JSON.self, success: success, failure: failure)
     }
@@ -126,7 +126,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getListMemberships(for userTag: UserTag, cursor: String?, filterToOwnedLists: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
         self.getListMemberships(for: userTag, cursor: cursor, filterToOwnedLists: filterToOwnedLists, successType: JSON.self, success: { json in
             success?(json["lists"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
@@ -152,7 +152,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getListSubscribers(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
         self.getListSubscribers(for: listTag, cursor: cursor, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: { json in
             success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
@@ -175,7 +175,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func subscribeToList(for listTag: ListTag, owner ownerTag: UserTag, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.subscribeToList(for: listTag, owner: ownerTag, successType: JSON.self, success: success, failure: failure)
     }
@@ -199,7 +199,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func checkListSubcription(of userTag: UserTag, for listTag: ListTag, includeEntities: Bool?, skipStatus: Bool?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.checkListSubcription(of: userTag, for: listTag, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: success, failure: failure)
     }
@@ -220,7 +220,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func unsubscribeFromList(for listTag: ListTag, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.unsubscribeFromList(for: listTag, successType: JSON.self, success: success, failure: failure)
     }
@@ -247,7 +247,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func subscribeUsersToList(for listTag: ListTag, users usersTag: UsersTag, includeEntities: Bool?, skipStatus: Bool?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.subscribeUsersToList(for: listTag, users: usersTag, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: success, failure: failure)
     }
@@ -271,7 +271,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func checkListMembership(of userTag: UserTag, for listTag: ListTag, includeEntities: Bool?, skipStatus: Bool?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.checkListMembership(of: userTag, for: listTag, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: success, failure: failure)
     }
@@ -281,7 +281,6 @@ public extension Swifter {
 
     Returns the members of the specified list. Private list members will only be shown if the authenticated user owns the specified list.
     */
-
     public func getListMembers<T: Decodable>(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/members.json"
 
@@ -296,13 +295,13 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getListMembers(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
         self.getListMembers(for: listTag, cursor: cursor, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: { json in
             success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
-    
+
     /**
     POST	lists/members/create
 
@@ -320,7 +319,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func addListMember(_ userTag: UserTag, for listTag: ListTag, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.addListMember(userTag, for: listTag, successType: JSON.self, success: success, failure: failure)
     }
@@ -341,7 +340,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func deleteList(for listTag: ListTag, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.deleteList(for: listTag, successType: JSON.self, success: success, failure: failure)
     }
@@ -365,11 +364,11 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func updateList(for listTag: ListTag, name: String?, isPublic: Bool = true, description: String?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.updateList(for: listTag, name: name, isPublic: isPublic, description: description, successType: JSON.self, success: success, failure: failure)
     }
-    
+
     /**
     POST	lists/create
 
@@ -385,7 +384,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func createList(named name: String, asPublicList: Bool = true, description: String?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.createList(named: name, asPublicList: asPublicList, description: description, successType: JSON.self, success: success, failure: failure)
     }
@@ -406,9 +405,9 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in
             success?(json)
-            }, failure: failure)
+        }, failure: failure)
     }
-    
+
     public func showList(for listTag: ListTag, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.showList(for: listTag, successType: JSON.self, success: success, failure: failure)
     }
@@ -428,13 +427,13 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getSubscribedList(of userTag: UserTag, count: String?, cursor: String?, success: CursorSuccessHandler?, failure: FailureHandler?) {
         self.getSubscribedList(of: userTag, count: count, cursor: cursor, successType: JSON.self, success: { json in
             success?(json["lists"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
-    
+
     /**
     POST	lists/members/destroy_all
 
@@ -454,11 +453,11 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func removeListMembers(_ usersTag: UsersTag, for listTag: ListTag, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
         self.removeListMembers(usersTag, for: listTag, successType: JSON.self, success: success, failure: failure)
     }
-    
+
     /**
     GET    lists/ownerships
     
@@ -466,33 +465,33 @@ public extension Swifter {
     */
     public func getOwnedLists<T: Decodable>(for userTag: UserTag, count: String?, cursor: String?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/ownerships.json"
-        
+
         var parameters = Dictionary<String, Any>()
         parameters[userTag.key] = userTag.value
         parameters["count"] ??= count
         parameters["cursor"] ??= cursor
-        
+
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in
             success?(json)
         }, failure: failure)
-        
+
     }
-    
+
     public func getOwnedLists(for userTag: UserTag, count: String?, cursor: String?, success: CursorSuccessHandler?, failure: FailureHandler?) {
         self.getOwnedLists(for: userTag, count: count, cursor: cursor, successType: JSON.self, success: { json in
             success?(json["lists"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
-    
+
 }
 
 private extension UserTag {
-    
+
     var ownerKey: String {
         switch self {
         case .id:           return "owner_id"
         case .screenName:   return "owner_screen_name"
         }
     }
-    
+
 }

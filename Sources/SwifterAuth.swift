@@ -33,9 +33,9 @@ import Foundation
 #endif
 
 public extension Swifter {
-    
+
     public typealias TokenSuccessHandler = (Credential.OAuthAccessToken?, URLResponse) -> Void
-    
+
     /**
      Begin Authorization with a Callback URL.
      - OS X only

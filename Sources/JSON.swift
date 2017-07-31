@@ -276,7 +276,7 @@ extension JSON: ExpressibleByStringLiteral,
 }
 
 extension JSON: Decodable {
-    
+
     public init(from decoder: Decoder) throws {
         if let container = try? decoder.singleValueContainer() {
             if let string = try? container.decode(String.self) {
@@ -306,23 +306,23 @@ extension JSON: Decodable {
             self = .invalid
         }
     }
-    
+
     struct CodingKeys: CodingKey {
-        
+
         var stringValue: String
-        
+
         init?(stringValue: String) {
             self.stringValue = stringValue
         }
-        
+
         var intValue: Int? { return nil }
-        
+
         init?(intValue: Int) {
             return nil
         }
-        
+
     }
-    
+
 }
 
 private func +(lhs: [String: Any], rhs: [String: Any]) -> [String: Any] {

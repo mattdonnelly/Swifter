@@ -39,7 +39,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getHelpConfiguration(success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getHelpConfiguration(successType: JSON.self, success: success, failure: failure)
     }
@@ -54,7 +54,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getHelpLanguages(success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getHelpLanguages(successType: JSON.self, success: success, failure: failure)
     }
@@ -69,7 +69,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getHelpPrivacy(success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getHelpPrivacy(successType: JSON.self, success: { json in success?(json["privacy"]) }, failure: failure)
     }
@@ -84,7 +84,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getHelpTermsOfService(success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getHelpTermsOfService(successType: JSON.self, success: { json in success?(json["tos"]) }, failure: failure)
     }
@@ -112,9 +112,9 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getRateLimits(for resources: [String], success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getRateLimits(for: resources, successType: JSON.self, success: success, failure: failure)
     }
-    
+
 }

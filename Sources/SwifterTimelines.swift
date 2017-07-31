@@ -53,11 +53,10 @@ public extension Swifter {
     public func getMentionsTimelineTweets<T: Decodable>(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler?) {
         self.getTimeline(at: "statuses/mentions_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, successType: successType, success: success, failure: failure)
     }
-    
+
     public func getMentionsTimelineTweets(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler?) {
         self.getMentionsTimelineTweets(count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, successType: JSON.self, success: success, failure: failure)
     }
-
 
     /**
     GET	statuses/user_timeline
@@ -76,7 +75,7 @@ public extension Swifter {
 
         self.getTimeline(at: "statuses/user_timeline.json", parameters: parameters, count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, successType: successType, success: success, failure: failure)
     }
-    
+
     public func getTimeline(for userID: String, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getTimeline(for: userID, count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, successType: JSON.self, success: success, failure: failure)
     }
@@ -93,7 +92,7 @@ public extension Swifter {
     public func getHomeTimeline<T: Decodable>(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         self.getTimeline(at: "statuses/home_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, successType: successType, success: success, failure: failure)
     }
-    
+
     public func getHomeTimeline(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getHomeTimeline(count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, successType: JSON.self, success: success, failure: failure)
     }
@@ -106,7 +105,7 @@ public extension Swifter {
     public func getRetweetsOfMe<T: Decodable>(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         self.getTimeline(at: "statuses/retweets_of_me.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, successType: successType, success: success, failure: failure)
     }
-    
+
     public func getRetweetsOfMe(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getRetweetsOfMe(count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, successType: JSON.self, success: success, failure: failure)
     }

@@ -37,7 +37,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getAccountSettings(success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getAccountSettings(successType: JSON.self, success: success, failure: failure)
     }
@@ -56,7 +56,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-        
+
     public func verifyAccountCredentials(includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.verifyAccountCredentials(includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: success, failure: failure)
     }
@@ -81,11 +81,11 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func updateAccountSettings(trendLocationWOEID: String? = nil, sleepTimeEnabled: Bool? = nil, startSleepTime: Int? = nil, endSleepTime: Int? = nil, timeZone: String? = nil, lang: String? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.updateAccountSettings(trendLocationWOEID: trendLocationWOEID, sleepTimeEnabled: sleepTimeEnabled, startSleepTime: startSleepTime, endSleepTime: endSleepTime, timeZone: timeZone, lang: lang, successType: JSON.self, success: success, failure: failure)
     }
-    
+
     /**
     POST	account/update_profile
 
@@ -103,10 +103,10 @@ public extension Swifter {
         parameters["description"] ??= description
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
-        
+
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func updateUserProfile(name: String? = nil, url: String? = nil, location: String? = nil, description: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.updateUserProfile(name: name, url: url, location: location, description: description, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: success, failure: failure)
     }
@@ -129,11 +129,11 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func updateProfileBackground(using imageData: Data, title: String? = nil, includeEntities: Bool? = nil, use: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.updateProfileBackground(using: imageData, title: title, includeEntities: includeEntities, use: use, successType: JSON.self, success: success, failure: failure)
     }
-    
+
     /**
     POST	account/update_profile_colors
 
@@ -153,11 +153,11 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func updateProfileColors(backgroundColor: String? = nil, linkColor: String? = nil, sidebarBorderColor: String? = nil, sidebarFillColor: String? = nil, textColor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: @escaping FailureHandler) {
         self.updateProfileColors(backgroundColor: backgroundColor, linkColor: linkColor, sidebarBorderColor: sidebarBorderColor, sidebarFillColor: sidebarFillColor, textColor: textColor, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: success, failure: failure)
     }
-    
+
     /**
     POST	account/update_profile_image
 
@@ -175,7 +175,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func updateProfileImage(using imageData: Data, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.updateProfileImage(using: imageData, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: success, failure: failure)
     }
@@ -195,7 +195,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getBlockedUsers(includeEntities: Bool? = nil, skipStatus: Bool? = nil, cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         self.getBlockedUsers(includeEntities: includeEntities, skipStatus: skipStatus, cursor: cursor, successType: JSON.self, success: { json in
             success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
@@ -216,7 +216,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getBlockedUsersIDs(stringifyIDs: String? = nil, cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: @escaping FailureHandler) {
         self.getBlockedUsersIDs(stringifyIDs: stringifyIDs, cursor: cursor, successType: JSON.self, success: { json in
             success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
@@ -238,7 +238,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func blockUser(for userTag: UserTag, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: @escaping FailureHandler) {
         self.blockUser(for: userTag, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: success, failure: failure)
     }
@@ -258,7 +258,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func unblockUser(for userTag: UserTag, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: @escaping FailureHandler) {
         unblockUser(for: userTag, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: success, failure: failure)
     }
@@ -289,7 +289,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func lookupUsers(for usersTag: UsersTag, includeEntities: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: @escaping FailureHandler) {
         self.lookupUsers(for: usersTag, includeEntities: includeEntities, successType: JSON.self, success: success, failure: failure)
     }
@@ -310,7 +310,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func showUser(for userTag: UserTag, includeEntities: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: @escaping FailureHandler) {
         self.showUser(for: userTag, includeEntities: includeEntities, successType: JSON.self, success: success, failure: failure)
     }
@@ -333,7 +333,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func searchUsers(using query: String, page: Int?, count: Int?, includeEntities: Bool?, success: SuccessHandler<JSON>? = nil, failure: @escaping FailureHandler) {
         self.searchUsers(using: query, page: page, count: count, includeEntities: includeEntities, successType: JSON.self, success: success, failure: failure)
     }
@@ -348,7 +348,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func removeProfileBanner(success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.removeProfileBanner(successType: JSON.self, success: success, failure: failure)
     }
@@ -379,7 +379,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func updateProfileBanner(using imageData: Data, width: Int? = nil, height: Int? = nil, offsetLeft: Int? = nil, offsetTop: Int? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.updateProfileBanner(using: imageData, width: width, height: height, offsetLeft: offsetLeft, offsetTop: offsetTop, successType: JSON.self, success: success, failure: failure)
     }
@@ -395,7 +395,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getProfileBanner(for userTag: UserTag, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getProfileBanner(for: userTag, successType: JSON.self, success: success, failure: failure)
     }
@@ -415,7 +415,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func muteUser(for userTag: UserTag, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.muteUser(for: userTag, successType: JSON.self, success: success, failure: failure)
     }
@@ -437,7 +437,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func unmuteUser(for userTag: UserTag, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.unmuteUser(for: userTag, successType: JSON.self, success: success, failure: failure)
     }
@@ -455,13 +455,13 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getMuteUsersIDs(cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         self.getMuteUsersIDs(cursor: cursor, successType: JSON.self, success: { json in
             success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
-    
+
     /**
     GET    mutes/users/list
     
@@ -469,19 +469,19 @@ public extension Swifter {
     */
     public func getMuteUsers<T: Decodable>(cursor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/list.json"
-        
+
         var parameters = Dictionary<String, Any>()
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
         parameters["cursor"] ??= cursor
-        
+
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getMuteUsers(cursor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         self.getMuteUsers(cursor: cursor, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: { json in
             success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
         }, failure: failure)
     }
-    
+
 }

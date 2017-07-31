@@ -44,7 +44,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getDirectMessages(since sinceID: String? = nil, maxID: String? = nil, count: Int? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getDirectMessages(since: sinceID, maxID: maxID, count: count, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: success, failure: failure)
     }
@@ -66,7 +66,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getSentDirectMessages(since sinceID: String? = nil, maxID: String? = nil, count: Int? = nil, page: Int? = nil, includeEntities: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getSentDirectMessages(since: sinceID, maxID: maxID, count: count, page: page, includeEntities: includeEntities, successType: JSON.self, success: success, failure: failure)
     }
@@ -82,7 +82,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func showDirectMessage(forID id: String, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.showDirectMessage(forID: id, successType: JSON.self, success: success, failure: failure)
     }
@@ -98,10 +98,10 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["id"] = id
         parameters["include_entities"] ??= includeEntities
-        
+
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func destroyDirectMessage(forID id: String, includeEntities: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.destroyDirectMessage(forID: id, includeEntities: includeEntities, successType: JSON.self, success: success, failure: failure)
     }
@@ -120,9 +120,9 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func sendDirectMessage(to userTag: UserTag, text: String, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.sendDirectMessage(to: userTag, text: text, successType: JSON.self, success: success, failure: failure)
     }
-    
+
 }

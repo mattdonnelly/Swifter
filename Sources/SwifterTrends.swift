@@ -25,10 +25,10 @@ public extension Swifter {
         var parameters = Dictionary<String, Any>()
         parameters["id"] = woeid
         parameters["exclude"] = excludeHashtags ? "hashtags" : nil
-        
+
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getTrendsPlace(with woeid: String, excludeHashtags: Bool = false, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getTrendsPlace(with: woeid, excludeHashtags: excludeHashtags, successType: JSON.self, success: success, failure: failure)
     }
@@ -46,7 +46,7 @@ public extension Swifter {
         let path = "trends/available.json"
         self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getAvailableTrends(success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getAvailableTrends(successType: JSON.self, success: success, failure: failure)
     }
@@ -68,7 +68,7 @@ public extension Swifter {
         parameters["long"] = coordinate.long
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getClosestTrends(for coordinate: (lat: Double, long: Double), success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getClosestTrends(for: coordinate, successType: JSON.self, success: success, failure: failure)
     }

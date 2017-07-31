@@ -26,7 +26,7 @@
 import Foundation
 
 public extension Swifter {
-    
+
     typealias StallWarningHandler = (_ code: String?, _ message: String?, _ percentFull: Int?) -> Void
 
     /**
@@ -41,7 +41,7 @@ public extension Swifter {
     At least one predicate parameter (follow, locations, or track) must be specified.
     */
     public func postTweetFilters<T: Decodable>(follow: [String]? = nil, track: [String]? = nil, locations: [String]? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progressType: T.Type, progress: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
-        
+
         assert(follow != nil || track != nil || locations != nil, "At least one predicate parameter (follow, locations, or track) must be specified")
 
         let path = "statuses/filter.json"
@@ -57,7 +57,7 @@ public extension Swifter {
 
         return self.postJSON(path: path, baseURL: .stream, parameters: parameters, downloadProgressType: progressType, downloadProgress: { json, _ in progress?(json) }, successType: progressType, success: { json, _ in progress?(json) }, failure: failure)
     }
-    
+
     public func postTweetFilters(follow: [String]? = nil, track: [String]? = nil, locations: [String]? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler<JSON>? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         return self.postTweetFilters(follow: follow, track: track, locations: locations, delimited: delimited, stallWarnings: stallWarnings, filter_level: filter_level, language: language, progressType: JSON.self, progress: { json in
             if let stallWarning = json["warning"].object {
@@ -102,7 +102,6 @@ public extension Swifter {
 
     Returns all public statuses. Few applications require this level of access. Creative use of a combination of other resources and various access levels can satisfy nearly every application use case.
     */
-    
     public func streamFirehoseTweets<T: Decodable>(count: Int? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progressType: T.Type, progress: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         let path = "statuses/firehose.json"
 
@@ -115,7 +114,7 @@ public extension Swifter {
 
         return self.getJSON(path: path, baseURL: .stream, parameters: parameters, downloadProgressType: progressType, downloadProgress: { json, _ in progress?(json) }, successType: progressType, success: { json, _ in progress?(json) }, failure: failure)
     }
-    
+
     public func streamFirehoseTweets(count: Int? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler<JSON>? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         return self.streamFirehoseTweets(count: count, delimited: delimited, stallWarnings: stallWarnings, filter_level: filter_level, language: language, progressType: JSON.self, progress: { json in
             if let stallWarning = json["warning"].object {
@@ -148,10 +147,10 @@ public extension Swifter {
         if includeReplies {
             parameters["replies"] = "all"
         }
-        
+
         return self.getJSON(path: path, baseURL: .userStream, parameters: parameters, downloadProgressType: progressType, downloadProgress: { json, _ in progress?(json) }, successType: progressType, success: { json, _ in progress?(json) }, failure: failure)
     }
-    
+
     public func beginUserStream(delimited: Bool? = nil, stallWarnings: Bool? = nil, includeMessagesFromUserOnly: Bool = false, includeReplies: Bool = false, track: [String]? = nil, locations: [String]? = nil, stringifyFriendIDs: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler<JSON>? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         return self.beginUserStream(delimited: delimited, stallWarnings: stallWarnings, includeMessagesFromUserOnly: includeMessagesFromUserOnly, includeReplies: includeReplies, track: track, locations: locations, stringifyFriendIDs: stringifyFriendIDs, filter_level: filter_level, language: language, progressType: JSON.self, progress: { json in
             if let stallWarning = json["warning"].object {
@@ -183,7 +182,7 @@ public extension Swifter {
 
         return self.getJSON(path: path, baseURL: .stream, parameters: parameters, downloadProgressType: progressType, downloadProgress: { json, _ in progress?(json) }, successType: progressType, success: { json, _ in progress?(json) }, failure: failure)
     }
-    
+
     public func beginSiteStream(delimited: Bool? = nil, stallWarnings: Bool? = nil, restrictToUserMessages: Bool = false, includeReplies: Bool = false, stringifyFriendIDs: Bool? = nil, progress: SuccessHandler<JSON>? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         return self.beginSiteStream(delimited: delimited, stallWarnings: stallWarnings, restrictToUserMessages: restrictToUserMessages, includeReplies: includeReplies, stringifyFriendIDs: stringifyFriendIDs, progressType: JSON.self, progress: { json in
             if let stallWarning = json["warning"].object {
@@ -193,5 +192,6 @@ public extension Swifter {
             }
         }, failure: failure)
     }
-    
+
 }
+

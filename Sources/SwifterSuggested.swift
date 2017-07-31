@@ -42,7 +42,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getUserSuggestions(slug: String, lang: String? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getUserSuggestions(slug: slug, lang: lang, successType: JSON.self, success: success, failure: failure)
     }
@@ -60,11 +60,11 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getUsersSuggestions(lang: String? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getUsersSuggestions(lang: lang, successType: JSON.self, success: success, failure: failure)
     }
-    
+
     /**
     GET    users/suggestions/:slug/members
 
@@ -74,9 +74,9 @@ public extension Swifter {
         let path = "users/suggestions/\(slug)/members.json"
         self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getUsersSuggestions(for slug: String, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getUsersSuggestions(for: slug, successType: JSON.self, success: success, failure: failure)
     }
-    
+
 }

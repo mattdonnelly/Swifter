@@ -40,7 +40,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getRetweets(forTweetID id: String, count: Int? = nil, trimUser: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getRetweets(forTweetID: id, count: count, trimUser: trimUser, successType: JSON.self, success: success, failure: failure)
     }
@@ -76,7 +76,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getTweet(forID id: String, count: Int? = nil, trimUser: Bool? = nil, includeMyRetweet: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getTweet(forID: id, count: count, trimUser: trimUser, includeMyRetweet: includeMyRetweet, includeEntities: includeEntities, successType: JSON.self, success: success, failure: failure)
     }
@@ -94,7 +94,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func destroyTweet(forID id: String, trimUser: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.destroyTweet(forID: id, trimUser: trimUser, successType: JSON.self, success: success, failure: failure)
     }
@@ -128,7 +128,7 @@ public extension Swifter {
         parameters["status"] = status
         parameters["in_reply_to_status_id"] ??= inReplyToStatusID
         parameters["trim_user"] ??= trimUser
-        
+
         if let placeID = placeID {
             parameters["place_id"] = placeID
             parameters["display_coordinates"] = true
@@ -137,14 +137,14 @@ public extension Swifter {
             parameters["long"] = coordinate.long
             parameters["display_coordinates"] = true
         }
-        
+
         if !media_ids.isEmpty {
             parameters["media_ids"] = media_ids.joined(separator: ",")
         }
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func postTweet(status: String, inReplyToStatusID: String? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, media_ids: [String] = [], success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.postTweet(status: status, inReplyToStatusID: inReplyToStatusID, coordinate: coordinate, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, media_ids: media_ids, successType: JSON.self, success: success, failure: failure)
     }
@@ -168,11 +168,11 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .upload, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func postMedia(_ media: Data, additionalOwners: UsersTag? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.postMedia(media, additionalOwners: additionalOwners, successType: JSON.self, success: success, failure: failure)
     }
-    
+
     /**
     POST	statuses/retweet/:id
 
@@ -192,32 +192,32 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func retweetTweet(forID id: String, trimUser: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.retweetTweet(forID: id, trimUser: trimUser, successType: JSON.self, success: success, failure: failure)
     }
-    
+
     /**
-     POST	statuses/unretweet/:id
-     
-     Untweets a retweeted status. Returns the original Tweet with retweet details embedded.
-     
-     - This method is subject to update limits. A HTTP 429 will be returned if this limit has been hit.
-     - The untweeted retweet status ID must be authored by the user backing the authentication token.
-     - An application must have write privileges to POST. A HTTP 401 will be returned for read-only applications.
-     - When passing a source status ID instead of the retweet status ID a HTTP 200 response will be returned with the same Tweet object but no action.
-     
-     Returns Tweets (1: the original tweet)
-     */
+    POST    statuses/unretweet/:id
+
+    Untweets a retweeted status. Returns the original Tweet with retweet details embedded.
+
+    - This method is subject to update limits. A HTTP 429 will be returned if this limit has been hit.
+    - The untweeted retweet status ID must be authored by the user backing the authentication token.
+    - An application must have write privileges to POST. A HTTP 401 will be returned for read-only applications.
+    - When passing a source status ID instead of the retweet status ID a HTTP 200 response will be returned with the same Tweet object but no action.
+
+    Returns Tweets (1: the original tweet)
+    */
     public func UnretweetTweet<T: Decodable>(forID id: String, trimUser: Bool? = nil, successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/unretweet/\(id).json"
-        
+
         var parameters = Dictionary<String, Any>()
         parameters["trim_user"] ??= trimUser
-        
+
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func UnretweetTweet(forID id: String, trimUser: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.UnretweetTweet(forID: id, trimUser: trimUser, successType: JSON.self, success: success, failure: failure)
     }
@@ -260,11 +260,11 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func oembedInfo(forID id: String, maxWidth: Int? = nil, hideMedia: Bool? = nil, hideThread: Bool? = nil, omitScript: Bool? = nil, align: String? = nil, related: String? = nil, lang: String? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.oembedInfo(forID: id, maxWidth: maxWidth, hideMedia: hideMedia, hideThread: hideThread, omitScript: omitScript, align: align, related: related, lang: lang, successType: JSON.self, success: success, failure: failure)
     }
-    
+
     public func oembedInfo(forUrl url: URL, maxWidth: Int? = nil, hideMedia: Bool? = nil, hideThread: Bool? = nil, omitScript: Bool? = nil, align: String? = nil, related: String? = nil, lang: String? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.oembedInfo(forUrl: url, maxWidth: maxWidth, hideMedia: hideMedia, hideThread: hideThread, omitScript: omitScript, align: align, related: related, lang: lang, successType: JSON.self, success: success, failure: failure)
     }
@@ -286,7 +286,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func tweetRetweeters(forID id: String, cursor: String? = nil, stringifyIDs: Bool? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         self.tweetRetweeters(forID: id, cursor: cursor, stringifyIDs: stringifyIDs, successType: JSON.self, success: { json in
             success?(json["ids"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
@@ -305,8 +305,8 @@ public extension Swifter {
         parameters["id"] = tweetIDs.joined(separator: ",")
         parameters["include_entities"] ??= includeEntities
         parameters["map"] ??= map
-        
+
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
 }

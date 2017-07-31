@@ -36,7 +36,7 @@ public extension Swifter {
     */
     public func getRecentlyFavouritedTweets<T: Decodable>(for userTag: UserTag? = nil, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "favorites/list.json"
-        
+
         var parameters = Dictionary<String, Any>()
         if let userTag = userTag {
             parameters[userTag.key] = userTag.value
@@ -44,10 +44,10 @@ public extension Swifter {
         parameters["count"] ??= count
         parameters["since_id"] ??= sinceID
         parameters["max_id"] ??= maxID
-        
+
         self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getRecentlyFavouritedTweets(for userTag: UserTag? = nil, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getRecentlyFavouritedTweets(for: userTag, count: count, sinceID: sinceID, maxID: maxID, successType: JSON.self, success: success, failure: failure)
     }
@@ -68,7 +68,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func unfavouriteTweet(forID id: String, includeEntities: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.unfavouriteTweet(forID: id, includeEntities: includeEntities, successType: JSON.self, success: success, failure: failure)
     }
@@ -89,9 +89,9 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func favouriteTweet(forID id: String, includeEntities: Bool? = nil, success: SuccessHandler<JSON>? = nil, failure: HTTPRequest.FailureHandler? = nil) {
         self.favouriteTweet(forID: id, includeEntities: includeEntities, successType: JSON.self, success: success, failure: failure)
     }
-    
+
 }

@@ -37,7 +37,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func getSavedSearchesList(success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.getSavedSearchesList(successType: JSON.self, success: success, failure: failure)
     }
@@ -52,7 +52,7 @@ public extension Swifter {
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func showSavedSearch(for id: String, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.showSavedSearch(for: id, successType: JSON.self, success: success, failure: failure)
     }
@@ -70,7 +70,7 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func createSavedSearch(for query: String, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.createSavedSearch(for: query, successType: JSON.self, success: success, failure: failure)
     }
@@ -85,9 +85,9 @@ public extension Swifter {
 
         self.postJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
     public func deleteSavedSearch(for id: String, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
         self.deleteSavedSearch(for: id, successType: JSON.self, success: success, failure: failure)
     }
-    
+
 }
