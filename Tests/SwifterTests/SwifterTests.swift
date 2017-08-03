@@ -5,7 +5,6 @@
 //  Created by Lewis Smith on 22/02/2016.
 //  Copyright © 2016 Matt Donnelly. All rights reserved.
 //
-
 import XCTest
 
 class SwifterTests: XCTestCase {
@@ -31,11 +30,11 @@ class SwifterTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
+    
     #if os(Linux)
     static var allTests = [
-        ("testExample", testExample),
-        ("testPerformanceExample", testPerformanceExample)
+    ("testExample", testExample),
+    ("testPerformanceExample", testPerformanceExample)
     ]
     #endif
 }

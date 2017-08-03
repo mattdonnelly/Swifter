@@ -19,14 +19,18 @@ public extension Swifter {
 
     This information is cached for 5 minutes. Requesting more frequently than that will not return any more data, and will count against your rate limit usage.
     */
-    public func getTrendsPlace(with woeid: String, excludeHashtags: Bool = false, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getTrendsPlace<T: Decodable>(with woeid: String, excludeHashtags: Bool = false, successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "trends/place.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["id"] = woeid
         parameters["exclude"] = excludeHashtags ? "hashtags" : nil
-        
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func getTrendsPlace(with woeid: String, excludeHashtags: Bool = false, success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
+        self.getTrendsPlace(with: woeid, excludeHashtags: excludeHashtags, successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -38,9 +42,13 @@ public extension Swifter {
 
     A WOEID is a Yahoo! Where On Earth ID.
     */
-    public func getAvailableTrends(success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getAvailableTrends<T: Decodable>(successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "trends/available.json"
-        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: [:], successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func getAvailableTrends(success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
+        self.getAvailableTrends(successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -52,13 +60,17 @@ public extension Swifter {
 
     A WOEID is a Yahoo! Where On Earth ID.
     */
-    public func getClosestTrends(for coordinate: (lat: Double, long: Double), success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getClosestTrends<T: Decodable>(for coordinate: (lat: Double, long: Double), successType: T.Type, success: SuccessHandler<T>? = nil, failure: FailureHandler? = nil) {
         let path = "trends/closest.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["lat"] = coordinate.lat
         parameters["long"] = coordinate.long
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func getClosestTrends(for coordinate: (lat: Double, long: Double), success: SuccessHandler<JSON>? = nil, failure: FailureHandler? = nil) {
+        self.getClosestTrends(for: coordinate, successType: JSON.self, success: success, failure: failure)
     }
 
 }

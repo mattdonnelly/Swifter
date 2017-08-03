@@ -36,27 +36,31 @@ public extension Swifter {
 
     A maximum of 100 results will be returned by this call. Subscribed lists are returned first, followed by owned lists. This means that if a user subscribes to 90 lists and owns 20 lists, this method returns 90 subscriptions and 10 owned lists. The reverse method returns owned lists first, so with reverse=true, 20 owned lists and 80 subscriptions would be returned. If your goal is to obtain every list a user owns or subscribes to, use GET lists/ownerships and/or GET lists/subscriptions instead.
     */
-    public func getSubscribedLists(reverse: Bool?, success: SuccessHandler?, failure: FailureHandler?) {
+    public func getSubscribedLists<T: Decodable>(reverse: Bool?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/list.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["reverse"] ??= reverse
 
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(json)
-            }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
 
-    public func getSubscribedLists(for userTag: UserTag, reverse: Bool?, success: SuccessHandler?, failure: FailureHandler?) {
+    public func getSubscribedLists<T: Decodable>(for userTag: UserTag, reverse: Bool?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/list.json"
 
         var parameters = Dictionary<String, Any>()
         parameters[userTag.key] = userTag.value
         parameters["reverse"] ??= reverse
 
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(json)
-            }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func getSubscribedLists(reverse: Bool?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.getSubscribedLists(reverse: reverse, successType: JSON.self, success: success, failure: failure)
+    }
+
+    public func getSubscribedLists(for userTag: UserTag, reverse: Bool?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.getSubscribedLists(for: userTag, reverse: reverse, successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -64,7 +68,7 @@ public extension Swifter {
 
     Returns a timeline of tweets authored by members of the specified list. Retweets are included by default. Use the include_rts=false parameter to omit retweets. Embedded Timelines is a great way to embed list timelines on your website.
     */
-    public func listTweets(for listTag: ListTag, sinceID: String?, maxID: String?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: SuccessHandler?, failure: FailureHandler?) {
+    public func listTweets<T: Decodable>(for listTag: ListTag, sinceID: String?, maxID: String?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/statuses.json"
 
         var parameters = Dictionary<String, Any>()
@@ -78,7 +82,11 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["include_rts"] ??= includeRTs
 
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func listTweets(for listTag: ListTag, sinceID: String?, maxID: String?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.listTweets(for: listTag, sinceID: sinceID, maxID: maxID, count: count, includeEntities: includeEntities, includeRTs: includeRTs, successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -86,7 +94,7 @@ public extension Swifter {
 
     Removes the specified member from the list. The authenticated user must be the list's owner to remove members from the list.
     */
-    public func removeMemberFromList(for listTag: ListTag, user userTag: UserTag, success: SuccessHandler?, failure: FailureHandler?) {
+    public func removeMemberFromList<T: Decodable>(for listTag: ListTag, user userTag: UserTag, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/members/destroy.json"
 
         var parameters = Dictionary<String, Any>()
@@ -96,7 +104,11 @@ public extension Swifter {
         }
         parameters[userTag.key] = userTag.value
 
-        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func removeMemberFromList(for listTag: ListTag, user userTag: UserTag, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.removeMemberFromList(for: listTag, user: userTag, successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -104,7 +116,7 @@ public extension Swifter {
 
     Returns the lists the specified user has been added to. If user_id or screen_name are not provided the memberships for the authenticating user are returned.
     */
-    public func getListMemberships(for userTag: UserTag, cursor: String?, filterToOwnedLists: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
+    public func getListMemberships<T: Decodable>(for userTag: UserTag, cursor: String?, filterToOwnedLists: Bool?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/memberships.json"
 
         var parameters = Dictionary<String, Any>()
@@ -112,9 +124,13 @@ public extension Swifter {
         parameters["cursor"] ??= cursor
         parameters["filter_to_owned_lists"] ??= filterToOwnedLists
 
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func getListMemberships(for userTag: UserTag, cursor: String?, filterToOwnedLists: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
+        self.getListMemberships(for: userTag, cursor: cursor, filterToOwnedLists: filterToOwnedLists, successType: JSON.self, success: { json in
             success?(json["lists"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
-            }, failure: failure)
+        }, failure: failure)
     }
 
     /**
@@ -122,7 +138,7 @@ public extension Swifter {
 
     Returns the subscribers of the specified list. Private list subscribers will only be shown if the authenticated user owns the specified list.
     */
-    public func getListSubscribers(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
+    public func getListSubscribers<T: Decodable>(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/subscribers.json"
 
         var parameters = Dictionary<String, Any>()
@@ -134,9 +150,13 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in            
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func getListSubscribers(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
+        self.getListSubscribers(for: listTag, cursor: cursor, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: { json in
             success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
-            }, failure: failure)
+        }, failure: failure)
     }
 
     /**
@@ -144,7 +164,7 @@ public extension Swifter {
 
     Subscribes the authenticated user to the specified list.
     */
-    public func subscribeToList(for listTag: ListTag, owner ownerTag: UserTag, success: SuccessHandler?, failure: FailureHandler?) {
+    public func subscribeToList<T: Decodable>(for listTag: ListTag, owner ownerTag: UserTag, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, Any>()
@@ -153,7 +173,11 @@ public extension Swifter {
             parameters[owner.ownerKey] = owner.value
         }
 
-        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func subscribeToList(for listTag: ListTag, owner ownerTag: UserTag, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.subscribeToList(for: listTag, owner: ownerTag, successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -161,7 +185,7 @@ public extension Swifter {
 
     Check if the specified user is a subscriber of the specified list. Returns the user if they are subscriber.
     */
-    public func checkListSubcription(of userTag: UserTag, for listTag: ListTag, includeEntities: Bool?, skipStatus: Bool?, success: SuccessHandler?, failure: FailureHandler?) {
+    public func checkListSubcription<T: Decodable>(of userTag: UserTag, for listTag: ListTag, includeEntities: Bool?, skipStatus: Bool?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/subscribers/show.json"
 
         var parameters = Dictionary<String, Any>()
@@ -173,7 +197,11 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func checkListSubcription(of userTag: UserTag, for listTag: ListTag, includeEntities: Bool?, skipStatus: Bool?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.checkListSubcription(of: userTag, for: listTag, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -181,7 +209,7 @@ public extension Swifter {
 
     Unsubscribes the authenticated user from the specified list.
     */
-    public func unsubscribeFromList(for listTag: ListTag, success: SuccessHandler?, failure: FailureHandler?) {
+    public func unsubscribeFromList<T: Decodable>(for listTag: ListTag, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/subscribers/destroy.json"
 
         var parameters = Dictionary<String, Any>()
@@ -190,7 +218,11 @@ public extension Swifter {
             parameters[owner.ownerKey] = owner.value
         }
 
-        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func unsubscribeFromList(for listTag: ListTag, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.unsubscribeFromList(for: listTag, successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -200,7 +232,7 @@ public extension Swifter {
 
     Please note that there can be issues with lists that rapidly remove and add memberships. Take care when using these methods such that you are not too rapidly switching between removals and adds on the same list.
     */
-    public func subscribeUsersToList(for listTag: ListTag, users usersTag: UsersTag, includeEntities: Bool?, skipStatus: Bool?, success: SuccessHandler?, failure: FailureHandler?) {
+    public func subscribeUsersToList<T: Decodable>(for listTag: ListTag, users usersTag: UsersTag, includeEntities: Bool?, skipStatus: Bool?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/members/create_all.json"
 
         var parameters = Dictionary<String, Any>()
@@ -213,7 +245,11 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func subscribeUsersToList(for listTag: ListTag, users usersTag: UsersTag, includeEntities: Bool?, skipStatus: Bool?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.subscribeUsersToList(for: listTag, users: usersTag, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -221,7 +257,7 @@ public extension Swifter {
 
     Check if the specified user is a member of the specified list.
     */
-    public func checkListMembership(of userTag: UserTag, for listTag: ListTag, includeEntities: Bool?, skipStatus: Bool?, success: SuccessHandler?, failure: FailureHandler?) {
+    public func checkListMembership<T: Decodable>(of userTag: UserTag, for listTag: ListTag, includeEntities: Bool?, skipStatus: Bool?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/members/show.json"
 
         var parameters = Dictionary<String, Any>()
@@ -233,7 +269,11 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func checkListMembership(of userTag: UserTag, for listTag: ListTag, includeEntities: Bool?, skipStatus: Bool?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.checkListMembership(of: userTag, for: listTag, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -241,8 +281,7 @@ public extension Swifter {
 
     Returns the members of the specified list. Private list members will only be shown if the authenticated user owns the specified list.
     */
-
-    public func getListMembers(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
+    public func getListMembers<T: Decodable>(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/members.json"
 
         var parameters = Dictionary<String, Any>()
@@ -254,17 +293,21 @@ public extension Swifter {
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
-            }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
+    public func getListMembers(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
+        self.getListMembers(for: listTag, cursor: cursor, includeEntities: includeEntities, skipStatus: skipStatus, successType: JSON.self, success: { json in
+            success?(json["users"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
+        }, failure: failure)
+    }
+
     /**
     POST	lists/members/create
 
     Add a member to a list. The authenticated user must own the list to be able to add members to it. Note that lists cannot have more than 5,000 members.
     */
-    public func addListMember(_ userTag: UserTag, for listTag: ListTag, success: SuccessHandler?, failure: FailureHandler?) {
+    public func addListMember<T: Decodable>(_ userTag: UserTag, for listTag: ListTag, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/members/create.json"
 
         var parameters = Dictionary<String, Any>()
@@ -274,7 +317,11 @@ public extension Swifter {
         }
         parameters[userTag.key] = userTag.value
 
-        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func addListMember(_ userTag: UserTag, for listTag: ListTag, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.addListMember(userTag, for: listTag, successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -282,7 +329,7 @@ public extension Swifter {
 
     Deletes the specified list. The authenticated user must own the list to be able to destroy it.
     */
-    public func deleteList(for listTag: ListTag, success: SuccessHandler?, failure: FailureHandler?) {
+    public func deleteList<T: Decodable>(for listTag: ListTag, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/destroy.json"
 
         var parameters = Dictionary<String, Any>()
@@ -291,7 +338,11 @@ public extension Swifter {
             parameters[owner.ownerKey] = owner.value
         }
 
-        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func deleteList(for listTag: ListTag, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.deleteList(for: listTag, successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -299,7 +350,7 @@ public extension Swifter {
 
     Updates the specified list. The authenticated user must own the list to be able to update it.
     */
-    public func updateList(for listTag: ListTag, name: String?, isPublic: Bool = true, description: String?, success: SuccessHandler?, failure: FailureHandler?) {
+    public func updateList<T: Decodable>(for listTag: ListTag, name: String?, isPublic: Bool = true, description: String?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/update.json"
 
         var parameters = Dictionary<String, Any>()
@@ -311,15 +362,19 @@ public extension Swifter {
         parameters["mode"] = isPublic ? "public" : "private"
         parameters["description"] ??= description
 
-        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
+    public func updateList(for listTag: ListTag, name: String?, isPublic: Bool = true, description: String?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.updateList(for: listTag, name: name, isPublic: isPublic, description: description, successType: JSON.self, success: success, failure: failure)
+    }
+
     /**
     POST	lists/create
 
     Creates a new list for the authenticated user. Note that you can't create more than 20 lists per account.
     */
-    public func createList(named name: String, asPublicList: Bool = true, description: String?, success: SuccessHandler?, failure: FailureHandler?) {
+    public func createList<T: Decodable>(named name: String, asPublicList: Bool = true, description: String?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/create.json"
 
         var parameters = Dictionary<String, Any>()
@@ -327,7 +382,11 @@ public extension Swifter {
         parameters["mode"] = asPublicList ? "public" : "private"
         parameters["description"] ??= description
 
-        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
+    }
+
+    public func createList(named name: String, asPublicList: Bool = true, description: String?, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.createList(named: name, asPublicList: asPublicList, description: description, successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -335,7 +394,7 @@ public extension Swifter {
 
     Returns the specified list. Private lists will only be shown if the authenticated user owns the specified list.
     */
-    public func showList(for listTag: ListTag, success: SuccessHandler?, failure: FailureHandler?) {
+    public func showList<T: Decodable>(for listTag: ListTag, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/show.json"
 
         var parameters = Dictionary<String, Any>()
@@ -344,9 +403,13 @@ public extension Swifter {
             parameters[owner.ownerKey] = owner.value
         }
 
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in
             success?(json)
-            }, failure: failure)
+        }, failure: failure)
+    }
+
+    public func showList(for listTag: ListTag, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.showList(for: listTag, successType: JSON.self, success: success, failure: failure)
     }
 
     /**
@@ -354,7 +417,7 @@ public extension Swifter {
 
     Obtain a collection of the lists the specified user is subscribed to, 20 lists per page by default. Does not include the user's own lists.
     */
-    public func getSubscribedList(of userTag: UserTag, count: String?, cursor: String?, success: CursorSuccessHandler?, failure: FailureHandler?) {
+    public func getSubscribedList<T: Decodable>(of userTag: UserTag, count: String?, cursor: String?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/subscriptions.json"
 
         var parameters = Dictionary<String, Any>()
@@ -362,11 +425,15 @@ public extension Swifter {
         parameters["count"] ??= count
         parameters["cursor"] ??= cursor
 
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-            success?(json["lists"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
-            }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
+    public func getSubscribedList(of userTag: UserTag, count: String?, cursor: String?, success: CursorSuccessHandler?, failure: FailureHandler?) {
+        self.getSubscribedList(of: userTag, count: count, cursor: cursor, successType: JSON.self, success: { json in
+            success?(json["lists"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
+        }, failure: failure)
+    }
+
     /**
     POST	lists/members/destroy_all
 
@@ -374,7 +441,7 @@ public extension Swifter {
 
     Please note that there can be issues with lists that rapidly remove and add memberships. Take care when using these methods such that you are not too rapidly switching between removals and adds on the same list.
     */
-    public func removeListMembers(_ usersTag: UsersTag, for listTag: ListTag, success: SuccessHandler?, failure: FailureHandler?) {
+    public func removeListMembers<T: Decodable>(_ usersTag: UsersTag, for listTag: ListTag, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/members/destroy_all.json"
 
         var parameters = Dictionary<String, Any>()
@@ -384,37 +451,47 @@ public extension Swifter {
         }
         parameters[usersTag.key] = usersTag.value
 
-        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        self.postJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in success?(json) }, failure: failure)
     }
-    
+
+    public func removeListMembers(_ usersTag: UsersTag, for listTag: ListTag, success: SuccessHandler<JSON>?, failure: FailureHandler?) {
+        self.removeListMembers(usersTag, for: listTag, successType: JSON.self, success: success, failure: failure)
+    }
+
     /**
     GET    lists/ownerships
     
     Returns the lists owned by the specified Twitter user. Private lists will only be shown if the authenticated user is also the owner of the lists.
     */
-    public func getOwnedLists(for userTag: UserTag, count: String?, cursor: String?, success: CursorSuccessHandler?, failure: FailureHandler?) {
+    public func getOwnedLists<T: Decodable>(for userTag: UserTag, count: String?, cursor: String?, successType: T.Type, success: SuccessHandler<T>?, failure: FailureHandler?) {
         let path = "lists/ownerships.json"
-        
+
         var parameters = Dictionary<String, Any>()
         parameters[userTag.key] = userTag.value
         parameters["count"] ??= count
         parameters["cursor"] ??= cursor
-        
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in            
-            success?(json["lists"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
-            }, failure: failure)
-        
+
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, successType: successType, success: { json, _ in
+            success?(json)
+        }, failure: failure)
+
     }
-    
+
+    public func getOwnedLists(for userTag: UserTag, count: String?, cursor: String?, success: CursorSuccessHandler?, failure: FailureHandler?) {
+        self.getOwnedLists(for: userTag, count: count, cursor: cursor, successType: JSON.self, success: { json in
+            success?(json["lists"], json["previous_cursor_str"].string, json["next_cursor_str"].string)
+        }, failure: failure)
+    }
+
 }
 
 private extension UserTag {
-    
+
     var ownerKey: String {
         switch self {
         case .id:           return "owner_id"
         case .screenName:   return "owner_screen_name"
         }
     }
-    
+
 }
