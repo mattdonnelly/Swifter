@@ -28,7 +28,7 @@ import Foundation
 public extension Swifter {
 
     // Convenience method
-    private func getTimeline(at path: String, parameters: Dictionary<String, Any>, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    private func getTimeline(at path: String, parameters: Dictionary<String, Any>, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, tweetMode: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         var params = parameters
         params["count"] ??= count
         params["since_id"] ??= sinceID
@@ -36,6 +36,7 @@ public extension Swifter {
         params["trim_user"] ??= trimUser
         params["contributor_details"] ??= contributorDetails
         params["include_entities"] ??= includeEntities
+        params["tweet_mode"] ??= tweetMode
 
         self.getJSON(path: path, baseURL: .api, parameters: params, success: { json, _ in
             success?(json)
@@ -52,8 +53,8 @@ public extension Swifter {
 
     This method can only return up to 800 tweets.
     */
-    public func getMentionsTimelineTweets(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler?) {
-        self.getTimeline(at: "statuses/mentions_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
+    public func getMentionsTimelineTweets(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, tweetMode: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler?) {
+        self.getTimeline(at: "statuses/mentions_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, tweetMode: tweetMode, success: success, failure: failure)
     }
 
 
@@ -69,10 +70,10 @@ public extension Swifter {
 
     This method can only return up to 3,200 of a user's most recent Tweets. Native retweets of other statuses by the user is included in this total, regardless of whether include_rts is set to false when requesting this resource.
     */
-    public func getTimeline(for userID: String, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getTimeline(for userID: String, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, tweetMode: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let parameters: Dictionary<String, Any> = ["user_id": userID]
 
-        self.getTimeline(at: "statuses/user_timeline.json", parameters: parameters, count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
+        self.getTimeline(at: "statuses/user_timeline.json", parameters: parameters, count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, tweetMode: tweetMode, success: success, failure: failure)
     }
 
     /**
@@ -84,8 +85,8 @@ public extension Swifter {
 
     Up to 800 Tweets are obtainable on the home timeline. It is more volatile for users that follow many users or follow users who tweet frequently.
     */
-    public func getHomeTimeline(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
-        self.getTimeline(at: "statuses/home_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
+    public func getHomeTimeline(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, tweetMode: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+        self.getTimeline(at: "statuses/home_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, tweetMode: tweetMode, success: success, failure: failure)
     }
 
     /**
@@ -93,8 +94,8 @@ public extension Swifter {
 
     Returns the most recent tweets authored by the authenticating user that have been retweeted by others. This timeline is a subset of the user's GET statuses/user_timeline. See Working with Timelines for instructions on traversing timelines.
     */
-    public func getRetweetsOfMe(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
-        self.getTimeline(at: "statuses/retweets_of_me.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
+    public func getRetweetsOfMe(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, tweetMode: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+        self.getTimeline(at: "statuses/retweets_of_me.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, tweetMode: tweetMode, success: success, failure: failure)
     }
 
 }
