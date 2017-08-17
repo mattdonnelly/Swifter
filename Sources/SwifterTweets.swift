@@ -211,7 +211,7 @@ public extension Swifter {
      
      Returns Tweets (1: the original tweet)
      */
-    public func UnretweetTweet(forID id: String, trimUser: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func unretweetTweet(forID id: String, trimUser: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/unretweet/\(id).json"
         
         var parameters = Dictionary<String, Any>()
