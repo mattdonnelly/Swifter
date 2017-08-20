@@ -58,14 +58,14 @@ public enum TwitterURL {
 
 // MARK: - Tweet Mode
 public enum TweetMode {
-    case defaultValue
+    case `default`
     case extended
     case compat
     case other(String)
     
     var stringValue: String? {
         switch self {
-        case .defaultValue:
+        case .default:
             return nil
         case .extended:
             return "extended"
