@@ -104,11 +104,12 @@ public extension Swifter {
 
     Returns the lists the specified user has been added to. If user_id or screen_name are not provided the memberships for the authenticating user are returned.
     */
-    public func getListMemberships(for userTag: UserTag, cursor: String?, filterToOwnedLists: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
+    public func getListMemberships(for userTag: UserTag, count: Int? = nil, cursor: String?, filterToOwnedLists: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
         let path = "lists/memberships.json"
 
         var parameters = Dictionary<String, Any>()
         parameters[userTag.key] = userTag.value
+        parameters["count"] ??= count
         parameters["cursor"] ??= cursor
         parameters["filter_to_owned_lists"] ??= filterToOwnedLists
 
