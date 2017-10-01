@@ -31,13 +31,13 @@ extension String {
         guard let range = self.range(of: sub), !range.isEmpty else {
             return nil
         }
-        return self.characters.distance(from: self.startIndex, to: range.lowerBound)
+        return self.distance(from: self.startIndex, to: range.lowerBound)
     }
 
-    internal subscript (r: Range<Int>) -> String {
+    internal subscript (r: Range<Int>) -> Substring {
         get {
-            let startIndex = self.characters.index(self.startIndex, offsetBy: r.lowerBound)
-            let endIndex = self.characters.index(startIndex, offsetBy: r.upperBound - r.lowerBound)
+            let startIndex = self.index(self.startIndex, offsetBy: r.lowerBound)
+            let endIndex = self.index(startIndex, offsetBy: r.upperBound - r.lowerBound)
             return self[startIndex..<endIndex]
         }
     }
