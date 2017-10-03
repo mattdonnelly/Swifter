@@ -203,6 +203,52 @@ public enum JSON : Equatable, CustomStringConvertible {
     
 }
 
+extension JSON: Decodable {
+
+    public init(from decoder: Decoder) throws {
+        if let container = try? decoder.singleValueContainer() {
+            if let string = try? container.decode(String.self) {
+                self = .string(string)
+            } else if let bool = try? container.decode(Bool.self) {
+                self = .bool(bool)
+            } else if let number = try? container.decode(Double.self) {
+                self = .number(number)
+            } else {
+                self = .invalid
+            }
+        } else if var container = try? decoder.unkeyedContainer() {
+            var array = [JSON]()
+            if let count = container.count {
+                for _ in 0..<count {
+                    array.append(try container.decodeIfPresent(JSON.self) ?? .null)
+                }
+            }
+            self = .array(array)
+        } else if let container = try? decoder.container(keyedBy: CodingKeys.self) {
+            var object = [String: JSON]()
+            for key in container.allKeys {
+                object[key.stringValue]
+                    = try container.decodeIfPresent(JSON.self,
+                                                    forKey: key) ?? .null
+            }
+            self = .object(object)
+        } else {
+            self = .invalid
+        }
+    }
+
+    struct CodingKeys: CodingKey {
+
+        var stringValue: String
+        init?(stringValue: String) { self.stringValue = stringValue }
+
+        var intValue: Int? { return nil }
+        init?(intValue: Int) { return nil }
+
+    }
+
+}
+
 public func ==(lhs: JSON, rhs: JSON) -> Bool {
     switch (lhs, rhs) {
     case (.null, .null):
@@ -227,8 +273,6 @@ public func ==(lhs: JSON, rhs: JSON) -> Bool {
         return false
     }
 }
-
-
 
 extension JSON: ExpressibleByStringLiteral,
     ExpressibleByIntegerLiteral,
