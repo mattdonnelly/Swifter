@@ -65,6 +65,38 @@ public class Swifter {
     public typealias JSONSuccessHandler = (JSON, _ response: HTTPURLResponse) -> Void
     public typealias FailureHandler = (_ error: Error) -> Void
 
+    public struct RawSuccessHandler {
+        private let handler: (Data, FailureHandler?) -> Void
+
+        public static func data(handler: @escaping (Data) -> Void) -> RawSuccessHandler {
+            return RawSuccessHandler { data, _ in handler(data) }
+        }
+
+        public static func dataAndDecoding<Entity: Decodable>(_ type: Entity.Type, handler: @escaping (Data, Entity?) -> Void) -> RawSuccessHandler {
+            return RawSuccessHandler { data, failure in
+                DispatchQueue.global(qos: .utility).async {
+                    do {
+                        let decodedResponse = try Swifter.decoder.decode(Entity.self, from: data)
+                        DispatchQueue.main.async { handler(data, decodedResponse) }
+                    } catch {
+                        DispatchQueue.main.async {
+                            handler(data, nil)
+                            failure?(error)
+                        }
+                    }
+                }
+            }
+        }
+
+        public static func decoding<Entity: Decodable>(_ type: Entity.Type, handler: @escaping (Entity) -> Void) -> RawSuccessHandler {
+            return .dataAndDecoding(type) { _, entity in
+                if let entity = entity { handler(entity) }
+            }
+        }
+
+        fileprivate func execute(on data: Data, failure: FailureHandler?) { handler(data, failure) }
+    }
+
     internal struct CallbackNotification {
         static let optionsURLKey = "SwifterCallbackNotificationOptionsURLKey"
     }
@@ -73,6 +105,20 @@ public class Swifter {
         static let dataKey = "SwifterDataParameterKey"
         static let fileNameKey = "SwifterDataParameterFilename"
     }
+
+    // MARK: - Static Properties
+
+    public static let decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "eee MMM dd HH:mm:ss ZZZZ yyyy"
+        dateFormatter.locale = Locale(identifier: "en_US")
+
+        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+
+        return decoder
+    }()
 
     // MARK: - Properties
     
@@ -103,39 +149,42 @@ public class Swifter {
     // MARK: - JSON Requests
     
     @discardableResult
-    internal func jsonRequest(path: String, baseURL: TwitterURL, method: HTTPMethodType, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler? = nil, failure: HTTPRequest.FailureHandler? = nil) -> HTTPRequest {
+    internal func jsonRequest(path: String, baseURL: TwitterURL, method: HTTPMethodType, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, rawDownloadProgress: RawSuccessHandler? = nil, success: JSONSuccessHandler? = nil, rawSuccess: RawSuccessHandler? = nil, failure: HTTPRequest.FailureHandler? = nil) -> HTTPRequest {
         let jsonDownloadProgressHandler: HTTPRequest.DownloadProgressHandler = { data, _, _, response in
+            if let downloadProgress = downloadProgress {
+                guard let jsonResult = try? JSON.parse(jsonData: data) else {
+                    let jsonString = String(data: data, encoding: .utf8)
+                    let jsonChunks = jsonString!.components(separatedBy: "\r\n")
 
-            guard let _ = downloadProgress else { return }
-            
-            guard let jsonResult = try? JSON.parse(jsonData: data) else {
-                let jsonString = String(data: data, encoding: .utf8)
-                let jsonChunks = jsonString!.components(separatedBy: "\r\n")
-                
-                for chunk in jsonChunks where !chunk.utf16.isEmpty {
-                    guard let chunkData = chunk.data(using: .utf8), let jsonResult = try? JSON.parse(jsonData: chunkData) else { continue }
-                    downloadProgress?(jsonResult, response)
+                    for chunk in jsonChunks where !chunk.utf16.isEmpty {
+                        guard let chunkData = chunk.data(using: .utf8), let jsonResult = try? JSON.parse(jsonData: chunkData) else { continue }
+                        downloadProgress(jsonResult, response)
+                    }
+                    return
                 }
-                return
+
+                downloadProgress(jsonResult, response)
             }
-            
-            downloadProgress?(jsonResult, response)
+
+            rawDownloadProgress?.execute(on: data, failure: failure)
         }
 
         let jsonSuccessHandler: HTTPRequest.SuccessHandler = { data, response in
-
-            DispatchQueue.global(qos: .utility).async {
-                do {
-                    let jsonResult = try JSON.parse(jsonData: data)
-                    DispatchQueue.main.async {
-                        success?(jsonResult, response)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        failure?(error)
+            if let success = success {
+                DispatchQueue.global(qos: .utility).async {
+                    do {
+                        let jsonResult = try JSON.parse(jsonData: data)
+                        DispatchQueue.main.async {
+                            success(jsonResult, response)
+                        }
+                    } catch {
+                        DispatchQueue.main.async {
+                            failure?(error)
+                        }
                     }
                 }
             }
+            rawSuccess?.execute(on: data, failure: failure)
         }
 
         if method == .GET {
@@ -146,13 +195,13 @@ public class Swifter {
     }
 
     @discardableResult
-    internal func getJSON(path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
-        return self.jsonRequest(path: path, baseURL: baseURL, method: .GET, parameters: parameters, uploadProgress: uploadProgress, downloadProgress: downloadProgress, success: success, failure: failure)
+    internal func getJSON(path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, rawDownloadProgress: RawSuccessHandler? = nil, success: JSONSuccessHandler?, rawSuccess: RawSuccessHandler? = nil, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+        return self.jsonRequest(path: path, baseURL: baseURL, method: .GET, parameters: parameters, uploadProgress: uploadProgress, downloadProgress: downloadProgress, rawDownloadProgress: rawDownloadProgress, success: success, rawSuccess: rawSuccess, failure: failure)
     }
 
     @discardableResult
-    internal func postJSON(path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, success: JSONSuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
-        return self.jsonRequest(path: path, baseURL: baseURL, method: .POST, parameters: parameters, uploadProgress: uploadProgress, downloadProgress: downloadProgress, success: success, failure: failure)
+    internal func postJSON(path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, rawDownloadProgress: RawSuccessHandler? = nil, success: JSONSuccessHandler?, rawSuccess: RawSuccessHandler? = nil, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+        return self.jsonRequest(path: path, baseURL: baseURL, method: .POST, parameters: parameters, uploadProgress: uploadProgress, downloadProgress: downloadProgress, rawDownloadProgress: rawDownloadProgress, success: success, rawSuccess: rawSuccess, failure: failure)
     }
     
 }
