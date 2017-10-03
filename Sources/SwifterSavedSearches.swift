@@ -43,7 +43,7 @@ public extension Swifter {
 
     Retrieve the information for the saved search represented by the given id. The authenticating user must be the owner of saved search ID being requested.
     */
-    public func showSavedSearch(for id: String, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func showSavedSearch(for id: UInt64, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "saved_searches/show/\(id).json"
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json) }, failure: failure)
@@ -68,7 +68,7 @@ public extension Swifter {
 
     Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.
     */
-    public func deleteSavedSearch(for id: String, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func deleteSavedSearch(for id: UInt64, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "saved_searches/destroy/\(id).json"
 
         self.postJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json) }, failure: failure)
