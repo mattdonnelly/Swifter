@@ -40,7 +40,7 @@ public extension Swifter {
 
     At least one predicate parameter (follow, locations, or track) must be specified.
     */
-    public func postTweetFilters(follow: [String]? = nil, track: [String]? = nil, locations: [String]? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
+    public func postTweetFilters(follow: [String]? = nil, track: [String]? = nil, locations: [String]? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, rawProgress: RawSuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         
         assert(follow != nil || track != nil || locations != nil, "At least one predicate parameter (follow, locations, or track) must be specified")
 
@@ -61,8 +61,7 @@ public extension Swifter {
             } else {
                 progress?(json)
             }
-
-            }, success: { json, _ in progress?(json) }, failure: failure)
+        }, rawDownloadProgress: rawProgress, success: { json, _ in progress?(json) }, rawSuccess: rawProgress, failure: failure)
     }
 
     /**
@@ -70,7 +69,7 @@ public extension Swifter {
 
     Returns a small random sample of all public statuses. The Tweets returned by the default access level are the same, so if two different clients connect to this endpoint, they will see the same Tweets.
     */
-    public func streamRandomSampleTweets(delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
+    public func streamRandomSampleTweets(delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, rawProgress: RawSuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         let path = "statuses/sample.json"
 
         var parameters = Dictionary<String, Any>()
@@ -86,7 +85,7 @@ public extension Swifter {
                 progress?(json)
             }
 
-            }, success: { json, _ in progress?(json) }, failure: failure)
+            }, rawDownloadProgress: rawProgress, success: { json, _ in progress?(json) }, rawSuccess: rawProgress, failure: failure)
     }
 
     /**
@@ -97,7 +96,7 @@ public extension Swifter {
     Returns all public statuses. Few applications require this level of access. Creative use of a combination of other resources and various access levels can satisfy nearly every application use case.
     */
     
-    public func streamFirehoseTweets(count: Int? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
+    public func streamFirehoseTweets(count: Int? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, rawProgress: RawSuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         let path = "statuses/firehose.json"
 
         var parameters = Dictionary<String, Any>()
@@ -113,8 +112,7 @@ public extension Swifter {
             } else {
                 progress?(json)
             }
-
-            }, success: { json, _ in progress?(json) }, failure: failure)
+        }, rawDownloadProgress: rawProgress, success: { json, _ in progress?(json) }, rawSuccess: rawProgress, failure: failure)
     }
 
     /**
@@ -122,7 +120,7 @@ public extension Swifter {
 
     Streams messages for a single user, as described in User streams https://dev.twitter.com/docs/streaming-apis/streams/user
     */
-    public func beginUserStream(delimited: Bool? = nil, stallWarnings: Bool? = nil, includeMessagesFromUserOnly: Bool = false, includeReplies: Bool = false, track: [String]? = nil, locations: [String]? = nil, stringifyFriendIDs: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
+    public func beginUserStream(delimited: Bool? = nil, stallWarnings: Bool? = nil, includeMessagesFromUserOnly: Bool = false, includeReplies: Bool = false, track: [String]? = nil, locations: [String]? = nil, stringifyFriendIDs: Bool? = nil, filter_level: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, rawProgress: RawSuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         let path = "user.json"
 
         var parameters = Dictionary<String, Any>()
@@ -147,7 +145,7 @@ public extension Swifter {
                 progress?(json)
             }
 
-            }, success: { json, _ in progress?(json) }, failure: failure)
+            }, rawDownloadProgress: rawProgress, success: { json, _ in progress?(json) }, rawSuccess: rawProgress, failure: failure)
     }
 
     /**
@@ -155,7 +153,7 @@ public extension Swifter {
 
     Streams messages for a set of users, as described in Site streams https://dev.twitter.com/docs/streaming-apis/streams/site
     */
-    public func beginSiteStream(delimited: Bool? = nil, stallWarnings: Bool? = nil, restrictToUserMessages: Bool = false, includeReplies: Bool = false, stringifyFriendIDs: Bool? = nil, progress: SuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
+    public func beginSiteStream(delimited: Bool? = nil, stallWarnings: Bool? = nil, restrictToUserMessages: Bool = false, includeReplies: Bool = false, stringifyFriendIDs: Bool? = nil, progress: SuccessHandler? = nil, rawProgress: RawSuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         let path = "site.json"
 
         var parameters = Dictionary<String, Any>()
@@ -171,7 +169,7 @@ public extension Swifter {
 
         return self.getJSON(path: path, baseURL: .stream, parameters: parameters, downloadProgress: { json, _ in
             stallWarningHandler?(json["warning"]["code"].string, json["warning"]["message"].string, json["warning"]["percent_full"].integer)
-            }, success: { json, _ in progress?(json) }, failure: failure)
+            }, rawDownloadProgress: rawProgress, success: { json, _ in progress?(json) }, rawSuccess: rawProgress, failure: failure)
     }
     
 }
