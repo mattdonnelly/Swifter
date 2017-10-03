@@ -32,7 +32,7 @@ public extension Swifter {
 
     Returns all the information about a known place.
     */
-    public func getGeoID(for placeID: UInt64, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getGeoID(for placeID: String, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "geo/id/\(placeID).json"
 
         self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json) }, failure: failure)

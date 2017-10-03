@@ -58,7 +58,7 @@ public extension Swifter {
 
     Updates the authenticating user's settings.
     */
-    public func updateAccountSettings(trendLocationWOEID: UInt64? = nil, sleepTimeEnabled: Bool? = nil, startSleepTime: Int? = nil, endSleepTime: Int? = nil, timeZone: String? = nil, lang: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func updateAccountSettings(trendLocationWOEID: String? = nil, sleepTimeEnabled: Bool? = nil, startSleepTime: Int? = nil, endSleepTime: Int? = nil, timeZone: String? = nil, lang: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         assert(trendLocationWOEID != nil || sleepTimeEnabled != nil || startSleepTime != nil || endSleepTime != nil || timeZone != nil || lang != nil, "At least one or more should be provided when executing this request")
 
         let path = "account/settings.json"
