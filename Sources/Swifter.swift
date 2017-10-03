@@ -108,7 +108,7 @@ public class Swifter {
 
     // MARK: - Static Properties
 
-    internal static let decoder: JSONDecoder = {
+    public static let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
 
         let dateFormatter = DateFormatter()
