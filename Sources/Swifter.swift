@@ -68,22 +68,29 @@ public class Swifter {
     public struct RawSuccessHandler {
         private let handler: (Data, FailureHandler?) -> Void
 
-        // getting raw data
-        public init(handler: @escaping (Data) -> Void) {
-            self.handler = { data, _ in handler(data) }
+        public static func data(handler: @escaping (Data) -> Void) -> RawSuccessHandler {
+            return RawSuccessHandler { data, _ in handler(data) }
         }
 
-        // decoding raw data to a given type
-        public init<Entity: Decodable>(decoding type: Entity.Type, handler: @escaping (Entity) -> Void) {
-            self.handler = { data, failure in
+        public static func dataAndDecoding<Entity: Decodable>(_ type: Entity.Type, handler: @escaping (Data, Entity?) -> Void) -> RawSuccessHandler {
+            return RawSuccessHandler { data, failure in
                 DispatchQueue.global(qos: .utility).async {
                     do {
                         let decodedResponse = try Swifter.decoder.decode(Entity.self, from: data)
-                        DispatchQueue.main.async { handler(decodedResponse) }
+                        DispatchQueue.main.async { handler(data, decodedResponse) }
                     } catch {
-                        DispatchQueue.main.async { failure?(error) }
+                        DispatchQueue.main.async {
+                            handler(data, nil)
+                            failure?(error)
+                        }
                     }
                 }
+            }
+        }
+
+        public static func decoding<Entity: Decodable>(_ type: Entity.Type, handler: @escaping (Entity) -> Void) -> RawSuccessHandler {
+            return .dataAndDecoding(type) { _, entity in
+                if let entity = entity { handler(entity) }
             }
         }
 
@@ -145,14 +152,14 @@ public class Swifter {
     internal func jsonRequest(path: String, baseURL: TwitterURL, method: HTTPMethodType, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, rawDownloadProgress: RawSuccessHandler? = nil, success: JSONSuccessHandler? = nil, rawSuccess: RawSuccessHandler? = nil, failure: HTTPRequest.FailureHandler? = nil) -> HTTPRequest {
         let jsonDownloadProgressHandler: HTTPRequest.DownloadProgressHandler = { data, _, _, response in
             if let downloadProgress = downloadProgress {
-                RawSuccessHandler(decoding: JSON.self) { json in downloadProgress(json, response) }
+                RawSuccessHandler.decoding(JSON.self) { json in downloadProgress(json, response) }
                     .execute(on: data, failure: { _ in
                         let jsonString = String(data: data, encoding: .utf8)
                         let jsonChunks = jsonString!.components(separatedBy: "\r\n")
 
                         for chunk in jsonChunks where !chunk.utf16.isEmpty {
                             guard let chunkData = chunk.data(using: .utf8) else { continue }
-                            RawSuccessHandler(decoding: JSON.self) { json in
+                            RawSuccessHandler.decoding(JSON.self) { json in
                                 downloadProgress(json, response)
                             }.execute(on: chunkData, failure: failure)
                         }
@@ -164,7 +171,7 @@ public class Swifter {
 
         let jsonSuccessHandler: HTTPRequest.SuccessHandler = { data, response in
             if let success = success {
-                RawSuccessHandler(decoding: JSON.self) { json in success(json, response) }
+                RawSuccessHandler.decoding(JSON.self) { json in success(json, response) }
                     .execute(on: data, failure: failure)
             }
             rawSuccess?.execute(on: data, failure: failure)
