@@ -164,9 +164,8 @@ public class Swifter {
 
         let jsonSuccessHandler: HTTPRequest.SuccessHandler = { data, response in
             if let success = success {
-                RawSuccessHandler(decoding: JSON.self) { json in
-                    success(json, response)
-                }.execute(on: data, failure: failure)
+                RawSuccessHandler(decoding: JSON.self) { json in success(json, response) }
+                    .execute(on: data, failure: failure)
             }
             rawSuccess?.execute(on: data, failure: failure)
         }
