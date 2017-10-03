@@ -152,18 +152,18 @@ public class Swifter {
     internal func jsonRequest(path: String, baseURL: TwitterURL, method: HTTPMethodType, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler? = nil, downloadProgress: JSONSuccessHandler? = nil, rawDownloadProgress: RawSuccessHandler? = nil, success: JSONSuccessHandler? = nil, rawSuccess: RawSuccessHandler? = nil, failure: HTTPRequest.FailureHandler? = nil) -> HTTPRequest {
         let jsonDownloadProgressHandler: HTTPRequest.DownloadProgressHandler = { data, _, _, response in
             if let downloadProgress = downloadProgress {
-                RawSuccessHandler.decoding(JSON.self) { json in downloadProgress(json, response) }
-                    .execute(on: data, failure: { _ in
-                        let jsonString = String(data: data, encoding: .utf8)
-                        let jsonChunks = jsonString!.components(separatedBy: "\r\n")
+                guard let jsonResult = try? JSON.parse(jsonData: data) else {
+                    let jsonString = String(data: data, encoding: .utf8)
+                    let jsonChunks = jsonString!.components(separatedBy: "\r\n")
 
-                        for chunk in jsonChunks where !chunk.utf16.isEmpty {
-                            guard let chunkData = chunk.data(using: .utf8) else { continue }
-                            RawSuccessHandler.decoding(JSON.self) { json in
-                                downloadProgress(json, response)
-                            }.execute(on: chunkData, failure: failure)
-                        }
-                    })
+                    for chunk in jsonChunks where !chunk.utf16.isEmpty {
+                        guard let chunkData = chunk.data(using: .utf8), let jsonResult = try? JSON.parse(jsonData: chunkData) else { continue }
+                        downloadProgress(jsonResult, response)
+                    }
+                    return
+                }
+
+                downloadProgress(jsonResult, response)
             }
 
             rawDownloadProgress?.execute(on: data, failure: failure)
@@ -171,8 +171,18 @@ public class Swifter {
 
         let jsonSuccessHandler: HTTPRequest.SuccessHandler = { data, response in
             if let success = success {
-                RawSuccessHandler.decoding(JSON.self) { json in success(json, response) }
-                    .execute(on: data, failure: failure)
+                DispatchQueue.global(qos: .utility).async {
+                    do {
+                        let jsonResult = try JSON.parse(jsonData: data)
+                        DispatchQueue.main.async {
+                            success(jsonResult, response)
+                        }
+                    } catch {
+                        DispatchQueue.main.async {
+                            failure?(error)
+                        }
+                    }
+                }
             }
             rawSuccess?.execute(on: data, failure: failure)
         }
