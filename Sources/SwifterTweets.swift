@@ -109,7 +109,7 @@ public extension Swifter {
     - https://dev.twitter.com/notifications/multiple-media-entities-in-tweets
     - https://dev.twitter.com/docs/api/multiple-media-extended-entities
     */
-    public func postTweet(status: String, inReplyToStatusID: UInt64? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, media_ids: [String] = [], success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func postTweet(status: String, inReplyToStatusID: UInt64? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, media_ids: [UInt64] = [], success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path: String = "statuses/update.json"
 
         var parameters = Dictionary<String, Any>()
@@ -127,7 +127,7 @@ public extension Swifter {
         }
         
         if !media_ids.isEmpty {
-            parameters["media_ids"] = media_ids.joined(separator: ",")
+            parameters["media_ids"] = media_ids.map { String($0) }.joined(separator: ",")
         }
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
