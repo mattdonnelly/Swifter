@@ -284,11 +284,11 @@ public extension Swifter {
 
     Returns fully-hydrated tweet objects for up to 100 tweets per request, as specified by comma-separated values passed to the id parameter. This method is especially useful to get the details (hydrate) a collection of Tweet IDs. GET statuses/show/:id is used to retrieve a single tweet object.
     */
-    public func lookupTweets(for tweetIDs: [String], includeEntities: Bool? = nil, map: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func lookupTweets(for tweetIDs: [UInt64], includeEntities: Bool? = nil, map: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/lookup.json"
 
         var parameters = Dictionary<String, Any>()
-        parameters["id"] = tweetIDs.joined(separator: ",")
+        parameters["id"] = tweetIDs.map { String($0) }.joined(separator: ",")
         parameters["include_entities"] ??= includeEntities
         parameters["map"] ??= map
         
