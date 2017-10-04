@@ -38,7 +38,7 @@ public class Credential {
         public internal(set) var verifier: String?
 
         public internal(set) var screenName: String?
-        public internal(set) var userID: String?
+        public internal(set) var userID: UInt64?
 
         public init(key: String, secret: String) {
             self.key = key
@@ -52,7 +52,9 @@ public class Credential {
             self.secret = attributes["oauth_token_secret"]!
 
             self.screenName = attributes["screen_name"]
-            self.userID = attributes["user_id"]
+            if let userID = attributes["user_id"] {
+                self.userID = UInt64(userID)
+            }
         }
         
     }
