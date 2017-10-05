@@ -28,7 +28,7 @@ import Foundation
 public extension Swifter {
 
     // Convenience method
-    private func getTimeline(at path: String, parameters: Dictionary<String, Any>, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    private func getTimeline(at path: String, parameters: Dictionary<String, Any>, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, tweetMode: TweetMode = .compat, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         var params = parameters
         params["count"] ??= count
         params["since_id"] ??= sinceID
@@ -36,6 +36,7 @@ public extension Swifter {
         params["trim_user"] ??= trimUser
         params["contributor_details"] ??= contributorDetails
         params["include_entities"] ??= includeEntities
+        params["tweet_mode"] = tweetMode.rawValue
 
         self.getJSON(path: path, baseURL: .api, parameters: params, success: { json, _ in
             success?(json)
@@ -84,8 +85,8 @@ public extension Swifter {
 
     Up to 800 Tweets are obtainable on the home timeline. It is more volatile for users that follow many users or follow users who tweet frequently.
     */
-    public func getHomeTimeline(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
-        self.getTimeline(at: "statuses/home_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, success: success, failure: failure)
+    public func getHomeTimeline(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, tweetMode: TweetMode = .compat, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+        self.getTimeline(at: "statuses/home_timeline.json", parameters: [:], count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, tweetMode: tweetMode, success: success, failure: failure)
     }
 
     /**
