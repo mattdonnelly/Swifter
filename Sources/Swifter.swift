@@ -56,6 +56,27 @@ public enum TwitterURL {
     
 }
 
+// MARK: - Tweet Mode
+public enum TweetMode {
+    case `default`
+    case extended
+    case compat
+    case other(String)
+    
+    var stringValue: String? {
+        switch self {
+        case .default:
+            return nil
+        case .extended:
+            return "extended"
+        case .compat:
+            return "compat"
+        case .other(let string):
+            return string
+        }
+    }
+}
+
 public class Swifter {
     
     // MARK: - Types
