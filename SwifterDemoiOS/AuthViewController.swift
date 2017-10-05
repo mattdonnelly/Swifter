@@ -70,10 +70,9 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
             }
         } else {
             let url = URL(string: "swifter://success")!
-       
-            swifter.authorize(with: url, presentFrom: self, success: { _ in
-                    self.fetchTwitterHomeStream()
-                }, failure: failureHandler)
+            swifter.authorize(with: url, presentFrom: self, success: { _, _ in
+                self.fetchTwitterHomeStream()
+            }, failure: failureHandler)
         }
     }
 
