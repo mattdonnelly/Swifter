@@ -80,11 +80,12 @@ public extension Swifter {
 
     Destroys the status specified by the required ID parameter. The authenticating user must be the author of the specified status. Returns the destroyed status if successful.
     */
-    public func destroyTweet(forID id: String, trimUser: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func destroyTweet(forID id: String, trimUser: Bool? = nil, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/destroy/\(id).json"
 
         var parameters = Dictionary<String, Any>()
         parameters["trim_user"] ??= trimUser
+        parameters["tweet_mode"] ??= tweetMode.stringValue
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
     }
@@ -111,13 +112,14 @@ public extension Swifter {
     - https://dev.twitter.com/notifications/multiple-media-entities-in-tweets
     - https://dev.twitter.com/docs/api/multiple-media-extended-entities
     */
-    public func postTweet(status: String, inReplyToStatusID: String? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, media_ids: [String] = [], success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func postTweet(status: String, inReplyToStatusID: String? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, media_ids: [String] = [], tweetMode: TweetMode = TweetMode.default, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path: String = "statuses/update.json"
 
         var parameters = Dictionary<String, Any>()
         parameters["status"] = status
         parameters["in_reply_to_status_id"] ??= inReplyToStatusID
         parameters["trim_user"] ??= trimUser
+        parameters["tweet_mode"] ??= tweetMode.stringValue
         
         if let placeID = placeID {
             parameters["place_id"] = placeID
@@ -137,7 +139,7 @@ public extension Swifter {
             }, failure: failure)
     }
 
-    public func postTweet(status: String, media: Data, inReplyToStatusID: String? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func postTweet(status: String, media: Data, inReplyToStatusID: String? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path: String = "statuses/update_with_media.json"
 
         var parameters = Dictionary<String, Any>()
@@ -146,6 +148,7 @@ public extension Swifter {
         parameters[Swifter.DataParameters.dataKey] = "media[]"
         parameters["in_reply_to_status_id"] ??= inReplyToStatusID
         parameters["trim_user"] ??= trimUser
+        parameters["tweet_mode"] ??= tweetMode.stringValue
         
         if placeID != nil {
             parameters["place_id"] = placeID!
@@ -192,11 +195,12 @@ public extension Swifter {
 
     Returns Tweets (1: the new tweet)
     */
-    public func retweetTweet(forID id: String, trimUser: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func retweetTweet(forID id: String, trimUser: Bool? = nil, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/retweet/\(id).json"
 
         var parameters = Dictionary<String, Any>()
         parameters["trim_user"] ??= trimUser
+        parameters["tweet_mode"] ??= tweetMode.stringValue
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
     }
@@ -213,11 +217,12 @@ public extension Swifter {
      
      Returns Tweets (1: the original tweet)
      */
-    public func unretweetTweet(forID id: String, trimUser: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func unretweetTweet(forID id: String, trimUser: Bool? = nil, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "statuses/unretweet/\(id).json"
         
         var parameters = Dictionary<String, Any>()
         parameters["trim_user"] ??= trimUser
+        parameters["tweet_mode"] ??= tweetMode.stringValue
         
         self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
     }
