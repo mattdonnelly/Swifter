@@ -184,7 +184,7 @@ public enum JSON : Equatable, CustomStringConvertible {
             return "\(number)"
             
         case .string(let string):
-            return "\"\(string)\""
+            return "\"\(string.replacingOccurrences(of: "\"", with: "\\\"").replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "\\n"))\""
             
         case .array(let array):
             return "[\n" + array.map { "\(nextIndent)\($0.prettyPrint(indent, level + 1))" }.joined(separator: ",\n") + "\n\(currentIndent)]"

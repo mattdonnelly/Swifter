@@ -56,6 +56,13 @@ public enum TwitterURL {
     
 }
 
+// MARK: - tweet_mode
+public enum TweetMode: String {
+    case compat
+    case extended
+}
+
+
 public class Swifter {
     
     // MARK: - Types
