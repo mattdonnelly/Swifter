@@ -142,7 +142,11 @@ public class Swifter {
                     }
                 } catch {
                     DispatchQueue.main.async {
-                        failure?(error)
+                        if case 200 ... 299 = response.statusCode, data.count == 0 {
+						    success?(JSON("{}"), response)
+                        } else {
+                            failure?(error)
+                        }
                     }
                 }
             }

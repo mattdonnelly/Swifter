@@ -65,17 +65,17 @@ internal class AccountsClient: SwifterClientProtocol {
 
         if let keyString = params[Swifter.DataParameters.dataKey] as? String {
             postDataKey = keyString
-            postData = params[postDataKey!] as? Data
+            postData = params[keyString] as? Data
             
             params.removeValue(forKey: Swifter.DataParameters.dataKey)
-            params.removeValue(forKey: postDataKey!)
+            params.removeValue(forKey: keyString)
         }
 
         var postDataFileName: String?
         if let fileName = params[Swifter.DataParameters.fileNameKey] as? String {
             postDataFileName = fileName
-            params.removeValue(forKey: fileName)
-        }
+			params.removeValue(forKey: Swifter.DataParameters.fileNameKey)
+       }
 
         let stringifiedParameters = params.stringifiedDictionary()
 
