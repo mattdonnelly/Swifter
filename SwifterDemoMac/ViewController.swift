@@ -30,7 +30,7 @@ import SwifterMac
 class ViewController: NSViewController {
 
     let useACAccount = false
-    dynamic var tweets: [Tweet] = []
+    @objc dynamic var tweets: [Tweet] = []
                             
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +61,7 @@ class ViewController: NSViewController {
             }
         } else {
             let swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
-            swifter.authorize(with: URL(string: "swifter://success")!, success: { _ in
+            swifter.authorize(with: URL(string: "swifter://success")!, success: { _, _ in
                 swifter.getHomeTimeline(count: 100, success: { statuses in
                     guard let tweets = statuses.array else { return }
                     self.tweets = tweets.map {

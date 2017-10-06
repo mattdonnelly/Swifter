@@ -59,7 +59,7 @@ public extension Swifter {
             
             let authorizeURL = URL(string: "oauth/authorize", relativeTo: TwitterURL.oauth.url)
             let queryURL = URL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
-            NSWorkspace.shared().open(queryURL)
+            NSWorkspace.shared.open(queryURL)
         }, failure: failure)
     }
     #endif

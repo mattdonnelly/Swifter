@@ -64,7 +64,7 @@ public extension Swifter {
 
     Returns a timeline of tweets authored by members of the specified list. Retweets are included by default. Use the include_rts=false parameter to omit retweets. Embedded Timelines is a great way to embed list timelines on your website.
     */
-    public func listTweets(for listTag: ListTag, sinceID: String?, maxID: String?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: SuccessHandler?, failure: FailureHandler?) {
+    public func listTweets(for listTag: ListTag, sinceID: String?, maxID: String?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/statuses.json"
 
         var parameters = Dictionary<String, Any>()
@@ -77,6 +77,7 @@ public extension Swifter {
         parameters["count"] ??= count
         parameters["include_entities"] ??= includeEntities
         parameters["include_rts"] ??= includeRTs
+        parameters["tweet_mode"] ??= tweetMode.stringValue
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
     }
@@ -104,11 +105,12 @@ public extension Swifter {
 
     Returns the lists the specified user has been added to. If user_id or screen_name are not provided the memberships for the authenticating user are returned.
     */
-    public func getListMemberships(for userTag: UserTag, cursor: String?, filterToOwnedLists: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
+    public func getListMemberships(for userTag: UserTag, count: Int? = nil, cursor: String?, filterToOwnedLists: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
         let path = "lists/memberships.json"
 
         var parameters = Dictionary<String, Any>()
         parameters[userTag.key] = userTag.value
+        parameters["count"] ??= count
         parameters["cursor"] ??= cursor
         parameters["filter_to_owned_lists"] ??= filterToOwnedLists
 
@@ -144,7 +146,7 @@ public extension Swifter {
 
     Subscribes the authenticated user to the specified list.
     */
-    public func subsribeToList(for listTag: ListTag, owner ownerTag: UserTag, success: SuccessHandler?, failure: FailureHandler?) {
+    public func subscribeToList(for listTag: ListTag, owner ownerTag: UserTag, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/subscribers/create.json"
 
         var parameters = Dictionary<String, Any>()

@@ -62,7 +62,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
     let HTTPMethod: HTTPMethodType
 
     var request: URLRequest?
-    var dataTask: URLSessionDataTask!
+    var dataTask: URLSessionDataTask?
 
     var headers: Dictionary<String, String> = [:]
     var parameters: Dictionary<String, Any>
@@ -163,7 +163,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
         DispatchQueue.main.async {
             let session = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
             self.dataTask = session.dataTask(with: self.request!)
-            self.dataTask.resume()
+            self.dataTask?.resume()
             
             #if os(iOS)
                 UIApplication.shared.isNetworkActivityIndicatorVisible = true
@@ -172,7 +172,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
     }
 
     public func stop() {
-        self.dataTask.cancel()
+        self.dataTask?.cancel()
     }
 
     public func add(multipartData data: Data, parameterName: String, mimeType: String?, fileName: String?) -> Void {
