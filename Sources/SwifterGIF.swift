@@ -22,7 +22,7 @@ public extension Swifter {
 			if let media_id = json["media_id_string"].string {
 				self.uploadGIF(media_id, data: data, name: attachment.lastPathComponent, success: { json, response in
 					self.finalizeUpload(mediaId: media_id, success: { json, resoponse in
-						self.postTweet(status: text, media_ids: [media_id], success: success, failure: failure)
+						self.postTweet(status: text, mediaIDs: [media_id], success: success, failure: failure)
 					}, failure: failure)
 				}, failure: failure)
 			}
