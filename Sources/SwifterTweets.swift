@@ -140,7 +140,7 @@ public extension Swifter {
         }, rawSuccess: rawSuccess, failure: failure)
     }
 
-    public func postTweet(status: String, media: Data, inReplyToStatusID: String? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler? = nil, success: RawSuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func postTweet(status: String, media: Data, inReplyToStatusID: String? = nil, coordinate: (lat: Double, long: Double)? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler? = nil, rawSuccess: RawSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path: String = "statuses/update_with_media.json"
 
         var parameters = Dictionary<String, Any>()
