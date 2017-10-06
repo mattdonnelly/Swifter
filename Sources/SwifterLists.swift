@@ -64,7 +64,7 @@ public extension Swifter {
 
     Returns a timeline of tweets authored by members of the specified list. Retweets are included by default. Use the include_rts=false parameter to omit retweets. Embedded Timelines is a great way to embed list timelines on your website.
     */
-    public func listTweets(for listTag: ListTag, sinceID: String?, maxID: String?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, success: SuccessHandler?, rawSuccess: RawSuccessHandler? = nil, failure: FailureHandler?) {
+    public func listTweets(for listTag: ListTag, sinceID: String?, maxID: String?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler?, rawSuccess: RawSuccessHandler? = nil, failure: FailureHandler?) {
         let path = "lists/statuses.json"
 
         var parameters = Dictionary<String, Any>()
@@ -77,6 +77,7 @@ public extension Swifter {
         parameters["count"] ??= count
         parameters["include_entities"] ??= includeEntities
         parameters["include_rts"] ??= includeRTs
+        parameters["tweet_mode"] ??= tweetMode.stringValue
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, rawSuccess: rawSuccess, failure: failure)
     }

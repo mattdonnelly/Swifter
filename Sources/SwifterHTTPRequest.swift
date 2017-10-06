@@ -62,7 +62,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
     let HTTPMethod: HTTPMethodType
 
     var request: URLRequest?
-    var dataTask: URLSessionDataTask!
+    var dataTask: URLSessionDataTask?
 
     var headers: Dictionary<String, String> = [:]
     var parameters: Dictionary<String, Any>
@@ -111,13 +111,11 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
             for (key, value) in headers {
                 self.request!.setValue(value, forHTTPHeaderField: key)
             }
-            
-            let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.dataEncoding.rawValue))
-
+			
             let nonOAuthParameters = self.parameters.filter { key, _ in !key.hasPrefix("oauth_") }
 
             if !self.uploadData.isEmpty {
-                let boundary = "----------HTTPRequestBoUnDaRy"
+                let boundary = "--" + UUID().uuidString
 
                 let contentType = "multipart/form-data; boundary=\(boundary)"
                 self.request!.setValue(contentType, forHTTPHeaderField:"Content-Type")
@@ -140,15 +138,16 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
                 self.request!.setValue("\(body.count)", forHTTPHeaderField: "Content-Length")
                 self.request!.httpBody = body
             } else if !nonOAuthParameters.isEmpty {
+				let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.dataEncoding.rawValue))!
                 if self.HTTPMethod == .GET || self.HTTPMethod == .HEAD || self.HTTPMethod == .DELETE {
                     let queryString = nonOAuthParameters.urlEncodedQueryString(using: self.dataEncoding)
                     self.request!.url = self.url.append(queryString: queryString)
-                    self.request!.setValue("application/x-www-form-urlencoded; charset=\(String(describing: charset))", forHTTPHeaderField: "Content-Type")
+                    self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
                 } else {
                     var queryString = ""
                     if self.encodeParameters {
                         queryString = nonOAuthParameters.urlEncodedQueryString(using: self.dataEncoding)
-                        self.request!.setValue("application/x-www-form-urlencoded; charset=\(String(describing: charset))", forHTTPHeaderField: "Content-Type")
+                        self.request!.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
                     } else {
                         queryString = nonOAuthParameters.queryString
                     }
@@ -164,7 +163,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
         DispatchQueue.main.async {
             let session = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
             self.dataTask = session.dataTask(with: self.request!)
-            self.dataTask.resume()
+            self.dataTask?.resume()
             
             #if os(iOS)
                 UIApplication.shared.isNetworkActivityIndicatorVisible = true
@@ -173,7 +172,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
     }
 
     public func stop() {
-        self.dataTask.cancel()
+        self.dataTask?.cancel()
     }
 
     public func add(multipartData data: Data, parameterName: String, mimeType: String?, fileName: String?) -> Void {
@@ -183,7 +182,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
 
     private class func mulipartContent(with boundary: String, data: Data, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> Data {
         let mimeType = mimeTypeOrNil ?? "application/octet-stream"
-        let fileNameContentDisposition = fileName != nil ? "filename=\"\(String(describing: fileName))\"" : ""
+        let fileNameContentDisposition = fileName != nil ? "filename=\"\(fileName!)\"" : ""
         let contentDisposition = "Content-Disposition: form-data; name=\"\(parameterName)\"; \(fileNameContentDisposition)\r\n"
         
         var tempData = Data()
@@ -191,7 +190,6 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
         tempData.append(contentDisposition.data(using: .utf8)!)
         tempData.append("Content-Type: \(mimeType)\r\n\r\n".data(using: .utf8)!)
         tempData.append(data)
-        tempData.append("\r\n".data(using: .utf8)!)
         return tempData
     }
 
