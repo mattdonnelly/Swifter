@@ -28,7 +28,7 @@ import Foundation
 public enum JSON : Equatable, CustomStringConvertible {
     
     case string(String)
-    case number(Double)
+    case number(UInt)
     case object(Dictionary<String, JSON>)
     case array(Array<JSON>)
     case bool(Bool)
@@ -69,7 +69,7 @@ public enum JSON : Equatable, CustomStringConvertible {
             self = .string(string)
             
         case let number as NSNumber:
-            self = number.isBoolean ? .bool(number.boolValue) : .number(number.doubleValue)
+            self = number.isBoolean ? .bool(number.boolValue) : .number(number.uintValue)
             
         case _ as Optional<Any>:
             self = .null
@@ -99,7 +99,7 @@ public enum JSON : Equatable, CustomStringConvertible {
         guard case .number(let value) = self else {
             return nil
         }
-        return value
+        return Double(value)
     }
     
     public var object : [String: JSON]? {
@@ -236,7 +236,7 @@ extension JSON: ExpressibleByStringLiteral,
     ExpressibleByFloatLiteral,
     ExpressibleByArrayLiteral,
     ExpressibleByDictionaryLiteral,
-    ExpressibleByNilLiteral {
+ExpressibleByNilLiteral {
     
     public init(stringLiteral value: StringLiteralType) {
         self.init(value)
@@ -291,3 +291,4 @@ private extension NSNumber {
         return NSNumber(value: true).objCType == self.objCType
     }
 }
+
