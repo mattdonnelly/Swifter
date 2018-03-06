@@ -30,35 +30,42 @@ import Foundation
     import SafariServices
 #elseif os(macOS)
     import AppKit
+    import WebKit
 #endif
 
 public extension Swifter {
     
     public typealias TokenSuccessHandler = (Credential.OAuthAccessToken?, URLResponse) -> Void
     
+    private func authorizeParcer(with token :Credential.OAuthAccessToken?, and respopnce :URLResponse, success: TokenSuccessHandler?, failure: FailureHandler? = nil) -> URL {
+        NotificationCenter.default.addObserver(forName: .SwifterCallbackNotification, object: nil, queue: .main) { notification in
+            var requestToken = token!
+            
+            NotificationCenter.default.removeObserver(self)
+            let url = notification.userInfo![CallbackNotification.optionsURLKey] as! URL
+            let parameters = url.query!.queryStringParameters
+            requestToken.verifier = parameters["oauth_verifier"]
+            
+            self.postOAuthAccessToken(with: requestToken, success: { accessToken, response in
+                self.client.credential = Credential(accessToken: accessToken!)
+                success?(accessToken!, response)
+            }, failure: failure)
+        }
+        
+        let authorizeURL = URL(string: "oauth/authorize", relativeTo: TwitterURL.oauth.url)
+        return URL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
+    }
+    
     /**
      Begin Authorization with a Callback URL.
      - OS X only
      */
+    
     #if os(macOS)
-    public func authorize(with callbackURL: URL, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
+    public func authorize(with callbackURL: URL, inEmbedded webView:WKWebView? = nil, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
         self.postOAuthRequestToken(with: callbackURL, success: { token, response in
-            var requestToken = token!
             
-            NotificationCenter.default.addObserver(forName: .SwifterCallbackNotification, object: nil, queue: .main) { notification in
-                NotificationCenter.default.removeObserver(self)
-                let url = notification.userInfo![CallbackNotification.optionsURLKey] as! URL
-                let parameters = url.query!.queryStringParameters
-                requestToken.verifier = parameters["oauth_verifier"]
-                
-                    self.postOAuthAccessToken(with: requestToken, success: { accessToken, response in
-                    self.client.credential = Credential(accessToken: accessToken!)
-                    success?(accessToken!, response)
-                    }, failure: failure)
-            }
-            
-            let authorizeURL = URL(string: "oauth/authorize", relativeTo: TwitterURL.oauth.url)
-            let queryURL = URL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
+            let queryURL = self.authorizeParcer(with: token, and: response, success: success, failure: failure)
             NSWorkspace.shared.open(queryURL)
         }, failure: failure)
     }
@@ -75,23 +82,8 @@ public extension Swifter {
     #if os(iOS)
     public func authorize(with callbackURL: URL, presentFrom presentingViewController: UIViewController? , success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
         self.postOAuthRequestToken(with: callbackURL, success: { token, response in
-            var requestToken = token!
-            NotificationCenter.default.addObserver(forName: .SwifterCallbackNotification, object: nil, queue: .main) { notification in
-                NotificationCenter.default.removeObserver(self)
-                presentingViewController?.presentedViewController?.dismiss(animated: true, completion: nil)
-                let url = notification.userInfo![CallbackNotification.optionsURLKey] as! URL
-                
-                let parameters = url.query!.queryStringParameters
-                requestToken.verifier = parameters["oauth_verifier"]
-                
-                self.postOAuthAccessToken(with: requestToken, success: { accessToken, response in
-                    self.client.credential = Credential(accessToken: accessToken!)
-                    success?(accessToken!, response)
-                    }, failure: failure)
-            }
-            
-            let authorizeURL = URL(string: "oauth/authorize", relativeTo: TwitterURL.oauth.url)
-            let queryURL = URL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
+    
+            let queryURL = self.authorizeParcer(with: token, and: response, success: success, failure: failure)
             
             if #available(iOS 9.0, *) , let delegate = presentingViewController as? SFSafariViewControllerDelegate {
                 let safariView = SFSafariViewController(url: queryURL)
