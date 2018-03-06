@@ -62,13 +62,19 @@ public extension Swifter {
      */
     
     #if os(macOS)
-    public func authorize(with callbackURL: URL, inEmbedded webView:WKWebView? = nil, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
+    public func authorize(with callbackURL: URL, inEmbedded webView :WKWebView? = nil, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
         self.postOAuthRequestToken(with: callbackURL, success: { token, response in
             
             let queryURL = self.authorizeParcer(with: token, and: response, success: success, failure: failure)
-            NSWorkspace.shared.open(queryURL)
+            guard let webView = webView else {
+                NSWorkspace.shared.open(queryURL)
+                return
+            }
+            webView.load(URLRequest(url: queryURL))
+            
         }, failure: failure)
     }
+    
     #endif
     
     /**
