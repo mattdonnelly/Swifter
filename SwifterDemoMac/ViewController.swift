@@ -77,6 +77,7 @@ class ViewController: NSViewController {
 
 }
 
+@objcMembers
 class Tweet: NSObject {
     
     var name: String!
