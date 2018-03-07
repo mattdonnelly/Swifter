@@ -15,7 +15,7 @@ With the introduction of Swift 3, the naming convention of the language was chan
 
 ### Usage
 
-Swifter can be used with the 3 different kinds of authentication protocols Twitter allows. You can specify which protocol to use as show below. For more information on each of the authentication protocols, please check [Twitter OAuth Help](https://dev.twitter.com/oauth).
+Swifter can be used with the 3 different kinds of authentication protocols Twitter allows. You can specify which protocol to use as shown below. For more information on each of the authentication protocols, please check [Twitter OAuth Help](https://dev.twitter.com/oauth).
 
 Instantiation with ACAccount:
 
@@ -55,7 +55,7 @@ swifter.getHomeTimeline(count: 50, success: { json in
 ```
 
 #### ListTag, UserTag, and UsersTag
-Certain  Twitter API allows you to use either the `user_id` or `screen_name` to get user related objects (and `list_id`/`slug` for lists). Swifter offers a solution so that the user won't accidentally use the wrong method, and have nothing returned. For more information, check the `SwifterTag.swift` file.
+Certain  Twitter API calls allows you to use either the `user_id` or `screen_name` to get user related objects (and `list_id`/`slug` for lists). Swifter offers a solution so that the user won't accidentally use the wrong method, and have nothing returned. For more information, check the `SwifterTag.swift` file.
 
 ```swift
 swifter.getUserFollowersIDs(for: .id(userId), success: { json, prev, next in
@@ -103,7 +103,7 @@ swifter.postTweet(status: "Hello, world.", success: { status in
 
 ## JSON Handling
 
-To make accessing data returned by twitter requests, Swifter provides a class for representing JSON which you interact with similarly to a dictionary. The main advantage of using this instead of a Dictionary<String, AnyObject> is that it works better with Swift's strict typing system and doesn't require you to constantly downcast accessed objects. It also removes the need for lots optional chaining, making your code much cleaner and easier to read.
+To make accessing data returned by twitter requests simple, Swifter provides a class for representing JSON which you interact with similarly to a dictionary. The main advantage of using this instead of a Dictionary<String, AnyObject> is that it works better with Swift's strict typing system and doesn't require you to constantly downcast accessed objects. It also removes the need for lots of optional chaining, making your code much cleaner and easier to read.
 
 Here's an example of how you would access the text of the first element in list of statuses:
 
