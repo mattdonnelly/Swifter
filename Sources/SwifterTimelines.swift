@@ -28,12 +28,14 @@ import Foundation
 public extension Swifter {
 
     // Convenience method
-    private func getTimeline(at path: String, parameters: Dictionary<String, Any>, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    private func getTimeline(at path: String, parameters: Dictionary<String, Any>, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, excludeReplies: Bool? = nil, includeRts: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         var params = parameters
         params["count"] ??= count
         params["since_id"] ??= sinceID
         params["max_id"] ??= maxID
         params["trim_user"] ??= trimUser
+        params["exclude_replies"] ??= excludeReplies
+        params["include_rts"] ??= includeRts
         params["contributor_details"] ??= contributorDetails
         params["include_entities"] ??= includeEntities
         params["tweet_mode"] ??= tweetMode.stringValue
@@ -70,10 +72,10 @@ public extension Swifter {
 
     This method can only return up to 3,200 of a user's most recent Tweets. Native retweets of other statuses by the user is included in this total, regardless of whether include_rts is set to false when requesting this resource.
     */
-    public func getTimeline(for userID: String, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getTimeline(for userID: String, count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, excludeReplies: Bool? = nil, includeRts: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let parameters: Dictionary<String, Any> = ["user_id": userID]
 
-        self.getTimeline(at: "statuses/user_timeline.json", parameters: parameters, count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, contributorDetails: contributorDetails, includeEntities: includeEntities, tweetMode: tweetMode, success: success, failure: failure)
+        self.getTimeline(at: "statuses/user_timeline.json", parameters: parameters, count: count, sinceID: sinceID, maxID: maxID, trimUser: trimUser, excludeReplies: excludeReplies, includeRts: includeRts, contributorDetails: contributorDetails, includeEntities: includeEntities, tweetMode: tweetMode, success: success, failure: failure)
     }
 
     /**
