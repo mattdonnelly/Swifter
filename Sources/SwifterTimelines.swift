@@ -42,6 +42,18 @@ public extension Swifter {
             success?(json)
             }, failure: failure)
     }
+    
+    /**
+     GET    statuses/user_timeline
+     Returns Tweets (*: tweets for the user)
+     
+     Returns a collection of the most recent Tweets posted by the user based on custom parameters.
+     */
+    public func getTimeline(withCustomParameters params:Dictionary<String, Any>, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+        self.getJSON(path: "statuses/user_timeline.json", baseURL: .api, parameters: params, success: { json, _ in
+            success?(json)
+        }, failure: failure)
+    }
 
     /**
     GET	statuses/mentions_timeline
