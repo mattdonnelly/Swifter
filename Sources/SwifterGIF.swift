@@ -8,11 +8,9 @@
 
 import Foundation
 
-
 public enum GIFterError: Error {
 	case invalidData, invalidResponse
 }
-
 
 public extension Swifter {
 	

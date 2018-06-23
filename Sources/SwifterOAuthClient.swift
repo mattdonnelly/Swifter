@@ -52,7 +52,13 @@ internal class OAuthClient: SwifterClientProtocol  {
         self.credential = Credential(accessToken: credentialAccessToken)
     }
 
-    func get(_ path: String, baseURL: TwitterURL, parameters: [String: Any], uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+    func get(_ path: String,
+			 baseURL: TwitterURL,
+			 parameters: [String: Any],
+			 uploadProgress: HTTPRequest.UploadProgressHandler?,
+			 downloadProgress: HTTPRequest.DownloadProgressHandler?,
+			 success: HTTPRequest.SuccessHandler?,
+			 failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
         let url = URL(string: path, relativeTo: baseURL.url)!
 
         let request = HTTPRequest(url: url, method: .GET, parameters: parameters)
@@ -120,6 +126,23 @@ internal class OAuthClient: SwifterClientProtocol  {
         request.start()
         return request
     }
+	
+	func delete(_ path: String,
+				baseURL: TwitterURL,
+				parameters: [String: Any],
+				success: HTTPRequest.SuccessHandler?,
+				failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+		let url = URL(string: path, relativeTo: baseURL.url)!
+		
+		let request = HTTPRequest(url: url, method: .DELETE, parameters: parameters)
+		let authorizationHeader = self.authorizationHeader(for: .DELETE, url: url, parameters: parameters, isMediaUpload: false)
+		request.headers = ["Authorization": authorizationHeader]
+		request.successHandler = success
+		request.failureHandler = failure
+		request.dataEncoding = self.dataEncoding
+		request.start()
+		return request
+	}
 
     func authorizationHeader(for method: HTTPMethodType, url: URL, parameters: [String: Any], isMediaUpload: Bool) -> String {
         var authorizationParameters = [String: Any]()

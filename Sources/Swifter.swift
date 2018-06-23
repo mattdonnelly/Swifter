@@ -166,16 +166,22 @@ public class Swifter {
                 }
             }
         }
-
-        if method == .GET {
-            return self.client.get(path, baseURL: baseURL, parameters: parameters,
+		
+		switch method {
+		case .GET:
+			return self.client.get(path, baseURL: baseURL, parameters: parameters,
 								   uploadProgress: uploadProgress, downloadProgress: jsonDownloadProgressHandler,
 								   success: jsonSuccessHandler, failure: failure)
-        } else {
-            return self.client.post(path, baseURL: baseURL, parameters: parameters,
+		case .POST:
+			return self.client.post(path, baseURL: baseURL, parameters: parameters,
 									uploadProgress: uploadProgress, downloadProgress: jsonDownloadProgressHandler,
 									success: jsonSuccessHandler, failure: failure)
-        }
+		case .DELETE:
+			return self.client.delete(path, baseURL: baseURL, parameters: parameters,
+									  success: jsonSuccessHandler, failure: failure)
+		default:
+			fatalError("This HTTP Method is not supported")
+		}
     }
     
     private func handleStreamProgress(data: Data, response: HTTPURLResponse, handler: JSONSuccessHandler? = nil) {
@@ -223,5 +229,15 @@ public class Swifter {
 								uploadProgress: uploadProgress, downloadProgress: downloadProgress,
 								success: success, failure: failure)
     }
+	
+	@discardableResult
+	internal func deleteJSON(path: String,
+						   	baseURL: TwitterURL,
+							parameters: [String: Any],
+						    success: JSONSuccessHandler?,
+						    failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+		return self.jsonRequest(path: path, baseURL: baseURL, method: .DELETE, parameters: parameters,
+								success: success, failure: failure)
+	}
     
 }

@@ -96,6 +96,27 @@ internal class AccountsClient: SwifterClientProtocol {
         request.start()
         return request
     }
+	
+	func delete(_ path: String,
+				baseURL: TwitterURL,
+				parameters: [String: Any],
+				success: HTTPRequest.SuccessHandler?,
+				failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+		let url = URL(string: path, relativeTo: baseURL.url)
+		
+		let stringifiedParameters = parameters.stringifiedDictionary()
+		
+		let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .DELETE, url: url, parameters: stringifiedParameters)!
+		socialRequest.account = self.credential!.account!
+		
+		let request = HTTPRequest(request: socialRequest.preparedURLRequest())
+		request.parameters = parameters
+		request.successHandler = success
+		request.failureHandler = failure
+		
+		request.start()
+		return request
+	}
 
 }
 #endif
