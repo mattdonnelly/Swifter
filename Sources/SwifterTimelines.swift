@@ -35,6 +35,8 @@ public extension Swifter {
 							 sinceID: String? = nil,
 							 maxID: String? = nil,
 							 trimUser: Bool? = nil,
+							 excludeReplies: Bool? = nil,
+							 includeRetweets: Bool? = nil,
 							 contributorDetails: Bool? = nil,
 							 includeEntities: Bool? = nil,
 							 tweetMode: TweetMode = .default,
@@ -45,6 +47,8 @@ public extension Swifter {
         params["since_id"] ??= sinceID
         params["max_id"] ??= maxID
         params["trim_user"] ??= trimUser
+		params["exclude_replies"] ??= excludeReplies
+		params["include_rts"] ??= includeRetweets
         params["contributor_details"] ??= contributorDetails
         params["include_entities"] ??= includeEntities
         params["tweet_mode"] ??= tweetMode.stringValue
@@ -64,7 +68,15 @@ public extension Swifter {
 
     This method can only return up to 800 tweets.
     */
-    public func getMentionsTimelineTweets(count: Int? = nil, sinceID: String? = nil, maxID: String? = nil, trimUser: Bool? = nil, contributorDetails: Bool? = nil, includeEntities: Bool? = nil, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler? = nil, failure: FailureHandler?) {
+    public func getMentionsTimelineTweets(count: Int? = nil,
+										  sinceID: String? = nil,
+										  maxID: String? = nil,
+										  trimUser: Bool? = nil,
+										  contributorDetails: Bool? = nil,
+										  includeEntities: Bool? = nil,
+										  tweetMode: TweetMode = TweetMode.default,
+										  success: SuccessHandler? = nil,
+										  failure: FailureHandler?) {
         self.getTimeline(at: "statuses/mentions_timeline.json",
 						 parameters: [:],
 						 count: count,
@@ -97,6 +109,8 @@ public extension Swifter {
 							sinceID: String? = nil,
 							maxID: String? = nil,
 							trimUser: Bool? = nil,
+							excludeReplies: Bool? = nil,
+							includeRetweets: Bool? = nil,
 							contributorDetails: Bool? = nil,
 							includeEntities: Bool? = nil,
 							tweetMode: TweetMode = .default,
@@ -110,6 +124,8 @@ public extension Swifter {
 						 sinceID: sinceID,
 						 maxID: maxID,
 						 trimUser: trimUser,
+						 excludeReplies: excludeReplies,
+						 includeRetweets: includeRetweets,
 						 contributorDetails: contributorDetails,
 						 includeEntities: includeEntities,
 						 tweetMode: tweetMode,
