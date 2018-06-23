@@ -41,7 +41,10 @@ public extension Swifter {
      - OS X only
      */
     #if os(macOS)
-    public func authorize(with callbackURL: URL, success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
+    public func authorize(withCallback callbackURL: URL,
+						  forceLogin: Bool = false,
+						  success: TokenSuccessHandler?,
+						  failure: FailureHandler? = nil) {
         self.postOAuthRequestToken(with: callbackURL, success: { token, response in
             var requestToken = token!
             
@@ -56,9 +59,10 @@ public extension Swifter {
                     success?(accessToken!, response)
                     }, failure: failure)
             }
-            
-            let authorizeURL = URL(string: "oauth/authorize", relativeTo: TwitterURL.oauth.url)
-            let queryURL = URL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
+			
+			let forceLogin = forceLogin ? "&force_login=true" : ""
+			let query = "oauth/authorize?oauth_token=\(token!.key)\(forceLogin)"
+			let queryUrl = URL(string: query, relativeTo: TwitterURL.oauth.url)!
             NSWorkspace.shared.open(queryURL)
         }, failure: failure)
     }
@@ -75,6 +79,7 @@ public extension Swifter {
     #if os(iOS)
     public func authorize(withCallback callbackURL: URL,
 						  presentingFrom presenting: UIViewController?,
+						  forceLogin: Bool = false,
 						  success: TokenSuccessHandler?,
 						  failure: FailureHandler? = nil) {
         self.postOAuthRequestToken(with: callbackURL, success: { token, response in
@@ -92,9 +97,11 @@ public extension Swifter {
                     success?(accessToken!, response)
                     }, failure: failure)
             }
-            
-            let queryUrl = URL(string: "oauth/authorize?oauth_token=\(token!.key)", relativeTo: TwitterURL.oauth.url)!
-            
+			
+			let forceLogin = forceLogin ? "&force_login=true" : ""
+			let query = "oauth/authorize?oauth_token=\(token!.key)\(forceLogin)"
+            let queryUrl = URL(string: query, relativeTo: TwitterURL.oauth.url)!
+			
             if #available(iOS 9.0, *) , let delegate = presenting as? SFSafariViewControllerDelegate {
                 let safariView = SFSafariViewController(url: queryUrl)
                 safariView.delegate = delegate
