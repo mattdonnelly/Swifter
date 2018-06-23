@@ -60,7 +60,8 @@ class ViewController: NSViewController {
                     }, failure: failureHandler)
             }
         } else {
-            let swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
+			let swifter = Swifter(consumerKey: "nLl1mNYc25avPPF4oIzMyQzft",
+								  consumerSecret: "Qm3e5JTXDhbbLl44cq6WdK00tSUwa17tWlO8Bf70douE4dcJe2")
             swifter.authorize(with: URL(string: "swifter://success")!, success: { _, _ in
                 swifter.getHomeTimeline(count: 100, success: { statuses in
                     guard let tweets = statuses.array else { return }

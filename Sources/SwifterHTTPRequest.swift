@@ -65,10 +65,12 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
     var dataTask: URLSessionDataTask?
 
     var headers: Dictionary<String, String> = [:]
-    var parameters: Dictionary<String, Any>
+    var parameters: [String: Any]
     var encodeParameters: Bool
 
     var uploadData: [DataUpload] = []
+	
+	var jsonBody: Data?
 
     var dataEncoding: String.Encoding = .utf8
 
@@ -84,7 +86,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
     var successHandler: SuccessHandler?
     var failureHandler: FailureHandler?
 
-    public init(url: URL, method: HTTPMethodType = .GET, parameters: Dictionary<String, Any> = [:]) {
+    public init(url: URL, method: HTTPMethodType = .GET, parameters: [String: Any] = [:]) {
         self.url = url
         self.HTTPMethod = method
         self.parameters = parameters
@@ -114,15 +116,18 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
 			
             let nonOAuthParameters = self.parameters.filter { key, _ in !key.hasPrefix("oauth_") }
 
-            if !self.uploadData.isEmpty {
+			if let body = self.jsonBody {
+				self.request!.setValue("application/json", forHTTPHeaderField: "Content-Type")
+				self.request!.setValue("\(body.count)", forHTTPHeaderField: "Content-Length")
+				self.request!.httpBody = body
+			} else if !self.uploadData.isEmpty {
                 let boundary = "--" + UUID().uuidString
 
                 let contentType = "multipart/form-data; boundary=\(boundary)"
                 self.request!.setValue(contentType, forHTTPHeaderField:"Content-Type")
 
                 var body = Data()
-
-                for dataUpload: DataUpload in self.uploadData {
+                for dataUpload in self.uploadData {
                     let multipartData = HTTPRequest.mulipartContent(with: boundary, data: dataUpload.data, fileName: dataUpload.fileName, parameterName: dataUpload.parameterName, mimeType: dataUpload.mimeType)
                     body.append(multipartData)
                 }
@@ -179,6 +184,12 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
         let dataUpload = DataUpload(data: data, parameterName: parameterName, mimeType: mimeType, fileName: fileName)
         self.uploadData.append(dataUpload)
     }
+	
+	public func add(body: [String: Any]) {
+		if let data = try? JSONSerialization.data(withJSONObject: body, options: .prettyPrinted) {
+			self.jsonBody = data
+		}
+	}
 
     private class func mulipartContent(with boundary: String, data: Data, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> Data {
         let mimeType = mimeTypeOrNil ?? "application/octet-stream"

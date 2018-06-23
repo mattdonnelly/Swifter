@@ -46,7 +46,7 @@ public extension Swifter {
 
         let path = "statuses/filter.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["delimited"] ??= delimited
         parameters["stall_warnings"] ??= stallWarnings
         parameters["filter_level"] ??= filterLevel
@@ -73,7 +73,7 @@ public extension Swifter {
     public func streamRandomSampleTweets(delimited: Bool? = nil, stallWarnings: Bool? = nil, filterLevel: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         let path = "statuses/sample.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["delimited"] ??= delimited
         parameters["stall_warnings"] ??= stallWarnings
         parameters["filter_level"] ??= filterLevel
@@ -100,7 +100,7 @@ public extension Swifter {
     public func streamFirehoseTweets(count: Int? = nil, delimited: Bool? = nil, stallWarnings: Bool? = nil, filterLevel: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         let path = "statuses/firehose.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["count"] ??= count
         parameters["delimited"] ??= delimited
         parameters["stall_warnings"] ??= stallWarnings
@@ -125,7 +125,7 @@ public extension Swifter {
     public func beginUserStream(delimited: Bool? = nil, stallWarnings: Bool? = nil, includeMessagesFromUserOnly: Bool = false, includeReplies: Bool = false, track: [String]? = nil, locations: [String]? = nil, stringifyFriendIDs: Bool? = nil, filterLevel: String? = nil, language: [String]? = nil, progress: SuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         let path = "user.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["delimited"] ??= delimited
         parameters["stall_warnings"] ??= stallWarnings
         parameters["filter_level"] ??= filterLevel
@@ -158,7 +158,7 @@ public extension Swifter {
     public func beginSiteStream(delimited: Bool? = nil, stallWarnings: Bool? = nil, restrictToUserMessages: Bool = false, includeReplies: Bool = false, stringifyFriendIDs: Bool? = nil, progress: SuccessHandler? = nil, stallWarningHandler: StallWarningHandler? = nil, failure: FailureHandler? = nil) -> HTTPRequest {
         let path = "site.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["delimited"] ??= delimited
         parameters["stall_warnings"] ??= stallWarnings
         parameters["stringify_friend_ids"] ??= stringifyFriendIDs

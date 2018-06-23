@@ -39,7 +39,13 @@ internal class AppOnlyClient: SwifterClientProtocol  {
         self.consumerSecret = consumerSecret
     }
 
-    func get(_ path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+    func get(_ path: String,
+			 baseURL: TwitterURL,
+			 parameters: [String: Any],
+			 uploadProgress: HTTPRequest.UploadProgressHandler?,
+			 downloadProgress: HTTPRequest.DownloadProgressHandler?,
+			 success: HTTPRequest.SuccessHandler?,
+			 failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
         let url = URL(string: path, relativeTo: baseURL.url)
 
         let request = HTTPRequest(url: url!, method: .GET, parameters: parameters)
@@ -56,7 +62,13 @@ internal class AppOnlyClient: SwifterClientProtocol  {
         return request
     }
 
-    func post(_ path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+    func post(_ path: String,
+			  baseURL: TwitterURL,
+			  parameters: [String: Any],
+			  uploadProgress: HTTPRequest.UploadProgressHandler?,
+			  downloadProgress: HTTPRequest.DownloadProgressHandler?,
+			  success: HTTPRequest.SuccessHandler?,
+			  failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
         let url = URL(string: path, relativeTo: baseURL.url)
 
         let request = HTTPRequest(url: url!, method: .POST, parameters: parameters)
@@ -76,6 +88,26 @@ internal class AppOnlyClient: SwifterClientProtocol  {
         request.start()
         return request
     }
+	
+	func delete(_ path: String,
+				baseURL: TwitterURL,
+				parameters: [String: Any],
+				success: HTTPRequest.SuccessHandler?,
+				failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+		let url = URL(string: path, relativeTo: baseURL.url)
+		
+		let request = HTTPRequest(url: url!, method: .DELETE, parameters: parameters)
+		request.successHandler = success
+		request.failureHandler = failure
+		request.dataEncoding = self.dataEncoding
+		
+		if let bearerToken = self.credential?.accessToken?.key {
+			request.headers = ["Authorization": "Bearer \(bearerToken)"];
+		}
+		
+		request.start()
+		return request
+	}
 
     class func base64EncodedCredentials(withKey key: String, secret: String) -> String {
         let encodedKey = key.urlEncodedString()

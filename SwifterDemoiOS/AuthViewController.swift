@@ -37,7 +37,8 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
     let useACAccount = false
 
     required init?(coder aDecoder: NSCoder) {
-        self.swifter = Swifter(consumerKey: "RErEmzj7ijDkJr60ayE2gjSHT", consumerSecret: "SbS0CHk11oJdALARa7NDik0nty4pXvAxdt7aj0R5y1gNzWaNEx")
+        self.swifter = Swifter(consumerKey: "nLl1mNYc25avPPF4oIzMyQzft",
+							   consumerSecret: "Qm3e5JTXDhbbLl44cq6WdK00tSUwa17tWlO8Bf70douE4dcJe2")
         super.init(coder: aDecoder)
     }
 
@@ -70,7 +71,7 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
             }
         } else {
             let url = URL(string: "swifter://success")!
-            swifter.authorize(with: url, presentFrom: self, success: { _, _ in
+            swifter.authorize(withCallback: url, presentingFrom: self, success: { _, _ in
                 self.fetchTwitterHomeStream()
             }, failure: failureHandler)
         }

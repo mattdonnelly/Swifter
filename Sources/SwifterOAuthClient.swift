@@ -52,7 +52,13 @@ internal class OAuthClient: SwifterClientProtocol  {
         self.credential = Credential(accessToken: credentialAccessToken)
     }
 
-    func get(_ path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+    func get(_ path: String,
+			 baseURL: TwitterURL,
+			 parameters: [String: Any],
+			 uploadProgress: HTTPRequest.UploadProgressHandler?,
+			 downloadProgress: HTTPRequest.DownloadProgressHandler?,
+			 success: HTTPRequest.SuccessHandler?,
+			 failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
         let url = URL(string: path, relativeTo: baseURL.url)!
 
         let request = HTTPRequest(url: url, method: .GET, parameters: parameters)
@@ -66,29 +72,38 @@ internal class OAuthClient: SwifterClientProtocol  {
         return request
     }
 
-    func post(_ path: String, baseURL: TwitterURL, parameters: Dictionary<String, Any>, uploadProgress: HTTPRequest.UploadProgressHandler?, downloadProgress: HTTPRequest.DownloadProgressHandler?, success: HTTPRequest.SuccessHandler?, failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+    func post(_ path: String,
+			  baseURL: TwitterURL,
+			  parameters: [String: Any],
+			  uploadProgress: HTTPRequest.UploadProgressHandler?,
+			  downloadProgress: HTTPRequest.DownloadProgressHandler?,
+			  success: HTTPRequest.SuccessHandler?,
+			  failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
         let url = URL(string: path, relativeTo: baseURL.url)!
         
         var parameters = parameters
         var postData: Data?
         var postDataKey: String?
+		var jsonData: [String: Any]?
+		
+		if let jsonDataKey = parameters[Swifter.DataParameters.jsonDataKey] as? String {
+			jsonData = parameters[jsonDataKey] as? [String: Any]
+			parameters.removeValue(forKey: Swifter.DataParameters.jsonDataKey)
+			parameters.removeValue(forKey: jsonDataKey)
+		}
 
-        if let key: Any = parameters[Swifter.DataParameters.dataKey] {
-            if let keyString = key as? String {
-                postDataKey = keyString
-                postData = parameters[keyString] as? Data
-
-                parameters.removeValue(forKey: Swifter.DataParameters.dataKey)
-                parameters.removeValue(forKey: keyString)
-            }
+        if let keyString = parameters[Swifter.DataParameters.dataKey] as? String {
+			postDataKey = keyString
+			postData = parameters[keyString] as? Data
+			
+			parameters.removeValue(forKey: Swifter.DataParameters.dataKey)
+			parameters.removeValue(forKey: keyString)
         }
 
         var postDataFileName: String?
-        if let fileName: Any = parameters[Swifter.DataParameters.fileNameKey] {
-            if let fileNameString = fileName as? String {
-                postDataFileName = fileNameString
-				parameters.removeValue(forKey: Swifter.DataParameters.fileNameKey)
-           }
+        if let fileName = parameters[Swifter.DataParameters.fileNameKey] as? String {
+			postDataFileName = fileName
+			parameters.removeValue(forKey: Swifter.DataParameters.fileNameKey)
         }
 
         let request = HTTPRequest(url: url, method: .POST, parameters: parameters)
@@ -103,13 +118,34 @@ internal class OAuthClient: SwifterClientProtocol  {
             let fileName = postDataFileName ?? "media.jpg"
             request.add(multipartData: postData, parameterName: postDataKey!, mimeType: "application/octet-stream", fileName: fileName)
         }
+		
+		if let jsonData = jsonData {
+			request.add(body: jsonData)
+		}
 
         request.start()
         return request
     }
+	
+	func delete(_ path: String,
+				baseURL: TwitterURL,
+				parameters: [String: Any],
+				success: HTTPRequest.SuccessHandler?,
+				failure: HTTPRequest.FailureHandler?) -> HTTPRequest {
+		let url = URL(string: path, relativeTo: baseURL.url)!
+		
+		let request = HTTPRequest(url: url, method: .DELETE, parameters: parameters)
+		let authorizationHeader = self.authorizationHeader(for: .DELETE, url: url, parameters: parameters, isMediaUpload: false)
+		request.headers = ["Authorization": authorizationHeader]
+		request.successHandler = success
+		request.failureHandler = failure
+		request.dataEncoding = self.dataEncoding
+		request.start()
+		return request
+	}
 
-    func authorizationHeader(for method: HTTPMethodType, url: URL, parameters: Dictionary<String, Any>, isMediaUpload: Bool) -> String {
-        var authorizationParameters = Dictionary<String, Any>()
+    func authorizationHeader(for method: HTTPMethodType, url: URL, parameters: [String: Any], isMediaUpload: Bool) -> String {
+        var authorizationParameters = [String: Any]()
         authorizationParameters["oauth_version"] = OAuth.version
         authorizationParameters["oauth_signature_method"] =  OAuth.signatureMethod
         authorizationParameters["oauth_consumer_key"] = self.consumerKey
@@ -141,7 +177,7 @@ internal class OAuthClient: SwifterClientProtocol  {
         return "OAuth " + headerComponents.joined(separator: ", ")
     }
 
-    func oauthSignature(for method: HTTPMethodType, url: URL, parameters: Dictionary<String, Any>, accessToken token: Credential.OAuthAccessToken?) -> String {
+    func oauthSignature(for method: HTTPMethodType, url: URL, parameters: [String: Any], accessToken token: Credential.OAuthAccessToken?) -> String {
         let tokenSecret = token?.secret.urlEncodedString() ?? ""
         let encodedConsumerSecret = self.consumerSecret.urlEncodedString()
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"

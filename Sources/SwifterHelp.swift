@@ -34,10 +34,12 @@ public extension Swifter {
 
     It is recommended applications request this endpoint when they are loaded, but no more than once a day.
     */
-    public func getHelpConfiguration(success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getHelpConfiguration(success: SuccessHandler? = nil,
+									 failure: FailureHandler? = nil) {
         let path = "help/configuration.json"
-
-        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
+			success?(json)
+		}, failure: failure)
     }
 
     /**
@@ -45,10 +47,12 @@ public extension Swifter {
 
     Returns the list of languages supported by Twitter along with their ISO 639-1 code. The ISO 639-1 code is the two letter value to use if you include lang with any of your requests.
     */
-    public func getHelpLanguages(success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getHelpLanguages(success: SuccessHandler? = nil,
+								 failure: FailureHandler? = nil) {
         let path = "help/languages.json"
-
-        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
+			success?(json)
+		},failure: failure)
     }
 
     /**
@@ -56,10 +60,12 @@ public extension Swifter {
 
     Returns Twitter's Privacy Policy.
     */
-    public func getHelpPrivacy(success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getHelpPrivacy(success: SuccessHandler? = nil,
+							   failure: FailureHandler? = nil) {
         let path = "help/privacy.json"
-
-        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json["privacy"]) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
+			success?(json["privacy"])
+		}, failure: failure)
     }
 
     /**
@@ -67,10 +73,12 @@ public extension Swifter {
 
     Returns the Twitter Terms of Service in the requested format. These are not the same as the Developer Rules of the Road.
     */
-    public func getHelpTermsOfService(success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getHelpTermsOfService(success: SuccessHandler? = nil,
+									  failure: FailureHandler? = nil) {
         let path = "help/tos.json"
-
-        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in success?(json["tos"]) }, failure: failure)
+        self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
+			success?(json["tos"])
+		}, failure: failure)
     }
 
     /**
@@ -88,13 +96,14 @@ public extension Swifter {
 
     Read more about REST API Rate Limiting in v1.1 and review the limits.
     */
-    public func getRateLimits(for resources: [String], success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+    public func getRateLimits(for resources: [String],
+							  success: SuccessHandler? = nil,
+							  failure: FailureHandler? = nil) {
         let path = "application/rate_limit_status.json"
-
-        var parameters = Dictionary<String, Any>()
-        parameters["resources"] = resources.joined(separator: ",")
-
-        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
+        let parameters = ["resources": resources.joined(separator: ",")]
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
+			success?(json)
+		}, failure: failure)
     }
     
 }

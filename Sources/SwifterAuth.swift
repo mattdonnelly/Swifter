@@ -73,12 +73,15 @@ public extension Swifter {
      */
     
     #if os(iOS)
-    public func authorize(with callbackURL: URL, presentFrom presentingViewController: UIViewController? , success: TokenSuccessHandler?, failure: FailureHandler? = nil) {
+    public func authorize(withCallback callbackURL: URL,
+						  presentingFrom presenting: UIViewController?,
+						  success: TokenSuccessHandler?,
+						  failure: FailureHandler? = nil) {
         self.postOAuthRequestToken(with: callbackURL, success: { token, response in
             var requestToken = token!
-            NotificationCenter.default.addObserver(forName: .SwifterCallbackNotification, object: nil, queue: .main) { notification in
+            NotificationCenter.default.addObserver(forName: .swifterCallback, object: nil, queue: .main) { notification in
                 NotificationCenter.default.removeObserver(self)
-                presentingViewController?.presentedViewController?.dismiss(animated: true, completion: nil)
+                presenting?.presentedViewController?.dismiss(animated: true, completion: nil)
                 let url = notification.userInfo![CallbackNotification.optionsURLKey] as! URL
                 
                 let parameters = url.query!.queryStringParameters
@@ -90,22 +93,21 @@ public extension Swifter {
                     }, failure: failure)
             }
             
-            let authorizeURL = URL(string: "oauth/authorize", relativeTo: TwitterURL.oauth.url)
-            let queryURL = URL(string: authorizeURL!.absoluteString + "?oauth_token=\(token!.key)")!
+            let queryUrl = URL(string: "oauth/authorize?oauth_token=\(token!.key)", relativeTo: TwitterURL.oauth.url)!
             
-            if #available(iOS 9.0, *) , let delegate = presentingViewController as? SFSafariViewControllerDelegate {
-                let safariView = SFSafariViewController(url: queryURL)
+            if #available(iOS 9.0, *) , let delegate = presenting as? SFSafariViewControllerDelegate {
+                let safariView = SFSafariViewController(url: queryUrl)
                 safariView.delegate = delegate
-                presentingViewController?.present(safariView, animated: true, completion: nil)
+                presenting?.present(safariView, animated: true, completion: nil)
             } else {
-                UIApplication.shared.openURL(queryURL)
+                UIApplication.shared.openURL(queryUrl)
             }
         }, failure: failure)
     }
     #endif
     
     public class func handleOpenURL(_ url: URL) {
-        let notification = Notification(name: .SwifterCallbackNotification, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
+        let notification = Notification(name: .swifterCallback, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
         NotificationCenter.default.post(notification)
     }
     
@@ -121,14 +123,16 @@ public extension Swifter {
                     
                     success?(credentialToken, response)
                 } else {
-                    let error = SwifterError(message: "Cannot find bearer token in server response", kind: .invalidAppOnlyBearerToken)
+                    let error = SwifterError(message: "Cannot find bearer token in server response",
+											 kind: .invalidAppOnlyBearerToken)
                     failure?(error)
                 }
             } else if case .object = json["errors"] {
                 let error = SwifterError(message: json["errors"]["message"].string!, kind: .responseError(code: json["errors"]["code"].integer!))
                 failure?(error)
             } else {
-                let error = SwifterError(message: "Cannot find JSON dictionary in response", kind: .invalidJSONResponse)
+                let error = SwifterError(message: "Cannot find JSON dictionary in response",
+										 kind: .invalidJSONResponse)
                 failure?(error)
             }
             
@@ -137,10 +141,7 @@ public extension Swifter {
     
     public func postOAuth2BearerToken(success: JSONSuccessHandler?, failure: FailureHandler?) {
         let path = "oauth2/token"
-        
-        var parameters = Dictionary<String, Any>()
-        parameters["grant_type"] = "client_credentials"
-        
+		let parameters = ["grant_type": "client_credentials"]
         self.jsonRequest(path: path, baseURL: .oauth, method: .POST, parameters: parameters, success: success, failure: failure)
     }
     
@@ -160,7 +161,7 @@ public extension Swifter {
     
     public func postOAuthRequestToken(with callbackURL: URL, success: @escaping TokenSuccessHandler, failure: FailureHandler?) {
         let path = "oauth/request_token"
-        let parameters: [String: Any] =  ["oauth_callback": callbackURL.absoluteString]
+        let parameters =  ["oauth_callback": callbackURL.absoluteString]
         
         self.client.post(path, baseURL: .oauth, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: { data, response in
             let responseString = String(data: data, encoding: .utf8)!
@@ -172,7 +173,7 @@ public extension Swifter {
     public func postOAuthAccessToken(with requestToken: Credential.OAuthAccessToken, success: @escaping TokenSuccessHandler, failure: FailureHandler?) {
         if let verifier = requestToken.verifier {
             let path =  "oauth/access_token"
-            let parameters: [String: Any] = ["oauth_token": requestToken.key, "oauth_verifier": verifier]
+            let parameters = ["oauth_token": requestToken.key, "oauth_verifier": verifier]
             
             self.client.post(path, baseURL: .oauth, parameters: parameters, uploadProgress: nil, downloadProgress: nil, success: { data, response in
                 
@@ -182,7 +183,8 @@ public extension Swifter {
                 
                 }, failure: failure)
         } else {
-            let error = SwifterError(message: "Bad OAuth response received from server", kind: .badOAuthResponse)
+            let error = SwifterError(message: "Bad OAuth response received from server",
+									 kind: .badOAuthResponse)
             failure?(error)
         }
     }
