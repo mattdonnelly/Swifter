@@ -48,7 +48,7 @@ public extension Swifter {
     public func getReverseGeocode(for coordinate: (lat: Double, long: Double), accuracy: String? = nil, granularity: String? = nil, maxResults: Int? = nil, callback: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "geo/reverse_geocode.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["lat"] = coordinate.lat
         parameters["long"] = coordinate.long
 
@@ -74,7 +74,7 @@ public extension Swifter {
 
         let path = "geo/search.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         if let coordinate = coordinate {
             parameters["lat"] = coordinate.lat
             parameters["long"] = coordinate.long
@@ -105,7 +105,7 @@ public extension Swifter {
     public func getSimilarPlaces(for coordinate: (lat: Double, long: Double), name: String, containedWithin: String? = nil, attributeStreetAddress: String? = nil, callback: String? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "geo/similar_places.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["lat"] = coordinate.lat
         parameters["long"] = coordinate.long
         parameters["name"] = name

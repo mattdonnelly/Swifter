@@ -91,7 +91,7 @@ public extension Swifter {
     public func getRateLimits(for resources: [String], success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "application/rate_limit_status.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["resources"] = resources.joined(separator: ",")
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)

@@ -46,7 +46,7 @@ public extension Swifter {
     public func verifyAccountCredentials(includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "account/verify_credentials.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
 
@@ -63,7 +63,7 @@ public extension Swifter {
 
         let path = "account/settings.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["trend_location_woeid"] ??= trendLocationWOEID
         parameters["sleep_time_enabled"] ??= sleepTimeEnabled
         parameters["start_sleep_time"] ??= startSleepTime
@@ -84,7 +84,7 @@ public extension Swifter {
 
         let path = "account/update_profile.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["name"] ??= name
         parameters["url"] ??= url
         parameters["location"] ??= location
@@ -105,7 +105,7 @@ public extension Swifter {
 
         let path = "account/update_profile_background_image.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["image"] = imageData.base64EncodedString(options: [])
         parameters["title"] ??= title
         parameters["include_entities"] ??= includeEntities
@@ -122,7 +122,7 @@ public extension Swifter {
     public func updateProfileColors(backgroundColor: String? = nil, linkColor: String? = nil, sidebarBorderColor: String? = nil, sidebarFillColor: String? = nil, textColor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "account/update_profile_colors.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["profile_background_color"] ??= backgroundColor
         parameters["profile_link_color"] ??= linkColor
         parameters["profile_sidebar_link_color"] ??= sidebarBorderColor
@@ -144,7 +144,7 @@ public extension Swifter {
     public func updateProfileImage(using imageData: Data, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "account/update_profile_image.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["image"] = imageData.base64EncodedString(options: [])
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
@@ -160,7 +160,7 @@ public extension Swifter {
     public func getBlockedUsers(includeEntities: Bool? = nil, skipStatus: Bool? = nil, cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "blocks/list.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
         parameters["cursor"] ??= cursor
@@ -178,7 +178,7 @@ public extension Swifter {
     public func getBlockedUsersIDs(stringifyIDs: String? = nil, cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "blocks/ids.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["stringify_ids"] ??= stringifyIDs
         parameters["cursor"] ??= cursor
 
@@ -195,7 +195,7 @@ public extension Swifter {
     public func blockUser(for userTag: UserTag, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "blocks/create.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
@@ -211,7 +211,7 @@ public extension Swifter {
     public func unblockUser(for userTag: UserTag, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "blocks/destroy.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
@@ -239,7 +239,7 @@ public extension Swifter {
     public func lookupUsers(for usersTag: UsersTag, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "users/lookup.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[usersTag.key] = usersTag.value
         parameters["include_entities"] ??= includeEntities
 
@@ -256,7 +256,7 @@ public extension Swifter {
     public func showUser(for userTag: UserTag, includeEntities: Bool? = nil, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "users/show.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["include_entities"] ??= includeEntities
 
@@ -273,7 +273,7 @@ public extension Swifter {
     public func searchUsers(using query: String, page: Int?, count: Int?, includeEntities: Bool?, success: SuccessHandler? = nil, failure: @escaping FailureHandler) {
         let path = "users/search.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["q"] = query
         parameters["page"] ??= page
         parameters["count"] ??= count
@@ -310,7 +310,7 @@ public extension Swifter {
     public func updateProfileBanner(using imageData: Data, width: Int? = nil, height: Int? = nil, offsetLeft: Int? = nil, offsetTop: Int? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "account/update_profile_banner.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["banner"] = imageData.base64EncodedString
         parameters["width"] ??= width
         parameters["height"] ??= height
@@ -360,7 +360,7 @@ public extension Swifter {
     public func unmuteUser(for userTag: UserTag, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/destroy.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
@@ -376,7 +376,7 @@ public extension Swifter {
     public func getMuteUsersIDs(cursor: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/ids.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["cursor"] ??= cursor
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
@@ -392,7 +392,7 @@ public extension Swifter {
     public func getMuteUsers(cursor: String? = nil, includeEntities: Bool? = nil, skipStatus: Bool? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "mutes/users/list.json"
         
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
         parameters["cursor"] ??= cursor

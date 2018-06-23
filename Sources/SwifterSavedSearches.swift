@@ -57,7 +57,7 @@ public extension Swifter {
     public func createSavedSearch(for query: String, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "saved_searches/create.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["query"] = query
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)

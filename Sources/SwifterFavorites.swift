@@ -39,7 +39,7 @@ public extension Swifter {
 
         let path = "favorites/list.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["count"] ??= count
         parameters["since_id"] ??= sinceID
         parameters["max_id"] ??= maxID
@@ -53,7 +53,7 @@ public extension Swifter {
 
         let path = "favorites/list.json"
         
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["count"] ??= count
         parameters["since_id"] ??= sinceID
@@ -73,7 +73,7 @@ public extension Swifter {
     public func unfavoriteTweet(forID id: String, includeEntities: Bool? = nil, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "favorites/destroy.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["id"] = id
         parameters["include_entities"] ??= includeEntities
         parameters["tweet_mode"] ??= tweetMode.stringValue
@@ -91,7 +91,7 @@ public extension Swifter {
     public func favoriteTweet(forID id: String, includeEntities: Bool? = nil, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler? = nil, failure: HTTPRequest.FailureHandler? = nil) {
         let path = "favorites/create.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["id"] = id
         parameters["include_entities"] ??= includeEntities
         parameters["tweet_mode"] ??= tweetMode.stringValue

@@ -22,7 +22,7 @@ public extension Swifter {
     public func getTrendsPlace(with woeid: String, excludeHashtags: Bool = false, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "trends/place.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["id"] = woeid
         parameters["exclude"] = excludeHashtags ? "hashtags" : nil
         
@@ -55,7 +55,7 @@ public extension Swifter {
     public func getClosestTrends(for coordinate: (lat: Double, long: Double), success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "trends/closest.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["lat"] = coordinate.lat
         parameters["long"] = coordinate.long
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)

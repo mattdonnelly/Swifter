@@ -39,7 +39,7 @@ public extension Swifter {
     public func getSubscribedLists(reverse: Bool?, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/list.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["reverse"] ??= reverse
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
@@ -50,7 +50,7 @@ public extension Swifter {
     public func getSubscribedLists(for userTag: UserTag, reverse: Bool?, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/list.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["reverse"] ??= reverse
 
@@ -67,7 +67,7 @@ public extension Swifter {
     public func listTweets(for listTag: ListTag, sinceID: String?, maxID: String?, count: Int?, includeEntities: Bool?, includeRTs: Bool?, tweetMode: TweetMode = TweetMode.default, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/statuses.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[listTag.key] = listTag.value
         if case .slug(_, let owner) = listTag {
             parameters[owner.ownerKey] = owner.value
@@ -90,7 +90,7 @@ public extension Swifter {
     public func removeMemberFromList(for listTag: ListTag, user userTag: UserTag, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/members/destroy.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[listTag.key] = listTag.value
         if case .slug(_, let owner) = listTag {
             parameters[owner.ownerKey] = owner.value
@@ -108,7 +108,7 @@ public extension Swifter {
     public func getListMemberships(for userTag: UserTag, count: Int? = nil, cursor: String?, filterToOwnedLists: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
         let path = "lists/memberships.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["count"] ??= count
         parameters["cursor"] ??= cursor
@@ -127,7 +127,7 @@ public extension Swifter {
     public func getListSubscribers(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
         let path = "lists/subscribers.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[listTag.key] = listTag.value
         if case .slug(_, let owner) = listTag {
             parameters[owner.ownerKey] = owner.value
@@ -149,7 +149,7 @@ public extension Swifter {
     public func subscribeToList(for listTag: ListTag, owner ownerTag: UserTag, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/subscribers/create.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[listTag.key] = listTag.value
         if case .slug(_, let owner) = listTag {
             parameters[owner.ownerKey] = owner.value
@@ -166,7 +166,7 @@ public extension Swifter {
     public func checkListSubcription(of userTag: UserTag, for listTag: ListTag, includeEntities: Bool?, skipStatus: Bool?, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/subscribers/show.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[listTag.key] = listTag.value
         if case .slug(_, let owner) = listTag {
             parameters[owner.ownerKey] = owner.value
@@ -186,7 +186,7 @@ public extension Swifter {
     public func unsubscribeFromList(for listTag: ListTag, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/subscribers/destroy.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[listTag.key] = listTag.value
         if case .slug(_, let owner) = listTag {
             parameters[owner.ownerKey] = owner.value
@@ -205,7 +205,7 @@ public extension Swifter {
     public func subscribeUsersToList(for listTag: ListTag, users usersTag: UsersTag, includeEntities: Bool?, skipStatus: Bool?, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/members/create_all.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[listTag.key] = listTag.value
         if case .slug(_, let owner) = listTag {
             parameters[owner.ownerKey] = owner.value
@@ -226,7 +226,7 @@ public extension Swifter {
     public func checkListMembership(of userTag: UserTag, for listTag: ListTag, includeEntities: Bool?, skipStatus: Bool?, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/members/show.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[listTag.key] = listTag.value
         if case .slug(_, let owner) = listTag {
             parameters[owner.ownerKey] = owner.value
@@ -247,7 +247,7 @@ public extension Swifter {
     public func getListMembers(for listTag: ListTag, cursor: String?, includeEntities: Bool?, skipStatus: Bool?, success: CursorSuccessHandler?, failure: FailureHandler?) {
         let path = "lists/members.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[listTag.key] = listTag.value
         if case .slug(_, let owner) = listTag {
             parameters[owner.ownerKey] = owner.value
@@ -269,7 +269,7 @@ public extension Swifter {
     public func addListMember(_ userTag: UserTag, for listTag: ListTag, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/members/create.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[listTag.key] = listTag.value
         if case .slug(_, let owner) = listTag {
             parameters[owner.ownerKey] = owner.value
@@ -287,7 +287,7 @@ public extension Swifter {
     public func deleteList(for listTag: ListTag, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/destroy.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[listTag.key] = listTag.value
         if case .slug(_, let owner) = listTag {
             parameters[owner.ownerKey] = owner.value
@@ -304,7 +304,7 @@ public extension Swifter {
     public func updateList(for listTag: ListTag, name: String?, isPublic: Bool = true, description: String?, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/update.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[listTag.key] = listTag.value
         if case .slug(_, let owner) = listTag {
             parameters[owner.ownerKey] = owner.value
@@ -324,7 +324,7 @@ public extension Swifter {
     public func createList(named name: String, asPublicList: Bool = true, description: String?, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/create.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["name"] = name
         parameters["mode"] = asPublicList ? "public" : "private"
         parameters["description"] ??= description
@@ -340,7 +340,7 @@ public extension Swifter {
     public func showList(for listTag: ListTag, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/show.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[listTag.key] = listTag.value
         if case .slug(_, let owner) = listTag {
             parameters[owner.ownerKey] = owner.value
@@ -359,7 +359,7 @@ public extension Swifter {
     public func getSubscribedList(of userTag: UserTag, count: String?, cursor: String?, success: CursorSuccessHandler?, failure: FailureHandler?) {
         let path = "lists/subscriptions.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["count"] ??= count
         parameters["cursor"] ??= cursor
@@ -379,7 +379,7 @@ public extension Swifter {
     public func removeListMembers(_ usersTag: UsersTag, for listTag: ListTag, success: SuccessHandler?, failure: FailureHandler?) {
         let path = "lists/members/destroy_all.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[listTag.key] = listTag.value
         if case .slug(_, let owner) = listTag {
             parameters[owner.ownerKey] = owner.value
@@ -397,7 +397,7 @@ public extension Swifter {
     public func getOwnedLists(for userTag: UserTag, count: String?, cursor: String?, success: CursorSuccessHandler?, failure: FailureHandler?) {
         let path = "lists/ownerships.json"
         
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["count"] ??= count
         parameters["cursor"] ??= cursor

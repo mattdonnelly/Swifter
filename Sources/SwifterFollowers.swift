@@ -35,7 +35,7 @@ public extension Swifter {
     public func listOfNoRetweetsFriends(stringifyIDs: Bool = true, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/no_retweets/ids.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["stringify_ids"] = stringifyIDs
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in success?(json) }, failure: failure)
@@ -54,7 +54,7 @@ public extension Swifter {
     public func getUserFollowingIDs(for userTag: UserTag, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "friends/ids.json"
         
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["cursor"] ??= cursor
         parameters["stringify_ids"] ??= stringifyIDs
@@ -77,7 +77,7 @@ public extension Swifter {
     public func getUserFollowersIDs(for userTag: UserTag, cursor: String? = nil, stringifyIDs: Bool? = nil, count: Int? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "followers/ids.json"
         
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["cursor"] ??= cursor
         parameters["stringify_ids"] ??= stringifyIDs
@@ -96,7 +96,7 @@ public extension Swifter {
     public func getIncomingPendingFollowRequests(cursor: String? = nil, stringifyIDs: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/incoming.json"
         
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["cursor"] ??= cursor
         parameters["stringify_ids"] ??= stringifyIDs
         
@@ -113,7 +113,7 @@ public extension Swifter {
     public func getOutgoingPendingFollowRequests(cursor: String? = nil, stringifyIDs: String? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/outgoing.json"
         
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters["cursor"] ??= cursor
         parameters["stringify_ids"] ??= stringifyIDs
         
@@ -134,7 +134,7 @@ public extension Swifter {
     public func followUser(for userTag: UserTag, follow: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/create.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["follow"] ??= follow
 
@@ -155,7 +155,7 @@ public extension Swifter {
     public func unfollowUser(for userTag: UserTag, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/destroy.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
 
         self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
@@ -171,7 +171,7 @@ public extension Swifter {
     public func updateFriendship(with userTag: UserTag, device: Bool? = nil, retweets: Bool? = nil, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/update.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["device"] ??= device
         parameters["retweets"] ??= retweets
@@ -189,7 +189,7 @@ public extension Swifter {
     public func showFriendship(between sourceTag: UserTag, and targetTag: UserTag, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "friendships/show.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         switch sourceTag {
         case .id:           parameters["source_id"] = sourceTag.value
         case .screenName:   parameters["source_screen_name"] = sourceTag.value
@@ -215,7 +215,7 @@ public extension Swifter {
     public func getUserFollowing(for userTag: UserTag, cursor: String? = nil, count: Int? = nil, skipStatus: Bool? = nil, includeUserEntities: Bool? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "friends/list.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["cursor"] ??= cursor
         parameters["count"] ??= count
@@ -237,7 +237,7 @@ public extension Swifter {
     public func getUserFollowers(for userTag: UserTag, cursor: String? = nil, count: Int? = nil, skipStatus: Bool? = nil, includeUserEntities: Bool? = nil, success: CursorSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "followers/list.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["cursor"] ??= cursor
         parameters["count"] ??= count
@@ -257,7 +257,7 @@ public extension Swifter {
     public func lookupFriendship(with usersTag: UsersTag, success: SuccessHandler? = nil, failure: FailureHandler?) {
         let path = "friendships/lookup.json"
 
-        var parameters = Dictionary<String, Any>()
+        var parameters = [String: Any]()
         parameters[usersTag.key] = usersTag.value
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in            
