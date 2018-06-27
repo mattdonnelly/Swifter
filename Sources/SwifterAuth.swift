@@ -48,7 +48,7 @@ public extension Swifter {
         self.postOAuthRequestToken(with: callbackURL, success: { token, response in
             var requestToken = token!
             
-            NotificationCenter.default.addObserver(forName: .SwifterCallbackNotification, object: nil, queue: .main) { notification in
+            NotificationCenter.default.addObserver(forName: .swifterCallback, object: nil, queue: .main) { notification in
                 NotificationCenter.default.removeObserver(self)
                 let url = notification.userInfo![CallbackNotification.optionsURLKey] as! URL
                 let parameters = url.query!.queryStringParameters
@@ -63,7 +63,7 @@ public extension Swifter {
 			let forceLogin = forceLogin ? "&force_login=true" : ""
 			let query = "oauth/authorize?oauth_token=\(token!.key)\(forceLogin)"
 			let queryUrl = URL(string: query, relativeTo: TwitterURL.oauth.url)!
-            NSWorkspace.shared.open(queryURL)
+            NSWorkspace.shared.open(queryUrl)
         }, failure: failure)
     }
     #endif
