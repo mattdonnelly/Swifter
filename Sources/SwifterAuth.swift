@@ -106,6 +106,8 @@ public extension Swifter {
             if let delegate = safariDelegate ?? (presenting as? SFSafariViewControllerDelegate) {
                 let safariView = SFSafariViewController(url: queryUrl)
                 safariView.delegate = delegate
+                safariView.modalTransitionStyle = .coverVertical
+                safariView.modalPresentationStyle = .overFullScreen
                 presenting?.present(safariView, animated: true, completion: nil)
             } else {
                 UIApplication.shared.openURL(queryUrl)
