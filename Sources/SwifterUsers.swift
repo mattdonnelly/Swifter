@@ -48,6 +48,7 @@ public extension Swifter {
     */
     public func verifyAccountCredentials(includeEntities: Bool? = nil,
 										 skipStatus: Bool? = nil,
+										 includeEmail: Bool? = nil,
 										 success: SuccessHandler? = nil,
 										 failure: FailureHandler? = nil) {
         let path = "account/verify_credentials.json"
@@ -55,6 +56,7 @@ public extension Swifter {
         var parameters = [String: Any]()
         parameters["include_entities"] ??= includeEntities
         parameters["skip_status"] ??= skipStatus
+        parameters["include_email"] ??= includeEmail
 
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
 			success?(json)

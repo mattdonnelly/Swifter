@@ -80,6 +80,7 @@ public extension Swifter {
     public func authorize(withCallback callbackURL: URL,
 						  presentingFrom presenting: UIViewController?,
 						  forceLogin: Bool = false,
+						  safariDelegate: SFSafariViewControllerDelegate? = nil,
 						  success: TokenSuccessHandler?,
 						  failure: FailureHandler? = nil) {
         self.postOAuthRequestToken(with: callbackURL, success: { token, response in
@@ -102,9 +103,11 @@ public extension Swifter {
 			let query = "oauth/authorize?oauth_token=\(token!.key)\(forceLogin)"
             let queryUrl = URL(string: query, relativeTo: TwitterURL.oauth.url)!
 			
-            if #available(iOS 9.0, *) , let delegate = presenting as? SFSafariViewControllerDelegate {
+            if let delegate = safariDelegate ?? (presenting as? SFSafariViewControllerDelegate) {
                 let safariView = SFSafariViewController(url: queryUrl)
                 safariView.delegate = delegate
+                safariView.modalTransitionStyle = .coverVertical
+                safariView.modalPresentationStyle = .overFullScreen
                 presenting?.present(safariView, animated: true, completion: nil)
             } else {
                 UIApplication.shared.openURL(queryUrl)
