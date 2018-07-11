@@ -28,19 +28,20 @@ import Accounts
 import SwifterMac
 
 class ViewController: NSViewController {
-
+    
     let useACAccount = false
+    
     @objc dynamic var tweets: [Tweet] = []
-                            
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let failureHandler: (Error) -> Void = { print($0.localizedDescription) }
-
+        
         if useACAccount {
             let accountStore = ACAccountStore()
             let accountType = accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
-
+            
             accountStore.requestAccessToAccounts(with: accountType, options: nil) { granted, error in
                 guard granted else {
                     print("There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
@@ -57,30 +58,23 @@ class ViewController: NSViewController {
                 
                 swifter.getHomeTimeline(count: 20, success: { statuses in
                     print(statuses)
-                    }, failure: failureHandler)
+                }, failure: failureHandler)
             }
         } else {
-			let swifter = Swifter(consumerKey: "nLl1mNYc25avPPF4oIzMyQzft",
-								  consumerSecret: "Qm3e5JTXDhbbLl44cq6WdK00tSUwa17tWlO8Bf70douE4dcJe2")
-			swifter.authorize(withCallback: URL(string: "swifter://success")!, success: { _, _ in
+            let swifter = Swifter(consumerKey: "nLl1mNYc25avPPF4oIzMyQzft",
+                                  consumerSecret: "Qm3e5JTXDhbbLl44cq6WdK00tSUwa17tWlO8Bf70douE4dcJe2")
+            let callbackUrl = URL(string: "swifter://success")!
+            swifter.authorize(withCallback: callbackUrl, success: { _, _ in
                 swifter.getHomeTimeline(count: 100, success: { statuses in
                     guard let tweets = statuses.array else { return }
                     self.tweets = tweets.map {
-                        let tweet = Tweet()
-                        tweet.text = $0["text"].string!
-                        tweet.name = $0["user"]["name"].string!
-                        return tweet
+                        return Tweet(name: $0["user"]["name"].string!, text: $0["text"].string!)
                     }
-                    }, failure: failureHandler)
                 }, failure: failureHandler)
+            }, failure: failureHandler)
         }
     }
-
 }
 
-class Tweet: NSObject {
-    
-    var name: String!
-    var text: String!
-    
-}
+
+
