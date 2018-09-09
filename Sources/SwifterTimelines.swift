@@ -92,45 +92,45 @@ public extension Swifter {
 
 
     /**
-     GET    statuses/user_timeline
-     Returns Tweets (*: tweets for the user)
-     
-     Returns a collection of the most recent Tweets posted by the user indicated by the user_id parameter.
-     
-     User timelines belonging to protected users may only be requested when the authenticated user either "owns" the timeline or is an approved follower of the owner.
-     
-     The timeline returned is the equivalent of the one seen when you view a user's profile on twitter.com.
-     
-     This method can only return up to 3,200 of a user's most recent Tweets. Native retweets of other statuses by the user is included in this total, regardless of whether include_rts is set to false when requesting this resource.
-     */
+    GET	statuses/user_timeline
+    Returns Tweets (*: tweets for the user)
+
+    Returns a collection of the most recent Tweets posted by the user indicated by the user_id parameter.
+
+    User timelines belonging to protected users may only be requested when the authenticated user either "owns" the timeline or is an approved follower of the owner.
+
+    The timeline returned is the equivalent of the one seen when you view a user's profile on twitter.com.
+
+    This method can only return up to 3,200 of a user's most recent Tweets. Native retweets of other statuses by the user is included in this total, regardless of whether include_rts is set to false when requesting this resource.
+    */
     public func getTimeline(for userID: String,
-                            customParam: [String: Any] = [:],
-                            count: Int? = nil,
-                            sinceID: String? = nil,
-                            maxID: String? = nil,
-                            trimUser: Bool? = nil,
-                            excludeReplies: Bool? = nil,
-                            includeRetweets: Bool? = nil,
-                            contributorDetails: Bool? = nil,
-                            includeEntities: Bool? = nil,
-                            tweetMode: TweetMode = .default,
-                            success: SuccessHandler? = nil,
-                            failure: FailureHandler? = nil) {
+							customParam: [String: Any] = [:],
+							count: Int? = nil,
+							sinceID: String? = nil,
+							maxID: String? = nil,
+							trimUser: Bool? = nil,
+							excludeReplies: Bool? = nil,
+							includeRetweets: Bool? = nil,
+							contributorDetails: Bool? = nil,
+							includeEntities: Bool? = nil,
+							tweetMode: TweetMode = .default,
+							success: SuccessHandler? = nil,
+							failure: FailureHandler? = nil) {
         var parameters: [String: Any] = customParam
-        parameters["user_id"] = userID
-        self.getTimeline(at: "statuses/user_timeline.json",
-                         parameters: parameters,
-                         count: count,
-                         sinceID: sinceID,
-                         maxID: maxID,
-                         trimUser: trimUser,
-                         excludeReplies: excludeReplies,
-                         includeRetweets: includeRetweets,
-                         contributorDetails: contributorDetails,
-                         includeEntities: includeEntities,
-                         tweetMode: tweetMode,
-                         success: success,
-                         failure: failure)
+		parameters["user_id"] = userID
+		self.getTimeline(at: "statuses/user_timeline.json",
+						 parameters: parameters,
+						 count: count,
+						 sinceID: sinceID,
+						 maxID: maxID,
+						 trimUser: trimUser,
+						 excludeReplies: excludeReplies,
+						 includeRetweets: includeRetweets,
+						 contributorDetails: contributorDetails,
+						 includeEntities: includeEntities,
+						 tweetMode: tweetMode,
+						 success: success,
+						 failure: failure)
     }
     
     /**
