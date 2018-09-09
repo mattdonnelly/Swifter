@@ -74,6 +74,9 @@ public extension Swifter {
      - Parameter presentFromViewController: The viewController used to present the SFSafariViewController.
      The UIViewController must inherit SFSafariViewControllerDelegate
      
+     This authentication is only needed once. For future Swifter initializations, persist the access token (and access token secret) returned from the authentication callback, then in subsequent app sessions create the Swifter instance with the tokens themselves using the following initializer:
+     public init(consumerKey: String, consumerSecret: String, oauthToken: String, oauthTokenSecret: String)
+     
      */
     
     #if os(iOS)
