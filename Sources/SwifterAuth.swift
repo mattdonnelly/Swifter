@@ -85,20 +85,22 @@ public extension Swifter {
 						  failure: FailureHandler? = nil) {
         self.postOAuthRequestToken(with: callbackURL, success: { token, response in
             var requestToken = token!
-            NotificationCenter.default.addObserver(forName: .swifterCallback, object: nil, queue: .main) { notification in
-                NotificationCenter.default.removeObserver(self)
+            var observer: NSObjectProtocol?
+            observer = NotificationCenter.default.addObserver(forName: .swifterCallback, object: nil, queue: .main) { [weak self] notification in
+                NotificationCenter.default.removeObserver(observer!)
+                
                 presenting?.presentedViewController?.dismiss(animated: true, completion: nil)
                 let url = notification.userInfo![CallbackNotification.optionsURLKey] as! URL
                 
                 let parameters = url.query!.queryStringParameters
                 requestToken.verifier = parameters["oauth_verifier"]
                 
-                self.postOAuthAccessToken(with: requestToken, success: { accessToken, response in
-                    self.client.credential = Credential(accessToken: accessToken!)
+                self?.postOAuthAccessToken(with: requestToken, success: { accessToken, response in
+                    self?.client.credential = Credential(accessToken: accessToken!)
                     success?(accessToken!, response)
-                    }, failure: failure)
+                }, failure: failure)
             }
-			
+
 			let forceLogin = forceLogin ? "&force_login=true" : ""
 			let query = "oauth/authorize?oauth_token=\(token!.key)\(forceLogin)"
             let queryUrl = URL(string: query, relativeTo: TwitterURL.oauth.url)!
