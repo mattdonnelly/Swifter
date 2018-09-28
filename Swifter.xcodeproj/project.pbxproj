@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4ED2E25C215E1E1A00E2084A /* JSONTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED2E25B215E1E1A00E2084A /* JSONTest.swift */; };
 		8B116AF1194601970019A4DC /* SwifterHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */; };
 		8B116AF2194601970019A4DC /* SwifterHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */; };
 		8B1F259F194A663D004BD304 /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
@@ -153,6 +154,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4ED2E25B215E1E1A00E2084A /* JSONTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTest.swift; sourceTree = "<group>"; };
 		8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterHTTPRequest.swift; sourceTree = "<group>"; };
 		8B1F259E194A663D004BD304 /* SwifterHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SwifterHelp.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8B300C1F1944AA1A00993175 /* SwifterDemoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -399,6 +401,7 @@
 				DC7D6B711ECA5294008586E3 /* Info.plist */,
 				DC7D6B721ECA5294008586E3 /* String+SwifterTests.swift */,
 				DC7D6B731ECA5294008586E3 /* SwifterTests.swift */,
+				4ED2E25B215E1E1A00E2084A /* JSONTest.swift */,
 			);
 			name = SwifterTests;
 			path = Tests/SwifterTests;
@@ -729,6 +732,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ED2E25C215E1E1A00E2084A /* JSONTest.swift in Sources */,
 				DC7D6B761ECA5294008586E3 /* SwifterTests.swift in Sources */,
 				DC7D6B751ECA5294008586E3 /* String+SwifterTests.swift in Sources */,
 			);
