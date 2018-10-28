@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct SwifterError: Error {
+public struct SwifterError: LocalizedError {
     
     public enum ErrorKind: CustomStringConvertible {
         case invalidAppOnlyBearerToken
@@ -46,7 +46,7 @@ public struct SwifterError: Error {
     public var message: String
     public var kind: ErrorKind
     
-    public var localizedDescription: String {
+    public var errorDescription: String? {
         return "[\(kind.description)] - \(message)"
     }
     
