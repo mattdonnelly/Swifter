@@ -253,7 +253,7 @@ public extension Swifter {
         let path: String = "media/upload.json"
         var parameters = [String: Any]()
         parameters["media"] = media
-        parameters["additional_owers"] ??= additionalOwners?.value
+        parameters["additional_owners"] ??= additionalOwners?.value
         parameters[Swifter.DataParameters.dataKey] = "media"
 
         self.postJSON(path: path, baseURL: .upload, parameters: parameters, success: {
