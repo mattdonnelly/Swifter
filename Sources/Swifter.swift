@@ -107,6 +107,13 @@ public class Swifter {
     public var client: SwifterClientProtocol
     private var chunkBuffer: String?
 
+    internal var swifterCallbackToken: NSObjectProtocol? {
+        willSet {
+            guard let token = swifterCallbackToken else { return }
+            NotificationCenter.default.removeObserver(token)
+        }
+    }
+
     // MARK: - Initializers
     
     public init(consumerKey: String, consumerSecret: String, appOnly: Bool = false) {
