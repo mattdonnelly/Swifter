@@ -33,7 +33,7 @@ public extension Swifter {
 	
 	Returns a single Direct Message event by the given id.
 	*/
-	public func getDirectMessage(for messageId: String,
+	func getDirectMessage(for messageId: String,
 								 success: SuccessHandler? = nil,
 								 failure: FailureHandler? = nil) {
 		let path = "direct_messages/events/show.json"
@@ -48,7 +48,7 @@ public extension Swifter {
 	
 	Returns all Direct Message events (both sent and received) within the last 30 days. Sorted in reverse-chronological order.
 	*/
-	public func getDirectMessages(count: Int? = nil,
+	func getDirectMessages(count: Int? = nil,
 								  cursor: String? = nil,
 								  success: SuccessHandler? = nil,
 								  failure: FailureHandler? = nil) {
@@ -66,7 +66,7 @@ public extension Swifter {
 	
 	Returns all Direct Message events (both sent and received) within the last 30 days. Sorted in reverse-chronological order.
 	*/
-	public func destroyDirectMessage(for messageId: String,
+	func destroyDirectMessage(for messageId: String,
 									 success: SuccessHandler? = nil,
 									 failure: FailureHandler? = nil) {
 		let path = "direct_messages/events/destroy.json"
@@ -86,7 +86,7 @@ public extension Swifter {
 	When a message is received from a user you may send up to 5 messages in response within a 24 hour window. Each message received resets the 24 hour window and the 5 allotted messages. Sending a 6th message within a 24 hour window or sending a message outside of a 24 hour window will count towards rate-limiting. This behavior only applies when using the POST direct_messages/events/new endpoint.
 
 	*/
-	public func postDirectMessage(to recipientUserId: String,
+	func postDirectMessage(to recipientUserId: String,
 								  message: String,
 								  success: SuccessHandler? = nil,
 								  failure: FailureHandler? = nil) {
