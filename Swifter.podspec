@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.author    = "Matt Donnelly"
   s.ios.deployment_target = "10.0"
   s.osx.deployment_target = "10.10"
-  s.source       = { :git => "https://github.com/mattdonnelly/Swifter.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/levkusanagi/Swifter.git", :tag => "fixed" }
   s.source_files  = "Sources/*.swift"
   s.swift_version = "4.2"
 
