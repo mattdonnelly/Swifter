@@ -428,7 +428,7 @@ public extension Swifter {
         let path = "users/profile_banner.json"
         let parameters: [String: Any] = [userTag.key: userTag.value]
 
-        self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
 			success?(json)
 		}, failure: failure)
     }
