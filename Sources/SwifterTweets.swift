@@ -214,7 +214,7 @@ public extension Swifter {
             }, failure: failure)
     }
 	
-	public func postTweetWithGif(attachmentUrl: URL, text: String, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
+	func postTweetWithGif(attachmentUrl: URL, text: String, success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
 		guard let data = try? Data(contentsOf: attachmentUrl) else {
 			let error = SwifterError(message: "Found invalid GIF Data", kind: .invalidGifData)
 			failure?(error)
