@@ -19,7 +19,7 @@ public extension Swifter {
 
     This information is cached for 5 minutes. Requesting more frequently than that will not return any more data, and will count against your rate limit usage.
     */
-    public func getTrendsPlace(with woeid: String,
+    func getTrendsPlace(with woeid: String,
 							   excludeHashtags: Bool = false,
 							   success: SuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "trends/place.json"
@@ -42,7 +42,7 @@ public extension Swifter {
 
     A WOEID is a Yahoo! Where On Earth ID.
     */
-    public func getAvailableTrends(success: SuccessHandler? = nil,
+    func getAvailableTrends(success: SuccessHandler? = nil,
 								   failure: FailureHandler? = nil) {
         let path = "trends/available.json"
         self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
@@ -59,7 +59,7 @@ public extension Swifter {
 
     A WOEID is a Yahoo! Where On Earth ID.
     */
-    public func getClosestTrends(for coordinate: (lat: Double, long: Double),
+    func getClosestTrends(for coordinate: (lat: Double, long: Double),
 								 success: SuccessHandler? = nil,
 								 failure: FailureHandler? = nil) {
         let path = "trends/closest.json"
