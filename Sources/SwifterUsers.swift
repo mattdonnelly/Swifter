@@ -32,7 +32,7 @@ public extension Swifter {
 
     Returns settings (including current trend, geo and sleep time information) for the authenticating user.
     */
-    public func getAccountSettings(success: SuccessHandler? = nil,
+    func getAccountSettings(success: SuccessHandler? = nil,
 								   failure: FailureHandler? = nil) {
         let path = "account/settings.json"
 
@@ -46,7 +46,7 @@ public extension Swifter {
 
     Returns an HTTP 200 OK response code and a representation of the requesting user if authentication was successful; returns a 401 status code and an error message if not. Use this method to test if supplied user credentials are valid.
     */
-    public func verifyAccountCredentials(includeEntities: Bool? = nil,
+    func verifyAccountCredentials(includeEntities: Bool? = nil,
 										 skipStatus: Bool? = nil,
 										 includeEmail: Bool? = nil,
 										 success: SuccessHandler? = nil,
@@ -68,7 +68,7 @@ public extension Swifter {
 
     Updates the authenticating user's settings.
     */
-    public func updateAccountSettings(trendLocationWOEID: String? = nil,
+    func updateAccountSettings(trendLocationWOEID: String? = nil,
 									  sleepTimeEnabled: Bool? = nil,
 									  startSleepTime: Int? = nil,
 									  endSleepTime: Int? = nil,
@@ -96,7 +96,7 @@ public extension Swifter {
 
     Sets values that users are able to set under the "Account" tab of their settings page. Only the parameters specified will be updated.
     */
-    public func updateUserProfile(name: String? = nil,
+    func updateUserProfile(name: String? = nil,
 								  url: String? = nil,
 								  location: String? = nil,
 								  description: String? = nil,
@@ -127,7 +127,7 @@ public extension Swifter {
 
     Updates the authenticating user's profile background image. This method can also be used to enable or disable the profile background image. Although each parameter is marked as optional, at least one of image, tile or use must be provided when making this request.
     */
-    public func updateProfileBackground(using imageData: Data,
+    func updateProfileBackground(using imageData: Data,
 										title: String? = nil,
 										includeEntities: Bool? = nil,
 										use: Bool? = nil,
@@ -153,7 +153,7 @@ public extension Swifter {
 
     Sets one or more hex values that control the color scheme of the authenticating user's profile page on twitter.com. Each parameter's value must be a valid hexidecimal value, and may be either three or six characters (ex: #fff or #ffffff).
     */
-    public func updateProfileColors(backgroundColor: String? = nil,
+    func updateProfileColors(backgroundColor: String? = nil,
 									linkColor: String? = nil,
 									sidebarBorderColor: String? = nil,
 									sidebarFillColor: String? = nil,
@@ -185,7 +185,7 @@ public extension Swifter {
 
     This method asynchronously processes the uploaded file before updating the user's profile image URL. You can either update your local cache the next time you request the user's information, or, at least 5 seconds after uploading the image, ask for the updated URL using GET users/show.
     */
-    public func updateProfileImage(using imageData: Data,
+    func updateProfileImage(using imageData: Data,
 								   includeEntities: Bool? = nil,
 								   skipStatus: Bool? = nil,
 								   success: SuccessHandler? = nil,
@@ -207,7 +207,7 @@ public extension Swifter {
 
     Returns a collection of user objects that the authenticating user is blocking.
     */
-    public func getBlockedUsers(includeEntities: Bool? = nil,
+    func getBlockedUsers(includeEntities: Bool? = nil,
 								skipStatus: Bool? = nil,
 								cursor: String? = nil,
 								success: CursorSuccessHandler? = nil,
@@ -229,7 +229,7 @@ public extension Swifter {
 
     Returns an array of numeric user ids the authenticating user is blocking.
     */
-    public func getBlockedUsersIDs(stringifyIDs: String? = nil,
+    func getBlockedUsersIDs(stringifyIDs: String? = nil,
 								   cursor: String? = nil,
 								   success: CursorSuccessHandler? = nil,
 								   failure: FailureHandler? = nil) {
@@ -249,7 +249,7 @@ public extension Swifter {
 
     Blocks the specified user from following the authenticating user. In addition the blocked user will not show in the authenticating users mentions or timeline (unless retweeted by another user). If a follow or friend relationship exists it is destroyed.
     */
-    public func blockUser(_ userTag: UserTag,
+    func blockUser(_ userTag: UserTag,
 						  includeEntities: Bool? = nil,
 						  skipStatus: Bool? = nil,
 						  success: SuccessHandler? = nil,
@@ -271,7 +271,7 @@ public extension Swifter {
 
     Un-blocks the user specified in the ID parameter for the authenticating user. Returns the un-blocked user in the requested format when successful. If relationships existed before the block was instated, they will not be restored.
     */
-    public func unblockUser(for userTag: UserTag,
+    func unblockUser(for userTag: UserTag,
 							includeEntities: Bool? = nil,
 							skipStatus: Bool? = nil,
 							success: SuccessHandler? = nil,
@@ -305,7 +305,7 @@ public extension Swifter {
     - If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown.
     - You are strongly encouraged to use a POST for larger requests.
     */
-    public func lookupUsers(for usersTag: UsersTag,
+    func lookupUsers(for usersTag: UsersTag,
 							includeEntities: Bool? = nil,
 							success: SuccessHandler? = nil,
 							failure: FailureHandler? = nil) {
@@ -327,7 +327,7 @@ public extension Swifter {
 
     You must be following a protected user to be able to see their most recent Tweet. If you don't follow a protected user, the users Tweet will be removed. A Tweet will not always be returned in the current_status field.
     */
-    public func showUser(_ userTag: UserTag,
+    func showUser(_ userTag: UserTag,
 						 includeEntities: Bool? = nil,
 						 success: SuccessHandler? = nil,
 						 failure: FailureHandler? = nil) {
@@ -349,7 +349,7 @@ public extension Swifter {
 
     Only the first 1,000 matching results are available.
     */
-    public func searchUsers(using query: String,
+    func searchUsers(using query: String,
 							page: Int? = nil,
 							count: Int? = nil,
 							includeEntities: Bool? = nil,
@@ -373,7 +373,7 @@ public extension Swifter {
 
     Removes the uploaded profile banner for the authenticating user. Returns HTTP 200 upon success.
     */
-    public func removeProfileBanner(success: SuccessHandler? = nil,
+    func removeProfileBanner(success: SuccessHandler? = nil,
 									failure: FailureHandler? = nil) {
         let path = "account/remove_profile_banner.json"
 
@@ -396,7 +396,7 @@ public extension Swifter {
     400	Either an image was not provided or the image data could not be processed
     422	The image could not be resized or is too large.
     */
-    public func updateProfileBanner(using imageData: Data,
+    func updateProfileBanner(using imageData: Data,
 									width: Int? = nil,
 									height: Int? = nil,
 									offsetLeft: Int? = nil,
@@ -422,7 +422,7 @@ public extension Swifter {
 
     Returns a map of the available size variations of the specified user's profile banner. If the user has not uploaded a profile banner, a HTTP 404 will be served instead. This method can be used instead of string manipulation on the profile_banner_url returned in user objects as described in User Profile Images and Banners.
     */
-    public func getProfileBanner(for userTag: UserTag,
+    func getProfileBanner(for userTag: UserTag,
 								 success: SuccessHandler? = nil,
 								 failure: FailureHandler? = nil) {
         let path = "users/profile_banner.json"
@@ -442,7 +442,7 @@ public extension Swifter {
 
     Actions taken in this method are asynchronous and changes will be eventually consistent.
     */
-    public func muteUser(_ userTag: UserTag,
+    func muteUser(_ userTag: UserTag,
 						 success: SuccessHandler? = nil,
 						 failure: FailureHandler? = nil) {
         let path = "mutes/users/create.json"
@@ -462,7 +462,7 @@ public extension Swifter {
 
     Actions taken in this method are asynchronous and changes will be eventually consistent.
     */
-    public func unmuteUser(for userTag: UserTag,
+    func unmuteUser(for userTag: UserTag,
 						   success: SuccessHandler? = nil,
 						   failure: FailureHandler? = nil) {
         let path = "mutes/users/destroy.json"
@@ -478,7 +478,7 @@ public extension Swifter {
 
     Returns an array of numeric user ids the authenticating user has muted.
     */
-    public func getMuteUsersIDs(cursor: String? = nil,
+    func getMuteUsersIDs(cursor: String? = nil,
 								success: CursorSuccessHandler? = nil,
 								failure: FailureHandler? = nil) {
         let path = "mutes/users/ids.json"
@@ -496,7 +496,7 @@ public extension Swifter {
     
     Returns an array of user objects the authenticating user has muted.
     */
-    public func getMutedUsers(cursor: String? = nil,
+    func getMutedUsers(cursor: String? = nil,
 							 includeEntities: Bool? = nil,
 							 skipStatus: Bool? = nil,
 							 success: CursorSuccessHandler? = nil,

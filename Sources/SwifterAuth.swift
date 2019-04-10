@@ -116,7 +116,7 @@ public extension Swifter {
     }
     #endif
     
-    public class func handleOpenURL(_ url: URL) {
+    class func handleOpenURL(_ url: URL) {
         let notification = Notification(name: .swifterCallback, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
         NotificationCenter.default.post(notification)
     }

@@ -37,7 +37,7 @@ public extension Swifter {
      In API v1.1, the response format of the Search API has been improved to return Tweet objects more similar to the objects you’ll find across the REST API and platform. However, perspectival attributes (fields that pertain to the perspective of the authenticating user) are not currently supported on this endpoint.
 
      */
-    public func searchTweet(using query: String,
+    func searchTweet(using query: String,
 							geocode: String? = nil,
 							lang: String? = nil,
 							locale: String? = nil,
