@@ -17,7 +17,7 @@ public struct HMAC {
         
         // key
         if key.count > 64 {
-            key = SHA1(message: Data(bytes: key)).calculate().rawBytes
+            key = SHA1(Data(bytes: key)).calculate()
         }
         
         if (key.count < 64) {
@@ -34,8 +34,8 @@ public struct HMAC {
             ipad[idx] = key[idx] ^ ipad[idx]
         }
         
-        let ipadAndMessageHash = SHA1(message: Data(bytes: (ipad + message))).calculate().rawBytes
-        let finalHash = SHA1(message: Data(bytes: opad + ipadAndMessageHash)).calculate().rawBytes
+        let ipadAndMessageHash = SHA1(Data(bytes: (ipad + message))).calculate()
+        let finalHash = SHA1(Data(bytes: opad + ipadAndMessageHash)).calculate()
         let mac = finalHash
 
         return Data(bytes: UnsafePointer<UInt8>(mac), count: mac.count)
