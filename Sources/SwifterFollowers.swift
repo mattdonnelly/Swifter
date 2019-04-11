@@ -32,7 +32,7 @@ public extension Swifter {
 
     Returns a collection of user_ids that the currently authenticated user does not want to receive retweets from. Use POST friendships/update to set the "no retweets" status for a given user account on behalf of the current user.
     */
-    public func listOfNoRetweetsFriends(success: SuccessHandler? = nil,
+    func listOfNoRetweetsFriends(success: SuccessHandler? = nil,
 										failure: FailureHandler? = nil) {
         let path = "friendships/no_retweets/ids.json"
         let parameters = ["stringigy_ids": true]
@@ -50,7 +50,7 @@ public extension Swifter {
 
     This method is especially powerful when used in conjunction with GET users/lookup, a method that allows you to convert user IDs into full user objects in bulk.
     */
-    public func getUserFollowingIDs(for userTag: UserTag,
+    func getUserFollowingIDs(for userTag: UserTag,
 									cursor: String? = nil,
 									count: Int? = nil,
 									success: CursorSuccessHandler? = nil,
@@ -77,7 +77,7 @@ public extension Swifter {
     
     This method is especially powerful when used in conjunction with GET users/lookup, a method that allows you to convert user IDs into full user objects in bulk.
     */
-    public func getUserFollowersIDs(for userTag: UserTag,
+    func getUserFollowersIDs(for userTag: UserTag,
 									cursor: String? = nil,
 									count: Int? = nil,
 									success: CursorSuccessHandler? = nil,
@@ -100,7 +100,7 @@ public extension Swifter {
     
     Returns a collection of numeric IDs for every user who has a pending request to follow the authenticating user.
     */
-    public func getIncomingPendingFollowRequests(cursor: String? = nil,
+    func getIncomingPendingFollowRequests(cursor: String? = nil,
 												 success: CursorSuccessHandler? = nil,
 												 failure: FailureHandler? = nil) {
         let path = "friendships/incoming.json"
@@ -119,7 +119,7 @@ public extension Swifter {
     
     Returns a collection of numeric IDs for every protected user for whom the authenticating user has a pending follow request.
     */
-    public func getOutgoingPendingFollowRequests(cursor: String? = nil,
+    func getOutgoingPendingFollowRequests(cursor: String? = nil,
 												 success: CursorSuccessHandler? = nil,
 												 failure: FailureHandler? = nil) {
         let path = "friendships/outgoing.json"
@@ -142,7 +142,7 @@ public extension Swifter {
 
     Actions taken in this method are asynchronous and changes will be eventually consistent.
     */
-    public func followUser(_ userTag: UserTag,
+    func followUser(_ userTag: UserTag,
 						   follow: Bool? = nil,
 						   success: SuccessHandler? = nil,
 						   failure: FailureHandler? = nil) {
@@ -166,7 +166,7 @@ public extension Swifter {
 
     Actions taken in this method are asynchronous and changes will be eventually consistent.
     */
-    public func unfollowUser(_ userTag: UserTag,
+    func unfollowUser(_ userTag: UserTag,
 							 success: SuccessHandler? = nil,
 							 failure: FailureHandler? = nil) {
         let path = "friendships/destroy.json"
@@ -184,7 +184,7 @@ public extension Swifter {
 
     Allows one to enable or disable retweets and device notifications from the specified user.
     */
-    public func updateFriendship(with userTag: UserTag,
+    func updateFriendship(with userTag: UserTag,
 								 device: Bool? = nil,
 								 retweets: Bool? = nil,
 								 success: SuccessHandler? = nil,
@@ -206,7 +206,7 @@ public extension Swifter {
 
     Returns detailed information about the relationship between two arbitrary users.
     */
-    public func showFriendship(between sourceTag: UserTag,
+    func showFriendship(between sourceTag: UserTag,
 							   and targetTag: UserTag,
 							   success: SuccessHandler? = nil,
 							   failure: FailureHandler? = nil) {
@@ -235,7 +235,7 @@ public extension Swifter {
 
     At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests. See Using cursors to navigate collections for more information.
     */
-    public func getUserFollowing(for userTag: UserTag,
+    func getUserFollowing(for userTag: UserTag,
 								 cursor: String? = nil,
 								 count: Int? = nil,
 								 skipStatus: Bool? = nil,
@@ -263,7 +263,7 @@ public extension Swifter {
 
     At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests. See Using cursors to navigate collections for more information.
     */
-    public func getUserFollowers(for userTag: UserTag,
+    func getUserFollowers(for userTag: UserTag,
 								 cursor: String? = nil,
 								 count: Int? = nil,
 								 skipStatus: Bool? = nil,
@@ -289,7 +289,7 @@ public extension Swifter {
 
     Returns the relationships of the authenticating user to the comma-separated list of up to 100 screen_names or user_ids provided. Values for connections can be: following, following_requested, followed_by, none.
     */
-    public func lookupFriendship(with usersTag: UsersTag,
+    func lookupFriendship(with usersTag: UsersTag,
 								 success: SuccessHandler? = nil,
 								 failure: FailureHandler? = nil) {
         let path = "friendships/lookup.json"

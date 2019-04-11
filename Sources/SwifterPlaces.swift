@@ -32,7 +32,7 @@ public extension Swifter {
 
     Returns all the information about a known place.
     */
-    public func getGeoID(for placeID: String,
+    func getGeoID(for placeID: String,
 						 success: SuccessHandler? = nil,
 						 failure: FailureHandler? = nil) {
         let path = "geo/id/\(placeID).json"
@@ -48,7 +48,7 @@ public extension Swifter {
 
     This request is an informative call and will deliver generalized results about geography.
     */
-    public func getReverseGeocode(for coordinate: (lat: Double, long: Double),
+    func getReverseGeocode(for coordinate: (lat: Double, long: Double),
 								  accuracy: String? = nil,
 								  granularity: String? = nil,
 								  maxResults: Int? = nil,
@@ -77,7 +77,7 @@ public extension Swifter {
 
     This is the recommended method to use find places that can be attached to statuses/update. Unlike GET geo/reverse_geocode which provides raw data access, this endpoint can potentially re-order places with regards to the user who is authenticated. This approach is also preferred for interactive place matching with the user.
     */
-    public func searchGeo(coordinate: (lat: Double, long: Double)? = nil,
+    func searchGeo(coordinate: (lat: Double, long: Double)? = nil,
 						  query: String? = nil,
 						  ipAddress: String? = nil,
 						  accuracy: String? = nil,
@@ -119,7 +119,7 @@ public extension Swifter {
 
     The token contained in the response is the token needed to be able to create a new place.
     */
-    public func getSimilarPlaces(for coordinate: (lat: Double, long: Double),
+    func getSimilarPlaces(for coordinate: (lat: Double, long: Double),
 								 name: String,
 								 containedWithin: String? = nil,
 								 attributeStreetAddress: String? = nil,

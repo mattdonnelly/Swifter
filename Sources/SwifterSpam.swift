@@ -32,7 +32,7 @@ public extension Swifter {
 
     Report the specified user as a spam account to Twitter. Additionally performs the equivalent of POST blocks/create on behalf of the authenticated user.
     */
-    public func reportSpam(for userTag: UserTag,
+    func reportSpam(for userTag: UserTag,
 						   success: SuccessHandler? = nil,
 						   failure: FailureHandler? = nil) {
         let path = "users/report_spam.json"
