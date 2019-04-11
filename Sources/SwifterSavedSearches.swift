@@ -26,63 +26,63 @@
 import Foundation
 
 public extension Swifter {
-
+    
     /**
-    GET    saved_searches/list
-
-    Returns the authenticated user's saved search queries.
-    */
+     GET    saved_searches/list
+     
+     Returns the authenticated user's saved search queries.
+     */
     func getSavedSearchesList(success: SuccessHandler? = nil,
-									 failure: FailureHandler? = nil) {
+                              failure: FailureHandler? = nil) {
         let path = "saved_searches/list.json"
         self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
-			success?(json)
-		}, failure: failure)
+            success?(json)
+        }, failure: failure)
     }
-
+    
     /**
-    GET    saved_searches/show/:id
-
-    Retrieve the information for the saved search represented by the given id. The authenticating user must be the owner of saved search ID being requested.
-    */
+     GET    saved_searches/show/:id
+     
+     Retrieve the information for the saved search represented by the given id. The authenticating user must be the owner of saved search ID being requested.
+     */
     func showSavedSearch(for id: String,
-								success: SuccessHandler? = nil,
-								failure: FailureHandler? = nil) {
+                         success: SuccessHandler? = nil,
+                         failure: FailureHandler? = nil) {
         let path = "saved_searches/show/\(id).json"
-
+        
         self.getJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
-			success?(json)
-		}, failure: failure)
+            success?(json)
+        }, failure: failure)
     }
-
+    
     /**
-    POST   saved_searches/create
-
-    Create a new saved search for the authenticated user. A user may only have 25 saved searches.
-    */
+     POST   saved_searches/create
+     
+     Create a new saved search for the authenticated user. A user may only have 25 saved searches.
+     */
     func createSavedSearch(for query: String,
-								  success: SuccessHandler? = nil,
-								  failure: FailureHandler? = nil) {
+                           success: SuccessHandler? = nil,
+                           failure: FailureHandler? = nil) {
         let path = "saved_searches/create.json"
         let parameters = ["query": query]
-
+        
         self.postJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
-			success?(json)
-		}, failure: failure)
+            success?(json)
+        }, failure: failure)
     }
-
+    
     /**
-    POST   saved_searches/destroy/:id
-
-    Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.
-    */
+     POST   saved_searches/destroy/:id
+     
+     Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.
+     */
     func deleteSavedSearch(for id: String,
-								  success: SuccessHandler? = nil,
-								  failure: FailureHandler? = nil) {
+                           success: SuccessHandler? = nil,
+                           failure: FailureHandler? = nil) {
         let path = "saved_searches/destroy/\(id).json"
-		self.postJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
-			success?(json)
-		}, failure: failure)
+        self.postJSON(path: path, baseURL: .api, parameters: [:], success: { json, _ in
+            success?(json)
+        }, failure: failure)
     }
     
 }

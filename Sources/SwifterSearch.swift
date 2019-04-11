@@ -38,19 +38,19 @@ public extension Swifter {
 
      */
     func searchTweet(using query: String,
-							geocode: String? = nil,
-							lang: String? = nil,
-							locale: String? = nil,
-							resultType: String? = nil,
-							count: Int? = nil,
-							until: String? = nil,
-							sinceID: String? = nil,
-							maxID: String? = nil,
-							includeEntities: Bool? = nil,
-							callback: String? = nil,
-							tweetMode: TweetMode = TweetMode.default,
-							success: SearchResultHandler? = nil,
-							failure: @escaping FailureHandler) {
+                     geocode: String? = nil,
+                     lang: String? = nil,
+                     locale: String? = nil,
+                     resultType: String? = nil,
+                     count: Int? = nil,
+                     until: String? = nil,
+                     sinceID: String? = nil,
+                     maxID: String? = nil,
+                     includeEntities: Bool? = nil,
+                     callback: String? = nil,
+                     tweetMode: TweetMode = TweetMode.default,
+                     success: SearchResultHandler? = nil,
+                     failure: @escaping FailureHandler) {
         let path = "search/tweets.json"
 
         var parameters = [String: Any]()

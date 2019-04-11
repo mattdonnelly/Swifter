@@ -17,8 +17,8 @@ public struct SwifterError: LocalizedError {
         case badOAuthResponse
         case urlResponseError(status: Int, headers: [AnyHashable: Any], errorCode: Int)
         case jsonParseError
-		case invalidGifData
-		case invalidGifResponse
+        case invalidGifData
+        case invalidGifResponse
         
         public var description: String {
             switch self {
@@ -34,10 +34,10 @@ public struct SwifterError: LocalizedError {
                 return "urlResponseError(status: \(code), headers: \(headers), errorCode: \(errorCode)"
             case .jsonParseError:
                 return "jsonParseError"
-			case .invalidGifData:
-				return "invalidGifData"
-			case .invalidGifResponse:
-				return "invalidGifResponse"
+            case .invalidGifData:
+                return "invalidGifData"
+            case .invalidGifResponse:
+                return "invalidGifResponse"
             }
         }
         

@@ -236,7 +236,7 @@ extension JSON: ExpressibleByStringLiteral,
     ExpressibleByFloatLiteral,
     ExpressibleByArrayLiteral,
     ExpressibleByDictionaryLiteral,
-    ExpressibleByNilLiteral {
+ExpressibleByNilLiteral {
     
     public init(stringLiteral value: StringLiteralType) {
         self.init(value)
