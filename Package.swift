@@ -1,9 +1,12 @@
-// swift-tools-version:4.2
+// swift-tools-version:5.0
 
 import PackageDescription
 
 let package = Package(
     name: "Swifter",
+    platforms: [
+        .macOS(.v10_10), .iOS(.v10)
+    ],
     products: [
         .library(name: "Swifter", targets: ["Swifter"]),
     ],
@@ -12,6 +15,5 @@ let package = Package(
             name: "Swifter",
             path: "Sources"
         ),
-    ],
-    swiftLanguageVersions: [.v4_2]
+    ]
 )
