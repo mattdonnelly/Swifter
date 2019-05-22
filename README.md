@@ -115,6 +115,25 @@ if let statusText = statuses[0]["text"].string {
 
 In Twitter REST API v1.1, each client application must authenticate itself with consumer key and consumer secret tokens. You can request consumer tokens for your app on [Twitter's dev website](https://dev.twitter.com/apps)
 
+## Single Sign-On
+
+If you authorize with SSO, you should add URL-Scheme your Info.plist.
+*REPLACE $(TWITTER_CONSUMER_KEY) TO YOUR CONSUMER KEY.*
+
+```
+<key>CFBundleURLTypes</key>
+<array>
+	<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>swifter-$(TWITTER_CONSUMER_KEY)</string>
+		</array>
+	</dict>
+</array>
+```
+
 # License
 
 Swifter is licensed under the MIT License. See the LICENSE file for more information.
