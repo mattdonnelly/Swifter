@@ -61,8 +61,9 @@ class ViewController: NSViewController {
                 }, failure: failureHandler)
             }
         } else {
-            let swifter = Swifter(consumerKey: "nLl1mNYc25avPPF4oIzMyQzft",
-                                  consumerSecret: "Qm3e5JTXDhbbLl44cq6WdK00tSUwa17tWlO8Bf70douE4dcJe2")
+            let consumerKey = Bundle.main.object(forInfoDictionaryKey: "TwitterConsumerKey") as! String
+            let consumerSecret = Bundle.main.object(forInfoDictionaryKey: "TwitterConsumerSecret") as! String
+            let swifter = Swifter(consumerKey: consumerKey, consumerSecret: consumerSecret)
             let callbackUrl = URL(string: "swifter://success")!
             swifter.authorize(withCallback: callbackUrl, success: { _, _ in
                 swifter.getHomeTimeline(count: 100, success: { statuses in

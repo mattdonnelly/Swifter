@@ -37,8 +37,9 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
     let useACAccount = false
 
     required init?(coder aDecoder: NSCoder) {
-        self.swifter = Swifter(consumerKey: "nLl1mNYc25avPPF4oIzMyQzft",
-							   consumerSecret: "Qm3e5JTXDhbbLl44cq6WdK00tSUwa17tWlO8Bf70douE4dcJe2")
+        let consumerKey = Bundle.main.object(forInfoDictionaryKey: "TwitterConsumerKey") as! String
+        let consumerSecret = Bundle.main.object(forInfoDictionaryKey: "TwitterConsumerSecret") as! String
+        self.swifter = Swifter(consumerKey: consumerKey, consumerSecret: consumerSecret)
         super.init(coder: aDecoder)
     }
 
