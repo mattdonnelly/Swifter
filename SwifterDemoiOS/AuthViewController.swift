@@ -34,7 +34,12 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
     var swifter: Swifter
 
     // Default to using the iOS account framework for handling twitter auth
-    let useACAccount = false
+    enum AuthorizeMode {
+        case acaccount
+        case browser
+        case sso
+    }
+    let authorizeMode: AuthorizeMode = .browser
 
     required init?(coder aDecoder: NSCoder) {
         let consumerKey = Bundle.main.object(forInfoDictionaryKey: "TwitterConsumerKey") as! String
@@ -48,8 +53,9 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
             self.alert(title: "Error", message: error.localizedDescription)
             
         }
-
-        if useACAccount {
+        
+        switch authorizeMode {
+        case .acaccount:
             let accountStore = ACAccountStore()
             let accountType = accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
 
@@ -70,11 +76,16 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
                     self.fetchTwitterHomeStream()
                 }
             }
-        } else {
+        case .safari:
             let url = URL(string: "swifter://success")!
             swifter.authorize(withCallback: url, presentingFrom: self, success: { _, _ in
                 self.fetchTwitterHomeStream()
             }, failure: failureHandler)
+        case .sso:
+            swifter.authorizeSSO(success: { (_) in
+                self.fetchTwitterHomeStream()
+            }, failure: failureHandler)
+            break
         }
     }
 
