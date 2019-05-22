@@ -46,5 +46,12 @@ extension URL {
         guard let scheme = self.scheme, let otherScheme = otherUrl.scheme else { return false }
         return scheme.caseInsensitiveCompare(otherScheme) == .orderedSame
     }
-
+  
+    var queryParamsForSSO: [String : String] {
+        guard let host = self.host else { return [:] }
+        return host.split(separator: "&").reduce(into: [String:String](), {
+            let keyValue = $1.split(separator: "=")
+            $0[String(keyValue[0])] = String(keyValue[1])
+        })
+    }
 }

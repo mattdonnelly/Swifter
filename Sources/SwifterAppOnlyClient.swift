@@ -25,10 +25,10 @@
 
 import Foundation
 
-internal class AppOnlyClient: SwifterClientProtocol  {
+internal class AppOnlyClient: SwifterClientProtocol, SwifterAppProtocol {
     
-    var consumerKey: String
-    var consumerSecret: String
+    let consumerKey: String
+    let consumerSecret: String
     
     var credential: Credential?
     

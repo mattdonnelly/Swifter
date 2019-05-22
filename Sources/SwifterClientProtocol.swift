@@ -25,6 +25,11 @@
 
 import Foundation
 
+public protocol SwifterAppProtocol {
+    var consumerKey: String { get }
+    var consumerSecret: String { get }
+}
+
 public protocol SwifterClientProtocol {
     
     var credential: Credential? { get set }
