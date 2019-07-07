@@ -60,7 +60,7 @@ public extension Swifter {
      */
     func listTweets(for listTag: ListTag,
                     sinceID: String? = nil,
-                    maxID: String? = nil,
+                    maxID: Int64? = nil,
                     count: Int? = nil,
                     includeEntities: Bool? = nil,
                     includeRTs: Bool? = nil,
