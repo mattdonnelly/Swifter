@@ -116,7 +116,7 @@ public extension Swifter {
     }
     #endif
     
-    public class func handleOpenURL(_ url: URL, callbackURL: URL) -> Bool {
+    class func handleOpenURL(_ url: URL, callbackURL: URL) -> Bool {
         guard url.hasSameUrlScheme(as: callbackURL) else {
             return false
         }
