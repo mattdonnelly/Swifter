@@ -62,7 +62,7 @@ public extension Swifter {
 			
 			let forceLogin = forceLogin ? "&force_login=true" : ""
 			let query = "oauth/authorize?oauth_token=\(token!.key)\(forceLogin)"
-			let queryUrl = URL(string: query, relativeTo: TwitterURL.oauth.url)!
+			let queryUrl = URL(string: query, relativeTo: TwitterURL.oauth.url)!.absoluteURL
             NSWorkspace.shared.open(queryUrl)
         }, failure: failure)
     }
@@ -101,7 +101,7 @@ public extension Swifter {
 			
 			let forceLogin = forceLogin ? "&force_login=true" : ""
 			let query = "oauth/authorize?oauth_token=\(token!.key)\(forceLogin)"
-            let queryUrl = URL(string: query, relativeTo: TwitterURL.oauth.url)!
+            let queryUrl = URL(string: query, relativeTo: TwitterURL.oauth.url)!.absoluteURL
 			
             if let delegate = safariDelegate ?? (presenting as? SFSafariViewControllerDelegate) {
                 let safariView = SFSafariViewController(url: queryUrl)
