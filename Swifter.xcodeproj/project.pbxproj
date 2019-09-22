@@ -76,6 +76,7 @@
 		A1246D3A20F65E7300E1676E /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1246D3920F65E7300E1676E /* Tweet.swift */; };
 		A17A694F1C78336200063DFD /* Operator++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17A694D1C78333400063DFD /* Operator++.swift */; };
 		A17A69501C78336300063DFD /* Operator++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17A694D1C78333400063DFD /* Operator++.swift */; };
+		A198590F233737C400B63092 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198590E233737C400B63092 /* SceneDelegate.swift */; };
 		A1AA8B001D5C514E00CE7F17 /* SwifterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */; };
 		A1AA8B011D5C515000CE7F17 /* SwifterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */; };
 		A1AA8B031D5C59D200CE7F17 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA8B021D5C59D200CE7F17 /* TweetCell.swift */; };
@@ -198,6 +199,7 @@
 		8BF1D6871948C11E00E3AA64 /* SwifterCredential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterCredential.swift; sourceTree = "<group>"; };
 		A1246D3920F65E7300E1676E /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		A17A694D1C78333400063DFD /* Operator++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Operator++.swift"; sourceTree = "<group>"; };
+		A198590E233737C400B63092 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterError.swift; sourceTree = "<group>"; };
 		A1AA8B021D5C59D200CE7F17 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		A1BDB38A1D4C859200B0080F /* SwifterTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTag.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				8B5EFF03195F064400B354F9 /* AppDelegate.swift */,
+				A198590E233737C400B63092 /* SceneDelegate.swift */,
 				8B5EFF04195F064400B354F9 /* AuthViewController.swift */,
 				8B5EFF05195F064400B354F9 /* TweetsViewController.swift */,
 				A1AA8B021D5C59D200CE7F17 /* TweetCell.swift */,
@@ -552,10 +555,9 @@
 			};
 			buildConfigurationList = 8B9F50E81944A5AB00894629 /* Build configuration list for PBXProject "Swifter" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -564,9 +566,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8B300C1E1944AA1A00993175 /* SwifterDemoiOS */,
 				8B9F50ED1944A5AB00894629 /* SwifteriOS */,
 				8B9F51121944A61D00894629 /* SwifterMac */,
+				8B300C1E1944AA1A00993175 /* SwifterDemoiOS */,
 				8B300C461944AECB00993175 /* SwifterDemoMac */,
 				F6B4D5741C7BAC4500E06514 /* SwifterTests */,
 			);
@@ -620,6 +622,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A198590F233737C400B63092 /* SceneDelegate.swift in Sources */,
 				8B5EFF08195F064400B354F9 /* AuthViewController.swift in Sources */,
 				8B5EFF07195F064400B354F9 /* AppDelegate.swift in Sources */,
 				8B5EFF09195F064400B354F9 /* TweetsViewController.swift in Sources */,
@@ -775,6 +778,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = SwifterDemoiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mattdonnelly.${PRODUCT_NAME:rfc1034identifier}";
@@ -790,6 +794,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SwifterDemoiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mattdonnelly.${PRODUCT_NAME:rfc1034identifier}";
