@@ -82,7 +82,7 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
                 self.fetchTwitterHomeStream()
             }, failure: failureHandler)
         case .sso:
-            swifter.authorizeSSO(success: { (_) in
+            swifter.authorizeSSO(success: { _ in
                 self.fetchTwitterHomeStream()
             }, failure: failureHandler)
             break
