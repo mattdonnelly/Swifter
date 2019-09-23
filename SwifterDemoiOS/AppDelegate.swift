@@ -24,17 +24,12 @@
 //
 
 import UIKit
-import SwifteriOS
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-                            
-    var window: UIWindow?
-
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        let callbackUrl = URL(string: "swifter://success")!
-        return Swifter.handleOpenUrl(url, callbackUrl: callbackUrl, sourceApplication: options[.sourceApplication] as? String)
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-    
 }
+
 
