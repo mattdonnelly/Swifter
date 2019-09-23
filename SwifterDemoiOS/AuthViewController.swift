@@ -76,7 +76,7 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
                     self.fetchTwitterHomeStream()
                 }
             }
-        case .safari:
+        case .browser:
             let url = URL(string: "swifter://success")!
             swifter.authorize(withCallback: url, presentingFrom: self, success: { _, _ in
                 self.fetchTwitterHomeStream()
