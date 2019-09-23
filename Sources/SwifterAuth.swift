@@ -159,16 +159,17 @@ public extension Swifter {
     #endif
     
     @discardableResult
-    class func handleOpenUrl(_ url: URL, callbackUrl: URL, sourceApplication: String? = nil) -> Bool {
-        if let sourceApplication = sourceApplication {
-            let isSSO = sourceApplication.hasPrefix("com.twitter") || sourceApplication.hasPrefix("com.atebits")
-            if isSSO {
-                let notification = Notification(name: .swifterSSOCallback, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
-                NotificationCenter.default.post(notification)
-            }
-            return true
+    class func handleOpenUrlSSO(_ url: URL, callbackUrl: URL) -> Bool {
+        guard url.hasSameUrlScheme(as: callbackUrl) else {
+            return false
         }
-        
+        let notification = Notification(name: .swifterSSOCallback, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
+        NotificationCenter.default.post(notification)
+        return true
+    }
+    
+    @discardableResult
+    class func handleOpenUrl(_ url: URL, callbackUrl: URL) -> Bool {
         guard url.hasSameUrlScheme(as: callbackUrl) else {
             return false
         }

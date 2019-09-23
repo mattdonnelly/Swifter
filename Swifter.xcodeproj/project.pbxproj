@@ -93,6 +93,7 @@
 		A1E207B31D4B86170093E498 /* Int++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207B01D4B86170093E498 /* Int++.swift */; };
 		A1E207B41D4B86170093E498 /* Data++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207B11D4B86170093E498 /* Data++.swift */; };
 		A1E207B51D4B86170093E498 /* Data++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E207B11D4B86170093E498 /* Data++.swift */; };
+		CD304B172338F07A00B12364 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD304B162338F07A00B12364 /* SceneDelegate.swift */; };
 		D0DCE3EE1F09C5E700B62429 /* SwifterGIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DCE3ED1F09C5E700B62429 /* SwifterGIF.swift */; };
 		D0DCE3EF1F09C5E700B62429 /* SwifterGIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DCE3ED1F09C5E700B62429 /* SwifterGIF.swift */; };
 		DC7D6B751ECA5294008586E3 /* String+SwifterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D6B721ECA5294008586E3 /* String+SwifterTests.swift */; };
@@ -206,6 +207,7 @@
 		A1E207A81D4B85D90093E498 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A1E207B01D4B86170093E498 /* Int++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int++.swift"; sourceTree = "<group>"; };
 		A1E207B11D4B86170093E498 /* Data++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data++.swift"; sourceTree = "<group>"; };
+		CD304B162338F07A00B12364 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D0DCE3ED1F09C5E700B62429 /* SwifterGIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterGIF.swift; sourceTree = "<group>"; };
 		DC7D6B711ECA5294008586E3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC7D6B721ECA5294008586E3 /* String+SwifterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SwifterTests.swift"; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				8B5EFF03195F064400B354F9 /* AppDelegate.swift */,
+				CD304B162338F07A00B12364 /* SceneDelegate.swift */,
 				8B5EFF04195F064400B354F9 /* AuthViewController.swift */,
 				8B5EFF05195F064400B354F9 /* TweetsViewController.swift */,
 				A1AA8B021D5C59D200CE7F17 /* TweetCell.swift */,
@@ -620,6 +623,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD304B172338F07A00B12364 /* SceneDelegate.swift in Sources */,
 				8B5EFF08195F064400B354F9 /* AuthViewController.swift in Sources */,
 				8B5EFF07195F064400B354F9 /* AppDelegate.swift in Sources */,
 				8B5EFF09195F064400B354F9 /* TweetsViewController.swift in Sources */,
@@ -775,6 +779,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = SwifterDemoiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mattdonnelly.${PRODUCT_NAME:rfc1034identifier}";
@@ -790,6 +795,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SwifterDemoiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mattdonnelly.${PRODUCT_NAME:rfc1034identifier}";
