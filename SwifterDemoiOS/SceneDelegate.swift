@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  SwifterDemoiOS
 //
-//  Created by beta on 2019/09/23.
+//  Created by noppe on 2019/09/23.
 //  Copyright © 2019 Matt Donnelly. All rights reserved.
 //
 
