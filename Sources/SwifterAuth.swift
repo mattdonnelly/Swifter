@@ -134,8 +134,7 @@ public extension Swifter {
             
             let isCanceled = url.host == nil
             if isCanceled {
-                let error = SwifterError(message: "User cancelled login from Twitter App",
-                                         kind: .cancelled)
+                let error = SwifterError(message: "User cancelled login from Twitter App", kind: .cancelled)
                 failure?(error)
             } else {
                 let params = url.queryParamsForSSO
