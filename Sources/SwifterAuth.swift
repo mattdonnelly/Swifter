@@ -129,7 +129,7 @@ public extension Swifter {
         let nc = NotificationCenter.default
         self.swifterCallbackToken = nc.addObserver(forName: .swifterSSOCallback, object: nil, queue: .main) { notification in
             self.swifterCallbackToken = nil
-            let url = notification.userInfo![CallbackNotification.optionsURLKey] as! URL
+            guard let url = notification.userInfo?[CallbackNotification.optionsURLKey] as? URL else { return }
             guard url.scheme == urlScheme else { return }
             
             let isCanceled = url.host == nil
