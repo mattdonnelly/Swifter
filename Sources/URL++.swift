@@ -49,9 +49,9 @@ extension URL {
   
     var queryParamsForSSO: [String : String] {
         guard let host = self.host else { return [:] }
-        return host.split(separator: "&").reduce(into: [:]) {
-            let keyValue = $1.split(separator: "=")
-            $0[String(keyValue[0])] = String(keyValue[1])
+        return host.split(separator: "&").reduce(into: [:]) { (result, parameter) in
+            let keyValue = parameter.split(separator: "=")
+            result[String(keyValue[0])] = String(keyValue[1])
         }
     }
 }
