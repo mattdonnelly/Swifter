@@ -116,8 +116,7 @@ public extension Swifter {
         }, failure: failure)
     }
   
-    func authorizeSSO(success: SSOTokenSuccessHandler?,
-                      failure: FailureHandler? = nil) {
+    func authorizeSSO(success: SSOTokenSuccessHandler?, failure: FailureHandler? = nil) {
         guard let client = client as? SwifterAppProtocol else {
             let error = SwifterError(message: "SSO not supported AppOnly client",
                                      kind: .invalidClient)
