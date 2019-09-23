@@ -35,7 +35,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func handleEvent(_ event: NSAppleEventDescriptor!, withReplyEvent: NSAppleEventDescriptor!) {
-        Swifter.handleOpenURL(URL(string: event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))!.stringValue!)!)
+        let callbackUrl = URL(string: "swifter://success")!
+        Swifter.handleOpenUrl(URL(string: event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))!.stringValue!)!, callbackUrl: callbackUrl)
     }
 
 }

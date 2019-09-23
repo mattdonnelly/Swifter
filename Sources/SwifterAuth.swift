@@ -156,24 +156,20 @@ public extension Swifter {
         })
     }
     
-    class func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-        guard let sourceApplication = options[.sourceApplication] as? String else { return false }
-        let isSSO = sourceApplication.hasPrefix("com.twitter") || sourceApplication.hasPrefix("com.atebits")
-        let isWeb = sourceApplication.hasPrefix("com.apple") || sourceApplication == Bundle.main.bundleIdentifier!
-        if isSSO {
-            let notification = Notification(name: .swifterSSOCallback, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
-            NotificationCenter.default.post(notification)
-        } else if isWeb {
-            let notification = Notification(name: .swifterCallback, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
-            NotificationCenter.default.post(notification)
-        }
-        return false
-    }
-    
     #endif
     
-    public class func handleOpenURL(_ url: URL, callbackURL: URL) -> Bool {
-        guard url.hasSameUrlScheme(as: callbackURL) else {
+    @discardableResult
+    class func handleOpenUrl(_ url: URL, callbackUrl: URL, sourceApplication: String? = nil) -> Bool {
+        if let sourceApplication = sourceApplication {
+            let isSSO = sourceApplication.hasPrefix("com.twitter") || sourceApplication.hasPrefix("com.atebits")
+            if isSSO {
+                let notification = Notification(name: .swifterSSOCallback, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
+                NotificationCenter.default.post(notification)
+            }
+            return true
+        }
+        
+        guard url.hasSameUrlScheme(as: callbackUrl) else {
             return false
         }
         let notification = Notification(name: .swifterCallback, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
