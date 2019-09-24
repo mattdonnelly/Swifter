@@ -28,28 +28,39 @@ import SwifteriOS
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
     var window: UIWindow?
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+    ) -> Bool {
         return true
     }
-    
-    @available(iOS 13.0, *)
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+
+    func application(
+        _ application: UIApplication,
+        open url: URL,
+        options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+    ) -> Bool {
         web: do {
             let callbackUrl = URL(string: "swifter://")!
-            Swifter.handleOpenUrl(url, callbackUrl: callbackUrl)
+            Swifter.handleOpenUrl(url, callbackURL: callbackUrl)
         }
         sso: do {
             let callbackUrl = URL(string: "swifter-nLl1mNYc25avPPF4oIzMyQzft://")!
-            Swifter.handleOpenUrl(url, callbackUrl: callbackUrl, isSSO: true)
+            Swifter.handleOpenUrl(url, callbackURL: callbackUrl, isSSO: true)
         }
         return true
+    }
+
+    @available(iOS 13.0, *)
+    func application(
+        _ application: UIApplication,
+        configurationForConnecting connectingSceneSession: UISceneSession,
+        options: UIScene.ConnectionOptions
+    ) -> UISceneConfiguration {
+        return UISceneConfiguration(
+            name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 }
 

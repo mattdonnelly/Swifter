@@ -30,9 +30,6 @@ import SwifteriOS
 import SafariServices
 
 class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
-    
-    var swifter: Swifter
-
     // Default to using the iOS account framework for handling twitter auth
     enum AuthorizeMode {
         case acaccount
@@ -41,33 +38,26 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
     }
     let authorizeMode: AuthorizeMode = .browser
 
-    required init?(coder aDecoder: NSCoder) {
-        let consumerKey = Bundle.main.object(forInfoDictionaryKey: "TwitterConsumerKey") as! String
-        let consumerSecret = Bundle.main.object(forInfoDictionaryKey: "TwitterConsumerSecret") as! String
-        self.swifter = Swifter(consumerKey: consumerKey, consumerSecret: consumerSecret)
-        super.init(coder: aDecoder)
-    }
+    private var swifter = Swifter(
+        consumerKey: "nLl1mNYc25avPPF4oIzMyQzft",
+        consumerSecret: "Qm3e5JTXDhbbLl44cq6WdK00tSUwa17tWlO8Bf70douE4dcJe2")
+    private var jsonResult: [JSON] = []
 
     @IBAction func didTouchUpInsideLoginButton(_ sender: AnyObject) {
         let failureHandler: (Error) -> Void = { error in
             self.alert(title: "Error", message: error.localizedDescription)
-            
         }
         
         switch authorizeMode {
         case .acaccount:
-            let accountStore = ACAccountStore()
-            let accountType = accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
-
-            // Prompt the user for permission to their twitter account stored in the phone's settings
-            accountStore.requestAccessToAccounts(with: accountType, options: nil) { granted, error in
-                guard granted else {
+            let store = ACAccountStore()
+            let type = store.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
+            store.requestAccessToAccounts(with: type, options: nil) { granted, error in
+                guard let twitterAccounts = store.accounts(with: type), granted else {
                     self.alert(title: "Error", message: error!.localizedDescription)
                     return
                 }
-                
-                let twitterAccounts = accountStore.accounts(with: accountType)!
-                
+
                 if twitterAccounts.isEmpty {
                     self.alert(title: "Error", message: "There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
                 } else {
@@ -85,7 +75,6 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
             swifter.authorizeSSO(success: { _ in
                 self.fetchTwitterHomeStream()
             }, failure: failureHandler)
-            break
         }
     }
 
@@ -93,16 +82,16 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
         let failureHandler: (Error) -> Void = { error in
             self.alert(title: "Error", message: error.localizedDescription)
         }
-        self.swifter.getHomeTimeline(count: 20, success: { json in
+        swifter.getHomeTimeline(count: 20, success: { json in
             // Successfully fetched timeline, so lets create and push the table view
-            
-            let tweetsViewController = self.storyboard!.instantiateViewController(withIdentifier: "TweetsViewController") as! TweetsViewController
-            guard let tweets = json.array else { return }
-            tweetsViewController.tweets = tweets
-            self.navigationController?.pushViewController(tweetsViewController, animated: true)
-            
-            }, failure: failureHandler)
-        
+            self.jsonResult = json.array ?? []
+            self.performSegue(withIdentifier: "showTweets", sender: self)
+        }, failure: failureHandler)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destination = segue.destination as? TweetsViewController else { return }
+        destination.tweets = jsonResult
     }
 
     func alert(title: String, message: String) {
@@ -110,11 +99,8 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-    
-    @available(iOS 9.0, *)
+
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         controller.dismiss(animated: true, completion: nil)
     }
-
-
 }

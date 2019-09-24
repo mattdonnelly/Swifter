@@ -46,7 +46,7 @@ public class Credential {
         }
         
         public init(queryString: String) {
-            var attributes = queryString.queryStringParameters
+            let attributes = queryString.queryStringParameters
             
             self.key = attributes["oauth_token"]!
             self.secret = attributes["oauth_token_secret"]!

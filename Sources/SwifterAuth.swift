@@ -63,7 +63,7 @@ public extension Swifter {
 			
 			let forceLogin = forceLogin ? "&force_login=true" : ""
 			let query = "oauth/authorize?oauth_token=\(token!.key)\(forceLogin)"
-			let queryUrl = URL(string: query, relativeTo: TwitterURL.oauth.url)!
+			let queryUrl = URL(string: query, relativeTo: TwitterURL.oauth.url)!.absoluteURL
             NSWorkspace.shared.open(queryUrl)
         }, failure: failure)
     }
@@ -102,7 +102,7 @@ public extension Swifter {
 			
 			let forceLogin = forceLogin ? "&force_login=true" : ""
 			let query = "oauth/authorize?oauth_token=\(token!.key)\(forceLogin)"
-            let queryUrl = URL(string: query, relativeTo: TwitterURL.oauth.url)!
+            let queryUrl = URL(string: query, relativeTo: TwitterURL.oauth.url)!.absoluteURL
 			
             if let delegate = safariDelegate ?? (presenting as? SFSafariViewControllerDelegate) {
                 let safariView = SFSafariViewController(url: queryUrl)
@@ -157,10 +157,10 @@ public extension Swifter {
     }
     
     #endif
-    
+
     @discardableResult
-    class func handleOpenUrl(_ url: URL, callbackUrl: URL, isSSO: Bool = false) -> Bool {
-        guard url.hasSameUrlScheme(as: callbackUrl) else {
+    class func handleOpenUrl(_ url: URL, callbackURL: URL, isSSO: Bool = false) -> Bool {
+        guard url.hasSameUrlScheme(as: callbackURL) else {
             return false
         }
         
