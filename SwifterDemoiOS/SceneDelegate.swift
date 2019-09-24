@@ -18,11 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // handle url
         web: do {
             let callbackUrl = URL(string: "swifter://")!
-            Swifter.handleOpenUrl(context.url, callbackURL: callbackUrl)
+            Swifter.handleOpenURL(context.url, callbackURL: callbackUrl)
         }
         sso: do {
             let callbackUrl = URL(string: "swifter-nLl1mNYc25avPPF4oIzMyQzft://")!
-            Swifter.handleOpenUrl(context.url, callbackURL: callbackUrl, isSSO: true)
+            Swifter.handleOpenURL(context.url, callbackURL: callbackUrl, isSSO: true)
         }
     }
 }

@@ -44,11 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         web: do {
             let callbackUrl = URL(string: "swifter://")!
-            Swifter.handleOpenUrl(url, callbackURL: callbackUrl)
+            Swifter.handleOpenURL(url, callbackURL: callbackUrl)
         }
         sso: do {
             let callbackUrl = URL(string: "swifter-nLl1mNYc25avPPF4oIzMyQzft://")!
-            Swifter.handleOpenUrl(url, callbackURL: callbackUrl, isSSO: true)
+            Swifter.handleOpenURL(url, callbackURL: callbackUrl, isSSO: true)
         }
         return true
     }

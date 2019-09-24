@@ -159,7 +159,7 @@ public extension Swifter {
     #endif
 
     @discardableResult
-    class func handleOpenUrl(_ url: URL, callbackURL: URL, isSSO: Bool = false) -> Bool {
+    class func handleOpenURL(_ url: URL, callbackURL: URL, isSSO: Bool = false) -> Bool {
         guard url.hasSameUrlScheme(as: callbackURL) else {
             return false
         }
