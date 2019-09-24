@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         sso: do {
             let callbackUrl = URL(string: "swifter-nLl1mNYc25avPPF4oIzMyQzft://")!
-            Swifter.handleOpenUrlSSO(url, callbackUrl: callbackUrl)
+            Swifter.handleOpenUrl(url, callbackUrl: callbackUrl, isSSO: true)
         }
         return true
     }

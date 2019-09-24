@@ -25,8 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
             sso: do {
                 let callbackUrl = URL(string: "swifter-nLl1mNYc25avPPF4oIzMyQzft://")!
-                Swifter.handleOpenUrlSSO(context.url, callbackUrl: callbackUrl)
-            }   
+                Swifter.handleOpenUrl(context.url, callbackUrl: callbackUrl, isSSO: true)
+            }
         }
     }
 }
