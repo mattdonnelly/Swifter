@@ -38,7 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let callbackUrl = URL(string: "swifter://success") else { return }
         guard let urlString = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue else { return }
         guard let url = URL(string: urlString) else { return }
-        Swifter.handleOpenURL(url, callbackUrl: callbackUrl)
+        Swifter.handleOpenURL(url, callbackURL: callbackUrl)
     }
 
 }
