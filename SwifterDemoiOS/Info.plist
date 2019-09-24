@@ -33,7 +33,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>swifter-$(TWITTER_CONSUMER_KEY)</string>
+				<string>swifter-nLl1mNYc25avPPF4oIzMyQzft</string>
 			</array>
 		</dict>
 	</array>
@@ -41,10 +41,6 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>TwitterConsumerKey</key>
-	<string>$(TWITTER_CONSUMER_KEY)</string>
-	<key>TwitterConsumerSecret</key>
-	<string>$(TWITTER_CONSUMER_SECRET)</string>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch Screen</string>
 	<key>UIApplicationSceneManifest</key>
