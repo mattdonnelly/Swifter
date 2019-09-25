@@ -26,6 +26,18 @@
 import UIKit
 import SwifteriOS
 
+enum AuthorizationMode {
+    case acaccount
+    case browser
+    case sso
+    
+    var isUsingSSO: Bool {
+        return self == .sso
+    }
+}
+
+let authorizationMode: AuthorizationMode = .browser
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
@@ -41,14 +53,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         open url: URL,
         options: [UIApplication.OpenURLOptionsKey : Any] = [:]
-    ) -> Bool {
-        web: do {
-            let callbackUrl = URL(string: "swifter://")!
-            Swifter.handleOpenURL(url, callbackURL: callbackUrl)
-        }
-        sso: do {
+    ) -> Bool {        
+        if authorizationMode.isUsingSSO {
             let callbackUrl = URL(string: "swifter-nLl1mNYc25avPPF4oIzMyQzft://")!
             Swifter.handleOpenURL(url, callbackURL: callbackUrl, isSSO: true)
+        } else {
+            let callbackUrl = URL(string: "swifter://")!
+            Swifter.handleOpenURL(url, callbackURL: callbackUrl)
         }
         return true
     }

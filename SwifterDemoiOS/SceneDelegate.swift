@@ -15,14 +15,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard let context = URLContexts.first else { return }
-        // handle url
-        web: do {
-            let callbackUrl = URL(string: "swifter://")!
-            Swifter.handleOpenURL(context.url, callbackURL: callbackUrl)
-        }
-        sso: do {
+        if authorizationMode.isUsingSSO {
             let callbackUrl = URL(string: "swifter-nLl1mNYc25avPPF4oIzMyQzft://")!
             Swifter.handleOpenURL(context.url, callbackURL: callbackUrl, isSSO: true)
+        } else {
+            // ... Web
+            let callbackUrl = URL(string: "swifter://")!
+            Swifter.handleOpenURL(context.url, callbackURL: callbackUrl)
         }
     }
 }
