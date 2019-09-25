@@ -39,13 +39,9 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
         let failureHandler: (Error) -> Void = { error in
             self.alert(title: "Error", message: error.localizedDescription)
         }
-
-        if #available(iOS 11.0, *) {
-            let url = URL(string: "swifter://success")!
-            swifter.authorize(withCallback: url, presentingFrom: self, success: { _, _ in
-                self.fetchTwitterHomeStream()
-            }, failure: failureHandler)
-        } else {
+        
+        switch authorizeMode {
+        case .acaccount:
             let store = ACAccountStore()
             let type = store.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
             store.requestAccessToAccounts(with: type, options: nil) { granted, error in
@@ -62,6 +58,15 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
                     self.fetchTwitterHomeStream()
                 }
             }
+        case .browser:
+            let url = URL(string: "swifter://success")!
+            swifter.authorize(withCallback: url, presentingFrom: self, success: { _, _ in
+                self.fetchTwitterHomeStream()
+            }, failure: failureHandler)
+        case .sso:
+            swifter.authorizeSSO(success: { _ in
+                self.fetchTwitterHomeStream()
+            }, failure: failureHandler)
         }
     }
 

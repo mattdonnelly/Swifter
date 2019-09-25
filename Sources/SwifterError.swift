@@ -19,6 +19,9 @@ public struct SwifterError: LocalizedError {
         case jsonParseError
         case invalidGifData
         case invalidGifResponse
+        case noTwitterApp
+        case cancelled
+        case invalidClient
         
         public var description: String {
             switch self {
@@ -38,6 +41,12 @@ public struct SwifterError: LocalizedError {
                 return "invalidGifData"
             case .invalidGifResponse:
                 return "invalidGifResponse"
+            case .noTwitterApp:
+                return "noTwitterApp"
+            case .cancelled:
+                return "cancelled"
+            case .invalidClient:
+                return "invalidClient"
             }
         }
         

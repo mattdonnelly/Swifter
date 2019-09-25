@@ -25,15 +25,15 @@
 
 import Foundation
 
-internal class OAuthClient: SwifterClientProtocol  {
+internal class OAuthClient: SwifterClientProtocol, SwifterAppProtocol {
     
     struct OAuth {
         static let version = "1.0"
         static let signatureMethod = "HMAC-SHA1"
     }
     
-    var consumerKey: String
-    var consumerSecret: String
+    let consumerKey: String
+    let consumerSecret: String
     
     var credential: Credential?
     

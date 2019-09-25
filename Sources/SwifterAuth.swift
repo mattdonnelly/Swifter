@@ -35,6 +35,7 @@ import Foundation
 public extension Swifter {
     
     typealias TokenSuccessHandler = (Credential.OAuthAccessToken?, URLResponse) -> Void
+    typealias SSOTokenSuccessHandler = (Credential.OAuthAccessToken) -> Void
     
     /**
      Begin Authorization with a Callback URL.
@@ -114,15 +115,63 @@ public extension Swifter {
             }
         }, failure: failure)
     }
+  
+    func authorizeSSO(success: SSOTokenSuccessHandler?, failure: FailureHandler? = nil) {
+        guard let client = client as? SwifterAppProtocol else {
+            let error = SwifterError(message: "SSO not supported AppOnly client",
+                                     kind: .invalidClient)
+            failure?(error)
+            return
+        }
+        
+        let urlScheme = "swifter-\(client.consumerKey)"
+        
+        let nc = NotificationCenter.default
+        self.swifterCallbackToken = nc.addObserver(forName: .swifterSSOCallback, object: nil, queue: .main) { notification in
+            self.swifterCallbackToken = nil
+            guard let url = notification.userInfo?[CallbackNotification.optionsURLKey] as? URL else { return }
+            guard url.scheme == urlScheme else { return }
+            
+            let isCanceled = url.host == nil
+            if isCanceled {
+                let error = SwifterError(message: "User cancelled login from Twitter App", kind: .cancelled)
+                failure?(error)
+            } else {
+                let params = url.queryParamsForSSO
+                let secret = params["secret"]!
+                let token = params["token"]!
+                let credentialToken = Credential.OAuthAccessToken(key: token, secret: secret)
+                self.client.credential = Credential(accessToken: credentialToken)
+                success?(credentialToken)
+            }
+        }
+        
+        let url = URL(string: "twitterauth://authorize?consumer_key=\(client.consumerKey)&consumer_secret=\(client.consumerSecret)&oauth_callback=\(urlScheme)")!
+        UIApplication.shared.open(url, options: [:], completionHandler: { (success) in
+            if !success {
+                let error = SwifterError(message: "Cannot open twitter app",
+                                         kind: .noTwitterApp)
+                failure?(error)
+            }
+        })
+    }
+    
     #endif
 
     @discardableResult
-    class func handleOpenURL(_ url: URL, callbackURL: URL) -> Bool {
+    class func handleOpenURL(_ url: URL, callbackURL: URL, isSSO: Bool = false) -> Bool {
         guard url.hasSameUrlScheme(as: callbackURL) else {
             return false
         }
-        let notification = Notification(name: .swifterCallback, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
-        NotificationCenter.default.post(notification)
+        
+        if isSSO {
+            let notification = Notification(name: .swifterSSOCallback, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
+            NotificationCenter.default.post(notification)
+        } else {
+            let notification = Notification(name: .swifterCallback, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
+            NotificationCenter.default.post(notification)
+        }
+        
         return true
     }
     

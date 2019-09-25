@@ -32,6 +32,7 @@ import Accounts
 
 extension Notification.Name {
     static let swifterCallback = Notification.Name(rawValue: "Swifter.CallbackNotificationName")
+    static let swifterSSOCallback = Notification.Name(rawValue: "Swifter.SSOCallbackNotificationName")
 }
 
 // MARK: - Twitter URL
