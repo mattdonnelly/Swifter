@@ -39,8 +39,9 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
         let failureHandler: (Error) -> Void = { error in
             self.alert(title: "Error", message: error.localizedDescription)
         }
-        
-        switch authorizeMode {
+
+        // You can change the authorizationMode to test different results via the AppDelegate
+        switch authorizationMode {
         case .acaccount:
             let store = ACAccountStore()
             let type = store.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
