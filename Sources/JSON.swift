@@ -223,6 +223,9 @@ public func ==(lhs: JSON, rhs: JSON) -> Bool {
     case (.object(let lhsValue), .object(let rhsValue)):
         return lhsValue == rhsValue
         
+    case (.invalid, .invalid):
+        return true    
+        
     default:
         return false
     }
