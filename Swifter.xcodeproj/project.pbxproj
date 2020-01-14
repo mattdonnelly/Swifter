@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4ED2E25C215E1E1A00E2084A /* JSONTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED2E25B215E1E1A00E2084A /* JSONTest.swift */; };
+		7DA5CF6A23CE0C9E00F54CA0 /* WebAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA5CF6923CE0C9E00F54CA0 /* WebAuthenticationViewController.swift */; };
 		8B116AF1194601970019A4DC /* SwifterHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */; };
 		8B116AF2194601970019A4DC /* SwifterHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */; };
 		8B1F259F194A663D004BD304 /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F259E194A663D004BD304 /* SwifterHelp.swift */; };
@@ -154,6 +155,7 @@
 
 /* Begin PBXFileReference section */
 		4ED2E25B215E1E1A00E2084A /* JSONTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTest.swift; sourceTree = "<group>"; };
+		7DA5CF6923CE0C9E00F54CA0 /* WebAuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationViewController.swift; sourceTree = "<group>"; };
 		8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterHTTPRequest.swift; sourceTree = "<group>"; };
 		8B1F259E194A663D004BD304 /* SwifterHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SwifterHelp.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8B300C1F1944AA1A00993175 /* SwifterDemoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwifterDemoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -363,6 +365,7 @@
 				8B116AF0194601970019A4DC /* SwifterHTTPRequest.swift */,
 				D0DCE3ED1F09C5E700B62429 /* SwifterGIF.swift */,
 				8B33CA3E19587C6D00739FCB /* JSON.swift */,
+				7DA5CF6923CE0C9E00F54CA0 /* WebAuthenticationViewController.swift */,
 				8B9F51591944A8E100894629 /* Extensions */,
 				8B5EFF10195F085B00B354F9 /* Supporting Files */,
 			);
@@ -658,6 +661,7 @@
 				8BF1D6761948825D00E3AA64 /* SwifterSavedSearches.swift in Sources */,
 				A1E207A91D4B85D90093E498 /* HMAC.swift in Sources */,
 				8BCF43171947450A00E63301 /* SwifterTweets.swift in Sources */,
+				7DA5CF6A23CE0C9E00F54CA0 /* WebAuthenticationViewController.swift in Sources */,
 				8BF1D6851948BCC100E3AA64 /* SwifterAccountsClient.swift in Sources */,
 				8B548F591945325E00EE2927 /* SwifterAuth.swift in Sources */,
 				8BCF431D1947907300E63301 /* SwifterMessages.swift in Sources */,
