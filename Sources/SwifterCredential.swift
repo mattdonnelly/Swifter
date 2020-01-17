@@ -43,6 +43,7 @@ public class Credential {
         public init(key: String, secret: String) {
             self.key = key
             self.secret = secret
+            self.userID = key.components(separatedBy: "-").first
         }
         
         public init(queryString: String) {
