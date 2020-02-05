@@ -108,7 +108,7 @@ public class Swifter {
     
     public var client: SwifterClientProtocol
     private var chunkBuffer: String?
-    private var appSwitchingObserver: AppSwitchingObserver?
+    internal var appSwitchingObserver: AppSwitchingObserver?
     
     internal var swifterCallbackToken: NSObjectProtocol? {
         willSet {
