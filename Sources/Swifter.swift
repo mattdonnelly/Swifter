@@ -95,6 +95,7 @@ public class Swifter {
     
     internal struct CallbackNotification {
         static let optionsURLKey = "SwifterCallbackNotificationOptionsURLKey"
+        static let optionsUserCancelKey = "SwifterCallbackNotificationOptionsUserCancelKey"
     }
     
     internal struct DataParameters {
@@ -107,6 +108,7 @@ public class Swifter {
     
     public var client: SwifterClientProtocol
     private var chunkBuffer: String?
+    private var appSwitchingObserver: AppSwitchingObserver?
     
     internal var swifterCallbackToken: NSObjectProtocol? {
         willSet {
