@@ -125,6 +125,18 @@ public extension Swifter {
         }
         
         let urlScheme = "swifter-\(client.consumerKey)"
+        authorizeSSO(withCallback: urlScheme, success: success, failure: failure)
+    }
+  
+    func authorizeSSO(withCallback urlScheme: String,
+                      success: SSOTokenSuccessHandler?,
+                      failure: FailureHandler? = nil) {
+        guard let client = client as? SwifterAppProtocol else {
+            let error = SwifterError(message: "SSO not supported AppOnly client",
+                                     kind: .invalidClient)
+            failure?(error)
+            return
+        }
         
         let nc = NotificationCenter.default
         self.swifterCallbackToken = nc.addObserver(forName: .swifterSSOCallback, object: nil, queue: .main) { notification in
