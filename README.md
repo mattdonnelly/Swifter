@@ -115,7 +115,7 @@ if let statusText = statuses[0]["text"].string {
 
 In Twitter REST API v1.1, each client application must authenticate itself with consumer key and consumer secret tokens. You can request consumer tokens for your app on [Twitter's dev website](https://dev.twitter.com/apps)
 
-## Single Sign-On
+## Single Sign-On [Deprecated]
 
 If you authorize with SSO, you should add URL-Scheme your Info.plist.
 *REPLACE $(TWITTER_CONSUMER_KEY) TO YOUR CONSUMER KEY.*
