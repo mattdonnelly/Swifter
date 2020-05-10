@@ -129,6 +129,7 @@ public class Swifter {
     }
     
     #if os(macOS) || os(iOS)
+    @available(iOS, deprecated: 11.0, message: "Using ACAccount for Twitter is no longer supported as of iOS 11.")
     public init(account: ACAccount) {
         self.client = AccountsClient(account: account)
     }

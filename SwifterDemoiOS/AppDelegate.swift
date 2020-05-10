@@ -27,6 +27,7 @@ import UIKit
 import SwifteriOS
 
 enum AuthorizationMode {
+    @available(iOS, deprecated: 11.0)
     case acaccount
     case browser
     case sso

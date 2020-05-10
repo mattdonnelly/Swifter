@@ -61,8 +61,10 @@ public class Credential {
     public internal(set) var accessToken: OAuthAccessToken?
     
     #if os(macOS) || os(iOS)
+    @available(iOS, deprecated: 11.0, message: "Using ACAccount for Twitter is no longer supported as of iOS 11.")
     public internal(set) var account: ACAccount?
-    
+
+    @available(iOS, deprecated: 11.0, message: "Using ACAccount for Twitter is no longer supported as of iOS 11.")
     public init(account: ACAccount) {
         self.account = account
     }
