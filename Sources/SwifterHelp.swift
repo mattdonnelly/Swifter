@@ -101,7 +101,7 @@ public extension Swifter {
                        failure: FailureHandler? = nil) {
         let path = "application/rate_limit_status.json"
         var parameters = [String: Any]()
-        parameters["resources"] ??= resources.joined(separator: ",")
+        parameters["resources"] ??= resources?.joined(separator: ",")
         self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
             success?(json)
         }, failure: failure)
