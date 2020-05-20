@@ -73,15 +73,12 @@ public extension Swifter {
      Begin Authorization with a Callback URL
      
      - Parameter presentFromViewController: The viewController used to present the SFSafariViewController.
-     The UIViewController must inherit SFSafariViewControllerDelegate
-     
      */
     
     #if os(iOS)
     func authorize(withCallback callbackURL: URL,
                    presentingFrom presenting: UIViewController?,
                    forceLogin: Bool = false,
-                   safariDelegate: SFSafariViewControllerDelegate? = nil,
                    success: TokenSuccessHandler?,
                    failure: FailureHandler? = nil) {
         self.postOAuthRequestToken(with: callbackURL, success: { token, response in
@@ -99,20 +96,15 @@ public extension Swifter {
                     success?(accessToken!, response)
                     }, failure: failure)
             }
-			
-			let forceLogin = forceLogin ? "&force_login=true" : ""
-			let query = "oauth/authorize?oauth_token=\(token!.key)\(forceLogin)"
+            
+            let forceLogin = forceLogin ? "&force_login=true" : ""
+            let query = "oauth/authorize?oauth_token=\(token!.key)\(forceLogin)"
             let queryUrl = URL(string: query, relativeTo: TwitterURL.oauth.url)!.absoluteURL
-			
-            if let delegate = safariDelegate ?? (presenting as? SFSafariViewControllerDelegate) {
-                let safariView = SFSafariViewController(url: queryUrl)
-                safariView.delegate = delegate
-                safariView.modalTransitionStyle = .coverVertical
-                safariView.modalPresentationStyle = .overFullScreen
-                presenting?.present(safariView, animated: true, completion: nil)
-            } else {
-                UIApplication.shared.open(queryUrl, options: [:], completionHandler: nil)
+            let webAuthenticationViewController = WebAuthenticationViewController(queryUrl: queryUrl) {
+                let error = SwifterError(message: "User login cancelled ", kind: .cancelled)
+                failure?(error)
             }
+            presenting?.present(webAuthenticationViewController, animated: true, completion: nil)
         }, failure: failure)
     }
   

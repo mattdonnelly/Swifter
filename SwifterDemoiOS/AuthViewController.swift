@@ -29,7 +29,7 @@ import Social
 import SwifteriOS
 import SafariServices
 
-class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
+class AuthViewController: UIViewController {
     private var swifter = Swifter(
         consumerKey: "nLl1mNYc25avPPF4oIzMyQzft",
         consumerSecret: "Qm3e5JTXDhbbLl44cq6WdK00tSUwa17tWlO8Bf70douE4dcJe2")
@@ -95,9 +95,5 @@ class AuthViewController: UIViewController, SFSafariViewControllerDelegate {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
-    }
-
-    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        controller.dismiss(animated: true, completion: nil)
     }
 }
