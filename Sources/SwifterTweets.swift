@@ -220,20 +220,20 @@ public extension Swifter {
 			failure?(error)
 			return
 		}
-		
-		self.prepareUpload(data: data, success: { json, response in
-			if let media_id = json["media_id_string"].string {
-				self.uploadGIF(media_id, data: data, name: attachmentUrl.lastPathComponent, success: { json, response in
-					self.finalizeUpload(mediaId: media_id, success: { json, resoponse in
-						self.postTweet(status: text, mediaIDs: [media_id], success: success, failure: failure)
-					}, failure: failure)
-				}, failure: failure)
-			}
-			else {
-				let error = SwifterError(message: "Bad Response for GIF Upload", kind: .invalidGifResponse)
-				failure?(error)
-			}
-		}, failure: failure)
+
+        self.prepareUpload(data: data, type: .gif, category: .gif, success: { json, response in
+            if let media_id = json["media_id_string"].string {
+                self.appendUpload(media_id, data: data, name: attachmentUrl.lastPathComponent, index: 0, success: { json, response in
+                    self.finalizeUpload(mediaId: media_id, success: { json, resoponse in
+                        self.postTweet(status: text, mediaIDs: [media_id], success: success, failure: failure)
+                    }, failure: failure)
+                }, failure: failure)
+            }
+            else {
+                let error = SwifterError(message: "Bad Response for GIF Upload", kind: .invalidGifResponse)
+                failure?(error)
+            }
+        }, failure: failure)
 	}
 
     /**
@@ -259,6 +259,27 @@ public extension Swifter {
         self.postJSON(path: path, baseURL: .upload, parameters: parameters, success: {
 			json, _ in success?(json)
 		}, failure: failure)
+    }
+
+    func postMultipartMedia(_ media: Data,
+                            name: String? = nil,
+                            type: MultipartMediaType,
+                            category: MediaCategory,
+                            success: SuccessHandler? = nil,
+                            failure: FailureHandler? = nil) {
+        self.prepareUpload(data: media, type: type, category: category, success: { json, response in
+            if let media_id = json["media_id_string"].string {
+                self.appendUpload(media_id, data: media, name: name, index: 0, success: { json, response in
+                    self.finalizeUpload(mediaId: media_id, success: { (json, _) in
+                        success?(json)
+                    }, failure: failure)
+                }, failure: failure)
+            }
+            else {
+                let error = SwifterError(message: "Bad Response for GIF Upload", kind: .invalidGifResponse)
+                failure?(error)
+            }
+        }, failure: failure)
     }
 
     /**
