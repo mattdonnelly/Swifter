@@ -44,7 +44,7 @@ public extension Swifter {
         self.postJSON(path: path, baseURL: .upload, parameters: parameters, success: { (json, response) in
             if let processingInfo = json["processing_info"].object, let state = processingInfo["state"]?.string {
                 switch state {
-                case "in_progress":
+                case "pending", "in_progress":
                     let secs = processingInfo["check_after_secs"]?.double ?? 3.0
                     DispatchQueue.global().asyncAfter(deadline: .now() + secs) {
                         self.finalizeUpload(mediaId: mediaId, success: success, failure: failure)
