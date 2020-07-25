@@ -8,7 +8,9 @@
 
 import Foundation
 
-public enum MultipartMediaType: String {
+public enum MediaType: String {
+    case png = "image/png"
+    case jpeg = "image/jpeg"
     case gif = "image/gif"
     case mov = "video/mov"
     case mp4 = "video/mp4"
@@ -21,7 +23,7 @@ public enum MediaCategory: String {
 
 public extension Swifter {
 
-    internal func prepareUpload(data: Data, type: MultipartMediaType, category: MediaCategory, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
+    internal func prepareUpload(data: Data, type: MediaType, category: MediaCategory, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "media/upload.json"
         let parameters: [String : Any] = [ "command": "INIT", "total_bytes": data.count,
                                            "media_type": type.rawValue, "media_category": category.rawValue]

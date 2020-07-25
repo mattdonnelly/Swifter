@@ -263,7 +263,7 @@ public extension Swifter {
 
     func postMultipartMedia(_ media: Data,
                             name: String? = nil,
-                            type: MultipartMediaType,
+                            type: MediaType,
                             category: MediaCategory,
                             success: SuccessHandler? = nil,
                             failure: FailureHandler? = nil) {
