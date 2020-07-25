@@ -39,7 +39,25 @@ public extension Swifter {
     internal func finalizeUpload(mediaId: String, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "media/upload.json"
         let parameters = ["command": "FINALIZE", "media_id" : mediaId]
-        self.postJSON(path: path, baseURL: .upload, parameters: parameters, success: success, failure: failure)
+        self.postJSON(path: path, baseURL: .upload, parameters: parameters, success: { (json, response) in
+            if let processingInfo = json["processing_info"].object, let state = processingInfo["state"]?.string {
+                switch state {
+                case "in_progress":
+                    let secs = processingInfo["check_after_secs"]?.double ?? 3.0
+                    DispatchQueue.global().asyncAfter(deadline: .now() + secs) {
+                        self.finalizeUpload(mediaId: mediaId, success: success, failure: failure)
+                    }
+                case "succeeded":
+                    success?(json, response)
+                default: // includes failed
+                    let error = SwifterError(message: "Bad Response for Multipart Media Upload", kind: .invalidMultipartMediaResponse)
+                    failure?(error)
+                }
+            } else {
+                let error = SwifterError(message: "Cannot parse processing_info", kind: .jsonParseError)
+                failure?(error)
+            }
+        }, failure: failure)
     }
 
 }
