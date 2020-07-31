@@ -264,10 +264,10 @@ public extension Swifter {
     func postMultipartMedia(_ media: Data,
                             name: String? = nil,
                             type: MediaType,
-                            category: MediaCategory,
+                            category: MediaCategory? = nil,
                             success: SuccessHandler? = nil,
                             failure: FailureHandler? = nil) {
-        self.prepareUpload(data: media, type: type, category: category, success: { json, response in            
+        self.prepareUpload(data: media, type: type, category: category, success: { json, response in
             if let media_id = json["media_id_string"].string {
                 self.appendUpload(media_id, data: media, name: name, index: 0, success: { json, response in
                     self.finalizeUpload(mediaId: media_id, success: { (json, response) in
