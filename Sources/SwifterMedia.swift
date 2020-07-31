@@ -75,7 +75,7 @@ public extension Swifter {
                                              kind: .invalidMultipartMediaResponse)
                     failure?(error)
                 }
-            } else if let processingInfo = json["processing_info"].object{
+            } else if json != nil {
                 // success but with no state
                 success?(json, response)
             } else {
