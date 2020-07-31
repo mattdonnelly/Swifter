@@ -19,6 +19,7 @@ public enum MediaType: String {
 public enum MediaCategory: String {
     case gif = "tweet_gif"
     case video = "tweet_video"
+    case null = ""
 }
 
 public extension Swifter {
