@@ -267,14 +267,10 @@ public extension Swifter {
                             category: MediaCategory,
                             success: SuccessHandler? = nil,
                             failure: FailureHandler? = nil) {
-        self.prepareUpload(data: media, type: type, category: category, success: { json, response in
-            print("swifter 1: ", json, response)
-            
+        self.prepareUpload(data: media, type: type, category: category, success: { json, response in            
             if let media_id = json["media_id_string"].string {
                 self.appendUpload(media_id, data: media, name: name, index: 0, success: { json, response in
-                    print("swifter 1: ", json, response)
                     self.finalizeUpload(mediaId: media_id, success: { (json, response) in
-                        print("swifter 1: ", json, response)
                         success?(json)
                     }, failure: failure)
                 }, failure: failure)

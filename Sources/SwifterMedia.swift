@@ -19,17 +19,18 @@ public enum MediaType: String {
 public enum MediaCategory: String {
     case gif = "tweet_gif"
     case video = "tweet_video"
-    case null = ""
 }
 
 public extension Swifter {
     
-    internal func prepareUpload(data: Data, type: MediaType, category: MediaCategory, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
+    internal func prepareUpload(data: Data, type: MediaType, category: MediaCategory?, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "media/upload.json"
-        let parameters: [String : Any] = ["command": "INIT",
+        var parameters: [String : Any] = ["command": "INIT",
                                           "total_bytes": data.count,
                                           "media_type": type.rawValue]
-        //                                          "media_category": category.rawValue]
+        if let cat = category {
+            parameters["media_category"] = cat
+        }
         self.postJSON(path: path, baseURL: .upload, parameters: parameters, success: success, failure: failure)
     }
     
@@ -75,8 +76,8 @@ public extension Swifter {
                                              kind: .invalidMultipartMediaResponse)
                     failure?(error)
                 }
-            } else if json != nil {
-                // success but with no state
+            } else if json != nil && response.statusCode >= 200 && response.statusCode <= 299 {
+                // success but with no state - use with caution!
                 success?(json, response)
             } else {
                 let error = SwifterError(message: "Cannot parse processing_info", kind: .jsonParseError)
