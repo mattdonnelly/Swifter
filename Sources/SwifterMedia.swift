@@ -23,7 +23,7 @@ public enum MediaCategory: String {
 
 public extension Swifter {
     
-    internal func prepareUpload(data: Data, type: MediaType, category: MediaCategory?, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
+    internal func prepareUpload(data: Data, type: MediaType, category: MediaCategory? = nil, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "media/upload.json"
         var parameters: [String : Any] = ["command": "INIT",
                                           "total_bytes": data.count,
