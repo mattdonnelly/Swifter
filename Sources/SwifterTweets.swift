@@ -276,7 +276,8 @@ public extension Swifter {
                 }, failure: failure)
             }
             else {
-                let error = SwifterError(message: "Bad Response for GIF Upload", kind: .invalidGifResponse)
+                let error = SwifterError(message: "Bad Response for Multipart Media Upload",
+                                         kind: .invalidMultipartMediaResponse)
                 failure?(error)
             }
         }, failure: failure)

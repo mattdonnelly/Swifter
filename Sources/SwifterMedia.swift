@@ -21,6 +21,8 @@ public enum MediaCategory: String {
     case video = "tweet_video"
 }
 
+fileprivate let CHUNK_SIZE: Int = 2 * 1024 * 1024
+
 public extension Swifter {
 
     internal func prepareUpload(data: Data, type: MediaType, category: MediaCategory, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
@@ -32,10 +34,21 @@ public extension Swifter {
 
     internal func appendUpload(_ mediaId: String, data: Data, name: String? = nil, index: Int = 0, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "media/upload.json"
+        let location = index * CHUNK_SIZE
+        let length: Int = (data.count < CHUNK_SIZE) ? data.count : min(data.count - CHUNK_SIZE, CHUNK_SIZE)
+        let range: Range<Data.Index> = (location ..< location + length)
+        let subData = data.subdata(in: range)
         let parameters : [String : Any] = ["command": "APPEND", "media_id": mediaId, "segment_index": index,
                                            Swifter.DataParameters.dataKey : "media",
-                                           Swifter.DataParameters.fileNameKey: name ?? "Swifter.media", "media": data]
-        self.jsonRequest(path: path, baseURL: .upload, method: .POST, parameters: parameters, success: success, failure: failure)
+                                           Swifter.DataParameters.fileNameKey: name ?? "Swifter.media", "media": subData]
+        self.jsonRequest(path: path, baseURL: .upload, method: .POST, parameters: parameters, success: { (json, response) in
+            let next = index + 1
+            if data.count < next * CHUNK_SIZE {
+                success?(json, response)
+            } else {
+                self.appendUpload(mediaId, data: data, name: name, index: next, success: success, failure: failure)
+            }
+        }, failure: failure)
     }
 
     internal func finalizeUpload(mediaId: String, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
@@ -52,7 +65,8 @@ public extension Swifter {
                 case "succeeded":
                     success?(json, response)
                 default: // includes failed
-                    let error = SwifterError(message: "Bad Response for Multipart Media Upload", kind: .invalidMultipartMediaResponse)
+                    let error = SwifterError(message: "Bad Response for Multipart Media Upload",
+                                             kind: .invalidMultipartMediaResponse)
                     failure?(error)
                 }
             } else {
