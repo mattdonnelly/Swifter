@@ -23,16 +23,16 @@ public enum MediaCategory: String {
 }
 
 public extension Swifter {
-
+    
     internal func prepareUpload(data: Data, type: MediaType, category: MediaCategory, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "media/upload.json"
         let parameters: [String : Any] = ["command": "INIT",
                                           "total_bytes": data.count,
                                           "media_type": type.rawValue]
-//                                          "media_category": category.rawValue]
+        //                                          "media_category": category.rawValue]
         self.postJSON(path: path, baseURL: .upload, parameters: parameters, success: success, failure: failure)
     }
-
+    
     internal func appendUpload(_ mediaId: String, data: Data, name: String? = nil, index: Int = 0, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "media/upload.json"
         let chunkSize: Int = 2 * 1024 * 1024
@@ -55,7 +55,7 @@ public extension Swifter {
             }
         }, failure: failure)
     }
-
+    
     internal func finalizeUpload(mediaId: String, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
         let path = "media/upload.json"
         let parameters = ["command": "FINALIZE",
@@ -75,13 +75,14 @@ public extension Swifter {
                                              kind: .invalidMultipartMediaResponse)
                     failure?(error)
                 }
-            } else {
-                print("json: ", json)
-//                let error = SwifterError(message: "Cannot parse processing_info", kind: .jsonParseError)
-//                failure?(error)
+            } else if let processingInfo = json["processing_info"].object{
+                // success but with no state
                 success?(json, response)
+            } else {
+                let error = SwifterError(message: "Cannot parse processing_info", kind: .jsonParseError)
+                failure?(error)
             }
         }, failure: failure)
     }
-
+    
 }
