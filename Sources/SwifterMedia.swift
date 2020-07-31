@@ -76,6 +76,7 @@ public extension Swifter {
                     failure?(error)
                 }
             } else {
+                print("json: ", json)
                 let error = SwifterError(message: "Cannot parse processing_info", kind: .jsonParseError)
                 failure?(error)
             }
