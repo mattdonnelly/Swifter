@@ -28,8 +28,8 @@ public extension Swifter {
         let path = "media/upload.json"
         let parameters: [String : Any] = ["command": "INIT",
                                           "total_bytes": data.count,
-                                          "media_type": type.rawValue,
-                                          "media_category": category.rawValue]
+                                          "media_type": type.rawValue]
+//                                          "media_category": category.rawValue]
         self.postJSON(path: path, baseURL: .upload, parameters: parameters, success: success, failure: failure)
     }
 
