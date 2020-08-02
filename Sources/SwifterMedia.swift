@@ -21,6 +21,17 @@ public enum MediaCategory: String {
     case video = "tweet_video"
 }
 
+/**
+Uploading media
+INIT -> APPEND 🔄 -> FINALIZE (if async response -> STATUS 🔄)
+
+See:
+- https://developer.twitter.com/en/docs/media/upload-media/uploading-media/media-best-practices
+- https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload-init
+- https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload-append
+- https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload-finalize
+- https://developer.twitter.com/en/docs/media/upload-media/api-reference/get-media-upload-status
+*/
 public extension Swifter {
 
     internal func prepareUpload(data: Data, type: MediaType, category: MediaCategory, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
@@ -60,25 +71,58 @@ public extension Swifter {
         let parameters = ["command": "FINALIZE",
                           "media_id": mediaId]
         self.postJSON(path: path, baseURL: .upload, parameters: parameters, success: { (json, response) in
-            if let processingInfo = json["processing_info"].object, let state = processingInfo["state"]?.string {
-                switch state {
-                case "pending", "in_progress":
-                    let secs = processingInfo["check_after_secs"]?.double ?? 3.0
-                    DispatchQueue.global().asyncAfter(deadline: .now() + secs) {
-                        self.finalizeUpload(mediaId: mediaId, success: success, failure: failure)
-                    }
-                case "succeeded":
-                    success?(json, response)
-                default: // includes failed
-                    let error = SwifterError(message: "Bad Response for Multipart Media Upload",
-                                             kind: .invalidMultipartMediaResponse)
-                    failure?(error)
-                }
+            guard let obj = json.object, obj.keys.count > 0 else {
+                let error = SwifterError(message: "Bad Response for Multipart Media Upload",
+                                         kind: .invalidMultipartMediaResponse)
+                failure?(error)
+                return
+            }
+            if let processingInfo = json["processing_info"].object {
+                // async FINALIZE response which requires further STATUS command call(s)
+                self.statusCheck(processingInfo: processingInfo, json: json, response: response,
+                                 mediaId: mediaId, success: success, failure: failure)
             } else {
-                let error = SwifterError(message: "Cannot parse processing_info", kind: .jsonParseError)
+                // sync FINALIZE response
+                success?(json, response)
+            }
+        }, failure: failure)
+    }
+
+    private func statusUpload(mediaId: String, success: JSONSuccessHandler? = nil, failure: FailureHandler? = nil) {
+        let path = "media/upload.json"
+        let parameters = ["command": "STATUS",
+                          "media_id": mediaId]
+        self.getJSON(path: path, baseURL: .upload, parameters: parameters, success: { (json, response) in
+            if let processingInfo = json["processing_info"].object {
+                self.statusCheck(processingInfo: processingInfo, json: json, response: response,
+                                 mediaId: mediaId, success: success, failure: failure)
+            } else {
+                let error = SwifterError(message: "Bad Response for Multipart Media Upload",
+                                         kind: .invalidMultipartMediaResponse)
                 failure?(error)
             }
         }, failure: failure)
+    }
+
+    private func statusCheck(processingInfo: [String: JSON],
+                             json: JSON,
+                             response: HTTPURLResponse,
+                             mediaId: String,
+                             success: JSONSuccessHandler? = nil,
+                             failure: FailureHandler? = nil) {
+        switch processingInfo["state"]!.string! {
+        case "pending", "in_progress":
+            let secs = processingInfo["check_after_secs"]!.double!
+            DispatchQueue.global().asyncAfter(deadline: .now() + secs) {
+                self.statusUpload(mediaId: mediaId, success: success, failure: failure)
+            }
+        case "succeeded":
+            success?(json, response)
+        default: // includes failed
+            let error = SwifterError(message: "Failed to upload Multipart Media",
+                                     kind: .invalidMultipartMediaResponse)
+            failure?(error)
+        }
     }
 
 }
