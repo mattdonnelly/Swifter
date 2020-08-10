@@ -128,7 +128,12 @@ public extension Swifter {
         
         let nc = NotificationCenter.default
         self.swifterCallbackToken = nc.addObserver(forName: .swifterSSOCallback, object: nil, queue: .main) { notification in
+            if let isCanceled = notification.userInfo?[CallbackNotification.optionsUserCancelKey] as? Bool, isCanceled {
+                let error = SwifterError(message: "User cancelled login from Twitter App", kind: .cancelled)
+                failure?(error)
+            }
             self.swifterCallbackToken = nil
+            self.appSwitchingObserver?.isEnabled = false
             guard let url = notification.userInfo?[CallbackNotification.optionsURLKey] as? URL else { return }
             guard url.scheme == urlScheme else { return }
             
@@ -145,7 +150,7 @@ public extension Swifter {
                 success?(credentialToken)
             }
         }
-        
+        setupAppSwitchingObserver()
         let url = URL(string: "twitterauth://authorize?consumer_key=\(client.consumerKey)&consumer_secret=\(client.consumerSecret)&oauth_callback=\(urlScheme)")!
         UIApplication.shared.open(url, options: [:], completionHandler: { (success) in
             if !success {
@@ -253,4 +258,31 @@ public extension Swifter {
         }
     }
     
+    
+    class AppSwitchingObserver {
+        var token: NSObjectProtocol?
+        var isEnabled: Bool = true
+        var onTrigger: (() -> Void)? = nil
+        
+        func startObserving() {
+            token = NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] (_) in
+                guard let `self` = self else { return }
+                guard self.isEnabled else { return }
+                self.onTrigger?()
+            }
+        }
+    }
+    
+    private func setupAppSwitchingObserver() {
+        let observer = AppSwitchingObserver()
+        observer.onTrigger = {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                let notification = Notification(name: .swifterSSOCallback, object: nil, userInfo: [CallbackNotification.optionsUserCancelKey: true])
+                NotificationCenter.default.post(notification)
+            }
+        }
+        appSwitchingObserver = observer
+        
+        observer.startObserving()
+    }
 }
