@@ -62,10 +62,10 @@ extension String {
 
         while !scanner.isAtEnd {
             key = scanner.scanUpToString("=")
-            _ = scanner.scanString(string: "=")
+            _ = scanner.scanString("=")
 
             value = scanner.scanUpToString("&")
-            _ = scanner.scanString(string: "&")
+            _ = scanner.scanString("&")
 
             if let key = key, let value = value {
                 parameters.updateValue(value, forKey: key)
