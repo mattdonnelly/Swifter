@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Swifter"
-  s.version      = "2.4.0"
+  s.version      = "2.4.1"
   s.summary      = ":bird: A Twitter framework for iOS & macOS written in Swift"
   s.description  = <<-DESC
   Twitter framework for iOS & macOS written in Swift, with support of three different types of authentication protocol, and most, if not all, of the REST API.
