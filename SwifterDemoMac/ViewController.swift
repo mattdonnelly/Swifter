@@ -26,6 +26,7 @@
 import Cocoa
 import Accounts
 import SwifterMac
+import AuthenticationServices
 
 class ViewController: NSViewController {
     let useACAccount = false
@@ -35,7 +36,9 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if #available(macOS 10.13, *) {
+        if #available(macOS 10.15, *) {
+            authorizeWithASWebAuthentication()
+        } else if #available(macOS 10.13, *) {
             authorizeWithWebLogin()
         } else if useACAccount {
             authorizeWithACAccountStore()
@@ -80,10 +83,32 @@ class ViewController: NSViewController {
         }) { print($0.localizedDescription) }
     }
 
+    @available(macOS 10.15, *)
+    private func authorizeWithASWebAuthentication() {
+        let swifter = Swifter(
+            consumerKey: "nLl1mNYc25avPPF4oIzMyQzft",
+            consumerSecret: "Qm3e5JTXDhbbLl44cq6WdK00tSUwa17tWlO8Bf70douE4dcJe2"
+        )
+        let callbackUrl = URL(string: "swifter://success")!
+        swifter.authorize(withProvider: self, callbackURL: callbackUrl) { (_, _) in
+            swifter.getHomeTimeline(count: 100, success: { statuses in
+                self.processTweets(result: statuses)
+            }) { print($0.localizedDescription) }
+        } failure: { print($0.localizedDescription) }
+    }
+
     private func processTweets(result: JSON) {
         guard let tweets = result.array else { return }
         self.tweets = tweets.map {
             return Tweet(name: $0["user"]["name"].string!, text: $0["text"].string!)
         }
+    }
+}
+
+// This is need for ASWebAuthenticationSession
+@available(macOS 10.15, *)
+extension ViewController: ASWebAuthenticationPresentationContextProviding {
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return self.view.window!
     }
 }
