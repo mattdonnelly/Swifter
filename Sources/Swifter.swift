@@ -25,6 +25,7 @@
 
 import Foundation
 import Dispatch
+import AuthenticationServices
 
 #if os(macOS) || os(iOS)
 import Accounts
@@ -113,6 +114,14 @@ public class Swifter {
             guard let token = swifterCallbackToken else { return }
             NotificationCenter.default.removeObserver(token)
         }
+    }
+
+    private var storedSession: Any?
+    @available(macOS 10.15, *)
+    @available(iOS 13.0, *)
+    internal var session: ASWebAuthenticationSession? {
+        get { return storedSession as? ASWebAuthenticationSession }
+        set { storedSession = newValue as Any }
     }
     
     // MARK: - Initializers
