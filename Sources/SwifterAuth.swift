@@ -142,7 +142,7 @@ public extension Swifter {
                 safariView.modalPresentationStyle = .overFullScreen
                 presenting?.present(safariView, animated: true, completion: nil)
             } else {
-                UIApplication.shared.open(queryUrl, options: [:], completionHandler: nil)
+                UIApplication.shared.open(queryURL, options: [:], completionHandler: nil)
             }
         }, failure: failure)
     }
