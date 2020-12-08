@@ -75,7 +75,6 @@ public extension Swifter {
      - OS X only
      */
     #if os(macOS)
-    @available(macOS, deprecated: 10.15)
     func authorize(withCallback callbackURL: URL,
                    forceLogin: Bool = false,
                    success: TokenSuccessHandler?,

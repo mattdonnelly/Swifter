@@ -54,6 +54,7 @@ class ViewController: NSViewController {
         }
     }
 
+    @available(macOS, deprecated: 10.13)
     private func authorizeWithACAccountStore() {
         if #available(macOS 10.13, *) {
             self.alert(title: "Deprecated",

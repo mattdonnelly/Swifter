@@ -120,7 +120,6 @@ class AuthViewController: UIViewController {
     }
 }
 
-@available(iOS, obsoleted: 13.0)
 extension AuthViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         controller.dismiss(animated: true, completion: nil)
