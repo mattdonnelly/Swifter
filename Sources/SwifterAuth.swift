@@ -55,6 +55,7 @@ public extension Swifter {
         self.postOAuthRequestToken(with: callbackURL, success: { token, response in
             let queryURL = self.makeQueryURL(tokenKey: token!.key, forceLogin: forceLogin)
             self.session = ASWebAuthenticationSession(url: queryURL, callbackURLScheme: callbackURLScheme) { (url, error) in
+                self.session = nil
                 if let error = error {
                     failure?(error)
                     return
@@ -106,7 +107,6 @@ public extension Swifter {
                    success: TokenSuccessHandler?,
                    failure: FailureHandler? = nil) {
         self.postOAuthRequestToken(with: callbackURL, success: { token, response in
-            var requestToken = token!
             self.swifterCallbackToken = NotificationCenter.default.addObserver(forName: .swifterCallback, object: nil, queue: .main) { notification in
                 self.swifterCallbackToken = nil
                 presenting?.presentedViewController?.dismiss(animated: true, completion: nil)
