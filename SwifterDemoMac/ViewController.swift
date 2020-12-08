@@ -58,22 +58,22 @@ class ViewController: NSViewController {
         if #available(macOS 10.13, *) {
             self.alert(title: "Deprecated",
                        message: "ACAccountStore was deprecated on macOS 10.13, please use the OAuth flow instead")
-        } else {
-            let store = ACAccountStore()
-            let type = store.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
-            store.requestAccessToAccounts(with: type, options: nil) { granted, error in
-                guard let twitterAccounts = store.accounts(with: type), granted else {
-                    self.alert(error: error)
-                    return
-                }
-                if twitterAccounts.isEmpty {
-                    self.alert(title: "Error", message: "There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
-                    return
-                } else {
-                    let twitterAccount = twitterAccounts[0] as! ACAccount
-                    self.swifter = Swifter(account: twitterAccount)
-                    self.fetchTwitterHomeStream()
-                }
+            return
+        }
+        let store = ACAccountStore()
+        let type = store.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
+        store.requestAccessToAccounts(with: type, options: nil) { granted, error in
+            guard let twitterAccounts = store.accounts(with: type), granted else {
+                self.alert(error: error)
+                return
+            }
+            if twitterAccounts.isEmpty {
+                self.alert(title: "Error", message: "There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
+                return
+            } else {
+                let twitterAccount = twitterAccounts[0] as! ACAccount
+                self.swifter = Swifter(account: twitterAccount)
+                self.fetchTwitterHomeStream()
             }
         }
     }
