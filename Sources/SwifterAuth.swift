@@ -54,7 +54,7 @@ public extension Swifter {
         let callbackURLScheme = callbackURL.absoluteString.components(separatedBy: "://").first
         self.postOAuthRequestToken(with: callbackURL, success: { token, response in
             let queryURL = self.makeQueryURL(tokenKey: token!.key, forceLogin: forceLogin)
-            self.session = ASWebAuthenticationSession(url: queryURL, callbackURLScheme: callbackURLScheme) { (url, error) in
+            let session = ASWebAuthenticationSession(url: queryURL, callbackURLScheme: callbackURLScheme) { (url, error) in
                 self.session = nil
                 if let error = error {
                     failure?(error)
@@ -62,9 +62,10 @@ public extension Swifter {
                 }
                 self.postOAuthAccessTokenHelper(requestToken: token!, responseURL: url!, success: success, failure: failure)
             }
-            self.session?.presentationContextProvider = provider
-            self.session?.prefersEphemeralWebBrowserSession = ephemeralSession
-            self.session?.start()
+            session.presentationContextProvider = provider
+            session.prefersEphemeralWebBrowserSession = ephemeralSession
+            session.start()
+            self.session = session
         }, failure: failure)
     }
     #endif
