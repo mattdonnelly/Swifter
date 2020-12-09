@@ -106,6 +106,8 @@ public class Swifter {
     // MARK: - Properties
     
     public var client: SwifterClientProtocol
+    /// Queue with which to trigger completions.
+    public var completionQueue: DispatchQueue = .main
     private var chunkBuffer: String?
     
     internal var swifterCallbackToken: NSObjectProtocol? {
@@ -157,15 +159,15 @@ public class Swifter {
             }
         }
         
-        let jsonSuccessHandler: HTTPRequest.SuccessHandler = { data, response in
+        let jsonSuccessHandler: HTTPRequest.SuccessHandler = { [weak self] data, response in
             DispatchQueue.global(qos: .utility).async {
                 do {
                     let jsonResult = try JSON.parse(jsonData: data)
-                    DispatchQueue.main.async {
+                    self?.completionQueue.async {
                         success?(jsonResult, response)
                     }
                 } catch {
-                    DispatchQueue.main.async {
+                    self?.completionQueue.async {
                         if case 200...299 = response.statusCode, data.isEmpty {
                             success?(JSON("{}"), response)
                         } else {

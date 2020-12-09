@@ -68,6 +68,8 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
     var parameters: [String: Any]
     var encodeParameters: Bool
     
+    var completionQueue: DispatchQueue
+    
     var uploadData: [DataUpload] = []
     
     var jsonBody: Data?
@@ -86,19 +88,21 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
     var successHandler: SuccessHandler?
     var failureHandler: FailureHandler?
     
-    public init(url: URL, method: HTTPMethodType = .GET, parameters: [String: Any] = [:]) {
+    public init(url: URL, method: HTTPMethodType = .GET, parameters: [String: Any] = [:], completionQueue: DispatchQueue = .main) {
         self.url = url
         self.HTTPMethod = method
         self.parameters = parameters
         self.encodeParameters = false
+        self.completionQueue = completionQueue
     }
     
-    public init(request: URLRequest) {
+    public init(request: URLRequest, completionQueue: DispatchQueue = .main) {
         self.request = request
         self.url = request.url!
         self.HTTPMethod = HTTPMethodType(rawValue: request.httpMethod!)!
         self.parameters = [:]
         self.encodeParameters = true
+        self.completionQueue = completionQueue
     }
     
     public func start() {
@@ -165,7 +169,7 @@ public class HTTPRequest: NSObject, URLSessionDataDelegate {
             }
         }
         
-        DispatchQueue.main.async {
+        completionQueue.async {
             let session = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
             self.dataTask = session.dataTask(with: self.request!)
             self.dataTask?.resume()
