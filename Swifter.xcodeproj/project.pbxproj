@@ -81,7 +81,6 @@
 		A198590F233737C400B63092 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198590E233737C400B63092 /* SceneDelegate.swift */; };
 		A1AA8B001D5C514E00CE7F17 /* SwifterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */; };
 		A1AA8B011D5C515000CE7F17 /* SwifterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */; };
-		A1AA8B031D5C59D200CE7F17 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA8B021D5C59D200CE7F17 /* TweetCell.swift */; };
 		A1BDB38C1D4C864200B0080F /* SwifterTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BDB38A1D4C859200B0080F /* SwifterTag.swift */; };
 		A1BDB38D1D4C864200B0080F /* SwifterTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BDB38A1D4C859200B0080F /* SwifterTag.swift */; };
 		A1C7F0A51C7845FD00955ADB /* SwifterMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9F51131944A61D00894629 /* SwifterMac.framework */; };
@@ -202,7 +201,6 @@
 		A17A694D1C78333400063DFD /* Operator++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Operator++.swift"; sourceTree = "<group>"; };
 		A198590E233737C400B63092 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A1AA8AFE1D5C50AE00CE7F17 /* SwifterError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterError.swift; sourceTree = "<group>"; };
-		A1AA8B021D5C59D200CE7F17 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		A1BDB38A1D4C859200B0080F /* SwifterTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterTag.swift; sourceTree = "<group>"; };
 		A1E207A61D4B85D90093E498 /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
 		A1E207A71D4B85D90093E498 /* SHA1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA1.swift; sourceTree = "<group>"; };
@@ -265,7 +263,6 @@
 				A198590E233737C400B63092 /* SceneDelegate.swift */,
 				8B5EFF04195F064400B354F9 /* AuthViewController.swift */,
 				8B5EFF05195F064400B354F9 /* TweetsViewController.swift */,
-				A1AA8B021D5C59D200CE7F17 /* TweetCell.swift */,
 				8B300C211944AA1A00993175 /* Supporting Files */,
 			);
 			path = SwifterDemoiOS;
@@ -626,7 +623,6 @@
 				8B5EFF08195F064400B354F9 /* AuthViewController.swift in Sources */,
 				8B5EFF07195F064400B354F9 /* AppDelegate.swift in Sources */,
 				8B5EFF09195F064400B354F9 /* TweetsViewController.swift in Sources */,
-				A1AA8B031D5C59D200CE7F17 /* TweetCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -893,6 +889,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -946,6 +943,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
