@@ -405,7 +405,7 @@ public extension Swifter {
         let path = "account/update_profile_banner.json"
 
         var parameters = [String: Any]()
-        parameters["banner"] = imageData.base64EncodedString
+        parameters["banner"] = imageData.base64EncodedString()
         parameters["width"] ??= width
         parameters["height"] ??= height
         parameters["offset_left"] ??= offsetLeft
