@@ -25,6 +25,7 @@
 
 import Foundation
 
+@dynamicMemberLookup
 public enum JSON : Equatable, CustomStringConvertible {
     
     case string(String)
@@ -119,6 +120,13 @@ public enum JSON : Equatable, CustomStringConvertible {
     public var bool : Bool? {
         guard case .bool(let value) = self else {
             return nil
+        }
+        return value
+    }
+    
+    public subscript(dynamicMember key: String) -> JSON {
+        guard case .object(let dict) = self, let value = dict[key] else {
+            return .invalid
         }
         return value
     }
