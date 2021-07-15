@@ -44,7 +44,7 @@ public extension Swifter {
     /**
      GET    users/show
      
-     Returns user info (including name, location, description, isVerified, profileImage) for the authenticating user.
+     Returns user info (including name, location, description, isVerified, profileImage) for the requested user.
      */
     func getUserDetails(for userTag: UserTag,
                         success: SuccessHandler? = nil,
