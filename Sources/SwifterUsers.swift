@@ -42,6 +42,25 @@ public extension Swifter {
     }
 
     /**
+     GET    users/show
+     
+     Returns user info (including name, location, description, isVerified, profileImage) for the requested user.
+     */
+    func getUserDetails(for userTag: UserTag,
+                        success: SuccessHandler? = nil,
+                        failure: FailureHandler? = nil) {
+        let path = "users/show.json"
+        
+        var parameters = [String: Any]()
+        parameters[userTag.key] = userTag.value
+        parameters["include_entities"] ??= false
+        
+        self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
+            success?(json)
+        }, failure: failure)
+    }
+
+    /**
     GET	account/verify_credentials
 
     Returns an HTTP 200 OK response code and a representation of the requesting user if authentication was successful; returns a 401 status code and an error message if not. Use this method to test if supplied user credentials are valid.
