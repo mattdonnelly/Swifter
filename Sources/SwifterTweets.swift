@@ -283,6 +283,21 @@ public extension Swifter {
         }, failure: failure)
     }
 
+    func postMetadata(mediaId: String,
+                      altText: String,
+                      success: SuccessHandler? = nil,
+                      failure: FailureHandler? = nil) {
+        let path: String = "media/metadata/create.json"
+        var parameters = [String: Any]()
+
+        parameters[Swifter.DataParameters.jsonDataKey] = "json_data"
+        parameters["json_data"] = ["media_id": mediaId, "alt_text": ["text": altText]]
+
+        self.postJSON(path: path, baseURL: .upload, parameters: parameters, success: {
+            json, _ in success?(json)
+        }, failure: failure)
+    }
+
     /**
     POST	statuses/retweet/:id
 
