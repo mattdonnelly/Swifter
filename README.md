@@ -1,4 +1,4 @@
-# ⚠️ This repo will soon be deprecated: https://github.com/mattdonnelly/Swifter/issues/360  ⚠️
+# ⚠️ This project has been deprecated: https://github.com/mattdonnelly/Swifter/issues/360  ⚠️
 
 ***
 
