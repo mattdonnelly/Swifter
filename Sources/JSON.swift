@@ -27,49 +27,49 @@ import Foundation
 
 public enum JSON : Equatable, CustomStringConvertible {
     
-    case string(String)
-    case number(Double)
-    case object(Dictionary<String, JSON>)
-    case array(Array<JSON>)
-    case bool(Bool)
+    case string(String, Data?)
+    case number(Double, Data?)
+    case object(Dictionary<String, JSON>, Data?)
+    case array(Array<JSON>, Data?)
+    case bool(Bool, Data?)
     case null
     case invalid
     
-    public init(_ rawValue: Any) {
+    public init(_ rawValue: Any, data: Data? = nil) {
         switch rawValue {
         case let json as JSON:
             self = json
             
         case let array as [JSON]:
-            self = .array(array)
+            self = .array(array, data)
             
         case let dict as [String: JSON]:
-            self = .object(dict)
+            self = .object(dict, data)
             
         case let data as Data:
             do {
                 let object = try JSONSerialization.jsonObject(with: data, options: [])
-                self = JSON(object)
+                self = JSON(object, data: data)
             } catch {
                 self = .invalid
             }
             
         case let array as [Any]:
             let newArray = array.map { JSON($0) }
-            self = .array(newArray)
+            self = .array(newArray, data)
             
         case let dict as [String: Any]:
             var newDict = [String: JSON]()
             for (key, value) in dict {
                 newDict[key] = JSON(value)
             }
-            self = .object(newDict)
+            self = .object(newDict, data)
             
         case let string as String:
-            self = .string(string)
+            self = .string(string, data)
             
         case let number as NSNumber:
-            self = number.isBoolean ? .bool(number.boolValue) : .number(number.doubleValue)
+            self = number.isBoolean ? .bool(number.boolValue, data) : .number(number.doubleValue, data)
             
         case _ as Optional<Any>:
             self = .null
@@ -81,57 +81,74 @@ public enum JSON : Equatable, CustomStringConvertible {
         
     }
     
+    public var data: Data? {
+        switch self {
+        case .string(_, let data):
+            return data
+        case .number(_, let data):
+            return data
+        case .object(_, let data):
+            return data
+        case .array(_, let data):
+            return data
+        case .bool(_, let data):
+            return data
+        default:
+            return nil
+        }
+    }
+    
     public var string : String? {
-        guard case .string(let value) = self else {
+        guard case .string(let value, _) = self else {
             return nil
         }
         return value
     }
     
     public var integer : Int? {
-        guard case .number(let value) = self else {
+        guard case .number(let value, _) = self else {
             return nil
         }
         return Int(value)
     }
     
     public var double : Double? {
-        guard case .number(let value) = self else {
+        guard case .number(let value, _) = self else {
             return nil
         }
         return value
     }
     
     public var object : [String: JSON]? {
-        guard case .object(let value) = self else {
+        guard case .object(let value, _) = self else {
             return nil
         }
         return value
     }
     
     public var array : [JSON]? {
-        guard case .array(let value) = self else {
+        guard case .array(let value, _) = self else {
             return nil
         }
         return value
     }
     
     public var bool : Bool? {
-        guard case .bool(let value) = self else {
+        guard case .bool(let value, _) = self else {
             return nil
         }
         return value
     }
     
     public subscript(key: String) -> JSON {
-        guard case .object(let dict) = self, let value = dict[key] else {
+        guard case .object(let dict, _) = self, let value = dict[key] else {
             return .invalid
         }
         return value
     }
     
     public subscript(index: Int) -> JSON {
-        guard case .array(let array) = self, array.count > index else {
+        guard case .array(let array, _) = self, array.count > index else {
             return .invalid
         }
         return array[index]
@@ -140,7 +157,7 @@ public enum JSON : Equatable, CustomStringConvertible {
     static func parse(jsonData: Data) throws -> JSON {
         do {
             let object = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
-            return JSON(object)
+            return JSON(object, data: jsonData)
         } catch {
             throw SwifterError(message: "\(error)", kind: .jsonParseError)
         }
@@ -177,19 +194,19 @@ public enum JSON : Equatable, CustomStringConvertible {
         let nextIndent = currentIndent + "  "
         
         switch self {
-        case .bool(let bool):
+        case .bool(let bool, _):
             return bool ? "true" : "false"
             
-        case .number(let number):
+        case .number(let number, _):
             return "\(number)"
             
-        case .string(let string):
+        case .string(let string, _):
             return "\"\(string.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "\"", with: "\\\"").replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "\\n"))\""
             
-        case .array(let array):
+        case .array(let array, _):
             return "[\n" + array.map { "\(nextIndent)\($0.prettyPrint(indent, level + 1))" }.joined(separator: ",\n") + "\n\(currentIndent)]"
             
-        case .object(let dict):
+        case .object(let dict, _):
             return "{\n" + dict.map { "\(nextIndent)\"\($0)\" : \($1.prettyPrint(indent, level + 1))"}.joined(separator: ",\n") + "\n\(currentIndent)}"
             
         case .null:
@@ -208,23 +225,23 @@ public func ==(lhs: JSON, rhs: JSON) -> Bool {
     case (.null, .null):
         return true
         
-    case (.bool(let lhsValue), .bool(let rhsValue)):
+    case (.bool(let lhsValue, _), .bool(let rhsValue, _)):
         return lhsValue == rhsValue
         
-    case (.string(let lhsValue), .string(let rhsValue)):
+    case (.string(let lhsValue, _), .string(let rhsValue, _)):
         return lhsValue == rhsValue
         
-    case (.number(let lhsValue), .number(let rhsValue)):
+    case (.number(let lhsValue, _), .number(let rhsValue, _)):
         return lhsValue == rhsValue
         
-    case (.array(let lhsValue), .array(let rhsValue)):
+    case (.array(let lhsValue, _), .array(let rhsValue, _)):
         return lhsValue == rhsValue
         
-    case (.object(let lhsValue), .object(let rhsValue)):
+    case (.object(let lhsValue, _), .object(let rhsValue, _)):
         return lhsValue == rhsValue
         
     case (.invalid, .invalid):
-        return true    
+        return true
         
     default:
         return false
