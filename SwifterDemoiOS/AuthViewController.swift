@@ -32,8 +32,8 @@ import AuthenticationServices
 
 class AuthViewController: UIViewController {
     private var swifter = Swifter(
-        consumerKey: "nLl1mNYc25avPPF4oIzMyQzft",
-        consumerSecret: "Qm3e5JTXDhbbLl44cq6WdK00tSUwa17tWlO8Bf70douE4dcJe2"
+      consumerKey: myAppCredentials.consumerKey,
+      consumerSecret: myAppCredentials.consumerSecret
     )
     private var jsonResult: [JSON] = []
 

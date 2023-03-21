@@ -39,3 +39,4 @@ DerivedData
 *.xcuserstate
 .build
 
+MyAppCredentials.swift

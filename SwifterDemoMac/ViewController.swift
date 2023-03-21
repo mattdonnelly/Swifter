@@ -38,8 +38,8 @@ let authorizationMode: AuthorizationMode = .browser
 
 class ViewController: NSViewController {
     private var swifter = Swifter(
-        consumerKey: "nLl1mNYc25avPPF4oIzMyQzft",
-        consumerSecret: "Qm3e5JTXDhbbLl44cq6WdK00tSUwa17tWlO8Bf70douE4dcJe2"
+      consumerKey: myAppCredentials.consumerKey,
+      consumerSecret: myAppCredentials.consumerSecret
     )
     @objc dynamic var tweets: [Tweet] = []
     
